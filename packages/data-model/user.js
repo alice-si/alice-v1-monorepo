@@ -2,12 +2,11 @@ var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 var ursa = require('ursa');
 var fs = require('fs');
-var Mail = require('../service/mail');
 var Campaign = require('./campaign');
 
 
 var Schema = mongoose.Schema;
-var pub = ursa.openSshPublicKey(fs.readFileSync('../keys/alice.pub', 'utf8'), 'base64');
+// var pub = ursa.openSshPublicKey(fs.readFileSync('../keys/alice.pub', 'utf8'), 'base64');
 
 
 var UserSchema = new Schema({
@@ -48,32 +47,6 @@ var UserSchema = new Schema({
   postCode: String
 });
 
-UserSchema.pre('save', function (next) {
-  var user = this;
-  if (this.password && (this.isModified('password') || this.isNew)) {
-    var encrypted = pub.encrypt(user.password, 'utf8', 'base64');
-    if (this.isNew) {
-      user.crypto = encrypted;
-    } else {
-      user.changedCrypto = encrypted;
-    }
-    bcrypt.genSalt(10, function (err, salt) {
-      if (err) {
-        return next(err);
-      }
-      bcrypt.hash(user.password, salt, function (err, hash) {
-        if (err) {
-          return next(err);
-        }
-        user.password = hash;
-        next();
-      });
-    });
-  } else {
-    return next();
-  }
-});
-
 UserSchema.methods.comparePassword = function (passw, cb) {
   bcrypt.compare(passw, this.password, function (err, isMatch) {
     if (err) {
@@ -83,4 +56,33 @@ UserSchema.methods.comparePassword = function (passw, cb) {
   });
 };
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = function (pub) {
+  if (pub) {
+    UserSchema.pre('save', function (next) {
+      var user = this;
+      if (this.password && (this.isModified('password') || this.isNew)) {
+        var encrypted = pub.encrypt(user.password, 'utf8', 'base64');
+        if (this.isNew) {
+          user.crypto = encrypted;
+        } else {
+          user.changedCrypto = encrypted;
+        }
+        bcrypt.genSalt(10, function (err, salt) {
+          if (err) {
+            return next(err);
+          }
+          bcrypt.hash(user.password, salt, function (err, hash) {
+            if (err) {
+              return next(err);
+            }
+            user.password = hash;
+            next();
+          });
+        });
+      } else {
+        return next();
+      }
+    });
+  }
+  return mongoose.model('User', UserSchema);
+};
