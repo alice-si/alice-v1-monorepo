@@ -1,0 +1,29 @@
+{
+  "name": "alice-model",
+  "version": "1.0.0",
+  "description": "Mongoose models for alice-web and alice-eth projects",
+  "main": "index.js",
+  "dependencies": {
+    "htmlencode": "^0.0.4",
+    "mongoose": "^5.2.9",
+    "mongoose-cache": "^0.1.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alice-si/data-model.git"
+  },
+  "keywords": [
+    "alice",
+    "model"
+  ],
+  "author": "alex@alice.si",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alice-si/data-model/issues"
+  },
+  "homepage": "https://github.com/alice-si/data-model#readme"
+}
