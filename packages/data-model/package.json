@@ -4,13 +4,15 @@
   "description": "Mongoose models for alice-web and alice-eth projects",
   "main": "index.js",
   "dependencies": {
+    "chai": "^4.1.2",
     "htmlencode": "^0.0.4",
+    "mocha": "^5.2.0",
     "mongoose": "^5.2.9",
     "mongoose-cache": "^0.1.5"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/mocha"
   },
   "repository": {
     "type": "git",
