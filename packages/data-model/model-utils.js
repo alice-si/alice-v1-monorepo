@@ -12,20 +12,20 @@ ModelUtils.evaluateStatuses = function (processNames, statuses) {
     return result.concat(statuses);
 };
 
-ModelUtils.addDateFields = (processNames, schemaObj) => addFields(processNames, schemaObj, createDateField);
+ModelUtils.addDateFields = (processNames, schemaObj) => addFields(processNames, schemaObj, createDateField, Date);
 
-ModelUtils.addTxFields = (processNames, schemaObj) => addFields(processNames, schemaObj, createTxField);
+ModelUtils.addTxFields = (processNames, schemaObj) => addFields(processNames, schemaObj, createTxField, String);
 
-const addFields = (processNames, schemaObj, fieldNameCreator) => {
+const addFields = (processNames, schemaObj, fieldNameCreator, type) => {
     for (let processName of processNames) {
-        schemaObj[fieldNameCreator(processName)] = Date;
+        schemaObj[fieldNameCreator(processName)] = type;
     }
     return schemaObj;
 };
 
-const createTxField = process => process + 'Tx';
+const createTxField = process => process.toLowerCase() + 'Tx';
 
-const createDateField = process => process + 'Time';
+const createDateField = process => process.toLowerCase() + 'Time';
 
 const getStatusName = (processName, stage) => processName + '_' + stage;
 

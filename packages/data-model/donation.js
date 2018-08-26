@@ -2,7 +2,7 @@ const Mongoose = require('mongoose');
 const ModelUtils = require('./model-utils');
 
 const processNames = ['MINTING', 'DEPOSITING', 'COLLECTING'];
-const statuses = ['PENDING'];
+const statuses = ['PENDING', 'DONATED'];
 
 let Schema = Mongoose.Schema;
 
