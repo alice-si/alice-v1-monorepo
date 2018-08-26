@@ -1,12 +1,14 @@
-var Mongoose = require('mongoose');
+const Mongoose = require('mongoose');
 
-var MailSchema = new Mongoose.Schema({
+const mailStatuses = ["SENT", "NEW", "FAIL"];
+
+let MailSchema = new Mongoose.Schema({
   from: String,
   to: String,
   subject: String,
   html: String,
   type: String,
-  status: {type: String, default: "NEW", enum: ["SENT", "NEW", "FAIL"]},
+  status: {type: String, default: "NEW", enum: mailStatuses},
   sendDate: Date,
   createdAt: {type: Date, default: Date.now}
 });

@@ -1,6 +1,10 @@
-var Mongoose = require('mongoose');
+const Mongoose = require('mongoose');
+const ModelUtils = require('./model-utils');
 
-var ValidationSchema = new Mongoose.Schema({
+const processNames = ['VALIDATING', 'LINKING', 'IMPACT_FETCHING'];
+const statuses = ['PENDING'];
+
+let validationSchemaObject = {
   _campaignId: {
     type: Mongoose.Schema.ObjectId,
     ref: 'Campaign'
@@ -17,11 +21,15 @@ var ValidationSchema = new Mongoose.Schema({
 
   crypto: String,
   createdAt: Date,
-  loadTx: String,
-  loadTime: Date,
-  executionTx: String,
-  executionTime: Date,
-  status: String
-});
+  status: {
+    type: String,
+    enum: ModelUtils.evaluateStatuses(processNames, statuses)
+  }
+};
+
+ModelUtils.addDateFields(processNames, validationSchemaObject);
+ModelUtils.addTxFields(processNames, validationSchemaObject);
+
+const ValidationSchema = new Mongoose.Schema(validationSchemaObject);
 
 module.exports = Mongoose.model('Validation', ValidationSchema);

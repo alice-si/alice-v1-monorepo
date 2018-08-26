@@ -1,7 +1,7 @@
-var Mongoose = require('mongoose');
-var htmlencode = require('htmlencode');
+const Mongoose = require('mongoose');
+const htmlencode = require('htmlencode');
 
-var CharitySchema = new Mongoose.Schema({
+let CharitySchema = new Mongoose.Schema({
   name: String,
   legalName: String,
   code: {type: String, unique: true},
@@ -20,8 +20,6 @@ var CharitySchema = new Mongoose.Schema({
     ref: 'User'
   }]
 });
-
-const fieldsToDecode = ['description'];
 
 CharitySchema.methods.prepareForSaving = function () {
   this.projects = undefined;

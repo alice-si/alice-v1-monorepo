@@ -1,6 +1,6 @@
-var Mongoose = require('mongoose');
+const Mongoose = require('mongoose');
 
-var ProjectHistorySchema = new Mongoose.Schema({
+let ProjectHistorySchema = new Mongoose.Schema({
   project: Mongoose.Schema.Types.Mixed,
   outcomes: [Mongoose.Schema.Types.Mixed],
   changedBy: {
