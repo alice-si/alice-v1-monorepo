@@ -1,6 +1,6 @@
-var Mongoose = require('mongoose');
+const Mongoose = require('mongoose');
 
-var OutcomeSchema = new Mongoose.Schema({
+let OutcomeSchema = new Mongoose.Schema({
   title: String,
   description: String,
   reason: String,
@@ -15,7 +15,6 @@ var OutcomeSchema = new Mongoose.Schema({
     type: Mongoose.Schema.ObjectId,
     ref: 'Campaign'
   }
-
 });
 
 module.exports = Mongoose.model('Outcome', OutcomeSchema);

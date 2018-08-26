@@ -1,7 +1,7 @@
-var Mongoose = require('mongoose');
-var Schema = Mongoose.Schema;
+const Mongoose = require('mongoose');
+const Schema = Mongoose.Schema;
 
-var AddressSchema = new Schema({
+let AddressSchema = new Schema({
   _user: {
     type: Mongoose.Schema.ObjectId,
     ref: 'User'

@@ -1,7 +1,12 @@
-var Mongoose = require('mongoose');
-var Schema = Mongoose.Schema;
+const Mongoose = require('mongoose');
+const ModelUtils = require('./model-utils');
 
-var DonationSchema = new Schema({
+const processNames = ['MINTING', 'DEPOSITING', 'COLLECTING'];
+const statuses = ['PENDING'];
+
+let Schema = Mongoose.Schema;
+
+let donationSchemaObj = {
   _userId: {
     type: Mongoose.Schema.ObjectId,
     ref: 'User'
@@ -12,31 +17,17 @@ var DonationSchema = new Schema({
   },
   amount: Number,
   createdAt: Date,
-  loadingTx: String,
-  loadingTime: Date,
-  donatingTx: String,
-  donatingTime: Date,
+
   status: {
     type: String,
-    enum: [
-      "PENDING",
-      "FAILED",
-      "ERROR",
-      "WIRED",
-      "DONATED",
-      "LOADED",
-      "COLLECTED",
-      "3DS",
-      "CLEANED",
-      "LOST",
-      "MINTING",
-      "MINTED",
-      "MINTING_IN_PROGRESS",
-      "COLLECTION_IN_PROGRESS",
-      "LOADING",
-      "DONATING"
-    ]},
+    enum: ModelUtils.evaluateStatuses(processNames, statuses)
+  },
   transactionId: String
-});
+};
+
+ModelUtils.addDateFields(processNames, donationSchemaObj);
+ModelUtils.addTxFields(processNames, donationSchemaObj);
+
+let DonationSchema = new Schema(donationSchemaObj);
 
 module.exports = Mongoose.model('Donation', DonationSchema);

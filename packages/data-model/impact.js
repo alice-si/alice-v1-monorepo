@@ -1,6 +1,6 @@
-var Mongoose = require('mongoose');
+const Mongoose = require('mongoose');
 
-var ImpactSchema = new Mongoose.Schema({
+let ImpactSchema = new Mongoose.Schema({
   _campaignId: {
     type: Mongoose.Schema.ObjectId,
     ref: 'Campaign'

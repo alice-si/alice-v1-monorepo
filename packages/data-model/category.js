@@ -1,7 +1,7 @@
-var Mongoose = require('mongoose');
-var Campaign = require('./campaign');
+const Mongoose = require('mongoose');
+const Campaign = require('./campaign');
 
-var CategorySchema = new Mongoose.Schema({
+let CategorySchema = new Mongoose.Schema({
   title: String,
   lead: String,
   img: String,

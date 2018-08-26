@@ -1,13 +1,15 @@
-var Mongoose = require('mongoose');
-var Outcome = require('./outcome');
-var htmlencode = require('htmlencode');
+const Mongoose = require('mongoose');
+const Outcome = require('./outcome');
+const htmlencode = require('htmlencode');
 
-var CampaignSchema = new Mongoose.Schema({
+const projectStatuses = ['FINISHED', 'ACTIVE', 'PENDING'];
+
+let ProjectSchema = new Mongoose.Schema({
   code: {type: String, unique: true},
   title: String,
   status: {
     type: String,
-    enum: ['FINISHED', 'ACTIVE', 'PENDING'],
+    enum: projectStatuses,
     default: 'PENDING'
   },
   lead: String,
@@ -51,15 +53,15 @@ var CampaignSchema = new Mongoose.Schema({
 
 const fieldsToDecode = ['lead', 'summary', 'project', 'serviceProvider', 'beneficiary', 'validator', 'costBreakdown', 'outcomesIntro'];
 
-CampaignSchema.pre('remove', function (next) {
+ProjectSchema.pre('remove', function (next) {
   Outcome.find({_parentId: this._id}).remove(function () {
     console.log("Removing nested outcomes");
   });
   next();
 });
 
-CampaignSchema.methods.htmlFieldsDecode = function () {
-  var project = this;
+ProjectSchema.methods.htmlFieldsDecode = function () {
+  let project = this;
   fieldsToDecode.forEach(function (field) {
     project[field] = htmlencode.htmlDecode(project[field]);
   });
@@ -69,4 +71,4 @@ CampaignSchema.methods.htmlFieldsDecode = function () {
   });
 };
 
-module.exports = Mongoose.model('Campaign', CampaignSchema);
+module.exports = Mongoose.model('Project', ProjectSchema);
