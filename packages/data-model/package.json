@@ -1,6 +1,6 @@
 {
   "name": "alice-model",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "description": "Mongoose models for alice-web and alice-eth projects",
   "main": "index.js",
   "dependencies": {
