@@ -2,6 +2,17 @@ let ModelUtils = {};
 
 const stages = ['STARTED', 'IN_PROGRESS', 'COMPLETED', 'REVERTED', 'ERROR', 'NOT_STARTED', 'COMPLETED', 'LOST', 'CLEANED']
 
+// schemaModifier is an optional function
+// it should be used if you want to interact with another models instances
+ModelUtils.exportModel = function(name, schema, schemaModifier = null) {
+    return function (mongooseInstance) {
+        if (schemaModifier) {
+            schemaModifier(schema, mongooseInstance);
+        }
+        return mongooseInstance.model(name, schema);
+    };
+};
+
 ModelUtils.evaluateStatuses = function (processNames, statuses) {
     let result = [];
     for (let processName of processNames) {

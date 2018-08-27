@@ -1,5 +1,6 @@
 const ModelUtils = require('../model-utils');
 const should = require('chai').should();
+const Mongoose = require('mongoose');
 
 describe('Model-utils', function() {
     let processNames = ['TEST', 'NEW_TEST'];
@@ -31,14 +32,14 @@ describe('Model-utils', function() {
 });
 
 describe('Validation fields', function() {
-    const Validation = require('../validation');
+    const Validation = require('../validation')(Mongoose);
     const enums = ['PENDING', 'VALIDATING_IN_PROGRESS'];
     testTxAndDateFields('Validation', Validation, ['validatingTime', 'impact_fetchingTime', 'linkingTx', 'validatingTx']);
     testStatusEnum('Validation', Validation, enums);
 });
 
 describe('Donation fields', function() {
-    const Donation = require('../donation');
+    const Donation = require('../donation')(Mongoose);
     testTxAndDateFields('Validation', Donation, ['mintingTime', 'depositingTime', 'collectingTx', 'mintingTx']);
     const enums = ['PENDING', 'MINTING_IN_PROGRESS', 'DONATED', 'COLLECTING_STARTED'];
     testStatusEnum('Donation', Donation, enums);

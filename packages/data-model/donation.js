@@ -11,9 +11,9 @@ let donationSchemaObj = {
     type: Mongoose.Schema.ObjectId,
     ref: 'User'
   },
-  _campaignId: {
+  _projectId: {
     type: Mongoose.Schema.ObjectId,
-    ref: 'Campaign'
+    ref: 'Project'
   },
   amount: Number,
   createdAt: Date,
@@ -30,4 +30,4 @@ ModelUtils.addTxFields(processNames, donationSchemaObj);
 
 let DonationSchema = new Schema(donationSchemaObj);
 
-module.exports = Mongoose.model('Donation', DonationSchema);
+module.exports = ModelUtils.exportModel('Donation', DonationSchema);

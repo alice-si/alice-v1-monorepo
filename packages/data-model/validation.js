@@ -5,9 +5,9 @@ const processNames = ['VALIDATING', 'LINKING', 'IMPACT_FETCHING'];
 const statuses = ['PENDING'];
 
 let validationSchemaObject = {
-  _campaignId: {
+  _projectId: {
     type: Mongoose.Schema.ObjectId,
-    ref: 'Campaign'
+    ref: 'Project'
   },
   _outcomeId: {
     type: Mongoose.Schema.ObjectId,
@@ -32,4 +32,4 @@ ModelUtils.addTxFields(processNames, validationSchemaObject);
 
 const ValidationSchema = new Mongoose.Schema(validationSchemaObject);
 
-module.exports = Mongoose.model('Validation', ValidationSchema);
+module.exports = ModelUtils.exportModel('Validation', ValidationSchema);

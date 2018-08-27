@@ -10,4 +10,4 @@ let ProjectHistorySchema = new Mongoose.Schema({
   changedDate: {type: Date, default: Date.now}
 });
 
-module.exports = Mongoose.model('ProjectHistory', ProjectHistorySchema);
+module.exports = ModelUtils.exportModel('ProjectHistory', ProjectHistorySchema);

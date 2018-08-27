@@ -1,4 +1,5 @@
 const Mongoose = require('mongoose');
+const ModelUtils = require('./model-utils');
 
 const mailStatuses = ["SENT", "NEW", "FAIL"];
 
@@ -13,4 +14,4 @@ let MailSchema = new Mongoose.Schema({
   createdAt: {type: Date, default: Date.now}
 });
 
-module.exports = Mongoose.model('Mail', MailSchema);
+module.exports = ModelUtils.exportModel('Mail', MailSchema);

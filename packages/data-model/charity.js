@@ -1,5 +1,6 @@
 const Mongoose = require('mongoose');
 const htmlencode = require('htmlencode');
+const ModelUtils = require('./model-utils');
 
 let CharitySchema = new Mongoose.Schema({
   name: String,
@@ -9,7 +10,7 @@ let CharitySchema = new Mongoose.Schema({
   description: String,
   projects: [{
     type: Mongoose.Schema.ObjectId,
-    ref: 'Campaign'
+    ref: 'Project'
   }],
   projectAdmins: [{
     type: Mongoose.Schema.ObjectId,
@@ -39,4 +40,4 @@ CharitySchema.statics.addProjectToCharity = function(project, callback) {
   }
 };
 
-module.exports = Mongoose.model('Charity', CharitySchema);
+module.exports = ModelUtils.exportModel('Charity', CharitySchema);
