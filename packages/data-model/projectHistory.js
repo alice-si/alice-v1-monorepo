@@ -1,4 +1,5 @@
 const Mongoose = require('mongoose');
+const ModelUtils = require('./model-utils');
 
 let ProjectHistorySchema = new Mongoose.Schema({
   project: Mongoose.Schema.Types.Mixed,

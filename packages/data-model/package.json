@@ -4,6 +4,7 @@
   "description": "Mongoose models for alice-web and alice-eth projects",
   "main": "index.js",
   "dependencies": {
+    "bcrypt": "^3.0.0",
     "chai": "^4.1.2",
     "htmlencode": "^0.0.4",
     "mocha": "^5.2.0",
