@@ -1,6 +1,6 @@
 const Mongoose = require('mongoose');
-const Outcome = require('./outcome');
 const htmlencode = require('htmlencode');
+const ModelUtils = require('./model-utils');
 
 const projectStatuses = ['FINISHED', 'ACTIVE', 'PENDING'];
 
@@ -53,13 +53,6 @@ let ProjectSchema = new Mongoose.Schema({
 
 const fieldsToDecode = ['lead', 'summary', 'project', 'serviceProvider', 'beneficiary', 'validator', 'costBreakdown', 'outcomesIntro'];
 
-ProjectSchema.pre('remove', function (next) {
-  Outcome.find({_parentId: this._id}).remove(function () {
-    console.log("Removing nested outcomes");
-  });
-  next();
-});
-
 ProjectSchema.methods.htmlFieldsDecode = function () {
   let project = this;
   fieldsToDecode.forEach(function (field) {
@@ -71,4 +64,14 @@ ProjectSchema.methods.htmlFieldsDecode = function () {
   });
 };
 
-module.exports = Mongoose.model('Project', ProjectSchema);
+function schemaModifier(schema, mongooseInstance) {
+  const Outcome = require('./outcome')(mongooseInstance);
+  schema.pre('remove', function (next) {
+    Outcome.find({_parentId: this._id}).remove(function () {
+      console.log("Removing nested outcomes");
+    });
+    next();
+  });
+}
+
+module.exports = ModelUtils.exportModel('Project', ProjectSchema, schemaModifier);

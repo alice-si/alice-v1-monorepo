@@ -1,21 +1,24 @@
 const Mongoose = require('mongoose');
-const Campaign = require('./campaign');
+const ModelUtils = require('./model-utils');
 
 let CategorySchema = new Mongoose.Schema({
   title: String,
   lead: String,
   img: String,
-  _campaigns: [{
+  _projects: [{
     type: Mongoose.Schema.ObjectId,
-    ref: 'Campaign'
+    ref: 'Project'
   }]
 });
 
-CategorySchema.pre('remove', function (next) {
-  Campaign.find({_parentId: this._id}).remove(function () {
-    console.log("Removing nested campaigns");
+function schemaModifier(schema, mongooseInstance) {
+  const Project = require('./project')(mongooseInstance);
+  schema.pre('remove', function (next) {
+    Project.find({_parentId: this._id}).remove(function () {
+      console.log("Removing nested projects");
+    });
+    next();
   });
-  next();
-});
+}
 
-module.exports = Mongoose.model('Category', CategorySchema);
+module.exports = ModelUtils.exportModel('Category', CategorySchema, schemaModifier);

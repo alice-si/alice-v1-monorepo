@@ -1,4 +1,5 @@
 const Mongoose = require('mongoose');
+const ModelUtils = require('./model-utils');
 
 let OutcomeSchema = new Mongoose.Schema({
   title: String,
@@ -13,8 +14,8 @@ let OutcomeSchema = new Mongoose.Schema({
   category: String,
   _parentId: {
     type: Mongoose.Schema.ObjectId,
-    ref: 'Campaign'
+    ref: 'Project'
   }
 });
 
-module.exports = Mongoose.model('Outcome', OutcomeSchema);
+module.exports = ModelUtils.exportModel('Outcome', OutcomeSchema);

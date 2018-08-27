@@ -1,9 +1,10 @@
 const Mongoose = require('mongoose');
+const ModelUtils = require('./model-utils');
 
 let ImpactSchema = new Mongoose.Schema({
-  _campaignId: {
+  _projectId: {
     type: Mongoose.Schema.ObjectId,
-    ref: 'Campaign'
+    ref: 'Project'
   },
   _outcomeId: {
     type: Mongoose.Schema.ObjectId,
@@ -21,4 +22,4 @@ let ImpactSchema = new Mongoose.Schema({
   confirmationEmail: String
 });
 
-module.exports = Mongoose.model('Impact', ImpactSchema);
+module.exports = ModelUtils.exportModel('Impact', ImpactSchema);

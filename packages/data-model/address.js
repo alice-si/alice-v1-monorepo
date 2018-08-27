@@ -1,5 +1,6 @@
 const Mongoose = require('mongoose');
 const Schema = Mongoose.Schema;
+const ModelUtils = require('./model-utils');
 
 let AddressSchema = new Schema({
   _user: {
@@ -21,4 +22,4 @@ let AddressSchema = new Schema({
   },
 });
 
-module.exports = Mongoose.model('Address', AddressSchema);
+module.exports = ModelUtils.exportModel('Address', AddressSchema);

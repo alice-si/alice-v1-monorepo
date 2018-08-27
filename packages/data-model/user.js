@@ -1,4 +1,5 @@
 const Mongoose = require('mongoose');
+const ModelUtils = require('./model-utils');
 const bcrypt = require('bcrypt');
 
 let Schema = Mongoose.Schema;
@@ -27,7 +28,7 @@ let UserSchema = new Schema({
   mangoWalletId: String,
   validator: [{
     type: Schema.ObjectId,
-    ref: "Campaign"
+    ref: "Project"
   }],
   charityAdmin: {
     type: Schema.ObjectId,
@@ -81,8 +82,8 @@ UserSchema.pre('save', function (next) {
 function tryToInitPubKey() {
   const pathToKey = '../keys/alice.pub';
   if (!pub && fs.existsSync(pathToKey)) {
-    pub = ursa.openSshPublicKey(fs.readFileSync(pathToKey, 'utf8'), 'base64')
+    pub = ursa.openSshPublicKey(fs.readFileSync(pathToKey, 'utf8'), 'base64');
   }
 }
 
-module.exports = Mongoose.model('User', UserSchema);
+module.exports = ModelUtils.exportModel('User', UserSchema);
