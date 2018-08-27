@@ -2,6 +2,7 @@ const Mongoose = require('mongoose');
 const ModelUtils = require('./model-utils');
 const bcrypt = require('bcrypt');
 const fs = require('fs');
+const ursa = require('ursa');
 
 let Schema = Mongoose.Schema;
 let pub = null;
