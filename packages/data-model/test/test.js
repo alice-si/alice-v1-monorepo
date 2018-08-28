@@ -33,7 +33,7 @@ describe('Model-utils', function () {
 
 describe('Validation fields', function () {
     const Validation = require('../validation')(Mongoose);
-    const enums = ['PENDING', 'VALIDATING_IN_PROGRESS'];
+    const enums = prepareEnums(['VALIDATING', 'LINKING', 'IMPACT_FETCHING']);
     testTxAndDateFields('Validation', Validation, ['validatingTime', 'impact_fetchingTime', 'linkingTx', 'validatingTx']);
     testStatusEnum('Validation', Validation, enums);
 });
@@ -41,7 +41,7 @@ describe('Validation fields', function () {
 describe('Donation fields', function () {
     const Donation = require('../donation')(Mongoose);
     testTxAndDateFields('Validation', Donation, ['mintingTime', 'depositingTime', 'collectingTx', 'mintingTx']);
-    const enums = ['PENDING', 'MINTING_IN_PROGRESS', 'DONATED', 'COLLECTING_STARTED'];
+    const enums = prepareEnums(['MINTING', 'DEPOSITING', 'COLLECTING']);
     testStatusEnum('Donation', Donation, enums);
 });
 
@@ -62,9 +62,21 @@ function testStatusEnum(name, model, enums) {
     let schema = model.schema.obj;
     it(name + ' should have enum checkers for status field', function () {
         for (let enumChecker of enums) {
+            console.log('Testing enum: ' + enumChecker);
             schema.status.enum.should.include(enumChecker);
         }
     });
+}
+
+function prepareEnums(processes) {
+    const stages = ['STARTED', 'IN_PROGRESS', 'COMPLETED', 'REVERTED', 'ERROR', 'NOT_STARTED', 'COMPLETED', 'LOST', 'CLEANED'];
+    let result = [];
+    for (let stage of stages) {
+        for (let process of processes) {
+            result.push(process + '_' + stage);
+        }
+    }
+    return result;
 }
 
 function testTxAndDateFields(name, model, fields) {
