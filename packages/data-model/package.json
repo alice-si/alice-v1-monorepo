@@ -9,7 +9,8 @@
     "htmlencode": "^0.0.4",
     "mocha": "^5.2.0",
     "mongoose": "^5.2.9",
-    "mongoose-cache": "^0.1.5"
+    "mongoose-cache": "^0.1.5",
+    "ursa": "^0.9.4"
   },
   "devDependencies": {},
   "scripts": {
