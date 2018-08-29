@@ -4,21 +4,13 @@ const Mongoose = require('mongoose');
 
 describe('Model-utils', function () {
     let processNames = ['TEST', 'NEW_TEST'];
-    let evalautedStatuses = ModelUtils.evaluateStatuses(processNames, ['PENDING'])
+    let evalautedStatuses = ModelUtils.evaluateStatuses(processNames, ['TTT'])
     it('Should evaluate statuses', function () {
         for (let status of ['TEST_STARTED', 'TEST_COMPLETED', 'TEST_IN_PROGRESS', 'TEST_ERROR', 'NEW_TEST_LOST']) {
             evalautedStatuses.should.include(status);
         }
-        evalautedStatuses.should.include('PENDING');
-        evalautedStatuses.should.not.include('PENDING_IN_PROGRESS');
-    });
-
-    it('Should evaluate statuses', function () {
-        for (let status of ['TEST_STARTED', 'TEST_COMPLETED', 'TEST_IN_PROGRESS', 'TEST_ERROR', 'NEW_TEST_LOST']) {
-            evalautedStatuses.should.include(status);
-        }
-        evalautedStatuses.should.include('PENDING');
-        evalautedStatuses.should.not.include('PENDING_IN_PROGRESS');
+        evalautedStatuses.should.include('TTT');
+        evalautedStatuses.should.not.include('TTT_IN_PROGRESS');
     });
 
     it('Should add fields', function () {
@@ -31,22 +23,22 @@ describe('Model-utils', function () {
     });
 });
 
+describe('Donation fields', function () {
+    const Donation = require('../donation')(Mongoose);
+    testTxAndDateFields('Validation', Donation, ['mintingTime', 'depositingTime', 'collectingTx', 'mintingTx']);
+    const enums = prepareEnums(['MINTING', 'DEPOSITING', 'COLLECTING']).concat(['3DS', 'CREATED', 'DONATED']);
+    testStatusEnum('Donation', Donation, enums);
+});
+
 describe('Validation fields', function () {
     const Validation = require('../validation')(Mongoose);
-    const enums = prepareEnums(['VALIDATING', 'LINKING', 'IMPACT_FETCHING']);
+    const enums = prepareEnums(['VALIDATING', 'LINKING', 'IMPACT_FETCHING']).concat(['CREATED']);
     testTxAndDateFields('Validation', Validation, ['validatingTime', 'impact_fetchingTime', 'linkingTx', 'validatingTx']);
     testStatusEnum('Validation', Validation, enums);
 });
 
-describe('Donation fields', function () {
-    const Donation = require('../donation')(Mongoose);
-    testTxAndDateFields('Validation', Donation, ['mintingTime', 'depositingTime', 'collectingTx', 'mintingTx']);
-    const enums = prepareEnums(['MINTING', 'DEPOSITING', 'COLLECTING']);
-    testStatusEnum('Donation', Donation, enums);
-});
-
 describe('Test model initializing', function () {
-    const names = ['address', 'category', 'charity', 'donation', 'impact', 'mail', 'outcome', 'project', 'projectHistory', 'user', 'validation'];
+    const names = ['category', 'charity', 'donation', 'impact', 'mail', 'outcome', 'project', 'projectHistory', 'user', 'validation'];
     for (let name of names) {
         testModelInit(name);
     }
