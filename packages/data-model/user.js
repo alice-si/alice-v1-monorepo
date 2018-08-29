@@ -1,11 +1,8 @@
 const Mongoose = require('mongoose');
 const ModelUtils = require('./model-utils');
 const bcrypt = require('bcrypt');
-const fs = require('fs');
-const ursa = require('ursa');
 
 let Schema = Mongoose.Schema;
-let pub = null;
 
 let UserSchema = new Schema({
   email: {
@@ -53,39 +50,5 @@ UserSchema.methods.comparePassword = function (passw, cb) {
     cb(null, isMatch);
   });
 };
-
-UserSchema.pre('save', function (next) {
-  tryToInitPubKey();
-  var user = this;
-  if (pub && this.password && (this.isModified('password') || this.isNew)) {
-    var encrypted = pub.encrypt(user.password, 'utf8', 'base64');
-    if (this.isNew) {
-      user.crypto = encrypted;
-    } else {
-      user.changedCrypto = encrypted;
-    }
-    bcrypt.genSalt(10, function (err, salt) {
-      if (err) {
-        return next(err);
-      }
-      bcrypt.hash(user.password, salt, function (err, hash) {
-        if (err) {
-          return next(err);
-        }
-        user.password = hash;
-        next();
-      });
-    });
-  } else {
-    return next();
-  }
-});
-
-function tryToInitPubKey() {
-  const pathToKey = '../keys/alice.pub';
-  if (!pub && fs.existsSync(pathToKey)) {
-    pub = ursa.openSshPublicKey(fs.readFileSync(pathToKey, 'utf8'), 'base64');
-  }
-}
 
 module.exports = ModelUtils.exportModel('User', UserSchema);

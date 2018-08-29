@@ -11,14 +11,4 @@ let CategorySchema = new Mongoose.Schema({
   }]
 });
 
-function schemaModifier(schema, mongooseInstance) {
-  const Project = require('./project')(mongooseInstance);
-  schema.pre('remove', function (next) {
-    Project.find({_parentId: this._id}).remove(function () {
-      console.log("Removing nested projects");
-    });
-    next();
-  });
-}
-
-module.exports = ModelUtils.exportModel('Category', CategorySchema, schemaModifier);
+module.exports = ModelUtils.exportModel('Category', CategorySchema);

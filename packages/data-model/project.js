@@ -36,6 +36,10 @@ let ProjectSchema = new Mongoose.Schema({
   outcomesIntro: String,
   contractAddress: String,
 
+  mangoUserId: String,
+  mangoContractWalletId: String,
+  mangoBeneficiaryWalletId: String,
+
   myStory: [{
     img: String,
     header: String,
@@ -45,7 +49,7 @@ let ProjectSchema = new Mongoose.Schema({
     type: Mongoose.Schema.ObjectId,
     ref: 'Outcome'
   }],
-  _parentId: {
+  _categoryId: {
     type: Mongoose.Schema.ObjectId,
     ref: 'Category'
   }
@@ -64,14 +68,4 @@ ProjectSchema.methods.htmlFieldsDecode = function () {
   });
 };
 
-function schemaModifier(schema, mongooseInstance) {
-  const Outcome = require('./outcome')(mongooseInstance);
-  schema.pre('remove', function (next) {
-    Outcome.find({_parentId: this._id}).remove(function () {
-      console.log("Removing nested outcomes");
-    });
-    next();
-  });
-}
-
-module.exports = ModelUtils.exportModel('Project', ProjectSchema, schemaModifier);
+module.exports = ModelUtils.exportModel('Project', ProjectSchema);
