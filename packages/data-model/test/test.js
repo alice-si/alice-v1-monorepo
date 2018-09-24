@@ -35,6 +35,14 @@ describe('Validation fields', function () {
     const enums = prepareEnums(['VALIDATING', 'LINKING', 'IMPACT_FETCHING']).concat(['CREATED']);
     testTxAndDateFields('Validation', Validation, ['validatingTime', 'impact_fetchingTime', 'linkingTx', 'validatingTx']);
     testStatusEnum('Validation', Validation, enums);
+
+    let validation = new Validation({});
+    validation.linkingTransactions.push('0x0');
+    validation.linkingTransactions.push('0x1');
+    it('should have linking transactions', function () {
+        validation.linkingTransactions.should.include('0x1');
+        validation.linkingTransactions.should.include('0x0');
+    });
 });
 
 describe('Test model initializing', function () {

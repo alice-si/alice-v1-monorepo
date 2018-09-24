@@ -1,6 +1,6 @@
 let ModelUtils = {};
 
-const stages = ['STARTED', 'IN_PROGRESS', 'COMPLETED', 'REVERTED', 'ERROR', 'NOT_STARTED', 'COMPLETED', 'LOST', 'CLEANED']
+const stages = ['STARTED', 'IN_PROGRESS', 'REVERTED', 'ERROR', 'NOT_STARTED', 'COMPLETED', 'LOST', 'CLEANED']
 
 // schemaModifier is an optional function
 // it should be used if you want to interact with another models instances

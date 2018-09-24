@@ -2,7 +2,7 @@ const Mongoose = require('mongoose');
 const ModelUtils = require('./model-utils');
 
 const processNames = ['VALIDATING', 'LINKING', 'IMPACT_FETCHING'];
-const statuses = ['CREATED'];
+const statuses = ['CREATED', 'LINKING_STEP_COMPLETED'];
 
 let validationSchemaObject = {
   _projectId: {
@@ -21,6 +21,7 @@ let validationSchemaObject = {
 
   crypto: String,
   createdAt: Date,
+  linkingTransactions: [String],
   status: {
     type: String,
     enum: ModelUtils.evaluateStatuses(processNames, statuses)
