@@ -8,6 +8,7 @@ let CharitySchema = new Mongoose.Schema({
   code: {type: String, unique: true},
   picture: String,
   description: String,
+  ethAccount: String,
   projects: [{
     type: Mongoose.Schema.ObjectId,
     ref: 'Project'
