@@ -11,7 +11,7 @@ let projectSchemaObject = {
   title: String,
   status: {
     type: String,
-    enum: projectStatuses,
+    enum: ModelUtils.evaluateStatuses(processNames, projectStatuses),
     default: 'CREATED'
   },
   lead: String,
