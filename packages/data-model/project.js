@@ -2,15 +2,17 @@ const Mongoose = require('mongoose');
 const htmlencode = require('htmlencode');
 const ModelUtils = require('./model-utils');
 
-const projectStatuses = ['FINISHED', 'ACTIVE', 'PENDING'];
+const projectStatuses = ['FINISHED', 'ACTIVE', 'CREATED'];
+const processNames = ['PROJECT_DEPLOYMENT'];
+const fieldsToDecode = ['lead', 'summary', 'project', 'serviceProvider', 'beneficiary', 'validator', 'costBreakdown', 'outcomesIntro'];
 
-let ProjectSchema = new Mongoose.Schema({
+let projectSchemaObject = {
   code: {type: String, unique: true},
   title: String,
   status: {
     type: String,
     enum: projectStatuses,
-    default: 'PENDING'
+    default: 'CREATED'
   },
   lead: String,
   charity: {
@@ -53,9 +55,12 @@ let ProjectSchema = new Mongoose.Schema({
     type: Mongoose.Schema.ObjectId,
     ref: 'Category'
   }
-});
+};
 
-const fieldsToDecode = ['lead', 'summary', 'project', 'serviceProvider', 'beneficiary', 'validator', 'costBreakdown', 'outcomesIntro'];
+ModelUtils.addDateFields(processNames, projectSchemaObject);
+ModelUtils.addTxFields(processNames, projectSchemaObject);
+
+let ProjectSchema = new Mongoose.Schema(projectSchemaObject);
 
 ProjectSchema.methods.htmlFieldsDecode = function () {
   let project = this;

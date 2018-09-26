@@ -45,6 +45,8 @@ describe('Validation fields', function () {
     });
 });
 
+// TODO add tests for project statuses
+
 describe('Test model initializing', function () {
     const names = ['category', 'charity', 'donation', 'impact', 'mail', 'outcome', 'project', 'projectHistory', 'user', 'validation'];
     for (let name of names) {
