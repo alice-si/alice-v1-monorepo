@@ -31,6 +31,7 @@ let projectSchemaObject = {
   validatorImg: String,
   costBreakdown: String,
 
+  upfrontPayment: Number,
   peopleTarget: Number,
   fundingTarget: Number,
   perPerson: Number,
