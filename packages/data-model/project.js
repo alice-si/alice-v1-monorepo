@@ -39,7 +39,6 @@ let projectSchemaObject = {
   outcomesIntro: String,
   contractAddress: String,
 
-  mangoUserId: String,
   mangoContractWalletId: String,
   mangoBeneficiaryWalletId: String,
 
