@@ -22,7 +22,10 @@ let donationSchemaObj = {
     type: String,
     enum: ModelUtils.evaluateStatuses(processNames, statuses)
   },
-  transactionId: String
+  transactionId: String,
+
+  daiTx: String,
+  daiAddress: String
 };
 
 ModelUtils.addDateFields(processNames, donationSchemaObj);
