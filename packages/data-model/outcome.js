@@ -8,6 +8,7 @@ let OutcomeSchema = new Mongoose.Schema({
   value: String,
   image: String,
   amount: Number,
+  unit: String,
   completion: Number,
   target: Number,
   hidden: Boolean,
