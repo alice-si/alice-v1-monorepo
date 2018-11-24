@@ -45,7 +45,17 @@ describe('Validation fields', function () {
     });
 });
 
-// TODO add tests for project statuses
+describe('Project fields', function () {
+    const Project = require('../project')(Mongoose);
+    const enums = prepareEnums(['PROJECT_DEPLOYMENT']).concat(['CREATED']);
+    testStatusEnum('Project', Project, enums);
+});
+
+describe('Mail fields', function () {
+    const Mail = require('../mail')(Mongoose);
+    const enums = prepareEnums(['MAIL_SENDING']).concat(['CREATED']);
+    testStatusEnum('Mail', Mail, enums);
+});
 
 describe('Test model initializing', function () {
     const names = ['category', 'charity', 'donation', 'impact', 'mail', 'outcome', 'project', 'projectHistory', 'user', 'validation'];
