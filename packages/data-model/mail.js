@@ -6,7 +6,7 @@ const mailStatuses = ["CREATED"];
 
 let MailSchema = new Mongoose.Schema({
   from: String,
-  to: String,
+  to: Mongoose.Schema.Types.Mixed,
   subject: String,
   html: String,
   type: String,
