@@ -30,6 +30,8 @@ let donationSchemaObj = {
   },
   transactionId: String,
 
+  bankTransferCheckingTime: Date,
+
   daiTx: String,
   daiAddress: String
 };
