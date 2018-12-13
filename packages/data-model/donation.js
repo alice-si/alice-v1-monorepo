@@ -2,7 +2,7 @@ const Mongoose = require("mongoose");
 const ModelUtils = require("./model-utils");
 
 const processNames = ["MINTING", "DEPOSITING", "COLLECTING", "DAI_COLLECTING"];
-const statuses = ["CREATED", "DONATED", "3DS", "BIG_TRANSFER_CREATED", "BANK_TRANSFER_REQUESTED"];
+const statuses = ["CREATED", "DONATED", "FAILED", "3DS", "BIG_TRANSFER_CREATED", "BANK_TRANSFER_REQUESTED"];
 
 let Schema = Mongoose.Schema;
 
