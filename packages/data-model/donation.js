@@ -2,7 +2,7 @@ const Mongoose = require("mongoose");
 const ModelUtils = require("./model-utils");
 
 const processNames = ["MINTING", "DEPOSITING", "COLLECTING", "DAI_COLLECTING"];
-const statuses = ["CREATED", "DONATED", "3DS", "BIG_TRANSFER_CREATED"];
+const statuses = ["CREATED", "DONATED", "3DS", "BIG_TRANSFER_CREATED", "BANK_TRANSFER_REQUESTED"];
 
 let Schema = Mongoose.Schema;
 
@@ -17,6 +17,12 @@ let donationSchemaObj = {
   },
   amount: Number,
   createdAt: Date,
+
+  type: {
+    type: String,
+    enum: ["BANK_TRANSFER", "CARD", "DAI"],
+    default: "CARD"
+  },
 
   status: {
     type: String,
