@@ -31,6 +31,7 @@ let donationSchemaObj = {
   transactionId: String,
 
   bankTransferCheckingTime: Date,
+  bankTransferData: Schema.Types.Mixed,
 
   daiTx: String,
   daiAddress: String
