@@ -29,12 +29,15 @@ let donationSchemaObj = {
     enum: ModelUtils.evaluateStatuses(processNames, statuses)
   },
   transactionId: String,
+  secureModeNeeded: Boolean,
 
   bankTransferCheckingTime: Date,
   bankTransferData: Schema.Types.Mixed,
 
   daiTx: String,
-  daiAddress: String
+  daiAddress: String,
+
+  err: Schema.Types.Mixed
 };
 
 ModelUtils.addDateFields(processNames, donationSchemaObj);
