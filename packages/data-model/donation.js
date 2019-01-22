@@ -30,6 +30,7 @@ let donationSchemaObj = {
   },
   transactionId: String,
   secureModeNeeded: Boolean,
+  errorChecked: Boolean,
 
   bankTransferCheckingTime: Date,
   bankTransferData: Schema.Types.Mixed,
