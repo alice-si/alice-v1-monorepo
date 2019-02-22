@@ -1,7 +1,7 @@
 const Mongoose = require('mongoose');
 const ModelUtils = require('./model-utils');
 
-const processNames = ['VALIDATING', 'LINKING', 'IMPACT_FETCHING'];
+const processNames = ['CLAIMING', 'VALIDATING', 'LINKING', 'IMPACT_FETCHING'];
 const statuses = ['CREATED', 'LINKING_STEP_COMPLETED'];
 
 let validationSchemaObject = {
@@ -13,7 +13,12 @@ let validationSchemaObject = {
     type: Mongoose.Schema.ObjectId,
     ref: 'Outcome'
   },
-  _userId: {
+  _claimerId: {
+    type: Mongoose.Schema.ObjectId,
+    ref: 'User'
+  },
+  // Formerly known as _userId.
+  _validatorId: {
     type: Mongoose.Schema.ObjectId,
     ref: 'User'
   },
