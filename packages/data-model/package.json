@@ -1,13 +1,13 @@
 {
   "name": "alice-model",
-  "version": "2.21.0",
+  "version": "3.0.0",
   "description": "Mongoose models for alice-web and alice-eth projects",
   "main": "index.js",
   "dependencies": {
-    "chai": "^4.1.2",
+    "chai": "^4.2.0",
     "htmlencode": "^0.0.4",
     "mocha": "^5.2.0",
-    "mongoose": "^5.2.9",
+    "mongoose": "^5.3.12",
     "mongoose-cache": "^0.1.5"
   },
   "devDependencies": {},
