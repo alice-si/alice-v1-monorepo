@@ -34,7 +34,7 @@ let UserSchema = new Schema({
     ref: "Charity"
   },
   superadmin: Boolean,
-  onlyEmailRegistered: Boolean,
+  isSimpleUser: Boolean,
   giftAid: Boolean,
   agreeAlice: Boolean,
   address1: String,
