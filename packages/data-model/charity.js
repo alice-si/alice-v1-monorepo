@@ -6,6 +6,7 @@ let CharitySchema = new Mongoose.Schema({
   name: String,
   legalName: String,
   url: String,
+  allowedRedirectUrls: [String],
   code: {type: String, unique: true},
   picture: String,
   description: String,
