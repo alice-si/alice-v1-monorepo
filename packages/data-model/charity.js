@@ -28,6 +28,8 @@ let CharitySchema = new Mongoose.Schema({
 
 CharitySchema.methods.prepareForSaving = function () {
   this.projects = undefined;
+  this.name = htmlencode.htmlDecode(this.name);
+  this.legalName = htmlencode.htmlDecode(this.legalName);
   this.description = htmlencode.htmlDecode(this.description);
 };
 
