@@ -13,17 +13,16 @@ let validationSchemaObject = {
     type: Mongoose.Schema.ObjectId,
     ref: 'Outcome'
   },
+  _claimerId: {
+    type: Mongoose.Schema.ObjectId,
+    ref: 'User'
+  },
   // Formerly known as _userId.
   _validatorId: {
     type: Mongoose.Schema.ObjectId,
     ref: 'User'
   },
   amount: Number,
-
-  // Encrypted Ethereum passwords of claimer (beneficiary) and validator.
-  // Removed from documents as soon as the transactions are complete.
-  beneficiaryPass: String,
-  validatorPass: String,
 
   createdAt: Date,
   linkingTransactions: [String],
