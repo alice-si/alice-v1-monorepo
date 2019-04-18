@@ -25,10 +25,13 @@ let UserSchema = new Schema({
   daiAccount: String,
   mangoUserId: String,
   mangoWalletId: String,
-  validator: [{
-    type: Schema.ObjectId,
-    ref: "Project"
-  }],
+  validator: {
+    type: [{
+      type: Schema.ObjectId,
+      ref: "Project"
+    }],
+    required: true
+  },
   charityAdmin: {
     type: Schema.ObjectId,
     ref: "Charity"
