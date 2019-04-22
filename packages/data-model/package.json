@@ -7,7 +7,7 @@
     "chai": "^4.2.0",
     "htmlencode": "^0.0.4",
     "mocha": "^5.2.0",
-    "mongoose": "^5.3.12",
+    "mongoose": "5.3.12",
     "mongoose-cache": "^0.1.5"
   },
   "devDependencies": {},
