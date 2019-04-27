@@ -1,6 +1,11 @@
 linters:
+  eslint:
+    config: './eslintrc.yml'
+    fixer: true
   shellcheck:
     shell: bash
+fixers:
+  enable: true
 files:
   ignore:
     - 'bower_components/*'
