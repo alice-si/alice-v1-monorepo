@@ -5,6 +5,23 @@ jobs:
       - image: circleci/node:10.15.3-stretch
     steps:
       - checkout
-      - run: npm install
-      - run: npx lerna bootstrap
-      - run: npx lerna run test
+      - run:
+          # See https://circleci.com/docs/2.0/caching/
+          name: collect-lock-files
+          command: find . -name package-lock.json | xargs sha256sum >.circleci.depcache
+      - restore_cache:
+          key: npm-v1-{{ checksum ".circleci.depcache" }}
+      - run:
+          name: install
+          command: npm install
+      - run:
+          name: lerna-bootstrap
+          command: npx lerna bootstrap --hoist
+      - save_cache:
+        key: npm-v1-{{ checksum ".circleci.depcache" }}
+        paths:
+          - ./node_modules
+          - ./packages/contracts/node_modules
+      - run:
+          name: test
+          command: npx lerna run test
