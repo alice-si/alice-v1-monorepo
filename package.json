@@ -1,0 +1,14 @@
+{
+  "name": "alice-monorepo",
+  "version": "0.1.0",
+  "description": "A monorepo for Alice (https://alice.si)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "GPL-3.0+",
+  "devDependencies": {
+    "lerna": "^3.13.4"
+  }
+}
