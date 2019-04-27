@@ -18,10 +18,10 @@ jobs:
           name: lerna-bootstrap
           command: npx lerna bootstrap --hoist
       - save_cache:
-        key: npm-v1-{{ checksum ".circleci.depcache" }}
-        paths:
-          - ./node_modules
-          - ./packages/contracts/node_modules
+          key: npm-v1-{{ checksum ".circleci.depcache" }}
+          paths:
+            - ./node_modules
+            - ./packages/contracts/node_modules
       - run:
           name: test
           command: npx lerna run test
