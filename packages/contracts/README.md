@@ -53,43 +53,6 @@ You can also use an automated test script instead of the previous two commands:
 
     yarn test
 
-### Demo dApp
-
-We created a demo dApp so you can interact and test the smart contracts in a visual environment rather than hacking console scripts. To run this mode, deploy the smart contracts to your blockchain network:
-
-    truffle migrate
-
-... and then launch a demo server:
-
-    npm run dev
-
-This demo dApp should be available at: http://localhost:8080/ and look like this:
-![screenshot](https://s3.eu-west-2.amazonaws.com/alice-res/alice-dApp.png)
-
 ## Contributions
 
 All comments and ideas for improvements and pull requests are welcomed. We want to improve the project based on feedback from the community.
-
-## License
-
-MIT License
-
-Copyright (c) 2017 Alice Ltd. (Jakub Wojciechowski jakub@alice.si)
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.

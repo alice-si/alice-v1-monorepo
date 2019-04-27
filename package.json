@@ -1,5 +1,6 @@
 {
   "name": "alice-monorepo",
+  "private": true,
   "version": "0.1.0",
   "description": "A monorepo for Alice (https://alice.si)",
   "main": "index.js",

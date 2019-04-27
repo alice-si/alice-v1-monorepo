@@ -1,16 +1,10 @@
+#!/bin/bash
 
-#! /bin/bash
+npx ganache-cli -a 100 -i 3  >/dev/null &
+GANACHE_PID=$!
+echo "Started Ganache, PID: $GANACHE_PID"
 
-output=$(nc -z localhost 8545; echo $?)
-[ $output -eq "0" ] && trpc_running=true
-if [ ! $trpc_running ]; then
-  echo "Starting our own ganache node instance"
-  # create 100 accounts for load tests
-  yarn run ganache-cli -a 100 -i 3 \
-  > /dev/null &
-  trpc_pid=$!
-fi
-truffle test "$@"
-if [ ! $trpc_running ]; then
-  kill -9 $trpc_pid
-fi
+npx truffle test "$@"
+
+echo "Tests ran"
+kill $GANACHE_PID
