@@ -4,7 +4,6 @@ executors:
   node-executor:
     docker:
       - image: circleci/node:10.15.3-stretch
-    working_directory: /tmp
 
 jobs:
   build:
