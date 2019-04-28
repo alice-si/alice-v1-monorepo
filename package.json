@@ -9,6 +9,9 @@
   },
   "author": "",
   "license": "MIT",
+  "dependencies": {
+    "openzeppelin-solidity": "^1.11.0"
+  },
   "devDependencies": {
     "eslint": "^5.16.0",
     "lerna": "^3.13.4"
