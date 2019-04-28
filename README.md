@@ -14,7 +14,7 @@ the following commands:
 
 ```
 npm install
-npx lerna bootstrap --hoist
+npx lerna bootstrap
 ```
 
 Then, navigate to the project of interest and follow the instructions in

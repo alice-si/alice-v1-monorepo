@@ -8,14 +8,9 @@
     "url": "https://github.com/alice-si/monorepo.git"
   },
   "scripts": {
-    "test": "scripts/test.sh",
-    "console": "truffle console",
-    "update-image": "bash ./scripts/update-image-contracts.sh"
+    "test": "scripts/test.sh"
   },
   "license": "MIT",
-  "dependencies": {
-    "openzeppelin-solidity": "^1.11.0"
-  },
   "devDependencies": {
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",

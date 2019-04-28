@@ -8,3 +8,7 @@ lerna-debug.log*
 
 # Dependency directories
 node_modules/
+
+# Artifacts
+dist/
+build/

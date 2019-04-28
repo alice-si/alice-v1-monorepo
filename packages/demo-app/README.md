@@ -1,8 +1,5 @@
 # Alice Smart Contracts
 
-[![Build Status](https://travis-ci.org/alice-si/contracts.svg?branch=master)](https://travis-ci.org/alice-si/contracts)
-[![Join the chat at https://gitter.im/alice-si/Lobby](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/alice-si/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 This project is a collection of smart contracts used by Alice, a social impact platform built on Ethereum <https://alice.si>.
 
 ### Overview
@@ -39,20 +36,6 @@ We recommend using popular Ethereum test client [ganache](https://www.npmjs.com/
 
     npm install -g ganache-cli
 
-### Running tests
-
-To run all of the smart contract tests, use the following truffle command in your console:
-
-    truffle test
-
-If you are using the testrpc client, remember to start it with a sufficient number of test accounts:
-
-    ganache-cli -a 100
-
-You can also use an automated test script instead of the previous two commands:
-
-    yarn test
-
 ### Demo dApp
 
 We created a demo dApp so you can interact and test the smart contracts in a visual environment rather than hacking console scripts. To run this mode, deploy the smart contracts to your blockchain network:
@@ -65,31 +48,3 @@ We created a demo dApp so you can interact and test the smart contracts in a vis
 
 This demo dApp should be available at: http://localhost:8080/ and look like this:
 ![screenshot](https://s3.eu-west-2.amazonaws.com/alice-res/alice-dApp.png)
-
-## Contributions
-
-All comments and ideas for improvements and pull requests are welcomed. We want to improve the project based on feedback from the community.
-
-## License
-
-MIT License
-
-Copyright (c) 2017 Alice Ltd. (Jakub Wojciechowski jakub@alice.si)
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
