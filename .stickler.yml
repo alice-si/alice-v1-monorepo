@@ -1,6 +1,6 @@
 linters:
   eslint:
-    config: './eslintrc.json'
+    config: '.eslintrc.yml'
     fixer: true
   shellcheck:
     shell: bash
