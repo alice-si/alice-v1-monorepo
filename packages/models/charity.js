@@ -35,7 +35,7 @@ CharitySchema.methods.prepareForSaving = function () {
 
 CharitySchema.statics.addProjectToCharity = function(project, callback) {
   if (!project.charity) {
-    throw "Saved project does not have charity field";
+    throw 'Saved project does not have charity field';
   } else {
     this.findById(project.charity).then(function(charity) {
       if (!charity.projects.includes(project._id)) {

@@ -1,27 +1,27 @@
-const Mongoose = require("mongoose");
-const ModelUtils = require("./model-utils");
+const Mongoose = require('mongoose');
+const ModelUtils = require('./model-utils');
 
-const processNames = ["MINTING", "DEPOSITING", "COLLECTING", "DAI_COLLECTING"];
-const statuses = ["CREATED", "DONATED", "FAILED", "3DS", "BIG_TRANSFER_CREATED", "BANK_TRANSFER_REQUESTED"];
+const processNames = ['MINTING', 'DEPOSITING', 'COLLECTING', 'DAI_COLLECTING'];
+const statuses = ['CREATED', 'DONATED', 'FAILED', '3DS', 'BIG_TRANSFER_CREATED', 'BANK_TRANSFER_REQUESTED'];
 
 let Schema = Mongoose.Schema;
 
 let donationSchemaObj = {
   _userId: {
     type: Mongoose.Schema.ObjectId,
-    ref: "User"
+    ref: 'User'
   },
   _projectId: {
     type: Mongoose.Schema.ObjectId,
-    ref: "Project"
+    ref: 'Project'
   },
   amount: Number,
   createdAt: Date,
 
   type: {
     type: String,
-    enum: ["BANK_TRANSFER", "CARD", "DAI"],
-    default: "CARD"
+    enum: ['BANK_TRANSFER', 'CARD', 'DAI'],
+    default: 'CARD'
   },
 
   status: {
@@ -46,4 +46,4 @@ ModelUtils.addTxFields(processNames, donationSchemaObj);
 
 let DonationSchema = new Schema(donationSchemaObj);
 
-module.exports = ModelUtils.exportModel("Donation", DonationSchema);
+module.exports = ModelUtils.exportModel('Donation', DonationSchema);

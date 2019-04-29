@@ -9,7 +9,7 @@ let AccessRequestSchema = new Mongoose.Schema({
   accessCode: String,
   _userId: {
     type: Mongoose.Schema.ObjectId,
-    ref: "User"
+    ref: 'User'
   },
   scope: String, // Level of access
 });
