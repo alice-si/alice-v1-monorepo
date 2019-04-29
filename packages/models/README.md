@@ -1,11 +1,15 @@
-# Mongoose models used in alice-web and alice-eth projects
+# Mongoose models for Alice donations platform
 
-# Usage
-#### After installing this package model can be included into js file
+## Usage
+
+You can use the models like this:
+
 ```javascript
-const user = require('alice-model/user');
-const mail = require('alice-model/mail');
+const mongoose = require('mongoose');
+const User = require('@alice-si/models/user')(mongoose);
+const Mail = require('@alice-si/models/mail')(mongoose);
 ```
 
-# Tests
-#### Just print in console `npm test`
+## Tests
+
+Can be run with `npm test`.
