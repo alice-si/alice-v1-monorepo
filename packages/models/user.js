@@ -28,13 +28,13 @@ let UserSchema = new Schema({
   validator: {
     type: [{
       type: Schema.ObjectId,
-      ref: "Project"
+      ref: 'Project'
     }],
     required: true
   },
   charityAdmin: {
     type: Schema.ObjectId,
-    ref: "Charity"
+    ref: 'Charity'
   },
   superadmin: Boolean,
   isSimpleUser: Boolean,
