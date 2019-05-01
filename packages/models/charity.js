@@ -9,6 +9,7 @@ let CharitySchema = new Mongoose.Schema({
   allowedRedirectUrls: [String],
   code: {type: String, unique: true},
   picture: String,
+  darkPicture: String,
   description: String,
   ethAccount: String,
   mangoUserId: String,
