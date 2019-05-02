@@ -19,19 +19,10 @@ module.exports = {
     rules: [
       {
         test: /\.css$/,
-        use: [ 'style-loader', 'css-loader' ]
-      }
-    ],
-    loaders: [
-      { test: /\.json$/, use: 'json-loader' },
-      {
-        test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['2017'],
-          plugins: ['transform-runtime']
-        }
+        use: [
+          'style-loader',
+          'css-loader'
+        ]
       }
     ]
   }
