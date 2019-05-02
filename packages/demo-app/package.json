@@ -4,6 +4,10 @@
   "private": true,
   "author": "Jakub Wojciechowski",
   "description": "Demo app for Alice smart contracts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alice-si/monorepo.git"
+  },
   "scripts": {
     "build": "webpack",
     "compile": "truffle compile --contracts_directory=./node_modules/@alice-si/contracts/contracts",
@@ -35,7 +39,7 @@
     "truffle-contract": "^3.0.1",
     "web3": "^0.18.4",
     "webpack": "^2.7.0",
-    "webpack-dev-server": "^2.9.3"
+    "webpack-dev-server": "^3.3.1"
   },
   "devDependencies": {
     "chai": "^4.1.2",
