@@ -4,7 +4,7 @@ const Mongoose = require('mongoose');
 var ModelUtils = {};
 
 function loadModel(modelName) {
-  return require('alice-model/' + modelName)(Mongoose);
+  return require('@alice-si/models/' + modelName)(Mongoose);
 }
 
 const Validation = loadModel('validation');

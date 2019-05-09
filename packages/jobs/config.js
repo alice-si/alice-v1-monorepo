@@ -30,7 +30,7 @@ config.mode = mode;
 
 // Mockgoose is used in tests, so a connection string is not needed.
 config.db = getEnv('DB_URL', '');
-config.pathToKeys = getEnv('PATH_TO_KEYS', './secrets/keys');
+config.pathToKeys = getEnv('PATH_TO_KEYS', './secrets/keys/');
 config.awsEmailSenderAddress = getEnv('ALICE_SENDER_EMAIL');
 config.accountUnlockTtl = 10000;     // seconds
 config.repeatedErrorTimeout = 3600;  // seconds
@@ -51,7 +51,7 @@ if (mode == 'PROD') {
   config.mangoUrl = 'https://api.mangopay.com';
 }
 
-if (!env.AWS_ACCESS_KEY_ID || !env.AWS_SECRET_ACCESS_KEY) {
+if (!process.env.AWS_ACCESS_KEY_ID || !process.env.AWS_SECRET_ACCESS_KEY) {
   throw 'Config does not have credentials required for AWS SES';
 }
 

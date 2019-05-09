@@ -7,8 +7,9 @@
   "license": "MIT",
   "scripts": {
     "start": "node server.js",
+    "generate-keys": "node ./tools/generate-keys.js",
     "compile": "truffle compile --contracts_directory=./node_modules/@alice-si/contracts/contracts",
-    "pretest": "npm run compile",
+    "pretest": "npm run generate-keys ./secrets/keys/ && npm run compile",
     "test": "./scripts/test.sh silent-mode $@",
     "test-normal": "./scripts/test.sh all-output $@",
     "load-test": "./scripts/load-test.sh"
@@ -31,6 +32,9 @@
     "yargs": "^4.8.1"
   },
   "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "chai-bignumber": "^2.0.1",
     "mocha-steps": "^1.3.0",
     "mockgoose": "^7.3.5",
     "rewire": "^4.0.1",

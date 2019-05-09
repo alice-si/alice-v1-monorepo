@@ -41,7 +41,7 @@ jobs:
           at: .
       - run:
           name: test
-          command: npx lerna run test
+          command: npx lerna run test --stream
   docker-build:
     executor: node-executor
     steps:
