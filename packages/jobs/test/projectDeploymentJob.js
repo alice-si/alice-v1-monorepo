@@ -7,11 +7,11 @@ const Charity = ModelUtils.loadModel('charity');
 const TestConfig = require('../test-config');
 const KeyProxy = require('../gateways/keyProxy');
 
-TestUtils.setBeforeAndAfterHooksForJobTest();
-
 contract('ProjectDeploymentJob', async function (accounts) {
   const code = 'TEST_FOR_PRJ_DEPLOY';
   let project, charityAdmin, validator, charity;
+
+  TestUtils.setBeforeAndAfterHooksForJobTest();
 
   it('Should create new objects', async function () {
     charity = await new Charity({code: 'charityCodeForTests'}).save();
@@ -44,7 +44,8 @@ contract('ProjectDeploymentJob', async function (accounts) {
     await ProjectDeploymentJob.execute();
   });
 
-  it('Project should have status PROJECT_DEPLOYMENT_COMPLETED', function (done) {
-    TestUtils.testStatus(Project, 'PROJECT_DEPLOYMENT_COMPLETED', project._id, done);
+  it('Project should have status PROJECT_DEPLOYMENT_COMPLETED', async () => {
+    await TestUtils.testStatus(
+      Project, 'PROJECT_DEPLOYMENT_COMPLETED', project._id);
   });
 });

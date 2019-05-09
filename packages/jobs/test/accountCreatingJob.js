@@ -3,11 +3,11 @@ const ModelUtils = require('../utils/model-utils');
 const User = ModelUtils.loadModel('user');
 const AccountCreatingJob = require('../jobs/accountCreatingJob');
 
-TestUtils.setBeforeAndAfterHooksForJobTest();
-
 contract('AccountCreatingJob', async function (accounts) {
   const timeout = 500;
   let user;
+
+  TestUtils.setBeforeAndAfterHooksForJobTest();
 
   it('should create test model', async function () {
     let mocks = await TestUtils.prepareMockObjects('owner', 'MINTING_COMPLETED', 'CREATED');

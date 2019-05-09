@@ -3,11 +3,11 @@ const ModelUtils = require('../utils/model-utils');
 const Mail = ModelUtils.loadModel('mail');
 const MailSendingJob = require('../jobs/mailSendingJob');
 
-TestUtils.setBeforeAndAfterHooksForJobTest();
-
 contract('MailSendingJob', async function () {
   const timeout = 500;
   let mail;
+
+  TestUtils.setBeforeAndAfterHooksForJobTest();
 
   it('Should create test mail', async function () {
     mail = await new Mail({

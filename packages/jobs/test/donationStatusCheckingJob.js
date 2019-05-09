@@ -7,13 +7,13 @@ const DonationStatusCheckingJob = require('../jobs/donationStatusCheckingJob');
 const MailSendingJob = require('../jobs/mailSendingJob');
 const Config = require('../config');
 
-TestUtils.setBeforeAndAfterHooksForJobTest();
-
 const SHOULD_TEST_EMAIL_SENDING = true;
 
 contract('DonationStatusCheckingJob', async function () {
   const timeout = 500;
   let donations = {};
+
+  TestUtils.setBeforeAndAfterHooksForJobTest();
 
   it('should create test donations', async function () {
     for (let i = 0; i < 10; i++) {
@@ -32,22 +32,23 @@ contract('DonationStatusCheckingJob', async function () {
     await DonationStatusCheckingJob.execute();
   });
 
-  it('Mail for developers should be created', function (done) {
-    setTimeout(async function () {
-      mails = await Mail.find();
-      mails.length.should.be.gt(0);
-      done();
-    }, timeout);
+  it('Mail for developers should be created', async () => {
+    await sleep();
+    mails = await Mail.find();
+    mails.length.should.be.gt(0);
   });
 
-  it('Checking email sending if needed', async function () {
+  it('Checking email sending if needed', async () => {
     if (SHOULD_TEST_EMAIL_SENDING) {
       await MailSendingJob.execute();
-      await setTimeout(async function () {
-        let mail = Mail.findOne();
-        mail.status.should.be.equal('MAIL_SENDING_COMPLETED');
-        mail.sendDate.should.be.a('date');
-      }, timeout);
+      await sleep();
+      let mail = await Mail.findOne();
+      mail.status.should.be.equal('MAIL_SENDING_COMPLETED');
+      mail.sendDate.should.be.a('date');
     }
   });
+
+  async function sleep() {
+    await new Promise(resolve => setTimeout(resolve, timeout));
+  }
 });

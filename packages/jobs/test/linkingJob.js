@@ -4,10 +4,10 @@ const LinkingJob = require('../jobs/linkingJob');
 const Validation = ModelUtils.loadModel('validation');
 const EthProxy = require('../gateways/ethProxy');
 
-TestUtils.setBeforeAndAfterHooksForJobTest();
-
 contract('LinkingJob', async function () {
   let mocks;
+
+  TestUtils.setBeforeAndAfterHooksForJobTest();
 
   it('should create test model', async function () {
     mocks = await TestUtils.prepareMockObjects('validator', 'CREATED', 'VALIDATING_COMPLETED');
@@ -28,8 +28,9 @@ contract('LinkingJob', async function () {
     await LinkingJob.execute();
   });
 
-  it('validation should have status LINKING_IN_PROGRESS', function (done) {
-    TestUtils.testStatus(Validation, 'LINKING_IN_PROGRESS', mocks.validation._id, done);
+  it('validation should have status LINKING_IN_PROGRESS', async () => {
+    await TestUtils.testStatus(
+      Validation, 'LINKING_IN_PROGRESS', mocks.validation._id);
   });
 
   it('should execute linking job checker', async function () {
@@ -37,15 +38,17 @@ contract('LinkingJob', async function () {
   });
 
   // It is not a bug - it is an odd job mechanism
-  it('validation should have status LINKING_STEP_COMPLETED', function (done) {
-    TestUtils.testStatus(Validation, 'LINKING_STEP_COMPLETED', mocks.validation._id, done);
+  it('validation should have status LINKING_STEP_COMPLETED', async () => {
+    await TestUtils.testStatus(
+      Validation, 'LINKING_STEP_COMPLETED', mocks.validation._id);
   });
 
   it('should execute linking job again', async function () {
     await LinkingJob.execute();
   });
 
-  it('validation should have status LINKING_COMPLETED', function (done) {
-    TestUtils.testStatus(Validation, 'LINKING_COMPLETED', mocks.validation._id, done);
+  it('validation should have status LINKING_COMPLETED', async () => {
+    await TestUtils.testStatus(
+      Validation, 'LINKING_COMPLETED', mocks.validation._id);
   });
 });

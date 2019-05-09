@@ -3,10 +3,10 @@ const ModelUtils = require('../utils/model-utils');
 const DepositingJob = require('../jobs/depositingJob');
 const Donation = ModelUtils.loadModel('donation');
 
-TestUtils.setBeforeAndAfterHooksForJobTest();
-
 contract('DepositingJob', async function (accounts) {
   let mocks;
+
+  TestUtils.setBeforeAndAfterHooksForJobTest();
 
   it('should create test model', async function () {
     mocks = await TestUtils.prepareMockObjects('owner', 'MINTING_COMPLETED', 'CREATED');
@@ -16,15 +16,17 @@ contract('DepositingJob', async function (accounts) {
     await DepositingJob.execute();
   });
 
-  it('donation should have status DEPOSITING_IN_PROGRESS', function (done) {
-    TestUtils.testStatus(Donation, 'DEPOSITING_IN_PROGRESS', mocks.donation._id, done);
+  it('donation should have status DEPOSITING_IN_PROGRESS', async () => {
+    await TestUtils.testStatus(
+      Donation, 'DEPOSITING_IN_PROGRESS', mocks.donation._id);
   });
 
   it('should execute checker part for depositing job', async function () {
     await DepositingJob.check();
   });
 
-  it('donation should have status DONATED', function (done) {
-    TestUtils.testStatus(Donation, 'DONATED', mocks.donation._id, done);
+  it('donation should have status DONATED', async () => {
+    await TestUtils.testStatus(
+      Donation, 'DONATED', mocks.donation._id);
   });
 });

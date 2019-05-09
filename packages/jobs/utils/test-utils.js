@@ -47,8 +47,8 @@ TestUtils.connectToMockDB = function () {
   });
 };
 
-TestUtils.resetMockDB = function () {
-  return mockgoose.helper.reset();
+TestUtils.resetMockDB = async () => {
+  await mockgoose.helper.reset();
 };
 
 TestUtils.createDefaultMockProject = async (
@@ -254,12 +254,12 @@ TestUtils.payInToUserAccount = async function(user, amount) {
   await MangoProxy.payIn(user, amount, registrationData.CardId);
 };
 
-TestUtils.testStatus = function (model, status, id, done) {
-  return setTimeout(async function () {
-    let modelInstance = await model.findOne({_id: id});
-    modelInstance.status.should.be.equal(status);
-    done();
-  }, 1000);
+TestUtils.testStatus = async (model, status, id) => {
+  // sleep
+  await new Promise(resolve => setTimeout(resolve, 1000 /*ms*/));
+  console.log(`Checking for ${status} status...`);
+  let modelInstance = await model.findOne({ _id: id });
+  modelInstance.status.should.be.equal(status);
 };
 
 TestUtils.prepareMockObjectsForLoadTest = async function (numberOfUsers) {

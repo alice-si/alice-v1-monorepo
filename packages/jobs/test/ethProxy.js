@@ -4,8 +4,6 @@ const AliceToken = artifacts.require('AliceToken');
 const Project = artifacts.require('Project');
 const Token = artifacts.require('AliceToken');
 
-TestUtils.setBeforeAndAfterHooksForJobTest();
-
 contract('EthProxy', function (accounts) {
   let mocks,
     projectAddress,
@@ -15,6 +13,8 @@ contract('EthProxy', function (accounts) {
     token,
     validationId = '58e6695d7b16403e108e8f1a',
     testAccount = accounts[3];
+
+  TestUtils.setBeforeAndAfterHooksForJobTest();
 
   it('should create test model', async function () {
     mocks = await TestUtils.prepareMockObjects('owner', 'CREATED', 'CREATED');

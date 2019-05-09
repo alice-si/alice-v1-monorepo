@@ -10,8 +10,7 @@
     "generate-keys": "node ./tools/generate-keys.js",
     "compile": "truffle compile --contracts_directory=./node_modules/@alice-si/contracts/contracts",
     "pretest": "npm run generate-keys ./secrets/keys/ && npm run compile",
-    "test": "./scripts/test.sh silent-mode $@",
-    "test-normal": "./scripts/test.sh all-output $@",
+    "test": "truffle test --contracts_directory=./node_modules/@alice-si/contracts/contracts",
     "load-test": "./scripts/load-test.sh"
   },
   "dependencies": {

@@ -5,10 +5,10 @@ const PaymentCollectingJob = require('../jobs/paymentCollectingJob');
 const Mango = require('../gateways/mangoProxy');
 const request = require('request-promise');
 
-TestUtils.setBeforeAndAfterHooksForJobTest();
-
 contract('PaymentCollectingJob', async function (accounts) {
   let mocks;
+
+  TestUtils.setBeforeAndAfterHooksForJobTest();
 
   it('should create test model', async function () {
     mocks = await TestUtils.prepareMockObjects('owner', 'CREATED', 'CREATED', 33);
@@ -22,7 +22,8 @@ contract('PaymentCollectingJob', async function (accounts) {
     await PaymentCollectingJob.execute();
   });
 
-  it('donation should have status COLLECTING_COMPLETED', function (done) {
-    TestUtils.testStatus(Donation, 'COLLECTING_COMPLETED', mocks.donation._id, done);
+  it('donation should have status COLLECTING_COMPLETED', async () => {
+    await TestUtils.testStatus(
+      Donation, 'COLLECTING_COMPLETED', mocks.donation._id);
   });
 });

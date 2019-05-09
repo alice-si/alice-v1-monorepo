@@ -8,10 +8,10 @@ const config = require('../config');
 
 const Validation = ModelUtils.loadModel('validation');
 
-TestUtils.setBeforeAndAfterHooksForJobTest();
-
 contract('ClaimingJob', async () => {
   let mocks, validation;
+
+  TestUtils.setBeforeAndAfterHooksForJobTest();
 
   step('test model is created', async () => {
     mocks = await TestUtils.prepareMockObjects(
@@ -29,17 +29,17 @@ contract('ClaimingJob', async () => {
     await new ClaimingJob().execute();
   });
 
-  step('validation should have status CLAIMING_IN_PROGRESS', done => {
-    TestUtils.testStatus(
-      Validation, 'CLAIMING_IN_PROGRESS', mocks.validation._id, done);
+  step('validation should have status CLAIMING_IN_PROGRESS', async () => {
+    await TestUtils.testStatus(
+      Validation, 'CLAIMING_IN_PROGRESS', mocks.validation._id);
   });
 
   step('job checks transaction', async () => {
     await new ClaimingJob().execute();
   });
 
-  step('validation should have status CLAIMING_COMPLETED', done => {
-    TestUtils.testStatus(
-      Validation, 'CLAIMING_COMPLETED', mocks.validation._id, done);
+  step('validation should have status CLAIMING_COMPLETED', async () => {
+    await TestUtils.testStatus(
+      Validation, 'CLAIMING_COMPLETED', mocks.validation._id);
   });
 });

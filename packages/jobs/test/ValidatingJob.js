@@ -7,10 +7,10 @@ const config = require('../config');
 
 const Validation = ModelUtils.loadModel('validation');
 
-TestUtils.setBeforeAndAfterHooksForJobTest();
-
 contract('ValidatingJob', async () => {
   let mocks, validation;
+
+  TestUtils.setBeforeAndAfterHooksForJobTest();
 
   step('test model is created', async () => {
     mocks = await TestUtils.prepareMockObjects(
@@ -28,25 +28,24 @@ contract('ValidatingJob', async () => {
     await new ClaimingJob().execute();
   });
 
-  step('validation should have status CLAIMING_IN_PROGRESS', done => {
-    TestUtils.testStatus(
-      Validation, 'CLAIMING_IN_PROGRESS', mocks.validation._id, done);
+  step('validation should have status CLAIMING_IN_PROGRESS', async () => {
+    await TestUtils.testStatus(
+      Validation, 'CLAIMING_IN_PROGRESS', mocks.validation._id);
   });
 
   step('claiming job checks transaction', async () => {
     await new ClaimingJob().execute();
   });
 
-  step('validation should have status CLAIMING_COMPLETED', done => {
-    TestUtils.testStatus(Validation, 'CLAIMING_COMPLETED', mocks.validation._id, done);
+  step('validation should have status CLAIMING_COMPLETED', async () => {
+    await TestUtils.testStatus(
+      Validation, 'CLAIMING_COMPLETED', mocks.validation._id);
   });
 
-  step('validation should not be processed before approval', done => {
-    new ValidatingJob().execute()
-      .then(() => {
-        TestUtils.testStatus(
-          Validation, 'CLAIMING_COMPLETED', mocks.validation._id, done);
-      });
+  step('validation should not be processed before approval', async () => {
+    await new ValidatingJob().execute();
+    await TestUtils.testStatus(
+      Validation, 'CLAIMING_COMPLETED', mocks.validation._id);
   });
 
   step('validation is approved', async () => {
@@ -60,17 +59,17 @@ contract('ValidatingJob', async () => {
     await new ValidatingJob().execute();
   });
 
-  step('validation should have status VALIDATING_IN_PROGRESS', done => {
-    TestUtils.testStatus(
-      Validation, 'VALIDATING_IN_PROGRESS', mocks.validation._id, done);
+  step('validation should have status VALIDATING_IN_PROGRESS', async () => {
+    await TestUtils.testStatus(
+      Validation, 'VALIDATING_IN_PROGRESS', mocks.validation._id);
   });
 
   step('validating job checks transaction', async () => {
     await new ValidatingJob().execute();
   });
 
-  step('validation should have status VALIDATING_COMPLETED', done => {
-    TestUtils.testStatus(
-      Validation, 'VALIDATING_COMPLETED', mocks.validation._id, done);
+  step('validation should have status VALIDATING_COMPLETED', async () => {
+    await TestUtils.testStatus(
+      Validation, 'VALIDATING_COMPLETED', mocks.validation._id);
   });
 });

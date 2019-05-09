@@ -6,10 +6,10 @@ const Validation = ModelUtils.loadModel('validation');
 const Mail = ModelUtils.loadModel('mail');
 const EthProxy = require('../gateways/ethProxy');
 
-TestUtils.setBeforeAndAfterHooksForJobTest();
-
 contract('ImpactFetchingJob', async function () {
   let mocks, validator;
+
+  TestUtils.setBeforeAndAfterHooksForJobTest();
 
   it('should create test model', async function () {
     mocks = await TestUtils.prepareMockObjects('validator', 'CREATED', 'LINKING_COMPLETED');
@@ -31,17 +31,17 @@ contract('ImpactFetchingJob', async function () {
     await ImpactFetchingJob.execute();
   });
 
-  it('validation should have status IMPACT_FETCHING_COMPLETED', function (done) {
-    TestUtils.testStatus(Validation, 'IMPACT_FETCHING_COMPLETED', mocks.validation._id, done);
+  it('validation should have status IMPACT_FETCHING_COMPLETED', async () => {
+    await TestUtils.testStatus(
+      Validation, 'IMPACT_FETCHING_COMPLETED', mocks.validation._id);
   });
 
   it('should execute MailSendingJob job', async function () {
     await MailSendingJob.execute();
   });
 
-  it('should change emails status', function (done) {
-    Mail.findOne({}).then(function (mail) {
-      TestUtils.testStatus(Mail, 'MAIL_SENDING_COMPLETED', mail, done);
-    });
+  it('should change emails status', async () => {
+    let mail = await Mail.findOne({});
+    await TestUtils.testStatus(Mail, 'MAIL_SENDING_COMPLETED', mail);
   });
 });
