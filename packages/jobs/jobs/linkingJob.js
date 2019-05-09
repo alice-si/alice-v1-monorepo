@@ -5,21 +5,21 @@ const EthProxy = require('../gateways/ethProxy');
 
 function mainAction(jobContext) {
   let validation = jobContext.model;
-  jobContext.msg("Linking impact for validation: " + validation._id);
+  jobContext.msg('Linking impact for validation: ' + validation._id);
   let project = validation._projectId;
   return EthProxy.getImpactLinked(project, validation._id.toString())
     .then(function (linkedAmount) {
-      jobContext.msg("Currently linked: " + linkedAmount + " of: " + validation.amount);
+      jobContext.msg('Currently linked: ' + linkedAmount + ' of: ' + validation.amount);
       if (linkedAmount == validation.amount) {
-        jobContext.msg("All impact linked for validation: " + validation._id);
-        return ModelUtils.changeStatus(validation, "LINKING_COMPLETED");
+        jobContext.msg('All impact linked for validation: ' + validation._id);
+        return ModelUtils.changeStatus(validation, 'LINKING_COMPLETED');
       } else {
         EthProxy.linkImpact(project, validation._id.toString()).then(function (linkingTx) {
           validation.linkingTransactions.push(linkingTx);
           return validation.save().then(function () {
             return jobContext.inProgressBehaviour(linkingTx);
           });
-        })
+        });
       }
     }).catch(function (err) {
       return jobContext.errorBehaviour(err);

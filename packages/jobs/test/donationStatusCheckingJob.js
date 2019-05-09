@@ -17,13 +17,13 @@ contract('DonationStatusCheckingJob', async function () {
 
   it('should create test donations', async function () {
     for (let i = 0; i < 10; i++) {
-        console.log('Creating donation');
-        donations[i] = await new Donation({
-            status: 'FAILED',
-            errorChecked: i > 7,
-            createdAt: (new Moment()).subtract(Config.stalledDonationTimeout * 2, 's').toDate()
-        }).save();
-        console.log('Donation created ' + donations[i]._id);
+      console.log('Creating donation');
+      donations[i] = await new Donation({
+        status: 'FAILED',
+        errorChecked: i > 7,
+        createdAt: (new Moment()).subtract(Config.stalledDonationTimeout * 2, 's').toDate()
+      }).save();
+      console.log('Donation created ' + donations[i]._id);
     }
     
   });

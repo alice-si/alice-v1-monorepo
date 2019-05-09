@@ -46,7 +46,7 @@ function mainAction(jobContext) {
   }).then(function (address) {
     if (address != project.charity.ethAccount) {
       project.charity.ethAccount = address;
-      jobContext.msg("Created account for charity with address: " + address);
+      jobContext.msg('Created account for charity with address: ' + address);
     }
     return project.charity.save();
   }).then(function () {
@@ -56,7 +56,7 @@ function mainAction(jobContext) {
     project.ethAddresses = addresses;
     return project.save();
   }).then(function () {
-    jobContext.msg("Addresses were saved in DB");
+    jobContext.msg('Addresses were saved in DB');
     return jobContext.completedBehaviour();
   }).catch(function (err) {
     return jobContext.errorBehaviour(err);

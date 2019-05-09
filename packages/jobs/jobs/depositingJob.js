@@ -14,7 +14,7 @@ function mainAction(jobContext) {
   }
   jobContext.msg('Executing donation: ' + JSON.stringify(donation));
   return EthProxy.deposit(userAccount, donation._projectId, donation.amount).then(function (tx) {
-    jobContext.msg("Deposit was finished successfully " + JSON.stringify(tx));
+    jobContext.msg('Deposit was finished successfully ' + JSON.stringify(tx));
     return jobContext.inProgressBehaviour(tx);
   }).catch(function (err) {
     return jobContext.errorBehaviour(err);

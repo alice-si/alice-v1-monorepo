@@ -200,10 +200,10 @@ TestUtils.prepareMockObjects = async (
     'validator', addresses['validator']);
 
   switch (userRole) {
-    case 'validator': userCreated = validatorCreated; break;
-    case 'claimer': userCreated = claimerCreated; break;
-    default: userCreated = await TestUtils.createDefaultMockUser(
-      '', addresses[userRole]);
+  case 'validator': userCreated = validatorCreated; break;
+  case 'claimer': userCreated = claimerCreated; break;
+  default: userCreated = await TestUtils.createDefaultMockUser(
+    '', addresses[userRole]);
   }
 
   let projectCreated = await TestUtils.createDefaultMockProject(
@@ -237,9 +237,9 @@ TestUtils.payInToUserAccount = async function(user, amount) {
   let cardData = {
     accessKeyRef: preRegistrationData.AccessKey,
     data: preRegistrationData.PreregistrationData,
-    cardNumber: "4706750000000009",
-    cardExpirationDate: "1119",
-    cardCvx: "123"
+    cardNumber: '4706750000000009',
+    cardExpirationDate: '1119',
+    cardCvx: '123'
   };
 
   let registeredData = await request({
@@ -266,7 +266,7 @@ TestUtils.prepareMockObjectsForLoadTest = async function (numberOfUsers) {
   const accounts = await Promise.promisify(web3.eth.getAccounts)();
   // we need to have eth validator account to be able to deploy project with job
   const validatorEthAccount = accounts[5];
-  let mainUser = await TestUtils.createDefaultMockUser("", config.mainAccount);
+  let mainUser = await TestUtils.createDefaultMockUser('', config.mainAccount);
   let testAmount = 10;
 
   // Deploy and configure claims registry.
@@ -282,7 +282,7 @@ TestUtils.prepareMockObjectsForLoadTest = async function (numberOfUsers) {
     'testCharityAdmin', project.ethAddresses['beneficiary'], projectToDeploy.charity, null);
 
   for (let i = 0; i < numberOfUsers; i++) {
-    console.log((i + 1) + "/" + numberOfUsers);
+    console.log((i + 1) + '/' + numberOfUsers);
     let user = await TestUtils.createDefaultMockUser(i.toString(), null);
     await TestUtils.payInToUserAccount(user, testAmount);
     await TestUtils.createDefaultMockDonation(user._id, projectToDeploy._id, 'CREATED', testAmount);
@@ -297,7 +297,7 @@ TestUtils.createMockValidations = async function () {
   let donations = await Donation.find();
   let total = donations.length;
   donations.forEach(async function (donation, i) {
-    console.log((i + 1) + "/" + total);
+    console.log((i + 1) + '/' + total);
     await TestUtils.createDefaultMockValidation(
       claimer._id,
       validator._id,

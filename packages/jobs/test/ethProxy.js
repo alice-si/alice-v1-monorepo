@@ -8,13 +8,13 @@ TestUtils.setBeforeAndAfterHooksForJobTest();
 
 contract('EthProxy', function (accounts) {
   let mocks,
-  projectAddress,
-  tokenAddress,
-  validator,
-  project,
-  token,
-  validationId = '58e6695d7b16403e108e8f1a',
-  testAccount = accounts[3];
+    projectAddress,
+    tokenAddress,
+    validator,
+    project,
+    token,
+    validationId = '58e6695d7b16403e108e8f1a',
+    testAccount = accounts[3];
 
   it('should create test model', async function () {
     mocks = await TestUtils.prepareMockObjects('owner', 'CREATED', 'CREATED');
@@ -27,14 +27,14 @@ contract('EthProxy', function (accounts) {
     project = Project.at(projectAddress);
   });
 
-  it("should mint", async function () {
+  it('should mint', async function () {
     let mintedAmount = 1000;
     let amountBefore = await token.balanceOf(projectAddress);
     await EthProxy.mint(mocks.project, mintedAmount);
     (await token.balanceOf(projectAddress)).should.be.bignumber.equal(mintedAmount + amountBefore.toNumber());
   });
 
-  it("should deposit", async function () {
+  it('should deposit', async function () {
     let amount = 1000;
     let totalBefore = await project.total();
     let balanceBefore = (await project.getBalance(testAccount));
@@ -42,10 +42,10 @@ contract('EthProxy', function (accounts) {
     (await project.total()).should.be.bignumber.equal(amount + totalBefore.toNumber());
     balanceAfter = (await project.getBalance(testAccount));
     balanceAfter.should.be.bignumber.equal(balanceBefore.plus(amount));
-    console.log("Balance before: ", balanceBefore.toNumber(), " Balance after: ", balanceAfter.toNumber());
+    console.log('Balance before: ', balanceBefore.toNumber(), ' Balance after: ', balanceAfter.toNumber());
   });
 
-  it("should claim and validate outcome", async function () {
+  it('should claim and validate outcome', async function () {
     let projectBalance = (await (Token.at(tokenAddress)).balanceOf(projectAddress));
     let validation = {
       _id: validationId,
@@ -58,17 +58,17 @@ contract('EthProxy', function (accounts) {
   });
 
   // TODO test it better
-  it("should fetch impact", async function () {
+  it('should fetch impact', async function () {
     await EthProxy.fetchImpact(mocks.project, validationId).should.be.fulfilled;
   });
 
   // TODO test it better
-  it("should get impact linked", async function () {
+  it('should get impact linked', async function () {
     await EthProxy.getImpactLinked(mocks.project, validationId).should.be.fulfilled;
   });
 
   // TODO test it better
-  it("should link impact", async function () {
+  it('should link impact', async function () {
     await EthProxy.linkImpact(mocks.project, validationId).should.be.fulfilled;
   });
 });

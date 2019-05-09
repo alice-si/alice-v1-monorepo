@@ -21,15 +21,15 @@ const mainAccount = config.mainAccount;
 const mainPassword = config.mainPassword;
 
 EthProxy.loadAccount = function (fromAddress) {
-  ethProxyLog("Unlocking main account");
+  ethProxyLog('Unlocking main account');
   return unlockAccountAsync(mainAccount, mainPassword).then(function () {
-    ethProxyLog("Preparing load transaction...");
-    return sendAsync({from: mainAccount, to: fromAddress, value: web3.toWei(loadAmount, "ether")});
+    ethProxyLog('Preparing load transaction...');
+    return sendAsync({from: mainAccount, to: fromAddress, value: web3.toWei(loadAmount, 'ether')});
   });
 };
 
 EthProxy.createAccount = function (password) {
-  ethProxyLog("Creating Geth Account...");
+  ethProxyLog('Creating Geth Account...');
   return createAccountAsync(password);
 };
 
@@ -45,7 +45,7 @@ EthProxy.deposit = async (fromUserAccount, project, amount) => {
   await unlockAccountAsync(mainAccount, mainPassword);
 
   let contracts = await Project.getAllContractsForDocument(project);
-  ethProxyLog("Depositing: " + JSON.stringify({
+  ethProxyLog('Depositing: ' + JSON.stringify({
     from: fromUserAccount,
     to: contracts.project.address,
     amount: amount
@@ -105,7 +105,7 @@ EthProxy.deposit = async (fromUserAccount, project, amount) => {
 EthProxy.mint = async (project, amount) => {
   await unlockAccountAsync(mainAccount, mainPassword);
 
-  ethProxyLog("Minting: " + amount);
+  ethProxyLog('Minting: ' + amount);
   let contracts = await Project.getAllContractsForDocument(project);
   return contracts.token.mintAsync(
     contracts.project.address, amount, {from: mainAccount});
@@ -128,7 +128,7 @@ EthProxy.validateOutcome = async (
     idBytes, validation.amount, { from: validatorAccount, gas: 3e6 });
 
   return transaction;
-}
+};
 
 EthProxy.claimOutcome = async (project, validation, beneficiaryPass) => {
   let beneficiary = project.ethAddresses['beneficiary'];
@@ -149,10 +149,10 @@ EthProxy.claimOutcome = async (project, validation, beneficiaryPass) => {
     { from: beneficiary, gas: 3e6 });
 
   return transaction;
-}
+};
 
 EthProxy.fetchImpact = async (project, validationId) => {
-  ethProxyLog("Fetching impacts for: " + validationId);
+  ethProxyLog('Fetching impacts for: ' + validationId);
   let validationIdBytes = mongoIdToBytes(validationId);
 
   let impacts = [];
@@ -161,7 +161,7 @@ EthProxy.fetchImpact = async (project, validationId) => {
   return await new Promise(function(resolve, reject) {
     return contracts.impactRegistry.getImpactCountAsync(validationIdBytes).then(function (result) {
       let count = result.toNumber();
-      ethProxyLog("Fetching impacts: " + count);
+      ethProxyLog('Fetching impacts: ' + count);
       if (count == 0) {
         resolve(impacts);
       }
@@ -171,11 +171,11 @@ EthProxy.fetchImpact = async (project, validationId) => {
           contracts.impactRegistry.getImpactValueAsync(validationIdBytes, donor).then(function (value) {
             impact.value = value.toNumber();
             impacts.push(impact);
-            ethProxyLog("Fetched impact for donor " + impact.donor + " of: " + impact.value);
+            ethProxyLog('Fetched impact for donor ' + impact.donor + ' of: ' + impact.value);
             if (impacts.length == count) {
               resolve(impacts);
             }
-          })
+          });
         });
       }
     });
@@ -194,14 +194,14 @@ EthProxy.linkImpact = async (project, validationId) => {
   await unlockAccountAsync(mainAccount, mainPassword);
   let validationIdBytes = mongoIdToBytes(validationId);
 
-  ethProxyLog("Linking impact: " + validationId);
+  ethProxyLog('Linking impact: ' + validationId);
   let contracts = await Project.getAllContractsForDocument(project);
   return contracts.impactRegistry.linkImpactAsync(
     validationIdBytes, {from: mainAccount, gas: 500000});
 };
 
 EthProxy.checkTransaction = function (tx) {
-  ethProxyLog("Checking transaction: " + tx);
+  ethProxyLog('Checking transaction: ' + tx);
   return getReceiptAsync(tx);
 };
 
@@ -222,19 +222,19 @@ EthProxy.deployProject = async (project, validatorAccount, charityAccount) => {
     ethProxyLog(err);
     throw err;
   }
-}
+};
 
 EthProxy.checkTransactionWithEtherscan = function (tx) {
-  let etherscanUrl = "";
+  let etherscanUrl = '';
   switch (config.networkName) {
-    case 'rinkeby':
-      etherscanUrl = 'https://rinkeby.etherscan.io/api?module=proxy&action=eth_getTransactionByHash&txhash=';
-      break;
-    case 'main':
-      etherscanUrl = 'https://etherscan.io/api?module=proxy&action=eth_getTransactionByHash&txhash=';
-      break;
-    default:
-      throw "Cannot get etherscan url for network: " + config.networkName;
+  case 'rinkeby':
+    etherscanUrl = 'https://rinkeby.etherscan.io/api?module=proxy&action=eth_getTransactionByHash&txhash=';
+    break;
+  case 'main':
+    etherscanUrl = 'https://etherscan.io/api?module=proxy&action=eth_getTransactionByHash&txhash=';
+    break;
+  default:
+    throw 'Cannot get etherscan url for network: ' + config.networkName;
   }
 
   return request(etherscanUrl + tx, function (error, response, body) {
@@ -247,7 +247,7 @@ EthProxy.checkTransactionWithEtherscan = function (tx) {
 
 // This function allows easy logs filtering
 function ethProxyLog(msg) {
-  console.log("EthProxy: " + msg);
+  console.log('EthProxy: ' + msg);
 }
 
 function mongoIdToBytes(id) {

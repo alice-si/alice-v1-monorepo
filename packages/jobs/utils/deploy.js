@@ -19,35 +19,35 @@ async function deployToken(aliceAccount, contractAddresses) {
 }
 
 async function deployProject(aliceAccount,
-                             validatorAccount,
-                             beneficiaryAccount,
-                             project,
-                             contractAddresses) {
-	let projectContract = await Project.new(
+  validatorAccount,
+  beneficiaryAccount,
+  project,
+  contractAddresses) {
+  let projectContract = await Project.new(
     project.code, project.upfrontPayment, getTxConfig(aliceAccount, 5e6));
-	deployerLog('Project deployed: ' + projectContract.address);
+  deployerLog('Project deployed: ' + projectContract.address);
 
-	let setValidatorTx = await projectContract.setValidator(
+  let setValidatorTx = await projectContract.setValidator(
     validatorAccount, getTxConfig(aliceAccount));
-	deployerLog('setValidator tx created: ' + setValidatorTx.tx);
+  deployerLog('setValidator tx created: ' + setValidatorTx.tx);
 
-	let setBeneficiaryTx = await projectContract.setBeneficiary(
+  let setBeneficiaryTx = await projectContract.setBeneficiary(
     beneficiaryAccount, getTxConfig(aliceAccount));
   deployerLog('setBeneficiary tx created: ' + setBeneficiaryTx.tx);
 
-	let setTokenTx = await projectContract.setToken(
+  let setTokenTx = await projectContract.setToken(
     contractAddresses.token, getTxConfig(aliceAccount));
   deployerLog('setToken tx created: ' + setTokenTx.tx);
 
-	let impactContract = await ImpactRegistry.new(
+  let impactContract = await ImpactRegistry.new(
     projectContract.address, getTxConfig(aliceAccount, 4e6));
   deployerLog('ImpactRegistry deployed: ' + impactContract.address);
 
-	let linkerContract = await Linker.new(
+  let linkerContract = await Linker.new(
     impactContract.address, 10, getTxConfig(aliceAccount, 4e6));
   deployerLog('Linker deployed: ' + linkerContract.address);
 
-	let setLinkerTx = await impactContract.setLinker(
+  let setLinkerTx = await impactContract.setLinker(
     linkerContract.address, getTxConfig(aliceAccount));
   deployerLog('setLinker tx created: ' + setLinkerTx.tx);
 
@@ -109,14 +109,14 @@ function getTxConfig(account, gasLimit = 1e6) {
     from: account,
     gas: gasLimit,
     gasPrice: 10000000000 // 10 gwei
-  }
+  };
 }
 
 function deployerLog(msg) {
-  console.log("Deployer: " + msg);
+  console.log('Deployer: ' + msg);
 }
 
-module.exports = {}
+module.exports = {};
 
 module.exports.deployProject = async (
   aliceAccount,
@@ -128,7 +128,7 @@ module.exports.deployProject = async (
 ) => {
   if (!project.code || project.upfrontPayment < 0
         || project.upfrontPayment > 100) {
-    throw "Project is not valid";
+    throw 'Project is not valid';
   }
 
   if (passwords) {
@@ -156,4 +156,4 @@ module.exports.deployClaimsRegistry = async (aliceAccount, password) => {
   console.log('ClaimsRegistry deployed: ' + claimsRegistryContract.address);
 
   return claimsRegistryContract.address;
-}
+};

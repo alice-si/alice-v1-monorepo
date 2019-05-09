@@ -16,6 +16,6 @@ function mainAction(jobContext) {
 module.exports = JobUtils.createJob({
   processName: 'MAIL_SENDING',
   createChecker: false,
-  modelGetter: (() => Mail.findOneAndUpdate({status: "CREATED"}, {status: 'MAIL_SENDING_STARTED'})),
+  modelGetter: (() => Mail.findOneAndUpdate({status: 'CREATED'}, {status: 'MAIL_SENDING_STARTED'})),
   action: mainAction
 });

@@ -25,7 +25,7 @@ function createModellessJob(conf) {
       let jobContext = {};
       const jobId = createJobId(conf.processName + '_modelles_executor');
 
-      jobContext.msg = (msg) => console.log(jobId + ": " + msg);
+      jobContext.msg = (msg) => console.log(jobId + ': ' + msg);
       jobContext.errorBehaviour = (err) => jobContext.msg(getErrorString(err));
       jobContext.completedBehaviour = () => jobContext.msg('finished successfully');
 
@@ -60,7 +60,7 @@ function createExecutor(conf) {
     };
 
     jobContext.completedBehaviour = function () {
-      jobContext.msg("Completed: " + jobContext.model._id);
+      jobContext.msg('Completed: ' + jobContext.model._id);
       return ModelUtils.changeStatus(jobContext.model, getCompletedStatus(conf));
     };
 
@@ -93,24 +93,24 @@ function createChecker(conf) {
       }
     }
 
-    jobContext.msg("Start checking: " + id);
+    jobContext.msg('Start checking: ' + id);
     return EthProxy.checkTransaction(tx).then(function (receipt) {
       if (receipt != null) {
         if (EthProxy.checkTransactionReceipt(receipt)) {
-          jobContext.msg(conf.processName + " was completed, tx: " + tx);
+          jobContext.msg(conf.processName + ' was completed, tx: ' + tx);
           return ModelUtils.changeStatus(jobContext.model, getCompletedStatus(conf));
         } else {
-          jobContext.msg(conf.processName + " was reverted, tx: " + tx)
+          jobContext.msg(conf.processName + ' was reverted, tx: ' + tx);
           return ModelUtils.changeStatus(jobContext.model, getRevertedStatus(conf));
         }
       } else if (age > minAgeForEtherscanChecking) {
         if (!EthProxy.checkTransactionWithEtherscan(tx)) {
-          jobContext.msg("No trace on etherscan: " + tx);
+          jobContext.msg('No trace on etherscan: ' + tx);
           return ModelUtils.changeStatus(jobContext.model, getLostStatus(conf));
         }
       }
     }).catch(function (err) {
-      jobContext.msg("Error while checking " + modelName + ": " + err);
+      jobContext.msg('Error while checking ' + modelName + ': ' + err);
       return MailUtils.sendErrorNotification('checkerJobError', {
         name: checkerJobPrefix,
         model: jobContext.model
@@ -128,7 +128,7 @@ function createJobInternal(jobIdPrefix, modelGetter, action) {
     const jobId = createJobId(jobIdPrefix);
 
     function jobMsg(msg) {
-      console.log(jobId + ": " + msg);
+      console.log(jobId + ': ' + msg);
     }
     jobMsg('started');
     return modelGetter().then(function(model) {
@@ -212,33 +212,33 @@ function getTxField(conf) {
   if (conf.txField) {
     return conf.txField;
   }
-  return conf.processName.toLowerCase() + "Tx";
+  return conf.processName.toLowerCase() + 'Tx';
 }
 
 function getTimeField(conf) {
   if (conf.timeField) {
     return conf.timeField;
   }
-  return conf.processName.toLowerCase() + "Time";
+  return conf.processName.toLowerCase() + 'Time';
 }
 
 // TODO add more checks
 function validateJobConfiguration(conf) {
   if (conf.modelless) {
     if (!conf.processName) {
-      throw "Modelles job should have at least processName field";
+      throw 'Modelles job should have at least processName field';
     }
   } else {
     var requiredFields = ['processName', 'createChecker', 'action'];
 
     requiredFields.forEach(field => {
       if (!conf.hasOwnProperty(field)) {
-        throw "Job configuration does not have the following property: " + field;
+        throw 'Job configuration does not have the following property: ' + field;
       }
     });
 
     if (!conf.hasOwnProperty('startStatus') && !conf.hasOwnProperty('modelGetter')) {
-      throw "Job configuration does not have any of the following properties: startStatus, modelGetter";
+      throw 'Job configuration does not have any of the following properties: startStatus, modelGetter';
     }
   }
 }

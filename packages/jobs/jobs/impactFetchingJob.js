@@ -12,12 +12,12 @@ function mainAction(jobContext) {
   let lastUser, lastImpact;
   let validation = jobContext.model;
   let project = validation._projectId;
-  jobContext.msg("Fetching impact for validation: " + validation._id);
+  jobContext.msg('Fetching impact for validation: ' + validation._id);
   return EthProxy.fetchImpact(project, validation._id.toString()).then(function (impacts) {
     return Promise.map(impacts, function (impact) {
       return User.findOne({ethAccount: impact.donor}).then(function (user) {
         if (!user) {
-          throw "There are no users with ethAccount: " + impact.donor;
+          throw 'There are no users with ethAccount: ' + impact.donor;
         }
         lastUser = user;
         return new Impact({
@@ -28,7 +28,7 @@ function mainAction(jobContext) {
           amount: impact.value
         }).save();
       }).then(function (impact) {
-        jobContext.msg("Impact fetched for validation: " + validation._id, " impactID: " + impact._id);
+        jobContext.msg('Impact fetched for validation: ' + validation._id, ' impactID: ' + impact._id);
         lastImpact = impact;
         return Project.findById(project._id).populate('charity');
       }).then(function (projectWithCharity) {

@@ -16,7 +16,7 @@ const ClaimsRegistry = initializeContract('ClaimsRegistry');
 
 ContractUtils.getClaimsRegistry = (address) => {
   return getContractInstance(ClaimsRegistry, address);
-}
+};
 
 ContractUtils.getProvider = function () {
   lazyInitWeb3();
@@ -55,17 +55,17 @@ function getDefaultProvider() {
 function validateNetworkId() {
   let networkId;
   switch (config.networkName) {
-    case 'local':
-      networkId = 3;
-      break;
-    case 'rinkeby':
-      networkId = 4;
-      break;
-    case 'main':
-      networkId = 1;
-      break;
-    default:
-      throw 'network name is unknown: ' + config.networkName;
+  case 'local':
+    networkId = 3;
+    break;
+  case 'rinkeby':
+    networkId = 4;
+    break;
+  case 'main':
+    networkId = 1;
+    break;
+  default:
+    throw 'network name is unknown: ' + config.networkName;
   }
   web3.version.getNetwork(function (err, netId) {
     // assert(!err, err);

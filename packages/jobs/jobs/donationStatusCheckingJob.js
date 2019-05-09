@@ -16,13 +16,13 @@ function mainAction(jobContext) {
       return Promise.resolve();
     }
   }).then(function (result) {
-    jobContext.msg("Fetched aggregated result");
+    jobContext.msg('Fetched aggregated result');
     aggregatedResult = result;
-    return Donation.find(getFilter(), "createdAt amount status type")
-      .sort({createdAt: "desc"})
-      .populate("_userId", "email");
+    return Donation.find(getFilter(), 'createdAt amount status type')
+      .sort({createdAt: 'desc'})
+      .populate('_userId', 'email');
   }).then(function (result) {
-    jobContext.msg("Fetched stalled donations data");
+    jobContext.msg('Fetched stalled donations data');
     donations = result;
     if (donations && donations.length > 0) {
       jobContext.msg('Sending email to devs with Donation: ' + JSON.stringify(result));
@@ -34,7 +34,7 @@ function mainAction(jobContext) {
     return jobContext.completedBehaviour();
   }).catch(function (err) {
     jobContext.errorBehaviour(err);
-  })
+  });
 }
 
 function getFilter() {

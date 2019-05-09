@@ -19,13 +19,13 @@ TestUtils.connectToMockDB().then(async function () {
 
   let validationsWereCreated = false;
   Schedule.scheduleJob('*/1 * * * * *', async () => {
-    console.log("Searching for donated donations started...");
+    console.log('Searching for donated donations started...');
 
     let project = await Project.findOne({});
     let donationsDonated = await Donation.find({status: 'DONATED'});
 
     if (donationsDonated.length == numberOfUsers && !validationsWereCreated) {
-      console.log("All donations have DONATED status - validations creating started...");
+      console.log('All donations have DONATED status - validations creating started...');
 
       // transfer some ether to claimer so he can pay for transaction
       await EthProxy.loadAccount(project.ethAddresses['beneficiary']);
@@ -34,7 +34,7 @@ TestUtils.connectToMockDB().then(async function () {
       validationsWereCreated = true;
     } else {
       if (!validationsWereCreated) {
-        console.log("Not all donations have DONATED status yet - skipping...");
+        console.log('Not all donations have DONATED status yet - skipping...');
       }
     }
   });

@@ -28,7 +28,7 @@ MailProxy.requestSending = function (conf) {
       });
       return newMailRequest.save();
     }).then(function (newMailRequest) {
-      mailProxyLog("MailProxy: mail sending request was saved in DB: " + newMailRequest._id);
+      mailProxyLog('MailProxy: mail sending request was saved in DB: ' + newMailRequest._id);
       resolve();
     }).catch(function (err) {
       reject(err);
@@ -63,11 +63,11 @@ MailProxy.send = function (mail) {
 
     sendPromise.then(
       function (data) {
-        mailProxyLog("Mail sent: " + data.MessageId);
+        mailProxyLog('Mail sent: ' + data.MessageId);
         resolve(data);
       }).catch(
       function (err) {
-        mailProxyLog("Error occured: " + JSON.stringify(err));
+        mailProxyLog('Error occured: ' + JSON.stringify(err));
         reject(err);
       });
   });
@@ -75,14 +75,14 @@ MailProxy.send = function (mail) {
 
 function getSubject(mail) {
   if (config.mode != 'PROD') {
-    return "[" + config.mode + "] " + mail.subject;
+    return '[' + config.mode + '] ' + mail.subject;
   } else {
     return mail.subject;
   }
 }
 
 function getCC(mail) {
-  if (mail.type == "ErrorNotification" || mail.type == "StalledDonationsNotification") {
+  if (mail.type == 'ErrorNotification' || mail.type == 'StalledDonationsNotification') {
     return [];
   } else {
     return [mail.from];
@@ -94,24 +94,24 @@ function getRecipients(mail) {
 }
 
 function mailProxyLog(msg) {
-  console.log("MailProxy: " + msg);
+  console.log('MailProxy: ' + msg);
 }
 
 function readTemplateFilesWithPartials(conf) {
-  const pathToTemplates = __dirname + "/../templates/";
-  const pathToPartials = pathToTemplates + "partials/";
+  const pathToTemplates = __dirname + '/../templates/';
+  const pathToPartials = pathToTemplates + 'partials/';
   let result = {
     partials: {}
   };
 
-  return fs.readFileAsync(pathToTemplates + conf.template, "utf8").then(function (template) {
+  return fs.readFileAsync(pathToTemplates + conf.template, 'utf8').then(function (template) {
     result.template = template;
     return fs.readdirAsync(pathToPartials);
   }).then(function (partialFiles) {
     let promises = [];
     for (let partialFile of partialFiles) {
-      let partialKey = partialFile.replace(".mustache", "");
-      let readFilePromise = fs.readFileAsync(pathToPartials + partialFile, "utf8").then(function (content) {
+      let partialKey = partialFile.replace('.mustache', '');
+      let readFilePromise = fs.readFileAsync(pathToPartials + partialFile, 'utf8').then(function (content) {
         result.partials[partialKey] = content;
       });
       promises.push(readFilePromise);

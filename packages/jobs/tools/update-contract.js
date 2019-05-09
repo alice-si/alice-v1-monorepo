@@ -6,7 +6,7 @@
  * Example usage: node tools/upgrade-contract.js Project
  */
 
-const path = require('path')
+const path = require('path');
 
 const argv = require('yargs').argv;
 const mongoose = require('mongoose');

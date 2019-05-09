@@ -20,10 +20,10 @@ function mainAction(jobContext) {
       throw walletsErr;
     }
     if (upfrontPayment > 100 || upfrontPayment < 0) {
-      throw "UpfrontPayment is not correct number (0-100): " + project.upfrontPayment;
+      throw 'UpfrontPayment is not correct number (0-100): ' + project.upfrontPayment;
     }
 
-    jobContext.msg("Collecting money from donation: " + donation._id);
+    jobContext.msg('Collecting money from donation: ' + donation._id);
   }).then(() => makeUpfrontTransfer(donation, project, charity, upfrontPaymentAmount))
     .then((result) => {
       jobContext.msg('Upfront transfer completed: ' + JSON.stringify(result));
@@ -34,16 +34,16 @@ function mainAction(jobContext) {
       jobContext.completedBehaviour();
     })
     .catch(function (err) {
-    jobContext.errorBehaviour(err);
-  });
+      jobContext.errorBehaviour(err);
+    });
 }
 
 function checkWallets(user, project, charity) {
-  let err = "";
-  err += (Config.technicalMangoUserId) ? "" : "Config does not have technicalUserId value|";
-  err += (user && user.mangoUserId && user.mangoWalletId) ? "" : "Donor has problems with mango userId or walletId|";
-  err += (charity && charity.mangoUserId) ? "" : "Charity has problems with mango userId|";
-  err += (project && project.mangoBeneficiaryWalletId && project.mangoContractWalletId) ? "" : "Project has problems with mango userId or walletId|";
+  let err = '';
+  err += (Config.technicalMangoUserId) ? '' : 'Config does not have technicalUserId value|';
+  err += (user && user.mangoUserId && user.mangoWalletId) ? '' : 'Donor has problems with mango userId or walletId|';
+  err += (charity && charity.mangoUserId) ? '' : 'Charity has problems with mango userId|';
+  err += (project && project.mangoBeneficiaryWalletId && project.mangoContractWalletId) ? '' : 'Project has problems with mango userId or walletId|';
 
   return err;
 }
@@ -63,7 +63,7 @@ function makeTransfer(donation, toUserId, toWalletId, amount) {
       toUserId, toWalletId,
       amount).then(function (data) {
       if (data.Status == 'FAILED') {
-        throw "Transfer failed: " + data.Id;
+        throw 'Transfer failed: ' + data.Id;
       } else {
         return data;
       }

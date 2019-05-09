@@ -7,7 +7,7 @@ const Charity = ModelUtils.loadModel('charity');
 const TestConfig = require('../test-config');
 const KeyProxy = require('../gateways/keyProxy');
 
-  TestUtils.setBeforeAndAfterHooksForJobTest();
+TestUtils.setBeforeAndAfterHooksForJobTest();
 
 contract('ProjectDeploymentJob', async function (accounts) {
   const code = 'TEST_FOR_PRJ_DEPLOY';

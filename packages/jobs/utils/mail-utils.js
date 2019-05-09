@@ -38,7 +38,7 @@ Mail.sendErrorNotification = function (type, context, err) {
     to: Config.developerEmails,
     data: {
       err: JSON.stringify(err),
-      mode: Config.mode || "Local",
+      mode: Config.mode || 'Local',
       context: JSON.stringify(context),
       time: new Date().toISOString(),
       type: type
@@ -73,11 +73,11 @@ Mail.sendStalledDonationsNotification = function (donationStatuses, donations) {
     data: {
       report: JSON.stringify(donationStatuses),
       donations: donations,
-      mode: Config.mode || "Local",
+      mode: Config.mode || 'Local',
     },
     type: 'StalledDonationsNotification'
   };
   return MailProxy.requestSending(mailToSend);
-}
+};
 
 module.exports = Mail;

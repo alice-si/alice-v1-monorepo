@@ -43,7 +43,7 @@ function getModelAndUpdate(model, startStatus, newStatus, dateField) {
 ModelUtils.changeStatus = function (modelObj, status) {
   const Model = modelObj.constructor;
   return Model.findByIdAndUpdate(modelObj._id, {status: status}).then(function() {
-    console.log("Status was changed to " + status);
+    console.log('Status was changed to ' + status);
     Monitor.printStatus(Model);
   });
 };

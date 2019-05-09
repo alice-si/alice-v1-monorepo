@@ -4,24 +4,24 @@
 // If you see repeating "no model found. skipping..." please finish script executing (ctrl+c) 
 
 const TestUtils = require('../utils/test-utils');
-const MailUtils = require("../utils/mail-utils");
+const MailUtils = require('../utils/mail-utils');
 const MailSendingJob = require('../jobs/mailSendingJob');
 
 async function prepare() {
   await TestUtils.connectToMockDB();
-  console.log("Connected to mock DB.");
+  console.log('Connected to mock DB.');
   let mocks = await TestUtils.prepareMockObjects(
-    "owner",
-    "COLLECTING_COMPLETED",
-    "CREATED"
+    'owner',
+    'COLLECTING_COMPLETED',
+    'CREATED'
   );
-  await MailUtils.sendStalledDonationsNotification("Test mail sending", []);
+  await MailUtils.sendStalledDonationsNotification('Test mail sending', []);
   await MailUtils.sendErrorNotification('Test', 'Just a test', 'No error');
   const impact = {
-    _id: "12345678",
+    _id: '12345678',
     amount: 10
   };
-  mocks.project.charity.legalName = "Charity Legal Name";
+  mocks.project.charity.legalName = 'Charity Legal Name';
   await MailUtils.sendImpactConfirmation(mocks.user, mocks.project, impact);
 }
 

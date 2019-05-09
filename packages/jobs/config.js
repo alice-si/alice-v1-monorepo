@@ -10,7 +10,7 @@ function getEnv(variable, defaultForLocal) {
   if (process.env[variable]) {
     return process.env[variable];
   } else if (defaultForLocal !== undefined && mode === 'LOCAL') {
-    return defaultForLocal
+    return defaultForLocal;
   } else {
     throw `Environment variable "${variable}" is missing`;
   }
@@ -52,7 +52,7 @@ if (mode == 'PROD') {
 }
 
 if (!env.AWS_ACCESS_KEY_ID || !env.AWS_SECRET_ACCESS_KEY) {
-  throw "Config does not have credentials required for AWS SES";
+  throw 'Config does not have credentials required for AWS SES';
 }
 
 module.exports = config;
