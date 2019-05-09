@@ -28,6 +28,7 @@ jobs:
             - ./node_modules
             - ./packages/contracts/node_modules
             - ./packages/demo-app/node_modules
+            - ./packages/jobs/node_modules
             - ./packages/models/node_modules
       - persist_to_workspace:
           root: .
@@ -40,7 +41,7 @@ jobs:
           at: .
       - run:
           name: test
-          command: npx lerna run test
+          command: npx lerna run test --stream
   docker-build:
     executor: node-executor
     steps:
