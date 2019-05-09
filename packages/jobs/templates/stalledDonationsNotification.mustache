@@ -1,0 +1,37 @@
+<h2>Hey there!</h2>
+<h3>Please check stalled donation statuses</h3>
+<table border="1">
+    <tr>
+        <td>Statuses</td>
+        <td>{{ report }}</td>
+    </tr>
+    <tr>
+        <td>Mode</td>
+        <td>{{ mode }}</td>
+    </tr>
+    <tr>
+        <td>Stalled donations</td>
+        <table border="1">
+            <tr>
+                <th>Email</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Amount</th>
+                <th>Type</th>
+                <th>Id</th>
+            </tr>
+            {{ #donations }}
+                <tr>
+                    <td>{{ _userId.email }}</td>
+                    <td>{{ createdAt }}</td>
+                    <td>{{ status }}</td>
+                    <td>{{ amount }}</td>
+                    <td>{{ type }}</td>
+                    <td>{{ _id }}</td>
+                </tr>
+            {{ /donations }}
+        </table>
+    </tr>
+</table>
+
+<h6>Please check it ASAP but don't forget about work-life balance ;)</h6>

@@ -1,0 +1,42 @@
+{
+  "name": "@alice-si/jobs",
+  "version": "0.0.0",
+  "author": "Jakub Wojciechowski",
+  "description": "A collection of background jobs for Alice platform",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "start": "node server.js",
+    "compile": "truffle compile --contracts_directory=./node_modules/@alice-si/contracts/contracts",
+    "pretest": "npm run compile",
+    "test": "./scripts/test.sh silent-mode $@",
+    "test-normal": "./scripts/test.sh all-output $@",
+    "load-test": "./scripts/load-test.sh"
+  },
+  "dependencies": {
+    "@alice-si/contracts": "^0.0.0",
+    "@alice-si/models": "^0.0.0",
+    "@stratumn/canonicaljson": "^1.0.2",
+    "aws-sdk": "^2.361.0",
+    "bluebird": "^3.5.2",
+    "ganache-cli": "^6.1.8",
+    "mangopay2-nodejs-sdk": "^1.3.1",
+    "mustache": "^3.0.1",
+    "node-schedule": "^1.1.1",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.4",
+    "truffle": "^4.1.14",
+    "truffle-contract": "^3.0.6",
+    "web3": "^0.20.6",
+    "yargs": "^4.8.1"
+  },
+  "devDependencies": {
+    "mocha-steps": "^1.3.0",
+    "mockgoose": "^7.3.5",
+    "rewire": "^4.0.1",
+    "should": "^13.2.3"
+  },
+  "yargs": {
+    "parse-numbers": false
+  }
+}
