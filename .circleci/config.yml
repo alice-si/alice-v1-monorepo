@@ -44,7 +44,7 @@ jobs:
           command: npx lerna run test --stream
   docker-build:
     docker:
-      image: google/cloud-sdk
+      - image: google/cloud-sdk
     steps:
       - setup_remote_docker:
           docker_layer_caching: true
