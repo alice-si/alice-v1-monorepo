@@ -84,7 +84,7 @@ workflows:
             - build
       - docker-build:
           requires:
-            - build
+            - test
           filters:
             branches:
               only: master
