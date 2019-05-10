@@ -58,14 +58,21 @@ jobs:
             gcloud --quiet auth configure-docker
 
             TAG=$(date +'%Y%m%d')-$(echo $CIRCLE_SHA1 | cut -c 1-3)
-            DEMO_APP_TAG="gcr.io/$GOOGLE_PROJECT_ID/alice-demo-app:$TAG"
-            JOBS_TAG="gcr.io/$GOOGLE_PROJECT_ID/alice-jobs:$TAG"
+            DEMO_APP_NAME="gcr.io/$GOOGLE_PROJECT_ID/alice-demo-app:$TAG"
+            JOBS_NAME="gcr.io/$GOOGLE_PROJECT_ID/alice-jobs:$TAG"
             echo "Building version $TAG"
 
-            docker build -t "$DEMO_APP_TAG" -f packages/demo-app/Dockerfile .
-            docker build -t "$JOBS_TAG" -f packages/jobs/Dockerfile .
-            docker push "$DEMO_APP_TAG"
-            docker push "$JOBS_TAG"
+            docker build -t "alice-monorepo:$TAG" .
+            docker build -t "$DEMO_APP_NAME" \
+              -f packages/demo-app/Dockerfile \
+              --build-arg VERSION=$TAG \
+              .
+            docker build -t "$JOBS_NAME" \
+              -f packages/jobs/Dockerfile \
+              --build-arg VERSION=$TAG \
+              .
+            docker push "$DEMO_APP_NAME"
+            docker push "$JOBS_NAME"
 
 workflows:
   version: 2
