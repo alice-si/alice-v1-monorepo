@@ -1,13 +1,8 @@
-FROM node:10
+ARG VERSION
+FROM alice-monorepo:${VERSION}
 
-# Create app directory
-WORKDIR /usr/src/app
-
-# Bundle app source
-COPY . ./
-
-# Install dependencies.
-RUN npm install --only=prod
+# Move to jobs package.
+WORKDIR /usr/src/app/packages/demo-app
 
 # Build contracts.
-RUN npm compile
+RUN npm run compile
