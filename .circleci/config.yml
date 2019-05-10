@@ -46,6 +46,7 @@ jobs:
     docker:
       - image: google/cloud-sdk
     steps:
+      - checkout
       - setup_remote_docker:
           docker_layer_caching: true
       - run:
@@ -61,10 +62,10 @@ jobs:
             JOBS_TAG="gcr.io/$GOOGLE_PROJECT_ID/alice-jobs:$TAG"
             echo "Building version $TAG"
 
-            docker build -t $DEMO_APP_TAG -f packages/demo-app/Dockerfile .
-            docker build -t $JOBS_TAG -f packages/jobs/Dockerfile .
-            docker push $DEMO_APP_TAG
-            docker push $JOBS_TAG
+            docker build -t "$DEMO_APP_TAG" -f packages/demo-app/Dockerfile .
+            docker build -t "$JOBS_TAG" -f packages/jobs/Dockerfile .
+            docker push "$DEMO_APP_TAG"
+            docker push "$JOBS_TAG"
 
 workflows:
   version: 2
