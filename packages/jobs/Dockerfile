@@ -10,4 +10,4 @@ COPY . ./
 RUN npm install --only=prod
 
 # Build contracts.
-RUN npm compile
+RUN npm run compile
