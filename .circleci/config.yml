@@ -50,13 +50,21 @@ jobs:
       - attach_workspace:
           at: .
       - run:
-          name: Build alice-demo-app image
+          name: Build and push Docker images
           command: |
-            TAG=gcr.io/donations-218312/alice-demo-app
-            docker build -t $TAG -f packages/demo-app/Dockerfile .
-            docker save -o alice-demo-app.tar $TAG
-      - store_artifacts:
-          path: alice-demo-app.tar
+            echo $GCLOUD_SERVICE_KEY | gcloud auth authenticate-service-account --key-file=-
+            gcloud --quiet config set project $GOOGLE_PROJECT_ID
+            gcloud --quiet config set compute/zone $GOOGLE_COMPUTE_ZONE
+            gcloud auth configure-docker
+
+            TAG=$(date +'%Y%m%d')-$(echo $CIRCLE_SHA1 | cut -c 1-3)
+            DEMO_APP_TAG="gcr.io/$GOOGLE_PROJECT_ID/alice-demo-app:$TAG"
+            JOBS_TAG="gcr.io/$GOOGLE_PROJECT_ID/alice-jobs:$TAG"
+
+            docker build -t $DEMO_APP_TAG -f packages/demo-app/Dockerfile .
+            docker build -t $JOBS_TAG -f packages/jobs/Dockerfile .
+            docker push $DEMO_APP_TAG
+            docker push $JOBS_TAG
 
 workflows:
   version: 2
