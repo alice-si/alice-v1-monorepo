@@ -10,6 +10,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "mongodb-memory-server": "^5.1.1",
     "mongoose": "5.3.12",
     "openzeppelin-solidity": "^1.11.0"
   },

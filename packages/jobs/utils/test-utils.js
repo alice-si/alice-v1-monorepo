@@ -1,9 +1,8 @@
 const config = require('../config');
 const TestConfig = require('../test-config');
 const ModelUtils = require('./model-utils');
-const Mongoose = require('mongoose');
-const Mockgoose = require('mockgoose').Mockgoose;
-const mockgoose = new Mockgoose(Mongoose);
+const mongoose = require('mongoose');
+const { MongoMemoryServer } = require('mongodb-memory-server');
 const ContractUtils = require('./contract-utils');
 const web3 = ContractUtils.getWeb3();
 const BigNumber = web3.BigNumber;
@@ -31,24 +30,41 @@ Promise.prototype.shouldBeReverted = async function () {
 
 let TestUtils = {};
 
+let mongoServer;
+
 TestUtils.getDefaultProjectCode = function () {
   return TestConfig.defaultProjectName;
 };
 
-TestUtils.connectToMockDB = function () {
-  return mockgoose.prepareStorage().then(function () {
-    return Mongoose.connect('mongodb://anything/can/be/here', {useNewUrlParser: true}).then(function (connection) {
-      console.log('Connection to mockDB was established successfully');
-      return connection;
-    }, function (err) {
-      console.log('Connection to mockDB failed');
-      throw err;
+TestUtils.connectToMockDB = async function () {
+  mongoServer = new MongoMemoryServer();
+
+  mongoose.Promise = Promise;
+  const mongoUri = await mongoServer.getConnectionString();
+  const mongooseOpts = {
+    // options for mongoose 4.11.3 and above
+    autoReconnect: true,
+    reconnectTries: Number.MAX_VALUE,
+    reconnectInterval: 1000,
+  };
+
+  await new Promise((resolve, reject) => {
+    mongoose.connect(mongoUri, mongooseOpts);
+
+    mongoose.connection.on('error', (e) => {
+      console.error(e);
+      reject(e);
+    });
+  
+    mongoose.connection.once('open', () => {
+      console.log(`MongoDB successfully connected to ${mongoUri}`);
+      resolve();
     });
   });
 };
 
 TestUtils.resetMockDB = async () => {
-  await mockgoose.helper.reset();
+  await mongoServer.stop();
 };
 
 TestUtils.createDefaultMockProject = async (
