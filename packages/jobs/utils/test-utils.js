@@ -62,7 +62,7 @@ TestUtils.connectToMockDB = async function () {
 };
 
 TestUtils.resetMockDB = async () => {
-  mongoose.disconnect();
+  // mongoose.disconnect();
   await mongoServer.stop();
 };
 
