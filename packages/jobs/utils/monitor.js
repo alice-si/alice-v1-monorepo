@@ -1,4 +1,6 @@
-function Monitor(){}
+const logger = require('./logger')('utils/monitor');
+
+function Monitor(){};
 
 Monitor.getAggregatedResult = function (model) {
   return model.aggregate([{
@@ -7,11 +9,11 @@ Monitor.getAggregatedResult = function (model) {
       count: {$sum: 1}
     }
   }]);
-};
+}
 
 Monitor.printStatus = function(model) {
   Monitor.getAggregatedResult(model).then(function(result) {
-    console.log(model.modelName + ': ' + JSON.stringify(result));
+    logger.info(model.modelName + ': ' + JSON.stringify(result));
   });
 };
 

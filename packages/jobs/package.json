@@ -28,6 +28,7 @@
     "truffle": "^4.1.14",
     "truffle-contract": "^3.0.6",
     "web3": "^0.20.6",
+    "winston": "^3.2.1",
     "yargs": "^4.8.1"
   },
   "devDependencies": {

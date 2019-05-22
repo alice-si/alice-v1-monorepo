@@ -2,6 +2,7 @@ const TestUtils = require('../utils/test-utils');
 const ModelUtils = require('../utils/model-utils');
 const User = ModelUtils.loadModel('user');
 const AccountCreatingJob = require('../jobs/accountCreatingJob');
+const logger = require('../utils/logger')('test/accountCreatingJob');
 
 contract('AccountCreatingJob', async function (accounts) {
   const timeout = 500;
@@ -26,7 +27,7 @@ contract('AccountCreatingJob', async function (accounts) {
   it('User should have ethAccount', function (done) {
     setTimeout(async function () {
       let userFound = await User.findOne({_id: user._id});
-      console.log(userFound);
+      logger.debug(userFound);
       userFound.ethAccount.should.not.be.null;
       done();
     }, timeout);

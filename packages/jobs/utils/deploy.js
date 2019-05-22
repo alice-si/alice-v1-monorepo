@@ -1,7 +1,5 @@
-// Import libraries we need.
-const Promise = require('bluebird');
-
 const ContractUtils = require('./contract-utils');
+const logger = require('./logger')('utils/deploy');
 const ImpactRegistry = require('../contract_proxies/ImpactRegistry');
 const Linker = require('../contract_proxies/FlexibleImpactLinker');
 const Project = require('../contract_proxies/Project');
@@ -14,53 +12,55 @@ const web3 = ContractUtils.getWeb3();
 
 async function deployToken(aliceAccount, contractAddresses) {
   let tokenContract = await AliceToken.new(getTxConfig(aliceAccount, 4e6));
-  deployerLog('Token deployed: ' + tokenContract.address);
+  logger.info('Token deployed: ' + tokenContract.address);
   contractAddresses.token = tokenContract.address;
 }
 
-async function deployProject(aliceAccount,
+async function deployProject(
+  aliceAccount,
   validatorAccount,
   beneficiaryAccount,
   project,
-  contractAddresses) {
-  let projectContract = await Project.new(
+  contractAddresses
+) {
+	let projectContract = await Project.new(
     project.code, project.upfrontPayment, getTxConfig(aliceAccount, 5e6));
-  deployerLog('Project deployed: ' + projectContract.address);
+	logger.info('Project deployed: ' + projectContract.address);
 
-  let setValidatorTx = await projectContract.setValidator(
+	let setValidatorTx = await projectContract.setValidator(
     validatorAccount, getTxConfig(aliceAccount));
-  deployerLog('setValidator tx created: ' + setValidatorTx.tx);
+	logger.info('setValidator tx created: ' + setValidatorTx.tx);
 
-  let setBeneficiaryTx = await projectContract.setBeneficiary(
+	let setBeneficiaryTx = await projectContract.setBeneficiary(
     beneficiaryAccount, getTxConfig(aliceAccount));
-  deployerLog('setBeneficiary tx created: ' + setBeneficiaryTx.tx);
+  logger.info('setBeneficiary tx created: ' + setBeneficiaryTx.tx);
 
-  let setTokenTx = await projectContract.setToken(
+	let setTokenTx = await projectContract.setToken(
     contractAddresses.token, getTxConfig(aliceAccount));
-  deployerLog('setToken tx created: ' + setTokenTx.tx);
+  logger.info('setToken tx created: ' + setTokenTx.tx);
 
-  let impactContract = await ImpactRegistry.new(
+	let impactContract = await ImpactRegistry.new(
     projectContract.address, getTxConfig(aliceAccount, 4e6));
-  deployerLog('ImpactRegistry deployed: ' + impactContract.address);
+  logger.info('ImpactRegistry deployed: ' + impactContract.address);
 
-  let linkerContract = await Linker.new(
+	let linkerContract = await Linker.new(
     impactContract.address, 10, getTxConfig(aliceAccount, 4e6));
-  deployerLog('Linker deployed: ' + linkerContract.address);
+  logger.info('Linker deployed: ' + linkerContract.address);
 
-  let setLinkerTx = await impactContract.setLinker(
+	let setLinkerTx = await impactContract.setLinker(
     linkerContract.address, getTxConfig(aliceAccount));
-  deployerLog('setLinker tx created: ' + setLinkerTx.tx);
+  logger.info('setLinker tx created: ' + setLinkerTx.tx);
 
   let setImpactRegistryTx = await projectContract.setImpactRegistry(
     impactContract.address, getTxConfig(aliceAccount));
-  deployerLog('setImpactRegistry tx created: ' + setImpactRegistryTx.tx);
+  logger.info('setImpactRegistry tx created: ' + setImpactRegistryTx.tx);
 
   if (contractAddresses.claimsRegistry) {
     let setClaimsRegistryTx = await projectContract.setClaimsRegistry(
       contractAddresses.claimsRegistry, getTxConfig(aliceAccount));
-    deployerLog('setClaimsRegistry tx created: ' + setClaimsRegistryTx.tx);
+    logger.info('setClaimsRegistry tx created: ' + setClaimsRegistryTx.tx);
   } else {
-    deployerLog('Project deployed without ClaimsRegistry');
+    logger.info('Project deployed without ClaimsRegistry');
   }
 
   contractAddresses.project = projectContract.address;
@@ -77,7 +77,7 @@ async function deploy(
   claimsRegistryAddress,
   project
 ) {
-  deployerLog('Deploying project with the following data: ' + JSON.stringify({
+  logger.info('Deploying project with the following data: ' + JSON.stringify({
     AliceAccount: aliceAccount,
     ValidatorAccount: validatorAccount,
     BenficiaryAccount: beneficiaryAccount,
@@ -109,11 +109,7 @@ function getTxConfig(account, gasLimit = 1e6) {
     from: account,
     gas: gasLimit,
     gasPrice: 10000000000 // 10 gwei
-  };
-}
-
-function deployerLog(msg) {
-  console.log('Deployer: ' + msg);
+  }
 }
 
 module.exports = {};
@@ -141,7 +137,7 @@ module.exports.deployProject = async (
     beneficiaryAccount,
     claimsRegistryAddress,
     project);
-  deployerLog('Contracts were deployed: ' + JSON.stringify(addresses));
+  logger.info('Contracts were deployed: ' + JSON.stringify(addresses));
 
   return addresses;
 };
@@ -153,7 +149,7 @@ module.exports.deployClaimsRegistry = async (aliceAccount, password) => {
   }
 
   let claimsRegistryContract = await ClaimsRegistry.new(getTxConfig(aliceAccount));
-  console.log('ClaimsRegistry deployed: ' + claimsRegistryContract.address);
+  logger.info('ClaimsRegistry deployed: ' + claimsRegistryContract.address);
 
   return claimsRegistryContract.address;
 };

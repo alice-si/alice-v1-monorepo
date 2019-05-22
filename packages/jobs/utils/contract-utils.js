@@ -1,10 +1,9 @@
 const Web3 = require('web3');
 const Promise = require('bluebird');
 const contract = require('truffle-contract');
-const assert = require('assert');
-const lodash = require('lodash');
 
 const config = require('../config');
+const logger = require('./logger')('utils/contract-utils');
 
 let ContractUtils = {};
 
@@ -71,11 +70,11 @@ function validateNetworkId() {
     // assert(!err, err);
     // assert(netId == networkId, 'Network id is incorrect');
     if (err) {
-      console.log('ContractUtils error: ' + JSON.stringify(err));
+      logger.error(err);
     }
     if(netId != networkId) {
       const ids = '(config value: ' + networkId + ', real value: ' + netId + ')';
-      console.log('ContractUtils error: Network id is incorrect ' + ids);
+      logger.error('Network id is incorrect ' + ids);
     }
   });
 }

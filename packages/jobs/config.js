@@ -27,6 +27,7 @@ config.ethClientAddress = getEnv('ETH_CLIENT_ADDRESS', 'http://localhost:8545');
 config.networkName = getEnv('ETH_NETWORK_NAME', 'local'); // enum: ['local', 'rinkeby', 'main'];
 
 config.mode = mode;
+config.logLevel = 'info'; // enum ['debug', 'info', 'warn', 'error']
 
 // Mockgoose is used in tests, so a connection string is not needed.
 config.db = getEnv('DB_URL', '');

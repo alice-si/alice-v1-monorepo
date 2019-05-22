@@ -1,4 +1,5 @@
 const TestUtils = require('../utils/test-utils');
+const logger = require('../utils/logger')('test/ethProxy');
 const EthProxy = require('../gateways/ethProxy');
 const AliceToken = artifacts.require('AliceToken');
 const Project = artifacts.require('Project');
@@ -42,7 +43,7 @@ contract('EthProxy', function (accounts) {
     (await project.total()).should.be.bignumber.equal(amount + totalBefore.toNumber());
     balanceAfter = (await project.getBalance(testAccount));
     balanceAfter.should.be.bignumber.equal(balanceBefore.plus(amount));
-    console.log('Balance before: ', balanceBefore.toNumber(), ' Balance after: ', balanceAfter.toNumber());
+    logger.info('Balance before: ' + balanceBefore.toNumber() + ' Balance after: ' + balanceAfter.toNumber());
   });
 
   it('should claim and validate outcome', async function () {
