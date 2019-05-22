@@ -176,7 +176,7 @@ EthProxy.fetchImpact = async (project, validationId) => {
             if (impacts.length == count) {
               resolve(impacts);
             }
-          })
+          });
         });
       }
     });
@@ -228,14 +228,14 @@ EthProxy.deployProject = async (project, validatorAccount, charityAccount) => {
 EthProxy.checkTransactionWithEtherscan = function (tx) {
   let etherscanUrl = '';
   switch (config.networkName) {
-    case 'rinkeby':
-      etherscanUrl = 'https://rinkeby.etherscan.io/api?module=proxy&action=eth_getTransactionByHash&txhash=';
-      break;
-    case 'main':
-      etherscanUrl = 'https://etherscan.io/api?module=proxy&action=eth_getTransactionByHash&txhash=';
-      break;
-    default:
-      throw 'Cannot get etherscan url for network: ' + config.networkName;
+  case 'rinkeby':
+    etherscanUrl = 'https://rinkeby.etherscan.io/api?module=proxy&action=eth_getTransactionByHash&txhash=';
+    break;
+  case 'main':
+    etherscanUrl = 'https://etherscan.io/api?module=proxy&action=eth_getTransactionByHash&txhash=';
+    break;
+  default:
+    throw 'Cannot get etherscan url for network: ' + config.networkName;
   }
 
   return request(etherscanUrl + tx, function (error, response, body) {

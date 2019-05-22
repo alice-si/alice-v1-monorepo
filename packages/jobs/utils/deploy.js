@@ -23,31 +23,31 @@ async function deployProject(
   project,
   contractAddresses
 ) {
-	let projectContract = await Project.new(
+  let projectContract = await Project.new(
     project.code, project.upfrontPayment, getTxConfig(aliceAccount, 5e6));
-	logger.info('Project deployed: ' + projectContract.address);
+  logger.info('Project deployed: ' + projectContract.address);
 
-	let setValidatorTx = await projectContract.setValidator(
+  let setValidatorTx = await projectContract.setValidator(
     validatorAccount, getTxConfig(aliceAccount));
-	logger.info('setValidator tx created: ' + setValidatorTx.tx);
+  logger.info('setValidator tx created: ' + setValidatorTx.tx);
 
-	let setBeneficiaryTx = await projectContract.setBeneficiary(
+  let setBeneficiaryTx = await projectContract.setBeneficiary(
     beneficiaryAccount, getTxConfig(aliceAccount));
   logger.info('setBeneficiary tx created: ' + setBeneficiaryTx.tx);
 
-	let setTokenTx = await projectContract.setToken(
+  let setTokenTx = await projectContract.setToken(
     contractAddresses.token, getTxConfig(aliceAccount));
   logger.info('setToken tx created: ' + setTokenTx.tx);
 
-	let impactContract = await ImpactRegistry.new(
+  let impactContract = await ImpactRegistry.new(
     projectContract.address, getTxConfig(aliceAccount, 4e6));
   logger.info('ImpactRegistry deployed: ' + impactContract.address);
 
-	let linkerContract = await Linker.new(
+  let linkerContract = await Linker.new(
     impactContract.address, 10, getTxConfig(aliceAccount, 4e6));
   logger.info('Linker deployed: ' + linkerContract.address);
 
-	let setLinkerTx = await impactContract.setLinker(
+  let setLinkerTx = await impactContract.setLinker(
     linkerContract.address, getTxConfig(aliceAccount));
   logger.info('setLinker tx created: ' + setLinkerTx.tx);
 
@@ -109,7 +109,7 @@ function getTxConfig(account, gasLimit = 1e6) {
     from: account,
     gas: gasLimit,
     gasPrice: 10000000000 // 10 gwei
-  }
+  };
 }
 
 module.exports = {};

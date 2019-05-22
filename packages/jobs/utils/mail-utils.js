@@ -79,6 +79,6 @@ Mail.sendStalledDonationsNotification = function (donationStatuses, donations) {
     type: 'StalledDonationsNotification'
   };
   return MailProxy.requestSending(mailToSend);
-}
+};
 
 module.exports = Mail;
