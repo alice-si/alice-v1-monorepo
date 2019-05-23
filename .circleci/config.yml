@@ -37,7 +37,7 @@ jobs:
           at: .
       - run:
           name: test
-          command: yarn lerna run test --scope=@alice-si/jobs --concurrency 6 --stream --loglevel debug
+          command: yarn lerna run test --stream --loglevel debug
   docker-build:
     docker:
       - image: google/cloud-sdk
