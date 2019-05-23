@@ -37,7 +37,7 @@ jobs:
           at: .
       - run:
           name: test
-          command: yarn lerna run test
+          command: yarn lerna run test --concurrency 1 --stream
   docker-build:
     docker:
       - image: google/cloud-sdk
@@ -87,6 +87,6 @@ workflows:
       - docker-build:
           requires:
             - test
-          filters:
-            branches:
-              only: master
+          # filters:
+          #   branches:
+          #     only: master
