@@ -1,4 +1,9 @@
-let config = {};
+let config = {
+  // The following lazy settings only get looked up when actually needed.
+  get db() { return getEnv('DB_URL'); },
+  get awsAccessKey() { return getEnv('AWS_S3_ACCESS_KEY'); },
+  get awsSecretKey() { return getEnv('AWS_S3_SECRET_KEY'); },
+};
 
 // enum: [dev, stage, prod, local]
 const mode = (process.env.ALICE_MODE || "local").toLowerCase();
@@ -55,14 +60,9 @@ if (mode == "prod") {
   config.mangoUrl = 'https://api.sandbox.mangopay.com';
 }
 
-config.db = getEnv('DB_URL');
-
 config.mangoClientId = getEnv('MANGO_CLIENT_ID');
 config.mangoPassword = getEnv('MANGO_PASSWORD');
 config.technicalMangoUserId = getEnv('TECHNICAL_MANGO_USER_ID');
-
-config.awsAccessKey = getEnv('AWS_S3_ACCESS_KEY');
-config.awsSecretKey = getEnv('AWS_S3_SECRET_KEY');
 
 config.secret = getEnv('JWT_SECRET', 'aaa');
 
