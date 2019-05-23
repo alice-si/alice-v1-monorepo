@@ -5,7 +5,7 @@ linters:
   shellcheck:
     shell: bash
 fixers:
-  enable: true
+  enable: false
 files:
   ignore:
     - 'bower_components/*'
