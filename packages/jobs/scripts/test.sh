@@ -8,7 +8,7 @@ trap "kill $GANACHE_PID" EXIT
 
 echo "Started Ganache, PID: $GANACHE_PID"
 
-source ./scripts/find-contracts.sh
+CONTRACTS_DIR=$(node -e "console.log(path.dirname(require.resolve('@alice-si/contracts/package.json')));")
 yarn truffle test --contracts_directory=$CONTRACTS_DIR "$@"
 
 echo "Tests ran"
