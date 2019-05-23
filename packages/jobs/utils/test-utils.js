@@ -10,6 +10,7 @@ const BigNumber = web3.BigNumber;
 const MangoProxy = require('../gateways/mangoProxy');
 const KeyProxy = require('../gateways/keyProxy');
 const Deploy = require('../utils/deploy');
+const logger = require('../utils/logger')('utils/test-utils');
 const request = require('request-promise');
 const Promise = require('bluebird');
 
@@ -38,10 +39,10 @@ TestUtils.getDefaultProjectCode = function () {
 TestUtils.connectToMockDB = function () {
   return mockgoose.prepareStorage().then(function () {
     return Mongoose.connect('mongodb://anything/can/be/here', {useNewUrlParser: true}).then(function (connection) {
-      console.log('Connection to mockDB was established successfully');
+      logger.info('Connection to mockDB was established successfully');
       return connection;
     }, function (err) {
-      console.log('Connection to mockDB failed');
+      logger.info('Connection to mockDB failed');
       throw err;
     });
   });
@@ -79,7 +80,7 @@ TestUtils.createDefaultMockProject = async (
     mangoUserId: charityMangoUserId
   }).save();
 
-  console.log('Project creating');
+  logger.info('Project creating');
   let project = await new Project({
     code: projectCode,
     title: projectCode + '_TITLE_',
@@ -91,7 +92,7 @@ TestUtils.createDefaultMockProject = async (
     ethAddresses: ethAddresses,
   }).save();
 
-  console.log('Project created: ' + project._id);
+  logger.info('Project created: ' + project._id);
   return project;
 };
 
@@ -117,7 +118,7 @@ TestUtils.createDefaultMockUser = async function (postfix, ethAccount, charity, 
     testUserObj.validator = [validator];
   }
 
-  console.log('User creating');
+  logger.info('User creating');
 
   let user = new User(testUserObj);
   let userWithMango = await MangoProxy.registerUser(user);
@@ -127,7 +128,7 @@ TestUtils.createDefaultMockUser = async function (postfix, ethAccount, charity, 
 };
 
 TestUtils.createDefaultMockDonation = async function (userId, projectId, status, amount) {
-  console.log('Donation creating');
+  logger.info('Donation creating');
   let donation = new Donation({
     _userId: userId,
     _projectId: projectId,
@@ -146,7 +147,7 @@ TestUtils.createDefaultMockValidation = async (
   status,
   amount
 ) => {
-  console.log('Validation creating');
+  logger.info('Validation creating');
   let validation = new Validation({
     amount,
     status,
@@ -227,7 +228,7 @@ TestUtils.prepareMockObjects = async (
     project: projectCreated,
     user: userCreated
   };
-  console.log(result);
+  logger.debug(result);
 
   return result;
 };
@@ -257,7 +258,6 @@ TestUtils.payInToUserAccount = async function(user, amount) {
 TestUtils.testStatus = async (model, status, id) => {
   // sleep
   await new Promise(resolve => setTimeout(resolve, 1000 /*ms*/));
-  console.log(`Checking for ${status} status...`);
   let modelInstance = await model.findOne({ _id: id });
   modelInstance.status.should.be.equal(status);
 };
@@ -279,10 +279,13 @@ TestUtils.prepareMockObjectsForLoadTest = async function (numberOfUsers) {
   let validator = await TestUtils.createDefaultMockUser(
     'testValidator', validatorEthAccount, null, projectToDeploy._id);
   let charityAdmin = await TestUtils.createDefaultMockUser(
-    'testCharityAdmin', project.ethAddresses['beneficiary'], projectToDeploy.charity, null);
+    'testCharityAdmin',
+    projectToDeploy.ethAddresses['beneficiary'],
+    projectToDeploy.charity,
+    null);
 
   for (let i = 0; i < numberOfUsers; i++) {
-    console.log((i + 1) + '/' + numberOfUsers);
+    logger.info((i + 1) + '/' + numberOfUsers);
     let user = await TestUtils.createDefaultMockUser(i.toString(), null);
     await TestUtils.payInToUserAccount(user, testAmount);
     await TestUtils.createDefaultMockDonation(user._id, projectToDeploy._id, 'CREATED', testAmount);
@@ -290,14 +293,14 @@ TestUtils.prepareMockObjectsForLoadTest = async function (numberOfUsers) {
 };
 
 TestUtils.createMockValidations = async function () {
-  console.log('Mock validation creating started...');
+  logger.info('Mock validation creating started...');
   const claimer = await User.findOne({ charityAdmin: {$ne: null} });
   const validator = await User.findOne({validator: { $gt: [] }});
 
   let donations = await Donation.find();
   let total = donations.length;
   donations.forEach(async function (donation, i) {
-    console.log((i + 1) + '/' + total);
+    logger.info((i + 1) + '/' + total);
     await TestUtils.createDefaultMockValidation(
       claimer._id,
       validator._id,
@@ -310,12 +313,12 @@ TestUtils.createMockValidations = async function () {
 TestUtils.setBeforeAndAfterHooksForJobTest = function () {
   before(async function () {
     await TestUtils.connectToMockDB();
-    console.log('Connected to mock DB.');
+    logger.info('Connected to mock DB.');
   });
 
   after(async function () {
     await TestUtils.resetMockDB();
-    console.log('Mock DB was reset.');
+    logger.info('Mock DB was reset.');
   });
 };
 

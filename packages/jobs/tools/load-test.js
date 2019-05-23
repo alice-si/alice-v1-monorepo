@@ -1,10 +1,9 @@
 const ModelUtils = require('../utils/model-utils');
-const Promise = require('bluebird');
 const RunJobs = require('../utils/run-jobs');
 const Schedule = require('node-schedule');
-const TestConfig = require('../test-config');
 const TestUtils = require('../utils/test-utils');
 const EthProxy = require('../gateways/ethProxy.js');
+const ProjectDeploymentJob = require('../jobs/projectDeploymentJob');
 
 const Donation = ModelUtils.loadModel('donation');
 const Project = ModelUtils.loadModel('project');
@@ -15,6 +14,8 @@ const interval = 1; // second
 
 TestUtils.connectToMockDB().then(async function () {
   await TestUtils.prepareMockObjectsForLoadTest(numberOfUsers);
+  // Project should be deployed before other jobs running
+  await ProjectDeploymentJob.execute();
   RunJobs(interval);
 
   let validationsWereCreated = false;

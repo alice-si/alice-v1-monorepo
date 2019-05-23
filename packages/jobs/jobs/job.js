@@ -1,17 +1,19 @@
 const EthProxy = require('../gateways/ethProxy');
 const MailUtils = require('../utils/mail-utils');
+const logger = require('../utils/logger')('jobs/Job');
 
 class BasicJob {
   constructor(name) {
     this.name = name;
     this.id = `${this.name.toLowerCase()}_job_${Date.now()}`;
+    this.logger = logger.child({id: this.id});
   }
 
   async execute() {
-    this.log('started');
+    this.logger.debug('started');
     try {
       await this.run();
-      this.log('finished successfully');
+      this.logger.debug('finished successfully');
     } catch (err) {
       await this.error('running the job failed', err);
     }
@@ -26,14 +28,10 @@ class BasicJob {
       'BasicJob.run() must be overriden with the actual job logic');
   }
 
-  log(msg) {
-    console.log(`${this.id}: ${msg}`);
-  }
-
   async error(msg, cause, context) {
     context = Object.assign({job: this.id, msg}, context);
     await MailUtils.sendErrorNotification('jobError', context, cause);
-    this.log(`Error: ${msg}, caused by ${cause.toString()}\n${cause.stack}`);
+    this.logger.error(`Error: ${msg}, caused by ${cause.toString()}\n${cause.stack}`);
   }
 }
 
@@ -45,7 +43,7 @@ class ModelJob extends BasicJob {
   }
 
   async execute() {
-    this.log('started');
+    this.logger.debug('started');
 
     let target;
     try {
@@ -55,11 +53,11 @@ class ModelJob extends BasicJob {
       return;
     }
     if (!target) {
-      this.log('no targets found, skipping');
+      this.logger.debug('no targets found, skipping');
       return;
     }
 
-    this.log(`target was found: processing ${target._id}`);
+    this.logger.info(`target was found: processing ${target._id}`);
     try {
       await this.run(target);
       await this.saveAndUpdateStatus(target, this.completedStatus());
@@ -88,7 +86,7 @@ class ModelJob extends BasicJob {
   }
 
   async saveAndUpdateStatus(target, newStatus) {
-    this.log(`changing status to: ${newStatus}`);
+    this.logger.info(`changing status to: ${newStatus}`);
     target.status = newStatus;
     await target.save();
   }
@@ -114,7 +112,7 @@ const MIN_AGE_FOR_ETHERSCAN_CHECKING_MS = 300000;
 
 class BlockchainJob extends ModelJob {
   async execute() {
-    this.log('started');
+    this.logger.debug('started');
     let inProgressCount = await this.countInProgress();
 
     this.tryCheck();
@@ -124,7 +122,7 @@ class BlockchainJob extends ModelJob {
   }
 
   async trySend() {
-    this.log('trying to find a ready target');
+    this.logger.debug('trying to find a ready target');
     let target;
     try {
       target = await this.findReady();
@@ -134,12 +132,12 @@ class BlockchainJob extends ModelJob {
     if (target) {
       await this.executeTransaction(target);
     } else {
-      this.log('no ready targets found, skipping');
+      this.logger.debug('no ready targets found, skipping');
     }
   }
 
   async tryCheck() {
-    this.log('trying to find "in progress" target');
+    this.logger.debug('trying to find "in progress" target');
     let target;
     try {
       target = await this.findInProgress();
@@ -149,16 +147,16 @@ class BlockchainJob extends ModelJob {
     if (target) {
       await this.executeChecker(target);
     } else {
-      this.log('no "in progress" targets found, skipping');
+      this.logger.debug('no "in progress" targets found, skipping');
     }
   }
 
   async executeTransaction(target) {
-    this.log(`target was found: processing ${target._id}`);
+    this.logger.debug(`target was found: processing ${target._id}`);
     try {
       let tx = await this.run(target);
       if (!tx) throw new Error('job did not return a transaction');
-      this.log(`transaction ${tx} was sent`);
+      this.logger.info(`transaction ${tx} was sent`);
 
       target[this.txFieldName()] = tx;
       target[this.timeFieldName()] = Date.now();
@@ -169,7 +167,7 @@ class BlockchainJob extends ModelJob {
   }
 
   async executeChecker(target) {
-    this.log(`checking transaction status for target ${target._id}`);
+    this.logger.debug(`checking transaction status for target ${target._id}`);
     let tx = target[this.txFieldName()];
 
     try {
@@ -209,16 +207,16 @@ class BlockchainJob extends ModelJob {
   async postConfirmation(target, tx) { }
 
   async checkTransaction(target, tx) {
-    this.log('checking if transaction was processed...');
+    this.logger.debug('checking if transaction was processed...');
 
     let receipt = await EthProxy.checkTransaction(tx);
     if (receipt) {
       if (EthProxy.checkTransactionReceipt(receipt)) {
         await this.saveAndUpdateStatus(target, this.completedStatus());
-        this.log('transaction was completed');
+        this.logger.info('transaction was completed');
       } else {
         await this.saveAndUpdateStatus(target, this.revertedStatus());
-        this.log('transaction was reverted');
+        this.logger.error('transaction was reverted');
       }
       return;
     }
@@ -227,7 +225,7 @@ class BlockchainJob extends ModelJob {
     if (age >= MIN_AGE_FOR_ETHERSCAN_CHECKING_MS) {
       if (!EthProxy.checkTransactionWithEtherscan(tx)) {
         await this.saveAndUpdateStatus(target, this.lostStatus());
-        this.log('no trace of transaction on Etherscan');
+        this.logger.error('no trace of transaction on Etherscan');
         return;
       }
     }

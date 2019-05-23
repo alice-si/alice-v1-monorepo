@@ -1,3 +1,5 @@
+const logger = require('./logger')('utils/monitor');
+
 function Monitor(){}
 
 Monitor.getAggregatedResult = function (model) {
@@ -11,7 +13,7 @@ Monitor.getAggregatedResult = function (model) {
 
 Monitor.printStatus = function(model) {
   Monitor.getAggregatedResult(model).then(function(result) {
-    console.log(model.modelName + ': ' + JSON.stringify(result));
+    logger.info(model.modelName + ': ' + JSON.stringify(result));
   });
 };
 

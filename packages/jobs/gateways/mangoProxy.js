@@ -1,12 +1,12 @@
-var Config = require('../config');
-var request = require('request-promise');
-var mangopay = require('mangopay2-nodejs-sdk');
+const config = require('../config');
+const logger = require('../utils/logger')('gateways/mangoProxy');
+const mangopay = require('mangopay2-nodejs-sdk');
 var SECURITY_THRESHOLD = 5000;
 
 var api = new mangopay({
-  clientId: Config.mangoClientId,
-  clientPassword: Config.mangoPassword,
-  baseUrl: Config.mangoUrl
+  clientId: config.mangoClientId,
+  clientPassword: config.mangoPassword,
+  baseUrl: config.mangoUrl
 });
 
 var Mango = {};
@@ -24,7 +24,7 @@ Mango.registerCharity = function (name, representative) {
     LegalRepresentativeNationality: representative.nationality,
     LegalRepresentativeCountryOfResidence: representative.residence
   }).then(function (mangoUser) {
-    mangoProxyLog('Created mango account: ' + mangoUser.Id);
+    logger.info('Created mango account: ' + mangoUser.Id);
     return Promise.resolve(mangoUser.Id);
   });
 };
@@ -37,7 +37,7 @@ Mango.registerWalletsForProject = function (project) {
     'Description': 'Contract Wallet: ' + project.code,
     'Currency': 'GBP'
   }).then(function (contractWallet) {
-    mangoProxyLog('Created Contract Wallet: ' + contractWallet.Id);
+    logger.info('Created Contract Wallet: ' + contractWallet.Id);
     wallets.contractWalletId = contractWallet.Id;
     return api.Wallets.create({
       'Owners': [project.charity.mangoUserId],
@@ -45,7 +45,7 @@ Mango.registerWalletsForProject = function (project) {
       'Currency': 'GBP'
     });
   }).then(function (beneficiaryWallet) {
-    mangoProxyLog('Created Beneficiary Wallet: ' + beneficiaryWallet.Id);
+    logger.info('Created Beneficiary Wallet: ' + beneficiaryWallet.Id);
     wallets.beneficiaryWalletId = beneficiaryWallet.Id;
     return Promise.resolve(wallets);
   });
@@ -64,22 +64,22 @@ Mango.registerLegalUser = function (name, walletDescription, representative) {
     LegalRepresentativeNationality: representative.nationality,
     LegalRepresentativeCountryOfResidence: representative.residence
   }).then(function (mangoUser) {
-    mangoProxyLog('Created mango user: ' + mangoUser.Id);
+    logger.info('Created mango user: ' + mangoUser.Id);
     return api.Wallets.create({
       'Owners': [mangoUser.Id],
       'Description': walletDescription,
       'Currency': 'GBP'
     });
   }).then(function (wallet) {
-    mangoProxyLog('Created Wallet: ' + wallet.Id);
+    logger.info('Created Wallet: ' + wallet.Id);
     return Promise.resolve();
   }).catch(function (err) {
-    mangoProxyLog('Error: ' + err);
+    logger.error('Error: ' + err);
   });
 };
 
 Mango.registerUser = function (user) {
-  mangoProxyLog('MangoProxy: user creating started');
+  logger.info('MangoProxy: user creating started');
   return api.Users.create({
     'FirstName': user.firstName,
     'LastName': user.lastName,
@@ -91,9 +91,9 @@ Mango.registerUser = function (user) {
     'Nationality': user.nationality,
     'CountryOfResidence': user.residence
   }).then(function (mangoUser) {
-    mangoProxyLog((user.dateOfBirth.getTime() / 1000 - user.dateOfBirth.getTimezoneOffset() * 60));
+    logger.info((user.dateOfBirth.getTime() / 1000 - user.dateOfBirth.getTimezoneOffset() * 60));
     if (mangoUser.errors) return Promise.reject(mangoUser.errors);
-    mangoProxyLog('Created mango account: ' + mangoUser.Id);
+    logger.info('Created mango account: ' + mangoUser.Id);
     user.mangoUserId = mangoUser.Id;
     return api.Wallets.create({
       'Owners': [user.mangoUserId],
@@ -101,18 +101,19 @@ Mango.registerUser = function (user) {
       'Currency': 'GBP'
     }).then(function (wallet) {
       if (wallet.errors) return Promise.reject(wallet.errors);
-      mangoProxyLog('Created mango wallet: ' + wallet.Id);
+      logger.info('Created mango wallet: ' + wallet.Id);
       user.mangoWalletId = wallet.Id;
       return Promise.resolve(user);
     });
   }).catch(function (err) {
+    logger.error(err);
     throw err;
   });
 };
 
 Mango.checkBalance = function (walletId) {
   return api.Wallets.get(walletId).then(function (wallet) {
-    mangoProxyLog('Checking balance of wallet: ' + walletId);
+    logger.info('Checking balance of wallet: ' + walletId);
     return Promise.resolve(wallet.Balance.Amount);
   });
 };
@@ -165,7 +166,7 @@ Mango.payOut = function (userId, walletId, bankAccountId, amount, reference, tag
 Mango.payIn = function (user, amount, cardId) {
   return api.PayIns.create({
     AuthorId: user.mangoUserId,
-    CreditedUserId: Config.technicalMangoUserId,
+    CreditedUserId: config.technicalMangoUserId,
     CreditedWalletId: user.mangoWalletId,
     DebitedFunds: {
       Currency: 'GBP',
@@ -194,10 +195,5 @@ Mango.preRegisterCard = function (user) {
 Mango.updateCardRegistration = function (registeredData) {
   return api.CardRegistrations.update(registeredData);
 };
-
-function mangoProxyLog(msg) {
-  console.log('MangoProxy: ' + msg);
-}
-
 
 module.exports = Mango;

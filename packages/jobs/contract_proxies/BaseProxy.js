@@ -10,6 +10,7 @@ const json = require('@stratumn/canonicaljson');
 
 const ContractUtils = require('../utils/contract-utils');
 const ModelUtils = require('../utils/model-utils');
+const logger = require('../utils/logger')('contract_proxies/BaseProxy');
 
 const ContractVersion = ModelUtils.loadModel('contractVersion');
 const DeployedContract = ModelUtils.loadModel('deployedContract');
@@ -34,7 +35,7 @@ function createProxy(contractName) {
       });
 
       if (!version) {
-        console.log(`WARNING: deploying ${contractName} with non-stable ABI! ` +
+        logger.warn(`Deploying ${contractName} with non-stable ABI! ` +
           'Don\'t do this in production!');
       }
 
@@ -60,7 +61,7 @@ function createProxy(contractName) {
       if (deployedContract) {
         abi = json.parse(deployedContract.abi);
       } else {
-        console.log('WARNING: accessing Project with non-stable ABI! ' +
+        logger.warn('Accessing Project with non-stable ABI! ' +
           'Don\'t do this in production!');
         abi = CurrentContract.abi;
       }

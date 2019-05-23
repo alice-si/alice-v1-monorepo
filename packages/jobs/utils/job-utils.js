@@ -2,6 +2,9 @@ const EthProxy = require('../gateways/ethProxy');
 const ModelUtils = require('./model-utils');
 const MailUtils = require('./mail-utils');
 const Monitor = require('./monitor');
+const logger = require('./logger')('utils/job-utils');
+
+// THIS MODULE IS DEPRECATED - to create new jobs please use jobs/Job.js
 
 var JobUtils = {};
 
@@ -25,8 +28,9 @@ function createModellessJob(conf) {
       let jobContext = {};
       const jobId = createJobId(conf.processName + '_modelles_executor');
 
-      jobContext.msg = (msg) => console.log(jobId + ': ' + msg);
-      jobContext.errorBehaviour = (err) => jobContext.msg(getErrorString(err));
+      jobContext.msg = (msg) => logger.debug(jobId + ': ' + msg);
+      jobContext.errMsg = (msg) => logger.error(jobId + ': ' + msg);
+      jobContext.errorBehaviour = (err) => jobContext.errMsg(err);
       jobContext.completedBehaviour = () => jobContext.msg('finished successfully');
 
       jobContext.msg('Started...');
@@ -50,7 +54,7 @@ function createExecutor(conf) {
     };
 
     jobContext.errorBehaviour = function (err) {
-      jobContext.msg(`Error occured: ${err.toString()} ${err.stack}`);
+      jobContext.errMsg(`Error occured: ${err.toString()} ${err.stack}`);
       return MailUtils.sendErrorNotification('executorJobError', {
         name: executorJobPrefix,
         model: jobContext.model
@@ -110,7 +114,7 @@ function createChecker(conf) {
         }
       }
     }).catch(function (err) {
-      jobContext.msg('Error while checking ' + modelName + ': ' + err);
+      jobContext.errMsg('Error while checking ' + modelName + ': ' + err);
       return MailUtils.sendErrorNotification('checkerJobError', {
         name: checkerJobPrefix,
         model: jobContext.model
@@ -128,7 +132,10 @@ function createJobInternal(jobIdPrefix, modelGetter, action) {
     const jobId = createJobId(jobIdPrefix);
 
     function jobMsg(msg) {
-      console.log(jobId + ': ' + msg);
+      logger.debug(jobId + ': ' + msg);
+    }
+    function jobErrMsg(msg) {
+      logger.error(jobId + ': ' + msg);
     }
     jobMsg('started');
     return modelGetter().then(function(model) {
@@ -136,7 +143,8 @@ function createJobInternal(jobIdPrefix, modelGetter, action) {
         jobMsg('Model was found. processing... ' + model._id);
         let initialJobContext = {
           model: model,
-          msg: jobMsg
+          msg: jobMsg,
+          errMsg: jobErrMsg
         };
         return action(initialJobContext);
       } else {
@@ -144,7 +152,7 @@ function createJobInternal(jobIdPrefix, modelGetter, action) {
       }
     }).catch(function(err) {
       MailUtils.sendErrorNotification('jobInternalError', {name: jobIdPrefix}, err);
-      jobMsg(`Error during executing job: ${err.toString()} ${err.stack}`);
+      jobErrMsg(`Error during executing job: ${err.toString()} ${err.stack}`);
     });
   };
 }
@@ -245,13 +253,6 @@ function validateJobConfiguration(conf) {
 
 function createJobId(prefix) {
   return prefix.toLowerCase() + '_' + Date.now();
-}
-
-function getErrorString(err) {
-  return JSON.stringify({
-    stringified: JSON.stringify(err),
-    tostringed: err.toString()
-  });
 }
 
 module.exports = JobUtils;
