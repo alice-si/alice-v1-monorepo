@@ -3,6 +3,7 @@ const Promise = require('bluebird');
 const ContractUtils = require('../utils/contract-utils');
 const Deploy = require('../utils/deploy');
 const Project = require('../contract_proxies/Project');
+const logger = require('../utils/logger')('gateways/ethProxy');
 const config = require('../config');
 
 const web3 = ContractUtils.getWeb3();
@@ -21,15 +22,15 @@ const mainAccount = config.mainAccount;
 const mainPassword = config.mainPassword;
 
 EthProxy.loadAccount = function (fromAddress) {
-  ethProxyLog('Unlocking main account');
+  logger.info('Unlocking main account');
   return unlockAccountAsync(mainAccount, mainPassword).then(function () {
-    ethProxyLog('Preparing load transaction...');
+    logger.info('Preparing load transaction...');
     return sendAsync({from: mainAccount, to: fromAddress, value: web3.toWei(loadAmount, 'ether')});
   });
 };
 
 EthProxy.createAccount = function (password) {
-  ethProxyLog('Creating Geth Account...');
+  logger.info('Creating Geth Account...');
   return createAccountAsync(password);
 };
 
@@ -45,7 +46,7 @@ EthProxy.deposit = async (fromUserAccount, project, amount) => {
   await unlockAccountAsync(mainAccount, mainPassword);
 
   let contracts = await Project.getAllContractsForDocument(project);
-  ethProxyLog('Depositing: ' + JSON.stringify({
+  logger.info('Depositing: ' + JSON.stringify({
     from: fromUserAccount,
     to: contracts.project.address,
     amount: amount
@@ -105,7 +106,7 @@ EthProxy.deposit = async (fromUserAccount, project, amount) => {
 EthProxy.mint = async (project, amount) => {
   await unlockAccountAsync(mainAccount, mainPassword);
 
-  ethProxyLog('Minting: ' + amount);
+  logger.info('Minting: ' + amount);
   let contracts = await Project.getAllContractsForDocument(project);
   return contracts.token.mintAsync(
     contracts.project.address, amount, {from: mainAccount});
@@ -114,10 +115,10 @@ EthProxy.mint = async (project, amount) => {
 EthProxy.validateOutcome = async (
   project, validation, validatorAccount, validatorPass
 ) => {
-  ethProxyLog(
+  logger.info(
     `Unlocking validator account: ${validatorAccount}`);
   await unlockAccountAsync(validatorAccount, validatorPass);
-  ethProxyLog(
+  logger.info(
     `Validating outcome, validation id: ${validation._id}, ` +
     `amount: ${validation.amount}`);
 
@@ -133,7 +134,7 @@ EthProxy.validateOutcome = async (
 EthProxy.claimOutcome = async (project, validation, beneficiaryPass) => {
   let beneficiary = project.ethAddresses['beneficiary'];
   await unlockAccountAsync(beneficiary, beneficiaryPass);
-  ethProxyLog(
+  logger.info(
     `Claiming outcome, validation id: ${validation._id}, ` +
     `amount: ${validation.amount}`);
 
@@ -152,7 +153,7 @@ EthProxy.claimOutcome = async (project, validation, beneficiaryPass) => {
 };
 
 EthProxy.fetchImpact = async (project, validationId) => {
-  ethProxyLog('Fetching impacts for: ' + validationId);
+  logger.info('Fetching impacts for: ' + validationId);
   let validationIdBytes = mongoIdToBytes(validationId);
 
   let impacts = [];
@@ -161,7 +162,7 @@ EthProxy.fetchImpact = async (project, validationId) => {
   return await new Promise(function(resolve, reject) {
     return contracts.impactRegistry.getImpactCountAsync(validationIdBytes).then(function (result) {
       let count = result.toNumber();
-      ethProxyLog('Fetching impacts: ' + count);
+      logger.info('Fetching impacts: ' + count);
       if (count == 0) {
         resolve(impacts);
       }
@@ -171,7 +172,7 @@ EthProxy.fetchImpact = async (project, validationId) => {
           contracts.impactRegistry.getImpactValueAsync(validationIdBytes, donor).then(function (value) {
             impact.value = value.toNumber();
             impacts.push(impact);
-            ethProxyLog('Fetched impact for donor ' + impact.donor + ' of: ' + impact.value);
+            logger.info('Fetched impact for donor ' + impact.donor + ' of: ' + impact.value);
             if (impacts.length == count) {
               resolve(impacts);
             }
@@ -194,14 +195,14 @@ EthProxy.linkImpact = async (project, validationId) => {
   await unlockAccountAsync(mainAccount, mainPassword);
   let validationIdBytes = mongoIdToBytes(validationId);
 
-  ethProxyLog('Linking impact: ' + validationId);
+  logger.info('Linking impact: ' + validationId);
   let contracts = await Project.getAllContractsForDocument(project);
   return contracts.impactRegistry.linkImpactAsync(
     validationIdBytes, {from: mainAccount, gas: 500000});
 };
 
 EthProxy.checkTransaction = function (tx) {
-  ethProxyLog('Checking transaction: ' + tx);
+  logger.info('Checking transaction: ' + tx);
   return getReceiptAsync(tx);
 };
 
@@ -219,7 +220,7 @@ EthProxy.deployProject = async (project, validatorAccount, charityAccount) => {
       project,
       { owner: mainPassword });
   } catch (err) {
-    ethProxyLog(err);
+    logger.error(err);
     throw err;
   }
 };
@@ -244,11 +245,6 @@ EthProxy.checkTransactionWithEtherscan = function (tx) {
     return true;
   });
 };
-
-// This function allows easy logs filtering
-function ethProxyLog(msg) {
-  console.log('EthProxy: ' + msg);
-}
 
 function mongoIdToBytes(id) {
   return '0x' + web3.padLeft(id.toString(), 64);

@@ -1,5 +1,6 @@
 const TestUtils = require('../utils/test-utils');
 const ModelUtils = require('../utils/model-utils');
+const logger = require('../utils/logger')('test/impactFetchingJob');
 const ImpactFetchingJob = require('../jobs/impactFetchingJob');
 const MailSendingJob = require('../jobs/mailSendingJob');
 const Validation = ModelUtils.loadModel('validation');
@@ -14,7 +15,7 @@ contract('ImpactFetchingJob', async function () {
   it('should create test model', async function () {
     mocks = await TestUtils.prepareMockObjects('validator', 'CREATED', 'LINKING_COMPLETED');
     validator = mocks.project.ethAddresses.validator;
-    console.log('User has an ethAccount: ' + mocks.user.ethAccount);
+    logger.info('User has an ethAccount: ' + mocks.user.ethAccount);
   });
 
   it('should prepare contracts for impactFetching', async function () {

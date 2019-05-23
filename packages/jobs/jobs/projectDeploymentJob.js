@@ -20,7 +20,7 @@ function mainAction(jobContext) {
     }
     validator = validators[0];
     if (!validator.ethAccount) {
-      console.log('validator does not have an ethAccount: ' + validator._id + ' skipping...');
+      jobContext.msg('validator does not have an ethAccount: ' + validator._id + ' skipping...');
       return ModelUtils.changeStatus(project, startStatus);
     }
 

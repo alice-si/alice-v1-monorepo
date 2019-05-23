@@ -3,6 +3,7 @@ const MailProxy = require('../gateways/mailProxy');
 const ModelUtils = require('../utils/model-utils');
 const MailModel = ModelUtils.loadModel('mail');
 const Moment = require('moment');
+const logger = require('./logger')('utils/mail-utils');
 
 function Mail() {
 }
@@ -55,7 +56,7 @@ Mail.sendErrorNotification = function (type, context, err) {
       for (let mail of mails) {
         const isRepeated = mail.subject == mailToSend.subject && mail.html.includes(err);
         if (isRepeated) {
-          console.log(`MailUtils: error mail is repeated for ${mail._id}. Skipping...`);
+          logger.info(`Mail is repeated for ${mail._id}. Skipping...`);
           return Promise.resolve();
         }
       }

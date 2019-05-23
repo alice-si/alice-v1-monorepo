@@ -5,6 +5,7 @@ const config = require('../config');
 const mustache = require('mustache');
 const promise = require('bluebird');
 const utils = require('../utils/model-utils');
+const logger = require('../utils/logger')('gateways/mailProxy');
 const mail = utils.loadModel('mail');
 const fs = promise.promisifyAll(require('fs'));
 
@@ -28,7 +29,7 @@ MailProxy.requestSending = function (conf) {
       });
       return newMailRequest.save();
     }).then(function (newMailRequest) {
-      mailProxyLog('MailProxy: mail sending request was saved in DB: ' + newMailRequest._id);
+      logger.info('MailProxy: mail sending request was saved in DB: ' + newMailRequest._id);
       resolve();
     }).catch(function (err) {
       reject(err);
@@ -63,11 +64,11 @@ MailProxy.send = function (mail) {
 
     sendPromise.then(
       function (data) {
-        mailProxyLog('Mail sent: ' + data.MessageId);
+        logger.info('Mail sent: ' + data.MessageId);
         resolve(data);
       }).catch(
       function (err) {
-        mailProxyLog('Error occured: ' + JSON.stringify(err));
+        logger.error('Error occured: ' + JSON.stringify(err));
         reject(err);
       });
   });
@@ -91,10 +92,6 @@ function getCC(mail) {
 
 function getRecipients(mail) {
   return [].concat(mail.to);
-}
-
-function mailProxyLog(msg) {
-  console.log('MailProxy: ' + msg);
 }
 
 function readTemplateFilesWithPartials(conf) {
