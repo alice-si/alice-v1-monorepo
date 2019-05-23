@@ -26,8 +26,10 @@ jobs:
           key: npm-v1-{{ checksum ".circleci.depcache" }}
           paths:
             - ./node_modules
+            - ./packages/cli/node_modules
             - ./packages/contracts/node_modules
             - ./packages/demo-app/node_modules
+            - ./packages/donations-app/node_modules
             - ./packages/jobs/node_modules
             - ./packages/models/node_modules
       - persist_to_workspace:
@@ -60,6 +62,7 @@ jobs:
             TAG=$(date +'%Y%m%d')-$(echo $CIRCLE_SHA1 | cut -c 1-6)
             DEMO_APP_NAME="gcr.io/$GOOGLE_PROJECT_ID/alice-demo-app:$TAG"
             JOBS_NAME="gcr.io/$GOOGLE_PROJECT_ID/alice-jobs:$TAG"
+            DONATIONS_APP_NAME="gcr.io/$GOOGLE_PROJECT_ID/alice-donations-app:$TAG"
             echo "Building version $TAG"
 
             docker build -t "alice-monorepo:$TAG" .
@@ -71,8 +74,13 @@ jobs:
               -f packages/jobs/Dockerfile \
               --build-arg VERSION=$TAG \
               .
+            docker build -t "$DONATIONS_APP_NAME" \
+              -f packages/donations-app/Dockerfile \
+              --build-arg VERSION=$TAG \
+              .
             docker push "$DEMO_APP_NAME"
             docker push "$JOBS_NAME"
+            docker push "$DONATIONS_APP_NAME"
 
 workflows:
   version: 2
