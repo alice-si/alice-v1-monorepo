@@ -1,0 +1,135 @@
+<div class="page" ng-controller="ProjectController as projectCtrl">
+
+  <project-details model="projectCtrl.model" pilot="false"></project-details>
+
+  <div style="clear:both;"/>
+
+  <section class="project row page" style="margin-top: -3rem;">
+
+    <div class="hidden-md hidden-lg" style="clear: both; height: 5%;"></div>
+
+    <div class="col-md-7" style="padding: 0;">
+      <div class="wrapper wrapper-content animated fadeInUp" style="padding: 0; text-align: justify">
+        <h2 class="section">Summary</h2>
+        <div class="description" ng-bind-html="projectCtrl.model.summary">
+
+        </div>
+        <div class="description">
+          <div class="campaign-video-container">
+            <iframe class="campaign-video" ng-src="{{projectCtrl.model.video}}" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="row" style="margin-bottom: 30px;">
+          <div class="col-md-6">
+            <h2 class="section sub-section">Who runs this project</h2>
+            <img class="sub-section-logo"
+                 src="{{projectCtrl.model.initializerImg}}">
+          </div>
+          <div class="col-md-6">
+            <h2 class="section sub-section">Who validates the goals</h2>
+            <img class="sub-section-logo" src="{{projectCtrl.model.validatorImg}}">
+          </div>
+        </div>
+
+        <h2 class="section">Who we're helping</h2>
+        <div class="description" ng-bind-html="projectCtrl.model.beneficiary">
+        </div>
+
+        <my-story model="projectCtrl.model.myStory" index="0"></my-story>
+
+        <h2 class="section">Knowing you've made a difference</h2>
+        <div class="description" ng-bind-html="projectCtrl.model.project">
+        </div>
+
+        <h2 class="section">Where your money will go</h2>
+        <div class="description" ng-bind-html="projectCtrl.model.costBreakdown">
+        </div>
+
+        <h2 class="section">How you know it will work</h2>
+        <div class="description" ng-bind-html="projectCtrl.model.validator">
+        </div>
+
+        <h2 class="section">Who we are</h2>
+        <div class="description" ng-bind-html="projectCtrl.model.serviceProvider">
+        </div>
+
+        <my-story model="projectCtrl.model.myStory" index="1"></my-story>
+
+      </div>
+    </div>
+    <div class="col-md-5 campaign-right">
+      <div class="wrapper wrapper-content animated fadeInUp" style="padding: 0; text-align: justify">
+        <h2 class="section">How will your gift help?</h2>
+        <div class="description" ng-bind-html="projectCtrl.model.outcomesIntro"></div>
+        <div style="text-align: center; margin-top: 2rem;">
+          <a href="/checkout/{{projectCtrl.model.code}}" class="btn btn-primary btn-donate">
+            Donate
+          </a>
+        </div>
+
+        <h2 class="section">Project Goals</h2>
+        <div style="margin-top: 25px;">
+
+          <div ng-repeat="(key, outcomes) in campCtrl.model.outcomeCategories"
+               style="position: relative; margin-bottom: -1rem;">
+            <div class="outcome-category">
+              <img class="animate" aria-hidden="true"
+                   style="width: 40px; height: 40px; float: right; position: inherit; margin-left: 10px;"
+                   data-toggle="collapse" data-target="#outcomes-group-{{$index}}"
+                   src="https://s3.eu-west-2.amazonaws.com/alice-res/Arrow_icon_veraman.png"
+                   ng-class="{'rotate': campCtrl.model.outcomeCategories[key].infoFull}"
+                   ng-click="campCtrl.model.outcomeCategories[key].infoFull = !campCtrl.model.outcomeCategories[key].infoFull">
+              {{key}}
+            </div>
+            <div id="outcomes-group-{{$index}}" class="collapse">
+              <div ng-repeat="outcome in outcomes | filter:{hidden:'!true'}" class="outcome-box">
+
+                <div class="outcome-gauge">
+                  <div class="outcome-icon"
+                       style="background-image: url('https://s3.eu-west-2.amazonaws.com/alice-res/{{outcome.image}}');">
+                  </div>
+
+                  <round-progress
+                    max="100"
+                    current="0"
+                    bgcolor="#FFFFFF"
+                    radius="30"
+                    stroke="4"
+                    clockwise="true"
+                    responsive="false"
+                    duration="800"
+                    animation="easeInOutQuart"
+                    animation-delay="100">
+                  </round-progress>
+
+
+                  <div class="outcome-header">{{outcome.title}}</div>
+
+                </div>
+
+                <div class="outcome-content">
+                  <p>
+                    <span class="outcome-into">Goal: </span>{{outcome.description}}
+                  </p>
+
+                  <p>
+                    <span class="outcome-into">Why: </span>{{outcome.reason}}
+                  </p>
+
+                  <p>
+                    <span class="outcome-into">We receive: </span>{{outcome.value}}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
+
+
+  </section>
+</div>

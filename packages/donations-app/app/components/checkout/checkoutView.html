@@ -1,0 +1,59 @@
+<section class="page container" ng-controller="CheckoutController as checkCtrl" style="margin-top : 80px;">
+
+  <treasure-overlay-spinner active="checkCtrl.waiting">
+    <div class="row">
+
+      <div class="col-lg-6 col-md-8 col-sm-12">
+        <h2 class="section">Donate to {{checkCtrl.project.title}}</h2>
+
+        <div ng-show="checkCtrl.project.status == 'FINISHED'">
+          With this project coming to an end, donations are not possible at this time.
+        </div>
+
+        <div ng-show="checkCtrl.project.status != 'ACTIVE' && checkCtrl.project.status != 'FINISHED' && checkCtrl.project.status">
+          You can't donate to project with status: {{checkCtrl.project.status}}
+        </div>
+
+        <div ng-show="checkCtrl.project.status == 'ACTIVE'">
+          <!-- TABS -->
+          <ul class="nav nav-tabs">
+            <li style="margin-left: 1vw" class="nav-item">
+              <a
+                class="nav-link checkout-tab {{ ['CARD', '3DS'].includes(checkCtrl.mode) ? 'active' : '' }}"
+                href="#" ng-click="checkCtrl.setMode('CARD')"
+              >
+                Card
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link checkout-tab {{ checkCtrl.mode == 'BANK_TRANSFER' ? 'active' : '' }}"
+                href="#" ng-click="checkCtrl.setMode('BANK_TRANSFER')"
+              >
+                Bank transfer
+              </a>
+            </li>
+            <li ng-show="true && checkCtrl.donation && checkCtrl.donation.bankTransferData" class="nav-item">
+              <a
+                class="nav-link checkout-tab {{ checkCtrl.mode == 'BANK_TRANSFER_REQUESTED' ? 'active' : '' }}"
+                href="#" ng-click="checkCtrl.setMode('BANK_TRANSFER_REQUESTED')"
+              >
+                Bank transfer details
+              </a>
+            </li>
+          </ul>  
+          
+          
+          <!-- CONTENT -->
+          <ng-include src="'/components/checkout/3DS.html'"></ng-include>
+          <ng-include src="'/components/checkout/cardForm.html'"></ng-include>
+          <ng-include src="'/components/checkout/bankTransferForm.html'"></ng-include>
+          <ng-include src="'/components/checkout/bankTransferDetails.html'"></ng-include>
+        </div>
+      </div>
+
+    </div>
+
+
+  </treasure-overlay-spinner>
+</section>

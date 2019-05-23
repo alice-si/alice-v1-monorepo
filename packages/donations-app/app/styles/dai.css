@@ -1,0 +1,272 @@
+@media screen and (max-width: 760px) {
+  .dai-page {
+    padding: 50px 20px 50px;
+  }
+
+  .dai-page .appeal-section-heading::after {
+    width: 15%;
+  }
+
+  .alice-maker-banner {
+    height: auto;
+  }
+
+  .dai-logo {
+    margin: 30px 0;
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #aliceDai-banner {
+    height: auto;
+  }
+
+  #aliceDai p{
+    font-size: 24px;
+  }
+
+  .dai-input-section {
+    margin: 20px 0;
+  }
+
+  #dai-email {
+    height: 55px;
+    border: 3px solid #ACCCCE;
+    color: #ACCCCE;
+    margin-bottom: 20px;
+    border-radius: 0;
+    margin-top: 15px;
+    width: 100%;
+    padding-left: 15px;
+  }
+
+  #dai-amount {
+    height: 55px;
+    border: 3px solid #ACCCCE;
+    color: #ACCCCE;
+    margin-bottom: 20px;
+    border-radius: 0;
+    margin-top: 15px;
+    width: 100%;
+    padding-left: 15px;
+  }
+
+  #dai-amount::placeholder {
+    font-family: 'Avenir';
+    font-weight: 300;
+    font-size: 10px;
+    color: #ACCCCE !important;
+    padding-top: 4px;
+    letter-spacing: 5px;
+  }
+
+  #dai-email::placeholder {
+    font-family: 'Avenir';
+    font-weight: 300;
+    font-size: 10px;
+    color: #ACCCCE !important;
+    padding-top: 4px;
+    letter-spacing: 5px;
+  }
+
+  .dai-donate a {
+    background: #2498a1;
+    height: 55px;
+    text-align: center;
+    color: #fff;
+    font-size: 16px;
+    letter-spacing: 7px;
+    line-height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 0 2px 0 #1F838B;
+    border: 3px solid #1F838B;;
+  }
+
+  .dai-redirect {
+    padding-left: 0;
+    font-size: 14px;
+    color: #202E37;
+    letter-spacing: 0.75px;
+
+    font-weight: 300 !important;
+    text-decoration: underline;
+    line-height: 24px;
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (min-width: 760px) {
+  .dai-page {
+    padding: 50px 20px 100px;
+  }
+
+  .dai-page .appeal-section-heading::after {
+    width: 15%;
+  }
+
+  .alice-maker-banner {
+    height: 80px;
+    width: 100vw;
+  }
+
+  .alice-maker-banner svg {
+    height: 60px;
+    width: 80%;
+    margin-left: 10%;
+  }
+
+  .dai-logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @keyframes dai-coin {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  .dai-logo {
+    margin: 30px 0;
+    height: 100px;
+    width: 100px;
+
+    animation: dai-coin 1s infinite;
+  }
+
+  #aliceDai-banner {
+    height: 50px;
+    width: 100%;
+  }
+
+  #aliceDai p{
+    font-size: 24px;
+  }
+
+  #aliceDai-header .appeal-section-heading::after {
+    border: none;
+  }
+
+  #aliceDai-header .appeal-section-heading,
+  #aliceDai-header .alice-section-subheading {
+    text-align: center;
+  }
+
+  #aliceDai-header .alice-section-subheading > .section-text-left {
+    font-size: 20px !important;
+    margin-top: -50px;
+  }
+
+  #aliceDai-track {
+    margin-top: 50px;
+  }
+
+  #aliceDai-track .appeal-section-heading::after {
+    border: none;
+  }
+
+  #aliceDai-track .alice-section-subheading > .section-text-left {
+    font-size: 20px !important;
+    margin-top: -50px;
+  }
+
+  .dai-input-section {
+    margin: 20px 0;
+  }
+
+  #dai-email {
+    height: 50px;
+    border: 3px solid #ACCCCE;
+    color: #ACCCCE;
+    margin-bottom: 20px;
+    border-radius: 0;
+  }
+
+  #dai-amount {
+    height: 55px;
+    border: 3px solid #ACCCCE;
+    color: #ACCCCE;
+    margin-bottom: 20px;
+    border-radius: 0;
+    margin-top: 15px;
+  }
+
+  #dai-amount::placeholder {
+    font-family: 'Avenir';
+    font-weight: 300;
+    font-size: 15px;
+    color: #ACCCCE !important;
+    letter-spacing: 8px;
+  }
+
+  #dai-email::placeholder {
+    font-family: 'Avenir';
+    font-weight: 300;
+    font-size: 15px;
+    color: #ACCCCE !important;
+    letter-spacing: 8px;
+  }
+
+  .dai-donate a {
+    background: #2498a1;
+    height: 55px;
+    text-align: center;
+    color: #fff;
+    font-size: 16px;
+    letter-spacing: 7px;
+    line-height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 0 2px 0 #1F838B;
+    border: 3px solid #1F838B;;
+  }
+
+  .dai-redirect {
+    padding-left: 0;
+    font-size: 14px;
+    color: #202E37;
+    letter-spacing: 0.75px;
+
+    font-weight: 300 !important;
+    text-decoration: underline;
+    line-height: 24px;
+  }
+
+
+  .my-impact-screenshot img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 100px;
+  }
+}

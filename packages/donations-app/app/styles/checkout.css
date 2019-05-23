@@ -1,0 +1,29 @@
+.checkout-tab {
+  color: #1998a2 !important;
+}
+
+.checkout-tab.active {
+  background-color: #dcdcdc;
+}
+
+.bank-wire-button-box {
+  position: relative !important;
+  margin-top: 10px;
+}
+
+#bank-details-table {
+  box-shadow: 0px 0px 5px #888888;
+  margin: 10px 10px 10px 10px;
+}
+
+#bank-details-table th {
+  font-size: smaller;
+  font-weight: bold;
+  text-align: left;
+  padding: 10px 20px 1px 10px;
+}
+
+#bank-details-table td {
+  font-size: smaller;
+  padding: 1px 20px 10px 10px;
+}

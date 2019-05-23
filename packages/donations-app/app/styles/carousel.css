@@ -1,0 +1,190 @@
+@media screen and (max-width: 760px) {
+  .carousel-image-cropper {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+      border-radius: 50%;
+      border: none;
+
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+  }
+
+  .carousel-inner {
+    height: 560px;
+  }
+
+  .carousel-image {
+    height: 100%;
+    width: auto;
+    margin: auto;
+  }
+
+  .carousel-text {
+    font-weight: 100 !important;
+    text-align: center !important;
+    height: 260px;
+    width: 100%;
+  }
+
+  .carousel-text > h1 {
+    text-align: center;
+  }
+
+  .carousel-indicators li, .carousel-indicators li.active {
+    margin-right: 10px;
+    height: 5px;
+    width: 5px;
+  }
+
+  .carousel-indicators li:last-child {
+    margin-right: none;
+  }
+
+  .left-carousel-control, .right-carousel-control {
+    z-index: 1000;
+  }
+
+  .carousel-control.right, .carousel-control.left  {
+    background: linear-gradient(to right,rgba(0,0,0,0) 0,rgba(0,0,0,0) 100%)
+  }
+
+  .text-center > img {
+    height: auto;
+    overflow-y: hidden;
+  }
+}
+
+
+@media screen and (min-width: 760px) {
+  /******* CAROUSEL FOR HOMEPAGE ********/
+  .projects-carousel {
+    height: 320px;
+    width: 100vw;
+    margin-left: -15px;
+    margin-top: -198px;
+    /* background: #272d30; */
+  }
+
+  #projects-carousel {
+    padding-top: 50px;
+    padding-left: 50px;
+  }
+
+  #projects-carousel > .carousel-text {
+    font-weight: 200;
+    padding-top: 40px;
+  }
+
+  #projects-carousel > .carousel-text > h1 {
+    font-weight: 100;
+    text-transform: uppercase;
+  }
+
+  #projects-carousel > .carousel-text > .project-charity {
+    font-size: 16px;
+    margin-top: 20px;
+  }
+
+  .projects-carousel > .carousel-control > .glyphicon {
+    color: #fff;
+  }
+
+  .projects-carousel a {
+    color: inherit;
+  }
+
+
+
+
+  .appeal-carousel {
+    height: 460px;
+    background: rgb(50,60, 67);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: darken;
+  }
+
+  .appeal-carousel::after {
+    opacity: 0.5;
+  }
+
+  .carousel-image-cropper {
+    width: 200px !important;
+    height: 200px !important;
+    margin: 20px 0 0 80px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+    border: none;
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .carousel-wrapper {
+    height: 340px;
+    padding-top: 20px;
+    right: 10%;
+    left: 10%;
+    color: #fff;
+  }
+
+  .carousel-inner {
+    height: 560px;
+  }
+
+  .carousel-image {
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+    margin: auto;
+  }
+
+  .carousel-seperator {
+    height: 200px;
+    margin-top: 25px;
+    border-right: 1px solid #fff;
+  }
+
+  .carousel-text {
+    font-weight: 100 !important;
+    text-align: left;
+    height: 260px;
+    margin-top: -10px;
+    margin-left: 50px;
+  }
+
+  .carousel-text > h1 {
+    font-weight: 100;
+    letter-spacing: 5px;
+  }
+
+  .carousel-indicators li, .carousel-indicators li.active {
+    margin-right: 10px;
+    height: 5px;
+    width: 5px;
+  }
+
+  .carousel-control.right, .carousel-control.left  {
+    background: linear-gradient(to right,rgba(0,0,0,0) 0,rgba(0,0,0,0) 100%)
+  }
+
+  .carousel-indicators li:last-child {
+    margin-right: none;
+  }
+
+  .left-carousel-control, .right-carousel-control {
+    z-index: 1000;
+  }
+
+  .text-center > img {
+    height: auto;
+    overflow-y: hidden;
+  }
+}

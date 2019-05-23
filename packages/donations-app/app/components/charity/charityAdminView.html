@@ -1,0 +1,98 @@
+<section class="page  wrapper-content" ng-controller="CharityAdminController as charityAdminCtrl">
+  <div class="row">
+    <div class="col-lg-12">
+      <h2 class="section" style="margin-top: 0px;">Charity admin view</h2>
+    </div>
+  </div>
+  <form name="charityAdminCtrl.charityForm" class="form-horizontal" novalidate>
+    <div class="row">
+      <div class="col-md- col-sm-8 col-xs-8">
+        <div class="form-group" has-error>
+          <label for="name" class="col-sm-3 control-label">Name</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" ng-model="charityAdminCtrl.charity.name" name="name" required>
+            <error-message name="name" error="required">This field is required
+            </error-message>
+          </div>
+        </div>
+
+        <div class="form-group" has-error>
+          <label for="legalName" class="col-sm-3 control-label">Legal name</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" ng-model="charityAdminCtrl.charity.legalName" name="legalName"
+                   required>
+            <error-message name="name" error="required">This field is required
+            </error-message>
+          </div>
+        </div>
+
+        <div class="form-group" has-error>
+          <label for="code" class="col-sm-3 control-label">Code</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" ng-model="charityAdminCtrl.charity.code" name="code" required>
+            <error-message name="name" error="required">This field is required
+            </error-message>
+          </div>
+        </div>
+
+        <div class="form-group" has-error>
+          <label for="code" class="col-sm-3 control-label">Link to webpage</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" ng-model="charityAdminCtrl.charity.url" name="url" required>
+            <error-message name="name" error="required">This field is required
+            </error-message>
+          </div>
+        </div>
+
+        <div class="form-group" has-error>
+          <label class="col-sm-3 control-label">Picture</label>
+          <div s3loader model="charityAdminCtrl.charity.picture"></div>
+        </div>
+
+        <div class="form-group" has-error>
+          <label class="col-sm-3 control-label">Dark picture (to show on white background)</label>
+          <div s3loader model="charityAdminCtrl.charity.darkPicture"></div>
+        </div>
+
+        <div class="form-group" has-error>
+          <label for="description" class="col-sm-3 control-label">Description</label>
+          <div class="col-sm-9">
+            <input summernote class="form-control" ng-model="charityAdminCtrl.charity.description" name="description"
+                   required>
+            <error-message name="description" error="required">This field is required
+            </error-message>
+          </div>
+        </div>
+
+        <div class="form-group" has-error>
+          <label for="projectAdmins" class="col-sm-3 control-label">Admins</label>
+          <div class="col-sm-9">
+            <div user-list model="charityAdminCtrl.charity.projectAdmins" name="projectAdmins"></div>
+          </div>
+        </div>
+
+        <div class="form-group" has-error>
+          <label for="projectManagers" class="col-sm-3 control-label">Managers</label>
+          <div class="col-sm-9">
+            <div user-list model="charityAdminCtrl.charity.projectManagers" name="projectManagers"></div>
+          </div>
+        </div>
+
+        <div class="form-group" has-error ng-show="charityAdminCtrl.auth.isSuperadmin()">
+          <label for="charityAdmins" class="col-sm-3 control-label">Charity admins</label>
+          <div class="col-sm-9">
+            <div user-list model="charityAdminCtrl.charity.charityAdmins" name="charityAdmins"></div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-3 col-sm-9">
+            <button type="submit" class="btn btn-primary" ng-click="charityAdminCtrl.submitSaveCharity()">
+              Save charity
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</section>

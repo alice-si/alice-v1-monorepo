@@ -1,0 +1,88 @@
+/* Styles for validator dashboard. */
+
+/* TODO move this to some common location. */
+.title-over-image {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+}
+
+.title-over-image > img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.title-over-image > .title-over-image__title {
+  position: absolute;
+  bottom: 0px;
+  margin: 30px;
+  color: white;
+}
+
+.title-over-image.grad-bottom:before {
+  display: inline-block;
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
+  opacity: .6; 
+}
+
+.title-over-image.grad-both:before {
+  display: inline-block;
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8)),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
+  opacity: .6; 
+}
+
+.goals-dash .goals-dash__greeting {
+  margin-top: 20px;
+  font-size: 2em;
+  color: #333;
+}
+
+.goals-dash__tabset {
+  margin-top: 20px;
+}
+
+.goals-dash__grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-column-gap: 20px;
+}
+
+.goals-dash__grid-elem {
+  grid-column: span 12;
+}
+
+@media only screen and (min-width: 768px) {
+  .goals-dash__grid-elem {
+    grid-column: span 6;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .goals-dash__grid-elem {
+    grid-column: span 4;
+  }
+}
+
+.goal-card--in-progress {
+  opacity: 0.7;
+}
+
+img.goal-card__image {
+  height: 150px;
+}

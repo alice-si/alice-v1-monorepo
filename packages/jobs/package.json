@@ -7,13 +7,13 @@
   "license": "MIT",
   "scripts": {
     "start": "node server.js",
-    "generate-keys": "node ./tools/generate-keys.js",
     "compile": "truffle compile --contracts_directory=./node_modules/@alice-si/contracts/contracts",
-    "pretest": "npm run generate-keys ./secrets/keys/ && npm run compile",
+    "pretest": "npx alice-cli generate-keys ./secrets/keys/ && npm run compile",
     "test": "./scripts/test.sh",
     "load-test": "./scripts/load-test.sh"
   },
   "dependencies": {
+    "@alice-si/cli": "^0.0.0",
     "@alice-si/contracts": "^0.0.0",
     "@alice-si/models": "^0.0.0",
     "@stratumn/canonicaljson": "^1.0.2",

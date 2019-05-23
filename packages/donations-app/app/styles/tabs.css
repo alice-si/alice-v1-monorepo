@@ -1,0 +1,30 @@
+/* Styles used for tabsets. */
+
+/* TODO refer to alice colors here */
+
+.alice-tabset .nav {
+  overflow-y: visible;
+  white-space: nowrap;
+  --nav-border-width: 3px;
+  border-bottom: var(--nav-border-width) solid rgba(25, 152, 162, 0.6);
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.alice-tabset .nav > li {
+  display: inline-block;
+  float: none;
+}
+
+.alice-tabset .nav .nav-item a {
+  border-radius: 0px;
+  font-size: 1.5em;
+  color: gray;
+}
+
+.alice-tabset .nav .nav-item.active a {
+  color: inherit;
+  background-color: transparent;
+  border-bottom: 4px solid rgb(25, 152, 162);
+  margin-bottom: calc(-1 * var(--nav-border-width));
+}

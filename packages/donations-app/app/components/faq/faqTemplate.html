@@ -1,0 +1,23 @@
+<div class="faq" ng-controller="FaqController as faqCtrl">
+  <div class="splash col-md-12">
+    <img id="geek-splash-logo" src="https://s3.eu-west-2.amazonaws.com/alice-res/AliceLogoWhite.png"/>
+    <div class="splash-text">
+      <div class="splash-title">FACTS &amp; QUESTIONS</div>
+      <div class="section-heading-border"></div>
+      <div class="splash-subtitle">
+        <!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. -->
+      </div>
+    </div>
+  </div>
+  <div class="questions-wrapper">
+    <div class="questions"  ng-repeat="question in faqCtrl.questions">
+      <div class="question left col-md-10">
+        <div class="title wow fadeInLeft">{{ question.question }}</div>
+        <div class="section-heading-border wow fadeInLeft"></div>
+        <div class="subtitle wow fadeInLeft" ng-bind-html="question.answer"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<alice-footer></alice-footer>

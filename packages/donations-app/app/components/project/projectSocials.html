@@ -1,0 +1,81 @@
+<div class="sm-icons">
+
+  <!-- Twitter: Desktop -->
+    <a href="http://twitter.com/intent/tweet?status={{model.title}}+{{model.projectShareLink}}">
+      <button class="hidden-xs social-icon">
+        <img style="width: 15px; height: 12px;" src="https://s3.eu-west-2.amazonaws.com/alice-res/twitter-sm-icon.png" alt="">
+      </button>
+    </a>
+
+  <!-- Twitter: Mobile -->
+  <a href="http://twitter.com/intent/tweet?status={{model.title}}+{{model.projectShareLink}}">
+    <button class="hidden-sm hidden-md hidden-lg social-icon">
+      <img style="width: 12px; height: 9px; margin-top: 1px;" src="https://s3.eu-west-2.amazonaws.com/alice-res/twitter-sm-icon.png" alt="">
+    </button>
+  </a>
+
+
+  <!-- Facebook: Desktop -->
+  <a class="fb-xfbml-parse-ignore" target="_blank" href="http://www.facebook.com/share.php?u={{model.projectShareLink}}&title={{model.title}}">
+    <button class="hidden-xs social-icon">
+    <!-- FACEBOOK -->
+      <img style="width: 5px; height: 12px;" src="https://s3.eu-west-2.amazonaws.com/alice-res/facebook-sm-icon.png" alt="">
+    </button>
+  </a>
+
+  <!-- Facebook: Mobile -->
+  <a class="fb-xfbml-parse-ignore" target="_blank" href="http://www.facebook.com/share.php?u={{model.projectShareLink}}&title={{model.title}}">
+    <button class="hidden-sm hidden-md hidden-lg social-icon">      <!-- FACEBOOK -->
+      <img style="width: 5px; height: 10px;" src="https://s3.eu-west-2.amazonaws.com/alice-res/facebook-sm-icon.png" alt="">
+    </button>
+  </a>
+
+
+  <!-- LINKEDIN
+  <a ng-click="model.openLinkedIn()" taget="_blank">
+    <button class="social-icon">
+    </button>
+  </a>
+  -->
+
+
+  <!-- Email: Desktop -->
+  <a href="mailto:?body={{model.projectShareLink}}&subject={{model.title}}">
+    <button class="hidden-xs social-icon">
+      <!-- EMAIL -->
+      <img style="width: 16px; height: 12px;" src="https://s3.eu-west-2.amazonaws.com/alice-res/mail-sm-icon.png" alt="">
+    </button>
+  </a>
+
+  <!-- Email: Mobile -->
+  <a href="mailto:?body={{model.projectShareLink}}&subject={{model.title}}">
+    <button class="hidden-sm hidden-md hidden-lg social-icon">
+      <!-- EMAIL -->
+      <img style="width: 14px; height: 10px;" src="https://s3.eu-west-2.amazonaws.com/alice-res/mail-sm-icon.png" alt="">
+    </button>
+  </a>
+
+
+  <!-- Currently doesn't work? -->
+  <!-- <a ng-href="model.copyLinkToClipboard()"
+  <button class="social-icon">
+    <svg width="12px" height="10px" viewbox="0 0 12 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g  transform="translate(-525, -355)" fill="#FFFFFF">
+          <g >
+            <g transform="translate(397, 349)">
+              <g id="Group-13" transform="translate(123, 0)">
+                <g id="Group-18" transform="translate(5, 6)">
+                  <path d="M11.3951889,5.42170918 L9.28351312,7.44748416 C9.18684989,7.54025658 9.05827712,7.5913436 8.92152191,7.5913436 C8.78476671,7.5913436 8.65619393,7.54025658 8.55939719,7.44733783 C8.46273396,7.35491295 8.40955774,7.23192365 8.40940515,7.1008131 C8.40925257,6.96951965 8.46258137,6.84594503 8.55945441,6.7529897 L10.2073641,5.17194433 C10.2634967,5.11811365 10.2634967,5.03086514 10.2074404,4.97710762 L8.5595307,3.39511111 C8.35996729,3.20331072 8.359891,2.89152077 8.5593209,2.70034228 C8.65619393,2.60771619 8.78476671,2.55670234 8.92131211,2.55670234 C9.05806731,2.55670234 9.18671638,2.60784423 9.28351312,2.70067152 L11.3951889,4.72741593 C11.5946951,4.91875904 11.5946951,5.23020145 11.3951889,5.42170918 Z" ></path>
+                  <path d="M3.43170653,7.44755733 C3.33519588,7.54025658 3.2066994,7.59127043 3.06992512,7.59127043 C2.93315085,7.59127043 2.80452085,7.54018341 2.70778132,7.44730125 L0.596334408,5.42170918 C0.396751921,5.23025633 0.396751921,4.91868587 0.596334408,4.72721473 L2.70785762,2.70061665 C2.80473065,2.60778936 2.93337972,2.55664747 3.07013493,2.55664747 C3.20668032,2.55664747 3.33517681,2.60758816 3.43184004,2.69999475 C3.63147975,2.89137444 3.63155604,3.20318268 3.43212614,3.3949099 L1.78406383,4.97697958 C1.72800755,5.0307371 1.72800755,5.11796732 1.78414012,5.17181629 L3.43204984,6.7527885 C3.52892288,6.84581699 3.58225169,6.96939161 3.5820991,7.10070336 C3.58190837,7.23185048 3.52865586,7.35493124 3.43170653,7.44755733 Z" ></path>
+                  <path d="M8.19874111,0.801525771 L4.75397865,9.68960617 C4.67945946,9.88127852 4.4864954,10.0100844 4.27377144,10.0100844 C4.2129087,10.0100844 4.15267537,9.9995853 4.09446382,9.97878833 C3.96669211,9.9334813 3.86491725,9.84284894 3.80794545,9.72364589 C3.75087829,9.60422336 3.74584295,9.47071668 3.79385032,9.34754447 L7.23844112,0.45968356 C7.3121783,0.268230704 7.50464647,0.139607747 7.71737042,0.139607747 C7.77851926,0.139607747 7.83873351,0.150088543 7.89696415,0.170903805 C8.16122402,0.264572485 8.29662503,0.547627128 8.19874111,0.801525771 Z" ></path>
+                </g>
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+    </svg>
+  </button>
+  </a> -->
+</div>

@@ -1,0 +1,120 @@
+<form
+  role="form"
+  name="checkCtrl.donationForm"
+  id="payment-form"
+  style="padding: 4% 0 0 4%;"
+  novalidate
+  ng-show="checkCtrl.mode == 'CARD'"
+>
+  <ng-include src="'/components/checkout/amountSelector.html'"></ng-include>
+
+  <div class="has-error" ng-show="checkCtrl.noAmount">
+    <span class="help-block">Please select an amount</span>
+  </div>
+
+  <div class="row" style="margin-top: 20px;">
+    <div class="col-xs-12">
+      <div class="form-group" has-error>
+        <input
+          id="donate-card-name"
+          type="text"
+          class="form-control"
+          name="cardName"
+          required
+          placeholder="Name on the card"
+          ng-model="checkCtrl.card.name"
+        />
+        <error-message name="cardName" error="required"
+          >This field is required
+        </error-message>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="form-group" has-error>
+        <input
+          id="donate-card-number"
+          type="text"
+          class="form-control"
+          name="cardNumber"
+          cc-number
+          non-amex
+          placeholder="Card number"
+          required=""
+          ng-model="checkCtrl.card.number"
+          style="z-index: 0"
+        />
+        <error-message name="cardNumber" error="required"
+          >This field is required</error-message
+        >
+        <error-message name="cardNumber" error="ccNumber"
+          >Incorrect card number</error-message
+        >
+        <error-message name="cardNumber" error="nonAmex"
+          >Unfortunately, we cannot accept American Express cards
+        </error-message>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-md-5">
+      <div class="form-group" has-error>
+        <input
+          id="donate-expiry-date"
+          type="text"
+          class="form-control"
+          name="cardExpiryDate"
+          placeholder="Expiration date (MM/YY)"
+          maxlength="5"
+          required=""
+          ng-model="checkCtrl.card.expiryDate"
+          ng-pattern="/^(0[1-9]{1}|1[0-2]{1})/\d{2}$/"
+          future-date
+        />
+
+        <error-message name="cardExpiryDate" error="required"
+          >This field is required
+        </error-message>
+        <error-message name="cardExpiryDate" error="pattern"
+          >Incorrect date format
+        </error-message>
+        <error-message name="cardExpiryDate" error="futureDate"
+          >Card has expired
+        </error-message>
+      </div>
+    </div>
+
+    <div class="col-xs-0 col-md-2"></div>
+
+    <div class="col-xs-12 col-md-5" style="margin-bottom: 20px;">
+      <div class="form-group" has-error>
+        <input
+          id="donate-cvc"
+          type="text"
+          class="form-control"
+          name="cvc"
+          placeholder="Security code"
+          ng-pattern="/\d{2}/"
+          maxlength="3"
+          required=""
+          ng-model="checkCtrl.card.cvc"
+        />
+        <img
+          class="cvc"
+          src="https://s3.eu-west-2.amazonaws.com/alice-res/cvc.png"
+        />
+        <error-message name="cvc" error="required"
+          >This field is required
+        </error-message>
+        <error-message name="cvc" error="pattern"
+          >Incorrect CVC format
+        </error-message>
+      </div>
+    </div>
+  </div>
+
+  <ng-include src="'/components/checkout/checkoutFormFooter.html'"></ng-include>
+</form>

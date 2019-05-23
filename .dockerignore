@@ -10,9 +10,11 @@
 # Dependencies
 node_modules/
 packages/*/node_modules/
+packages/*/bower_components/
 
 # Artifacts
 packages/*/dist
+packages/*/dist.*
 packages/*/build
 
 # Secrets

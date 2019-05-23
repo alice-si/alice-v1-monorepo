@@ -1,0 +1,218 @@
+<div ng-controller="ProjectController as projectCtrl" class="appeal-page">
+
+  <!-- The overlay -->
+  <div id="overlayContainer" class="overlay" ng-class="openModal">
+    <!-- Button to close the overlay -->
+    <a class="closebtn" ng-click="closeOverlay()">&times;</a>
+    <!-- Overlay content -->
+    <div class="overlay-content">
+      <div class="col-md-4 hidden-xs hidden-sm overlay-left" ng-hide="trackImpact" ng-style="{ 'background' : 'linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.0)) 0% 0% , url(' + overlay.img + ') no-repeat center', 'background-size' : 'cover', 'background-blend-mode' : 'multiply' }">
+      </div>
+      <div class="col-md-8 col-xs-12 overlay-right" ng-hide="trackImpact">
+        <div class="row">
+          <div class="col-md-12 col-xs-12 overlay-section-heading" style="float: left;">
+            {{ overlay.title }}
+          </div>
+          <div class="section-text-left col-md-12 hidden-xs hidden-sm" ng-repeat="line in overlay.details" ng-bind-html="line.paragraph"></div>
+          <div class="section-text-left col-xs-12 hidden-md hidden-lg hidden-xl" ng-repeat="line in overlay.details" ng-bind-html="line.paragraph"></div>
+        </div>
+        <div class="row alice-graph-overlay" ng-hide="!aliceGraph">
+          <img style="margin-top: 0" src="{{ overlay.img }}" alt="">
+        </div>
+      </div>
+      <div class="col-md-12 track-impact-overlay" ng-show="trackImpact">
+        <div class="col-md-12 col-xs-12 overlay-section-heading" style="text-align: center;">
+          {{ overlay.title }}
+        </div>
+        <img style="margin-top: -1px" src="https://s3.eu-west-2.amazonaws.com/alice-res/my-impact-screenshot.png" alt="">
+      </div>
+    </div>
+  </div>
+
+
+  <project-splash model="projectCtrl.model"></project-splash>
+  <div class="appeal-tab-content" id="appealSummary">
+    <div class="row appeal-summary-content">
+      <div class="col-md-12 col-xs-12 appeal-section-heading" style="float: left;">
+          <p>{{ projectCtrl.model.lead }}</p>
+      </div>
+      <div class="col-md-10 col-xs-12 summary-section">
+        <div class="section-text-left medium col-md-12 hidden-xs hidden-sm " ng-bind-html="projectCtrl.model.summary"></div>
+      </div>
+      <div class="col-md-12 col-xs-12 project-details-container">
+        <div class="project-details-btn">
+          <a ng-click="clickForOverlay('projectDetails')">SEE PROJECT DETAILS</a>
+        </div>
+      </div>
+      <div class="col-md-10 hidden-xs hidden-sm summary-section">
+        <div class="section-text-left col-md-12 medium" ng-bind-html="projectCtrl.model.outcomesIntro"></div>
+      </div>
+      <div class="col-md-12 col-xs-12 goals-section">
+        <!-- FOR DESKTOP & LARGER -->
+        <!-- Had to seperate the 2 displays to account for number of cards -->
+        <div uib-carousel class="goals-carousel hidden-xs hidden-sm" active="slide.active" interval="10000" no-wrap="false">
+          <div uib-slide ng-repeat="slide in projectCtrl.model.goals " index="$index">
+            <div class="col-md-4 goal-container container" ng-repeat="goal in slide | limitTo: 3">
+              <div class="goal-image-wrapper row">
+                <div class="goal-image-cropper">
+                  <img ng-src="{{ goal.image }}" class="goal-project-img" style="margin:auto;">
+                </div>
+              </div>
+              <div class="goal-card-title row">
+                {{goal.title}}
+              </div>
+              <div class="goal-card-value row">
+                {{goal.value}}
+              </div>
+              <div class="goal-card-bottom row">
+                <!-- <div class="col-md-6 row"> -->
+                <div class="col-md-12 row">
+                  <div class="goal-paid-title">
+                    {{goal.amount | rounded}}
+                  </div>
+                  <div class="goal-card-bottom-subtext">
+                    Cost per Goal
+                    <!-- Total Paid Out -->
+                  </div>
+                </div>
+                <!-- <div class="col-md-6 row">
+                  <div class="goal-achieved-title">
+                    {{goal.completion}}
+                  </div>
+                  <div class="goal-card-bottom-subtext">
+                    Unit
+                  </div>
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FOR MOBILE RESPONSIVENESS -->
+        <div uib-carousel class="goals-carousel hidden-sm hidden-md hidden-lg" active="slide.active" interval="10000" no-wrap="false">
+          <div class="col-xs-12 col-sm-12 goal-container container" uib-slide ng-repeat="goal in projectCtrl.model._outcomes " index="$index">
+            <div class="goal-image-wrapper padded-row row">
+              <div class="goal-image-cropper">
+                <img ng-src="{{ goal.image }}" class="goal-project-img" style="margin:auto;">
+              </div>
+            </div>
+            <div class="goal-card-title padded-row row">
+              {{goal.title}}
+            </div>
+            <div class="goal-card-value small padded-row row">
+              {{goal.value}}
+            </div>
+            <div class="goal-card-bottom row">
+              <!-- <div class="col-xs-6 row"> -->
+              <div class="col-xs-12 col-sm-12 row">
+                <div class="goal-paid-title">
+                  {{ goal.amount | rounded}}
+                </div>
+                <div class="goal-card-bottom-subtext">
+                  <!-- Total Paid Out -->
+                  Cost per Goal
+                </div>
+              </div>
+              <!-- <div class="col-xs-6 row">
+                <div class="goal-achieved-title">
+                  {{goal.completion}}
+                </div>
+                <div class="goal-card-bottom-subtext" style="padding-left: 40px;">
+                  Unit
+                </div>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12 col-xs-12 project-details-container">
+        <div class="col-md-10 col-xs-12 summary-section">
+          <div class="section-text-left medium col-md-12 col-xs-12 impact-intro">
+            Once you've donated, you can track your impact... <br>
+            <div class="hidden-xs hidden-sm" style="margin-bottom: 20px"> </div>
+            <!-- <span class="hidden-sm hidden-xs">Click below for a preview:</span> -->
+          </div>
+        </div>
+        <div class="col-md-12 col-xs-12 my-impact-screenshot">
+          <img src="https://s3.eu-west-2.amazonaws.com/alice-res/impact+example.png" alt="">
+        </div>
+        <!-- <div class="col-md-10 hidden-xs">
+          <div class="project-details-btn">
+            <a ng-click="clickForOverlay('trackImpact')">TRACKING YOUR IMPACT</a>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+
+
+  <div class="appeal-tab-content" id="appealStories">
+    <div class="row">
+      <a class="col-md-6 col-xs-12 col-sm-12 story-container"
+        ng-click="clickForOverlay('firstStory')"
+        ng-style="{ 'background' : 'linear-gradient(rgba(30, 137, 147, 0.5), rgba(30, 137, 147, 0.5)) 0% 0%, url(' + projectCtrl.model.myStory[0].img + ') no-repeat center',
+                             'background-size' : 'cover',
+                             'background-blend-mode' : 'multiply',
+                            }">
+              See {{ projectCtrl.model.myStory[0].header | lastWord }}'s Story
+      </a>
+      <a class="col-md-6 hidden-xs hidden-sm story-container"
+        ng-click="clickForOverlay('secondStory')"
+        ng-style="{ 'background' : 'linear-gradient(rgba(30, 137, 147, 0.5), rgba(30, 137, 147, 0.5)) 0% 0%, url(' + projectCtrl.model.myStory[1].img + ') no-repeat center',
+                             'background-size' : 'cover',
+                             'background-blend-mode' : 'multiply' }">
+              See {{ projectCtrl.model.myStory[1].header | lastWord }}'s Story
+      </a>
+    </div>
+  </div>
+
+  <div class="appeal-tab-content" id="appealAlice">
+    <div class="row">
+      <div class="appeal-section-heading col-md-10 col-md-offset-1 hidden-sm hidden-xs" style="float: left;">
+        <h1>Track Your Donation's Impact</h1>
+      </div>
+      <div class="appeal-section-heading col-xs-12 col-sm-10 col-sm-offset-1  hidden-md hidden-lg" style="float: left;">
+        <p>Know what impact your donation makes</p>
+      </div>
+      <div class="alice-section-subheading medium col-md-10 col-md-offset-1 col-sm-7 col-sm-offset-1 col-xs-12">
+        <span class="hidden-xs hidden-sm">
+          Donating on Alice is different to donating anywhere else.
+          You only give your full donation when the charity has achieved its goals. <br>
+        </span>
+        <span class="section-text-left hidden-md hidden-lg hidden-xl">
+          Donating on Alice is different to donating anywhere else. <br>
+          You only give your full donation when the charity has achieved its goals. <br>
+        </span>
+      </div>
+      <div class="hidden-md hidden-lg hidden-xl col-xs-12 col-sm-6 col-sm-offset-1 project-details-container">
+        <div class="project-details-btn">
+          <a ng-click="clickForOverlay('aliceOverlay')">SEE HOW ALICE WORKS</a>
+        </div>
+      </div>
+      <div class="alice-section-subheading medium col-md-10 col-md-offset-1 col-xs-12 col-sm-7 col-sm-offset-1 ">
+        <span class="hidden-xs hidden-sm">
+          That means you'll know exactly how many lives your money has improved and how.
+        </span>
+        <span class="section-text-left hidden-md hidden-lg hidden-xl">
+          That means you'll know exactly how many lives your money has improved and how.
+        </span>
+      </div>
+      <div class="col-md-8 col-md-offset-2 hidden-xs hidden-sm">
+        <img src="https://s3.eu-west-2.amazonaws.com/alice-res/Alice_graph.png" alt="dashboard"
+             class="pull-right alice-graph">
+      </div>
+    </div>
+  </div>
+
+
+  <div class="appeal-tab-content" id="appealNgo">
+    <!-- Desktop -->
+    <ng-include src="'/components/project/desktopCharityAndValidatorProfiles.html'"></ng-include>
+    <!-- Mobile  -->
+    <ng-include src="'/components/project/mobileCharityAndValidatorProfiles.html'"></ng-include>
+  </div>
+
+
+  <alice-footer model="projectCtrl.model"></alice-footer>
+</div>

@@ -1,0 +1,15 @@
+<div ng-if="!protectedViewCtrl.authorized && !protectedViewCtrl.stillLoading">
+  <div class="container">
+    <p ng-if="!protectedViewCtrl.loggedIn" class="alert alert-warning">
+    Please log in to view the content.
+    </p>
+    <p ng-if="protectedViewCtrl.loggedIn" class="alert alert-warning">
+    It looks like you are not authorized to view this page.
+    If you think that you should have access, please contact <a href="mailto:support@alice.si">support@alice.si</a> to resolve this issue.
+    </p>
+  </div>
+</div>
+
+<div ng-if="protectedViewCtrl.authorized">
+  <ng-transclude></ng-transclude>
+</div>

@@ -1,0 +1,156 @@
+<div class="appeal-splash" ng-style="{ 'background' : 'linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url(' + model.img + ') no-repeat center', 'background-size' : 'cover', 'background-blend-mode' : 'multiply' }">
+    <div class="hidden-xs splash-content container-fluid">
+      <div class="row">
+        <div class="appeal-left col-md-7 col-sm-10">
+          <div class="row main-title" ng-bind-html=" model.title "></div><br>
+          <div class="row title-border"></div>
+          <div class="sm-icons-container">
+            <social-icons  model="model"></social-icons>
+          </div>
+          <div class="row charity-title">
+            <div class="subtext" style="width: 100%;">
+              Project run by:
+            </div>
+            <div class="charity-logo">
+              <a class="charity-logo" href="{{ model.charity.url }}" target="_blank" ><img ng-src="{{ model.charity.picture }}"/></a>
+            </div>
+          </div>
+          <div class="row title-border-2"></div>
+          <div class="row appeal-alice">
+            <div class="subtitle-text">
+              <!-- Donate with Alice to track your money’s impact. The charity gets half of your donation upfront and half when their impact is verified. -->
+              Donate with Alice to track your money’s impact. You'll be notified each time {{ model.charity.name }} achieves one of its goals.
+
+            </div>
+          </div>
+          <div class="row splash-learn-container">
+            <div class="row splash-learn">
+              <a href="#appealAlice">LEARN MORE</a>
+            </div>
+          </div>
+        </div>
+        <div class="appeal-right col-md-5 col-sm-12">
+          <div class="row donate-button-container">
+            <div class="row donate-button">
+              <a href="/checkout/{{model.code}}">DONATE</a>
+            </div>
+          </div>
+
+          <div class="row vertical-line-container">
+            <div class="vertical-line" style="margin-top: 40px;"></div>
+          </div>
+
+          <div class="row donate-raised-container">
+
+            <div class="donate-raised">
+              {{ model.raised | rounded }}
+            </div>
+            <div class="subtext">Raised So Far</div>
+
+          </div>
+
+          <div class="row hidden-sm vertical-line-container">
+            <div class="vertical-line"></div>
+          </div>
+
+          <div class="row hidden-sm graph-container">
+            <div class="appeal-circle-chart row">
+              <svg class="appeal-circle-chart" viewbox="0 0 33.83098862 33.83098862" width="250" height="250">
+                <circle fill="rgba(32, 46, 55, 1)" stroke="#fff" stroke-width="1.2" cx="16.91549431" cy="16.91549431" r="15.91549431"/>
+                <!-- CHANGE PERCENTAGE VALUE HERE: stroke-dasharray(percent, 100) -->
+                <circle ng-style="{'stroke-dasharray': 100 * model.peopleFunded / model.peopleTarget + ',' + 100}" class="circle-chart-foreground" stroke="#46B3BC" stroke-width="2" stroke-linecap="none" fill="none" cx="16.91549431" cy="16.91549431" r="14.32549431" />
+                <text ng-hide="model.peopleFunded == 0" x="50%" y="53%" class="appeal-chart-amount" text-anchor="middle">
+                  <tspan class="light">{{ model.peopleFunded }}</tspan><tspan class="dark"> / {{ model.peopleTarget }}</tspan>
+                  <tspan x="50%" y="65%" text-anchor="middle" class="subtext appeal-small">Helped</tspan>
+                </text>
+                <!-- <text x="50%" y="65%" text-anchor="middle" class="subtext appeal-small">Helped</text> -->
+                <text ng-show="model.peopleFunded == 0" x="50%" y="53%" textLength="50" class="appeal-chart-text" text-anchor="middle">
+                  <tspan x="51%" y="42%" class="light">The charity is currently</tspan>
+                  <tspan x="51%" y="52%" class="light">working hard to achieve</tspan>
+                  <tspan x="51%" y="62%" class="light">the goals below</tspan>
+                </text>
+              </svg>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="hidden-sm hidden-md hidden-lg hidden-xl mobile-appeal-splash">
+        <div class="appeal-title">
+          <div class="row">
+            <div class="appeal-title col-xs-12">
+              <div class="main-title"  ng-bind-html="model.title"></div><br>
+              <div class="title-border-container">
+                <div class="title-border"></div>
+                <div class="col-xs-5 sm-icons-container">
+                  <social-icons  model="model"></social-icons>
+                </div>
+              </div>
+              <div class="row">
+
+              </div>
+              <div class="row">
+                <div class="subtext" style="width: 100%;">
+                  Project run by:
+                </div>
+                <div class="charity-logo">
+                  <a class="charity-logo" href="{{ model.charity.url }}" target="_blank" ><img ng-src="{{ model.charity.picture }}"/></a>
+                </div>
+              </div>
+              <!-- <div class="icons-list">
+
+              </div> -->
+              <div class="subtitle-text">
+                Donate with alice to see exactly what your money pays for.
+              </div>
+            </div>
+          </div>
+          <div class="row donate-button-container">
+            <div class="donate-button col-xs-12">
+              <a href="/checkout/{{model.code}}">DONATE</a>
+            </div>
+
+            <div class="row vertical-line-container">
+              <div class="vertical-line" style="margin-top: 18px;"></div>
+            </div>
+
+            <div class="row donate-raised-container">
+
+              <div class="donate-raised">
+                {{ model.raised | rounded }}
+              </div>
+              <div class="subtext">Raised So Far</div>
+
+            </div>
+
+            <div class="row hidden-sm vertical-line-container">
+              <div class="vertical-line"></div>
+            </div>
+
+            <div class="row hidden-sm graph-container">
+              <div class=" row">
+                <svg viewbox="0 0 33.83098862 33.83098862" width="200" height="200">
+                  <circle fill="rgba(32, 46, 55, 1)" stroke="#fff" stroke-width="1.2" cx="16.91549431" cy="16.91549431" r="15.91549431"/>
+                  <!-- CHANGE PERCENTAGE VALUE HERE: stroke-dasharray(percent, 100) -->
+                  <circle ng-style="{'stroke-dasharray': 100 * model.peopleFunded / model.peopleTarget + ',' + 100}" class="circle-chart-foreground" stroke="#46B3BC" stroke-width="2" stroke-linecap="none" fill="none" cx="16.91549431" cy="16.91549431" r="14.32549431" />
+                  <text ng-hide="model.peopleFunded == 0" x="50%" y="53%" class="appeal-chart-amount" text-anchor="middle">
+                    <tspan class="light">{{ model.peopleFunded }}</tspan><tspan class="dark"> / {{ model.peopleTarget }}</tspan>
+                    <tspan x="50%" y="65%" text-anchor="middle" class="subtext appeal-small">Helped</tspan>
+                  </text>
+                  <!-- <text x="50%" y="65%" text-anchor="middle" class="subtext appeal-small">Helped</text> -->
+                  <text ng-show="model.peopleFunded == 0" x="50%" y="53%" textLength="50" class="appeal-chart-text" text-anchor="middle">
+                    <tspan x="51%" y="42%" class="light">The charity is currently</tspan>
+                    <tspan x="51%" y="52%" class="light">working hard to achieve</tspan>
+                    <tspan x="51%" y="62%" class="light">the goals below</tspan>
+                  </text>
+                </svg>
+              </div>
+            </div>
+
+          </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,51 @@
+<div class="container live-projects" ng-controller="BoardController as boardCtrl" ng-init="boardCtrl.loadWeb3()">
+
+    <div class="row live-projects-row">
+      <div class="col-lg-9 col-xs-12 live-project-section">
+        <div class="live-project-title col-lg-12 col-xs-12">
+          <span class="live-project-lead" ng-bind-html="project.lead"></span>
+        </div>
+        <div class="col-lg-12 col-xs-12 project-impact-overall">
+          <div class="row project-impact-numbers">
+            <div class="col-md-6 col-xs-6 ng-cloak wow flipInX" style="font-size: 64px" data-wow-duration="1.4s" data-wow-delay="0.6s">
+              {{ boardCtrl.total }}
+              <div class="impact-number-border"></div>
+            </div>
+            <div class="col-md-6 col-xs-6 ng-cloak wow flipInX" style="font-size: 64px" data-wow-duration="2.2s" data-wow-delay="0.6s">
+              {{ boardCtrl.count }}
+              <div class="impact-number-border"></div>
+            </div>
+
+          </div>
+          <div class="row project-impact-titles">
+            <div class="col-md-6 col-xs-6">
+              Total donated
+            </div>
+            <div class="col-md-6 col-xs-6">
+              Donations count
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="row project-goals-row">
+      <div ng-hide="boardCtrl.donations.length > 0" class="impact-table-header">
+        No donations yet
+      </div>
+      <table ng-show="boardCtrl.donations.length > 0" class="col-xs-12 impact-table my-impact">
+        <tr>
+          <td>Amount</td>
+          <td>Transaction hash</td>
+
+        </tr>
+
+        <tr ng-repeat="donation in boardCtrl.donations">
+          <td>{{donation.amount}} DAI</td> <!-- Do we put the goal number? {{ $index + 1 }} -->
+          <td>{{donation.tx}}</td>
+
+        </tr>
+      </table>
+    </div>
+</div>

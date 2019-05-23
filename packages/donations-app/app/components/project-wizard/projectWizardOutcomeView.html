@@ -1,0 +1,129 @@
+<!-- Visible when outcome is not selected -->
+<div class="col-md-8" ng-show="prWizardCtrl.mode == prWizardCtrl.modes.OUTCOMES && !prWizardCtrl.selectedOutcome">
+  <div class="form-group">
+    <label class="col-sm-3 control-label">Outcomes intro</label>
+    <div class="col-sm-9">
+      <div class="form-control" summernote ng-model="prWizardCtrl.project.outcomesIntro"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Visible when outcome is selected -->
+<div class="col-md-8" ng-repeat="outcome in prWizardCtrl.project.outcomes"
+     ng-show="prWizardCtrl.mode == prWizardCtrl.modes.OUTCOMES && prWizardCtrl.selectedOutcome === outcome">
+  <div class="form-group" has-error>
+    <label class="col-sm-3 control-label">Title *</label>
+
+    <div class="col-sm-9">
+      <input type="text" class="form-control" ng-model="outcome.title"
+             placeholder="Title" name="outcomeTitle" required>
+      <error-message name="outcomeTitle" error="required">This field is required
+      </error-message>
+    </div>
+  </div>
+
+  <div class="form-group" has-error>
+    <label class="col-sm-3 control-label">Category *</label>
+
+    <div class="col-sm-9">
+      <input type="text" class="form-control" ng-model="outcome.category"
+             placeholder="Category" name="outcomeCategory" required>
+      <error-message name="outcomeCategory" error="required">This field is required
+      </error-message>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-3 control-label">Description *</label>
+
+    <div class="col-sm-9">
+            <textarea class="form-control" rows="3" ng-model="outcome.description"
+                      placeholder="Description"></textarea>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-3 control-label">Reason *</label>
+
+    <div class="col-sm-9">
+            <textarea class="form-control" rows="3" ng-model="outcome.reason"
+                      placeholder="Why"></textarea>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-3 control-label">Value *</label>
+
+    <div class="col-sm-9">
+            <textarea class="form-control" rows="3" ng-model="outcome.value"
+                      placeholder="We receive"></textarea>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-3 control-label">Image *</label>
+
+    <div class="col-sm-9">
+      <div s3loader model="outcome.image"></div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-3 control-label">Target *</label>
+
+    <div class="col-sm-9">
+      <input type="text" class="form-control" ng-model="outcome.target"
+             placeholder="Target"
+             name="target" required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-3 control-label">Global cost *</label>
+
+    <div class="col-sm-9">
+      <input type="text" class="form-control" ng-model="outcome.amount"
+             placeholder="Cost" money00
+             name="cost" required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-3 control-label">Unit</label>
+
+    <div class="col-sm-9">
+      <input type="text" class="form-control" ng-model="outcome.unit"
+             placeholder="Unit Of Cost"
+             name="unit">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-3 control-label">Cost per unit</label>
+
+    <div class="col-sm-9">
+      <input type="text" class="form-control" ng-model="outcome.costPerUnit"
+             placeholder="Cost per unit" money00
+             name="costPerUnit">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-3 control-label">Hidden from the appeal</label>
+
+    <div class="col-sm-9">
+      <input type="checkbox" class="form-control" ng-model="outcome.hidden"
+             name="hidden">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-3 control-label">Colour of goal (for impact page)</label>
+    <div class="col-sm-4">
+      <input type="color" class="form-control" ng-model="outcome.color"
+        name="outcomeColor" value="#1998a4" id="" required/>
+      <error-message name="outcomeColor" error="required">This field is required
+      </error-message>
+    </div>
+    <div class="col-sm-3">
+      <div id="color-picker" style="background-color:{{outcome.color}}">{{outcome.color}}</div>
+    </div>
+  </div>
+</div>

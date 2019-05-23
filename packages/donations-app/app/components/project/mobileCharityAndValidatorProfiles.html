@@ -1,0 +1,31 @@
+<div class="row hidden-md hidden-lg hidden-xl">
+  <div class="col-xs-12 story-container" ng-style="{ 'background' : 'linear-gradient(rgba(61,103,107,0.40), rgba(61,103,107,0.40)), url(' + projectCtrl.model.myStory[1].img + ') no-repeat center', 'background-size' : 'cover', 'background-blend-mode' : 'multiply' }">
+      <a ng-click="clickForOverlay('secondStory')">
+          See {{ projectCtrl.model.myStory[1].header | lastWord }}'s Story
+      </a>
+  </div>
+  <div class="col-xs-12 ngo-section-right">
+      <div class="appeal-section-heading white row">
+          <div class="ngo-title col-xs-8">
+              Charity Profile
+          </div>
+          <div class="col-xs-3 col-xs-offset-1">
+              <a href="{{ projectCtrl.model.charity.url }}" target="_blank"><img
+                      class="sub-section-logo" src="{{ projectCtrl.model.charity.picture }}"></a>
+          </div>
+      </div>
+      <div class="section-text-left medium white profile" ng-bind-html="projectCtrl.model.serviceProvider">
+      </div>
+
+      <div class="appeal-section-heading white row">
+          <div class="ngo-title col-xs-8">
+              Validator Profile
+          </div>
+          <div class="col-xs-3 col-xs-offset-1">
+              <a href="{{ projectCtrl.model.validatorUrl }}" target="_blank"><img
+                      class="sub-section-logo" src="{{projectCtrl.model.validatorImg}}"></a>
+          </div>
+      </div>
+      <div class="section-text-left medium white profile" ng-bind-html="projectCtrl.model.validator"></div>
+  </div>
+</div>

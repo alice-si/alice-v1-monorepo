@@ -1,0 +1,21 @@
+<section class="container page-content" ng-controller="Oauth2Controller as oauth2Ctrl">
+  <div class="text-center">
+    <div ng-hide="oauth2Ctrl.auth.getLoggedUser()">
+      Please sign in to see this page!
+    </div>
+    <div ng-show="oauth2Ctrl.showQuestion">
+      <h4>
+        Share access with
+        <mark>{{oauth2Ctrl.charityName}}</mark>?
+      </h4>
+      <button class="btn btn-success" ng-click="oauth2Ctrl.requestAccess()"
+        type="submit">
+        Share
+      </button>
+      <button class="btn btn-warning" ng-click="oauth2Ctrl.redirect('User cancelled access sharing')"
+          type="submit">
+        Cancel
+      </button>
+    </div>
+  </div>
+</section>

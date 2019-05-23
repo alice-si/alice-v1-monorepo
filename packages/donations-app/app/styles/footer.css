@@ -1,0 +1,273 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+/******** FOOTER **********/
+
+
+@media screen and (max-width: 760px) {
+
+
+  /******* FOOTER ********/
+
+  .footer-social-icons {
+    height: 80px;
+    background: #FAFAFA;
+    width: 100%;
+    position: relative;
+  }
+
+  .footer-icons {
+    height: 100%;
+  }
+
+  .ft-icon {
+    height: 100%;
+  }
+
+  .footer-contact {
+    height: auto;
+    width: 90%;
+    margin-left: 10%;
+    margin-bottom: 80px;
+  }
+
+  .contact-us-heading {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    letter-spacing: 8px;
+    font-size: 24px;
+    font-weight: 100;
+    margin-left: 15%;
+    color: #1998a4;
+  }
+
+  .contact-us-heading:after {
+    content: "";
+    display: block;
+    float: inherit;
+    width: 45%;
+    padding-bottom: 10px;
+    border-bottom: 0.5px solid #1998a4;
+  }
+
+  .contact-section {
+    padding: 20px 0 20px 0;
+    margin-left: -20px;
+    letter-spacing: 2px;
+  }
+
+  .contact-title {
+    font-size: 12px;
+    letter-spacing: 4px;
+    font-weight: 500;
+    color: #464f53;
+    padding-bottom: 15px;
+  }
+
+  .footer-terms {
+    margin-bottom: 30px;
+    margin-left: 25px;
+    width: 100%;
+    letter-spacing: 2px;
+    font-size: 14px;
+    font-weight: 100;
+    color: #9babab;
+  }
+
+  .ft-term {
+    margin-bottom: 5px;
+  }
+
+  /******* FOOTER ********/
+
+  .footer-social-icons {
+    height: 80px;
+    background: #FAFAFA;
+    width: 100%;
+  }
+
+  .footer-icons {
+    height: 100%;
+  }
+
+  .ft-icon {
+    height: 100%;
+  }
+
+  .medium-icon {
+    background-image: url('https://s3.eu-west-2.amazonaws.com/alice-res/medium.png');
+    background-size: contain;
+    height: 25px;
+    width: 25px;
+    margin: auto;
+    margin-top: 25px;
+
+    transition: 0.5s all ease-out;
+    -webkit-transition: 0.5s all ease-out;
+    -moz-transition: 0.5s all ease-out;
+  }
+
+  .medium-icon:hover {
+    background-image: url('https://s3.eu-west-2.amazonaws.com/alice-res/medium-coloured.png');
+
+  }
+
+  .linkedin-icon {
+    background-image: url('https://s3.eu-west-2.amazonaws.com/alice-res/linked-in.png');
+    background-size: contain;
+    height: 25px;
+    width: 25px;
+    margin: auto;
+    margin-top: 25px;
+
+    transition: 0.5s all ease-out;
+    -webkit-transition: 0.5s all ease-out;
+    -moz-transition: 0.5s all ease-out;
+  }
+
+  .linkedin-icon:hover {
+    background-image: url('https://s3.eu-west-2.amazonaws.com/alice-res/logo-linkedin.png');
+  }
+
+  .twitter-icon {
+    background-image: url('https://s3.eu-west-2.amazonaws.com/alice-res/twitter-logo-silhouette.png');
+    background-size: contain;
+    height: 25px;
+    width: 25px;
+    margin: auto;
+    margin-top: 25px;
+
+    transition: 0.5s all ease-out;
+    -webkit-transition: 0.5s all ease-out;
+    -moz-transition: 0.5s all ease-out;
+  }
+
+  .twitter-icon:hover {
+    background-image: url('https://s3.eu-west-2.amazonaws.com/alice-res/twitter.png');
+  }
+}
+
+@media screen and (min-width: 760px) {
+
+  /******* FOOTER ********/
+
+  .footer-social-icons {
+    height: 80px;
+    background: #FAFAFA;
+    width: 100%;
+  }
+
+  .footer-icons {
+    height: 100%;
+  }
+
+  .ft-icon {
+    height: 100%;
+  }
+
+  .medium-icon {
+    background-image: url('https://s3.eu-west-2.amazonaws.com/alice-res/medium.png');
+    background-size: contain;
+    margin-top: 25px;
+    height: 30px;
+    width: 30px;
+
+    transition: 0.5s all ease-out;
+    -webkit-transition: 0.5s all ease-out;
+    -moz-transition: 0.5s all ease-out;
+  }
+
+  .medium-icon:hover {
+    background-image: url('https://s3.eu-west-2.amazonaws.com/alice-res/medium-coloured.png');
+
+  }
+
+  .linkedin-icon {
+    background-image: url('https://s3.eu-west-2.amazonaws.com/alice-res/linked-in.png');
+    background-size: contain;
+    margin-top: 25px;
+    height: 30px;
+    width: 30px;
+
+    transition: 0.5s all ease-out;
+    -webkit-transition: 0.5s all ease-out;
+    -moz-transition: 0.5s all ease-out;
+  }
+
+  .linkedin-icon:hover {
+    background-image: url('https://s3.eu-west-2.amazonaws.com/alice-res/logo-linkedin.png');
+  }
+
+  .twitter-icon {
+    background-image: url('https://s3.eu-west-2.amazonaws.com/alice-res/twitter-logo-silhouette.png');
+    background-size: contain;
+    margin-top: 25px;
+    height: 30px;
+    width: 30px;
+
+    transition: 0.5s all ease-out;
+    -webkit-transition: 0.5s all ease-out;
+    -moz-transition: 0.5s all ease-out;
+  }
+
+  .twitter-icon:hover {
+    background-image: url('https://s3.eu-west-2.amazonaws.com/alice-res/twitter.png');
+  }
+
+  .footer-contact {
+    height: auto;
+    width: 90%;
+    margin-bottom: 80px;
+  }
+
+  .contact-us-heading {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+    font-size: 44px;
+    font-weight: 400;
+    margin-left: 6.5%;
+    color: #1998a4;
+  }
+
+  .contact-us-heading:after {
+    content: "";
+    display: block;
+    float: inherit;
+    width: 45%;
+    padding-bottom: 10px;
+    border-bottom: 0.5px solid #1998a4;
+  }
+
+  .contact-section {
+    padding: 20px 0 20px 0;
+    margin-left: -20px;
+    letter-spacing: 2px;
+  }
+
+  .contact-title {
+    font-size: 12px;
+    letter-spacing: 4px;
+    font-weight: 500;
+    color: #464f53;
+    padding-bottom: 15px;
+  }
+
+  .footer-terms {
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+    font-size: 14px;
+    font-weight: 100;
+    color: #9babab;
+  }
+}

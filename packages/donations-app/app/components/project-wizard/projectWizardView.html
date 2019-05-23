@@ -1,0 +1,111 @@
+<div class="block-spacer">
+<!-- ONLY HERE FOR A LITTLE TIME -->
+</div>
+
+<section class="page wrapper wrapper-content" ng-controller="ProjectWizardController as prWizardCtrl">
+  <div class="row">
+    <!-- MENU -->
+    <div class="col-lg-3 project-wizard-menu">
+      <h2>{{prWizardCtrl.project.title}}</h2>
+      <button type="submit" class="btn btn-primary" ng-click="prWizardCtrl.submitSaveProject()">Save project
+      </button>
+
+      <ul class="list-group">
+        <li>
+          <div class="list-item level-1" ng-click="prWizardCtrl.selectSection(prWizardCtrl.modes.GENERAL)">
+						<span>
+							<i class="fa fa-angle-{{prWizardCtrl.mode == prWizardCtrl.modes.GENERAL ? 'down' : 'right'}}"></i>
+						</span>
+            {{prWizardCtrl.modes.GENERAL}}
+          </div>
+        </li>
+        <li>
+          <div class="list-item level-1" ng-click="prWizardCtrl.selectSection(prWizardCtrl.modes.TARGETS)">
+						<span>
+							<i class="fa fa-angle-{{prWizardCtrl.mode == prWizardCtrl.modes.TARGETS ? 'down' : 'right'}}"></i>
+						</span>
+            {{prWizardCtrl.modes.TARGETS}}
+          </div>
+        </li>
+        <li>
+          <div class="list-item level-1" ng-click="prWizardCtrl.selectSection(prWizardCtrl.modes.SUMMARY)">
+						<span>
+							<i class="fa fa-angle-{{prWizardCtrl.mode == prWizardCtrl.modes.SUMMARY ? 'down' : 'right'}}"></i>
+						</span>
+            {{prWizardCtrl.modes.SUMMARY}}
+          </div>
+        </li>
+        <li>
+          <div class="list-item level-1" ng-click="prWizardCtrl.selectSection(prWizardCtrl.modes.OUTCOMES)">
+						<span>
+							<i class="fa fa-angle-{{prWizardCtrl.mode == prWizardCtrl.modes.OUTCOMES ? 'down' : 'right'}}"></i>
+						</span>
+            {{prWizardCtrl.modes.OUTCOMES}}
+          </div>
+          {{OUTCOME}}
+          <ul ng-show="prWizardCtrl.mode == prWizardCtrl.modes.OUTCOMES && prWizardCtrl.outcomesOpen"
+              class="list-group">
+            <li ng-repeat="outcome in prWizardCtrl.project.outcomes">
+              <div class="list-item level-2" ng-click="prWizardCtrl.selectOutcome(outcome)">
+								<span>
+									<i class="fa fa-angle-{{prWizardCtrl.selectedOutcome == outcome ? 'down' : 'right'}}"></i>
+								</span>
+                {{outcome.title}}
+                <span class="remove" ng-click="prWizardCtrl.removeOutcome(outcome, $event)">
+									<i class="fa fa-close"></i>
+								</span>
+              </div>
+            </li>
+            <li>
+              <div class="list-item level-2" ng-click="prWizardCtrl.addOutcome()">
+								<span>
+									<i class="fa fa-plus"></i>
+								</span>
+                Add Outcome
+              </div>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <div class="list-item level-1" ng-click="prWizardCtrl.selectSection(prWizardCtrl.modes.STORIES)">
+						<span>
+							<i class="fa fa-angle-{{prWizardCtrl.mode == prWizardCtrl.modes.STORIES ? 'down' : 'right'}}"></i>
+						</span>
+            {{prWizardCtrl.modes.STORIES}}
+          </div>
+          {{STORY}}
+          <ul class="list-group" ng-show="prWizardCtrl.mode == prWizardCtrl.modes.STORIES && prWizardCtrl.storiesOpen">
+            <li ng-repeat="story in prWizardCtrl.project.myStory">
+              <div class="list-item level-2" ng-click="prWizardCtrl.selectStory(story)">
+								<span>
+									<i class="fa fa-angle-{{prWizardCtrl.selectedStory == story ? 'down' : 'right'}}"></i>
+								</span>
+                Story {{$index + 1}}
+                <span class="remove" ng-click="prWizardCtrl.removeStory(story, $event)">
+									<i class="fa fa-close"></i>
+								</span>
+              </div>
+            </li>
+            <li>
+              <div class="list-item level-2" ng-click="prWizardCtrl.addStory()">
+								<span>
+									<i class="fa fa-plus"></i>
+								</span>
+                Add story
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <!-- CONTENT VIEW -->
+    <div class="col-lg-9 project-wizard-form">
+      <form name="prWizardCtrl.projectForm" class="form-horizontal" novalidate>
+        <ng-include src="'/components/project-wizard/projectWizardProjectView.html'"></ng-include>
+        <ng-include src="'/components/project-wizard/projectWizardStoryView.html'"></ng-include>
+        <ng-include src="'/components/project-wizard/projectWizardOutcomeView.html'"></ng-include>
+      </form>
+    </div>
+  </div>
+</section>

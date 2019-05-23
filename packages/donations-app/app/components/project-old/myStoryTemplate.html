@@ -1,0 +1,13 @@
+<div class="my-story">
+  <div class="my-story-box">
+    <img class="my-story-img" src="{{model[index].img}}">
+    <div class="my-story-caption">{{model[index].header}}</div>
+    <img class="my-caption-expand animate" aria-hidden="true"
+         data-toggle="collapse" data-target="#my-story-details-{{index}}"
+         src="https://s3.eu-west-2.amazonaws.com/alice-res/Arrow_down.png"
+         ng-class="{'rotate': model.infoFull}"
+         ng-click="model.infoFull = !model.infoFull">
+  </div>
+  <div id="my-story-details-{{index}}" class="collapse my-story-details" ng-bind-html="model[index].details">
+  </div>
+</div>

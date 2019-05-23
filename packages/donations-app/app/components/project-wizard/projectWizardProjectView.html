@@ -1,0 +1,183 @@
+<div class="row">
+  <div class="col-md-8">
+    <div ng-show="prWizardCtrl.mode == prWizardCtrl.modes.GENERAL">
+      <div class="form-group" has-error>
+        <label class="col-sm-3 control-label">Project image</label>
+        <div class="col-sm-9">
+          <div s3loader model="prWizardCtrl.project.img"></div>
+        </div>
+      </div>
+
+      <div class="form-group" has-error>
+        <label class="col-sm-3 control-label">Code</label>
+
+        <div class="col-sm-9">
+          <input type="text" class="form-control" ng-model="prWizardCtrl.project.code" placeholder="Code (url hook)"
+                 name="code" required>
+          <error-message name="code" error="required">This field is required
+          </error-message>
+        </div>
+      </div>
+
+      <div class="form-group" has-error>
+        <label class="col-sm-3 control-label">Title</label>
+
+        <div class="col-sm-9">
+          <input type="text" class="form-control" ng-model="prWizardCtrl.project.title" placeholder="Title"
+                 name="title" required>
+          <error-message name="title" error="required">This field is required
+          </error-message>
+        </div>
+      </div>
+
+      <div class="form-group" has-error>
+        <label class="col-sm-3 control-label">Upfront Payment (%)</label>
+
+        <div class="col-sm-9">
+          <input type="text" class="form-control" ng-model="prWizardCtrl.project.upfrontPayment" placeholder="Percentage of donations sent immediately to charity"
+                 name="upfrontPayment" required>
+          <error-message name="upfrontPayment" error="required">This field is required
+          </error-message>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Lead</label>
+
+        <div class="col-sm-9">
+          <div class="form-control" summernote ng-model="prWizardCtrl.project.lead"></div>
+        </div>
+      </div>
+
+      <div class="form-group" ng-if="prWizardCtrl.auth.isSuperadmin()">
+        <label class="col-sm-3 control-label">Charity</label>
+
+        <select class="col-sm-9" ng-model="prWizardCtrl.project.charity">
+          <option ng-repeat="charity in prWizardCtrl.charities" value="{{charity._id}}">{{charity.name}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div ng-show="prWizardCtrl.mode == 'TARGETS'">
+
+      <div class="form-group" has-error>
+        <label class="col-sm-3 control-label">Funding target</label>
+
+        <div class="col-sm-9">
+          <input type="number" class="form-control" ng-model="prWizardCtrl.project.fundingTarget"
+                 placeholder="Funding Target" name="fundingTarget" required>
+          <error-message name="fundingTarget" error="required">This field is required
+          </error-message>
+        </div>
+      </div>
+      <div class="form-group" has-error>
+        <label class="col-sm-3 control-label">People Target</label>
+
+        <div class="col-sm-9">
+          <input type="number" class="form-control" ng-model="prWizardCtrl.project.peopleTarget"
+                 placeholder="Number of people to help" name="peopleTarget" required>
+          <error-message name="peopleTarget" error="required">This field is required
+          </error-message>
+        </div>
+      </div>
+      <div class="form-group" has-error>
+        <label class="col-sm-3 control-label">Per person</label>
+
+        <div class="col-sm-9">
+          <input type="number" class="form-control" ng-model="prWizardCtrl.project.perPerson"
+                 placeholder="Amount to help a single person" name="perPerson"
+                 required>
+          <error-message name="perPerson" error="required">This field is required
+          </error-message>
+        </div>
+      </div>
+
+      <div class="form-group" has-error>
+        <label class="col-sm-3 control-label">External funding</label>
+
+        <div class="col-sm-9">
+          <input type="number" class="form-control" ng-model="prWizardCtrl.project.externalFunding"
+                 placeholder="Not recorded on the blockchain" name="externalFunding">
+          <error-message name="externalFunding" error="required">This field is required
+          </error-message>
+        </div>
+      </div>
+    </div>
+
+    <div ng-show="prWizardCtrl.mode == 'SUMMARY'">
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Summary</label>
+
+        <div class="col-sm-9">
+          <div class="form-control" summernote ng-model="prWizardCtrl.project.summary"></div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Our project</label>
+
+        <div class="col-sm-9">
+          <div class="form-control" summernote ng-model="prWizardCtrl.project.project"></div>
+        </div>
+      </div>
+
+
+      <div class="form-group" has-error>
+        <label class="col-sm-3 control-label">Service provider (Who we are)</label>
+
+        <div class="col-sm-9">
+          <div class="form-control" summernote ng-model="prWizardCtrl.project.serviceProvider"></div>
+        </div>
+      </div>
+
+      <div class="form-group" has-error>
+        <label class="col-sm-3 control-label">Beneficiary (Who we're helping)</label>
+
+        <div class="col-sm-9">
+          <div class="form-control" summernote ng-model="prWizardCtrl.project.beneficiary"></div>
+        </div>
+      </div>
+
+      <div class="form-group" has-error>
+        <label class="col-sm-3 control-label">Validator (Who’s validating our goals)</label>
+
+        <div class="col-sm-9">
+          <div class="form-control" summernote ng-model="prWizardCtrl.project.validator"></div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Cost breakdown</label>
+
+        <div class="col-sm-9">
+          <div class="form-control" summernote ng-model="prWizardCtrl.project.costBreakdown"></div>
+        </div>
+      </div>
+
+      <div class="form-group" has-error>
+        <label class="col-sm-3 control-label">Link to video</label>
+
+        <div class="col-sm-9">
+          <input type="text" class="form-control" ng-model="prWizardCtrl.project.video" placeholder="Link to video"
+                 name="video">
+        </div>
+      </div>
+
+      <div class="form-group" has-error>
+        <label class="col-sm-3 control-label">Validator image</label>
+        <div s3loader model="prWizardCtrl.project.validatorImg">
+        </div>
+      </div>
+
+      <div class="form-group" has-error>
+        <label class="col-sm-3 control-label">Url link to validator webpage</label>
+
+        <div class="col-sm-9">
+          <input type="text" class="form-control" ng-model="prWizardCtrl.project.validatorUrl" placeholder="Link to validator's webpage"
+                 name="validatorUrl">
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
