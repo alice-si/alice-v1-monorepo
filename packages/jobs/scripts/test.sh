@@ -5,7 +5,7 @@ set -x
 
 yarn ganache-cli -a 150 -i 3 -s 123 >/dev/null &
 GANACHE_PID=$!
-trap "kill $GANACHE_PID && echo KilledOK && ps --forest -o pid=,tty=,stat=,time=,cmd= $$" EXIT
+trap "kill $GANACHE_PID && echo KilledOK && ps --forest -o pid=,tty=,stat=,time=,cmd= && ps ax" EXIT
 
 echo "Started Ganache, PID: $GANACHE_PID"
 
