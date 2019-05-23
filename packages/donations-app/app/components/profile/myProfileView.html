@@ -1,0 +1,164 @@
+<div ng-controller="MyProfileController as mpCtrl">
+  <section class="content-header">
+    <h1>
+      My Profile
+    </h1>
+
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+
+    <div class="row">
+      <div class="col-md-3">
+
+        <!-- Profile Image -->
+        <div class="box box-primary">
+          <div class="box-body box-profile">
+            <img class="profile-user-img img-responsive img-circle" ng-src="photo/{{mpCtrl.user.photo}}"
+                 alt="User profile picture">
+
+            <h3 class="profile-username text-center">{{mpCtrl.user.firstName}} {{mpCtrl.user.lastName}}</h3>
+
+            <p class="text-muted text-center">{{mpCtrl.user.position}}</p>
+
+            <ul class="list-group list-group-unbordered">
+              <li class="list-group-item">
+                <b>Age</b> <a class="pull-right">{{mpCtrl.user.dob | age}}</a>
+              </li>
+              <li class="list-group-item">
+                <b>Email</b> <a class="pull-right">{{mpCtrl.user.email}}</a>
+              </li>
+              <li class="list-group-item">
+                <b>Member since</b> <a class="pull-right"><span am-time-ago="mpCtrl.user.registeredAt"></span></a>
+              </li>
+            </ul>
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+
+        <!-- About Me Box -->
+        <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">About Me</h3>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body">
+            <strong><i class="fa fa-book margin-r-5"></i> Education</strong>
+
+            <p class="text-muted">
+              {{mpCtrl.user.education}}
+            </p>
+
+            <hr>
+
+            <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
+
+            <p class="text-muted">{{mpCtrl.user.location}}</p>
+
+            <hr>
+
+            <strong><i class="fa fa-file-text-o margin-r-5"></i> About me</strong>
+
+            <p>{{mpCtrl.user.description}}</p>
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+      </div>
+      <!-- /.col -->
+      <div class="col-md-9">
+        <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">Edit</h3>
+          </div>
+          <div class="box-body">
+            <form name="mpCtrl.profileForm" class="form-horizontal" novalidate>
+              <div class="form-group">
+                <label for="photo" class="col-sm-2 col-md-2 control-label">Photo</label>
+
+                <div class="col-md-7 col-sm-7">
+                  <input type="text" class="form-control" ng-model="mpCtrl.photo.name" id="photo">
+                </div>
+
+                <div class="btn btn-sm btn-primary col-sm-2 col-md-2"
+                     style="height:34px; padding-top:7px;" ngf-select ng-model="mpCtrl.photo"
+                     ngf-pattern="'image/*'"
+                     ngf-accept="'*'" ngf-max-size="20MB" ngf-min-height="100">Select file
+                </div>
+              </div>
+
+              <div class="form-group" has-error>
+                <label for="firstName" class="col-sm-2 control-label">First Name *</label>
+
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" ng-model="mpCtrl.update.firstName"
+                         id="firstName" placeholder="First Name" name="firstName" required>
+                  <error-message name="firstName" error="required">This field is required</error-message>
+                </div>
+              </div>
+              <div class="form-group" has-error>
+                <label for="lastName" class="col-sm-2 control-label">Last Name *</label>
+
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" ng-model="mpCtrl.update.lastName"
+                         id="lastName" placeholder="Last Name" name="lastName" required>
+                  <error-message name="lastName" error="required">This field is required</error-message>
+                </div>
+              </div>
+              <div class="form-group" has-error>
+                <label for="location" class="col-sm-2 control-label">Location *</label>
+
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" ng-model="mpCtrl.update.location"
+                         id="location" placeholder="Location" name="location" required>
+                  <error-message name="location" error="required">This field is required</error-message>
+                </div>
+              </div>
+              <div class="form-group" has-error>
+                <label for="age" class="col-sm-2 control-label">Date of birth *</label>
+
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" ng-model="mpCtrl.update.dob" id="age"
+                         datetime="dd/MM/yyyy" placeholder="dd/mm/yyyy" name="dob" required>
+                  <error-message name="dob" error="required">This field is required</error-message>
+                </div>
+              </div>
+              <div class="form-group" has-error>
+                <label for="education" class="col-sm-2 control-label">Education</label>
+
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" ng-model="mpCtrl.update.education"
+                         id="education" name="education" placeholder="Education">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="education" class="col-sm-2 control-label">About me</label>
+
+                <div class="col-sm-10">
+                                        <textarea class="form-control" rows="3" ng-model="mpCtrl.update.description"
+                                                  id="description" placeholder="About me"></textarea>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="submit" class="btn btn-primary"
+                          ng-click="mpCtrl.submitUpdateProfile()">Update profile
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+        </div>
+
+        <!-- /.nav-tabs-custom -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+  </section>
+</div>

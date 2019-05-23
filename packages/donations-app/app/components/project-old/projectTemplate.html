@@ -1,0 +1,103 @@
+<div class="campaign-wrapper">
+  <!-- image -->
+  <img ng-src="{{model.img}}"/>
+  <div class="campaign-info campaign-info-small animate {{pilot ? 'hidden-xs' : ''}}"
+       ng-class="{'campaign-info-full': model.infoFull,
+                   'campaign-info-small': !model.infoFull,
+                   'pilot': pilot}">
+  </div>
+
+  <img class="info-expand-icon animate {{pilot ? 'hidden-xs' : ''}}" aria-hidden="true"
+       src="https://s3.eu-west-2.amazonaws.com/alice-res/Arrow_up.png"
+       ng-class="{'rotate': model.infoFull}" ng-click="model.infoFull = !model.infoFull">
+
+  <div class="campaign-info-text text-hook animate {{pilot ? 'hidden-xs' : ''}}"
+       ng-class="{'element-hidden': model.infoFull, 'element-visible': !model.infoFull}">
+    <div>Transparent giving</div>
+    <div style="font-size: 2.5rem;">A new way to donate</div>
+  </div>
+
+  <div class="campaign-info-text text-expanded animate"
+       ng-class="{'element-hidden': !model.infoFull, 'element-visible': model.infoFull}">
+    <div class="campaign-info-header">Only pay if this project achieves its goals</div>
+    <p>
+      When you donate to a charity on Alice, you can be sure your money will make a real difference...because you only
+      pay when
+      it does!
+    </p>
+    <p>
+      How it works: the charity receives a certain amount of donations for every goal it achieves. Your donation will be
+      grouped
+      with others to pay for these goals. And if no goals are achieved, your money will be returned to you.
+    </p>
+    <p>
+      Click on “My Impact" in the menu bar to track your donation's impact.
+    </p>
+
+  </div>
+
+  <div class="campaign-overlay campaign-background hidden-sm hidden-xs"></div>
+
+  <div class="campaign-overlay campaign-box hidden-sm hidden-xs">
+    <h1 class="campaign-title">
+      {{model.title}}
+    </h1>
+
+    <div class="campaign-gauge-box" style="width:28%">
+      <div class="gauge-label" ng-class="{'pilot': pilot}" style="bottom: 44%;">
+        {{model.raised | rounded}}
+      </div>
+
+      <div class="gauge-label gauge-label-small  ng-cloak" ng-class="{'pilot': pilot}" style="bottom: 24%;">
+        raised
+      </div>
+
+      <div style="width:100%">
+        <round-progress max="100" current="model.percentage" color="#1998a2" bgcolor="#B7B7B7" stroke="14"
+                        clockwise="true" responsive="true"
+                        duration="800" animation="easeInOutQuart" animation-delay="100">
+        </round-progress>
+      </div>
+    </div>
+
+    <div class="donate-description campaign-gauge-description" ng-style="{'font-size': pilot? '1.8em' : '2.0em' }"
+         ng-bind-html="model.lead">
+    </div>
+
+    <div class="campaign-gauge-button-wrapper">
+      <a id="campaign-{{model.code}}-{{pilot ? 'view' : 'donate'}}-button" class="btn btn-lg btn-primary btn-donate"
+         href="/#/{{pilot ? 'project' : 'checkout'}}/{{model.code}}"
+         role="button">
+        {{pilot ? 'VIEW' : 'DONATE'}}
+      </a>
+    </div>
+
+    <div class="gauge-link-description" ng-class="{ 'pilot': pilot }">
+      <div style="border-bottom: 1px solid #4ebbd3; padding-left: 15px; margin-bottom: 5px; padding-bottom: 6px;">
+        {{model.perPerson | money}} funds 1 person
+      </div>
+      <div style="padding-left: 15px;">{{model.peopleFunded}}/{{model.peopleTarget}} already funded</div>
+    </div>
+
+    <div class="social-box">
+      <a id="campaign-facebook-share-{{model.code}}"
+         href="https://www.facebook.com/sharer/sharer.php?u={{model.host}}redirection%2Fproject-{{model.code}}.html"
+         target="_blank">
+        <i class="fa fa-facebook" aria-hidden="true"></i>
+      </a>
+      <a id="campaign-twitter-share-{{model.code}}"
+         href="http://www.twitter.com/share?url={{model.host}}redirection%2Fproject-{{model.code}}.html"
+         target="_blank">
+        <i class="fa fa-twitter" aria-hidden="true"></i>
+      </a>
+      <a id="campaign-google-share-{{model.code}}"
+         href="https://plus.google.com/share?url={{model.host}}redirection%2Fproject-{{model.code}}.html"
+         target="_blank">
+        <i class="fa fa-google-plus" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+
+  <div class="mobile-overlay hidden-md hidden-lg" ng-if="pilot"></div>
+  <h2 class="category-title hidden-md hidden-lg" ng-if="pilot">{{model.title}}</h2>
+</div>

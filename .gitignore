@@ -6,14 +6,24 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
+nohup.out
 
 # Dependency directories
 node_modules/
+bower_components/
 
 # Artifacts
 dist/
+dist.*/
 build/
 
 # Secrets
 .envrc
 secrets
+
+# IDE-specific dirs.
+.idea
+.vscode
+
+# Trash
+.DS_Store

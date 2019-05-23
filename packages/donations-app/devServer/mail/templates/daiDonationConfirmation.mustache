@@ -1,0 +1,33 @@
+{{> header }}
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+  <tr>
+    <td
+      style="padding: 10px 65px 30px 65px; font-size: 16px; mso-height-rule: exactly; line-height: 20px;">
+      <p>
+        Thank you for donating to the <a style="color:#1998a2" href="{{host}}/project/save-from-abuse">Forgotten Animals</a>. Your Dai will only be paid when the charity achieves one of its goals, so you can see exactly how your money is helping end the suffering of wild animals in Russia.
+      </p>
+
+      <p>
+        We'll send you an email as soon as your Dai is paid. Watch this space!
+      </p>
+
+      <h2>Donation details</h2>
+
+      Transaction hash: <a style="color: #1998a2" href="https://etherscan.io/tx/{{donation.donationTx}}">{{donation.donationTx}}</a> <br/>
+      Donation amount: {{donation.donationAmount}} <br/>
+      Recipient charity: Forgotten Animals <br/>
+
+      <p style="margin-top: 20px; font-size: 12px;">
+        Please note that this is not a tax receipt, due to the conditional nature of your donation.
+        If you opted to add Gift Aid, it has not yet been applied. You will receive a tax receipt
+        only once your gift is paid to the charity. If the charity doesn't achieve the goals necessary
+        to receive your donation, in whole or in part, within the next 9 months,
+        you will be given the option to get a refund for the outstanding balance.
+      </p>
+
+
+    </td>
+  </tr>
+</table>
+
+{{> footer }}

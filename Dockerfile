@@ -10,7 +10,6 @@ WORKDIR /usr/src/app
 COPY . ./
 
 # Install dependencies.
-RUN npm install
-RUN npx lerna bootstrap
+RUN yarn
 
 ENV NODE_ENV=production

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Tripple curly brackets are used to disable html escaping for links and html content -->
+
+  <!-- Facebook -->
+  <meta property="og:url" content="{{{ host }}}/redirection/project-{{ code }}.html"/>
+  <meta property="og:title" content="{{ title }}"/>
+  <meta property="og:description" content="{{ description }}"/>
+  <meta property="og:image" content="{{{ img }}}"/>
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@raph_alice">
+  <meta name="twitter:title" content="{{ title }}">
+  <meta name="twitter:description" content="{{ description }}">
+  <meta name="twitter:image" content="{{{ img }}}">
+
+</head>
+<body>
+    <h1>{{title}}</h1>
+    <img src="{{{ img }}}">
+
+    <script>
+      window.location.replace("{{{ host }}}/project/{{ code }}/");
+    </script>
+</body>
+</html>

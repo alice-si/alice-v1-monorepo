@@ -1,0 +1,110 @@
+/*
+ * This style is based on dashboard table, but is currently
+ * only used for usersView. We should eventually migrate
+ * all other table styles to use this as a base.
+ */
+
+.alice-table-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 10px;
+}
+
+.alice-table-header__title {
+  font-weight: 400;
+}
+
+.alice-table-header__controls {
+  display: inline-block;
+}
+
+.alice-table-header__controls > * {
+  margin-right: 10px;
+}
+
+.alice-table-header__controls .checkbox {
+  display: inline;
+}
+
+.alice-table-header__controls .btn-export {
+  font-size: 1.4rem;
+  padding: 4px 12px;
+  border-radius: 0;
+  margin-top: -5px;
+  background-color: #1998a2;
+  border: 1px solid #FFFFFF;
+  color: #FFFFFF;
+  margin-right: 50px;
+}
+
+@media (max-width: 600px) {
+  .alice-table-container .btn-export {
+      margin-right: 10px;
+  }
+}
+
+.alice-table-container table.alice-table {
+  width: 100%;
+  margin-top: 30px;
+}
+
+.alice-table-container table.alice-table td {
+  width: auto;
+  font-size: 12px;
+  font-weight: 300;
+}
+
+.alice-table-container div.alice-table-header {
+  margin-bottom: 20px;
+}
+
+.alice-table-container table.alice-table td:first-child{
+  width: 20%
+}
+
+.alice-table-header {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  margin-top: 40px;
+  background: rgba(142, 166, 179, 0.22);
+  font-weight: 200;
+  letter-spacing: 1px;
+  color: rgba(142, 166, 179, 0.82);
+  text-align: center;
+}
+
+table.alice-table tr:first-child {
+  background: #fff;
+}
+
+table.alice-table tr:first-child > td {
+  color: rgba(179, 194, 195, 0.67) !important;
+  text-transform: none !important;
+  letter-spacing: 1px !important;
+}
+
+table.alice-table tr {
+  border-bottom: 1px solid rgba(142, 166, 179, 0.22);
+}
+
+table.alice-table tr:nth-child(even) {
+  background: rgba(142, 166, 179, 0.05);
+}
+
+table.alice-table td {
+  text-align: left;
+  padding-left: 15px !important;
+  font-family: "Avenir";
+  font-weight: 200;
+  letter-spacing: 1px;
+  color: #8ea6b3;
+  padding: 15px 0;
+}
+
+table.alice-table tr:first-child td {
+  font-weight: 400;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}

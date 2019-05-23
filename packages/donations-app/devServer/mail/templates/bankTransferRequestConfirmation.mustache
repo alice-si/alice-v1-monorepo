@@ -1,0 +1,81 @@
+{{> header }}
+
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+  <tr>
+    <td
+      style="padding: 10px 65px 30px 65px; font-size: 16px; mso-height-rule: exactly; line-height: 20px;">
+      <p>
+        Dear {{user.firstName}},<br/><br/>
+        Thank you for supporting the "{{project.title}}" project run by {{project.charity.name}}.
+        You'll find the details of your donation below.
+      </p>
+
+      <span>To finish your donation please <b style="font-weight: bold;">transfer exactly {{ donation.money }}</b> to account below </span>
+
+      <table id="bank-details-table">
+        <tr>
+          <th>
+            To:
+          </th>
+          <th>
+            Use this reference:
+          </th>
+          <th>
+            Address:
+          </th>
+        </tr>
+        <tr>
+          <td>
+            {{ donation.bankTransferData.account.OwnerName }}
+          </td>
+          <td>
+            {{ donation.bankTransferData.wireReference }}
+          </td>
+          <td rowspan="4">
+              {{
+                donation.bankTransferData.account.OwnerAddress.AddressLine1
+              }}
+              <br>
+              {{
+                donation.bankTransferData.account.OwnerAddress.AddressLine2
+              }}
+              <br>
+              {{ donation.bankTransferData.account.OwnerAddress.City }}
+              {{ donation.bankTransferData.account.OwnerAddress.PostalCode }}
+              <br>
+              {{ donation.bankTransferData.account.OwnerAddress.Region }}
+              <br>
+              {{ donation.bankTransferData.account.OwnerAddress.Country }}
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2"></td>
+        </tr>
+        <tr>
+          <th> {{ donation.bankTransferData.account.idFieldname }} </th>
+          <th>BIC</th>
+        </tr>
+        <tr>
+          <td>{{ donation.bankTransferData.account.idValue }}</td>
+          <td>{{ donation.bankTransferData.account.BIC }}</td>
+        </tr>
+      </table>
+
+      <p style="font-size: smaller">
+        "{{ donation.bankTransferData.account.OwnerName }}"
+        is a licensed escrow agent that will hold your funds in a segregated bank account until "{{project.charity.legalName}}" achieves its goals.
+      </p>
+
+      {{> spreadTheWorld }}
+
+      <h2>Donation details</h2>
+
+      Transaction number: {{donation._id}} <br/>
+      Donation amount: {{donation.money}} <br/>
+      Recipient charity: {{project.charity.legalName}} <br/>
+
+    </td>
+  </tr>
+</table>
+
+{{> footer }}

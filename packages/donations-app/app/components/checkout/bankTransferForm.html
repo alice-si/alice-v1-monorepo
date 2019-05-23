@@ -1,0 +1,18 @@
+<form
+  role="form"
+  name="checkCtrl.donationForm"
+  id="payment-form"
+  style="padding: 4% 0 0 4%;"
+  novalidate
+  ng-show="checkCtrl.mode == 'BANK_TRANSFER'"
+>
+  <ng-include src="'/components/checkout/amountSelector.html'"></ng-include>
+
+  <div class="has-error" ng-show="checkCtrl.noAmount">
+    <span class="help-block">Please select an amount</span>
+  </div>
+
+  <ng-include src="'/components/checkout/checkoutFormFooter.html'"></ng-include>
+
+
+</form>

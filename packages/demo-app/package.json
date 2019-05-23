@@ -10,7 +10,7 @@
   },
   "scripts": {
     "build": "webpack",
-    "compile": "truffle compile --contracts_directory=./node_modules/@alice-si/contracts/contracts",
+    "compile": "./scripts/compile.sh",
     "dev": "webpack-dev-server"
   },
   "license": "MIT",

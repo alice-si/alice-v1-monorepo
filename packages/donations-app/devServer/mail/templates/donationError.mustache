@@ -1,0 +1,62 @@
+{{> header }}
+
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+  <tr>
+    <td
+      style="padding: 10px 65px 30px 65px; font-size: 16px; mso-height-rule: exactly; line-height: 20px;">
+      <p>
+        Dear {{user.firstName}},<br/><br/>
+        We noticed that you tried to donate to "{{project.title}}" on Alice, thank you!<br/><br/>
+
+        {{#is3DS}}
+          Unfortunately, your donation did not go through, because your payment did not clear an additional security step for donations of {{ securityTreshold }} or more.<br/><br/>
+          Do please try to make another donation, and make sure to put in your credentials when prompted.
+          This generally takes the form of a "Verified by Visa" or "Mastercard SecureCode" page depending on your card.
+          If you do not have your credentials, you may need to contact your bank and ask them to enable 3DS (the name of the security procedure) on your card.
+        {{/is3DS}}
+        {{^is3DS}}
+          Unfortunately, your donation did not go through.
+          Do please try to make another donation using other card or bank account.
+        {{/is3DS}}
+
+      </p>
+
+
+      <h2>Spread the word</h2>
+
+      <p>
+        Invite your friends to donate to this project. Share the love!
+      </p>
+      <table style="margin: 0 !important;">
+        <tr>
+          <td>
+            <a style="text-decoration: none; margin-right: 30px;"
+                href="https://www.facebook.com/sharer/sharer.php?u={{host}}%2Fredirection%2Fproject-{{project.code}}.html"
+                target="_blank">
+              <img src="http://s3.eu-west-2.amazonaws.com/alice-res/fa-facebook.png">
+            </a>
+            <a style="text-decoration: none; margin-right: 30px;"
+                href="http://www.twitter.com/share?url={{host}}%2Fredirection%2Fproject-{{project.code}}.html"
+                target="_blank">
+              <img src="http://s3.eu-west-2.amazonaws.com/alice-res/fa-twitter.png">
+            </a>
+            <a style="text-decoration: none;"
+                href="https://plus.google.com/share?url={{host}}%2Fredirection%2Fproject-{{project.code}}.html"
+                target="_blank">
+              <img src="http://s3.eu-west-2.amazonaws.com/alice-res/fa-google-plus.png">
+            </a>
+          </td>
+        </tr>
+
+      </table>
+
+      <h2>Details</h2>
+
+      Recipient charity: {{project.charity.legalName}} <br/>
+      Error text: "{{err}}"
+
+    </td>
+  </tr>
+</table>
+
+{{> footer }}

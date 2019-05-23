@@ -1,0 +1,10 @@
+angular.module('aliceApp').constant('HOST', 'https://donationsapp.alice.si/');
+angular.module('aliceApp').constant('REDIRECTION', 'https://s3.eu-west-2.amazonaws.com/prod.alice.si/');
+angular.module('aliceApp').constant('API', 'https://api.alice.si/api/');
+angular.module('aliceApp').constant('MANGO', {clientId: 'alice1703si', url: 'https://api.mangopay.com'});
+angular.module('aliceApp').constant('ETHERSCAN', 'https://etherscan.io');
+angular.module('aliceApp').constant('WEB3_NETWORK_ID', '1');
+angular.module('aliceApp').constant('ETH_NETWORK_NAME', 'Main');
+angular.module('aliceApp').constant('DAI_ADDRESS', '0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359');
+angular.module('aliceApp').constant('DAI_TARGET_ADDRESS', '0x0a2c8e771dc1db1a133c03c19c9d37c25371a42c');
+angular.module('aliceApp').constant('DAI_START_BLOCK', '6613694');

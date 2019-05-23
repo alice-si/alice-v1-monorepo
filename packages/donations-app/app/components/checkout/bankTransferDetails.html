@@ -1,0 +1,70 @@
+<div ng-show="checkCtrl.mode == 'BANK_TRANSFER_REQUESTED'">
+  <p>To finish your donation please
+    <b>
+      transfer exactly {{ checkCtrl.donation.amount | money }}
+    </b>
+    to account below
+  </p>
+
+  <table id="bank-details-table">
+    <tr>
+      <th>
+        To:
+      </th>
+      <th>
+        Use this reference:
+      </th>
+      <th>
+        Address:
+      </th>
+    </tr>
+    <tr>
+      <td>
+        {{ checkCtrl.donation.bankTransferData.account.OwnerName }}
+      </td>
+      <td>
+        {{ checkCtrl.donation.bankTransferData.wireReference }}
+      </td>
+      <td rowspan="6">
+          {{
+            checkCtrl.donation.bankTransferData.account.OwnerAddress.AddressLine1
+          }}
+          <br>
+          {{
+            checkCtrl.donation.bankTransferData.account.OwnerAddress.AddressLine2
+          }}
+          <br>
+          {{ checkCtrl.donation.bankTransferData.account.OwnerAddress.City }}
+          {{ checkCtrl.donation.bankTransferData.account.OwnerAddress.PostalCode }}
+          <br>
+          {{ checkCtrl.donation.bankTransferData.account.OwnerAddress.Region }}
+          <br>
+          {{ checkCtrl.donation.bankTransferData.account.OwnerAddress.Country }}
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2"></td>
+    </tr>
+    <tr>
+      <th>{{ checkCtrl.donation.bankTransferData.account.Type }}</th>
+      <th>BIC</th>
+    </tr>
+    <tr>
+      <td>{{
+        checkCtrl.donation.bankTransferData.account.IBAN ||
+        checkCtrl.donation.bankTransferData.account.SortCode
+      }}</td>
+      <td>{{ checkCtrl.donation.bankTransferData.account.BIC }}</td>
+    </tr>
+    <tr ng-show="checkCtrl.donation.bankTransferData.account.AccountNumber">
+      <td colspan="2">
+        Account number
+      </td>
+    </tr>
+    <tr ng-show="checkCtrl.donation.bankTransferData.account.AccountNumber">
+      <td colspan="2">
+        {{ checkCtrl.donation.bankTransferData.account.AccountNumber }}
+      </td>
+    </tr>
+  </table>
+</div>

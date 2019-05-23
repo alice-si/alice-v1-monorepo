@@ -1,0 +1,160 @@
+<div ng-controller="MenuController as menuCtrl">
+    <div class="menu-top" id="navbar-menu" ng-hide="menuHidden">
+        <div class="hidden-xs" ng-class="{ 'menu-coloured' : menuColoured }">
+            <div class="alice-logo col-sm-1 col-md-1" ng-class="{'ng-hide': menuColoured }">
+                <a href="/"><img src="https://s3.eu-west-2.amazonaws.com/alice-res/alice-white.png"/></a>
+            </div>
+
+            <div class="alice-logo col-sm-1 col-md-1" ng-class="{'ng-hide': !menuColoured }">
+                <a href="/" ><img src="https://s3.eu-west-2.amazonaws.com/alice-res/AliceFullWhite.png"/></a>
+            </div>
+
+
+            <ul class="menu menu-left col-sm-6 col-md-6">
+                <menu-item id="menu-how-it-works" target="how-it-works/" label="How It Works"></menu-item>
+                <menu-item ng-if="!menuCtrl.auth.isValidator()"
+                           target="my-impact/"
+                           label="My Impact"></menu-item>
+                <menu-item ng-if="menuCtrl.auth.isValidator()"
+                           target="validation/"
+                           label="Validator dashboard"></menu-item>
+                <menu-item ng-if="menuCtrl.auth.isManager()"
+                           target="dashboard/main"
+                           label="My Dashboard"></menu-item>
+                <menu-item target="geek-mode/" label="Geek Mode"></menu-item>
+                <menu-item target="faq/" label="FAQ" last="true"></menu-item>
+            </ul>
+
+            <ul class="menu menu-right col-sm-3 col-md-3">
+                <li class="menu-item" ng-show="!menuCtrl.auth.getLoggedUser()">
+                    <a id="menu-login" class="page-scroll" ng-click="menuCtrl.logIn()">
+                    <span class="underline-from-center">Log in</span>
+                    </a>
+                </li>
+                <li class="menu-item" ng-show="!menuCtrl.auth.getLoggedUser()">
+                    <a id="menu-sign-up" class="page-scroll" ng-click="menuCtrl.signUp()">
+                        <span class="underline-from-center">Sign up</span><span class="divider hidden-xs">|</span>
+                    </a>
+                </li>
+                <li class="menu-item dropdown" ng-show="menuCtrl.auth.getLoggedUser()">
+                    <a id="menu-top" class="dropdown-toggle" data-toggle="dropdown">
+                        {{menuCtrl.auth.getLoggedUser().firstName}} {{menuCtrl.auth.getLoggedUser().lastName}}
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <ul class="dropdown-menu user-menu">
+                        <li style="width: 100%;">
+                            <div style="border-top: 2px solid #fff" ng-if="menuCtrl.auth.isSuperadmin()">
+                                <a href="/users/">
+                                    Users
+                                </a>
+                            </div>
+
+                            <div style="border-top: 2px solid #fff" ng-if="menuCtrl.auth.isSuperadmin()">
+                                <a href="/donations/">
+                                    Donations
+                                </a>
+                            </div>
+
+                            <div ng-if="menuCtrl.auth.isSuperadmin()">
+                                <a href="/validations/">
+                                    Validations
+                                </a>
+                            </div>
+
+                            <div style="border-bottom: 1px solid #fff" ng-if="menuCtrl.auth.isSuperadmin()">
+                                <a href="/impacts/">
+                                    Impacts
+                                </a>
+                            </div>
+
+
+                            <div style="border-bottom: 1px solid #fff" ng-if="menuCtrl.auth.isCharityAdmin() && !menuCtrl.auth.isSuperadmin()">
+                            <a href="/charity-admin/{{menuCtrl.auth.getCharityCodeForCharityAdmin()}}">
+                                Charity panel
+                            </a>
+                            </div>
+
+                            <div style="border-bottom: 1px solid #fff" ng-if="menuCtrl.auth.isSuperadmin()">
+                            <a href="/charities/">
+                                Charities
+                            </a>
+                            </div>
+
+                            <div style="border-bottom: 1px solid #fff" ng-if="menuCtrl.auth.isAdmin() || menuCtrl.auth.isCharityAdmin()">
+                            <a href="/projects/">
+                                Projects
+                            </a>
+                            </div>
+
+                            <div>
+                                <a id="menu-logout" ng-click="menuCtrl.logOut()">
+                                    Log out
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="hidden-xs breadcrumb" ng-class="{ 'ng-hide' : !breadcrumb }">
+        </div>
+
+        <div class="hidden-md hidden-lg hidden-sm" ng-class="{ 'menu-coloured' : menuColoured }">
+            <div class="alice-logo col-xs-3" ng-class="{'ng-hide': menuColoured }">
+                <a href="/"><img src="https://s3.eu-west-2.amazonaws.com/alice-res/alice-white.png"/></a>
+            </div>
+
+            <div class="alice-logo col-xs-3" ng-class="{'ng-hide': !menuColoured }">
+                <!-- Add the fully white one here -->
+                <a href="/" ><img src="https://s3.eu-west-2.amazonaws.com/alice-res/AliceFullWhite.png"/></a>
+            </div>
+
+            <div class="hamburger col-xs-offset-6 col-xs-3" data-toggle="collapse" data-target="#menu-mobile">
+                <i class="fa fa-bars" aria-hidden="true"></i>
+            </div>
+
+            <ul id="menu-mobile" onclick="$('#menu-mobile').collapse('hide')" class="collapse dropdown-menu user-menu menu-mobile">
+                <li>
+
+                    <a href="/my-impact/" ng-if="menuCtrl.auth.isAuthenticated() && (!menuCtrl.auth.isValidator() || menuCtrl.auth.isSuperadmin())">
+                        My Impact
+                    </a>
+
+                    <a href="/how-it-works/">
+                        How It Works
+                    </a>
+
+                    <a href="/validation/" ng-if="menuCtrl.auth.isValidator()">
+                        Validator dashboard
+                    </a>
+
+                    <a href="/geek-mode/">
+                        Geek Mode
+                    </a>
+
+                    <a href="/faq/">
+                        FAQ
+                    </a>
+
+                    <a href="/dashboard/main" ng-if="menuCtrl.auth.isManager()">
+                        Dashboard
+                    </a>
+
+                    <a id="menu-mobile-sign-up" ng-click="menuCtrl.signUp()" ng-show="!menuCtrl.auth.getLoggedUser()">
+                    Sign up
+                    </a>
+
+                    <a id="menu-mobile-login" ng-click="menuCtrl.logIn()" ng-show="!menuCtrl.auth.getLoggedUser()">
+                        Log in
+                    </a>
+
+                    <a id="menu-mobile-logout" ng-click="menuCtrl.logOut()" ng-show="menuCtrl.auth.getLoggedUser()">
+                        Log out
+                    </a>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+

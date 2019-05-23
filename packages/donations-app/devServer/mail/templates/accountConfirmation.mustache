@@ -1,0 +1,46 @@
+{{> header }}
+
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+  <tr>
+    <td
+      style="padding: 10px 50px 30px 50px; font-size: 16px; mso-height-rule: exactly; line-height: 20px;">
+      <p>
+        Hello {{user.firstName}},<br/><br/>
+        Thanks for signing up to Alice!<br/>
+        You're now ready to make donations, or start raising funds for your own charity project.
+      </p>
+
+      <a href="{{host}}" class="mail-link">
+        Donate
+      </a>
+
+      <p>
+        Browse and donate to charity projects. Remember, you only pay if they achieve their goals!
+      </p>
+
+      <a href="{{host}}/my-impact/" class="mail-link">
+        View your impact
+      </a>
+
+      <p>
+        Track your donation, and see what impact it's made.
+      </p>
+
+      <a href="{{host}}?action=startProject" class="mail-link">
+        Start a project
+      </a>
+
+      <p>
+        Set up your own project and appeal for donations on Alice.
+      </p>
+
+      <p style="margin-top: 20px; font-size: 12px;">
+        If you didn't sign up for an account, please let us know immediately by contacting
+        support@alice.si.
+      </p>
+
+    </td>
+  </tr>
+</table>
+
+{{> footer }}

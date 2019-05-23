@@ -1,0 +1,65 @@
+<section ng-controller="GoalsDashboardController as goalsCtrl"
+         class="goals-dash">
+
+  <div class="title-over-image grad-both">
+    <img src="{{ goalsCtrl.project.img }}"
+         alt="Image for {{ goalsCtrl.project.title }}" />
+    <h1 class="title-over-image__title">{{ goalsCtrl.project.title }}</h1>
+  </div>
+
+  <protected-view validator-for-project="goalsCtrl.project">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <p class="goals-dash__greeting">
+          Hi {{ goalsCtrl.loggedUser.firstName }}.
+          <span>
+            <ng-pluralize count="goalsCtrl.validations.ready.length"
+                          when="{'0': 'There are no new goals ready for assessment yet.',
+                                 '1': 'There is one new goal ready for assessment.',
+                                 'other': 'There are {} new goals ready for assessment.'}">
+            </ng-pluralize>
+          </span>
+          </p>
+        </div>
+      </div>
+
+      <uib-tabset type="pills" class="alice-tabset goals-dash__tabset">
+        <uib-tab heading="To assess">
+          <div class="goals-dash__grid">
+            <div goal-card
+                 ng-repeat="validation in goalsCtrl.validations.ready"
+                 goal="validation.outcome"
+                 approve-fn="goalsCtrl.approve(validation)"
+                 class="goals-dash__grid-elem">
+            </div>
+
+            <div goal-card
+                 ng-repeat="validation in goalsCtrl.validations.noFunds"
+                 goal="validation.outcome"
+                 no-funds="true"
+                 funds-available="goalsCtrl.project.amountAvailable"
+                 class="goals-dash__grid-elem">
+            </div>
+
+            <div goal-card
+                 ng-repeat="validation in goalsCtrl.validations.processingValidation"
+                 goal="validation.outcome"
+                 in-progress="true"
+                 class="goals-dash__grid-elem">
+            </div>
+          </div>
+        </uib-tab>
+        <uib-tab heading="Approved">
+          <div class="goals-dash__grid">
+            <div goal-card
+                 ng-repeat="validation in goalsCtrl.validations.validated"
+                 goal="validation.outcome"
+                 class="goals-dash__grid-elem">
+            </div>
+          </div>
+        </uib-tab>
+      </uib-tabset>
+    </div>
+  </protected-view>
+</section>

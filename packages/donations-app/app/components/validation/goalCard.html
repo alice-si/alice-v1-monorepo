@@ -1,0 +1,33 @@
+<div class="alice-card"
+     ng-class="{'goal-card--in-progress': inProgress}">
+  <div class="title-over-image grad-bottom">
+    <img src="{{goal.image}}"
+         alt="Image for {{ goal.title }}"
+         class="goal-card__image" />
+    <h4 class="title-over-image__title">{{ goal.title }}</h4>
+  </div>
+
+  <div class="alice-card__content">
+    <h4 ng-click="showDescription = !showDescription"
+        ng-class="{active: showDescription}"
+        class="alice-card__collapsible-title">Description</h4>
+    <p uib-collapse="!showDescription">{{ goal.description }}</p>
+
+    <p ng-if="noFunds" class="alert-warning">
+      The project has {{ fundsAvailable | money }} available,
+      but this goal requires {{ goal.amount | money }}.
+    </p>
+  </div>
+
+  <div ng-if="approveFn"
+       class="alice-card__buttons">
+    <button class="btn btn-danger" disabled>Reject</button>
+    <button ng-click="approveFn()"
+            class="btn btn-primary">Approve</button>
+  </div>
+
+  <div ng-if="inProgress" class="alice-card__buttons">
+    <div class="lds-dual-ring" />
+    <p>Blockchain processing in progress...</p>
+  </div>
+</div>

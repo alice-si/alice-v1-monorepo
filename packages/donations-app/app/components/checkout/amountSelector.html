@@ -1,0 +1,71 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="form-group" style="margin-bottom: 0px;">
+      <div class="row donation-amounts">
+        <div id="donate-amount-10" class="col-md-2 col-sm-12">
+          <input
+            icheck
+            type="checkbox"
+            ng-model="checkCtrl.amount10"
+            ng-change="checkCtrl.onAmountChange('amount10')"
+          />
+          £10
+        </div>
+        <div id="donate-amount-25" class="col-md-2 col-sm-12">
+          <input
+            icheck
+            type="checkbox"
+            ng-model="checkCtrl.amount25"
+            ng-change="checkCtrl.onAmountChange('amount25')"
+          />
+          £25
+        </div>
+        <div class="col-md-2 col-sm-12">
+          <input
+            id="donate-amount-50"
+            icheck
+            type="checkbox"
+            ng-model="checkCtrl.amount50"
+            ng-change="checkCtrl.onAmountChange('amount50')"
+          />
+          £50
+        </div>
+        <div class="col-md-2 col-sm-12">
+          <input
+            id="donate-amount-100"
+            icheck
+            type="checkbox"
+            ng-model="checkCtrl.amount100"
+            ng-change="checkCtrl.onAmountChange('amount100')"
+          />
+          £100
+        </div>
+        <div class="col-md-4 col-sm-12">
+          <input
+            id="donate-amount-other"
+            icheck
+            type="checkbox"
+            ng-model="checkCtrl.amountOther"
+            ng-change="checkCtrl.onAmountChange('amountOther')"
+          />
+          <span ng-show="!checkCtrl.amountOther">Other</span>
+          <span has-error>
+            <input
+              ng-show="checkCtrl.amountOther"
+              type="text"
+              class="form-control"
+              name="amountOtherValue"
+              ng-currency
+              min="0"
+              currency-symbol="£"
+              placeholder="My choice"
+              ng-model="checkCtrl.amountOtherValue"
+              ng-change="checkCtrl.onOtherChange()"
+              style="display: inline; width: 100px; padding-top:0; height: 100%; line-height: normal; padding-bottom: 0;"
+            />
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

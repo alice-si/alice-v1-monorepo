@@ -10,24 +10,20 @@ jobs:
     executor: node-executor
     steps:
       - checkout
-      - run:
-          # See https://circleci.com/docs/2.0/caching/
-          name: collect-lock-files
-          command: find . -name package-lock.json | xargs sha256sum >.circleci.depcache
       - restore_cache:
-          key: npm-v1-{{ checksum ".circleci.depcache" }}
+          # See https://circleci.com/docs/2.0/caching/
+          key: npm-v2-{{ checksum "yarn.lock" }}
       - run:
           name: install
-          command: npm install
-      - run:
-          name: lerna-bootstrap
-          command: npx lerna bootstrap
+          command: yarn
       - save_cache:
-          key: npm-v1-{{ checksum ".circleci.depcache" }}
+          key: npm-v2-{{ checksum "yarn.lock" }}
           paths:
             - ./node_modules
+            - ./packages/cli/node_modules
             - ./packages/contracts/node_modules
             - ./packages/demo-app/node_modules
+            - ./packages/donations-app/node_modules
             - ./packages/jobs/node_modules
             - ./packages/models/node_modules
       - persist_to_workspace:
@@ -41,7 +37,7 @@ jobs:
           at: .
       - run:
           name: test
-          command: npx lerna run test --stream
+          command: yarn lerna run test --stream --loglevel debug
   docker-build:
     docker:
       - image: google/cloud-sdk
@@ -60,6 +56,7 @@ jobs:
             TAG=$(date +'%Y%m%d')-$(echo $CIRCLE_SHA1 | cut -c 1-6)
             DEMO_APP_NAME="gcr.io/$GOOGLE_PROJECT_ID/alice-demo-app:$TAG"
             JOBS_NAME="gcr.io/$GOOGLE_PROJECT_ID/alice-jobs:$TAG"
+            DONATIONS_APP_NAME="gcr.io/$GOOGLE_PROJECT_ID/alice-donations-app:$TAG"
             echo "Building version $TAG"
 
             docker build -t "alice-monorepo:$TAG" .
@@ -71,8 +68,13 @@ jobs:
               -f packages/jobs/Dockerfile \
               --build-arg VERSION=$TAG \
               .
+            docker build -t "$DONATIONS_APP_NAME" \
+              -f packages/donations-app/Dockerfile \
+              --build-arg VERSION=$TAG \
+              .
             docker push "$DEMO_APP_NAME"
             docker push "$JOBS_NAME"
+            docker push "$DONATIONS_APP_NAME"
 
 workflows:
   version: 2

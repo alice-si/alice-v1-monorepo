@@ -1,4 +1,4 @@
-GANACHE_EXECUTABLE="npx ganache-cli"
+GANACHE_EXECUTABLE="yarn ganache-cli"
 
 # PREPARING BLOCKCHAIN
 output=$(nc -z localhost 8545; echo $?)

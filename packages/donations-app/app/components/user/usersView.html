@@ -1,0 +1,76 @@
+<section ng-controller="UsersController as usersCtrl" class="page-content container">
+
+  <div ng-show="!usersCtrl.auth.getLoggedUser()">
+    <p>Please log in to view the content.</p>
+  </div>
+
+  <div ng-show="usersCtrl.auth.getLoggedUser() && !usersCtrl.auth.isSuperadmin()">
+    <p>Unfortunately, you don't have enough privileges to see the page.</p>
+  </div>
+
+  <div ng-show="usersCtrl.auth.isSuperadmin()">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <div class="navy-line"></div>
+        <h1>Users</h1>
+      </div>
+    </div>
+
+    <div class="alice-table-container">
+      <div>
+        <div class="alice-table-header">
+          <div>
+            <span class="alice-table-header__title">Registered users</span>
+          </div>
+
+          <div class="alice-table-header__controls">
+            <input ng-model="usersCtrl.userSearch" placeholder="Search">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox"
+                       ng-model="usersCtrl.onlyAgreeContact"
+                       ng-change="usersCtrl.updateUsersToDisplay()"> Agreed to contact
+              </label>
+            </div>
+
+            <a id="exportUsersButton"
+               class="btn btn-primary btn-export"
+               ng-click="usersCtrl.exportToExcel()">Export data</a>
+          </div>
+        </div>
+
+        <table id="users" class="alice-table">
+          <tr>
+            <td>Name
+              <sort action="usersCtrl.sort" field="fullName"></sort>
+            </td>
+            <td>Email
+              <sort action="usersCtrl.sort" field="email"></sort>
+            </td>
+            <td>Created at
+              <sort action="usersCtrl.sort" field="createdAt"></sort>
+            </td>
+            <td>Donations total
+              <sort action="usersCtrl.sort" field="totalDonations"></sort>
+            </td>
+            <td>Times donated
+              <sort action="usersCtrl.sort" field="timesDonated"></sort>
+            </td>
+            <td>Contact
+              <sort action="usersCtrl.sort" field="agreeContact"></sort>
+            </td>
+          </tr>
+          <tr ng-repeat="user in usersCtrl.usersToDisplay | filter:usersCtrl.userSearch | orderBy:usersCtrl.sortField">
+            <td>{{user.fullName}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.createdAt | date}}</td>
+            <td>{{user.totalDonations | money}}</td>
+            <td>{{user.timesDonated}}</td>
+            <td>{{user.agreeContact | booleanTick}}</td>
+          </tr>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</section>

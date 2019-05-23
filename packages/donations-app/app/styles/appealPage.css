@@ -1,0 +1,1617 @@
+/** MOBILE STYLING **/
+
+
+/** iPhone 5/SE & Galaxy s5 **/
+
+@media screen and (min-width: 10px) and (max-width: 330px) {
+  .main-title {
+    font-size: 18px !important;
+  }
+
+  .appeal-donate-btn {
+    width: 120px !important;
+    padding-top: 16px !important;
+    padding-left: 22px !important;
+  }
+
+  .appeal-donate-btn > a {
+
+    letter-spacing: 4px !important;
+    font-size: 14px !important;
+  }
+
+	.donate-button a {
+		padding: 14px 85px !important;
+  }
+
+	.project-details-btn {
+		width: 120%;
+	}
+
+  .appeal-section-heading {
+		font-size: 24px !important;
+		font-weight: 400 !important;
+		letter-spacing: 0px !important;
+  }
+
+  .main-title {
+    line-height: 32px!important;
+    font-weight: 500!important;
+    font-size: 24px!important;
+  }
+
+  #appealNgo .profile {
+    font-size: 14px !important;
+  }
+
+}
+
+@media screen and (max-width: 760px) {
+	/* The Overlay (background) */
+	.overlay {
+		height: 90%;
+		width: 90%;
+		position: fixed;
+		z-index: -100;
+		opacity: 0;
+		left: 5%;
+		top: 5%;
+		background-color: rgb(0,0,0); /* Black fallback color */
+		background-color: rgba(69, 178, 187, 0.95); /* w/opacity */
+		overflow-x: hidden;
+		transition: 0.3s height width left top ease-out;
+		transition: 0.3s opacity ease-out;
+
+		-webkit-transition: 0.3s height width left top ease-out;
+		-webkit-transition: 0.3s opacity ease-out;
+
+		-moz-transition: 0.3s height width left top ease-out;
+		-moz-transition: 0.3s opacity ease-out;
+	}
+
+	.overlay-content {
+		position: relative;
+		top: 0;
+		height: 100%;
+		width: 100%;
+	}
+
+	.overlay-active {
+		height: 100%;
+		width: 100%;
+		position: fixed;
+		z-index: 1000;
+		opacity: 1;
+		left: 0;
+		top: 0;
+	}
+
+	/* When you mouse over the navigation links, change their color */
+	.overlay a:hover, .overlay a:focus {
+		color: #f1f1f1;
+	}
+
+	/* Position the close button (top right corner) */
+	.overlay .closebtn {
+    cursor: pointer;
+		position: absolute;
+		top: 10px;
+		right: 20px;
+		font-size: 40px;
+
+		padding: 8px;
+		text-decoration: none;
+		color: #fff;
+		display: block;
+		transition: 0.3s;
+		font-weight: 200;
+		z-index: 100;
+	}
+
+	.overlay-right {
+		height: 100%;
+		padding: 80px 30px 30px 30px;
+		background-color: rgba(69,178,187,1)
+	}
+
+	.overlay-section-heading {
+		font-size: 34px;
+		font-weight: 400;
+		color: #fff;
+		letter-spacing: 0px;
+		margin-top: 20px;
+		margin-bottom: 15px;
+	}
+
+	.overlay-right .section-text-left {
+		padding-left: 15px;
+		color: #fff;
+	}
+
+	.alice-graph-overlay > img {
+		transform: translateY(30px);
+		max-width: 100%;
+		height: auto;
+	}
+
+	#appealNgo .profile {
+		font-size: 14px !important;
+		margin-bottom: 50px;
+	}
+
+  .appeal-splash {
+    height: 950px;
+    width: 100%;
+  }
+
+  .appeal-image {
+    height: 86%;
+    width: auto;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+
+  .appeal-image > img {
+    height: 86vh;
+    margin: 0 auto;
+    filter: brightness(40%);
+  }
+
+  .appeal-title {
+    padding-top: 50px;
+    color: #fff;
+    font-weight: 200;
+  }
+
+  .main-title {
+	padding-right: 20px;
+	font-size: 30px;
+	line-height: 38px;
+    letter-spacing: 1px;
+    padding-left: 20px;
+    font-weight: 500;
+  }
+
+  .title-border-container {
+      width: 100%;
+      margin: 10px;
+      margin-left: 20px;
+  }
+
+  .title-border {
+    border: 0.5px solid #fff;
+    width: 25%;
+    float: left;
+  }
+
+	.sm-icons-container {
+		margin-left: 10px;
+		height: 40px;
+		float: left;
+	}
+
+	.sm-icons {
+		height: 30px;
+		transform: translateY(-10px);
+		width: 200px;
+		float: left;
+	}
+
+	.social-icon {
+		background: none;
+		border-radius: 11px;
+		border: 1px solid #fff;
+		height: 22px;
+		width: 22px;
+		padding: 0;
+		outline: none;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		vertical-align: center;
+		margin-right: 7px;
+	}
+
+  .subtitle-text {
+    color: #fff;
+    letter-spacing: 1px;
+    margin: 20px 0 20px 20px;
+    width: 80%;
+
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 200;
+  }
+
+  .appeal-alice > .subtitle-text {
+    font-size: 22px;
+  }
+
+	.subtext {
+    color: #fff;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 300;
+    /* margin-top: 20px; */
+		transform: translateX(35px);
+  }
+
+	.charity-logo {
+    width: 100%;
+    height: 100px !important;
+  }
+
+  .charity-logo > img {
+    margin: 20px 0 10px;
+    transform: translateX(50px);
+    max-height: 80px;
+  }
+
+  .appeal-alice > .subtitle-text > a {
+    color: #fff;
+    font-weight: 400;
+    border-bottom: 0.5px solid #fff;
+
+    transition: 0.3s all ease-out;
+    -webkit-transition: 0.3s all ease-out;
+    -moz-transition: 0.3s all ease-out;
+    margin-bottom: 20px
+  }
+
+  .appeal-alice > .subtitle-text > a:hover {
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+	.vertical-line-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+		width: 90%;
+		margin-left: 5%;
+  }
+
+  .vertical-line {
+    width: 4px;
+    background: #fff;
+    height: 30px;
+  }
+
+  .donate-raised-container {
+    padding: 10px 0 15px;
+    height: auto;
+    width: 150px;
+    margin: 0 auto;
+  }
+
+  .donate-raised {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+		font-weight: 400;
+    color: #fff;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .donate-raised-container .subtext {
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 0;
+		margin-left: -5%;
+		font-size: 10px;
+  }
+
+  .graph-container {
+    margin-top: -7px;
+		/* width: 100%; */
+		display: flex;
+		justify-content: center;
+
+  }
+
+  .circle-chart-foreground {
+    animation: circle-chart-fill 2s reverse;
+    -webkit-animation: circle-chart-fill 2s reverse;
+    -moz-animation: circle-chart-fill 2s reverse;
+    -ms-animation: circle-chart-fill 2s reverse;
+    transform: rotate(-90deg);
+    transform-origin: center;
+  }
+
+  .appeal-chart-amount > .light {
+    font-weight: 400;
+    fill: #fff;
+    font-size: 8px;
+
+    text-shadow: 0px 6px #112633;
+  }
+
+	.appeal-chart-text {
+		font-weight: 400;
+    fill: #fff;
+    font-size: 2px;
+    text-shadow: 0px 3px #112633;
+	}
+
+  .appeal-chart-amount > .dark {
+    font-weight: 400;
+    fill: #445c6a;
+    font-size: 4px;
+
+    text-shadow: 0px 6px #112633;
+  }
+
+	.appeal-small {
+		fill: #fff;
+    font-size: 1.5px;
+    letter-spacing: 1px;
+		text-shadow: 0px 3px #112633;
+	}
+
+  .small {
+		font-size: 18px !important;
+		font-weight: 100 !important;
+		line-height: 1.75;
+  }
+
+	.medium {
+		font-size: 22px !important;
+		font-weight: 200 !important;
+		line-height: 1.75;
+		letter-spacing: 1px;
+	}
+
+	.donate-button-container {
+		margin-top: 30px;
+		height: 60px;
+	}
+
+	.donate-button a {
+		border: 4px solid #202E37;
+    outline: 4px solid #fff;
+    text-shadow: 0px 2px #32787d;
+    padding: 14px 110px;
+    color: #fff;
+    letter-spacing: 5px;
+    font-weight: 400;
+    font-size: 16px;
+    margin: 20px 0 0 20px;
+    background: #1998a2;
+  }
+
+	.donate-button > button > a {
+    color: #fff;
+  }
+
+	.appeal-tab-content {
+    width: 100%;
+    height: auto;
+  }
+
+  #appealSummary {
+    margin-top: 20px;
+  }
+
+  .appeal-summary-content {
+    padding: 0 20px 0 20px;
+		padding-left: 0;
+  }
+
+	.appeal-section-heading {
+    font-size: 24px;
+    font-weight: 400;
+    color: #1998a2;
+    letter-spacing: 0px;
+		margin-top: 20px;
+    margin-bottom: 15px;
+  }
+
+  .appeal-section-heading:after {
+    content: "";
+    display: block;
+    float: inherit;
+    width: 25%;
+    padding-bottom: 10px;
+    border-bottom: 0.5px solid #1998a2;
+  }
+
+	.summary-section > .section-text-left {
+		padding-left: 0;
+		font-size: 14px;
+		color: #202E37;
+		letter-spacing: 0.75px;
+
+		font-weight: 200 !important;
+		line-height: 24px;
+	}
+
+	.summary-section > .section-text-left.impact-intro {
+		font-size: 14px !important;
+	}
+
+
+	.project-details-btn {
+		padding: 10px 0;
+	}
+
+	.project-details-btn:last-child {
+		transform: translateY(10px) !important;
+	}
+
+	.project-details-btn > a {
+		color: #1998a2;
+		border: 2px solid #46B3BC;
+		letter-spacing: 5px;
+		background: none;
+		margin: 25px 0;
+		font-weight: 400;
+		font-size: 11px;
+		height: 50px;
+		padding: 10px 25px;
+		width: 100%;
+	}
+
+	.goal-container {
+		padding: 10px 0 0;
+    background: #F9FCFC;
+		position: absolute;
+		display: flex;
+		flex-direction: column;
+    color: #202E37;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+		width: 100%;
+  }
+
+	.goal-container .padded-row {
+		width: 90%;
+		margin-left: 5%;
+	}
+
+	.goals-section {
+		margin: 80px 0 30px;
+		height: auto;
+		position: relative;
+	}
+
+	.goals-carousel {
+		position: relative;
+		display: flex;
+	}
+
+	.carousel-control {
+		color: #1998a2;
+		opacity: 1;
+		text-shadow: none;
+	}
+
+	.carousel-control:active, .carousel-control:hover {
+		color: #1998a2;
+		opacity: 1;
+		text-shadow: none;
+	}
+
+	.goals-section > .carousel > .carousel-control.right {
+    right: -20px;
+  }
+
+  .goals-section > .carousel > .carousel-control.left  {
+    left: -20px;
+  }
+
+	.goal-image-wrapper {
+		margin: 32px 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.goal-image-cropper {
+		width: 125px;
+		height: 125px;
+		position: relative;
+		overflow: hidden;
+		float: left;
+		border-radius: 50%;
+		border: 5px solid #1998a2;
+		-webkit-shape-outside: circle();
+		shape-outside: circle();
+	}
+
+	.goal-project-img {
+		display: inline;
+		margin: 0 auto;
+		margin-left: -25%;
+		height: 100%;
+		width: auto;
+	}
+
+	.goal-card-title {
+		font-size: 16px;
+		font-weight: 400;
+		min-height: 45px;
+		display: flex;
+		text-align: center;
+		letter-spacing: 2px;
+		color: #1998a2;
+		text-transform: uppercase;
+	}
+
+	.goal-container .goal-card-value {
+		padding: 5px 8px;
+		font-size: 14px !important;
+		font-weight: 200 !important;
+		letter-spacing: 1px;
+		color: #202E37;
+		min-height: 140px;
+	}
+
+	.goal-card-bottom {
+		bottom: 0;
+		width: 100%;
+		margin-left: 0.5px;
+		margin-top: 20px;
+		background: #F0FAFA;
+		height: 100px;
+		text-align: left;
+	}
+
+	.goal-paid-title{
+		padding: 20px 0 5px 20px;
+		color: #1998a2;
+		font-size: 24px;
+	}
+
+	 .goal-achieved-title {
+		 padding: 20px 0 5px 40px;
+		 color: #1998a2;
+		 font-size: 24px;
+	 }
+
+	.goal-paid-title:after, .goal-achieved-title:after {
+		content: "";
+		display: block;
+		float: inherit;
+		width: 15%;
+		border-bottom: 1px solid #ACCCCE;
+	}
+
+	.goal-card-bottom-subtext {
+		font-weight: 300;
+		padding-left: 20px;
+		font-size: 12px;
+		color: #202E37;
+	}
+
+	.goals-carousel .carousel-indicators {
+		display: none;
+	}
+
+	.my-impact-screenshot > img {
+		margin: 20px 0;
+		width: 110%;
+		transform: translateX(-5%);
+		height: auto;
+	}
+
+	.story-container {
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    font-size: 20px;
+  }
+
+	.story-container > a {
+		color: #fff;
+		padding: 105px 26%;
+		margin-left: 1px;
+		display: flex;
+	}
+
+	.story-container:hover {
+		color: #c9c9c9;
+	}
+
+	.story-container a:hover {
+		color: #c9c9c9;
+	}
+
+	#appealAlice {
+    padding: 20px 20px 40px 20px;
+  }
+
+  #appealAlice h1{
+    font-weight: 400;
+  }
+
+  .alice-section-subheading {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: 200;
+    letter-spacing: 0.75px;
+		color: #202E37;
+  }
+
+
+	#appealNgo {
+		height: auto;
+	}
+
+	.ngo-section-left {
+		height: 200px;
+	}
+
+	.ngo-section-right {
+		padding: 20px 40px 40px 50px;
+    background: #202E37;
+	}
+
+	.appeal-section-heading.white {
+		padding-bottom: 20px;
+	}
+
+	.appeal-section-heading.white:after {
+		border-color: #fff;
+	}
+
+	.ngo-title {
+		margin-left: -15px;
+	}
+
+	.ngo-title:last-child {
+		margin-top: 30px;
+	}
+
+	.charity-profile-section > .section-text-left {
+		margin: -10px 0 0 -15px;
+		font-size: 14px;
+		font-weight: 200;
+  }
+
+  .validator-profile-section > .section-text-left {
+		margin: -10px 0 0 -15px;
+		font-size: 14px !important;
+		font-weight: 200;
+	}
+
+	.section-heading-border.light {
+		border-color: #fff;
+	}
+
+	.section-text-left {
+		padding-right: 50px;
+		padding-left: 0;
+		font-size: 14px;
+		color: #202E37;
+		letter-spacing: 0.75px;
+		font-weight: 200 !important;
+		line-height: 24px;
+	}
+
+	.section-text-left.white {
+		border-right: none;
+	}
+
+	.white {
+		color: #fff !important;
+	}
+
+  .appeal-chart-title {
+    fill: #fff;
+    font-size: 4px;
+  }
+
+  .social-media-buttons {
+    height: 50px;
+    width: 100px;
+    display: inline-block;
+  }
+
+  .social-media-buttons .fa {
+    font-size: 3em;
+    margin-right: 12px;
+    cursor: pointer;
+    transition: all .3s ease-out;
+    -moz-transition: all .3s ease-out;
+    -webkit-transition: all .3s ease-out;
+    -o-transition: all .3s ease-out;
+  }
+
+  .social-media-buttons .fa-twitter {
+    color: #78aae8;
+  }
+
+  .social-media-buttons .fa:hover {
+    color: rgba(25, 152, 162, 0.58);
+  }
+
+  .appeal-donate-btn {
+    height: 50px;
+    width: 180px;
+    display: inline-block;
+    background-color: #1998a2;
+    float: right;
+    margin-top: -5px;
+    margin-right: 60px;
+    padding-top: 12px;
+    padding-left: 40px;
+
+    transition: all .3s ease-out;
+    -moz-transition: all .3s ease-out;
+    -webkit-transition: all .3s ease-out;
+    -o-transition: all .3s ease-out;
+  }
+
+  .appeal-donate-btn:active {
+    background-color: #488d93;
+  }
+
+  .appeal-donate-btn > a {
+    text-align: center;
+    font-weight: 200;
+    letter-spacing: 4px;
+    font-size: 18px;
+    height: 35px;
+    margin: 0 auto;
+    width: 100%;
+    color: #fff;
+
+    transition: all .3s ease-out;
+    -moz-transition: all .3s ease-out;
+    -webkit-transition: all .3s ease-out;
+    -o-transition: all .3s ease-out;
+  }
+
+  .appeal-donate-btn > a:active {
+    text-decoration: none;
+  }
+
+  .appeal-tab-content {
+    width: 100%;
+    height: auto;
+  }
+
+  #appealSummary {
+    margin-top: 20px;
+  }
+
+  .appeal-summary-content {
+    padding: 0 20px 0 20px;
+  }
+
+  .appeal-tab-title {
+    padding-top: 30px;
+    text-align: center;
+    background: none;
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: 8px;
+  }
+
+  .appeal-tab-title.dark {
+    background: rgb(50,60, 67);
+    /* color: #323638; */
+    color: #fff;
+    height: 100px;
+    z-index: 100;
+  }
+
+  .summary-section > .appeal-section-heading {
+    float: left !important;
+  }
+
+  .section-text-left {
+    float: left !important;
+    text-align: left;
+    padding-right: 10px;
+
+
+		padding-left: 0;
+		font-size: 14px;
+		color: #202E37;
+		letter-spacing: 0.75px;
+
+		font-weight: 200 !important;
+		line-height: 24px;
+  }
+
+  .white {
+    color: #fff;
+  }
+
+  .circle-image-wrapper {
+    width: 80% !important;
+  }
+
+  .ngo-section-heading {
+    letter-spacing: 4px;
+    font-size: 14px;
+    width: 100%;
+    font-weight: 400;
+    margin: 10px 0 10px 0;
+    float: left !important;
+    color: #495255;
+  }
+
+  .charity-logo, .validator-logo {
+    margin-top: 10px;
+    height: 60px;
+  }
+
+  .alice-section-heading > h1 {
+    letter-spacing: 4px;
+    font-size: 24px;
+    font-weight: 200;
+    color: #1998a2;
+  }
+
+  .alice-section-heading:after {
+    content: "";
+    display: block;
+    float: inherit;
+    width: 25%;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #353e42;
+  }
+
+  .alice-section-subheading {
+    margin-top: 20px;
+    font-size: 12px;
+    font-weight: 200;
+    letter-spacing: 2px;
+    color: #353e42;
+  }
+
+  .alice-graph {
+    height: auto;
+    width: 100%;
+    margin-bottom: 50px;
+  }
+}
+
+@media screen and (min-width: 760px) and (max-width: 1200px) {
+	.ngo-section-right {
+		/* min-height: 1200px; */
+	}
+
+	.ngo-section-left {
+		min-height: 1200px;
+	}
+}
+
+@media screen and (min-width: 760px) {
+	/* The Overlay (background) */
+	.overlay {
+		height: 90%;
+		width: 90%;
+		position: fixed;
+		z-index: -100;
+		opacity: 0;
+		left: 5%;
+		top: 5%;
+		background-color: rgb(0,0,0); /* Black fallback color */
+		background-color: rgba(69, 178, 187, 0.95); /* w/opacity */
+		overflow-x: hidden;
+		transition: 0.3s height width left top ease-in-out;
+		transition: 0.3s opacity ease-in-out;
+
+		-webkit-transition: 0.3s height width left top ease-in-out;
+		-webkit-transition: 0.3s opacity ease-in-out;
+
+		-moz-transition: 0.3s height width left top ease-in-out;
+		-moz-transition: 0.3s opacity ease-in-out;
+	}
+
+	.overlay-content {
+		position: relative;
+		top: 0;
+		height: 100%;
+		width: 100%;
+	}
+
+	/* When you mouse over the navigation links, change their color */
+	.overlay a:hover, .overlay a:focus {
+		color: #f1f1f1;
+	}
+
+	.overlay-active {
+		height: 100%;
+		width: 100%;
+		position: fixed;
+		z-index: 1000;
+		opacity: 1;
+		left: 0;
+		top: 0;
+	}
+
+	/* Position the close button (top right corner) */
+	.overlay .closebtn {
+    cursor: pointer;
+		position: absolute;
+		top: 20px;
+		right: 45px;
+		font-size: 60px;
+
+		padding: 8px;
+		text-decoration: none;
+		color: #dddddd;
+		display: block;
+		transition: 0.3s;
+		font-weight: 100;
+		z-index: 1000;
+	}
+
+	.overlay-right {
+		height: auto;
+		min-height: 100%;
+		padding: 5%;
+		background-color: rgba(69,178,187,1);
+	}
+
+	.overlay-left {
+		height: 100%;
+	}
+
+	.overlay-section-heading {
+		font-size: 44px;
+		font-weight: 400;
+		color: #fff;
+		letter-spacing: 0px;
+		margin-top: 20px;
+		margin-bottom: 15px;
+	}
+
+	.overlay-right .section-text-left {
+		padding-left: 10px;
+		color: #fff;
+	}
+
+	.track-impact-overlay > img {
+		margin-top: 150px;
+		height: 100%;
+		width: 100%;
+	}
+
+  .appeal-summary-content {
+    padding: 0 120px 0 80px;
+  }
+
+  .appeal-summary-content:first-child {
+    padding-top: 100px;
+  }
+
+  .appeal-page {
+		-webkit-font-smoothing: subpixel-antialiased;
+		-moz-osx-font-smoothing: grayscale;
+    width: 100vw;
+  }
+
+  .appeal-splash {
+    height: 100vh;
+    width: 100%;
+
+    background-position: top;
+  }
+
+  #appeal-splash-logo {
+    height:400px;
+    width: 440px;
+    position: fixed;
+    opacity: 0.05;
+    left: -100px;
+    top: 40px;
+    bottom: 50px;
+  }
+
+  .splash-content {
+    height: 100%;
+  }
+
+	#video-background {
+		/*  making the video fullscreen  */
+		position: fixed;
+		right: 0;
+		bottom: 0;
+		min-width: 100%;
+		min-height: 100%;
+		width: auto;
+		height: auto;
+		z-index: -100;
+	}
+
+  .splash-content > div{
+    height: 100vh;
+  }
+
+  .appeal-left {
+    color: #fff;
+    font-weight: 400;
+    padding-top: 9%;
+    padding-left: 5%;
+    margin-left: 40px;
+    margin-right: -40px;
+  }
+
+  .main-title {
+    position: relative;
+		font-size: 52px;
+		letter-spacing: -1px;
+		line-height: 1.35;
+		font-weight: 800;
+  }
+
+  .title-border {
+    border: 0.5px solid #fff;
+    width: 25%;
+    float: left;
+  }
+
+	.sm-icons-container {
+		height: 22px;
+		width: 75%;
+		float: right;
+	}
+
+	.sm-icons {
+		height: 30px;
+		transform: translate(10px, -12px);
+		width: 200px;
+		float: left;
+	}
+
+	.social-icon {
+		background: none;
+		border-radius: 13px;
+		border: 1px solid #fff;
+		height: 25px;
+		width: 25px;
+		padding: 0;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		vertical-align: center;
+		margin-right: 7px;
+
+		transition: 0.2s all ease-out;
+		-webkit-transition: 0.2s all ease-out;
+		-moz-transition: 0.2s all ease-out;
+	}
+
+	.social-icon:hover {
+		/* transform: translateY(-2px); */
+		background: rgba(255, 255, 255, 0.2);
+	}
+
+  .title-border-2 {
+    border: 0.5px solid #fff;
+    width: 6%;
+    float: left;
+  }
+
+  .subtext {
+    color: #fff;
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    font-weight: 300;
+    margin-top: 30px;
+  }
+
+  .subtitle-text {
+    color: #fff;
+    margin-top: 20px;
+    padding-right: 140px;
+		font-weight: 200;
+		padding-bottom: 5px;
+		line-height: 1.9;
+		letter-spacing: 1px;
+  }
+
+  .appeal-alice > .subtitle-text {
+    font-size: 18px;
+  }
+
+  .appeal-alice > .subtitle-text > a {
+    color: #fff;
+    font-weight: 400;
+    border-bottom: 0.5px solid #fff;
+
+    transition: 0.3s all ease-out;
+    -webkit-transition: 0.3s all ease-out;
+    -moz-transition: 0.3s all ease-out;
+  }
+
+  .appeal-alice > .subtitle-text > a:hover {
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  .charity-logo {
+    width: 100%;
+    height: 100px !important;
+  }
+
+  .charity-logo > img {
+    margin: 10px 0 30px;
+    max-height: 80px;
+  }
+
+	.splash-learn {
+		margin: 20px 0;
+	}
+
+  .splash-learn > a {
+    border: 1px solid #fff;
+    color: #fff;
+    background: none;
+    font-weight: 100;
+    height: 45px;
+		padding: 12px 20px;
+
+		font-weight: 200;
+		font-size: 10px;
+		letter-spacing: 5px;
+		width: 160px;
+		text-transform: uppercase;
+
+		transition: 0.3s all ease-out;
+    -webkit-transition: 0.3s all ease-out;
+    -moz-transition: 0.3s all ease-out;
+  }
+
+	.splash-learn > a:hover {
+		 background: rgba(255, 255, 255, 0.2);
+	}
+
+  .appeal-right {
+    padding-top: 13%;
+    text-align: center;
+  }
+
+  .donate-button > a {
+		border: 8px solid #202E37;
+		outline: 8px solid #fff;
+		letter-spacing: 7px;
+		font-weight: 400;
+		font-size: 28px;
+		width: 340px;
+		padding: 25px 65px;
+		color: #fff;
+		height: 100px;
+		background: #1998a2;
+		text-shadow: 0px 3px #136e75;
+		box-shadow: inset 0px -4px 0px #136e75;
+
+		transition: 0.1s all ease-out;
+    -webkit-transition: 0.1s all ease-out;
+    -moz-transition: 0.1s all ease-out;
+  }
+
+	.donate-button > a:hover {
+		text-shadow: 0px 1px #136e75;
+		box-shadow: inset 0px -1px 0px #136e75;
+	}
+
+  .vertical-line-container {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+  }
+
+  .vertical-line {
+    width: 8px;
+    background: #fff;
+    height: 50px;
+  }
+
+  .donate-raised-container {
+    padding: 10px 0 15px;
+    height: auto;
+    width: 150px;
+    margin: 0 auto;
+  }
+
+  .donate-raised {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+
+    color: #fff;
+    font-size: 40px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .donate-raised-container .subtext {
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 0;
+		font-size: 10px;
+  }
+
+  .graph-container {
+    margin-top: -7px;
+  }
+
+  .circle-chart-foreground {
+    animation: circle-chart-fill 2s reverse;
+    -webkit-animation: circle-chart-fill 2s reverse;
+    -moz-animation: circle-chart-fill 2s reverse;
+    -ms-animation: circle-chart-fill 2s reverse;
+    transform: rotate(-90deg);
+    transform-origin: center;
+  }
+
+  .appeal-chart-amount > .light {
+    font-weight: 400;
+    fill: #fff;
+    font-size: 8px;
+
+    text-shadow: 0px 6px #112633;
+  }
+
+	.appeal-chart-text {
+		font-weight: 400;
+    fill: #fff;
+    font-size: 2px;
+    text-shadow: 0px 3px #112633;
+	}
+
+  .appeal-chart-amount > .dark {
+    font-weight: 400;
+    fill: #445c6a;
+    font-size: 4px;
+
+    text-shadow: 0px 6px #112633;
+  }
+
+	.appeal-small {
+		fill: #fff;
+    font-size: 1.5px;
+    letter-spacing: 1px;
+		text-shadow: 0px 3px #112633;
+	}
+
+  .small {
+		font-size: 18px !important;
+		font-weight: 100 !important;
+		line-height: 1.75;
+  }
+
+	.medium {
+		font-size: 22px !important;
+		font-weight: 200 !important;
+		line-height: 1.75;
+		letter-spacing: 1px;
+	}
+
+  .appeal-section-heading {
+    font-size: 44px;
+    font-weight: 400;
+    color: #1998a2;
+    letter-spacing: 2px;
+    margin-bottom: 35px;
+  }
+
+  .appeal-section-heading:after {
+    content: "";
+    display: block;
+    float: inherit;
+    width: 10% !important;
+    padding-bottom: 10px;
+    border-bottom: 0.5px solid #1998a2;
+  }
+
+	.project-details-btn {
+		margin: 20px 0 50px;
+		padding-top: 20px;
+	}
+
+  .project-details-btn > a {
+    border: 1px solid #1998a2;
+		color: #1998a2;
+    letter-spacing: 4px;
+    background: none;
+		text-align: center;
+    font-weight: 400;
+    font-size: 12px;
+    width: 275px;
+    height: 50px;
+    padding: 20px 30px;
+
+		transition: 0.3s all ease-out;
+		-webkit-transition: 0.3s all ease-out;
+		-moz-transition: 0.3s all ease-out;
+		-o-transition: 0.3s all ease-out;
+  }
+
+	.project-details-btn > a:hover {
+		cursor: pointer;
+		background: rgba(104, 204, 210, 0.2);
+	}
+
+  .goals-section {
+    margin: 20px 0 60px 10px;
+  }
+
+  .goals-carousel {
+		position: relative;
+  }
+
+  .goals-section > .carousel > .carousel-control.right {
+    right: -130px;
+  }
+
+  .goals-section > .carousel > .carousel-control.left  {
+    left: -120px;
+  }
+
+	.goals-carousel .carousel-indicators {
+		display: none;
+	}
+
+  .carousel-control {
+		opacity: 1;
+    color: #1998a2 !important;
+		text-shadow: none !important;
+  }
+
+  .goal-container {
+    min-height: 500px;
+    background: #F9FCFC;
+    position: relative;
+    color: #202E37;
+    display: block;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .goal-container:not(:last-child) {
+    margin-right: 1.3%;
+    width: 32%;
+  }
+
+  .goal-image-wrapper {
+    margin: 32px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .goal-image-cropper {
+    width: 125px;
+    height: 125px;
+    position: relative;
+    overflow: hidden;
+    display: block;
+    float: left;
+    border-radius: 50%;
+    border: 5px solid #1998a2;
+    -webkit-shape-outside: circle();
+    shape-outside: circle();
+  }
+
+  .goal-project-img {
+    display: inline;
+    margin: 0 auto;
+    margin-left: -25%;
+    height: 100%;
+    width: auto;
+  }
+
+  .goal-card-title {
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    color: #1998a2;
+    text-transform: uppercase;
+		padding: 0 25px;
+  }
+
+  .goal-card-value {
+    font-size: 16px;
+		position: absolute;
+    font-weight: 200;
+    letter-spacing: 1px;
+    color: #202E37;
+		padding: 0 25px;
+  }
+
+  .goal-card-bottom {
+    bottom: 0;
+    width: 100%;
+    position: absolute;
+    background: #F0FAFA;
+    height: 100px;
+    text-align: left;
+  }
+
+  .goal-paid-title, .goal-achieved-title {
+    padding: 20px 0 5px 40px;
+    color: #1998a2;
+    font-size: 24px;
+  }
+
+  .goal-paid-title:after, .goal-achieved-title:after {
+    content: "";
+    display: block;
+    float: inherit;
+    width: 15%;
+    border-bottom: 1px solid #ACCCCE;
+  }
+
+  .goal-card-bottom-subtext {
+    font-weight: 300;
+    padding-left: 40px;
+    color: #202E37;
+  }
+
+  .story-container {
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    font-size: 32px;
+
+		transition: 0.2s all ease-out;
+  }
+
+	#appealStories {
+		margin-top: 20px;
+	}
+
+	#appealStories > .row > .story-container {
+		transition: 0.5s all ease-out;
+		-webkit-transition: 0.5s all ease-out;
+		-moz-transition: 0.5s all ease-out;
+	}
+
+	#appealStories > .row > a:hover {
+		cursor: pointer;
+		color: rgba(255, 255, 255, 0.79);
+	}
+
+	.story-container > a {
+		color: #fff;
+		padding: 225px 26%;
+		margin-left: 1px;
+
+		display: flex;
+
+	}
+
+  #appealAlice {
+    padding: 80px 0 40px;
+  }
+
+  #appealAlice h1{
+		font-size: 44px;
+    font-weight: 400;
+  }
+
+  .alice-section-subheading {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: 200;
+    letter-spacing: 1px;
+    color: #353e42;
+  }
+
+  .alice-graph {
+    height: auto;
+    width: 100%;
+		margin-top: 50px;
+    margin-bottom: 50px;
+  }
+
+  #appealNgo {
+    height: auto;
+  }
+
+  .ngo-section-left {
+    height: 900px;
+  }
+
+  .ngo-section-right {
+    padding: 80px 80px 0 100px;
+    /* height: 900px; */
+    background: #202E37;
+  }
+
+  .appeal-section-heading.white {
+    padding-bottom: 20px;
+  }
+
+  .appeal-section-heading.white:after {
+    border-color: #fff;
+  }
+
+  .ngo-title {
+    margin-left: -15px;
+  }
+
+  .charity-profile-section > .section-text-left {
+    margin: -10px 0 0 -15px;
+    font-size: 18px !important;
+    font-weight: 200 !important;
+  }
+
+  .validator-profile-section > .section-text-left {
+    margin: -10px 0 0 -15px;
+    font-size: 18px !important;
+    font-weight: 200 !important;
+  }
+
+  .section-heading-border.light {
+    border-color: #fff;
+  }
+
+  .section-text-left {
+    font-size: 22px;
+    font-weight: 200 !important;
+    letter-spacing: 1px;
+    color: #202E37;
+    padding-left: 0;
+    padding-right: 50px;
+  }
+
+  .section-text-left.white {
+    border-right: none;
+  }
+
+  .white {
+    color: #fff !important;
+  }
+
+  .social-media-buttons {
+    height: 50px;
+    margin-top: 15px;
+  }
+
+  .social-media-buttons .fa {
+      font-size: 3em;
+      margin-right: 40px;
+      cursor: pointer;
+
+      transition: all .3s ease-out;
+      -moz-transition: all .3s ease-out;
+      -webkit-transition: all .3s ease-out;
+      -o-transition: all .3s ease-out;
+  }
+
+
+  .social-media-buttons .fa-twitter {
+     color: #78aae8;
+  }
+
+  .social-media-buttons .fa:hover {
+      color: rgba(145, 206, 210, 0.58);
+  }
+
+  .charity-profile-section {
+    min-height: 50% !important;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+	.appeal-splash {
+		max-height: 900px;
+  }
+
+  .ngo-section-right {
+    height: 900px;
+  }
+}

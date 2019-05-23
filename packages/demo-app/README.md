@@ -14,13 +14,13 @@ needed.
 This app uses a local Ganache instance, so first start one using:
 
 ```
-npx ganache-cli -a 100
+yarn ganache-cli -a 100
 ```
 
 Then, you can run the server like this:
 
 ```
-npm run dev
+yarn dev
 ```
 
 The app should be now available at http://localhost:8080/.

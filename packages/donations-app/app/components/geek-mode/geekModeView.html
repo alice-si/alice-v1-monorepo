@@ -1,0 +1,168 @@
+<div class="geek-mode" ng-controller="GeekModeController as geekCtrl">
+  <div class="splash col-md-12 col-xs-12">
+    <img id="geek-splash-logo" src="https://s3.eu-west-2.amazonaws.com/alice-res/AliceLogoWhite.png"/>
+    <div class="splash-text">
+      <div class="splash-title">GEEK MODE</div>
+      <div class="section-heading-border"></div>
+      <div class="splash-subtitle">
+        See below why we’re using smart contracts to bring transparency to the charity sector, explore our smart contracts, check your ethereum account and support our work.
+      </div>
+    </div>
+  </div>
+
+  <div class="eth-wrapper home-section col-md-12 col-xs-12">
+    <div class="section-text left">
+      <div class="title wow fadeInLeft">ALICE IS ABOUT MAKING CHARITY TRANSPARENT</div>
+      <div class="section-heading-border wow fadeInLeft"></div>
+      <div class="subtitle wow fadeInLeft">
+        That's why we use smart contracts built on the Ethereum blockchain.<br>
+        On this page you'll find resources to delve into our code and smart contracts,
+        follow your donation on the blockchain, learn more about Ethereum,
+        and support Alice's development. <br><br>
+        This is a live page, so stay tuned for many, many more updates.
+      </div>
+    </div>
+    <div id="ethereum-image" class="wow fadeInRight right hidden-xs">
+        <img src="https://s3.eu-west-2.amazonaws.com/alice-res/ethereum.jpeg" alt="">
+    </div>
+  </div>
+
+  <div class="support-wrapper home-section dark-blue col-md-12 col-xs-12">
+    <img class="track-fundraise-logo" src="https://s3.eu-west-2.amazonaws.com/alice-res/AliceLogoWhite.png"/>
+    <div class="wow fadeInLeft col-md-6">
+      <img id="donation-icon" src="https://s3.eu-west-2.amazonaws.com/alice-res/donation.png"/>
+    </div>
+    <div class="section-text right col-md-6">
+      <div class="title wow fadeInRight">SUPPORT OUR WORK</div>
+      <div class="section-heading-border wow fadeInRight"></div>
+      <div class="subtitle wow fadeInRight">
+        Please support the work we're doing to increase trust in the charity sector,
+        and help solve some of the world's biggest social and environmental problems.<br><br>
+        Alice is currently funded by a series of small grants and investments.
+        With your support, we can achieve more and faster.
+      </div>
+    </div>
+    <div class="col-md-12 hidden-xs">
+      <div class="col-md-4 col-md-offset-4 donate-ether wow fadeIn">
+        Donate ether
+        <div class="section-heading-border hidden-xs">
+        </div>
+        <span style="cursor: pointer" ngclipboard-success="geekCtrl.showCopiedNotification()"
+          ngclipboard data-clipboard-text="0x972a2dA1f9d1dc0B01D313e52fFe916bB5E9a2c1"
+        >
+          0x972a2dA1f9d1dc0B01D313e52fFe916bB5E9a2c1
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="find-more-wrapper home-section col-md-12">
+    <div class="title col-md-12">
+      FIND OUT MORE ABOUT ETHEREUM
+      <div class="section-heading-border"></div>
+    </div>
+    <ul class="links col-md-10 col-md-offset-1">
+      <li class="link col-md-4 wow fadeIn"><a target="_blank" href="https://www.ethereum.org/">OFFICIAL SITE</a></li>
+      <li class="link col-md-4 wow fadeIn"><a target="_blank" href="https://medium.com/@ConsenSys/unpacking-the-term-smart-contract-dc8ac8afc0ef">ABOUT SMART CONTRACTS</a></li>
+      <li class="link col-md-4 wow fadeIn"><a target="_blank" href="https://www.ethnews.com/want-to-get-involved-with-ethereum-heres-how">GET INVOLVED WITH <br>ETHEREUM</a></li>
+    </ul>
+  </div>
+
+  <div class="etheroscope-wrapper home-section blue col-md-12">
+    <img class="track-fundraise-logo" src="https://s3.eu-west-2.amazonaws.com/alice-res/AliceLogoWhite.png"/>
+    <div class="left col-md-9">
+      <div class="title wow fadeInLeft">EXPLORE ALICE'S SMART CONTRACTS</div>
+      <div class="section-heading-border wow fadeInLeft"></div>
+      <div class="subtitle wow fadeInLeft">
+        The code for our smart contracts is open sourced.<br>
+        We invite you to use our smart contracts, and contribute to it, by visiting our <a target="_blank" href="https://github.com/alice-si/contracts">Github page</a><br>
+        The first charity appeal is live on Alice. You can monitor its progress on the blockchain:<br><br>
+        <a target="_blank"
+               href="https://etherscan.io/address/0xbd897c8885b40d014fb7941b3043b21adcc9ca1c">Donations</a>: the main
+          contract storing donations made to the London Street Impact: 15 Lives (LSI:15L) appeal<br>
+          <a target="_blank" href="https://etherscan.io/address/0xa120Fd6CEc5733b544BC5276a815716F31951C35">
+            Minting contract
+          </a>: this contract mints tokens representing the value of donations made in fiat<br>
+          <a target="_blank" href="https://etherscan.io/address/0x2299B133551318fC3C34Bf81b46694651dA11282">
+            Registry contract:
+          </a>: this contract keeps track of donor balances and goals achieved
+      </div>
+    </div>
+  </div>
+
+  <div class="eth-account-wrapper home-section col-md-12">
+    <div class="col-md-9 left">
+      <div class="title wow fadeInLeft">YOUR ETHEREUM ACCOUNT</div>
+      <div class="section-heading-border wow fadeInLeft"></div>
+      <div class="subtitle wow fadeInLeft eth-account-subtitle">
+        When you donate on Alice with your credit card, we create a personal Ethereum account for you. Think of us as a concierge service, opening a window onto the magical world of Ethereum.<br>
+        Your Ethereum account: <a ng-hide="geekCtrl.auth.getLoggedUser()" ng-click="geekCtrl.auth.showLogInModal()">Please log in to see your account address</a>
+        <a ng-show="geekCtrl.auth.getLoggedUser()" target="_blank"
+           href="{{geekCtrl.ETHERSCAN}}/address/{{geekCtrl.auth.getLoggedUser().ethAccount}}">
+          {{geekCtrl.auth.getLoggedUser().ethAccount}}
+        </a>
+        <br><br>
+        <span ng-hide="geekCtrl.web3Status.loaded">
+          Please use a web3-enabled browser
+          (like <a href="http://metamask.io">Metamask</a>,
+          <a href="https://parity.io">Parity</a>
+          or <a href="https://github.com/ethereum/mist">Mist</a>)
+          to check your balance.<br>
+        </span>
+        <span ng-hide="geekCtrl.web3Status.correctNetworkId">
+          Please connect to the {{geekCtrl.ethNetworkName}} network.
+        </span>
+        <h4 ng-show="geekCtrl.donated">Total donated: {{geekCtrl.donated | money}}</h4>
+        <h4 ng-show="geekCtrl.paid">Total paid to charity: {{geekCtrl.paid | money}}</h4>
+        <h4 ng-show="geekCtrl.balance">Your balance: {{geekCtrl.balance | money}}</h4>
+
+        <div ng-show="geekCtrl.donations || geekCtrl.impacts">
+          <ul ng-show="geekCtrl.donations && geekCtrl.donations.length > 0">
+            Donations made: <br/>
+            <li ng-repeat="donation in geekCtrl.donations">
+              <a target="_blank" href="{{geekCtrl.ETHERSCAN}}/tx/{{donation.depositingTx}}">
+                {{donation.depositingTx || "Processing..."}}
+              </a>
+            </li>
+          </ul>
+          <br/>
+          <ul ng-show="geekCtrl.impacts && geekCtrl.impacts.length > 0">
+            Your impact: <br/>
+            <li ng-repeat="impact in geekCtrl.impacts">
+              <a target="_blank" href="{{geekCtrl.ETHERSCAN}}/tx/{{impact.tx}}">
+                {{impact.tx || "Processing..."}}
+              </a>
+            </li>
+          </ul>
+          <br/>
+        </div>
+        Please note that in order to protect your privacy, we do not record any personal data on the blockchain, or publicly link it to your Ethereum account.<br>
+      </div>
+    </div>
+  </div>
+
+  <div class="etheroscope-wrapper home-section blue col-md-12">
+    <img class="track-fundraise-logo" src="https://s3.eu-west-2.amazonaws.com/alice-res/AliceLogoWhite.png"/>
+    <div class="left col-md-9">
+      <div class="title wow fadeInLeft">ABOUT OUR STABLECOIN PARTNERSHIP</div>
+      <div class="section-heading-border wow fadeInLeft"></div>
+      <div class="subtitle wow fadeInLeft">
+        When Alice first launched, we were one of the first companies
+        in the world to use a regulated stablecoin.<br>
+        We participated in a <a target="_blank"
+                                href="http://bankinnovation.net/2017/02/tramonex-to-use-smart-contracts-for-cross-currency-money-transfer//">
+                                pilot run by Tramonex Labs</a>,
+        within the Financial Conduct Authority's <a target="_blank"
+           href="https://www.fca.org.uk/news/press-releases/financial-conduct-authority-unveils-successful-sandbox-firms-second-anniversary">regulatory
+          sandbox</a>,
+        to issue e-money (tokens that represent the
+        value of fiat donations) on Ethereum.<br><br>
+        We are currently integrated with MangoPay to ensure the stability
+        of donations, and are open to experimenting with
+        other stablecoin solutions. <br>Get in touch!
+      </div>
+    </div>
+  </div>
+
+  <alice-footer></alice-footer>
+</div>

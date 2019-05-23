@@ -1,0 +1,1888 @@
+
+/***** Donations App Homepage *****/
+
+/**** MULTI-DEVICE HOMEPAGE STYLING ****/
+
+/* STYLING ACROSS HOMEPAGES */
+
+.splash {
+  width: 100%;
+  background-color: #353e42;
+  background-blend-mode: multiply;
+  height: 540px;
+}
+
+.splash-text {
+  display: block;
+  margin-left: 10%;
+  color: #fff;
+  transform: translateY(-250px);
+}
+
+.splash-text > .splash-title {
+  font-size: 40px;
+  font-weight: 100;
+  letter-spacing: 3px;
+}
+
+.splash-text > .section-heading-border {
+  width: 26%;
+  border-bottom: 0.5px solid #fff;
+}
+
+.splash-text > .splash-subtitle {
+  font-size: 16px;
+  font-weight: 200;
+  letter-spacing: 1px;
+}
+
+.title {
+  font-weight: 400;
+  letter-spacing: 5px;
+}
+
+.subtitle {
+  font-weight: 100;
+  letter-spacing: 1px;
+}
+
+.section-text {
+  display: block;
+  margin-left: 7%;
+}
+
+.section-text > .section-heading-border {
+  width: 26%;
+  border-bottom: 1px solid #353e42;
+  margin: 20px 0 40px 0;
+}
+
+.left {
+  float: left;
+}
+
+.home-section > .right {
+  float: right;
+  text-align: right;
+  margin-left: 0;
+  margin-right: 5%;
+}
+
+.right > .section-heading-border {
+  right: 0;
+  float: right;
+}
+
+.links {
+  margin-top: 20px;
+  width: 80%;
+  margin-left: 10%;
+  padding-top: 20px;
+}
+
+.link {
+  list-style: none !important;
+  text-align: center;
+}
+
+.link > a {
+  font-size: 16px;
+  font-weight: 400 !important;
+  letter-spacing: 2px;
+  color: #1998a4;
+
+  transition: 0.2s all ease-out;
+  -webkit-transition: 0.2s all ease-out;
+  -moz-transition: 0.2s all ease-out;
+}
+
+.link > a:hover {
+  color: rgba(25, 152, 164, 0.64);
+}
+
+
+.dark-blue {
+  background: #1998a4;
+}
+
+.blue {
+  background: #46B3BC;
+}
+
+
+/** How It Works **/
+
+
+.how-it-works > .splash {
+  height: 100vh;
+}
+
+.how-it-works > .splash > #home-splash-logo {
+  opacity: 0.02;
+}
+
+#hiw-splash-graph {
+  width: auto;
+  position: relative;
+}
+
+#transparent-image {
+  position: sticky;
+}
+
+#transparent-image > img {
+  position: sticky;
+  z-index: 100;
+}
+
+#ethereum-image > img {
+  height: 300px;
+  position: sticky;
+  transform: translate(-60px, -60px);
+  width: auto;
+  z-index: 100;
+}
+
+.track-wrapper {
+  color: #fff;
+  z-index: -1;
+}
+
+.track-wrapper > .section-text  {
+  display: block;
+  margin-left: 10%;
+}
+
+.track-wrapper > .section-text > .title {
+  font-weight: 400;
+  letter-spacing: 6px;
+}
+
+.track-wrapper > .section-text > .section-heading-border {
+  width: 26%;
+  border-bottom: 1px solid #fff;
+  margin: 20px 0 40px 0;
+}
+
+.track-fundraise-logo {
+  height: 200px;
+  width: 220px;
+  position: sticky;
+  transform: translate(-650px, -40px);
+  opacity: 0.1;
+  left: -100px;
+  bottom: 50px;
+}
+
+.wizard-screenshot {
+  position: sticky;
+  box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.26);
+}
+
+.edge-wrapper > .section-text > .title {
+  font-weight: 400;
+  letter-spacing: 6px;
+}
+
+.edge-wrapper > .section-text > .section-heading-border {
+  width: 26%;
+}
+
+.edge-wrapper .section-text > .subtitle {
+  float: right;
+}
+
+#edge-screenshot {
+  float: right;
+  position: sticky;
+}
+
+#edge-screenshot > img {
+  box-shadow: -3px 3px 7px rgba(0, 0, 0, 0.26);
+}
+
+/** Geek Mode **/
+
+#geek-splash-logo {
+  height:450px;
+  width: 500px;
+  position: relative;
+  transform: translate(-100px, 20px);
+  opacity: 0.02;
+  left: -100px;
+  top: 40px;
+  bottom: 50px;
+}
+
+.eth-wrapper > .section-text > .title {
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 3px;
+  color: #353E42;
+}
+
+.eth-wrapper > .section-text > .subtitle {
+  font-size: 14px;
+  font-weight: 100;
+}
+
+#donation-icon {
+  width: auto;
+  position: sticky;
+}
+
+.support-wrapper {
+  padding: 80px 0;
+  color: #fff;
+  height: 520px;
+}
+
+.support-wrapper > .section-text  {
+  display: block;
+  margin-left: 10%;
+}
+
+.donate-ether {
+  color: #fff;
+  font-weight: 400;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.donate-ether > .section-heading-border {
+  width: 46%;
+  border-top: 1px solid #fff;
+  margin: auto;
+  padding-bottom: 5px;
+}
+
+.donate-ether > span {
+  font-weight: 100;
+}
+
+.support-wrapper > .section-text > .title,
+.eth-account-wrapper > .left > .title,
+.etheroscope-wrapper > .left > .title,
+.questions > .question > .title {
+  font-size: 16px;
+}
+
+.support-wrapper > .section-text > .section-heading-border,
+.eth-account-wrapper > .left > .section-heading-border,
+.etheroscope-wrapper > .left > .section-heading-border,
+.questions > .question > .section-heading-border {
+  width: 26%;
+  border-bottom: 1px solid #fff;
+  margin: 20px 0 20px 0;
+}
+
+.support-wrapper .section-text > .subtitle {
+  float: right;
+  font-size: 14px;
+}
+
+.eth-account-wrapper > .left > .subtitle,
+.etheroscope-wrapper > .left > .subtitle {
+  float: left;
+  font-size: 14px;
+  width: 100%;
+}
+
+
+.find-more-wrapper > .title {
+  text-align: center;
+  font-weight: 100;
+  color: #9BABAB;
+}
+
+.find-more-wrapper > .title > .section-heading-border {
+  height: 10px;
+  border-bottom: 0.5px solid #9BABAB;
+  margin: 0 auto;
+}
+
+.subtitle > a {
+  color: #fff;
+  font-weight: 200;
+
+
+  transition: 0.3s all ease-out;
+  -webkit-transition: 0.3s all ease-out;
+  -moz-transition: 0.3s all ease-out;
+}
+
+.eth-account-subtitle > a {
+  color: #1998a4;
+}
+
+.subtitle > a:hover {
+  cursor: pointer;
+  color: #c3c3c3;
+}
+
+
+.etheroscope-wrapper {
+  color: #fff;
+}
+
+.eth-account-wrapper > .left > .section-heading-border,
+.questions > .question > .section-heading-border {
+  border-color: #353e42;
+}
+
+.question {
+  color: #353e42;
+  z-index: -1;
+}
+
+.questions > .question > .title {
+  text-transform: uppercase;
+  color: #1998a4;
+  letter-spacing: 3px;
+}
+
+
+/** Home Section **/
+
+.home-section {
+  height: auto;
+  width: 100%;
+}
+
+.home-splash-wrapper {
+  height: 100vh;
+  width: 100%;
+  /** will be changing this to smth more dynamic soon **/
+  background-image: url('https://s3.eu-west-2.amazonaws.com/alice-res/butterfly3.jpg');
+  background-blend-mode: darken;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.home-splash-text {
+  width: 40%;
+  display: block;
+  margin-left: 10%;
+  color: #fff;
+}
+
+.home-splash-text > .home-splash-title {
+  font-weight: 100;
+  letter-spacing: 3px;
+}
+
+.home-splash-text > .section-heading-border {
+  border-bottom: 0.5px solid #fff;
+  margin: 20px 0 40px 0;
+}
+
+.home-splash-text > .home-splash-subtitle {
+  font-weight: 200;
+  letter-spacing: 1px;
+}
+
+.home-splash-btn > a {
+  letter-spacing: 2px;
+  text-decoration: none;
+  font-weight: 200;
+  color: #fff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.56);
+
+  transition: 0.5s all ease-out;
+  -webkit-transition: 0.5s all ease-out;
+  -moz-transition: 0.5s all ease-out;
+
+}
+
+.home-splash-btn > a:hover {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/** Pilot Section **/
+
+.home-pilot-text {
+  width: 70%;
+  display: block;
+  color: #353e42;
+}
+
+.home-pilot-text > .home-pilot-title {
+  font-size: 32px;
+  font-weight: 400;
+  letter-spacing: 6px;
+}
+
+.home-pilot-text > .section-heading-border {
+  width: 16%;
+  border-bottom: 0.5px solid #353e42;
+}
+
+.home-pilot-text > .home-pilot-subtitle {
+  font-weight: 100;
+  letter-spacing: 1px;
+}
+
+.subtitle-title {
+  letter-spacing: 6px;
+}
+
+.home-pilot-graphs {
+  margin-top: 30px;
+}
+
+.home-pilot-graph {
+  height: 100%;
+  padding: 0;
+}
+
+.graph-text {
+  color: #353e42;
+  font-weight: 200;
+  letter-spacing: 0;
+}
+
+.graph-text > .graph-text-title {
+  letter-spacing: 3px;
+  font-weight: 100;
+}
+
+.graph-text > .graph-text-subtitle {
+  color: #9F9F9F;
+  letter-spacing: 0;
+}
+
+.home-pilot-btn {
+  text-align: center;
+}
+
+.home-pilot-btn > a {
+  font-size: 16px;
+  letter-spacing: 5px;
+  text-decoration: none;
+  font-weight: 200;
+  color: #1998a4;
+  border-bottom: 0.5px solid #4cabb4;
+
+  transition: 0.5s all ease-out;
+  -webkit-transition: 0.5s all ease-out;
+  -moz-transition: 0.5s all ease-out;
+}
+
+.home-pilot-btn > a:hover {
+  cursor: pointer;
+  color: #435658;
+  border-bottom-color: #435658 ;
+}
+
+/** Project section **/
+
+.home-projects-wrapper {
+  background: #353e42;
+  height: 665px;
+}
+
+#home-projects-logo {
+  height: 200px;
+  width: 220px;
+  position: sticky;
+  opacity: 0.05;
+  bottom: 50px;
+}
+
+.home-projects-text {
+  width: 70%;
+  display: block;
+  margin-left: 10%;
+  color: #fff;
+  transform: translateY(-200px);
+}
+
+.home-projects-text > .home-projects-title {
+  font-size: 32px;
+  font-weight: 400;
+  letter-spacing: 6px;
+}
+
+.home-projects-text > .section-heading-border {
+  border-bottom: 1px solid #fff;
+  margin: 20px 0 40px 0;
+}
+
+.home-projects-text > .home-projects-subtitle {
+  font-weight: 100;
+  letter-spacing: 3px;
+}
+
+.subtitle-title {
+  letter-spacing: 5px;
+  font-weight: 200;
+}
+
+.home-projects-list {
+  height: 200px;
+  margin-top: 50px;
+  transform: translateY(-200px);
+}
+
+.home-project {
+  height: 100%;
+}
+
+.home-projects-btn {
+  margin-top: 100px;
+  text-align: center;
+  transform: translateY(-200px);
+}
+
+.home-projects-btn > a {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-decoration: none;
+  font-weight: 200;
+  color: #fff;
+  padding-bottom: 5px;
+
+  transition: 0.5s all ease-out;
+  -webkit-transition: 0.5s all ease-out;
+  -moz-transition: 0.5s all ease-out;
+
+}
+
+.home-projects-btn > a:hover {
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/** Charity section **/
+
+.home-charities-text {
+  width: 70%;
+  display: block;
+  margin-left: 10%;
+  color: #353e42;
+}
+
+.home-charities-text > .home-charities-title {
+  font-size: 32px;
+  font-weight: 400;
+  letter-spacing: 6px;
+}
+
+.home-charities-text > .section-heading-border {
+  width: 16%;
+  border-bottom: 1px solid #353e42;
+  margin: 20px 0 40px 0;
+}
+
+.home-charities-text > .home-charities-subtitle {
+  font-size: 12px;
+  font-weight: 200;
+  letter-spacing: 3px;
+}
+
+.home-charities-list {
+  height: 200px;
+  margin-top: 70px;
+}
+
+.home-charity {
+  display: inline-block;
+  margin-left: 85px;
+}
+
+.charity-logo {
+  width: 100%;
+  height: auto;
+  margin: auto;
+}
+
+.charity-logo.charity-logo-homepage {
+  height: 100px !important;
+  width: auto;
+}
+
+.home-charities-btn {
+  margin-top: 100px;
+  text-align: center;
+}
+
+.home-charities-btn > a {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-decoration: none;
+  font-weight: 200;
+  color: #353e42;
+
+  transition: 0.5s all ease-out;
+  -webkit-transition: 0.5s all ease-out;
+  -moz-transition: 0.5s all ease-out;
+
+}
+
+.home-charities-btn > a:hover {
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+
+/*** Fundraise Section ***/
+
+
+.home-fundraise-wrapper {
+  background: #41B1BB;
+  padding-top: 70px;
+}
+
+#home-fundraise-logo {
+  height: 200px;
+  width: 220px;
+  position: sticky;
+  opacity: 0.1;
+  left: -100px;
+  bottom: 50px;
+}
+
+.home-fundraise-text {
+  width: 70%;
+  display: block;
+  margin-left: 10%;
+  color: #fff;
+  transform: translateY(-200px);
+}
+
+.home-fundraise-text > .home-fundraise-title {
+  font-weight: 200;
+  letter-spacing: 6px;
+}
+
+.home-fundraise-text > .section-heading-border {
+  border-bottom: 1px solid #fff;
+  margin: 20px 0 30px 0;
+}
+
+.home-fundraise-text > .home-fundraise-subtitle {
+  font-weight: 100;
+}
+
+.home-fundraise-form {
+  margin-top: -150px;
+}
+
+
+
+/**** FORMS ****/
+
+.form-small {
+  background: none;
+  font-weight: 100;
+  width: 80%;
+}
+
+.form-large {
+  background: none;
+  font-weight: 100;
+  border: none;
+  color: #fff;
+  border-bottom: 1px solid #fff;
+  width: 200px;
+}
+
+.form-large:focus {
+  outline: none;
+  border-bottom: 2px solid #fff;
+}
+
+.form-small > label {
+  color: rgba(255, 255, 255, 0.53);
+}
+
+.form-input {
+  background: none;
+  border: none;
+  color: #fff;
+  border-bottom: 1px solid #fff;
+  width: 200px;
+}
+
+.form-input:focus {
+  outline: none;
+  border-bottom: 2px solid #fff;
+}
+
+.form-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #fff;
+  opacity: 0.6; /* Firefox */
+}
+
+#contactMessage {
+  margin-top: 9px;
+}
+
+#contactMessage::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #fff;
+  opacity: 0.6; /* Firefox */
+}
+
+.message-button {
+  font-weight: 100;
+  text-transform: uppercase;
+  border: 1px solid #fff;
+  padding: 10px 30px;
+  color: #fff;
+  letter-spacing: 1px;
+
+  transition: 0.3s all ease-out;
+  -webkit-transition: 0.3s all ease-out;
+  -moz-transition: 0.3s all ease-out;
+}
+
+.message-button:active, .message-button:hover {
+  color: #1998a4;
+  background: rgb(255, 255, 255);
+  cursor: pointer;
+}
+
+
+
+/** iPhone 5/SE **/
+@media screen and (min-width: 10px) and (max-width: 330px) {
+  .home-splash-wrapper {
+    background-position: center;
+  }
+
+  #home-splash-logo {
+    height: 350px;
+    width: 400px;
+    position: relative;
+    transform: translate(-200px, 40px);
+    opacity: 0.05;
+    top: 40px;
+    bottom: 50px;
+  }
+
+  .home-splash-text {
+    transform: translateY(-200px);
+  }
+
+  .home-splash-text > .home-splash-title {
+    font-size: 20px;
+  }
+
+  .home-splash-text > .section-heading-border {
+    width: 45%;
+  }
+
+  .home-splash-text > .home-splash-subtitle {
+    font-size: 6px;
+  }
+
+  .graph-text {
+    padding-top: 0 !important;
+    font-size: 10px !important;
+    transform: translateX(10px);
+  }
+
+  .home-fundraise-text > .home-fundraise-title {
+    font-size: 20px;
+  }
+
+  .home-fundraise-text > .home-fundraise-subtitle {
+    font-size: 10px;
+    letter-spacing: 3px;
+  }
+}
+
+
+
+
+
+
+/** Phone **/
+@media screen and (max-width: 760px) {
+  /** Global Styling across Homepages **/
+
+  .splash-text {
+    width: 80%;
+    margin-left: 5%;
+    transform: translateY(-350px);
+  }
+
+  .splash-text > .section-heading-border {
+    margin: 40px 0 20px;
+  }
+
+  .splash-text > .splash-subtitle {
+    font-size: 12px;
+    line-height: 20px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .section-text {
+    width: 80%;
+  }
+
+  .subtitle {
+    font-size: 12px;
+  }
+
+  .home-splash-wrapper {
+    background-position: center;
+  }
+
+  #home-splash-logo {
+    height: 400px;
+    width: 450px;
+    position: relative;
+    transform: translate(-200px, 40px);
+    opacity: 0.05;
+    top: 40px;
+    bottom: 50px;
+  }
+
+  .home-splash-text {
+    transform: translateY(-300px);
+  }
+
+  .home-splash-text > .home-splash-title {
+    font-size: 24px;
+  }
+
+  .home-splash-text > .section-heading-border {
+    width: 45%;
+  }
+
+  .home-splash-text > .home-splash-subtitle {
+    font-size: 10px;
+  }
+
+  .home-splash-btn {
+    margin-top: 50px;
+  }
+
+  .home-splash-btn > a {
+    font-size: 10px;
+  }
+
+  .home-splash-btn > a:hover {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .home-pilot-wrapper {
+    margin-top: 50px;
+    height: 550px;
+  }
+
+  .home-pilot-text {
+    margin-left: 5%;
+  }
+
+  .home-pilot-text > .section-heading-border {
+    margin: 20px 0 20px 0;
+  }
+
+  .home-pilot-text > .home-pilot-subtitle {
+    font-size: 16px;
+  }
+
+  .home-pilot-graphs {
+    height: 175px;
+  }
+
+  .subtitle-title {
+    font-size: 20px;
+  }
+
+  .graph-text {
+    padding-top: 10px;
+    font-size: 12px;
+    padding-left: 20px;
+  }
+
+  .graph-text > .graph-text-title {
+    font-size: 15px;
+  }
+
+  .graph-text > .graph-text-subtitle {
+    font-size: 12px;
+  }
+
+  .home-projects-wrapper {
+    padding-top: 50px;
+  }
+
+  #home-projects-logo {
+    transform: translate(-80px, -20px);
+  }
+
+  .home-projects-text > .section-heading-border {
+    width: 26%;
+  }
+
+  .home-projects-text > .home-projects-subtitle {
+    font-size: 10px;
+  }
+
+  .subtitle-title {
+    font-size: 12px;
+  }
+
+
+  .home-charities-wrapper {
+    padding: 40px 0 40px;
+  }
+
+  .home-charities-list {
+    height: auto;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .home-charity {
+    display: run-in;
+  }
+
+  .charity-logo {
+    width: 100%;
+    /* height: auto !important; */
+    margin: auto;
+  }
+
+  .charity-logo.charity-logo-homepage {
+    height: 100px !important;
+    width: auto;
+  }
+
+/****
+  * How It Works
+  ***/
+
+  .how-it-works > .splash > .home-splash-text {
+    transform: translateY(-450px);
+  }
+
+  #hiw-splash-graph {
+    height: 140px;
+    transform: translateX(10px);
+    transform: translateY(-50px);
+    left: 30px;
+    bottom: 50px;
+  }
+
+  .giving-wrapper {
+    padding: 30px 0;
+    height: 300px;
+  }
+
+  #transparent-image > img {
+    height: 150px;
+    position: sticky;
+    transform: translate(50px, -200px);
+    width: auto;
+    opacity: 0.1;
+  }
+
+  .track-wrapper {
+    padding: 30px 0;
+    height: 520px;
+  }
+
+  .track-wrapper > .section-text  {
+    width: 90%;
+    text-align: left !important;
+    transform: translateY(-180px);
+  }
+
+  .track-wrapper > .section-text > .title {
+    font-size: 24px;
+    display: block;
+  }
+
+  .track-wrapper > .section-text > .section-heading-border {
+    float: left !important;
+  }
+
+  .track-wrapper .section-text > .subtitle {
+    float: left;
+    font-size: 14px;
+  }
+
+  .wizard-screenshot {
+    height: auto;
+    margin: auto;
+    width: 100%;
+    transform: translateY(-150px);
+  }
+
+  .edge-wrapper {
+    padding: 40px 0;
+  }
+
+  .edge-wrapper > .section-text > .title {
+    font-size: 24px;
+  }
+
+  .edge-wrapper > .section-text > .section-heading-border {
+    margin: 30px 0;
+  }
+
+  .edge-wrapper .section-text > .subtitle {
+    font-size: 14px;
+  }
+
+  #edge-screenshot > img {
+    height: auto;
+    width: 80%;
+    margin-top: 20px;
+    margin-left: 10%;
+  }
+
+  /** Geek Mode **/
+
+  .eth-wrapper {
+    padding: 40px 10px 60px;
+    height: auto;
+  }
+
+  .eth-wrapper > .section-text {
+    width: 80%;
+  }
+
+  #donation-icon {
+    height: 100px;
+    transform: translate(10px, -160px);
+    opacity: 0.1;
+  }
+
+  .support-wrapper {
+    height: 460px;
+  }
+
+  .support-wrapper > .section-text  {
+    text-align: left;
+    float: left;
+    transform: translateY(-320px);
+  }
+
+  .support-wrapper > .section-text > .section-heading-border {
+    float: left;
+  }
+
+  .find-more-wrapper {
+    padding: 60px;
+  }
+
+  .find-more-wrapper > .title {
+    transform: translateY(30px);
+  }
+
+  .find-more-wrapper > .title > .section-heading-border {
+    width: 100px;
+  }
+
+  .link {
+    margin-top: 23px;
+  }
+
+  .subtitle > a {
+    color: #fff;
+    font-weight: 200;
+
+
+    transition: 0.3s all ease-out;
+    -webkit-transition: 0.3s all ease-out;
+    -moz-transition: 0.3s all ease-out;
+  }
+
+  .eth-account-subtitle > a {
+    color: #1998a4;
+  }
+
+  .subtitle > a:hover {
+    cursor: pointer;
+    color: #c3c3c3;
+  }
+
+  .etheroscope-wrapper, .eth-account-wrapper {
+    width: 100%;
+    padding: 20px 0 20px 5px;
+  }
+
+  .etheroscope-wrapper > .track-fundraise-logo, .eth-account-wrapper > .track-fundraise-logo {
+    transform: translate(-80px, -20px);
+  }
+
+  .etheroscope-wrapper {
+    height: 600px;
+  }
+
+  .etheroscope-wrapper:last-child {
+    height: 620px;
+  }
+
+  .etheroscope-wrapper > .left {
+    width: 80%;
+    margin-left: 10%;
+    transform: translateY(-160px);
+  }
+
+  .eth-account-wrapper {
+    height: 540px;
+  }
+
+  .eth-account-wrapper > .left {
+    width: 80%;
+    margin-left: 10%;
+    transform: translateY(-60px);
+  }
+
+  .question {
+    padding: 0 40px 40px;
+  }
+
+  .questions > .question > .title {
+    font-size: 12px;
+  }
+
+  .faq > .splash {
+    margin-bottom: 40px;
+  }
+
+
+
+  /*** Fundraise Section ***/
+  /**
+   * Part of Forms
+   */
+
+  .home-fundraise-wrapper {
+      height: 565px;
+  }
+
+  #home-fundraise-logo {
+    transform: translate(-80px, -20px);
+  }
+
+  .home-fundraise-text > .section-heading-border {
+    width: 26%;
+  }
+
+  .home-fundraise-text > .home-projects-subtitle {
+    font-size: 10px;
+  }
+
+  .home-fundraise-text > .home-fundraise-title {
+    font-size: 20px;
+  }
+
+  .home-fundraise-text > .home-fundraise-subtitle {
+    font-size: 10px;
+    letter-spacing: 3px;
+  }
+
+  #form-email {
+    margin-top: 10px;
+  }
+
+  #form-send {
+    padding-top: 40px;
+    padding-left: 25px;
+  }
+
+  /******** CAROUSEL *********/
+
+  /**** GLOBAL CAROUSEL *****/
+
+  .carousel-image-cropper {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+      border-radius: 50%;
+      border: none;
+
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+  }
+
+  .carousel-inner {
+    height: 560px;
+  }
+
+  .carousel-image {
+    height: 100%;
+    width: auto;
+    margin: auto;
+  }
+
+  .carousel-text {
+    font-weight: 100 !important;
+    text-align: center !important;
+    height: 260px;
+    width: 100%;
+    color: #2299A5;
+  }
+
+  .carousel-text > h1 {
+    text-align: center;
+    color: #2299A5;
+  }
+
+  .carousel-indicators li, .carousel-indicators li.active {
+    margin-right: 10px;
+    height: 5px;
+    width: 5px;
+  }
+
+  .carousel-indicators li:last-child {
+    margin-right: none;
+  }
+
+  .left-carousel-control, .right-carousel-control {
+    z-index: 1000;
+  }
+
+  .text-center > img {
+    height: auto;
+    overflow-y: hidden;
+  }
+
+
+  /*** PROJECTS ***/
+  .projects-carousel {
+    height: 360px;
+    width: 100vw;
+    margin-left: -15px;
+    margin-top: -145px;
+    color: #fff;
+  }
+
+  #projects-carousel {
+    padding-top: 30px;
+  }
+
+  #projects-carousel > .carousel-text {
+    font-weight: 200;
+    padding-top: 10px;
+    width: 100% !important;
+  }
+
+  #projects-carousel > .carousel-text > h1 {
+    font-weight: 100;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 2px;
+  }
+
+  #projects-carousel > .carousel-text > .project-charity {
+    font-size: 16px;
+    margin: 10px 0;
+  }
+
+  #project-carousel .carousel-wrapper, #appeal-carousel .carousel-wrapper {
+    height: 340px;
+    padding-top: 10px;
+    right: 10%;
+    left: 10%;
+    width: 80%;
+    color: #fff;
+  }
+
+  #projects-carousel > .circle-image-wrapper {
+    width: 100% !important;
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*** Desktop ***/
+
+@media screen and (min-width: 760px) {
+  /**
+	*
+	*  Global scrollbar settings
+	*
+	**/
+
+	::-webkit-scrollbar {
+		width: 4px;
+	}
+
+	::-webkit-scrollbar-track {
+		background: #fff;
+		box-shadow: inset 0 0 3px grey;
+	}
+
+	::-webkit-scrollbar-thumb {
+		background: rgba(#56a7ad, 0.8);
+		transition: 0.2s all ease-in-out;
+	}
+
+	::-webkit-scrollbar-thumb:hover {
+		background: rgba(25, 152, 162, 0.55);
+		cursor: pointer !important;
+	}
+
+
+
+  .home-section {
+    width: 100%;
+    height: auto;
+  }
+
+  /** Splash Section **/
+
+  .home-splash-wrapper {
+    background-position: top right;
+    height: 100vh;
+  }
+
+  #home-splash-logo {
+    height:650px;
+    width: 710px;
+    position: relative;
+    transform: translate(-160px, 20px);
+    opacity: 0.05;
+    left: -100px;
+    top: 40px;
+    bottom: 50px;
+  }
+
+  .home-splash-text {
+    transform: translateY(-450px);
+  }
+
+  .home-splash-text > .home-splash-title {
+    font-size: 40px;
+    font-weight: 100;
+    letter-spacing: 3px;
+  }
+
+  .home-splash-text > .section-heading-border {
+    width: 26%;
+    border-bottom: 0.5px solid #fff;
+    margin: 20px 0 40px 0;
+  }
+
+  .home-splash-text > .home-splash-subtitle {
+    font-size: 16px;
+    font-weight: 200;
+    letter-spacing: 1px;
+  }
+
+  .home-splash-btn {
+    margin-top: 100px;
+  }
+
+  .home-splash-btn > a {
+    font-size: 16px;
+  }
+
+  .home-splash-btn > a:hover {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  /** Pilot section **/
+  .home-pilot-wrapper {
+    margin: 100px 0;
+    height: 450px;
+  }
+
+  .home-pilot-text {
+    margin-left: 10%;
+  }
+
+  .home-pilot-text > .home-pilot-title {
+    font-size: 32px;
+    font-weight: 400;
+    letter-spacing: 6px;
+  }
+
+  .home-pilot-text > .section-heading-border {
+    margin: 20px 0 40px 0;
+  }
+
+  .home-pilot-text > .home-pilot-subtitle {
+    font-size: 20px;
+  }
+
+  .home-pilot-graphs {
+    height: 200px;
+  }
+
+  .subtitle-title {
+    font-size: 24px;
+  }
+
+  .graph-text {
+    padding-left: 30px;
+    padding-top: 10px;
+    font-size: 10px;
+  }
+
+  .graph-text > .graph-text-title {
+    font-size: 18px;
+  }
+
+  .graph-text > .graph-text-subtitle {
+    font-size: 12px;
+  }
+
+  #pilot-image {
+    position: sticky;
+  }
+
+  #pilot-image > img {
+    height: 450px;
+    position: sticky;
+    transform: translate(140px, -500px);
+    width: auto;
+    z-index: -100;
+  }
+
+  .home-pilot-btn {
+    margin-top: 30px;
+    transform: translateY(-450px);
+  }
+
+
+
+  /** Project section **/
+
+  .home-projects-wrapper {
+    padding-top: 100px;
+  }
+
+  #home-projects-logo {
+    transform: translate(-20px, -60px);
+    left: -100px;
+  }
+
+  .home-projects-text > .section-heading-border {
+    width: 16%;
+  }
+
+  .home-projects-text > .home-projects-subtitle {
+    font-size: 12px;
+  }
+
+  .subtitle-title {
+    font-size: 16px;
+  }
+
+  .home-project {
+    height: 100%;
+  }
+
+  .home-projects-btn {
+    margin-top: 100px;
+    text-align: center;
+    transform: translateY(-200px);
+  }
+
+  .home-projects-btn > a {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-decoration: none;
+    font-weight: 200;
+    color: #fff;
+    padding-bottom: 5px;
+
+    transition: 0.5s all ease-out;
+    -webkit-transition: 0.5s all ease-out;
+    -moz-transition: 0.5s all ease-out;
+
+  }
+
+  .home-projects-btn > a:hover {
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+
+  /** Charity section **/
+
+  .home-charities-wrapper {
+    padding: 80px 0 40px;
+  }
+
+  .charity-logo {
+    width: 100%;
+    height: auto !important;
+    margin: auto;
+  }
+
+  .charity-logo.charity-logo-homepage {
+    height: 100px !important;
+    width: auto;
+  }
+
+  /** Fundraise section **/
+
+  .home-fundraise-wrapper {
+    height: 465px;
+  }
+
+  #home-fundraise-logo {
+    transform: translate(-20px, -40px);
+  }
+
+  .home-fundraise-text > .home-fundraise-title {
+    font-size: 30px;
+  }
+
+  .home-fundraise-text > .section-heading-border {
+    width: 16%;
+  }
+
+  .home-fundraise-text > .home-fundraise-subtitle {
+    font-size: 12px;
+    letter-spacing: 4px;
+  }
+
+  .home-fundraise-form {
+    margin-top: -150px;
+  }
+
+  #form-email {
+    padding-right: 65px;
+    margin-top: 50px;
+  }
+
+  #form-title {
+    padding-right: 65px;
+    margin-top: -10px;
+  }
+
+  #form-send {
+    padding-top: 70px;
+  }
+
+  /***** GLOBAL STYLING ACROSS HOMEPAGES ******/
+
+  .splash-text {
+    width: 40%;
+  }
+
+  .splash-text > .section-heading-border {
+    margin: 20px 0 40px 0;
+  }
+
+  .title {
+    font-size: 30px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+  }
+
+  .section-text {
+    width: 40%;
+  }
+
+  .section-text > .section-heading-border {
+    width: 26%;
+    border-bottom: 1px solid #353e42;
+    margin: 20px 0 40px 0;
+  }
+
+  .left {
+    float: left;
+  }
+
+  .home-section > .right {
+    float: right;
+    text-align: right;
+    margin-left: 0;
+    margin-right: 5%;
+  }
+
+  .right > .section-heading-border {
+    right: 0;
+    float: right;
+  }
+
+  .links {
+    margin-top: 20px;
+    width: 80%;
+    margin-left: 10%;
+    padding-top: 20px;
+  }
+
+  .link {
+    list-style: none !important;
+    text-align: center;
+  }
+
+  .link > a {
+    font-size: 16px;
+    font-weight: 400 !important;
+    letter-spacing: 2px;
+    color: #1998a4;
+
+    transition: 0.2s all ease-out;
+    -webkit-transition: 0.2s all ease-out;
+    -moz-transition: 0.2s all ease-out;
+  }
+
+  .link > a:hover {
+    color: rgba(25, 152, 164, 0.64);
+  }
+
+
+  .dark-blue {
+    background: #1998a4;
+  }
+
+  .blue {
+    background: #46B3BC;
+  }
+
+
+  /** How It Works **/
+
+
+  .how-it-works > .splash {
+    height: 100vh;
+  }
+
+  #hiw-splash-graph {
+    height: 270px;
+    transform: translate(-10px, 20px);
+    left: -100px;
+    top: 40px;
+    bottom: 50px;
+  }
+
+  .giving-wrapper {
+    padding: 80px 0;
+    height: 400px;
+  }
+
+  #transparent-image {
+    position: sticky;
+  }
+
+  #transparent-image > img {
+    height: 450px;
+    position: sticky;
+    transform: translateX(100px);
+    width: auto;
+    z-index: 100;
+  }
+
+  #ethereum-image > img {
+    height: 300px;
+    position: sticky;
+    transform: translate(-60px, -60px);
+    width: auto;
+    z-index: 100;
+  }
+
+  .track-wrapper {
+    padding: 80px 0;
+    height: 700px;
+  }
+
+  .track-wrapper > .section-text  {
+    width: 400px;
+    transform: translateY(-60px);
+  }
+
+  .track-wrapper > .section-text > .title {
+    font-size: 47px;
+  }
+
+  .track-wrapper > .section-text > .section-heading-border {
+    width: 26%;
+    border-bottom: 1px solid #fff;
+    margin: 20px 0 40px 0;
+  }
+
+  .track-wrapper .section-text > .subtitle {
+    float: right;
+    font-size: 20px;
+  }
+
+  .track-fundraise-logo {
+    height: 200px;
+    width: 220px;
+    position: sticky;
+    transform: translate(-650px, -40px);
+    opacity: 0.1;
+    left: -100px;
+    bottom: 50px;
+  }
+
+  .wizard-screenshot {
+    height: 450px;
+    width: auto;
+    transform: translate(50px, 130px);
+  }
+
+  .edge-wrapper {
+    padding: 80px 0;
+  }
+
+  .edge-wrapper > .section-text  {
+    width: 400px;
+  }
+
+  .edge-wrapper > .section-text > .title {
+    font-size: 47px;
+  }
+
+  .edge-wrapper > .section-text > .section-heading-border {
+    margin: 60px 0 60px 0;
+  }
+
+  .edge-wrapper .section-text > .subtitle {
+    font-size: 20px;
+  }
+
+  #edge-screenshot {
+    margin-right: 150px;
+  }
+
+  #edge-screenshot > img {
+    height: 450px;
+    transform: translateX(-50px);
+  }
+
+  /** Geek Mode **/
+
+  .eth-wrapper {
+    padding: 80px 0;
+    height: 350px;
+  }
+
+  .eth-wrapper > .section-text {
+    width: 50%;
+  }
+
+  #donation-icon {
+    height: 250px;
+    transform: translate(100px, 30px);
+  }
+
+  .support-wrapper {
+    padding: 80px 0;
+    color: #fff;
+    height: 520px;
+  }
+
+  .support-wrapper > .section-text  {
+    transform: translateY(-120px);
+  }
+
+  .donate-ether {
+    transform: translateY(-40px);
+  }
+
+  .find-more-wrapper {
+    padding: 50px 0;
+  }
+
+  .find-more-wrapper > .title > .section-heading-border {
+    width: 680px;
+  }
+
+  .link:first-child, .link:nth-child(2) {
+    padding-top: 13px;
+  }
+
+  .subtitle > a {
+    color: #fff;
+    font-weight: 200;
+
+
+    transition: 0.3s all ease-out;
+    -webkit-transition: 0.3s all ease-out;
+    -moz-transition: 0.3s all ease-out;
+  }
+
+  .eth-account-subtitle > a {
+    color: #1998a4;
+  }
+
+  .subtitle > a:hover {
+    cursor: pointer;
+    color: #c3c3c3;
+  }
+
+  .etheroscope-wrapper, .eth-account-wrapper {
+    padding: 80px 0 80px 80px;
+  }
+
+  .etheroscope-wrapper > .track-fundraise-logo {
+    transform: translate(-985px, -40px);
+  }
+
+  .etheroscope-wrapper {
+    width: 100%;
+  }
+
+  .eth-account-wrapper > .left > .section-heading-border,
+  .questions > .question > .section-heading-border {
+    border-color: #353e42;
+  }
+
+  .question {
+    padding: 0 60px 60px;
+  }
+
+  .faq > .splash {
+    margin-bottom: 60px;
+  }
+}
