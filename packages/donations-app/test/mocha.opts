@@ -1,1 +1,1 @@
-test/controllers
+test/controllers --timeout 60000
