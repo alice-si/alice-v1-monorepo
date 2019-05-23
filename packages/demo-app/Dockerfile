@@ -5,8 +5,8 @@ FROM alice-monorepo:${VERSION}
 WORKDIR /usr/src/app/packages/demo-app
 
 # Compile contracts & build app.
-RUN npm run compile
-RUN npm run build
+RUN yarn compile
+RUN yarn build
 
 # Serve static files with nginx.
 FROM nginx:1.15

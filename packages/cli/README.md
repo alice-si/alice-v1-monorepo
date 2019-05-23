@@ -6,6 +6,6 @@ and deployments.
 ## Usage
 
 ```
-sudo npm link
+yarn link
 alice-cli --help
 ```

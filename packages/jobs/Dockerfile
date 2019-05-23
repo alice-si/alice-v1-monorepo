@@ -5,4 +5,4 @@ FROM alice-monorepo:${VERSION}
 WORKDIR /usr/src/app/packages/demo-app
 
 # Build contracts.
-RUN npm run compile
+RUN yarn compile

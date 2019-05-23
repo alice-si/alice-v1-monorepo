@@ -21,15 +21,15 @@ should already have everything you need installed.
 
 To run all of the smart contract tests, use the following truffle command in your console:
 
-    npx truffle test
+    yarn truffle test
 
 If you are using the testrpc client, remember to start it with a sufficient number of test accounts:
 
-    npx ganache-cli -a 100
+    yarn ganache-cli -a 100
 
 You can also use an automated test script instead of the previous two commands:
 
-    npm run test
+    yarn test
 
 ## Contributions
 

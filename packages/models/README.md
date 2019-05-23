@@ -12,4 +12,4 @@ const Mail = require('@alice-si/models/mail')(mongoose);
 
 ## Tests
 
-Can be run with `npm test`.
+Can be run with `yarn test`.

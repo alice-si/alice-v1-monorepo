@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "scripts": {
     "postinstall": "bower install --allow-root --force-latest",
-    "pretest": "npx alice-cli generate-keys ./secrets/keys/",
+    "pretest": "yarn alice-cli generate-keys ./secrets/keys/",
     "test": "mocha",
     "e2e-load": "bash ./scripts/e2e-test.sh ./test/e2e/load.js",
     "e2e": "bash ./scripts/e2e-test.sh ",

@@ -10,20 +10,14 @@ jobs:
     executor: node-executor
     steps:
       - checkout
-      - run:
-          # See https://circleci.com/docs/2.0/caching/
-          name: collect-lock-files
-          command: find . -name package-lock.json | xargs sha256sum >.circleci.depcache
       - restore_cache:
-          key: npm-v1-{{ checksum ".circleci.depcache" }}
+          # See https://circleci.com/docs/2.0/caching/
+          key: npm-v2-{{ checksum "yarn.lock" }}
       - run:
           name: install
-          command: npm install
-      - run:
-          name: lerna-bootstrap
-          command: npx lerna bootstrap
+          command: yarn
       - save_cache:
-          key: npm-v1-{{ checksum ".circleci.depcache" }}
+          key: npm-v2-{{ checksum "yarn.lock" }}
           paths:
             - ./node_modules
             - ./packages/cli/node_modules
@@ -43,7 +37,7 @@ jobs:
           at: .
       - run:
           name: test
-          command: npx lerna run test --stream
+          command: yarn lerna run test --stream
   docker-build:
     docker:
       - image: google/cloud-sdk

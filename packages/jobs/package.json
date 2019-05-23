@@ -7,8 +7,8 @@
   "license": "MIT",
   "scripts": {
     "start": "node server.js",
-    "compile": "truffle compile --contracts_directory=./node_modules/@alice-si/contracts/contracts",
-    "pretest": "npx alice-cli generate-keys ./secrets/keys/ && npm run compile",
+    "compile": "./scripts/compile.sh",
+    "pretest": "yarn alice-cli generate-keys ./secrets/keys/ && yarn compile",
     "test": "./scripts/test.sh",
     "load-test": "./scripts/load-test.sh"
   },

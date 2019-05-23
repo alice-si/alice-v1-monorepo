@@ -9,13 +9,10 @@ Please refer to individual projects' README files for detailed description.
 
 ## Building
 
-After you have cloned the repo, you should install dependencies with
-the following commands:
+You should have Yarn installed.
 
-```
-npm install
-npx lerna bootstrap
-```
+After you have cloned the repo, you should install dependencies with
+`yarn`.
 
 Then, navigate to the project of interest and follow the instructions in
 its README file.
