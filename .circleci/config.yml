@@ -37,7 +37,7 @@ jobs:
           at: .
       - run:
           name: test
-          command: yarn lerna run test --concurrency 1 --stream
+          command: yarn lerna run test --concurrency 4 --stream
   docker-build:
     docker:
       - image: google/cloud-sdk
