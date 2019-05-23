@@ -37,7 +37,7 @@ jobs:
           at: .
       - run:
           name: test
-          command: yarn lerna run test --stream
+          command: yarn lerna run test
   docker-build:
     docker:
       - image: google/cloud-sdk

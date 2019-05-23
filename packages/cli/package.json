@@ -14,9 +14,6 @@
     "type": "git",
     "url": "git+https://github.com/alice-si/monorepo.git"
   },
-  "scripts": {
-    "test": "true"
-  },
   "dependencies": {
     "yargs": "^13.2.4"
   },
