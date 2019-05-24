@@ -22,7 +22,7 @@ angular.module('aliceApp')
 
         vm.approve = function(validation) {
           let modal = $uibModal.open({
-            templateUrl: '/components/validation/confirmationModal.html',
+            templateUrl: '/components/global/confirmationModal.html',
             controller: 'ValidationConfirmationController as confirmationCtrl',
             resolve: {
               validation: () => validation

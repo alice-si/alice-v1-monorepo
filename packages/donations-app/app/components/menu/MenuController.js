@@ -13,8 +13,8 @@ angular.module('aliceApp')
       'project',
       'project-simple',
       'validation-goals-dashboard',
+      'charity-dashboard-goals',
     ];
-
     $scope.menuColoured = false;
     $scope.breadcrumb = false;
     $scope.onDaiPage = false;

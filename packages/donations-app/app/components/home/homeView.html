@@ -79,10 +79,6 @@
     <div id="pilot-image" class="hidden-xs hidden-sm wow fadeInRight right">
       <img src="https://alex-s3-hatskier.s3.amazonaws.com/1534336890389_tom-parsons-426898-unsplash.jpg"/>
     </div>
-    <!-- Might remove -->
-    <!-- <div class="home-pilot-btn col-md-12">
-      <a href="#" class="underline-from-center">VIEW REPORT</a>
-    </div> -->
   </div>
 
   <div id="home-projects" class="home-projects-wrapper home-section col-md-12">
@@ -108,7 +104,7 @@
           <!--TODO parametrize the defualt landing mode for home page links -->
           <a href="/#/project/{{slide.projectCode}}/2">
             <div class="col-md-5 col-md-offset-1 col-xs-12 carousel-text">
-              <h1>{{ slide.projectTitle }}</h1>
+              <h1 style="color: #38D2DA;">{{ slide.projectTitle }}</h1>
               <div class="project-charity"> {{ slide.projectCharity }} </div>
               <div ng-bind-html="slide.projectDetails"></div>
             </div>
@@ -156,7 +152,6 @@
                 </error-message>
               </div>
             </div>
-            <!-- -->
             <div class="form-small" id="form-email" has-error>
               <label class="sr-only" for="contactEmail">Email</label>
               <div>

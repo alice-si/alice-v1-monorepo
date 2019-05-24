@@ -10,9 +10,10 @@
       </div>
 
       <div class="row">
-        <div project-validation-card
-             ng-repeat="project in summaryCtrl.projects"
+        <div ng-repeat="project in summaryCtrl.projects"
              class="col-sm-12 col-md-6 col-lg-4">
+             <dashboard-project-card dashboard="summaryCtrl.dashboardType" project="project">
+             </dashboard-project-card>
         </div>
       </div>
     </div>

@@ -1,8 +1,9 @@
 const Auth = require('../service/auth');
 const distinctColors = require('distinct-colors');
+const Utils = require('../service/utils');
+const Project = Utils.loadModel('project');
+const Validation = Utils.loadModel('validation');
 const asyncHandler = require('express-async-handler');
-const utils = require('../service/utils');
-const project = utils.loadModel('project');
 
 module.exports = function (app) {
 
@@ -13,6 +14,55 @@ module.exports = function (app) {
   app.get('/api/getDonationsForProjects', Auth.auth(), function (req, res) {
     return getDonationsForProjects(req.user).then(result => res.json(result));
   });
+
+  // Return an object
+  // { current_project: {}, validated: [], donated: [] }
+  // to be used for charity dashboard
+  app.get('/api/getImpactsForProject/:code', Auth.auth(), asyncHandler(async (req, res, next) => {
+      let project = await Project.findOne({ code: req.params.code });
+      if(!project) {
+        return req.status(400).send('Unknown project code');
+      }
+
+      let current_project = {
+        title: project.title,
+        img: project.img,
+        initializerImg: project.initializerImg,
+      };
+
+      let validated = await findAndPrepareGoals({
+        status: 'IMPACT_FETCHING_COMPLETED',
+        _projectId: project._id,
+      });
+
+      let donated = await findAndPrepareGoals({
+        status: 'CREATED',
+        _projectId: project._id,
+      });
+
+      res.status(200).json({ current_project, validated, donated });
+
+      async function findAndPrepareGoals(filter) {
+        let label = (filter.status == 'IMPACT_FETCHING_COMPLETED') ? 'totalValidated' : 'totalDonated';
+        return await Validation.aggregate([
+          {$match: filter},
+          {
+            $group : {
+              _id :  "$_outcomeId",
+              [label] : { $sum: "$amount" },
+            },
+          },
+          {
+            $lookup: {
+              from: 'outcomes',
+              localField: '_id',
+              foreignField: '_id',
+              as: 'outcome',
+            }
+          },
+        ]);
+      }
+  }));
 
   app.get('/api/getGoalsForProjects', Auth.auth(), asyncHandler(async (req, res) => {
     const colorHueMin = 200; // color hue for green color
@@ -38,7 +88,7 @@ module.exports = function (app) {
   }));
 
   var getProjectsForMain = function (user) {
-    return project.aggregate([
+    return Project.aggregate([
       {$match: getProjectsCondition(user)},
       addLookupToProject("donations", "_projectId", "donations", ["amount"], "DONATED"),
       {
@@ -66,14 +116,14 @@ module.exports = function (app) {
       {$addFields: {"goalsAchieved": {$size: "$validations"}}},
       addLookupToProject("impacts", "_projectId", "impacts", ["amount"]),
       {$addFields: {"received": {$sum: "$impacts.amount"}}},
-      utils.createProjection(["donated", "title", "img", "fundingTarget", "goalsAchieved", "received", "upfrontPayment", "code", "charity"])
+      Utils.createProjection(["donated", "title", "img", "fundingTarget", "goalsAchieved", "received", "upfrontPayment", "code", "charity"])
     ]);
   };
 
   var getDonationsForProjects = function (user) {
-    return project.aggregate([
+    return Project.aggregate([
       {$match: getProjectsCondition(user)},
-      utils.createProjection(["_id", "title", "upfrontPayment"]),
+      Utils.createProjection(["_id", "title", "upfrontPayment"]),
       {
         $lookup: {
           from: "validations",
@@ -87,7 +137,7 @@ module.exports = function (app) {
                 ]
               }
             },
-            utils.createProjection(["createdAt", "amount"]),
+            Utils.createProjection(["createdAt", "amount"]),
             {$sort: {createdAt: 1}},
           ],
           as: "validations"
@@ -106,7 +156,7 @@ module.exports = function (app) {
                 ]
               }
             },
-            utils.createProjection(["_userId", "createdAt", "amount"]),
+            Utils.createProjection(["_userId", "createdAt", "amount"]),
             {
               $group: {
                 _id: "$_userId",
@@ -131,7 +181,7 @@ module.exports = function (app) {
                     }
                   },
                   {$group: {_id: "$_userId", total: {$sum: "$amount"}}},
-                  utils.createProjection(["total"])
+                  Utils.createProjection(["total"])
                 ],
                 as: "paidOut"
               }
@@ -152,7 +202,7 @@ module.exports = function (app) {
               }
             },
             {$replaceRoot: {newRoot: "$user"}},
-            utils.createProjection([
+            Utils.createProjection([
               "total", "count", "last", "_id", "fullName", "giftAid", "agreeContact", "email", "paidOut"
             ]),
           ],
@@ -172,7 +222,7 @@ module.exports = function (app) {
                 ]
               }
             },
-            utils.createProjection(["amount", "createdAt"]),
+            Utils.createProjection(["amount", "createdAt"]),
             {$sort: {"createdAt": 1}}
           ],
           as: "donations"
@@ -182,7 +232,7 @@ module.exports = function (app) {
   };
 
   var getGoalsForProjects = function (user) {
-    return project.aggregate([
+    return Project.aggregate([
       {$match: getProjectsCondition(user)},
       {
         $lookup: {
@@ -197,18 +247,18 @@ module.exports = function (app) {
                 ]
               }
             },
-            utils.createProjection(["_outcomeId", "impact_fetchingTime"]),
+            Utils.createProjection(["_outcomeId", "impact_fetchingTime"]),
             {$sort: {impact_fetchingTime: 1}},
             {$group: {_id: "$_outcomeId", validations: {$push: {time: "$impact_fetchingTime"}}}},
             {$lookup: {from: "outcomes", localField: "_id", foreignField: "_id", as: "outcome"}},
             {$addFields: {title: "$outcome.title"}},
-            utils.createProjection(["_id", "title", "validations"]),
+            Utils.createProjection(["_id", "title", "validations"]),
             {$unwind: "$title"},
           ],
           as: "outcomes"
         }
       },
-      utils.createProjection(["_id", "title", "outcomes"])
+      Utils.createProjection(["_id", "title", "outcomes"])
     ]);
   };
 
@@ -229,7 +279,7 @@ module.exports = function (app) {
         {$match: {$expr: {$and: [ {$eq: ["$" + foreignField, "$$projectId"]}, {$eq: ["$status", statusForFilter]} ]}}}
       ];
     }
-    pipeline.push(utils.createProjection(fields));
+    pipeline.push(Utils.createProjection(fields));
     var res =
       {
         $lookup: {

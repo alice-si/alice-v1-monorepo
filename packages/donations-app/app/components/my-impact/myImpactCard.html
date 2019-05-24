@@ -5,10 +5,10 @@
         <div class="col-lg-9 col-xs-12">
           {{ project.title }}
         </div>
-        <a href="project/{{project.code}}" class="col-xs-8 hidden-md hidden-lg square-button">
+        <a href="project/{{project.code}}" class="col-xs-8 hidden-md hidden-lg white-button">
           Boost Donation
         </a>
-        <a href="project/{{project.code}}" class="col-lg-3 hidden-xs square-button">
+        <a href="project/{{project.code}}" class="col-lg-3 hidden-xs white-button">
           Boost Donation
         </a>
       </div>
@@ -32,42 +32,42 @@
           chart-labels="doughnut.labels"
           chart-colors="doughnut.colours"
           chart-options="doughnut.options">
-        </canvas>
-      </div>
-      <!-- Only shows when at least one impact has been made -->
-      <div class="col-lg-7 col-xs-12 project-card-text" ng-if="project.impacts">
-        <div class="project-card-default" ng-if="currentGoal === undefined">
-          <h2>See which goals your donation&#39;s been spent on</h2>
-          <div class="rect"></div>
-          <h3>Hover over the graph to see how your money’s made an impact through this project’s goals.</h3>
+          </canvas>
         </div>
-        <div ng-repeat="goal in project.impacts" index="$index">
-          <div class="project-card-active" ng-if="currentGoal === $index">
-            <h2 class="doughnut-title">{{ labels[$index] }}</h2>
+        <!-- Only shows when at least one impact has been made -->
+        <div class="col-lg-7 col-xs-12 project-card-text" ng-if="project.impacts">
+          <div class="project-card-default" ng-if="currentGoal === undefined">
+            <h2>See which goals your donation&#39;s been spent on</h2>
             <div class="rect"></div>
-            <h3>{{ data[$index] | money }} of your donation was pooled with other contributions to pay for this impact.
-            </h3>
+            <h3>Hover over the graph to see how your money’s made an impact through this project’s goals.</h3>
+          </div>
+          <div ng-repeat="goal in project.impacts" index="$index">
+            <div class="project-card-active" ng-if="currentGoal === $index">
+              <h2 class="doughnut-title">{{ labels[$index] }}</h2>
+              <div class="rect"></div>
+              <h3>{{ data[$index] | money }} of your donation was pooled with other contributions to pay for this impact.
+              </h3>
+            </div>
           </div>
         </div>
-      </div>
-      <!-- Default card to show how impacts would be displayed -->
-      <div class="col-lg-7 col-xs-12 project-card-text" ng-if="!project.impacts">
-        <div class="project-card-default" ng-if="currentGoal === undefined">
-          <h2>Your charity is currently working hard to achieve their goals</h2>
-          <div class="rect"></div>
-          <h3>This graph is an example of how we display how much impact your money has made to this project’s goals.</h3>
-        </div>
-        <div ng-repeat="goal in labels" index="$index">
-          <div class="project-card-active" ng-if="currentGoal === $index">
-            <h2 class="doughnut-title">{{ labels[$index] }}</h2>
+        <!-- Default card to show how impacts would be displayed -->
+        <div class="col-lg-7 col-xs-12 project-card-text" ng-if="!project.impacts">
+          <div class="project-card-default" ng-if="currentGoal === undefined">
+            <h2>Your charity is currently working hard to achieve their goals</h2>
             <div class="rect"></div>
-            <h3>
-              This is example displays how a portion of your donation will be pooled with other contributions to pay for this impact.
-            </h3>
+            <h3>This graph is an example of how we display how much impact your money has made to this project’s goals.</h3>
+          </div>
+          <div ng-repeat="goal in labels" index="$index">
+            <div class="project-card-active" ng-if="currentGoal === $index">
+              <h2 class="doughnut-title">{{ labels[$index] }}</h2>
+              <div class="rect"></div>
+              <h3>
+                This is example displays how a portion of your donation will be pooled with other contributions to pay for this impact.
+              </h3>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 </div>

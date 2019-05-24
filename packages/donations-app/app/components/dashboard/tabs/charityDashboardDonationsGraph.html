@@ -1,0 +1,44 @@
+<div>
+  <div class="donations">
+    <div class="row" style="margin-top: 55px;">
+      <div class="col-md-6 col-sm-6 col-xs-6">
+        <div class="donations-total-header">
+          <span class="circle" style="background-color: #1998a2;"></span>Total raised
+          <div class="donations-total-value">
+            {{donCtrl.donated | money}}
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-sm-6 col-xs-6">
+        <div class="donations-total-header">
+          <span class="circle" style="background-color: #B7B7B7;"></span>Total received
+          <div class="donations-total-value">
+            {{donCtrl.received | money}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <div class="flot-chart" ng-if="donCtrl.donationsChartData[0].data.length > 0 || donCtrl.donationsChartData[1].data.length > 0">
+      <div id="flot-tooltip"></div>
+      <div class="flot-chart-content">
+        <!-- <flot id="flot-chart" dataset="donCtrl.donationsChartData" options="donCtrl.donationsChartOptions" height="300px"></flot> -->
+        <canvas class="chart chart-line"
+                chart-data="data"
+                chart-labels="labels"
+                chart-series="series"
+                chart-options="options"
+                chart-click="onClick"
+                chart-colors="colors"
+                width="400"
+                height="150">
+        </canvas>
+      </div>
+      <div class="y-label">Donations('000)</div>
+    </div>
+  </div>
+</div>

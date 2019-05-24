@@ -1,0 +1,20 @@
+<div class="panel-heading">
+  <h4 class="panel-title">
+    <a href
+       class="accordion-toggle"
+       ng-click="toggleOpen()"
+       uib-accordion-transclude="heading">
+       <span uib-accordion-header>
+         {{ heading }}
+       </span>
+       <i class="pull-up glyphicon"
+          ng-class="isOpen ? 'glyphicon-chevron-down' : 'glyphicon-chevron-up'"></i>
+    </a>
+  </h4>
+</div>
+<div class="panel-collapse collapse"
+     uib-collapse="!isOpen">
+     <div class="panel-body"
+          ng-transclude>
+      </div>
+</div>

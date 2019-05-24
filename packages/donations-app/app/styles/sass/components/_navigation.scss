@@ -1,0 +1,389 @@
+/* MENU */
+
+#navbar-menu {
+    height: $menu-height;
+    position: fixed;
+    z-index: 1000;
+    background: rgba(0,0,0,0);
+    color: #000;
+    width: 100%;
+    @include transition(0.5s, all, ease-out);
+}
+
+.navbar-hide {
+  top: -75px;
+}
+
+.menu-coloured {
+  height: $menu-height;
+  position: static;
+  z-index: 900;
+  background: $alice-blue !important;
+  color: #000;
+  width: 100%;
+}
+
+#menu-top:hover, #menu-login:hover, #menu-sign-up:hover {
+  cursor: pointer;
+}
+
+.alice-logo {
+    position: relative;
+}
+
+.alice-logo img{
+    margin: 25px -20px 0 20px;
+    height: 30px;
+}
+
+ul.menu {
+    position: relative;
+    margin-top: 30px;
+    list-style-type: none;
+}
+
+ul.menu-left {
+    float: left;
+    position: relative;
+    margin-left: 30px;
+    margin-top: 32px;
+}
+
+ul.menu-left li {
+    float: left;
+}
+
+ul.menu-right {
+    float: right;
+    margin-right: 50px;
+}
+
+ul.menu-right li {
+    float: right;
+}
+
+#menu-login {
+  margin: 0 22px !important;
+}
+
+/*** UNDERLINE ANIMATIONS ***/
+
+
+/* Underline From Center */
+.underline-from-center {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  position: relative;
+  overflow: hidden;
+
+  &:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    left: 51%;
+    right: 51%;
+    bottom: 0;
+    background: #fff;
+    height: 1px;
+    -webkit-transition-property: left, right;
+    transition-property: left, right;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+  }
+
+  &:hover:before, &:focus:before, &:active:before {
+    left: 0;
+    right: 0;
+  }
+}
+
+.underline-from-center-dark {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  position: relative;
+  overflow: hidden;
+
+  &:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    left: 51%;
+    right: 51%;
+    bottom: 0;
+    background: rgba(#353e42, 0.73);
+    height: 1px;
+    -webkit-transition-property: left, right;
+    transition-property: left, right;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+  }
+
+  &:hover:before, &:focus:before, &:active:before {
+    left: 0;
+    right: 0;
+  }
+}
+
+
+.landing-page {
+  .menu-item a {
+    font-size: 15px;
+    font-weight: 200;
+    color: #fff;
+    margin-left: 20px;
+    padding-bottom: 3px;
+  }
+
+  li:first-child a {
+    margin-left: 0 !important;
+    display: block;
+    width: 100%;
+  }
+
+  .text-center h1 {
+    font-size: 3rem;
+  }
+
+  section .text-center p {
+    font-size: 1.6rem;
+    font-weight: 300;
+  }
+
+  .navbar-default .nav li a {
+    text-transform: none;
+    padding-right: 0px;
+  }
+
+  ul.menu-mobile {
+    right: 0;
+    left: auto;
+    border-radius: 0;
+    top: 73px;
+    background-color: rgb(185, 185, 185);
+  }
+
+  ul.menu-mobile a {
+    color: #fff;
+    padding: 10px 0 10px 10px;
+    border-bottom: 1px solid #fff;
+    margin: 0;
+  }
+
+  ul.menu-mobile li div {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  ul.menu-mobile a:last-child {
+    border-bottom: none !important;
+  }
+
+  .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover {
+    border-top: 6px solid transparent;
+  }
+
+  .navbar-default .nav li a {
+    font-family: "Helvetica Neue", "Helvetica", "Liberation Sans", "Arial", sans-serif;
+    font-size: 2.0rem;
+    font-weight: 400;
+    color: #fff !important;
+  }
+
+  .navbar-scroll.navbar-default .nav li a:hover {
+      color: #1998A2;
+  }
+
+  .navbar-fixed-top.navbar-scroll {
+      border-bottom: 0 !important;
+  }
+}
+
+span.divider {
+    text-transform: none;
+    padding-left: 5px;
+    margin-right: -15px;
+    color: #1998a2;
+}
+
+.hamburger {
+    font-size: 30px;
+    position: absolute;
+    padding: 0 0 5px 0;
+    cursor: pointer;
+    right: 0;
+    margin-right: -30px;
+    margin-top: 13px;
+    top: 0;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+@media (max-width: 800px) {
+  .alice-logo {
+      margin-top: 0;
+  }
+
+  .alice-logo img {
+      height: 28px !important;
+      margin-top: 18px;
+  }
+
+  .menu-coloured {
+    height: 65px;
+    position: static;
+    z-index: 1000;
+    background: #1998a5 !important;
+    color: #000;
+    width: 100%;
+  }
+
+  .menu-top {
+      height: 40px;
+      width: 100%;
+  }
+}
+
+@media (max-width: 990px) {
+    .alice-logo {
+        margin-top: 0;
+    }
+
+    .alice-logo img {
+        height: 80px;
+    }
+
+    .menu-top {
+        height: 75px;
+    }
+}
+
+
+/* No header border */
+
+@media (max-width: 768px) {
+    .landing-page .navbar-scroll .navbar-nav > li > a {
+        padding: 0px !important;
+    }
+}
+
+.nav .open>a, .nav .open>a:focus, .nav .open>a:hover {
+    border-color: white;
+}
+
+span.menu-arrow {
+    font-family: 'FontAwesome';
+    margin-left: 5px;
+
+    &:before {
+        content: "\f107";
+    }
+}
+.open span.menu-arrow:before {
+    content: "\f106";
+}
+
+/**
+    .user-menu is the drop-down menu we
+    use in the top-right of the page
+**/
+
+.user-menu {
+  z-index: 1000;
+  background: rgba(143, 143, 143, 0.65);
+
+  li div {
+     padding: 5px 5px 5px 10px;
+     border-bottom: 1px solid #fff;
+     -webkit-transform: perspective(1px) translateZ(0);
+     transform: perspective(1px) translateZ(0);
+     box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+     position: relative;
+     -webkit-transition-property: color;
+     transition-property: color;
+     -webkit-transition-duration: 0.3s;
+     transition-duration: 0.3s;
+
+     &:last-child {
+       border-bottom: none;
+     }
+
+     /* Sweep To Right */
+     &:before {
+       content: "";
+       position: absolute;
+       z-index: -1;
+       top: 0;
+       left: 0;
+       right: 0;
+       bottom: 0;
+       background: rgba(255, 255, 255,0.4);
+       -webkit-transform: scaleX(0);
+       transform: scaleX(0);
+       -webkit-transform-origin: 0 50%;
+       transform-origin: 0 50%;
+       -webkit-transition-property: transform;
+       transition-property: transform;
+       -webkit-transition-duration: 0.3s;
+       transition-duration: 0.3s;
+       -webkit-transition-timing-function: ease-out;
+       transition-timing-function: ease-out;
+     }
+
+     &:hover, &:focus, &:active {
+       color: white;
+       cursor: pointer;
+     }
+
+     &:hover:before, &:focus:before, &:active:before {
+       -webkit-transform: scaleX(1);
+       transform: scaleX(1);
+     }
+
+     a {
+         font-size: 1.8rem !important;
+     }
+  }
+}
+
+.dropdown-menu {
+  border: medium none;
+  border-radius: 3px;
+  box-shadow: 0 0 3px rgba(86, 96, 117, 0.7);
+  display: none;
+  float: left;
+  font-size: 12px;
+  left: 0;
+  list-style: none outside none;
+  padding: 0;
+  position: absolute;
+  text-shadow: none;
+  top: 100%;
+  z-index: 999;
+
+  > li > a {
+    border-radius: 3px;
+    color: inherit;
+    line-height: 25px;
+    margin: 4px;
+    text-align: left;
+    font-weight: normal;
+
+    .font-bold {
+      font-weight: 600;
+    }
+  }
+}
+
+.dropdown-toggle {
+    background-color: transparent !important;
+}

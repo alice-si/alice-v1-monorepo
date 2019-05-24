@@ -5,6 +5,7 @@ angular.module('aliceApp')
       '$http', '$scope', 'API',
       function ($http, $scope, API) {
         let vm = this;
+        vm.dashboardType = 'validation';
 
         vm.projects = [];
 
@@ -22,6 +23,6 @@ angular.module('aliceApp')
     ])
   .directive('projectValidationCard', () => {
     return {
-      templateUrl: '/components/validation/projectCard.html',
+      templateUrl: '/components/global/projectCard.html',
     };
   });

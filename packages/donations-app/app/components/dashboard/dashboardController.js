@@ -6,6 +6,7 @@ angular.module('aliceApp')
     vm.projectSelected = [];
     /*jshint -W030 */
     vm.activeProject;
+    vm.dashboardType = 'dashboard';
 
     const modes = { 'OVERALL' : 0, 'SINGULAR' : 1, 'DONATIONS': 2, 'GOALS': 3 };
 
@@ -62,40 +63,13 @@ angular.module('aliceApp')
 
     return vm;
   }])
-  .directive('dashboardOverview', function() {
+  .directive('dashboardProjectCard', () => {
     return {
       scope: {
-        model: '=',
-        setproject: '&'
-      },
-      templateUrl: '/components/dashboard/projectsView.html',
-      link: function ($scope, $attrs) {
-        $scope.setProjectTo = function (project, code) {
-          $scope.setproject({ project: project, code: code });
-        };
-      }
-    };
-  })
-  .directive('dashboardProject', function() {
-    return {
-      scope: {
+        dashboard: '=',
         project: '=',
-        setproject: '&'
       },
-      templateUrl: '/components/dashboard/singleProjectView.html',
-      link: function ($scope, $attrs) {
-        $scope.setProjectTo = function (project, code) {
-          $scope.setproject({ project: project, code: code });
-        };
-      }
-    };
-  })
-  .directive('dashboardGoals', function() {
-    return {
-      scope: {
-        activeProject: '=',
-      },
-      templateUrl: '/components/dashboard/goalsView.html'
+      templateUrl: '/components/global/projectCard.html',
     };
   })
   .directive('dashboardDonations', function() {

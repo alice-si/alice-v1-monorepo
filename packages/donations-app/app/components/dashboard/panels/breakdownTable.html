@@ -1,0 +1,32 @@
+<table id="goalsBreakdown" class="alice-table">
+   <tr>
+      <td><p>Goal</p></td>
+      <td><p>Target</p></td>
+      <td><p>Current Progress</p></td>
+      <td><p>Cost Per Goal</p></td>
+      <td><p>Total Cost</p></td>
+      <td><p>Money Received</p></td>
+   </tr>
+   <tr ng-repeat="goal in outcomes"
+       style="border-bottom: 1px solid {{goal.outcome[0].color}};
+              color: {{goal.outcome[0].color}};">
+      <td>
+         {{ goal.outcome[0].title }}
+      </td>
+      <td>
+         {{ goal.outcome[0].target }}
+      </td>
+      <td>
+         {{ goal.totalValidated / goal.outcome[0].costPerUnit }}
+      </td>
+      <td>
+         {{ goal.outcome[0].costPerUnit | money }}
+      </td>
+      <td>
+         {{ goal.outcome[0].amount | money }}
+      </td>
+      <td>
+         {{ goal.totalValidated | money }}
+      </td>
+   </tr>
+</table>

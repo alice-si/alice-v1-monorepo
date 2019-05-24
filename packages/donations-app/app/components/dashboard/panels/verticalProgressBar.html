@@ -1,0 +1,20 @@
+<div class="col-md-3 vertical-progress-bar">
+  <div class="col-md-12">
+  <h4 class="vertical-progress-bar__percentage"
+      style="color: {{color}}">
+        {{percentage | limitTo : 3}}% Complete
+  </h4>
+  <div class="progress vertical-progress-bar__frame">
+    <div class="vertical-progress-bar__bar"
+         role="progressbar"
+         aria-valuenow="30"
+         aria-valuemin="0"
+         aria-valuemax="100"
+         style="background:{{color}}; height: {{percentage}}%">
+    </div>
+  </div>
+  </div>
+  <div class="vertical-progress-bar__title">
+    <p style="color: {{color}}">{{ outcomeTitle }}</p>
+  </div>
+</div>

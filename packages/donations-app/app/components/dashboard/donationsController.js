@@ -4,6 +4,52 @@ angular.module('aliceApp')
     vm.auth = AuthService;
     vm.mode = $stateParams.tab;
 
+
+    // For temporary Chart.js Donations Graph
+    // Recreating the donations model based on discussions.
+    $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
+    $scope.series = ['Series A'];
+    $scope.data = [
+      [65, 59, 80, 81, 56, 55, 40]
+    ];
+    $scope.onClick = function (points, evt) {
+      console.log(points, evt);
+    };
+    $scope.datasetOverride = [{ yAxisID: 'y-axis-1' }];
+    $scope.options = {
+      scales: {
+        responsive: false,
+        yAxes: [
+          {
+            id: 'y-axis-1',
+            type: 'linear',
+            display: true,
+            position: 'left',
+            ticks: {
+                suggestedMin: 0,    // minimum will be 0, unless there is a lower value.
+                suggestedMax: 100,
+            }
+          }
+        ],
+        xAxes: [{
+          ticks: {
+            fontFamily: "Avenir",
+            fontColor: "#707070",
+          }
+        }],
+      },
+      elements: {
+        line: {
+          fill: false,
+          tension: 0.1,
+          cubicInterpolationMode: 'monotone',
+        }
+      }
+    };
+    $scope.colors = ['#1998a2'];
+    // Ends here.
+    
+
     const MAX_DATE_MARGIN = {number: 1, unit: 'months'};
     const MIN_DATE_MARGIN = {number: -1, unit: 'months'};
 
@@ -33,9 +79,6 @@ angular.module('aliceApp')
           project.selected = true;
           return project;
         });
-        if(activeProject) {
-          vm.projectsWithDonations = vm.projectsWithDonations.filter(project => project.title == activeProject.title);
-        }
       });
 
       $scope.$watch("donCtrl.projectsWithDonations", function () {

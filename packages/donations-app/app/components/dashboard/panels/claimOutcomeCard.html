@@ -1,0 +1,32 @@
+<div class="alice-card">
+  <div class="title-over-image grad-bottom">
+    <img src="{{ outcome.outcome[0].image }}"
+         alt="Image for {{ outcome.outcome[0].title }}"
+         class="goal-card__image" />
+    <h4 class="title-over-image__title white">{{ outcome.outcome[0].title }}</h4>
+  </div>
+
+  <div class="alice-card__content">
+    <h4 class="col-md-12">Proof</h4>
+    <div class="col-md-12">
+      <h5>Proof Required</h5>
+      <p>Proof type</p>
+    </div>
+    <div class="col-md-12">
+      <!-- Need to change model to allow for validator details -->
+      <h5>Validator's Email Address</h5>
+      <p>validator@email.com</p>
+    </div>
+    <p class="col-md-6">No of people providing proof for</p>
+    <div class="col-md-6">
+      <input ng-model="quantity"
+             class="col-md-12"/>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="alice-card__buttons">
+      <button ng-click="claimFn(outcome, quantity)"
+              class="small-button__main">Submit</button>
+    </div>
+  </div>
+</div>

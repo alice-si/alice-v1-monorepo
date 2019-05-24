@@ -1,0 +1,16 @@
+#loading-screen {
+  background: $alice-dark;
+  height: 100vh;
+  width: 100vw;
+  color: #fff;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+
+  img {
+    margin-left: 100px;
+    display: block;
+    max-height: 70px;
+    width: auto;
+  }
+}

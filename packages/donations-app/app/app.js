@@ -81,6 +81,14 @@ angular.module('aliceApp', ['ui.router', 'angular-jwt', 'ui.bootstrap', 'ui.boot
         url: '/validation/:project',
         templateUrl: '/components/validation/goalsDashboard.html'
       })
+			.state('dashboard', {
+        url: '/dashboard/',
+        templateUrl: '/components/dashboard/charityDashboardHome.html'
+      })
+      .state('charity-dashboard-goals', {
+        url: '/dashboard/:project',
+        templateUrl: '/components/dashboard/charityDashboardView.html'
+      })
       .state('checkout', {
         url: '/checkout/:projectCode',
         templateUrl: '/components/checkout/checkoutView.html'
@@ -105,10 +113,6 @@ angular.module('aliceApp', ['ui.router', 'angular-jwt', 'ui.bootstrap', 'ui.boot
       .state('validations', {
         url: '/validations/',
         templateUrl: '/components/backoffice/validationsView.html'
-      })
-      .state('dashboard', {
-        url: '/dashboard/:tab',
-        templateUrl: '/components/dashboard/dashboardView.html'
       })
       .state('impacts', {
         url: '/impacts/',

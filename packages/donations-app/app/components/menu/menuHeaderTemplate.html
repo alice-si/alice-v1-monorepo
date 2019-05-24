@@ -19,13 +19,13 @@
                            target="validation/"
                            label="Validator dashboard"></menu-item>
                 <menu-item ng-if="menuCtrl.auth.isManager()"
-                           target="dashboard/main"
+                           target="dashboard/"
                            label="My Dashboard"></menu-item>
                 <menu-item target="geek-mode/" label="Geek Mode"></menu-item>
                 <menu-item target="faq/" label="FAQ" last="true"></menu-item>
             </ul>
 
-            <ul class="menu menu-right col-sm-3 col-md-3">
+            <ul class="menu menu-right col-sm-4 col-md-4">
                 <li class="menu-item" ng-show="!menuCtrl.auth.getLoggedUser()">
                     <a id="menu-login" class="page-scroll" ng-click="menuCtrl.logIn()">
                     <span class="underline-from-center">Log in</span>
@@ -136,7 +136,7 @@
                         FAQ
                     </a>
 
-                    <a href="/dashboard/main" ng-if="menuCtrl.auth.isManager()">
+                    <a href="/dashboard" ng-if="menuCtrl.auth.isManager()">
                         Dashboard
                     </a>
 
@@ -157,4 +157,3 @@
         </div>
     </div>
 </div>
-

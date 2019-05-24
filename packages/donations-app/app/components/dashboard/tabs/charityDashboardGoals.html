@@ -1,0 +1,52 @@
+<div class="col-xs-12 col-sm-6 col-md-12">
+  <div ng-hide="goals.length > 0">
+    <h3>
+      No goals have been created/validated yet. Please check back again later.
+    </h3>
+  </div>
+  <uib-accordion ng-hide="goals.length === 0"
+                 close-others="false">
+    <div uib-accordion-group
+         template-url="/components/dashboard/panels/panel.html"
+         class="c-dashboard__panel"
+         heading="People Helped">
+         <div class="container">
+           <div ng-repeat="goal in goals track by $index">
+                <vertical-progress-bar color="goal.outcome[0].color"
+                                       percentage="goal.percentage"
+                                       outcome-title="goal.outcome[0].title">
+                </vertical-progress-bar>
+           </div>
+         </div>
+
+    </div>
+    <div uib-accordion-group
+         template-url="/components/dashboard/panels/panel.html"
+         class="c-dashboard__panel"
+         heading="Goals Breakdown">
+         <div class="alice-table-container col-md-12">
+         <breakdown-table outcomes="goals">
+         </breakdown-table>
+       </div>
+    </div>
+    <div uib-accordion-group
+         template-url="/components/dashboard/panels/panel.html"
+         class="c-dashboard__panel"
+         heading="People Helped over time">
+         <charity-dashboard-donations>
+         </charity-dashboard-donations>
+    </div>
+    <div uib-accordion-group
+         template-url="/components/dashboard/panels/panel.html"
+         class="c-dashboard__panel"
+         heading="Goals Claim"
+         id="claimGoals">
+         <div ng-repeat="goal in goals"
+              class="col-sm-12 col-md-6 col-md-4">
+              <claim-outcome-card outcome="goal"/>
+         </div>
+
+    </div>
+  </uib-accordion>
+
+</div>
