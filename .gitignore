@@ -25,5 +25,10 @@ secrets
 .idea
 .vscode
 
+# Deploy-script directories
+deploy-test/
+deploy-test.zip
+clone-db.sh
+
 # Trash
 .DS_Store

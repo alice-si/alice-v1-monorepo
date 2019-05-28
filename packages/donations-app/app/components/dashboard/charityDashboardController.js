@@ -1,5 +1,5 @@
 angular.module('aliceApp')
-  .controller('CharityDashboardController', ['AuthService', '$scope', '$http', 'API', '$stateParams',  '$uibModal', function (AuthService, $scope, $http, API, $stateParams, $uibModal) {
+  .controller('CharityDashboardController', ['AuthService', '$scope', '$http', 'API', '$stateParams', '$uibModal', function (AuthService, $scope, $http, API, $stateParams, $uibModal) {
     var vm = this;
     vm.auth = AuthService;
     vm.code = $stateParams.project;
@@ -9,9 +9,6 @@ angular.module('aliceApp')
     if (!AuthService.getLoggedUser()) {
       AuthService.showLogInModal();
     }
-
-    const MAX_DATE_MARGIN = {number: 1, unit: 'months'};
-    const MIN_DATE_MARGIN = {number: -1, unit: 'months'};
 
     loadGoalsSingle(vm.code);
 

@@ -2,8 +2,7 @@ angular.module('aliceApp')
   .controller('DashboardDonationsController', ['AuthService', '$http', 'API', 'Excel', '$timeout', '$stateParams', '$scope', '$filter', function (AuthService, $http, API, Excel, $timeout, $stateParams, $scope, $filter) {
     var vm = this;
     vm.auth = AuthService;
-    vm.mode = $stateParams.tab;
-
+    vm.code = $stateParams.project;
 
     // For temporary Chart.js Donations Graph
     // Recreating the donations model based on discussions.
@@ -48,7 +47,7 @@ angular.module('aliceApp')
     };
     $scope.colors = ['#1998a2'];
     // Ends here.
-    
+
 
     const MAX_DATE_MARGIN = {number: 1, unit: 'months'};
     const MIN_DATE_MARGIN = {number: -1, unit: 'months'};
@@ -67,23 +66,34 @@ angular.module('aliceApp')
     }
 
     /*jshint -W030 */
-    $scope.activeProject;
-    $scope.$watch('activeProject', function() {
-      loadDonationsData($scope.activeProject);
-    });
+    loadDonationsForProject(vm.code);
 
-    function loadDonationsData(activeProject) {
+    function loadDonationsForProject(code) {
+      $http.get(API + `getDonationsForProject/${code}`).then(function (result) {
+        vm.projectWithDonations = result.data;
+        console.log(result.data);
+        if(vm.projectWithDonations) {
+          vm.projectWithDonations.dates = [];
+          vm.projectWithDonations.createdAt.map(elem => {
+            vm.projectWithDonations.dates.push(moment(elem.createdAt).format("MM/DD/YYYY"));
+          });
+          console.log(vm.donations);
+        }
+
+      });
+    }
+
+
+    // Multiple projects
+    function loadDonationsForProjects() {
       $http.get(API + 'getDonationsForProjects').then(function (result) {
         vm.projectsWithDonations = result.data;
+        console.log(vm.projectsWithDonations);
         vm.projectsWithDonations = vm.projectsWithDonations.map(project => {
           project.selected = true;
           return project;
         });
       });
-
-      $scope.$watch("donCtrl.projectsWithDonations", function () {
-        reloadDonationsData();
-      }, true);
     }
 
     function reloadDonationsData() {

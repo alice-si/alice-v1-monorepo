@@ -3,6 +3,7 @@ const distinctColors = require('distinct-colors');
 const Utils = require('../service/utils');
 const Project = Utils.loadModel('project');
 const Validation = Utils.loadModel('validation');
+const Donation = Utils.loadModel('donation');
 const asyncHandler = require('express-async-handler');
 
 module.exports = function (app) {
@@ -14,6 +15,85 @@ module.exports = function (app) {
   app.get('/api/getDonationsForProjects', Auth.auth(), function (req, res) {
     return getDonationsForProjects(req.user).then(result => res.json(result));
   });
+
+  app.get('/api/getDonationsForProject/:code', Auth.auth(), asyncHandler(async (req, res, next) => {
+      let project = await Project.findOne({ code: req.params.code });
+      if(!project) {
+        return req.status(400).send('Unknown project code');
+      }
+
+      let donations = await findAndPrepareDonations({
+        status: 'ACTIVE',
+        _id: project._id,
+      });
+
+
+      res.status(200).json(donations);
+
+      async function findAndPrepareDonations(filter) {
+        return await Project.aggregate([
+          {$match: filter},
+          Utils.createProjection(["_id"]),
+          {
+            $lookup: {
+              from: "validations",
+              let: {projectId: filter._id},
+              pipeline: [
+                {
+                  $match: {
+                    $and: [
+                      {$expr: {$eq: ["$_projectId", "$$projectId"]}},
+                      {$expr: {$eq: ["$status", "IMPACT_FETCHING_COMPLETED"]}}
+                    ]
+                  }
+                },
+                Utils.createProjection(["createdAt", "amount"]),
+                {$sort: {createdAt: 1}},
+              ],
+              as: "validations"
+            }
+          },
+          {
+            $lookup: {
+              from: "donations",
+              let: {projectId: filter._id},
+              pipeline: [
+                {
+                  $match: {
+                    $and: [
+                      {$expr: {$eq: ["$_projectId", "$$projectId"]}},
+                      {$expr: {$eq: ["$status", "DONATED"]}}
+                    ]
+                  }
+                },
+                {
+                  $project:
+                  {
+                    _id: false,
+                    amount: true,
+                    day: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
+                  }
+                },
+                {
+                  $group: {
+                    _id: { createdAt : "$day" },
+                    total: { $sum: "$amount" }
+                  }
+                },
+                {
+                  $addFields: {
+                    createdAt: "$_id.createdAt"
+                  }
+                },
+                Utils.createProjection(["total", "createdAt"])
+                // {$sort: {"createdAt": 1}}
+              ],
+              as: "donations"
+            }
+          }
+        ]);
+      }
+  }));
 
   // Return an object
   // { current_project: {}, validated: [], donated: [] }
