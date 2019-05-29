@@ -4,51 +4,6 @@ angular.module('aliceApp')
     vm.auth = AuthService;
     vm.code = $stateParams.project;
 
-    // For temporary Chart.js Donations Graph
-    // Recreating the donations model based on discussions.
-    $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
-    $scope.series = ['Series A'];
-    $scope.data = [
-      [65, 59, 80, 81, 56, 55, 40]
-    ];
-    $scope.onClick = function (points, evt) {
-      console.log(points, evt);
-    };
-    $scope.datasetOverride = [{ yAxisID: 'y-axis-1' }];
-    $scope.options = {
-      scales: {
-        responsive: false,
-        yAxes: [
-          {
-            id: 'y-axis-1',
-            type: 'linear',
-            display: true,
-            position: 'left',
-            ticks: {
-                suggestedMin: 0,    // minimum will be 0, unless there is a lower value.
-                suggestedMax: 100,
-            }
-          }
-        ],
-        xAxes: [{
-          ticks: {
-            fontFamily: "Avenir",
-            fontColor: "#707070",
-          }
-        }],
-      },
-      elements: {
-        line: {
-          fill: false,
-          tension: 0.1,
-          cubicInterpolationMode: 'monotone',
-        }
-      }
-    };
-    $scope.colors = ['#1998a2'];
-    // Ends here.
-
-
     const MAX_DATE_MARGIN = {number: 1, unit: 'months'};
     const MIN_DATE_MARGIN = {number: -1, unit: 'months'};
 
@@ -66,23 +21,7 @@ angular.module('aliceApp')
     }
 
     /*jshint -W030 */
-    loadDonationsForProject(vm.code);
-
-    function loadDonationsForProject(code) {
-      $http.get(API + `getDonationsForProject/${code}`).then(function (result) {
-        vm.projectWithDonations = result.data;
-        console.log(result.data);
-        if(vm.projectWithDonations) {
-          vm.projectWithDonations.dates = [];
-          vm.projectWithDonations.createdAt.map(elem => {
-            vm.projectWithDonations.dates.push(moment(elem.createdAt).format("MM/DD/YYYY"));
-          });
-          console.log(vm.donations);
-        }
-
-      });
-    }
-
+    reloadDonationsData();
 
     // Multiple projects
     function loadDonationsForProjects() {

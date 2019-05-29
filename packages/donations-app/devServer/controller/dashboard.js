@@ -23,10 +23,9 @@ module.exports = function (app) {
       }
 
       let donations = await findAndPrepareDonations({
-        status: 'ACTIVE',
+        // status: 'ACTIVE',
         _id: project._id,
       });
-
 
       res.status(200).json(donations);
 
@@ -47,8 +46,27 @@ module.exports = function (app) {
                     ]
                   }
                 },
-                Utils.createProjection(["createdAt", "amount"]),
-                {$sort: {createdAt: 1}},
+                {
+                  $project:
+                  {
+                    _id: false,
+                    amount: true,
+                    day: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
+                  }
+                },
+                {
+                  $group: {
+                    _id: { createdAt : "$day" },
+                    total: { $sum: "$amount" }
+                  }
+                },
+                {
+                  $addFields: {
+                    createdAt: "$_id.createdAt"
+                  }
+                },
+                Utils.createProjection(["total", "createdAt"]),
+                {$sort: {"createdAt": 1}}
               ],
               as: "validations"
             }
@@ -85,8 +103,8 @@ module.exports = function (app) {
                     createdAt: "$_id.createdAt"
                   }
                 },
-                Utils.createProjection(["total", "createdAt"])
-                // {$sort: {"createdAt": 1}}
+                Utils.createProjection(["total", "createdAt"]),
+                {$sort: {"createdAt": 1}}
               ],
               as: "donations"
             }

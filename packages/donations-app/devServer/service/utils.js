@@ -16,7 +16,7 @@ function Utils() {
 }
 
 function loadModel(name) {
-  return require('alice-model/' + name)(Mongoose);
+  return require('@alice-si/models/' + name)(Mongoose);
 }
 
 Utils.loadModel = loadModel;

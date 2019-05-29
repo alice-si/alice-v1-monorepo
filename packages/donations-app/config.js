@@ -15,7 +15,6 @@ config.isProductionMode = function () {
 }
 
 function getEnv(variable, defaultForLocal) {
-  console.log(process.env);
   if (process.env[variable]) {
     return process.env[variable];
   } else if (defaultForLocal !== undefined && mode === 'local') {
