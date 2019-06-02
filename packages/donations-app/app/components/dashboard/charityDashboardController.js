@@ -79,12 +79,12 @@ angular.module('aliceApp')
       templateUrl: '/components/dashboard/panels/verticalProgressBar.html',
     };
   })
-  .directive('breakdownTable', function() {
+  .directive('goalsBreakdownTable', function() {
     return {
       scope: {
         outcomes: '=',
       },
-      templateUrl: '/components/dashboard/panels/breakdownTable.html'
+      templateUrl: '/components/dashboard/panels/goalsBreakdownTable.html'
     };
   })
   .directive('claimOutcomeCard', () => {

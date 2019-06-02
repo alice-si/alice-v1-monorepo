@@ -22,6 +22,7 @@ angular.module('aliceApp')
 
     /*jshint -W030 */
     reloadDonationsData();
+    console.log(vm);
 
     // Multiple projects
     function loadDonationsForProjects() {

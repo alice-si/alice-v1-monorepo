@@ -78,7 +78,7 @@ module.exports = function (app) {
                 {
                   $group: {
                     _id: { createdAt : "$day" },
-                    total: { $sum: "$amount" }
+                    amount: { $sum: "$amount" }
                   }
                 },
                 {
@@ -86,8 +86,8 @@ module.exports = function (app) {
                     createdAt: "$_id.createdAt"
                   }
                 },
-                Utils.createProjection(["total", "createdAt"])
-                // {$sort: {"createdAt": 1}}
+                Utils.createProjection(["amount", "createdAt"]),
+                {$sort: {"createdAt": 1}}
               ],
               as: "donations"
             }
@@ -114,7 +114,7 @@ module.exports = function (app) {
       // Info required for outcome-claim cards
       let goals = await findGoals({
         _projectId: project._id,
-      })
+      });
 
       let validated = await findAndPrepareGoals({
         status: 'IMPACT_FETCHING_COMPLETED',
@@ -153,7 +153,7 @@ module.exports = function (app) {
         return await Outcome.aggregate([
           {$match: id},
           Utils.createProjection(["_id", "image", "title"]),
-        ])
+        ]);
       }
   }));
 

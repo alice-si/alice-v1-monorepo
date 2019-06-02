@@ -85,6 +85,13 @@ angular.module('aliceApp')
           cleanDataForLineChart(vm.projectWithDonations[0].donations, 0);
           cleanDataForLineChart(vm.projectWithDonations[0].validations, 0);
           vm.donationsData = [vm.projectWithDonations[0].donations, vm.projectWithDonations[0].validations];
+          vm.totalValidated = vm.projectWithDonations[0].validations.reduce((acc, e) => {
+            return acc + e.y;
+          }, 0) * 100;
+          vm.totalDonated = vm.projectWithDonations[0].donations.reduce((acc, e) => {
+            return acc + e.y;
+          }, 0) * 100;
+          console.log(vm.donationsData);
         }
       });
     }
@@ -93,8 +100,8 @@ angular.module('aliceApp')
       array.forEach(elem => {
         elem.x = elem.createdAt;
         vm.dates.push(elem.x);
-        elem.y = elem.total / 100;
-        delete elem.total;
+        elem.y = elem.amount / 100;
+        delete elem.amount;
         delete elem.createdAt;
         return elem;
       });

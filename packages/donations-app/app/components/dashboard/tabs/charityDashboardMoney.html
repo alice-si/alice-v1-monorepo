@@ -1,4 +1,5 @@
-<div class="col-xs-12 col-sm-6 col-md-12">
+<div class="col-xs-12 col-sm-6 col-md-12"
+     ng-controller="CharityDashboardMoneyController as donCtrl">
   <div ng-hide="donations.length > 0">
     <h3>
       Donations are yet to be raised for this project. Please check back again later.
@@ -25,25 +26,21 @@
          class="c-dashboard__panel"
          heading="Money Breakdown">
          <div class="alice-table-container col-md-12">
-         <breakdown-table outcomes="goals">
-         </breakdown-table>
+         <donations-breakdown-table outcomes="goals">
+         </donations-breakdown-table>
        </div>
+    </div>
+    <div uib-accordion-group
+         template-url="/components/dashboard/panels/panel.html"
+         class="c-dashboard__panel"
+         heading="Donations details">
+
     </div>
     <div uib-accordion-group
          template-url="/components/dashboard/panels/panel.html"
          class="c-dashboard__panel"
          heading="Money raised over time"
          id="claimGoals">
-         <div ng-repeat="goal in goals"
-              class="col-sm-12 col-md-6 col-md-4">
-              <claim-outcome-card outcome="goal"/>
-         </div>
-
-    </div>
-    <div uib-accordion-group
-         template-url="/components/dashboard/panels/panel.html"
-         class="c-dashboard__panel"
-         heading="Donations details">
          <!-- <charity-dashboard-donations>
          </charity-dashboard-donations> -->
     </div>
