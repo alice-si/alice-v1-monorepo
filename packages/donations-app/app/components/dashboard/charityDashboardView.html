@@ -27,7 +27,9 @@
       <uib-tabset type="pills" class="alice-tabset goals-dash__tabset">
         <uib-tab active="true" heading="Goals">
           <div class="row">
-            <charity-dashboard-goals goals="dashCtrl.outcomes">
+            <charity-dashboard-goals outcomes-donated-to="dashCtrl.donated_outcomes"
+                                     outcomes-validated="dashCtrl.validated_outcomes"
+                                     outcomes-of-project="dashCtrl.general_outcomes">
             </charity-dashboard-goals>
           </div>
         </uib-tab>

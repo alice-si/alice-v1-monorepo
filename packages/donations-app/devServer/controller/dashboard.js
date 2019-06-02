@@ -2,6 +2,7 @@ const Auth = require('../service/auth');
 const distinctColors = require('distinct-colors');
 const Utils = require('../service/utils');
 const Project = Utils.loadModel('project');
+const Outcome = Utils.loadModel('outcome');
 const Validation = Utils.loadModel('validation');
 const Donation = Utils.loadModel('donation');
 const asyncHandler = require('express-async-handler');
@@ -27,6 +28,7 @@ module.exports = function (app) {
         _id: project._id,
       });
 
+
       res.status(200).json(donations);
 
       async function findAndPrepareDonations(filter) {
@@ -46,27 +48,8 @@ module.exports = function (app) {
                     ]
                   }
                 },
-                {
-                  $project:
-                  {
-                    _id: false,
-                    amount: true,
-                    day: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
-                  }
-                },
-                {
-                  $group: {
-                    _id: { createdAt : "$day" },
-                    total: { $sum: "$amount" }
-                  }
-                },
-                {
-                  $addFields: {
-                    createdAt: "$_id.createdAt"
-                  }
-                },
-                Utils.createProjection(["total", "createdAt"]),
-                {$sort: {"createdAt": 1}}
+                Utils.createProjection(["createdAt", "amount"]),
+                {$sort: {createdAt: 1}},
               ],
               as: "validations"
             }
@@ -103,8 +86,8 @@ module.exports = function (app) {
                     createdAt: "$_id.createdAt"
                   }
                 },
-                Utils.createProjection(["total", "createdAt"]),
-                {$sort: {"createdAt": 1}}
+                Utils.createProjection(["total", "createdAt"])
+                // {$sort: {"createdAt": 1}}
               ],
               as: "donations"
             }
@@ -114,7 +97,7 @@ module.exports = function (app) {
   }));
 
   // Return an object
-  // { current_project: {}, validated: [], donated: [] }
+  // { current_project: {}, validated: [], donated: [], goals: [] }
   // to be used for charity dashboard
   app.get('/api/getImpactsForProject/:code', Auth.auth(), asyncHandler(async (req, res, next) => {
       let project = await Project.findOne({ code: req.params.code });
@@ -128,6 +111,11 @@ module.exports = function (app) {
         initializerImg: project.initializerImg,
       };
 
+      // Info required for outcome-claim cards
+      let goals = await findGoals({
+        _projectId: project._id,
+      })
+
       let validated = await findAndPrepareGoals({
         status: 'IMPACT_FETCHING_COMPLETED',
         _projectId: project._id,
@@ -138,7 +126,7 @@ module.exports = function (app) {
         _projectId: project._id,
       });
 
-      res.status(200).json({ current_project, validated, donated });
+      res.status(200).json({ current_project, validated, donated, goals });
 
       async function findAndPrepareGoals(filter) {
         let label = (filter.status == 'IMPACT_FETCHING_COMPLETED') ? 'totalValidated' : 'totalDonated';
@@ -159,6 +147,13 @@ module.exports = function (app) {
             }
           },
         ]);
+      }
+
+      async function findGoals(id) {
+        return await Outcome.aggregate([
+          {$match: id},
+          Utils.createProjection(["_id", "image", "title"]),
+        ])
       }
   }));
 

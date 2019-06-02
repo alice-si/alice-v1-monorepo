@@ -85,10 +85,6 @@ angular.module('aliceApp')
           cleanDataForLineChart(vm.projectWithDonations[0].donations, 0);
           cleanDataForLineChart(vm.projectWithDonations[0].validations, 0);
           vm.donationsData = [vm.projectWithDonations[0].donations, vm.projectWithDonations[0].validations];
-          console.log(vm.donationsData);
-        }
-        else {
-          console.log('no donations');
         }
       });
     }

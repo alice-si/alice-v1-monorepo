@@ -4,7 +4,7 @@ angular.module('aliceApp')
     vm.auth = AuthService;
     vm.code = $stateParams.project;
     vm.loggedUser = vm.auth.getLoggedUser();
-    vm.validated_goals = [];
+    vm.validated_outcomes = [];
 
     if (!AuthService.getLoggedUser()) {
       AuthService.showLogInModal();
@@ -15,20 +15,23 @@ angular.module('aliceApp')
     function loadGoalsFromProject(code) {
       $http.get(API + `getImpactsForProject/${code}`).then(function (result) {
         vm.projectWithGoals = result.data;
-        if(vm.projectWithGoals.current_project) {
-          vm.project = result.data.current_project;
-        }
-        vm.outcomes = _.map(vm.projectWithGoals.donated, function(item) {
-          return _.extend(item, _.findWhere(vm.projectWithGoals.validated, { _id: item._id }));
-        });
-        vm.outcomes.forEach((e) => {
-          // Not checking for amount because it's a compulsory field
-          e.percentage = (e.totalValidated) ? 100 * (e.totalValidated / e.outcome[0].amount) : 0;
-          if(e.percentage >= 100) {
-            vm.validated_goals.push(e);
-            e.percentage = 0;
+        if(vm.projectWithGoals) {
+          if(vm.projectWithGoals.current_project) {
+            vm.project = result.data.current_project;
           }
-        });
+          vm.general_outcomes = vm.projectWithGoals.goals;
+          vm.donated_outcomes = _.map(vm.projectWithGoals.donated, function(item) {
+            return _.extend(item, _.findWhere(vm.projectWithGoals.validated, { _id: item._id }));
+          });
+          vm.donated_outcomes.forEach((e) => {
+            // Not checking for amount because it's a compulsory field
+            e.percentage = (e.totalValidated) ? 100 * (e.totalValidated / e.outcome[0].amount) : 0;
+            if(e.percentage >= 100) {
+              vm.validated_outcomes.push(e);
+              e.percentage = 0;
+            }
+          });
+        }
       });
     }
 
@@ -45,7 +48,9 @@ angular.module('aliceApp')
   .directive('charityDashboardGoals', function() {
     return {
       scope: {
-        goals: '=',
+        outcomesDonatedTo: '=',
+        outcomesValidated: '=',
+        outcomesOfProject: '=',
       },
       templateUrl: '/components/dashboard/tabs/charityDashboardGoals.html'
     };
