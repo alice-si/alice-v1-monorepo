@@ -1,4 +1,4 @@
-var Project = artifacts.require("Project");
+Project = artifacts.require("project");
 var AliceToken = artifacts.require("AliceToken");
 
 require("./test-setup");
@@ -20,20 +20,20 @@ contract('Escape', function(accounts) {
   });
 
   it("should mint tokens to project account", async function () {
-		(await token.balanceOf(project.address)).should.be.bignumber.equal(0);
+		(await token.balanceOf(project.address)).should.be.bignumber.equal('0');
 
     await token.mint(project.address, 30, {from: main, gas: 300000});
     await project.fund(30);
 
-		(await token.balanceOf(project.address)).should.be.bignumber.equal(30);
-		(await project.total.call()).should.be.bignumber.equal(30);
+		(await token.balanceOf(project.address)).should.be.bignumber.equal('30');
+		(await project.total.call()).should.be.bignumber.equal('30');
   });
 
   it("should allow escape to secure address", async function () {
     await project.escape(escapeAddress);
 
-		(await token.balanceOf(project.address)).should.be.bignumber.equal(0);
-		(await token.balanceOf(escapeAddress)).should.be.bignumber.equal(30);
+		(await token.balanceOf(project.address)).should.be.bignumber.equal('0');
+		(await token.balanceOf(escapeAddress)).should.be.bignumber.equal('30');
   });
 
 });

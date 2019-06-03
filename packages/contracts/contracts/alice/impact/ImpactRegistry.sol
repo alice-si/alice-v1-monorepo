@@ -1,4 +1,4 @@
-pragma solidity ^0.4.24;
+pragma solidity ^0.5.2;
 
 import 'openzeppelin-solidity/contracts/ownership/Ownable.sol';
 import 'openzeppelin-solidity/contracts/math/SafeMath.sol';
@@ -9,7 +9,7 @@ contract ImpactRegistry is Ownable {
   using SafeMath for uint256;
 
   modifier onlyMaster {
-    require (msg.sender == owner || msg.sender == masterContract);
+    require (msg.sender == owner() || msg.sender == masterContract);
     _;
   }
 

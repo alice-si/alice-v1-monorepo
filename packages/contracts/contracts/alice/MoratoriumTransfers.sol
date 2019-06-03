@@ -1,4 +1,4 @@
-pragma solidity ^0.4.24;
+pragma solidity ^0.5.2;
 
 import 'openzeppelin-solidity/contracts/token/ERC20/ERC20.sol';
 import './TwoPhaseTransfers.sol';
@@ -14,7 +14,7 @@ contract MoratoriumTransfers is TwoPhaseTransfers {
     uint public moratoriumPeriod;
 
 
-    constructor(uint _moratoriumPeriod, address[] _proposers, address[] _validators)
+    constructor(uint _moratoriumPeriod, address[] memory _proposers, address[] memory _validators)
         TwoPhaseTransfers(_proposers, _validators) public {
         moratoriumPeriod = _moratoriumPeriod;
     }

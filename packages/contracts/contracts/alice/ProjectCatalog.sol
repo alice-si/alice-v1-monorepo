@@ -1,4 +1,4 @@
-pragma solidity ^0.4.24;
+pragma solidity ^0.5.2;
 
 import 'openzeppelin-solidity/contracts/ownership/Ownable.sol';
 import './StringUtils.sol';
@@ -8,7 +8,7 @@ contract ProjectCatalog is Ownable {
 
     mapping (bytes32 => address) public projects;
 
-    function addProject(string _name, address _projectAddress) public onlyOwner {
+    function addProject(string memory _name, address _projectAddress) public onlyOwner {
         bytes32 nameAsBytes = _name.stringToBytes32();
         require(projects[nameAsBytes] == address(0));
         projects[nameAsBytes] = _projectAddress;
@@ -17,7 +17,7 @@ contract ProjectCatalog is Ownable {
 
     }
 
-    function getProjectAddress(string _name) public view returns(address) {
+    function getProjectAddress(string memory _name) public view returns(address) {
         bytes32 nameAsBytes = _name.stringToBytes32();
 
         return projects[nameAsBytes];

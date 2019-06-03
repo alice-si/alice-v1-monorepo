@@ -1,4 +1,4 @@
-pragma solidity ^0.4.24;
+pragma solidity ^0.5.2;
 
 import 'openzeppelin-solidity/contracts/token/ERC20/ERC20.sol';
 import 'openzeppelin-solidity/contracts/math/SafeMath.sol';
@@ -15,7 +15,7 @@ contract DonationWallet is Ownable {
     projectCatalog = _projectCatalog;
   }
 
-  function donate(uint _amount, string _projectName) public onlyOwner {
+  function donate(uint _amount, string memory _projectName) public onlyOwner {
     address projectAddress = projectCatalog.getProjectAddress(_projectName);
     require(projectAddress != address(0));
     ERC20 token = Project(projectAddress).getToken();
@@ -25,11 +25,11 @@ contract DonationWallet is Ownable {
   }
 
   function refund(ERC20 _token, uint _amount) public onlyOwner {
-    _token.transfer(owner, _amount);
+    _token.transfer(owner(), _amount);
   }
 
   function balance(ERC20 _token) public view returns(uint256){
-    return _token.balanceOf(this);
+    return _token.balanceOf(address(this));
   }
 
 }

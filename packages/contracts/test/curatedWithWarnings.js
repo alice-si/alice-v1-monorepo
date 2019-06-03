@@ -18,11 +18,11 @@ contract('CuratedWithWarnings', function(accounts) {
 	});
 
 	it("should correctly deposit tokens", async function() {
-		(await token.balanceOf(curatedWithWarnings.address)).should.be.bignumber.equal(100);
+		(await token.balanceOf(curatedWithWarnings.address)).should.be.bignumber.equal('100');
 	});
 
 	it("should create transfer proposal", async function() {
-		const {logs} = await curatedWithWarnings.proposeTransfer(token.address, target, 100);
+		const {logs} = await curatedWithWarnings.proposeTransfer(token.address, target, '100');
 		const event = logs.find(e => e.event === 'TransferProposed');
 		proposalId = event.args.id;
 	});
@@ -50,8 +50,8 @@ contract('CuratedWithWarnings', function(accounts) {
 	it("should confirm resumed transfer", async function() {
 		await curatedWithWarnings.confirmTransfer(proposalId);
 
-		(await token.balanceOf(curatedWithWarnings.address)).should.be.bignumber.equal(0);
-		(await token.balanceOf(target)).should.be.bignumber.equal(100);
+		(await token.balanceOf(curatedWithWarnings.address)).should.be.bignumber.equal('0');
+		(await token.balanceOf(target)).should.be.bignumber.equal('100');
 	});
 
 });

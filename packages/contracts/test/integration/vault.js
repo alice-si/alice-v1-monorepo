@@ -3,13 +3,8 @@ var AliceToken = artifacts.require("AliceToken");
 
 require("../test-setup");
 
-contract('Vault', function(accounts) {
+contract('Vault', function([owner, curator, whistleblower, target, proposer, validator]) {
 	var vault;
-	var curator = accounts[1];
-	var whistleblower = accounts[2];
-	var target = accounts[3];
-	var proposer = accounts[4];
-	var validator = accounts[5];
 	var token;
 	var proposalId;
 
@@ -20,7 +15,7 @@ contract('Vault', function(accounts) {
 	});
 
 	it("should correctly deposit tokens", async function() {
-		(await token.balanceOf(vault.address)).should.be.bignumber.equal(100);
+		(await token.balanceOf(vault.address)).should.be.bignumber.equal('100');
 	});
 
 	it("should create transfer proposal", async function() {
@@ -56,8 +51,8 @@ contract('Vault', function(accounts) {
 	it("should confirm resumed transfer", async function() {
     await vault.confirmTransfer(proposalId, {from: validator});
 
-    (await token.balanceOf(vault.address)).should.be.bignumber.equal(0);
-    (await token.balanceOf(target)).should.be.bignumber.equal(100);
+    (await token.balanceOf(vault.address)).should.be.bignumber.equal('0');
+    (await token.balanceOf(target)).should.be.bignumber.equal('100');
   });
 
   it("should fail to confirm transfer for non validator", async function() {

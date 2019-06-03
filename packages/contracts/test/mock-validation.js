@@ -1,5 +1,7 @@
 var MockValidation = artifacts.require("MockValidation");
 
+require("./test-setup");
+
 contract('Mock Validation', function(accounts) {
   var mockValidation;
 

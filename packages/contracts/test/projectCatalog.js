@@ -3,8 +3,7 @@ var Project = artifacts.require("Project");
 
 require("./test-setup");
 
-contract('ProjectCatalog', function(accounts) {
-	var owner = accounts[0];
+contract('ProjectCatalog', function() {
 	var project;
 	var projectCatalog;
 

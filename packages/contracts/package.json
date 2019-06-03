@@ -12,12 +12,15 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "chai": "^4.1.2",
+    "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
-    "chai-bignumber": "^2.0.1",
+    "chai-bn": "^0.1.1",
     "ganache-cli": "^6.0.3",
     "mocha-steps": "^1.3.0",
-    "truffle": "^4.1.13",
-    "truffle-contract": "^3.0.1"
+    "openzeppelin-solidity": "^2.2.0",
+    "openzeppelin-test-helpers": "^0.4.0",
+    "truffle": "^4.0.3",
+    "truffle-contract": "^3.0.1",
+    "web3": "^1.0.0-beta.55"
   }
 }

@@ -17,6 +17,8 @@ contract('Project with ClaimsRegistry scenario', ([owner, beneficiary, validator
   let linker;
   let claimsRegistry;
 
+  const OUTCOME = web3.utils.fromAscii('OUTCOME');
+
 
   step('contracts are deployed', async () => {
     project = await Project.new('TEST', 0);
@@ -41,31 +43,31 @@ contract('Project with ClaimsRegistry scenario', ([owner, beneficiary, validator
     wallet = await DonationWallet.new(catalog.address);
     await token.mint(wallet.address, 1000);
     await wallet.donate(1000, "TEST");
-    (await token.balanceOf(wallet.address)).should.be.bignumber.equal(0);
+    (await token.balanceOf(wallet.address)).should.be.bignumber.equal('0');
   });
 
 
   step('beneficiary claims an outcome', async () => {
-    let value = '0x' + web3.padLeft(web3.toHex(100).substr(2), 64);
-    await claimsRegistry.setClaim(project.address, 'OUTCOME', value, {from: beneficiary});
+    let value = '0x' + web3.utils.padLeft(web3.utils.toHex(100).substr(2), 64);
+    await claimsRegistry.setClaim(project.address, OUTCOME, value, {from: beneficiary});
   });
 
 
   step('validator approves the claim, funds are transferred to beneficiary', async () => {
-    await project.validateOutcome('OUTCOME', 100, {from: validator});
-    (await token.balanceOf(beneficiary)).should.be.bignumber.equal(100);
-    (await token.balanceOf(project.address)).should.be.bignumber.equal(900);
+    await project.validateOutcome(OUTCOME, 100, {from: validator});
+    (await token.balanceOf(beneficiary)).should.be.bignumber.equal('100');
+    (await token.balanceOf(project.address)).should.be.bignumber.equal('900');
   });
 
 
   step('validator cannot approve the same claim the second time', async () => {
-    await project.validateOutcome('OUTCOME', 100, {from: validator}).shouldBeReverted();
+    await project.validateOutcome(OUTCOME, 100, {from: validator}).shouldBeReverted();
   });
 
 
   step('funds are linked', async () => {
-    (await project.getBalance(wallet.address)).should.be.bignumber.equal(1000);
-    for (let i = 0; i < 10; i++) await impactRegistry.linkImpact('OUTCOME');
-    (await project.getBalance(wallet.address)).should.be.bignumber.equal(900);
+    (await project.getBalance(wallet.address)).should.be.bignumber.equal('1000');
+    for (let i = 0; i < 10; i++) await impactRegistry.linkImpact(OUTCOME);
+    (await project.getBalance(wallet.address)).should.be.bignumber.equal('900');
   });
 });
