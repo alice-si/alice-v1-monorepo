@@ -22,22 +22,15 @@
       </div>
     </div>
 
-
-
-
-    <div class="flot-chart" ng-if="donCtrl.donationsData.length > 0">
-      <div id="flot-tooltip"></div>
-      <div class="flot-chart-content">
-        <!-- <flot id="flot-chart" dataset="donCtrl.donationsChartData" options="donCtrl.donationsChartOptions" height="300px"></flot> -->
+    <div ng-if="donCtrl.donationsGraphData.length > 0">
         <canvas class="chart chart-line"
-                chart-data="donCtrl.donationsData"
+                chart-data="donCtrl.donationsGraphData"
                 chart-labels="donCtrl.dates"
                 chart-options="donCtrl.lineChartOptions"
                 chart-dataset-override="donCtrl.datasetOverride"
                 width="400"
                 height="150">
         </canvas>
-      </div>
     </div>
   </div>
 </div>

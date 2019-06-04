@@ -2,11 +2,7 @@ angular.module('aliceApp')
   .controller('DashboardDonationsController', ['AuthService', '$http', 'API', 'Excel', '$timeout', '$stateParams', '$scope', '$filter', function (AuthService, $http, API, Excel, $timeout, $stateParams, $scope, $filter) {
     var vm = this;
     vm.auth = AuthService;
-    vm.code = $stateParams.project;
-
-    const MAX_DATE_MARGIN = {number: 1, unit: 'months'};
-    const MIN_DATE_MARGIN = {number: -1, unit: 'months'};
-
+    vm.mode = $stateParams.tab;
 
     vm.exportToExcel = function () {
       Excel.tableToExcel('donations', 'donations', 'donations.xlsx');
@@ -21,19 +17,23 @@ angular.module('aliceApp')
     }
 
     /*jshint -W030 */
-    reloadDonationsData();
-    console.log(vm);
+    $scope.activeProject;
+    $scope.$watch('activeProject', function() {
+      loadDonationsData($scope.activeProject);
+    });
 
-    // Multiple projects
-    function loadDonationsForProjects() {
+    function loadDonationsData(activeProject) {
       $http.get(API + 'getDonationsForProjects').then(function (result) {
         vm.projectsWithDonations = result.data;
-        console.log(vm.projectsWithDonations);
         vm.projectsWithDonations = vm.projectsWithDonations.map(project => {
           project.selected = true;
           return project;
         });
       });
+
+      $scope.$watch("donCtrl.projectsWithDonations", function () {
+        reloadDonationsData();
+      }, true);
     }
 
     function reloadDonationsData() {
@@ -58,19 +58,13 @@ angular.module('aliceApp')
 
       var selectedDontaionsData = prepareDataForAccumulativeSortedChart(selectedData.donations);
       var selectedValidationsData = prepareDataForAccumulativeSortedChart(selectedData.validations);
-      var selectedDonationsUsersData = groupUsers(selectedData.donationsUsers);
-
-      vm.donationsChartOptions = prepareDonationsChartOptions(selectedDontaionsData);
-      vm.donationsChartData = [
-        {color: '#1998a2', points: {fillColor: "#1998a2"}},
-        {color: '#B7B7B7', points: {fillColor: "#B7B7B7"}}
-      ];
-      vm.donationsChartData[0].data = selectedDontaionsData;
-      vm.donationsChartData[1].data = selectedValidationsData;
-      vm.donations = selectedDonationsUsersData;
+      // var selectedDonationsUsersData = groupUsers(selectedData.donationsUsers);
+      // vm.donations = selectedDonationsUsersData;
+      vm.donations = selectedData.donationsUsers;
 
       var summary = countSummaryForSelectedProjects(selectedData);
       vm = Object.assign(vm, summary);
+      // console.log(vm.donations);
     }
 
     function countSummaryForSelectedProjects(selectedData) {
@@ -116,45 +110,6 @@ angular.module('aliceApp')
       );
 
       return Object.values(usersDict);
-    }
-
-    function prepareDonationsChartOptions(donations) {
-      var maxVal = donations.reduce((curMax, donation) => {
-          return Math.max(curMax, donation[1]);
-        },
-        0
-      );
-      return {
-        grid: {
-          borderWidth: {top: 0, right: 0, bottom: 1, left: 1},
-          borderColor: {left: "#1998a2", bottom: "#1998a2"},
-          labelMargin: 10,
-          hoverable: true,
-          color: "#B7B7B7"
-        },
-        xaxis: {
-          mode: "time",
-          minTickSize: [1, "day"],
-          monthNames: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
-          max: (moment(new Date()).add(MAX_DATE_MARGIN.number, MAX_DATE_MARGIN.unit)).valueOf()
-        },
-        yaxis:
-          {
-            min: 0,
-            max: maxVal,
-            tickSize: maxVal / 10
-          },
-        series: {
-          lines: {show: true, lineWidth: 2},
-          points: {show: true, radius: 2, fill: true}
-        },
-        tooltip: {
-          show: true,
-          content: function(label, xval, yval, flotItem) {
-            return $filter('money')(yval* 100000);
-          }
-        }
-      };
     }
 
     function removeTimeFromDate(date) {

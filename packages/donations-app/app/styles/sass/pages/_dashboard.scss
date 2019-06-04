@@ -455,25 +455,6 @@
   text-align: right;
 }
 
-.flot-chart {
-  margin: 50px 0 30px;
-  height: 400px;
-  position: relative;
-  padding:20px;
-  font-size: 1.5rem;
-  font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
-  font-weight: 300;
-
-}
-
-.flot-chart .y-label {
-  position: absolute;
-  top: 0;
-  left: 0;
-  font-weight: 100;
-  font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif;
-}
-
 .donations table.impact-table {
   margin-top: 30px;
 }
@@ -714,35 +695,30 @@ table.impact-table.my-impact td {
 
 /* Vertical Progress Bar Directive */
 
-.vertical-progress-bar {
-  &__frame {
-		width: 10px;
-		border-radius: 5px;
-		min-height: 250px;
-		display: flex;
-		align-items: flex-end;
-		margin: 0 auto;
-		box-shadow: none;
-		margin-bottom: 20px;
+
+.progress-bar {
+
+	&__sm {
+		max-width: 140px;
 	}
 
-	&__bar {
-	  width: 100%;
-	  height: 0;
-		box-shadow: 0 0 3px rgba(0,0,0,0.3);
-		border-top-left-radius: 5px;
-		border-top-right-radius: 5px;
-		@include transition(height, 0.6s, ease);
+	&__med {
+		max-width: 280px;
+		max-height: 8px;
+	}
+}
+
+.goal-progress-bar {
+  &__desc {
+		font-size: 12px !important;
 	}
 
 	&__percentage {
-		text-align: center;
 		width: 100%;
 	}
 
 	&__title {
 		width: 100%;
-		text-align: center;
 		margin-top: 20px;
 	}
 }

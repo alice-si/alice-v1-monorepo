@@ -1,0 +1,19 @@
+<div class="col-md-4 goal-progress-bar">
+  <h5 class="goal-progress-bar__title"
+      style="color: {{ color }}; letter-spacing: 1px;">
+      {{ outcomeTitle }}
+  </h5>
+  <p class="goal-progress-bar__desc"
+     style="color: {{color}}">
+     {{ outcomeDesc }}
+  </p>
+  <uib-progress class="progress-bar__med">
+      <uib-bar style="background-color: {{ color }}"
+               value="37">
+      </uib-bar>
+  </uib-progress>
+  <p class="goal-progress-bar__percentage"
+      style="color: {{color}}">
+        {{percentage | limitTo : 3}}% Complete
+  </p>
+</div>

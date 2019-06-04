@@ -3,8 +3,12 @@
 
   <div class="title-over-image grad-both">
     <div class="header-image" ng-style="{ 'background' : 'linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.8)), url(' + dashCtrl.project.img + ') no-repeat center' }">
+      <div class="container">
+        <div class="row">
+          <h3 class="white title-over-image__title">{{ dashCtrl.project.title }}</h3>
+        </div>
+      </div>
     </div>
-    <h3 class="white title-over-image__title">{{ dashCtrl.project.title }}</h3>
   </div>
 
   <protected-view validator-for-project="dashCtrl.project">
@@ -13,14 +17,14 @@
         <div class="col-xs-12">
           <h3 class="goals-dash__greeting">
             Hi {{ dashCtrl.loggedUser.firstName }}
-          </h3><br>
-          <p>
-            <ng-pluralize count="dashCtrl.validated_goals.length"
-                          when="{'0': 'No goals have been validated yet.',
-                                 '1': 'We have achieved 1 goal.',
-                                 'other': 'We have achieved {} goals.'}">
-            </ng-pluralize>
-          </p>
+            <span><p style="margin: 2px 0 0 5px;">
+              <ng-pluralize count="dashCtrl.validated_outcomes.length"
+                            when="{'0': '- No goals have been validated yet',
+                                   '1': '- We have achieved 1 goal',
+                                   'other': '- We have achieved {} goals'}">
+              </ng-pluralize>
+            </p></span>
+          </h3>
         </div>
       </div>
 

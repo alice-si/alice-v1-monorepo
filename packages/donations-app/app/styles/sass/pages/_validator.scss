@@ -28,7 +28,13 @@
   &__title {
     position: absolute;
     bottom: 0px;
-    margin: 30px 30px 15px;
+    margin: 0 0 30px 15px;
+
+    &-card {
+      position: absolute;
+      bottom: 0px;
+      margin: 20px;
+    }
   }
 
   .grad-bottom:before {
@@ -59,15 +65,16 @@
   }
 }
 
-.goals-dash {  
+.goals-dash {
   &__greeting {
-    margin: 20px 0 -20px;
+    margin: 32px 0 -20px;
     font-size: 2em;
     color: #333;
+    display: inline-flex;
   }
 
   &__tabset {
-    margin-top: 20px;
+    margin-top: 32px;
 
     a {
       font-family: 'Avenir';

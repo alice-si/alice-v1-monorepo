@@ -67,6 +67,55 @@ module.exports = function (app) {
                     ]
                   }
                 },
+                Utils.createProjection(["_userId", "createdAt", "amount"]),
+                {$lookup: {from: "users", localField: "_userId", foreignField: "_id", as: "user"}},
+                {$unwind: "$user"},
+                {
+                  $lookup: {
+                    from: "impacts",
+                    let: {userId: "$_id"},
+                    pipeline: [
+                      {
+                        $match: {
+                          $and: [
+                            {$expr: {$eq: ["$_projectId", "$$projectId"]}},
+                            {$expr: {$eq: ["$_userId", "$$userId"]}}
+                          ]
+                        }
+                      },
+                    ],
+                    as: "received"
+                  }
+                },
+                {
+                  $addFields: {
+                    "user.fullName": {$concat: ["$user.firstName", " ", "$user.lastName"]},
+                    "user.donated": "$amount",
+                    "user.date": "$createdAt",
+                    "user.received": "$received"
+                  }
+                },
+                {$replaceRoot: {newRoot: "$user"}},
+                Utils.createProjection([
+                  "donated", "date", "_id", "fullName", "giftAid", "agreeContact", "email", "received"
+                ]),
+              ],
+              as: "users"
+            }
+          },
+          {
+            $lookup: {
+              from: "donations",
+              let: {projectId: filter._id},
+              pipeline: [
+                {
+                  $match: {
+                    $and: [
+                      {$expr: {$eq: ["$_projectId", "$$projectId"]}},
+                      {$expr: {$eq: ["$status", "DONATED"]}}
+                    ]
+                  }
+                },
                 {
                   $project:
                   {

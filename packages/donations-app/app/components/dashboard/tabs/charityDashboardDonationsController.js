@@ -5,7 +5,11 @@ angular.module('aliceApp')
     vm.code = $stateParams.project;
     vm.allowPageLoad = false;
 
-    // Recreating the donations model based on discussions.
+    vm.sort = function (field) {
+      vm.sortField = field;
+    };
+
+    // Override default graph graph properties
     vm.datasetOverride = [{
       backgroundColor: "#1998A2",
       pointBackgroundColor: "rgba(25, 152, 162, 0.3)",
@@ -44,7 +48,6 @@ angular.module('aliceApp')
             position: 'left',
             ticks: {
                 suggestedMin: 0,
-                // minimum will be 0, unless there is a lower value.
             }
           }
         ],
@@ -84,18 +87,25 @@ angular.module('aliceApp')
         if(vm.projectWithDonations) {
           cleanDataForLineChart(vm.projectWithDonations[0].donations, 0);
           cleanDataForLineChart(vm.projectWithDonations[0].validations, 0);
-          vm.donationsData = [vm.projectWithDonations[0].donations, vm.projectWithDonations[0].validations];
+          vm.donationsGraphData = [vm.projectWithDonations[0].donations, vm.projectWithDonations[0].validations];
+          // Turn validation/donation amounts to £ prices
           vm.totalValidated = vm.projectWithDonations[0].validations.reduce((acc, e) => {
             return acc + e.y;
           }, 0) * 100;
           vm.totalDonated = vm.projectWithDonations[0].donations.reduce((acc, e) => {
             return acc + e.y;
           }, 0) * 100;
-          console.log(vm.donationsData);
+          // Concat user arrays into one: vm.users.
+          vm.users = vm.projectWithDonations[0].users.reduce((acc, elem) => {
+            acc = acc.concat(elem);
+            return acc;
+          }, []);
         }
       });
     }
 
+
+    // relabel object keys to: { x, y }
     function cleanDataForLineChart(array, datesIndex) {
       array.forEach(elem => {
         elem.x = elem.createdAt;

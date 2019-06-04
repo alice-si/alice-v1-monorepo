@@ -26,11 +26,15 @@ angular.module('aliceApp')
           vm.donated_outcomes.forEach((e) => {
             // Not checking for amount because it's a compulsory field
             e.percentage = (e.totalValidated) ? 100 * (e.totalValidated / e.outcome[0].amount) : 0;
+            e.percentageHeight = e.percentage;
             if(e.percentage >= 100) {
               vm.validated_outcomes.push(e);
-              e.percentage = 0;
+              e.percentage = 100 * (e.totalValidated / e.outcome[0].amount);
+              e.percentageHeight = 100;
             }
           });
+
+          console.log(vm.donated_outcomes);
         }
       });
     }
@@ -63,20 +67,27 @@ angular.module('aliceApp')
       templateUrl: '/components/dashboard/tabs/charityDashboardPeople.html'
     };
   })
-  .directive('charityDashboardDonations', function() {
+  .directive('charityDashboardDonationsGraph', function() {
     return {
-      templateUrl: '/components/dashboard/tabs/charityDashboardDonationsGraph.html',
+      templateUrl: '/components/dashboard/panels/donationsGraph.html',
       controller: 'CharityDashboardDonationsController as donCtrl',
     };
   })
-  .directive('verticalProgressBar', function() {
+  .directive('charityDashboardDonationsTable', function() {
+    return {
+      templateUrl: '/components/dashboard/panels/donationsTable.html',
+      controller: 'CharityDashboardDonationsController as donCtrl',
+    };
+  })
+  .directive('goalProgressBar', function() {
     return {
       scope: {
         color: '=',
         percentage: '=',
         outcomeTitle: '=',
+        outcomeDesc: '=',
       },
-      templateUrl: '/components/dashboard/panels/verticalProgressBar.html',
+      templateUrl: '/components/dashboard/panels/goalProgressBar.html',
     };
   })
   .directive('goalsBreakdownTable', function() {

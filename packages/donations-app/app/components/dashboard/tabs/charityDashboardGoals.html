@@ -18,13 +18,13 @@
               heading="People Helped">
               <div class="container">
                 <div ng-repeat="goal in outcomesDonatedTo track by $index">
-                     <vertical-progress-bar color="goal.outcome[0].color"
+                     <goal-progress-bar color="goal.outcome[0].color"
                                             percentage="goal.percentage"
-                                            outcome-title="goal.outcome[0].title">
-                     </vertical-progress-bar>
+                                            outcome-title="goal.outcome[0].title"
+                                            outcome-desc="goal.outcome[0].description">
+                     </goal-progress-bar>
                 </div>
               </div>
-
          </div>
          <div uib-accordion-group
               template-url="/components/dashboard/panels/panel.html"
@@ -35,13 +35,11 @@
               </goals-breakdown-table>
             </div>
          </div>
-         <div uib-accordion-group
+         <!-- <div uib-accordion-group
               template-url="/components/dashboard/panels/panel.html"
               class="c-dashboard__panel"
               heading="People Helped over time">
-              <charity-dashboard-donations>
-              </charity-dashboard-donations>
-         </div>
+         </div> -->
     </div>
     <div uib-accordion-group
          template-url="/components/dashboard/panels/panel.html"
