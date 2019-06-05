@@ -25,16 +25,13 @@ angular.module('aliceApp')
           });
           vm.donated_outcomes.forEach((e) => {
             // Not checking for amount because it's a compulsory field
-            e.percentage = (e.totalValidated) ? 100 * (e.totalValidated / e.outcome[0].amount) : 0;
-            e.percentageHeight = e.percentage;
-            if(e.percentage >= 100) {
-              vm.validated_outcomes.push(e);
-              e.percentage = 100 * (e.totalValidated / e.outcome[0].amount);
-              e.percentageHeight = 100;
-            }
+            e.progressInUnits = e.outcome[0].costPerUnit ? (e.totalValidated / e.outcome[0].costPerUnit) : 0;
+            // e.percentage = (e.totalValidated) ? 100 * (e.totalValidated / e.outcome[0].amount) : 0;
+            e.percentage = (e.progressInUnits / e.outcome[0].target) * 100;
+            vm.validated_outcomes.push(e);
+            // e.percentage = 100 * (e.totalValidated / e.outcome[0].amount);
           });
-
-          console.log(vm.donated_outcomes);
+          vm.projectValidator = vm.projectWithGoals.projectValidator;
         }
       });
     }
@@ -55,6 +52,7 @@ angular.module('aliceApp')
         outcomesDonatedTo: '=',
         outcomesValidated: '=',
         outcomesOfProject: '=',
+        projectValidator: '=',
       },
       templateUrl: '/components/dashboard/tabs/charityDashboardGoals.html'
     };
@@ -83,9 +81,9 @@ angular.module('aliceApp')
     return {
       scope: {
         color: '=',
+        progressInUnits: '=',
         percentage: '=',
-        outcomeTitle: '=',
-        outcomeDesc: '=',
+        outcome: '=',
       },
       templateUrl: '/components/dashboard/panels/goalProgressBar.html',
     };
@@ -103,6 +101,7 @@ angular.module('aliceApp')
       templateUrl: '/components/dashboard/panels/claimOutcomeCard.html',
       scope: {
         outcome: '=',
+        validator: '=',
       },
       controller: ['$scope', '$uibModal', function($scope, $uibModal) {
         // Claiming function for a validation

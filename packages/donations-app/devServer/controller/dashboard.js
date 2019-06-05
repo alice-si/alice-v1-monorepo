@@ -5,6 +5,7 @@ const Project = Utils.loadModel('project');
 const Outcome = Utils.loadModel('outcome');
 const Validation = Utils.loadModel('validation');
 const Donation = Utils.loadModel('donation');
+const User = Utils.loadModel('user');
 const asyncHandler = require('express-async-handler');
 
 module.exports = function (app) {
@@ -160,6 +161,10 @@ module.exports = function (app) {
         initializerImg: project.initializerImg,
       };
 
+      // Project validator
+      let projectValidator = await findValidatorEmail(project._id);
+      projectValidator = projectValidator[0];
+
       // Info required for outcome-claim cards
       let goals = await findGoals({
         _projectId: project._id,
@@ -175,7 +180,7 @@ module.exports = function (app) {
         _projectId: project._id,
       });
 
-      res.status(200).json({ current_project, validated, donated, goals });
+      res.status(200).json({ projectValidator, current_project, validated, donated, goals });
 
       async function findAndPrepareGoals(filter) {
         let label = (filter.status == 'IMPACT_FETCHING_COMPLETED') ? 'totalValidated' : 'totalDonated';
@@ -194,7 +199,7 @@ module.exports = function (app) {
               foreignField: '_id',
               as: 'outcome',
             }
-          },
+          }
         ]);
       }
 
@@ -203,6 +208,14 @@ module.exports = function (app) {
           {$match: id},
           Utils.createProjection(["_id", "image", "title"]),
         ]);
+      }
+
+      // Can be extended for proof type
+      async function findValidatorEmail(projectId) {
+        return await User.find(
+          { 'validator': { $eq: projectId }},
+          { email: 1, _id: 0 }
+        );
       }
   }));
 
