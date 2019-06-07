@@ -54,7 +54,7 @@ gulp.task("deploy-dev", ["set-dev-env", "clean-build-frontend-app", "validate-de
       DIST_PATH : paths.getDistPath()
     }
   });
-})
+});
 
 // Used to publish frontend to stage s3 bucket - needs invalidation in Cloudfront
 gulp.task("publish-stage", ["set-stage-env", "clean-build-frontend-app"], function() {
