@@ -10,23 +10,11 @@
    <tr ng-repeat="goal in outcomes"
        style="border-bottom: 1px solid {{goal.outcome[0].color}};
               color: {{goal.outcome[0].color}};">
-      <td>
-         {{ goal.outcome[0].title }}
-      </td>
-      <td>
-         {{ goal.outcome[0].target }}
-      </td>
-      <td>
-         {{ goal.totalValidated / goal.outcome[0].costPerUnit }}
-      </td>
-      <td>
-         {{ goal.outcome[0].costPerUnit | money }}
-      </td>
-      <td>
-         {{ goal.outcome[0].amount | money }}
-      </td>
-      <td>
-         {{ goal.totalValidated | money }}
-      </td>
+      <td>{{ goal.outcome[0].title }}</td>
+      <td>{{ goal.outcome[0].target }}</td>
+      <td>{{ goal.totalValidated / goal.outcome[0].costPerUnit }}</td>
+      <td>{{ goal.outcome[0].costPerUnit | money }}</td>
+      <td>{{ goal.outcome[0].amount | money }}</td>
+      <td>{{ goal.totalValidated | money }}</td>
    </tr>
 </table>

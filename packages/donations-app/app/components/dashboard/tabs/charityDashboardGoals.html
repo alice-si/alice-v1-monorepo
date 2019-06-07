@@ -18,8 +18,7 @@
               heading="People Helped">
               <div class="container">
                 <div ng-repeat="goal in outcomesDonatedTo track by $index">
-                     <goal-progress-bar color="goal.outcome[0].color"
-                                        progress-in-units="goal.progressInUnits"
+                     <goal-progress-bar progress-in-units="goal.progressInUnits"
                                         percentage="goal.percentage"
                                         outcome="goal.outcome[0]">
                      </goal-progress-bar>

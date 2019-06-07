@@ -1,19 +1,21 @@
 <div class="col-md-4 col-xs-12 goal-progress-bar">
   <h5 class="goal-progress-bar__title"
-      style="color: {{ color }}; letter-spacing: 1px;">
+      style="color: {{ outcome.color }}; letter-spacing: 1px;">
       {{ outcome.title }}
   </h5>
   <p class="goal-progress-bar__desc"
-     style="color: {{color}}">
+     style="color: {{ outcome.color }}">
      {{ outcome.description }}
   </p>
-  <uib-progress class="progress-bar__med">
-      <uib-bar style="background-color: {{ color }}"
-               value="percentage">
-      </uib-bar>
+  <uib-progress class="progress-bar__med"
+                style="background-color: {{ outcome.lightColor }};">
+       <uib-bar class="inside"
+                style="background-color: {{ outcome.color }}"
+                value="percentage">
+       </uib-bar>
   </uib-progress>
   <p class="goal-progress-bar__percentage"
-      style="color: {{color}}">
+      style="color: {{ outcome.color }}">
         {{ progressInUnits | limitTo : 2}} {{ outcome.unit }} validated
   </p>
 </div>

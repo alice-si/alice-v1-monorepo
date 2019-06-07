@@ -1,46 +1,34 @@
-  <div class="donations">
-    <div>
-      <div class="impact-table-header" style="min-height:40px;">
-        <a id="exportDonationsButton"
-           class="btn btn-primary btn-export"
-           ng-click="donCtrl.exportToExcel()">Export data</a>
-        <input class="table-search" ng-model="donCtrl.donationSearch" placeholder="Search">
-      </div>
-
-      <table id="donations" class="impact-table">
-        <tr>
-          <td>Name
-            <sort action="donCtrl.sort" field="fullName"></sort>
-          </td>
-          <td>Email
-            <sort action="donCtrl.sort" field="email"></sort>
-          </td>
-          <td>Donated
-            <sort action="donCtrl.sort" field="total"></sort>
-          </td>
-          <td>Date
-            <sort action="donCtrl.sort" field="last"></sort>
-          </td>
-          <td>Received
-            <sort action="donCtrl.sort" field="paidOut"></sort>
-          </td>
-          <td>Gift Aid
-            <sort action="donCtrl.sort" field="giftAid"></sort>
-          </td>
-          <td>Contact
-            <sort action="donCtrl.sort" field="agreeContact"></sort>
-          </td>
-        </tr>
-        <tr ng-repeat="donation in donCtrl.users | filter:donCtrl.donationSearch | orderBy : donCtrl.sortField">
-          <td>{{donation.fullName}}</td>
-          <td>{{donation.email}}</td>
-          <td>{{donation.donated | money}}</td>
-          <td>{{donation.date | date}}</td>
-          <td>{{donation.received[0] ? 'donation.received[0] | money' : '0'}}</td>
-          <td>{{donation.giftAid ? '' : 'No'}}<a>{{donation.giftAid ? 'Show' : ''}}</a></td>
-          <td>{{donation.agreeContact ? 'Yes' : 'No'}}</td>
-        </tr>
-      </table>
-
-    </div>
+<div class="donations">
+  <table class="impact-table">
+    <tr>
+      <td><p>Name</p></td>
+      <td><p>Email</p></td>
+      <td><p>Donated</p></td>
+      <td><p>Date</p></td>
+      <td><p>Received</p></td>
+      <td><p>Gift Aid</p></td>
+      <td><p>Contact</p></td>
+    </tr>
+    <tr ng-repeat="donation in donCtrl.users.slice(((currentPage - 1) * itemsPerPage),
+                   ((currentPage) * itemsPerPage))
+                   | filter:donCtrl.donationSearch
+                   | orderBy : donCtrl.sortField"
+        class="donation-row">
+        <td>{{donation.fullName}}</td>
+        <td>{{donation.email}}</td>
+        <td>{{donation.donated | money}}</td>
+        <td>{{donation.date | date}}</td>
+        <td>{{donation.received[0] ? 'donation.received[0] | money' : '0'}}</td>
+        <td>{{donation.giftAid ? '' : 'No'}}<a>{{donation.giftAid ? 'Show' : ''}}</a></td>
+        <td>{{donation.agreeContact ? 'Yes' : 'No'}}</td>
+    </tr>
+  </table>
+  <div uib-pagination
+       total-items="donCtrl.totalItems"
+       ng-model="currentPage"
+       max-size="maxSize"
+       class="pagination-sm"
+       boundary-link-numbers="true"
+       rotate="false">
   </div>
+</div>

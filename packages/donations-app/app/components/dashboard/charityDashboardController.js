@@ -28,12 +28,23 @@ angular.module('aliceApp')
             e.progressInUnits = e.outcome[0].costPerUnit ? (e.totalValidated / e.outcome[0].costPerUnit) : 0;
             // e.percentage = (e.totalValidated) ? 100 * (e.totalValidated / e.outcome[0].amount) : 0;
             e.percentage = (e.progressInUnits / e.outcome[0].target) * 100;
+            e.outcome[0].lightColor = convertHex(e.outcome[0].color, 0.35);
             vm.validated_outcomes.push(e);
             // e.percentage = 100 * (e.totalValidated / e.outcome[0].amount);
           });
           vm.projectValidator = vm.projectWithGoals.projectValidator;
         }
       });
+    }
+
+    function convertHex(hex, opacity) {
+      hex = hex.replace('#','');
+      let r = parseInt(hex.substring(0,2), 16);
+      let g = parseInt(hex.substring(2,4), 16);
+      let b = parseInt(hex.substring(4,6), 16);
+
+      let result = 'rgba(' + r + ',' + g + ',' + b + ',' + opacity + ')';
+      return result;
     }
 
     return vm;

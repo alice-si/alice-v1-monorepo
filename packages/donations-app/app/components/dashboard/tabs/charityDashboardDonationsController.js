@@ -100,6 +100,7 @@ angular.module('aliceApp')
             acc = acc.concat(elem);
             return acc;
           }, []);
+          vm.totalItems = vm.users.length;
         }
       });
     }
@@ -117,6 +118,11 @@ angular.module('aliceApp')
       });
     }
 
+    // Donation table pagination config
+    $scope.viewby = 5;
+    $scope.currentPage = 1;
+    $scope.itemsPerPage = $scope.viewby;
+    $scope.maxSize = 5;
 
     return vm;
   }]);

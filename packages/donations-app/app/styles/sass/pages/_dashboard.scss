@@ -507,47 +507,34 @@
   }
 }
 
-table.impact-table tr:first-child {
-  background: #fff;
-}
+.impact-table {
+	tr {
+		background: none;
+		border-bottom: 1px solid $alice-tonal-light;
 
-table.impact-table tr:first-child > td {
-  color: rgba(179, 194, 195, 0.67) !important;
-  text-transform: none !important;
-  letter-spacing: 1px !important;
-}
+		td {
+			color: inherit;
+			text-align: left;
+			padding-left: 15px !important;
+			font-family: "Avenir";
+			font-weight: 200;
+			letter-spacing: 1px;
+			padding: 15px 0;
+		}
+	}
 
-table.impact-table tr {
-  border-bottom: 1px solid rgba(142, 166, 179, 0.22);
-}
+	td:first-child {
+		width: 15% !important;
+	}
 
-table.impact-table tr:nth-child(even) {
-  background: rgba(142, 166, 179, 0.05);
-}
+	tr:first-child {
+		border-bottom: 1px solid $alice-tonal-medium;
 
-table.impact-table td {
-    text-align: left;
-    padding-left: 15px !important;
-    font-family: "Avenir";
-    font-weight: 200;
-    letter-spacing: 1px;
-    color: #8ea6b3;
-    padding: 15px 0;
-}
-
-table.impact-table tr:first-child td {
-  font-weight: 400;
-  color: #fff;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-}
-
-table.impact-table td:first-child{
-    width: 10%;
-}
-
-table.impact-table.my-impact td {
-    width: 30%;
+		p {
+			font-size: 14px;
+			text-transform: uppercase;
+		}
+	}
 }
 
 
@@ -704,14 +691,24 @@ table.impact-table.my-impact td {
 
 .progress-bar {
 
-	&__sm {
-		max-width: 140px;
-	}
-
 	&__med {
 		max-width: 280px;
 		max-height: 8px;
+
+		.inside {
+			background-blend-mode: darken;
+			background-color: inherit;
+		}
 	}
+
+	&__sm {
+		max-width: 140px;
+	}
+}
+
+.progress-bar__med.progress {
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
 }
 
 .goal-progress-bar {
@@ -728,5 +725,43 @@ table.impact-table.my-impact td {
 		font-size: 20px;
 		margin-top: 20px;
 		letter-spacing: 1px !important;
+	}
+}
+
+
+// Override pagination styling
+
+.landing-page li {
+	&:first-child a {
+		width: auto;
+	}
+}
+
+.pagination {
+	li {
+		a {
+			border-radius: 25px;
+			margin: 4px;
+			color: $alice-tonal-medium;
+			border-color: $alice-tonal-light;
+
+			&:hover {
+				background-color: $alice-tonal-medium;
+				border-color: #fff;
+				color: #fff;
+			}
+		}
+	}
+
+	.active {
+		a {
+			background-color: $alice-tonal-medium;
+			border-color: #fff;
+
+			&:hover {
+				background-color: $alice-tonal-dark;
+				cursor: auto;
+			}
+		}
 	}
 }
