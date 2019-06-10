@@ -98,6 +98,12 @@ angular.module('aliceApp', ['ui.router', 'angular-jwt', 'ui.bootstrap', 'ui.boot
         templateUrl: '/components/project-wizard/projectWizardView.html'
       })
       // PROJECT WIZARD
+			// Superadmin Dashboard:
+			.state('super-admin', {
+				url: '/super-admin/',
+				templateUrl: '/components/backoffice/dashboardView.html'
+			})
+			// We will move the following >>>>>>>>
       .state('projects', {
         url: '/projects/',
         templateUrl: '/components/project-wizard/projectsView.html'
@@ -106,18 +112,11 @@ angular.module('aliceApp', ['ui.router', 'angular-jwt', 'ui.bootstrap', 'ui.boot
         url: '/users/',
         templateUrl: '/components/user/usersView.html'
       })
-      .state('donations', {
-        url: '/donations/',
-        templateUrl: '/components/backoffice/donationsView.html'
+			.state('charities', {
+        url: '/charities/',
+        templateUrl: '/components/charity/charitiesView.html'
       })
-      .state('validations', {
-        url: '/validations/',
-        templateUrl: '/components/backoffice/validationsView.html'
-      })
-      .state('impacts', {
-        url: '/impacts/',
-        templateUrl: '/components/backoffice/impactsView.html'
-      })
+			// <<<<<<<<< into Superadmin Dashboard
       .state('geek-mode', {
         url: '/geek-mode/',
         templateUrl: '/components/geek-mode/geekModeView.html'
@@ -125,10 +124,6 @@ angular.module('aliceApp', ['ui.router', 'angular-jwt', 'ui.bootstrap', 'ui.boot
       .state('faq', {
         url: '/faq/',
         templateUrl: '/components/faq/faqTemplate.html'
-      })
-      .state('charities', {
-        url: '/charities/',
-        templateUrl: '/components/charity/charitiesView.html'
       })
       .state('charity-admin', {
         url: '/charity-admin/:code',

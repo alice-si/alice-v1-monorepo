@@ -299,7 +299,8 @@ span.menu-arrow {
 
 .user-menu {
   z-index: 1000;
-  background: rgba(143, 143, 143, 0.65);
+  background: $alice-tonal-dark;
+  margin-top: 5px;
 
   li div {
      padding: 5px 5px 5px 10px;
@@ -326,7 +327,7 @@ span.menu-arrow {
        left: 0;
        right: 0;
        bottom: 0;
-       background: rgba(255, 255, 255,0.4);
+       background: $alice-tonal-medium;
        -webkit-transform: scaleX(0);
        transform: scaleX(0);
        -webkit-transform-origin: 0 50%;
@@ -350,7 +351,7 @@ span.menu-arrow {
      }
 
      a {
-         font-size: 1.8rem !important;
+         font-size: 14px !important;
      }
   }
 }

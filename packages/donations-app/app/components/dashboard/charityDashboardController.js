@@ -30,7 +30,6 @@ angular.module('aliceApp')
             e.percentage = (e.progressInUnits / e.outcome[0].target) * 100;
             e.outcome[0].lightColor = convertHex(e.outcome[0].color, 0.35);
             vm.validated_outcomes.push(e);
-            // e.percentage = 100 * (e.totalValidated / e.outcome[0].amount);
           });
           vm.projectValidator = vm.projectWithGoals.projectValidator;
         }
