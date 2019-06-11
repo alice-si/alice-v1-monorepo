@@ -143,7 +143,8 @@ Utils.createProjection = function (fields) {
 
 Utils.upsertEntityAsync = async function (obj, Model, constructor) {
   const entity = constructor(obj);
-  return await Model.findByIdAndUpdate(
+  try {
+    return await Model.findByIdAndUpdate(
       entity._id,
       entity,
       {
@@ -151,6 +152,10 @@ Utils.upsertEntityAsync = async function (obj, Model, constructor) {
         new: true
       }
     );
+  } catch (err) {
+    console.error(err);
+  }
+
 };
 
 // this function assumes that each object has _id field

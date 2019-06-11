@@ -12,6 +12,7 @@ const Charity = Utils.loadModel('charity');
 const Donation = Utils.loadModel('donation');
 const ProjectHistory = Utils.loadModel('projectHistory');
 const Outcome = Utils.loadModel('outcome');
+const User = Utils.loadModel('user');
 
 module.exports = function (app) {
 
@@ -175,8 +176,19 @@ module.exports = function (app) {
         await new ProjectHistory({
           project: savedProject,
           outcomes: req.body.outcomes,
+          validators: req.body.validators,
           changedBy: req.user._id
         }).save();
+
+        // Setting validator
+        if (AccessControl.isSuperadmin(req.user)
+            && req.body.validators
+            && req.body.validators.length > 0)
+        {
+          let user = await User.findById(req.body.validators[0]);
+          user.validator.push(savedProject._id);
+          user.save();
+        }
 
         res.json(savedProject);
 
