@@ -24,6 +24,7 @@
     "web3": "^1.0.0-beta.55"
   },
   "dependencies": {
-    "@gnosis.pm/hg-contracts": "^0.2.3"
+    "@gnosis.pm/hg-contracts": "^0.2.3",
+    "gnosis-hg-js": "github:alice-si/gnosis-hg-js"
   }
 }
