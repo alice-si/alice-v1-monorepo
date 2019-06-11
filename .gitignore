@@ -34,3 +34,4 @@ clone-db.sh
 .DS_Store
 .jshintrc
 .yarnclean
+.ignore
