@@ -30,4 +30,6 @@ secrets
 
 .ignore
 
+# Ingored scripts
 clone-db.sh
+cloneDB.sh
