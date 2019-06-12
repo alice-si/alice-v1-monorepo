@@ -10,7 +10,8 @@
     "e2e": "bash ./scripts/e2e-test.sh ",
     "e2e-stage": "bash ./scripts/e2e-test-stage.sh",
     "e2e-load-stage": "bash ./scripts/e2e-test-stage.sh ./test/e2e/load-stage.js",
-    "check-db": "node ./tools/check-db.js"
+    "check-db": "node ./tools/check-db.js",
+    "dev": "source .envrc && gulp watch-local"
   },
   "dependencies": {
     "@alice-si/cli": "^0.0.0",
