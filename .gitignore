@@ -27,9 +27,14 @@ secrets
 
 # Trash
 .DS_Store
-
 .ignore
+.jshintrc
 
 # Ingored scripts
 clone-db.sh
 cloneDB.sh
+deploy-test/
+deploy-test.zip
+
+# Incase a temp db directory is left accidentally via manual cloning
+tmp_db/
