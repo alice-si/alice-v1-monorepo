@@ -4,6 +4,7 @@ const Mail = require('../service/mail');
 const Utils = require('../service/utils');
 const Config = require('../../config');
 const Donation = Utils.loadModel('donation');
+const Environment = Utils.loadModel('environment');
 const Project = Utils.loadModel('project');
 const User = Utils.loadModel('user');
 const Lodash = require('lodash');
@@ -123,9 +124,20 @@ module.exports = function (app) {
     return res.json(donations);
   }));
 
+  async function redirectRequestToAllExpEnvironments(req) {
+    const environments = await Environment.find({});
+    for (const environment of environments) {
+      req.redirect(environment.url);
+    }
+  }
+
   async function mangoHookPayInEp(req, res) {
     let savedDonation;
     try {
+      if (Config.mode == 'stage') {
+        await redirectRequestToAllExpEnvironments(res);
+      }
+
       const transactionId = req.query.RessourceId;
       let {donation, mangoResult} = await getPayIn(transactionId);
       console.log('Got payIn: ' + JSON.stringify(mangoResult));
@@ -140,7 +152,6 @@ module.exports = function (app) {
         let project = await Project.findById(savedDonation._projectId).populate('charity');
         await Mail.sendDonationConfirmation(savedDonation._userId, project, savedDonation);
       }
-      res.send();
     } catch (err) {
       console.error('mangoHookPayInEp error');
       console.error(err.toString());
@@ -152,6 +163,7 @@ module.exports = function (app) {
       } else {
         console.error('Donation is undefined. Can not save error message in DB');
       }
+    } finally {
       res.send(); // we should respond with status code 200 in any case to avoid mango hook disabling
     }
   }
