@@ -1,6 +1,9 @@
 const config = require('../../config');
 const Utils = require('../service/utils');
+
 const Environment = Utils.loadModel('environment');
+
+const asyncHandler = require('express-async-handler');
 
 function assertStage() {
   if (config.mode != 'stage') {
@@ -23,13 +26,13 @@ module.exports = function (app) {
       assertStage();
       const {url} = req.body;
       const alreadyExists = await Environment.findOne({url});
-      const validEnvUrl = url.startsWith('html')
-                          && !url.startsWith('html')
-                          && url.endsWith('alice.si');
+      const validEnvUrl = url.startsWith('http')
+                          && !url.startsWith('https')
+                          && url.endsWith('.alice.si');
       if (alreadyExists) {
         return res.status(400).send(`Url "${url}" is already registered`);
       }
-      if (validEnvUrl) {
+      if (!validEnvUrl) {
         return res.status(400).send(`"${url}" is not a valid url for exp environment`);
       }
 

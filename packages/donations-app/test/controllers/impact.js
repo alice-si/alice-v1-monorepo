@@ -7,7 +7,9 @@ const Outcome = Utils.loadModel('outcome');
 describe('ImpactController', function () {
     let objects, outcome;
 
-    TestUtils.setBeforeAndAfterHooksForControllerTest('impact');
+    TestUtils.setBeforeAndAfterHooksForControllerTest({
+        name: 'impact'
+    });
 
     it('Should create test objects', async function () {
         objects = await TestUtils.createTestObjects();

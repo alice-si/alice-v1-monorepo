@@ -9,5 +9,6 @@ module.exports = function (app) {
   require('./controller/dashboard')(app);
   require('./controller/geek')(app);
   require('./controller/charity')(app);
+  require('./controller/environment')(app);
 
 };

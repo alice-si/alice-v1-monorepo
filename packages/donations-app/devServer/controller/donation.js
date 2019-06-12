@@ -8,6 +8,7 @@ const Environment = Utils.loadModel('environment');
 const Project = Utils.loadModel('project');
 const User = Utils.loadModel('user');
 const Lodash = require('lodash');
+const http = require('http');
 
 const asyncHandler = require('express-async-handler');
 
@@ -73,9 +74,19 @@ module.exports = function (app) {
     res.send();
   }));
 
-  app.get('/api/payInFailed', mangoHookPayInEp);
+  app.get('/api/payInFailed', asyncHandler(async (req, res) => {
+    if (Config.mode == 'stage') {
+      await redirectRequestToAllExpEnvironments('/api/payInFailed');
+    }
+    mangoHookPayInEp(req, res);
+  }));
 
-  app.get('/api/payInSucceeded', mangoHookPayInEp);
+  app.get('/api/payInSucceeded', asyncHandler(async (req, res) => {
+    if (Config.mode == 'stage') {
+      await redirectRequestToAllExpEnvironments('/api/payInSucceeded');
+    }
+    mangoHookPayInEp(req, res);
+  }));
 
   app.get('/api/securityReturn', function (req, res) {
     let payInResult;
@@ -124,20 +135,37 @@ module.exports = function (app) {
     return res.json(donations);
   }));
 
-  async function redirectRequestToAllExpEnvironments(req) {
+  async function redirectRequestToAllExpEnvironments(path) {
     const environments = await Environment.find({});
     for (const environment of environments) {
-      req.redirect(environment.url);
+      const newUrl = environment.url + path;
+      console.log('hookRedirection: Resending to ' + environment.url + path);
+      await new Promise((resolve) => {
+        let req = http.get(newUrl, (res) => {
+          console.log(`hookRedirection: Got reponse from ${environment.url}, statusCode: ${res.statusCode}`);
+          resolve();
+        });
+
+        req.on('timeout', () => {
+          console.log('hookRedirection: Time is out ' + environment.url);
+          req.abort();
+          resolve();
+        });
+
+        req.on('error', (err) => {
+          console.error('hookRedirection: Error occured ' + environment.url);
+          console.error(err);
+          resolve();
+        });
+
+        req.setTimeout(Config.timeoutForMangoHooksResending);
+      });
     }
   }
 
   async function mangoHookPayInEp(req, res) {
     let savedDonation;
     try {
-      if (Config.mode == 'stage') {
-        await redirectRequestToAllExpEnvironments(res);
-      }
-
       const transactionId = req.query.RessourceId;
       let {donation, mangoResult} = await getPayIn(transactionId);
       console.log('Got payIn: ' + JSON.stringify(mangoResult));
