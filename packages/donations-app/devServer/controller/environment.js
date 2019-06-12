@@ -40,4 +40,19 @@ module.exports = function (app) {
 
       return res.json(savedEnv);
     }));
+
+  app.post(
+    '/api/removeEnvironment',
+    asyncHandler(async (req, res) => {
+      assertStage();
+      const {url} = req.body;
+      const alreadyExists = await Environment.findOne({url});
+      if (!alreadyExists) {
+        return res.status(400).send(`Url "${url}" is not registered and cannot be removed`);
+      }
+
+      await Environment.findOneAndRemove({url});
+
+      return res.json();
+    }));
 };

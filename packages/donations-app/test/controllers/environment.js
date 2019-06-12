@@ -59,4 +59,11 @@ describe('EnvironmentController', function () {
         res.length.should.be.equal(2);
       });
     });
+
+    it('Should remove one environment', async function () {
+      await TestUtils.testPost('removeEnvironment', {url: urls[0]}, async function (res) {
+        const envsFound = await Environment.find({});
+        envsFound.length.should.be.equal(1);
+      });
+    });
 });
