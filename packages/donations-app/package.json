@@ -6,6 +6,7 @@
     "postinstall": "bower install --allow-root --force-latest",
     "pretest": "yarn alice-cli generate-keys ./secrets/keys/",
     "test": "mocha",
+    "local-test": "source .envrc && mocha",
     "e2e-load": "bash ./scripts/e2e-test.sh ./test/e2e/load.js",
     "e2e": "bash ./scripts/e2e-test.sh ",
     "e2e-stage": "bash ./scripts/e2e-test-stage.sh",
