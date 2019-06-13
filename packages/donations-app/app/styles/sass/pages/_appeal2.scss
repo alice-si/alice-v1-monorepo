@@ -1,0 +1,114 @@
+.appeal-v2 {
+
+  &__container {
+    width: 75vw;
+    padding: 0;
+    margin: 42px auto;
+
+    .col, [class*="col-"] {
+      padding: 0;
+    }
+  }
+
+  &__info {
+    h4 {
+      padding: 0;
+    }
+
+    &-image {
+      height: 150px;
+      width: auto;
+      background-size: cover;
+    }
+
+    &-left {
+      padding-top: 18px !important;
+
+    }
+
+    &-right {
+      padding: 20px !important;
+    }
+  }
+
+  &__stories {
+    &-img {
+      display: inline-block;
+      position: relative;
+      width: 100%;
+      border-left: 10px solid $alice-tonal-medium;
+      @include box-shadow(0, 0, 3px, rgba(0, 0, 0, 0.4));
+
+      .header-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        background-size: cover;
+        background-blend-mode: multiply;
+      }
+
+      /* Keeping this here incase we don't want gradient */
+      img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        @include transition(0.2s, all, ease-out);
+        filter: brightness(60%);
+      }
+
+      .grad-bottom:before {
+        display: inline-block;
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
+        opacity: .6;
+      }
+
+      .grad-both:before {
+        display: inline-block;
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image:
+          linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8)),
+          linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
+        opacity: .6;
+      }
+    }
+
+    &-underimg {
+      position: absolute;
+      margin-top: 0;
+      background: $alice-tonal-medium;
+      width: 100%;
+      padding: 10px 0 10px 10px;
+      height: 45px;
+    }
+
+    &-container {
+      height: 250px;
+      margin-bottom: 30px;
+    }
+
+    &-info {
+      padding: 5px 25px !important;
+      height: inherit;
+
+      p {
+        font-size: 18px !important;
+      }
+    }
+
+    .alice-card {
+      margin: 0;
+    }
+  }
+
+}

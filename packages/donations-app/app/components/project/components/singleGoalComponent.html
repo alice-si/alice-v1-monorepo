@@ -1,0 +1,26 @@
+<div class="col-md-12 col-lg-12 my-impact__container-goal">
+  <div class="my-impact__goal-image"
+       style="background-image: url('{{goal.image}}'); border-left: 15px solid {{goal.color}}">
+  </div>
+  <div class="my-impact__goal">
+    <div class="my-impact__goal-top">
+      <div class="my-impact__goal-topleft"
+           style="border-right: none;">
+        <p style="color: {{goal.color}} ">Goal {{ (index + 1)}}</p>
+        <p style="color: #000; font-size: 24px;">{{ goal.title }}</p>
+      </div>
+    </div>
+    <div class="my-impact__goal-bottom">
+      <uib-progress class="progress-bar__lg"
+                    style="background-color: {{goal.lightColor}};">
+            <uib-bar value="goal.totalPercentage"
+                     class="inside"
+                     style="background-color: {{goal.color}};"></uib-bar>
+       </uib-progress>
+       <p class="goal-progress-bar__percentage">
+         <span style="color: {{ goal.color }};"><span style="font-weight: bold;">{{ goal.totalPercentage }}%</span> completed</span>
+         <!-- <span style="float: right; bottom: 0; color: {{ goal.color }};"><span style="font-weight: bold;">{{ goal.totalSpent | money}}</span> spent</span> -->
+       </p>
+    </div>
+  </div>
+</div>
