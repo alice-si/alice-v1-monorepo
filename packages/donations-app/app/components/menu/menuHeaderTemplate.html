@@ -37,13 +37,13 @@
                     <ul class="dropdown-menu user-menu">
                         <li style="width: 100%;">
                             <div style="border-bottom: 2px solid #fff" ng-if="menuCtrl.auth.isSuperadmin()">
-                                <a href="/overview/">
+                                <a href="/super-admin/">
                                     Superadmin Overview
                                 </a>
                             </div>
 
                             <div ng-if="menuCtrl.auth.isManager()">
-                                <a href="/dashboard/">
+                                <a href="/charity-dashboard/">
                                     Charity Dashboard
                                 </a>
                             </div>
@@ -129,8 +129,8 @@
                         FAQ
                     </a>
 
-                    <a href="/dashboard" ng-if="menuCtrl.auth.isManager()">
-                        Dashboard
+                    <a href="/charity-dashboard" ng-if="menuCtrl.auth.isManager()">
+                        Charity Dashboard
                     </a>
 
                     <a id="menu-mobile-sign-up" ng-click="menuCtrl.signUp()" ng-show="!menuCtrl.auth.getLoggedUser()">

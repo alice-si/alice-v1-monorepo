@@ -1,56 +1,71 @@
-<section class="dashboard-page page" ng-controller="DashboardController as dashCtrl">
-
-  <div ng-hide="dashCtrl.auth.getLoggedUser()">
-    Please log in to view the content.
-  </div>
-
-  <div ng-hide="dashCtrl.auth.isManager()">
-    Unfortunately, you don't have enough privileges to see the page.
-  </div>
-
-  <!-- Project Managers -->
-  <div ng-if="dashCtrl.auth.isManager()" class="dashboard-content">
-
-    <!-- Charity -->
-    <div ng-if="dashCtrl.auth.isManager() && !dashCtrl.auth.isSuperadmin()" class="col-lg-12 col-md-12 dashboard-nav-top">
-      <div class="dashboard-image col-lg-1 col-md-1">
-        <img class="dashboard-image-in"
-             src="{{dashCtrl.charity.initializerImg}}"
-             alt="Charity image">
-      </div>
-      <div class="dashboard-title col-lg-5 col-md-5">
-        {{ dashCtrl.projectsForMain[0].charity.name }}
-      </div>
-    </div>
-
-    <!-- Alice -->
-    <div ng-if="dashCtrl.auth.isSuperadmin()" class="col-lg-12 col-md-12 dashboard-nav-top">
-      <div class="dashboard-image col-lg-1 col-md-1">
-        <img class="dashboard-image-in"
-             src="https://s3.eu-west-2.amazonaws.com/alice-res/AliceLogoOnly.png"
-             style="height: 40px; width: auto;"
-             alt="">
-      </div>
-      <h3 class="dashboard-title col-lg-5 col-md-5">
-        Hello, {{ dashCtrl.auth.getLoggedFullName() }}
-      </h3>
-    </div>
-
-
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-12">
-          <h1>Projects</h1>
+<div class="my-impact"
+     ng-controller="MyImpactController as impactCtrl">
+  <section class="splash-v2 grad-both">
+    <div class="header-image"
+         ng-style="{ 'background' : 'linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.8)), url(' + impactCtrl.project.img + ') no-repeat center' }">
+      <div class="container splash-v2__container-title">
+        <div class="row">
+          <h3 class="white">{{ impactCtrl.project.title }}</h3>
+          <p class="white">See what your money achieves, with Blockchain's transparency.</p>
         </div>
-      </div>
-
-      <div class="row" style="margin-top: 20px">
-        <div ng-repeat="project in dashCtrl.projectsForMain"
-             class="col-sm-12 col-md-6 col-lg-4">
-             <dashboard-project-card dashboard="dashCtrl.dashboardType" project="project">
-             </dashboard-project-card>
+        <div class="row splash-v2__container-progress">
+          <uib-progress class="progress-bar__lg"
+                         style="background-color: rgba(255, 255, 255, 0.3);">
+                <uib-bar class="inside"
+                         style="background-color: #fff"
+                         value="impactCtrl.project.overallProjectPercentage">
+                </uib-bar>
+           </uib-progress>
+           <p class="white goal-progress-bar__percentage">
+             <span style="font-size: 30px">{{ impactCtrl.project.overallProjectPercentage | limitTo : 2}}%</span> of goals completed
+           </p>
+           <p class="white goal-progress-bar__raised">
+             <span style="font-size: 30px">{{ impactCtrl.project.totalPaidOutOverall | money }}</span> spent
+           </p>
+           <a href="/checkout/{{impactCtrl.project.code}}">
+             <button class="standard-button__main">
+               Donate
+             </button>
+           </a>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+  <section class="container my-impact__container">
+    <div class="row my-impact__container-greeting">
+      <div class="col-xs-12 col-md-12 col-lg-12">
+        <h3 class="goals-dash__greeting alice-blue">
+          Hi {{ impactCtrl.loggedUser.firstName }} -
+          <span ng-if="impactCtrl.project.individualProjectPercentage > 0"><p style="margin: 2px 0 0 5px;">
+            You helped complete {{ impactCtrl.project.individualProjectPercentage }}% of this project's goals
+          </p></span>
+          <span ng-if="impactCtrl.project.individualProjectPercentage === 0"><p style="margin: 2px 0 0 5px;">
+            Your donations are yet to be spent on this project
+          </p></span>
+        </h3>
+      </div>
+      <div class="col-xs-12 col-md-12 col-lg-12 my-impact__overview">
+        <div class="col-lg-3">
+          <p>You donated</p>
+          <h3>{{ impactCtrl.project.totalDonated | money }}</h3>
+        </div>
+        <div class="col-lg-5">
+          <p>{{ impactCtrl.charity.name }} used</p>
+          <h3>{{ impactCtrl.project.totalPaidOut | money }}</h3>
+          <p>so far</p>
+        </div>
+        <div class="col-lg-3">
+          <p>To complete</p>
+          <h3>{{ impactCtrl.project.individualProjectPercentage }}%</h3>
+          <p>of it's goals</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-md-12 col-lg-12 my-impact__container-goals">
+      <h4>Track what your donation received </h4>
+      <div ng-repeat="goal in impactCtrl.goals track by $index">
+        <my-impact-goal goal="goal" index="$index"></my-impact-goal>
+      </div>
+    </div>
+  </section>
+</div>

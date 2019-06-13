@@ -6,7 +6,7 @@
 
 .dashboard-page {
   position: absolute;
-  background: #F0F5F5;
+  background: $dashboard-background;
   width: 100%;
   min-height: 100vh;
 }
@@ -16,7 +16,7 @@
   width: 100%;
   border-bottom: 2px solid #E3ECF0;
   z-index: 500;
-  background: #f0f5f5;
+  background: $dashboard-background;
   position: fixed;
 }
 
@@ -75,7 +75,7 @@
   position: relative;
   margin-top: 100px;
   padding: 20px 50px 40px 20px;
-  background: #f0f5f5;
+  background: $dashboard-background;
 }
 
 .dashboard-tabs {
@@ -523,7 +523,7 @@
 
 .dashboard-content {
   margin: 80px 0;
-  background: #f0f5f5;
+  background: $dashboard-background;
 }
 
 @media (max-width: 600px) {
@@ -708,48 +708,6 @@
 	tr:first-child p {
 		font-size: 14px;
 		text-transform: uppercase;
-	}
-}
-
-/* Vertical Progress Bar Directive */
-
-
-.progress-bar {
-
-	&__med {
-		max-width: 280px;
-		max-height: 8px;
-
-		.inside {
-			background-blend-mode: darken;
-			background-color: inherit;
-		}
-	}
-
-	&__sm {
-		max-width: 140px;
-	}
-}
-
-.progress-bar__med.progress {
-	-webkit-box-shadow: none !important;
-	box-shadow: none !important;
-}
-
-.goal-progress-bar {
-  &__desc {
-		font-size: 12px !important;
-	}
-
-	&__percentage {
-		width: 100%;
-	}
-
-	&__title {
-		width: 100%;
-		font-size: 20px;
-		margin-top: 20px;
-		letter-spacing: 1px !important;
 	}
 }
 

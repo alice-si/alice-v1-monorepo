@@ -6,7 +6,7 @@ angular.module('aliceApp')
     vm.projectSelected = [];
     /*jshint -W030 */
     vm.activeProject;
-    vm.dashboardType = 'dashboard';
+    vm.dashboardType = 'charity-dashboard';
 
     const modes = { 'OVERALL' : 0, 'SINGULAR' : 1, 'DONATIONS': 2, 'GOALS': 3 };
 

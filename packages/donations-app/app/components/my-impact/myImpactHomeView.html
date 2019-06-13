@@ -1,4 +1,4 @@
-<section class="dashboard-page page" ng-controller="DashboardController as dashCtrl">
+<section class="dashboard-page page" ng-controller="MyImpactController as dashCtrl">
 
   <div ng-hide="dashCtrl.auth.getLoggedUser()">
     Please log in to view the content.
@@ -44,10 +44,12 @@
         </div>
       </div>
 
-      <div class="row" style="margin-top: 20px">
+      <div class="row"
+           style="margin-top: 20px">
         <div ng-repeat="project in dashCtrl.projectsForMain"
              class="col-sm-12 col-md-6 col-lg-4">
-             <dashboard-project-card dashboard="dashCtrl.dashboardType" project="project">
+             <dashboard-project-card dashboard="dashCtrl.dashboardType"
+                                     project="project">
              </dashboard-project-card>
         </div>
       </div>

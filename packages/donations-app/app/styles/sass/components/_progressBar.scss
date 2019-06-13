@@ -1,0 +1,56 @@
+
+.progress-bar {
+
+	&__lg {
+		width: 100%;
+		height: 14px;
+		border-radius: 7px;
+
+		.inside {
+			background-blend-mode: darken;
+			background-color: inherit;
+		}
+	}
+
+	&__med {
+		max-width: 280px;
+		max-height: 8px;
+
+		.inside {
+			background-blend-mode: darken;
+			background-color: inherit;
+		}
+	}
+
+	&__sm {
+		max-width: 140px;
+	}
+}
+
+.progress-bar__med.progress {
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+}
+
+.goal-progress-bar {
+  &__desc {
+		font-size: 12px !important;
+	}
+
+	&__percentage {
+		width: 70%;
+		float: left;
+	}
+
+	&__raised {
+		width: 30%;
+		float: right;
+	}
+
+	&__title {
+		width: 100%;
+		font-size: 20px;
+		margin-top: 20px;
+		letter-spacing: 1px !important;
+	}
+}
