@@ -9,6 +9,7 @@ const Project = Utils.loadModel('project');
 const User = Utils.loadModel('user');
 const Lodash = require('lodash');
 const http = require('http');
+const url = require('url');
 
 const asyncHandler = require('express-async-handler');
 
@@ -74,19 +75,9 @@ module.exports = function (app) {
     res.send();
   }));
 
-  app.get('/api/payInFailed', asyncHandler(async (req, res) => {
-    if (Config.mode == 'stage') {
-      await redirectRequestToAllExpEnvironments('/api/payInFailed');
-    }
-    mangoHookPayInEp(req, res);
-  }));
+  app.get('/api/payInFailed', mangoHookPayInEp);
 
-  app.get('/api/payInSucceeded', asyncHandler(async (req, res) => {
-    if (Config.mode == 'stage') {
-      await redirectRequestToAllExpEnvironments('/api/payInSucceeded');
-    }
-    mangoHookPayInEp(req, res);
-  }));
+  app.get('/api/payInSucceeded', mangoHookPayInEp);
 
   app.get('/api/securityReturn', function (req, res) {
     let payInResult;
@@ -135,11 +126,12 @@ module.exports = function (app) {
     return res.json(donations);
   }));
 
-  async function redirectRequestToAllExpEnvironments(path) {
+  async function redirectRequestToAllExpEnvironments(req) {
     const environments = await Environment.find({});
     for (const environment of environments) {
-      const newUrl = environment.url + path;
-      console.log('hookRedirection: Resending to ' + environment.url + path);
+      const urlParsed = url.parse(req.url);
+      const newUrl = environment.url + urlParsed.pathname + urlParsed.search;
+      console.log('hookRedirection: Resending to ' + newUrl);
       await new Promise((resolve) => {
         let req = http.get(newUrl, (res) => {
           console.log(`hookRedirection: Got reponse from ${environment.url}, statusCode: ${res.statusCode}`);
@@ -166,6 +158,10 @@ module.exports = function (app) {
   async function mangoHookPayInEp(req, res) {
     let savedDonation;
     try {
+      if (Config.mode == 'stage') {
+        await redirectRequestToAllExpEnvironments(req);
+      }
+
       const transactionId = req.query.RessourceId;
       let {donation, mangoResult} = await getPayIn(transactionId);
       console.log('Got payIn: ' + JSON.stringify(mangoResult));

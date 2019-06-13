@@ -23,8 +23,14 @@ describe('DonationController - Mangopay Hooks', function () {
       }).save();
     });
 
-    it('Should get donations', async function () {
-      await TestUtils.testGet('payInSucceeded', '', function (res) {
+    it('Should send payInSucceeded request', async function () {
+      await TestUtils.testGet('payInSucceeded?transactionId=1231231', '', function (res) {
+        console.log(res);
+      });
+    });
+
+    it('Should send payInFailed request', async function () {
+      await TestUtils.testGet('payInFailed?transactionId=1231231', '', function (res) {
         console.log(res);
       });
     });
