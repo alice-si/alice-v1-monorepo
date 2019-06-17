@@ -20,18 +20,31 @@ angular.module('aliceApp')
             vm.project = result.data.current_project;
           }
           vm.general_outcomes = vm.projectWithGoals.goals;
-          vm.donated_outcomes = _.map(vm.projectWithGoals.donated, function(item) {
+
+          vm.projectWithGoals.validated.forEach((item) => {
+            // Not checking for amount because it's a compulsory field
+            item.progressInUnits = item.outcome[0].costPerUnit ? (
+              Math.floor(item.totalValidated / item.outcome[0].costPerUnit)) : 0;
+            // Have to decide which one we want as the percentage!!
+            item.percentage = (item.totalValidated) ?
+              Math.floor(100 * (item.totalValidated / item.outcome[0].amount)) : 0;
+            // item.percentage = (item.progressInUnits / item.outcome[0].target) * 100;
+            if(item.outcome[0].color) {
+              item.outcome[0].lightColor = convertHex(item.outcome[0].color, 0.35);
+            }
+          });
+
+          vm.validated_outcomes = vm.projectWithGoals.validated;
+
+          vm.donated_outcomes = _.map(vm.general_outcomes, function(item) {
             return _.extend(item, _.findWhere(vm.projectWithGoals.validated, { _id: item._id }));
           });
-          vm.donated_outcomes.forEach((e) => {
-            // Not checking for amount because it's a compulsory field
-            e.progressInUnits = e.outcome[0].costPerUnit ? (e.totalValidated / e.outcome[0].costPerUnit) : 0;
-            // e.percentage = (e.totalValidated) ? 100 * (e.totalValidated / e.outcome[0].amount) : 0;
-            e.percentage = (e.progressInUnits / e.outcome[0].target) * 100;
-            e.outcome[0].lightColor = convertHex(e.outcome[0].color, 0.35);
-            vm.validated_outcomes.push(e);
-          });
           vm.projectValidator = vm.projectWithGoals.projectValidator;
+        }
+      });
+      $http.get(API + `getDonationsForProject/${code}`).then(function (result) {
+        if(result.data) {
+          vm.projectWithGoals.donations = result.data[0].donations;
         }
       });
     }
