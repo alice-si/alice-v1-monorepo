@@ -171,8 +171,8 @@ module.exports = function (app) {
       });
 
       let validated = await findAndPrepareGoals({
-        status: 'IMPACT_FETCHING_COMPLETED',
         _projectId: project._id,
+        status: { $in: ['COMPLETED','IMPACT_FETCHING_COMPLETED'] } 
       });
 
       let donated = await findAndPrepareGoals({
@@ -183,7 +183,7 @@ module.exports = function (app) {
       res.status(200).json({ projectValidator, current_project, validated, donated, goals });
 
       async function findAndPrepareGoals(filter) {
-        let label = (filter.status == 'IMPACT_FETCHING_COMPLETED') ? 'totalValidated' : 'totalDonated';
+        let label = (filter.status === 'CREATED') ? 'totalDonated' : 'totalValidated';
         return await Validation.aggregate([
           {$match: filter},
           {
