@@ -64,7 +64,6 @@ angular.module('aliceApp')
 
       var summary = countSummaryForSelectedProjects(selectedData);
       vm = Object.assign(vm, summary);
-      // console.log(vm.donations);
     }
 
     function countSummaryForSelectedProjects(selectedData) {
