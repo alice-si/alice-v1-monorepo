@@ -1,4 +1,4 @@
-<div class="col-md-4 col-xs-12 goal-progress-bar">
+<div class="col-md-3 col-md-offset-right-1 col-xs-12 goal-progress-bar">
   <h5 class="goal-progress-bar__title"
       style="color: {{ outcome.color }}; letter-spacing: 1px;">
       {{ outcome.title }}
@@ -16,6 +16,7 @@
   </uib-progress>
   <p class="goal-progress-bar__percentage"
       style="color: {{ outcome.color }}">
-        {{ progressInUnits | limitTo : 2}} {{ outcome.unit }} validated
+      <!-- Should we make this: '% of goal validated, instead'? -->
+        {{ progressInUnits }} {{ outcome.unit }} validated
   </p>
 </div>

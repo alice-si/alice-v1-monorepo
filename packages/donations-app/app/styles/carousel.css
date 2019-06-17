@@ -79,7 +79,7 @@
     padding-top: 40px;
   }
 
-  #projects-carousel > .carousel-text > h1 {
+  #projects-carousel > .carousel-text > a > h1 {
     font-weight: 100;
     text-transform: uppercase;
   }
@@ -163,6 +163,9 @@
   .carousel-text > h1 {
     font-weight: 100;
     letter-spacing: 5px;
+    color: #fff;
+    line-height: 40px;
+    padding-top: 20px;
   }
 
   .carousel-indicators li, .carousel-indicators li.active {
