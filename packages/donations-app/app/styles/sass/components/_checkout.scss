@@ -1,0 +1,82 @@
+.donate-button-box {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.donation-amounts {
+    color: $alice-blue;
+    width: 100%;
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+.donation-amounts div {
+    padding-right: 0;
+    margin-bottom: 3px;
+}
+
+.gift-aid {
+    color: $alice-blue;
+    font-size: 1.5rem;
+    font-weight: 300;
+
+    &-box {
+        position:relative;
+        padding-bottom: 10px;
+        min-height: 30px;
+    }
+
+    &-text {
+        font-size: 1.5rem;
+        font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
+        font-weight:300;
+        margin-bottom: 30px;
+        color: black;
+    }
+}
+
+.donation-footer {
+    font-size: 1.5rem;
+    font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
+    font-weight:300;
+    color: black;
+    border-top: 1px solid black;
+    margin-top: 20px;
+    padding-top: 15px;
+    text-align: justify;
+
+    a {
+        color: #1998a2;
+        text-decoration: underline;
+    }
+}
+
+img.cvc {
+    position: absolute;
+    top: 0;
+    right: 10px;
+}
+
+@media (min-width: 1000px) {
+    .error-max {
+        position: absolute;
+        left: -300px;
+        top: 20px;
+    }
+}
+
+
+@media (max-width: 500px) {
+    .donate-button-box {
+        position: relative;
+        margin-top: 10px;
+        margin-bottom: -10px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .gift-aid-text {
+        margin-bottom: 10px;
+    }
+}

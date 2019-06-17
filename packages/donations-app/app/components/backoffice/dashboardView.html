@@ -1,0 +1,78 @@
+<section class="dashboard-page page" ng-controller="BackofficeController as dashCtrl">
+
+  <div ng-hide="dashCtrl.auth.getLoggedUser()">
+    Please log in to view the content.
+  </div>
+
+  <div ng-hide="dashCtrl.auth.isSuperadmin()">
+    Unfortunately, you don't have enough privileges to see the page.
+  </div>
+
+  <div ng-if="dashCtrl.auth.isSuperadmin()"
+       class="dashboard-content">
+    <div ng-if="dashCtrl.auth.isSuperadmin()"
+         class="col-lg-12 col-md-12 dashboard-nav-top">
+      <div class="dashboard-image col-lg-1 col-md-1">
+        <img class="dashboard-image-in"
+             src="https://s3.eu-west-2.amazonaws.com/alice-res/AliceLogoOnly.png"
+             style="height: 40px; width: auto;"
+             alt="">
+      </div>
+      <h3 class="dashboard-title col-lg-5 col-md-5">
+        Hello, {{ dashCtrl.auth.getLoggedFullName() }}
+      </h3>
+    </div>
+
+    <div class="col-lg-12 col-md-12">
+        <ul class="col-lg-2 col-md-2 dashboard-nav-side">
+            <li>
+                <!-- <a href="/users/"
+                   ng-if="dashCtrl.auth.isSuperadmin()">
+                   Users
+                </a> -->
+                <a ng-if="dashCtrl.auth.isSuperadmin()"
+                   ng-class="{'active': dashCtrl.view === dashCtrl.modes.donations}"
+                   ng-click="dashCtrl.changeView('donations')">
+                   Donations
+                </a>
+                <a ng-if="dashCtrl.auth.isSuperadmin()"
+                   ng-class="{'active': dashCtrl.view === dashCtrl.modes.validations}"
+                   ng-click="dashCtrl.changeView('validations')">
+                   Validations
+                </a>
+                <a ng-if="dashCtrl.auth.isSuperadmin()"
+                   ng-class="{'active': dashCtrl.view === dashCtrl.modes.impacts}"
+                   ng-click="dashCtrl.changeView('impacts')">
+                   Impacts
+                </a>
+                <!-- <a ng-if="dashCtrl.auth.isSuperadmin()"
+                   href="/charities/">
+                   Charities
+                </a>
+                <a ng-if="dashCtrl.auth.isAdmin() || menuCtrl.auth.isCharityAdmin()"
+                   href="/projects/">
+                   Projects
+                </a> -->
+            </li>
+        </ul>
+        <div class="col-lg-10 col-md-10 col-lg-offset-2 col-md-offset-2 dashboard-main-view">
+           <!-- <overview-users-table
+               ng-if="dashCtrl.view === dashCtrl.modes.users"
+               donations="dashCtrl.users"></overview-users-table> -->
+           <overview-donations-table
+               ng-if="dashCtrl.view === dashCtrl.modes.donations"
+               donations="dashCtrl.donations">
+           </overview-donations-table>
+           <overview-validations-table
+               ng-if="dashCtrl.view === dashCtrl.modes.validations"
+               validations="dashCtrl.validations">
+           </overview-validations-table>
+           <overview-impacts-table
+               ng-if="dashCtrl.view === dashCtrl.modes.impacts"
+               impacts="dashCtrl.impacts">
+           </overview-impacts-table>
+        </div>
+    </div>
+
+  </div>
+</section>

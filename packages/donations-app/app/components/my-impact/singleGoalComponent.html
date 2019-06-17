@@ -1,0 +1,41 @@
+<div class="col-md-12 col-lg-12 aliceGoal__container"
+     style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{goal.image}}'); background-size: cover; background-position: center;">
+  <div class="aliceGoal__goal">
+    <div class="aliceGoal__goal-left active">
+      <h6 class="white">Goal {{ (index + 1)}}</h6>
+      <h5 class="white">{{ goal.title }}</h5>
+      <uib-progress class="progress-bar__med"
+                    style="background-color: rgba(255, 255, 255, 0.3); margin-bottom: 1px">
+         <uib-bar value="goal.totalPercentage"
+                  class="inside"
+                  style="background-color: #fff;"></uib-bar>
+      </uib-progress>
+      <div class="aliceGoal__details">
+        <p class="goal-progress-bar__percentage">
+           <span class="white"><span style="font-weight: bold;">{{ goal.totalPercentage }}%</span> completed</span>
+        </p>
+        <p class="goal-progress-bar__raised">
+           <span style="float: left; bottom: 0;" class="white"><span style="font-weight: bold;">{{ goal.userSpent | money}}</span> spent</span>
+        </p>
+      </div>
+    </div>
+    <div class="aliceGoal__goal-right active" style="margin-top: 10px;">
+         <!-- <div class="" -->
+              <!-- style="padding:0;"> -->
+              <div class="col-md-12 col-xs-12">
+                <h3 class="white col-md-2 col-md-offset-2 col-xs-2">{{ goal.userSpent | money }}</h3>
+                <p class="white col-md-8 col-xs-10"
+                   style="padding-top: 30px;"> of your donation completed</p>
+              </div>
+              <div class="col-md-12 col-xs-12">
+                <h3 class="white col-md-2 col-md-offset-2 col-xs-2">{{ goal.userPercentage }}%</h3>
+              <!-- </div> -->
+              <!-- <div class="col-md-8 col-xs-10" -->
+                   <!-- style="padding-top: 30px;"> -->
+                <p class="white col-md-8 col-xs-10"
+                   style="padding-top: 30px;"> of this goal</p>
+              </div>
+         <!-- </div> -->
+    </div>
+  </div>
+</div>

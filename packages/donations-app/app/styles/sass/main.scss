@@ -1,0 +1,68 @@
+// Base
+
+@import "base/variables";
+@import "base/mixins";
+@import "base/reset";
+
+// Components
+
+@import "components/typography";
+@import "components/grid";
+@import "components/buttons";
+@import "components/navigation";
+@import "components/sections";
+@import "components/checkout";
+@import "components/card";
+@import "components/goals";
+@import "components/progressBar";
+@import "components/loader";
+
+
+// Pages
+@import "pages/home";
+@import "pages/appeal";
+@import "pages/appeal2";
+@import "pages/appealDesktop";
+@import "pages/appealMobile";
+@import "pages/dashboard";
+@import "pages/validator";
+@import "pages/myImpact";
+
+html,body
+{
+    width: 100%;
+    height: auto;
+    min-height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden;
+}
+
+html {
+    font-size: 10px;
+}
+
+@media (max-width: 550px) {
+    html {
+        font-size: 8px;
+    }
+}
+
+@media (max-width: 450px) {
+    html {
+        font-size: 7px;
+    }
+
+}
+
+@media (max-width: 400px) {
+    html {
+        font-size: 6px;
+    }
+}
+
+@media (max-width: 350px) {
+    html {
+        font-size: 5px;
+    }
+}

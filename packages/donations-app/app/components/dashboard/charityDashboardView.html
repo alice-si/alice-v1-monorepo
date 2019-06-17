@@ -1,0 +1,61 @@
+<section ng-controller="CharityDashboardController as dashCtrl"
+         class="goals-dash dashboard-background">
+
+  <div class="title-over-image grad-both">
+    <div class="header-image" ng-style="{ 'background' : 'linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.8)), url(' + dashCtrl.project.img + ') no-repeat center' }">
+      <div class="container">
+        <div class="row">
+          <h3 class="white title-over-image__title">{{ dashCtrl.project.title }}</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <protected-view validator-for-project="dashCtrl.project">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <h3 class="goals-dash__greeting">
+            Hi {{ dashCtrl.loggedUser.firstName }}
+            <span><p style="margin: 2px 0 0 5px;">
+              <ng-pluralize count="dashCtrl.validated_outcomes.length"
+                            when="{'0': '- No goals have been validated yet',
+                                   '1': '- We have achieved 1 goal',
+                                   'other': '- We have achieved {} goals'}">
+              </ng-pluralize>
+            </p></span>
+          </h3>
+        </div>
+      </div>
+
+      <uib-tabset type="pills" class="alice-tabset goals-dash__tabset">
+        <uib-tab active="true" heading="Goals">
+          <div class="row">
+            <charity-dashboard-goals outcomes-donated-to="dashCtrl.donated_outcomes"
+                                     outcomes-validated="dashCtrl.validated_outcomes"
+                                     outcomes-of-project="dashCtrl.general_outcomes"
+                                     project-validator="dashCtrl.projectValidator">
+            </charity-dashboard-goals>
+          </div>
+        </uib-tab>
+        <uib-tab heading="Money">
+          <div class="row">
+            <charity-dashboard-money donations="dashCtrl.projectWithGoals.donated">
+            </charity-dashboard-money>
+          </div>
+        </uib-tab>
+        <uib-tab disable="true" heading="People Helped">
+          <div class="row">
+            <charity-dashboard-people people="">
+            </charity-dashboard-people>
+          </div>
+        </uib-tab>
+        <uib-tab disable="true" heading="Performance">
+          <div class="row">
+            <!-- No design for Performance yet -->
+          </div>
+        </uib-tab>
+      </uib-tabset>
+    </div>
+  </protected-view>
+</section>

@@ -1,0 +1,158 @@
+/**
+ *
+ * Final version of Goal Styling:
+ * .aliceGoal (Found in v2 appeal page and my-impact page).
+ *
+ **/
+
+ .aliceGoal {
+   &__container {
+     display: inline-flex;
+     height: 200px;
+     margin: 20px 0 30px;
+     border-radius: 5px;
+     @include transition(all, 0.3s, ease-in-out);
+
+     &:hover {
+       cursor: pointer;
+       @include box-shadow(0, 0, 15px, rgba(0, 0, 0, 0.7));
+     }
+   }
+
+   &__details {
+     max-width: 310px;
+
+     p {
+       font-size: 14px !important;
+     }
+
+     .goal-progress-bar__raised {
+       float: right;
+     }
+   }
+
+   &__goal {
+     height: 100%;
+     width: 100%;
+     padding: 30px 40px;
+
+     &-left {
+       float: left;
+       width: 50%;
+
+       h6 {
+         margin-top: 20px;
+       }
+
+       h5 {
+         margin: -8px 0 8px -1px;
+       }
+     }
+
+     &-right {
+       padding: 0 !important;
+       width: 50%;
+       height: 100px;
+       float: right;
+       opacity: 0;
+       @include transition(all, 0.3s, ease-in-out);
+
+       div {
+         margin-top: -20px;
+       }
+     }
+
+     &-right.active {
+       opacity: 1;
+       padding: auto;
+       // justify-content: center;
+
+       p {
+         height: 100%;
+         padding: auto;
+       }
+     }
+   }
+ }
+
+
+@media screen and (max-width: 414px) {
+  .my-impact__container-goals {
+      .aliceGoal__container {
+        height: 250px;
+      }
+  }
+
+  .aliceGoal {
+    &__container {
+      height: 150px;
+    }
+
+    &__details {
+      max-width: 310px;
+
+      p {
+        font-size: 14px !important;
+      }
+
+      .goal-progress-bar__raised {
+        float: right;
+      }
+    }
+
+    &__goal {
+
+      &-left {
+        width: 100%;
+        opacity: 0;
+        height: 0;
+        @include transition(all, 0.5s, ease-out);
+
+        h6 {
+          margin-top: 10px;
+          font-size: 8px;
+        }
+
+        h5 {
+          margin: -8px 0 8px -1px;
+          font-size: 14px !important;
+        }
+      }
+
+      &-left.active {
+        height: auto;
+        opacity: 1;
+        padding: auto;
+      }
+
+      &-right {
+        padding: 0 !important;
+        width: 100%;
+        height: 100px;
+        float: right;
+        opacity: 0;
+        @include transition(all, 0.3s, ease-in-out);
+
+        div {
+          margin-top: -20px;
+        }
+      }
+
+      &-right.active {
+        opacity: 1;
+        padding: auto;
+        // justify-content: center;
+
+        p {
+          height: 100%;
+          padding: auto;
+        }
+
+        .col-xs-12, .col-md-12 {
+          padding-left: 0px;
+          padding-right: 0px;
+        }
+      }
+    }
+  }
+}

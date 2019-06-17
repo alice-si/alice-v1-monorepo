@@ -38,7 +38,7 @@ let projectSchemaObject = {
   perPerson: Number,
   externalFunding: Number,
   outcomesIntro: String,
-  
+
   ethAddresses: Mongoose.Schema.Types.Mixed,
 
   mangoContractWalletId: String,
@@ -47,6 +47,7 @@ let projectSchemaObject = {
   myStory: [{
     img: String,
     header: String,
+    quote: String,
     details: String
   }],
   _outcomes: [{
