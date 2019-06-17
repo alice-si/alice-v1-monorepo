@@ -6,8 +6,6 @@ angular.module('aliceApp')
 			vm.model = ProjectService.prepareProjectDetails(result.data);
 			vm.supporters = result.data.supporters;
 
-			console.log(vm.model);
-
 			vm.model._outcomes.forEach((elem) => {
 				let impact = vm.model.goalsV2.find((e) => {
 					if(e._id === elem._id){
@@ -18,13 +16,10 @@ angular.module('aliceApp')
 					elem.totalPercentage = Math.floor(100 * impact.totalValidatedForOutcome / elem.amount);
 					elem.totalValidatedForOutcome = impact.totalValidatedForOutcome;
 				} else { elem.totalPercentage = 0; }
-				elem.lightColor = convertHex(elem.color, 0.4);
+				elem.lightColor = elem.color ? convertHex(elem.color, 0.4) : 'rgba(255, 255, 255, 0.3)';
 			});
 
 			vm.model.percentageCompleted = Math.floor((100 * vm.model.amountValidated) / vm.model.fundingTarget);
-
-
-			console.log(vm.model);
 		});
 
 		function convertHex(hex, opacity) {
@@ -47,7 +42,6 @@ angular.module('aliceApp')
 		controller: ['$scope', function ($scope) {
 			$scope.hoverOn = function(goal) {
 				$scope.activeGoal = goal;
-				console.log($scope.activeGoal);
 			};
 			$scope.hoverOff = function() {
 				$scope.activeGoal = undefined;

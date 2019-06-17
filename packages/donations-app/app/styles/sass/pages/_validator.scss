@@ -5,13 +5,7 @@
   display: inline-block;
   position: relative;
   width: 100%;
-  margin-bottom: 100px;
-  border-left: 10px solid $alice-tonal-medium;
-  @include transition(0.3s, border-left, linear);
-
-  &:hover {
-    border-left: none;
-  }
+  border-radius: 4px;
 
   .header-image {
     width: 100%;
@@ -37,11 +31,9 @@
 
     &-card {
       position: absolute;
-      margin-top: 0;
-      background: $alice-tonal-medium;
+      bottom: 0;
       padding: 10px 30px 0 20px;
       width: 100%;
-      height: 100px;
     }
   }
 
