@@ -6,11 +6,11 @@ if (isLocal) {
   mode = 'LOCAL';
 }
 
-function getEnv(variable, defaultForLocal) {
+function getEnv(variable, defaultVal) {
   if (process.env[variable]) {
     return process.env[variable];
-  } else if (defaultForLocal !== undefined && mode === 'LOCAL') {
-    return defaultForLocal;
+  } else if (defaultVal !== undefined) {
+    return defaultVal;
   } else {
     throw `Environment variable "${variable}" is missing`;
   }

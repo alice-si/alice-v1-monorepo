@@ -1,4 +1,5 @@
 const Promise = require('bluebird');
+const request = require('request');
 
 const ContractUtils = require('../utils/contract-utils');
 const Deploy = require('../utils/deploy');

@@ -172,7 +172,7 @@ module.exports = function (app) {
 
       let validated = await findAndPrepareGoals({
         _projectId: project._id,
-        status: { $in: ['COMPLETED','IMPACT_FETCHING_COMPLETED'] } 
+        status: { $in: ['COMPLETED','IMPACT_FETCHING_COMPLETED'] }
       });
 
       let donated = await findAndPrepareGoals({
