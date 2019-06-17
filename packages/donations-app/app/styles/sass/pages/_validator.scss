@@ -1,0 +1,91 @@
+/* Styles for validator dashboard. */
+
+/* TODO move this to some common location. */
+.title-over-image {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  border-radius: 4px;
+
+  .header-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    background-size: cover;
+    background-blend-mode: multiply;
+  }
+
+  /* Keeping this here incase we don't want gradient */
+  img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    @include transition(0.2s, all, ease-out);
+    filter: brightness(60%);
+  }
+
+  &__title {
+    position: absolute;
+    bottom: 0px;
+    margin: 0 0 30px 15px;
+
+    &-card {
+      position: absolute;
+      bottom: 0;
+      padding: 10px 30px 0 20px;
+      width: 100%;
+    }
+  }
+
+  .grad-bottom:before {
+    display: inline-block;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
+    opacity: .6;
+  }
+
+  .grad-both:before {
+    display: inline-block;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+      linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8)),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
+    opacity: .6;
+  }
+}
+
+.goals-dash {
+  &__greeting {
+    margin: 32px 0 -20px;
+    font-size: 2em;
+    color: #333;
+    display: inline-flex;
+  }
+
+  &__tabset {
+    margin-top: 32px;
+
+    a {
+      font-family: 'Avenir';
+      font-weight: 300;
+    }
+  }
+}
+
+.goal-card--in-progress {
+  opacity: 0.7;
+}
+
+img.goal-card__image {
+  height: 150px;
+}

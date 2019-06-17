@@ -4,11 +4,9 @@
 *                        *
 **************************/
 
-
-
 .dashboard-page {
   position: absolute;
-  background: #F0F5F5;
+  background: $dashboard-background;
   width: 100%;
   min-height: 100vh;
 }
@@ -18,7 +16,7 @@
   width: 100%;
   border-bottom: 2px solid #E3ECF0;
   z-index: 500;
-  background: #f0f5f5;
+  background: $dashboard-background;
   position: fixed;
 }
 
@@ -36,28 +34,48 @@
 }
 
 .dashboard-title {
-  padding-top: 31px;
-  text-align: left;
-  font-size: 26px;
-  font-weight: 400;
-  color: #184E6D;
-  letter-spacing: 0;
-  line-height: 43.5px;
+  padding-top: 10px;
+  color: $alice-dark-text;
 }
 
 .dashboard-nav-side {
-  height: 550px;
+	padding: 8px 0;
+	margin-top: 100px;
+	height: 550px;
   z-index: 1000;
-  padding: 0 30px 0 40px;
   position: fixed;
-	margin-top: 120px;
+
+	list-style: none;
+
+	li > a {
+		padding: 7px 0 7px 15px;
+		color: $alice-azure;
+		font-size: 14px;
+		border-bottom: 1px solid $alice-UI-dark-grey;
+		border-right: 1px solid $alice-UI-dark-grey;
+		border-top-right-radius: 5px;
+		border-bottom-right-radius: 5px;
+
+		&:hover {
+			color: $alice-dark-text;
+			cursor: pointer;
+		}
+	}
+
+	li > a.active {
+		color: $alice-dark-text;
+	}
+}
+
+.dashboard-container {
+	margin-top: 100px;
 }
 
 .dashboard-main-view {
   position: relative;
   margin-top: 100px;
-  padding: 40px 50px 40px 20px;
-  background: #f0f5f5;
+  padding: 20px 50px 40px 20px;
+  background: $dashboard-background;
 }
 
 .dashboard-tabs {
@@ -79,14 +97,6 @@
    height: 120px;
 }
 
-.tab-group-title {
-  font-size: 10px;
-  letter-spacing: 2px;
-  padding-left: 20px;
-  font-weight: 200;
-  color: #BBCED9;
-}
-
 #dashboard-projects {
   height: 350px;
   overflow-y: auto;
@@ -106,7 +116,7 @@
 }
 
 #dashboard-projects .dashboard-tabs {
-	margin: 0 0 0 20px;
+	margin: 0 0 0 10px;
 }
 
 .dashboard-side-tab {
@@ -154,8 +164,12 @@
   padding: 8px 10px 0 0;
 }
 
-.inside-tabs li {
-  list-style: none;
+.inside-tabs {
+	margin-left: -10px;
+
+	li {
+	  list-style: none;
+	}
 }
 
 .dashboard-chart-received {
@@ -196,34 +210,10 @@
   background: #fff;
 }
 
-.project-card-buttons {
-  height: 50px;
-  padding: 0;
-}
-
-.square-button {
-  margin-left: -25px;
-  border: 1px solid #fff;
-  border-radius: 3px;
-  height: 40px;
-
-  text-align: center;
-  color: #fff;
-  font-weight: 200;
-  font-size: 12px;
-
-  letter-spacing: 1px;
-  line-height: 36px;
-
-  transition: 0.2s all ease-in-out;
-  -webkit-transition: 0.2s all ease-in-out;
-  -moz-transition: 0.2s all ease-in-out;
-}
-
-.square-button:hover {
-	border-color: #fff;
-	color: #fff;
-	background-color: rgba(255,255,255,0.2);
+.uib-tab {
+	margin: 0 30px;
+	min-width: 130px;
+	text-align: center;
 }
 
 .card-title {
@@ -234,30 +224,6 @@
   letter-spacing: 1px;
   transform: translateY(-20px);
   height: 30px;
-}
-
-.card-button {
-	color: #1998A2;
-  border: 1px solid #1998A2;
-  font-weight: 200;
-  font-size: 14px;
-  letter-spacing: 1px;
-  border-radius: 6px;
-  text-align: center;
-  padding-top: 14px;
-  height: inherit;
-  padding-left: 15px;
-
-  transition: 0.2s all ease-in-out;
-  -webkit-transition: 0.2s all ease-in-out;
-  -moz-transition: 0.2s all ease-in-out;
-}
-
-.card-button:hover {
-  cursor: pointer;
-	color: #184E6D;
-  border: 1px solid #1998A2;
-  background-color: #D8F1F3;
 }
 
 #donation-check {
@@ -278,9 +244,9 @@
 	border-top-right-radius: 6px;
 	border-top-left-radius: 6px;
   height: 120px;
-  background: #184E6D;
+  background: $alice-dark-text;
 
-  padding-top: 40px;
+  padding-top: 30px;
   color: #fff;
   font-weight: 400;
 
@@ -514,25 +480,6 @@
   text-align: right;
 }
 
-.flot-chart {
-  margin-top: 50px;
-  height: 300px;
-  position: relative;
-  padding:20px;
-  font-size: 1.5rem;
-  font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
-  font-weight: 300;
-
-}
-
-.flot-chart .y-label {
-  position: absolute;
-  top: 0;
-  left: 0;
-  font-weight: 100;
-  font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif;
-}
-
 .donations table.impact-table {
   margin-top: 30px;
 }
@@ -576,7 +523,7 @@
 
 .dashboard-content {
   margin: 80px 0;
-  background: #f0f5f5;
+  background: $dashboard-background;
 }
 
 @media (max-width: 600px) {
@@ -585,47 +532,34 @@
   }
 }
 
-table.impact-table tr:first-child {
-  background: #fff;
-}
+.impact-table {
+	tr {
+		background: none;
+		border-bottom: 1px solid $alice-tonal-light;
 
-table.impact-table tr:first-child > td {
-  color: rgba(179, 194, 195, 0.67) !important;
-  text-transform: none !important;
-  letter-spacing: 1px !important;
-}
+		td {
+			color: inherit;
+			text-align: left;
+			padding-left: 15px !important;
+			font-family: "Avenir";
+			font-weight: 200;
+			letter-spacing: 1px;
+			padding: 15px 0;
+		}
+	}
 
-table.impact-table tr {
-  border-bottom: 1px solid rgba(142, 166, 179, 0.22);
-}
+	td:first-child {
+		width: 15% !important;
+	}
 
-table.impact-table tr:nth-child(even) {
-  background: rgba(142, 166, 179, 0.05);
-}
+	tr:first-child {
+		border-bottom: 1px solid $alice-tonal-medium;
 
-table.impact-table td {
-    text-align: left;
-    padding-left: 15px !important;
-    font-family: "Avenir";
-    font-weight: 200;
-    letter-spacing: 1px;
-    color: #8ea6b3;
-    padding: 15px 0;
-}
-
-table.impact-table tr:first-child td {
-  font-weight: 400;
-  color: #fff;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-}
-
-table.impact-table td:first-child{
-    width: 10%;
-}
-
-table.impact-table.my-impact td {
-    width: 30%;
+		p {
+			font-size: 14px;
+			text-transform: uppercase;
+		}
+	}
 }
 
 
@@ -708,5 +642,109 @@ table.impact-table.my-impact td {
 
 	.project-card {
 		height: 540px;
+	}
+}
+
+
+.dashboard-background {
+	background: $alice-UI-light-grey;
+	min-height: 100vh;
+}
+
+/* Charity Dashboard */
+
+.c-dashboard__panel {
+	margin: 25px 0 !important;
+	border-radius: 0px !important;
+	width: 100%;
+	box-shadow: 0px 0px 5px rgba(179, 179, 179, 0.5);
+
+	.panel-heading {
+		color: $alice-dark;
+		padding: 30px;
+		@include transition(0.2s, all, ease-in-out);
+
+		&:hover {
+			cursor: pointer;
+			box-shadow: 0px 0px 5px rgba(179, 179, 179, 0.7);
+		}
+	}
+
+	.panel-title {
+		width: 100%;
+
+		a {
+			font-size: 18px;
+			color: $alice-dark-text !important;
+
+			.glyphicon {
+				float:right;
+				margin-top: 10px;
+			}
+		}
+	}
+
+	.panel-body {
+		padding: 32px;
+	}
+}
+
+#goalsBreakdown {
+	margin-top: 0;
+
+
+	tr {
+		background: none;
+
+		td {
+			color: inherit;
+		}
+	}
+
+	td:first-child {
+		width: 15%;
+	}
+
+	tr:first-child p {
+		font-size: 14px;
+		text-transform: uppercase;
+	}
+}
+
+
+// Override pagination styling
+
+.landing-page li {
+	&:first-child a {
+		width: auto;
+	}
+}
+
+.pagination {
+	li {
+		a {
+			border-radius: 25px;
+			margin: 4px;
+			color: $alice-tonal-medium;
+			border-color: $alice-tonal-light;
+
+			&:hover {
+				background-color: $alice-tonal-medium;
+				border-color: #fff;
+				color: #fff;
+			}
+		}
+	}
+
+	.active {
+		a {
+			background-color: $alice-tonal-medium;
+			border-color: #fff;
+
+			&:hover {
+				background-color: $alice-tonal-dark;
+				cursor: auto;
+			}
+		}
 	}
 }

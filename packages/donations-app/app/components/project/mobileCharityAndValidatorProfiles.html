@@ -6,26 +6,26 @@
   </div>
   <div class="col-xs-12 ngo-section-right">
       <div class="appeal-section-heading white row">
-          <div class="ngo-title col-xs-8">
+          <div class="ngo-title col-xs-10">
               Charity Profile
           </div>
-          <div class="col-xs-3 col-xs-offset-1">
+          <div class="col-xs-2">
               <a href="{{ projectCtrl.model.charity.url }}" target="_blank"><img
                       class="sub-section-logo" src="{{ projectCtrl.model.charity.picture }}"></a>
           </div>
       </div>
-      <div class="section-text-left medium white profile" ng-bind-html="projectCtrl.model.serviceProvider">
+      <div class="appeal-section-left medium white profile" ng-bind-html="projectCtrl.model.serviceProvider">
       </div>
 
       <div class="appeal-section-heading white row">
-          <div class="ngo-title col-xs-8">
+          <div class="ngo-title col-xs-10">
               Validator Profile
           </div>
-          <div class="col-xs-3 col-xs-offset-1">
+          <div class="col-xs-2">
               <a href="{{ projectCtrl.model.validatorUrl }}" target="_blank"><img
                       class="sub-section-logo" src="{{projectCtrl.model.validatorImg}}"></a>
           </div>
       </div>
-      <div class="section-text-left medium white profile" ng-bind-html="projectCtrl.model.validator"></div>
+      <div class="appeal-section-left medium white profile" ng-bind-html="projectCtrl.model.validator"></div>
   </div>
 </div>

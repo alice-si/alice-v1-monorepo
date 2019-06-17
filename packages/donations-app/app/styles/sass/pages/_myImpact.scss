@@ -1,0 +1,72 @@
+.my-impact {
+  background: $white;
+  min-height: 100vh;
+
+  .goal-progress-bar {
+  	&__percentage {
+  		width: 70%;
+  		float: left;
+  	}
+  }
+
+  &__container {
+    width: 75vw;
+    margin: auto;
+
+    &-greeting {
+      margin: 0 23px;
+    }
+
+    &-goals {
+      margin: 50px 0;
+      padding: 35px 30px;
+    }
+  }
+
+  &__overview {
+    margin-top: 50px;
+    padding: 0;
+
+    div {
+      p {
+        height: 30px;
+        margin: 0;
+      }
+
+      h3 {
+        margin: 0;
+      }
+
+      &:nth-child(2) , &:last-child {
+        display: inline-block;
+
+        h3 {
+          width: auto;
+          margin-right: 8px;
+          float: left;
+        }
+
+        p:last-child {
+          margin: 12px 0 0;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .my-impact {
+    &__container {
+      width: 100%;
+      h3 {
+        font-size: 18px;
+      }
+    }
+
+    &__overview {
+      div > p {
+        height: 20px;
+      }
+    }
+  }
+}

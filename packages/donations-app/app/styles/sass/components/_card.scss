@@ -1,11 +1,54 @@
 /* Styles used for various cards across the site. */
 
+#claimGoals {
+  .alice-card {
+    min-height: 500px;
+
+    &__content {
+      --content-padding: 10px;
+      padding: 20px var(--content-padding) 5px;
+
+      p {
+        font-size: 14px;
+      }
+
+      input {
+        border: none;
+        padding: none;
+        text-align: center;
+        border-bottom: 1px solid $alice-tonal-light;
+        background: none;
+
+        &:focus {
+          caret-color: $alice-dark-text;
+          font-weight: 200;
+          outline: 0;
+        }
+      }
+    }
+
+    &__buttons {
+      float: right;
+      margin-right: -10px;
+    }
+  }
+}
+
 .alice-card {
   display: block;
   color: inherit;
   background-color: #fff;
-  border: 1px solid #ddd;
   margin: 10px;
+  border-radius: 4px;
+
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 15px;
+  }
+
 }
 
 .alice-card__content {
