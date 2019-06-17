@@ -21,21 +21,19 @@ angular.module('aliceApp')
           }
           vm.general_outcomes = vm.projectWithGoals.goals;
 
-          vm.projectWithGoals.validated.forEach((validatedOutcome) => {
-            let outcome = vm.general_outcomes.find((outcome) => {
-              if(outcome._id === validatedOutcome._id) {
-                return outcome;
-              }
+          vm.projectWithGoals.validated.forEach((hasValidatedOutcome) => {
+            let outcome = vm.general_outcomes.some((outcome) => {
+              return outcome._id === hasValidatedOutcome._id;
             });
             if (outcome) {
               // Not checking for amount because it's a compulsory field
-              validatedOutcome.progressInUnits = validatedOutcome.outcome[0].costPerUnit ? (
-                Math.floor(validatedOutcome.totalValidated / validatedOutcome.outcome[0].costPerUnit)) : 0;
+              hasValidatedOutcome.progressInUnits = hasValidatedOutcome.outcome[0].costPerUnit ? (
+                Math.floor(hasValidatedOutcome.totalValidated / hasValidatedOutcome.outcome[0].costPerUnit)) : 0;
               // Have to decide which one we want as the percentage!!
               // e.percentage = (e.totalValidated) ? 100 * (e.totalValidated / e.outcome[0].amount) : 0;
-              validatedOutcome.percentage = (validatedOutcome.progressInUnits / validatedOutcome.outcome[0].target) * 100;
-              if(validatedOutcome.outcome[0].color) {
-                validatedOutcome.outcome[0].lightColor = convertHex(validatedOutcome.outcome[0].color, 0.35);
+              hasValidatedOutcome.percentage = (hasValidatedOutcome.progressInUnits / hasValidatedOutcome.outcome[0].target) * 100;
+              if(hasValidatedOutcome.outcome[0].color) {
+                hasValidatedOutcome.outcome[0].lightColor = convertHex(hasValidatedOutcome.outcome[0].color, 0.35);
               }
             }
           });
