@@ -21,8 +21,6 @@ angular.module('aliceApp')
           }
           vm.general_outcomes = vm.projectWithGoals.goals;
 
-          console.log(vm.projectWithGoals.validated);
-
           vm.projectWithGoals.validated.forEach((item) => {
             // Not checking for amount because it's a compulsory field
             item.progressInUnits = item.outcome[0].costPerUnit ? (
