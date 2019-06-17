@@ -1,7 +1,7 @@
 <div ng-controller="ProjectControllerV2 as projectCtrl" class="appeal-page">
   <section class="splash-v2 grad-both">
     <div class="header-image"
-         ng-style="{ 'background' : 'linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.8)), url(' + projectCtrl.model.img + ') no-repeat center' }">
+         ng-style="{ 'background' : 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(' + projectCtrl.model.img + ') no-repeat center' }">
       <div class="container splash-v2__container-title">
         <div class="row">
           <h3 class="white">{{ projectCtrl.model.title }}</h3>
@@ -16,10 +16,11 @@
                 </uib-bar>
            </uib-progress>
            <p class="white goal-progress-bar__percentage">
-             <span style="font-size: 30px">{{ projectCtrl.model.percentageCompleted }}%</span> of goals completed
+             <span style="font-size: 22px">{{ projectCtrl.model.percentageCompleted }}%</span> of goals completed
            </p>
            <p class="white goal-progress-bar__raised">
-             <span style="font-size: 30px">{{ projectCtrl.model.amountValidated | money }}</span> spent
+             <span style="font-size: 22px">{{ projectCtrl.model.amountValidated | money }}</span> spent |
+             <span style="font-size: 22px">{{ projectCtrl.model.raised | money }}</span> donated
            </p>
            <a href="/checkout/{{projectCtrl.model.code}}">
              <button class="standard-button__main">
@@ -34,37 +35,43 @@
   <section class="container appeal-v2__container">
     <div class="appeal-v2__info">
       <div class="col-xs-12 col-md-12 col-lg-12 appeal-v2__info-top">
-        <h4 class="col-xs-12 col-md-10 col-lg-10">{{ projectCtrl.model.lead }}</h4>
+        <h5 class="col-xs-12 col-md-10 col-lg-10">{{ projectCtrl.model.lead }}</h4>
         <!-- <button class="col-md-2 col-lg-2">Learn More </button> -->
       </div>
-      <div class="col-md-3 appeal-v2__info-left">
-        <p>Run by</p>
-        <div class="appeal-v2__info-image"
-             style="background-image: url('{{projectCtrl.model.charity.picture}}')">
-        </div>
-      </div>
-      <div class="col-md-9 appeal-v2__info-right">
+      <div class="col-md-8 appeal-v2__info-left">
         <p ng-bind-html="projectCtrl.model.project"></p>
+      </div>
+      <div class="col-md-3 col-md-offset-1 appeal-v2__info-right">
+        <h6>Run by</h6>
+        <div class="appeal-v2__info-image"
+             style="background-image: url('{{projectCtrl.model.charity.darkPicture}}')">
+        </div>
       </div>
     </div>
     <div class="col-xs-12 col-md-12 col-lg-12 appeal-v2__goals">
-      <h4>Track goals achieved - see how your donation will help</h4>
+      <h5>
+        <ng-pluralize count="projectCtrl.model._outcomes.length"
+                      when="{'0': '',
+                             '1': 'Track the impact of donations through 1 goal',
+                             'other': 'Track the impact of donations through {} goals'}">
+        </ng-pluralize>
+      </h5>
       <div ng-repeat="goal in projectCtrl.model._outcomes track by $index">
         <appeal-goal goal="goal" index="$index"></appeal-goal>
       </div>
     </div>
     <div class="col-xs-12 col-md-12 col-lg-12 appeal-v2__stories">
-      <h4>Follow the story</h4>
+      <h5>Follow the story</h5>
       <div class="appeal-v2__stories-container"
            ng-repeat="story in projectCtrl.model.myStory">
-        <div class="alice-card col-md-3">
+        <div class="alice-card col-md-3 col-xs-12">
           <div class="appeal-v2__stories-img grad-bottom">
             <img src="{{story.img}}"
                  alt="Image for {{ story.title }}" />
             <h4 class="white appeal-v2__stories-underimg">{{story.header}}</h4>
           </div>
         </div>
-        <div class="appeal-v2__stories-info col-md-9">
+        <div class="appeal-v2__stories-info col-md-9 col-xs-12">
           <h4 class="col-md-12">
             "{{story.quote}}"
           </h4>
@@ -73,8 +80,7 @@
           </p>
         </div>
       </div>
-
-
     </div>
   </section>
+  <alice-footer></alice-footer>
 </div>

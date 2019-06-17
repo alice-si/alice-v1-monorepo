@@ -72,8 +72,19 @@ h4 {
 	line-height: 36px;
 }
 
-h5, h6 {
-    font-family: "Avenir", "Helvetica", "Liberation Sans", "Arial", sans-serif;;
+h5 {
+	font-family: "Avenir", "Helvetica", "Liberation Sans", "Arial", sans-serif;
+	font-size: 24px;
+	font-weight: 200;
+	letter-spacing: 1px;
+}
+
+h6 {
+	font-family: "Avenir", "Helvetica", "Liberation Sans", "Arial", sans-serif;
+	font-size: 10px;
+	font-weight: 500;
+	letter-spacing: 5px;
+	text-transform: uppercase;
 }
 
 p, a {

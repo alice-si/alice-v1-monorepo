@@ -1,26 +1,31 @@
-<div class="col-md-12 col-lg-12 my-impact__container-goal">
-  <div class="my-impact__goal-image"
-       style="background-image: url('{{goal.image}}'); border-left: 15px solid {{goal.color}}">
-  </div>
-  <div class="my-impact__goal">
-    <div class="my-impact__goal-top">
-      <div class="my-impact__goal-topleft"
-           style="border-right: none;">
-        <p style="color: {{goal.color}} ">Goal {{ (index + 1)}}</p>
-        <p style="color: #000; font-size: 24px;">{{ goal.title }}</p>
-      </div>
-    </div>
-    <div class="my-impact__goal-bottom">
-      <uib-progress class="progress-bar__lg"
-                    style="background-color: {{goal.lightColor}};">
+<div class="col-md-12 col-lg-12 aliceGoal__container"
+     style="background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('{{goal.image}}'); background-size: cover; background-position: center;">
+  <div class="aliceGoal__goal"
+       ng-mouseover="hoverOn(index)"
+       ng-mouseleave="hoverOff()">
+     <div class="aliceGoal__goal-left"
+          ng-class="{ 'active' : (activeGoal !== index)}">
+        <h6 class="white">Goal {{ (index + 1)}}</h6>
+        <h5 class="white">{{ goal.title }}</h5>
+        <uib-progress class="progress-bar__med"
+                      style="background-color: rgba(255, 255, 255, 0.3); margin-bottom: 3px">
             <uib-bar value="goal.totalPercentage"
                      class="inside"
-                     style="background-color: {{goal.color}};"></uib-bar>
-       </uib-progress>
-       <p class="goal-progress-bar__percentage">
-         <span style="color: {{ goal.color }};"><span style="font-weight: bold;">{{ goal.totalPercentage }}%</span> completed</span>
-         <!-- <span style="float: right; bottom: 0; color: {{ goal.color }};"><span style="font-weight: bold;">{{ goal.totalSpent | money}}</span> spent</span> -->
-       </p>
-    </div>
+                     style="background-color: #fff;"></uib-bar>
+        </uib-progress>
+        <div class="aliceGoal__details">
+          <p class="goal-progress-bar__percentage">
+            <span class="white"><span style="font-weight: bold;">{{ goal.totalPercentage }}%</span> completed</span>
+          </p>
+          <p class="goal-progress-bar__raised">
+            <span style="float: left; bottom: 0;" class="white"><span style="font-weight: bold;">{{ goal.totalValidatedForOutcome | money}}</span> spent</span>
+          </p>
+        </div>
+      </div>
+      <div class="aliceGoal__goal-right"
+           ng-class="{ 'active': (activeGoal === index) }">
+        <p class="white"
+           ng-bind-html="goal.value"></p>
+      </div>
   </div>
 </div>

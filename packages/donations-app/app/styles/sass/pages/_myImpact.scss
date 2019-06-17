@@ -1,6 +1,13 @@
 .my-impact {
-  background: $dashboard-background;
+  background: $white;
   min-height: 100vh;
+
+  .goal-progress-bar {
+  	&__percentage {
+  		width: 70%;
+  		float: left;
+  	}
+  }
 
   &__container {
     width: 75vw;
@@ -11,17 +18,8 @@
     }
 
     &-goals {
-      background: $white;
       margin: 50px 0;
-      @include box-shadow(0, 0, 5px, rgba(0, 0, 0, 0.1));
       padding: 35px 30px;
-    }
-
-    &-goal {
-      display: inline-flex;
-      height: 200px;
-      margin: 20px 0 30px;
-      padding: 0;
     }
   }
 
@@ -36,7 +34,7 @@
       }
 
       h3 {
-        margin: 0;;
+        margin: 0;
       }
 
       &:nth-child(2) , &:last-child {
@@ -54,57 +52,21 @@
       }
     }
   }
+}
 
-  &__goal {
-    height: 100%;
-    width: 80%;
-
-    &-image {
-      width: 200px;
-      height: 200px;
-      background-position: center;
-      background-size: cover;
-      border-radius: 2px;
-      margin-right: 25px;
-      @include box-shadow(0, 0, 3px, rgba(0, 0, 0, 0.3));
-    }
-
-    &-top {
-      display: inline-flex;
+@media screen and (max-width: 414px) {
+  .my-impact {
+    &__container {
       width: 100%;
-
-      &left {
-        float: left;
-        width: 50%;
-        border-right: 2px solid $alice-UI-light-grey;
-        margin-right: 9%;
-
-        p:first-child {
-          font-size: 20px !important;
-        }
-      }
-
-      &right {
-        padding: 0 !important;
-        width: 40%;
-        height: 100px;
-        float: right;
-
-        div {
-          margin-top: -20px;
-        }
+      h3 {
+        font-size: 18px;
       }
     }
 
-    &-bottom {
-      margin-top: 20px;
-
-      .goal-progress-bar__percentage {
-        width: 100%;
-        color: $alice-blue;
-        font-size: 20px;
+    &__overview {
+      div > p {
+        height: 20px;
       }
     }
   }
-
 }

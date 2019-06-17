@@ -45,16 +45,16 @@
         </h3>
       </div>
       <div class="col-xs-12 col-md-12 col-lg-12 my-impact__overview">
-        <div class="col-lg-3">
+        <div class="col-lg-3 col-xs-4">
           <p>You donated</p>
           <h3>{{ impactCtrl.project.totalDonated | money }}</h3>
         </div>
-        <div class="col-lg-5">
+        <div class="col-lg-5 col-xs-4">
           <p>{{ impactCtrl.charity.name }} used</p>
           <h3>{{ impactCtrl.project.totalPaidOut | money }}</h3>
           <p>so far</p>
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-3 col-xs-4">
           <p>To complete</p>
           <h3>{{ impactCtrl.project.individualProjectPercentage }}%</h3>
           <p>of it's goals</p>
@@ -62,7 +62,7 @@
       </div>
     </div>
     <div class="col-xs-12 col-md-12 col-lg-12 my-impact__container-goals">
-      <h4>Track what your donation received </h4>
+      <h5>Track what your donation received </h5>
       <div ng-repeat="goal in impactCtrl.goals track by $index">
         <my-impact-goal goal="goal" index="$index"></my-impact-goal>
       </div>

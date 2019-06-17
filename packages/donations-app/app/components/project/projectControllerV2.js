@@ -16,6 +16,7 @@ angular.module('aliceApp')
 				});
 				if(impact) {
 					elem.totalPercentage = Math.floor(100 * impact.totalValidatedForOutcome / elem.amount);
+					elem.totalValidatedForOutcome = impact.totalValidatedForOutcome;
 				} else { elem.totalPercentage = 0; }
 				elem.lightColor = convertHex(elem.color, 0.4);
 			});
@@ -42,6 +43,15 @@ angular.module('aliceApp')
 			goal: '=',
 			index: '='
 		},
-		templateUrl: '/components/project/components/singleGoalComponent.html'
+		templateUrl: '/components/project/components/singleGoalComponent.html',
+		controller: ['$scope', function ($scope) {
+			$scope.hoverOn = function(goal) {
+				$scope.activeGoal = goal;
+				console.log($scope.activeGoal);
+			};
+			$scope.hoverOff = function() {
+				$scope.activeGoal = undefined;
+			};
+		}]
 	};
 });
