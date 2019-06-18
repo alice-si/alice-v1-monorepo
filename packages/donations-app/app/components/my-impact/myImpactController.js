@@ -30,8 +30,8 @@ angular.module('aliceApp')
 						}
 					});
 					if (vm.project) {
-            vm.project.overallProjectPercentage = Math.floor(100 * vm.project.totalPaidOutOverall / vm.project.fundingTarget);
-            vm.project.individualProjectPercentage = Math.floor(100 * vm.project.totalPaidOut / vm.project.fundingTarget);
+            vm.project.overallProjectPercentage = Math.round(100 * vm.project.totalPaidOutOverall / vm.project.fundingTarget);
+            vm.project.individualProjectPercentage = Math.round(100 * vm.project.totalPaidOut / vm.project.fundingTarget);
             if (vm.project) {
               vm.charity = vm.project.charity;
             }
