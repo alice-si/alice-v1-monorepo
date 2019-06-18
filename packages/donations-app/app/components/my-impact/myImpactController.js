@@ -22,6 +22,8 @@ angular.module('aliceApp')
       $http.get(API + 'getMyProjects').then(function (result) {
         vm.projectsForMain = result.data;
 
+        console.log(vm.projectsForMain);
+
         if(vm.projectsForMain) {
 					// Get single
 					vm.project = vm.projectsForMain.find(function (elem) {

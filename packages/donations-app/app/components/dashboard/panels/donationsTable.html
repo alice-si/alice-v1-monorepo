@@ -11,8 +11,8 @@
     </tr>
     <tr ng-repeat="donation in donCtrl.users.slice(((currentPage - 1) * itemsPerPage),
                    ((currentPage) * itemsPerPage))
-                   | filter: donCtrl.donationSearch
-                   | orderBy : date"
+                   | filter:donCtrl.donationSearch
+                   | orderBy : donCtrl.sortField"
         class="donation-row">
         <td>{{donation.fullName}}</td>
         <td>{{donation.email}}</td>
@@ -24,7 +24,7 @@
     </tr>
   </table>
   <div uib-pagination
-       total-items="donCtrl.totalItems * 2"
+       total-items="donCtrl.totalItems"
        ng-model="currentPage"
        max-size="maxSize"
        class="pagination-sm"
