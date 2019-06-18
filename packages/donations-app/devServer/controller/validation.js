@@ -3,6 +3,7 @@ const asyncHandler = require('express-async-handler');
 const Auth = require('../service/auth');
 const AccessControl = require('../service/access-control');
 const Utils = require('../service/utils');
+const Mail = require('../service/mail');
 
 const Outcome = Utils.loadModel('outcome');
 const Project = Utils.loadModel('project');
@@ -126,13 +127,17 @@ async function linkImpacts(validation) {
       console.log(`Donor impact: ${amountForDonor}`);
 
       // Creating a new impact for current donor
-      await new Impact({
+      let savedImpact = await new Impact({
         _projectId: validation._projectId,
         _outcomeId: validation._outcomeId,
         _userId: donor._id,
         _validationId: validation._id,
         amount: amountForDonor
       }).save();
+
+      //Send confirmation email
+      let projectWithCharity = await Project.findById(validation._projectId).populate('charity');
+      await Mail.sendImpactConfirmation(donor, projectWithCharity, savedImpact);
 
       // Updating accumulated values
       amountLeft -= amountForDonor;
