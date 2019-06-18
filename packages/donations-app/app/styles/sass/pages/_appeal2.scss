@@ -17,10 +17,39 @@
     }
 
     &-image {
-      height: 150px;
+      height: 100px;
       width: auto;
       background-size: contain;
       background-repeat: no-repeat;
+    }
+
+    &-top {
+      margin-bottom: 15px;
+
+      h6 {
+        color: rgba($alice-blue, 0.6);
+        font-size: 10px;
+      }
+
+      &-expanded > button {
+        margin-top: 15px;
+        padding: 8px 0 10px !important;
+        font-weight: 200;
+        background: $alice-blue;
+        border-radius: 2px;
+        color: #fff;
+        border: none;
+        font-weight: 300;
+        letter-spacing: 1px;
+        @include box-shadow(0, 0, 2px, rgba(0, 0, 0, 0.23));
+        outline: none;
+
+        .glyphicon {
+          font-weight: 200;
+          color: #fff;
+          top: 3px;
+        }
+      }
     }
 
     &-left {
@@ -52,8 +81,6 @@
       display: inline-block;
       position: relative;
       width: 100%;
-      border-left: 10px solid $alice-tonal-medium;
-      @include box-shadow(0, 0, 3px, rgba(0, 0, 0, 0.4));
 
       .header-image {
         width: 100%;
@@ -66,60 +93,63 @@
       /* Keeping this here incase we don't want gradient */
       img {
         width: 100%;
-        height: 150px;
+        height: 180px;
         object-fit: cover;
-        @include transition(0.2s, all, ease-out);
         filter: brightness(60%);
-      }
-
-      .grad-bottom:before {
-        display: inline-block;
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
-        opacity: .6;
-      }
-
-      .grad-both:before {
-        display: inline-block;
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-image:
-          linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8)),
-          linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
-        opacity: .6;
       }
     }
 
-    &-underimg {
+    &-imgtext {
       position: absolute;
-      margin-top: 0;
-      background: $alice-tonal-medium;
+      margin-top: -180px; // same height of image
       width: 100%;
       padding: 10px 0 10px 10px;
       height: 45px;
     }
 
     &-container {
-      height: 250px;
-      margin: 20px 0 30px;
+      height: auto;
+      margin: 20px 0 0;
+      padding-bottom: 10px;
+      @include box-shadow(0, 0, 1px, rgba(0, 0, 0, 0.2));
+
+      .alice-card {
+        height: 180px;
+      }
     }
 
     &-info {
-      padding: 5px 25px !important;
-      height: inherit;
+      padding: 2px 25px !important;
+      height: auto;
+
+      h4 {
+        font-weight: 200 !important;
+      }
 
       p {
-        font-size: 18px !important;
+        font-size: 14px !important;
       }
+
+      button {
+        margin-bottom: 10px;
+        padding: 8px 0 10px !important;
+        font-weight: 200;
+        background: $alice-blue;
+        border-radius: 2px;
+        color: #fff;
+        border: none;
+        font-weight: 300;
+        letter-spacing: 1px;
+        @include box-shadow(0, 0, 2px, rgba(0, 0, 0, 0.23));
+        outline: none;
+
+        .glyphicon {
+          font-weight: 200;
+          color: #fff;
+          top: 3px;
+        }
+      }
+
     }
 
     .alice-card {

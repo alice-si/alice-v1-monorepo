@@ -136,7 +136,8 @@ module.exports = function (app) {
       if (savedDonation.status == 'FAILED') {
         throw 'PayIn failed ' + savedDonation._id;
       }
-      if (['CREATED', 'BIG_TRANSFER_CREATED'].includes(savedDonation.status)) {
+      // FIXME remove 'DONATED' from this list
+      if (['DONATED', 'CREATED', 'BIG_TRANSFER_CREATED'].includes(savedDonation.status)) {
         let project = await Project.findById(savedDonation._projectId).populate('charity');
         await Mail.sendDonationConfirmation(savedDonation._userId, project, savedDonation);
       }
@@ -200,7 +201,9 @@ module.exports = function (app) {
         if (mangoResult.DebitedFunds.Amount >= BIG_TRANSFER_TRESHOLD) {
           return 'BIG_TRANSFER_CREATED';
         }
-        return 'CREATED';
+        // return 'CREATED';
+        // FIXME donation should go through blockchain
+        return 'DONATED';
       case 'CREATED':
         if (mangoResult.PaymentType == 'BANK_WIRE') {
           return 'BANK_TRANSFER_REQUESTED';

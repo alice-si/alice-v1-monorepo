@@ -23,7 +23,7 @@
              <span style="font-size: 22px">{{ projectCtrl.model.raised | money }}</span> donated
            </p>
            <a href="/checkout/{{projectCtrl.model.code}}">
-             <button class="standard-button__main">
+             <button>
                Donate
              </button>
            </a>
@@ -34,15 +34,28 @@
 
   <section class="container appeal-v2__container">
     <div class="appeal-v2__info">
-      <div class="col-xs-12 col-md-12 col-lg-12 appeal-v2__info-top">
-        <h5 class="col-xs-12 col-md-10 col-lg-10">{{ projectCtrl.model.lead }}</h5>
-        <!-- <button class="col-md-2 col-lg-2">Learn More </button> -->
-      </div>
       <div class="col-md-8 appeal-v2__info-left">
-        <p ng-bind-html="projectCtrl.model.project"></p>
+        <div class="col-xs-12 col-md-12 col-lg-12 appeal-v2__info-top">
+          <!-- <h6 class="col-xs-12 col-md-3 col-lg-3">{{ projectCtrl.model.location }}</h6> -->
+          <!-- <h6 class="col-xs-12 col-md-3 col-lg-3">{{ projectCtrl.model.location }}</h6> -->
+          <h5 class="col-xs-12 col-md-12 col-lg-12">{{ projectCtrl.model.lead }}</h5>
+          <h6 class="col-xs-12 col-md-6 col-lg-6">{{ projectCtrl.model.peopleTarget }} {{ projectCtrl.model.typeOfBeneficiary }} | {{ projectCtrl.model.location }}</h6>
+        </div>
+        <div class="appeal-v2__info-top-expanded">
+          <p ng-bind-html="projectCtrl.model.summary"></p>
+          <div uib-collapse="!expandSummary">
+            <p ng-bind-html="projectCtrl.model.extendedSummary"></p>
+          </div>
+          <button class="col-md-2 col-lg-2"
+                  ng-click="expandSummary = !expandSummary">
+            Read <span ng-if="expandSummary">Less</span><span ng-if="!expandSummary">More</span>
+            <!-- <i class="pull-up glyphicon"
+               ng-class="expandSummary ? 'glyphicon-chevron-up' : 'glyphicon-chevron-down'"></i> -->
+          </button>
+        </div>
       </div>
       <div class="col-md-3 col-md-offset-1 appeal-v2__info-right">
-        <h6>Run by</h6>
+        <h5>Run by</h5>
         <div class="appeal-v2__info-image"
              style="background-image: url('{{projectCtrl.model.charity.darkPicture}}')">
         </div>
@@ -62,22 +75,32 @@
     </div>
     <div class="col-xs-12 col-md-12 col-lg-12 appeal-v2__stories">
       <h5>Follow the story</h5>
-      <div class="appeal-v2__stories-container"
-           ng-repeat="story in projectCtrl.model.myStory">
-        <div class="alice-card col-md-3 col-xs-12">
-          <div class="appeal-v2__stories-img grad-bottom">
-            <img src="{{story.img}}"
-                 alt="Image for {{ story.title }}" />
-            <h4 class="white appeal-v2__stories-underimg">{{story.header}}</h4>
+      <div ng-repeat="story in projectCtrl.model.myStory track by $index">
+        <div class="appeal-v2__stories-container col-xs-12 col-md-12 col-lg-12">
+          <div class="alice-card col-md-3 col-xs-12">
+            <div class="appeal-v2__stories-img grad-bottom">
+              <img src="{{story.img}}"
+                   alt="Image for {{ story.title }}"/>
+              <h6 class="white appeal-v2__stories-imgtext">{{story.header}}</h6>
+            </div>
           </div>
-        </div>
-        <div class="appeal-v2__stories-info col-md-9 col-xs-12">
-          <h4 class="col-md-12">
-            "{{story.quote}}"
-          </h4>
-          <p class="col-md-12"
-             ng-bind-html="story.details">
-          </p>
+          <div class="appeal-v2__stories-info col-md-9 col-xs-12">
+            <h4 class="col-md-6">
+              "{{story.quote}}"
+            </h4>
+            <p class="col-md-12"
+               ng-bind-html="story.details">
+            </p>
+            <p class="col-md-12"
+               uib-collapse="!story.expandStory"
+               ng-bind-html="story.extendedDetails"></p>
+            <button class="col-md-2 col-lg-2"
+                    ng-click="story.expandStory = !story.expandStory">
+              Read <span ng-if="story.expandStory">Less</span><span ng-if="!story.expandStory">More</span>
+              <!-- <i class="pull-up glyphicon"
+                 ng-class="expandSummary ? 'glyphicon-chevron-up' : 'glyphicon-chevron-down'"></i> -->
+            </button>
+          </div>
         </div>
       </div>
     </div>
