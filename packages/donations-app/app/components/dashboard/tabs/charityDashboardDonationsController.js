@@ -119,6 +119,7 @@ angular.module('aliceApp')
     }
 
     // Donation table pagination config
+    
     $scope.viewby = 5;
     $scope.currentPage = 1;
     $scope.itemsPerPage = $scope.viewby;
