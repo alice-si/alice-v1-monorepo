@@ -42,10 +42,17 @@ angular.module('aliceApp')
           vm.projectValidator = vm.projectWithGoals.projectValidator;
         }
       });
+
       $http.get(API + `getDonationsForProject/${code}`).then(function (result) {
-        if(result.data) {
+        if (vm.projectWithGoals) {
           vm.projectWithGoals.donations = result.data[0].donations;
+        } else {
+          vm.projectWithGoals = result.data[0];
         }
+
+        // if(result.data) {
+        //   vm.projectWithGoals.donations = result.data[0].donations;
+        // }
       });
     }
 
