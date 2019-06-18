@@ -100,6 +100,12 @@ angular.module('aliceApp')
             acc = acc.concat(elem);
             return acc;
           }, []);
+          vm.users.forEach((user) => {
+            user.totalReceived = user.received.reduce((acc, elem) => {
+              acc = acc + elem.amount;
+              return acc;
+            }, 0);
+          });
           vm.totalItems = vm.users.length;
         }
       });
@@ -119,10 +125,10 @@ angular.module('aliceApp')
     }
 
     // Donation table pagination config
-    $scope.viewby = 10;
+    $scope.viewby = 5;
     $scope.currentPage = 1;
     $scope.itemsPerPage = $scope.viewby;
-    $scope.maxSize = 10;
+    $scope.maxSize = 5;
 
     return vm;
   }]);

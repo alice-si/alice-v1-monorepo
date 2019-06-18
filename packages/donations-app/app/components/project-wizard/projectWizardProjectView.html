@@ -56,6 +56,28 @@
           <option ng-repeat="charity in prWizardCtrl.charities" value="{{charity._id}}">{{charity.name}}</option>
         </select>
       </div>
+
+      <div class="form-group" has-error>
+        <label class="col-sm-3 control-label">Location of project</label>
+
+        <div class="col-sm-9">
+          <input type="text"
+                 class="form-control"
+                 ng-model="prWizardCtrl.project.location"
+                 placeholder="United Kingdom"
+                 name="location">
+        </div>
+      </div>
+      <div class="form-group" has-error>
+        <label class="col-sm-3 control-label">Type Of Beneficiary</label>
+
+        <div class="col-sm-9">
+          <input type="text" class="form-control" ng-model="prWizardCtrl.project.typeOfBeneficiary"
+                 placeholder="eg. People, Animals, Trees etc." name="typeOfBeneficiary" required>
+          <error-message name="typeOfBeneficiary" error="required">This field is required
+          </error-message>
+        </div>
+      </div>
     </div>
 
     <div ng-show="prWizardCtrl.mode == 'TARGETS'">
@@ -110,6 +132,13 @@
 
         <div class="col-sm-9">
           <div class="form-control" summernote ng-model="prWizardCtrl.project.summary"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Extended Summary</label>
+
+        <div class="col-sm-9">
+          <div class="form-control" summernote ng-model="prWizardCtrl.project.extendedSummary"></div>
         </div>
       </div>
 

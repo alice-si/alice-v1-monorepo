@@ -22,8 +22,6 @@ angular.module('aliceApp')
       $http.get(API + 'getMyProjects').then(function (result) {
         vm.projectsForMain = result.data;
 
-        console.log(vm.projectsForMain);
-
         if(vm.projectsForMain) {
 					// Get single
 					vm.project = vm.projectsForMain.find(function (elem) {
@@ -32,8 +30,8 @@ angular.module('aliceApp')
 						}
 					});
 					if (vm.project) {
-            vm.project.overallProjectPercentage = Math.floor(100 * vm.project.totalPaidOutOverall / vm.project.fundingTarget);
-            vm.project.individualProjectPercentage = Math.floor(100 * vm.project.totalPaidOut / vm.project.fundingTarget);
+            vm.project.overallProjectPercentage = Math.round(100 * vm.project.totalPaidOutOverall / vm.project.fundingTarget);
+            vm.project.individualProjectPercentage = Math.round(100 * vm.project.totalPaidOut / vm.project.fundingTarget);
             if (vm.project) {
               vm.charity = vm.project.charity;
             }

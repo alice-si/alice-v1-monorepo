@@ -23,14 +23,17 @@ let projectSchemaObject = {
   video: String,
 
   summary: String,
+  extendedSummary: String,
   project: String,
   serviceProvider: String,
   beneficiary: String,
+  typeOfBeneficiary: String,
   validator: String,
   initializerImg: String,
   validatorImg: String,
   validatorUrl: String,
   costBreakdown: String,
+  location: String,
 
   upfrontPayment: Number,
   peopleTarget: Number,
@@ -48,7 +51,8 @@ let projectSchemaObject = {
     img: String,
     header: String,
     quote: String,
-    details: String
+    details: String,
+    extendedDetails: String,
   }],
   _outcomes: [{
     type: Mongoose.Schema.ObjectId,

@@ -76,7 +76,7 @@ module.exports = function (app) {
                 {
                   $lookup: {
                     from: "impacts",
-                    let: {userId: "$_id"},
+                    let: {userId: "$user._id"},
                     pipeline: [
                       {
                         $match: {
