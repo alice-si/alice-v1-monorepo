@@ -56,7 +56,8 @@
       </div>
     </div>
     <div class="row"
-         style="margin-top: 20px">
+         style="margin-top: 20px"
+         ng-if="!dashCtrl.projectsForMain || dashCtrl.projectsForMain.length == 0">
          <h5> You must donate to a project to track your impact </h5>
     </div>
   </div>
