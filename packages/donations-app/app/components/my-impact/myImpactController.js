@@ -1,5 +1,5 @@
 angular.module('aliceApp')
-  .controller('MyImpactController', ['$http', 'AuthService', '$stateParams', '$scope', 'API', '$rootScope', function ($http, AuthService, $stateParams, $scope, API, $rootScope) {
+  .controller('MyImpactController', ['$http', 'AuthService', '$stateParams', 'ProjectService', '$scope', 'API', '$rootScope', function ($http, AuthService, $stateParams, ProjectService, $scope, API, $rootScope) {
     var vm = this;
     vm.auth = AuthService;
 		vm.loggedUser = vm.auth.getLoggedUser();
@@ -30,14 +30,14 @@ angular.module('aliceApp')
 					});
 					vm.project.overallProjectPercentage = Math.floor(100 * vm.project.totalPaidOutOverall / vm.project.fundingTarget);
 					vm.project.individualProjectPercentage = Math.floor(100 * vm.project.totalPaidOut / vm.project.fundingTarget);
-					console.log(vm.project);
+
 					if(vm.project) {
 						vm.charity = vm.project.charity;
 					}
 
 					vm.project.allImpactsForProject.forEach((elem) => {
 						let impact = vm.project.impacts.find((e) => {
-							if(e._id === elem._id){
+							if(e._id === elem._id) {
 								return e
 							}
 						});
@@ -51,9 +51,24 @@ angular.module('aliceApp')
 							{ value: elem.userPercentage, color: "#1998a2"}
 						];
 					});
-					vm.goals = vm.project.allImpactsForProject
+					vm.goals = vm.project.allImpactsForProject;
 				}
       });
+
+			ProjectService.getProjectDetails(vm.code).then(function (result) {
+				let project = ProjectService.prepareProjectDetails(result.data);
+
+				project._outcomes.forEach((elem) => {
+					if(!vm.goals.some((e) => {return elem._id === e._id;})) {
+						let goal = elem;
+						goal.userSpent = 0;
+						goal.userPercentage = 0;
+						goal.totalSpent = 0;
+						goal.totalPercentage = 0;
+						vm.goals.push(goal);
+					}
+				});
+			});
     }
 
 		function convertHex(hex, opacity) {

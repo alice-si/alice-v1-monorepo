@@ -15,19 +15,21 @@
            <span class="white"><span style="font-weight: bold;">{{ goal.totalPercentage }}%</span> completed</span>
         </p>
         <p class="goal-progress-bar__raised">
-           <span style="float: left; bottom: 0;" class="white"><span style="font-weight: bold;">{{ goal.userSpent | money}}</span> spent</span>
+           <span style="float: left; bottom: 0;" class="white"><span style="font-weight: bold;">{{ goal.userSpent | money }}</span> spent</span>
         </p>
       </div>
     </div>
     <div class="aliceGoal__goal-right active" style="margin-top: 10px;">
          <!-- <div class="" -->
               <!-- style="padding:0;"> -->
-              <div class="col-md-12 col-xs-12">
+              <div class="col-md-12 col-xs-12"
+                   ng-if="goal.userSpent > 0">
                 <h3 class="white col-md-2 col-md-offset-2 col-xs-2">{{ goal.userSpent | money }}</h3>
                 <p class="white col-md-8 col-xs-10"
                    style="padding-top: 30px;"> of your donation completed</p>
               </div>
-              <div class="col-md-12 col-xs-12">
+              <div class="col-md-12 col-xs-12"
+                   ng-if="goal.userPercentage > 0">
                 <h3 class="white col-md-2 col-md-offset-2 col-xs-2">{{ goal.userPercentage }}%</h3>
               <!-- </div> -->
               <!-- <div class="col-md-8 col-xs-10" -->
@@ -35,6 +37,9 @@
                 <p class="white col-md-8 col-xs-10"
                    style="padding-top: 30px;"> of this goal</p>
               </div>
+              <p class="white"
+                 ng-if="goal.userPercentage === 0"
+                 ng-bind-html="goal.value"></p>
          <!-- </div> -->
     </div>
   </div>

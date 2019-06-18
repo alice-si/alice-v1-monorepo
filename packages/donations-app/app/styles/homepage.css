@@ -1226,12 +1226,12 @@
     text-align: center !important;
     height: 260px;
     width: 100%;
-    color: #2299A5;
+    color: #fff;
   }
 
   .carousel-text > h1 {
     text-align: center;
-    color: #2299A5;
+    color: #fff;
   }
 
   .carousel-indicators li, .carousel-indicators li.active {
