@@ -42,5 +42,8 @@ cloneDB.sh
 deploy-test/
 deploy-test.zip
 
+# Sass mapping
+.css.map
+
 # Incase a temp db directory is left accidentally via manual cloning
 tmp_db/
