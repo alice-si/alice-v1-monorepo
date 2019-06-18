@@ -35,23 +35,23 @@
         Hello, {{ dashCtrl.auth.getLoggedFullName() }}
       </h3>
     </div>
+  </div>
 
-
-    <div class="container">
-      <div class="row" style="padding-top: 120px">
-        <div class="col-sm-12">
-          <h3>Your projects</h3>
-        </div>
+  <!-- Individual dashboard -->
+  <div ng-if="!dashCtrl.auth.isManager()" class="container">
+    <div class="row" style="padding-top: 120px">
+      <div class="col-sm-12">
+        <h3>Your projects</h3>
       </div>
+    </div>
 
-      <div class="row"
-           style="margin-top: 20px">
-        <div ng-repeat="project in dashCtrl.projectsForMain"
-             class="col-sm-12 col-md-6 col-lg-4">
-             <dashboard-project-card dashboard="dashCtrl.dashboardType"
-                                     project="project">
-             </dashboard-project-card>
-        </div>
+    <div class="row"
+         style="margin-top: 20px">
+      <div ng-repeat="project in dashCtrl.projectsForMain"
+           class="col-sm-12 col-md-6 col-lg-4">
+        <dashboard-project-card dashboard="dashCtrl.dashboardType"
+                                project="project">
+        </dashboard-project-card>
       </div>
     </div>
   </div>
