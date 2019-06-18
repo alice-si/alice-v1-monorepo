@@ -19,7 +19,11 @@
         <td>{{donation.donated | money}}</td>
         <td>{{donation.date | date}}</td>
         <td>{{donation.received[0] ? 'donation.received[0] | money' : '0'}}</td>
-        <td>{{donation.giftAid ? '' : 'No'}}<a>{{donation.giftAid ? 'Show' : ''}}</a></td>
+        <td>{{donation.giftAid ? 'Yes' : 'No'}}
+            <!--  FIXME: Turning link off until we implement what should be there
+            <a>{{donation.giftAid ? 'Show' : ''}}</a>
+            -->
+        </td>
         <td>{{donation.agreeContact ? 'Yes' : 'No'}}</td>
     </tr>
   </table>
