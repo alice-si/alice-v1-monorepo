@@ -40,6 +40,7 @@ angular.module('aliceApp')
             return _.extend(item, _.findWhere(vm.projectWithGoals.validated, { _id: item._id }));
           });
           vm.projectValidator = vm.projectWithGoals.projectValidator;
+          console.log(vm.projectWithGoals);
         }
       });
 
