@@ -29,7 +29,8 @@ angular.module('aliceApp')
       // myStory.details with an array of 'paragraph' objects
       let parseRegex = /<p>([^<]*)<\/p\>\s*/;
       vm.model.myStory.forEach(function(story) {
-        let storyObject = story.details.split(parseRegex);
+				let details = story.details + story.extendedDetails;
+        let storyObject = details.split(parseRegex);
         story.details = [];
         storyObject.forEach(function(para) {
           if (para !== '') {
