@@ -137,6 +137,7 @@ async function linkImpacts(validation) {
       // Updating accumulated values
       amountLeft -= amountForDonor;
       amountAvailable -= amountForDonor;
+      donor.balance -= amountForDonor;
       counter++;
     } else {
       console.log('Donor skipped');
