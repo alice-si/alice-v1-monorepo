@@ -24,7 +24,7 @@
     </div>
 
     <!-- Alice -->
-    <div class="col-lg-12 col-md-12 dashboard-nav-top">
+    <div ng-if="dashCtrl.auth.isSuperadmin()" class="col-lg-12 col-md-12 dashboard-nav-top">
       <div class="dashboard-image col-lg-1 col-md-1">
         <img class="dashboard-image-in"
              src="https://s3.eu-west-2.amazonaws.com/alice-res/AliceLogoOnly.png"
