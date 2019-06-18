@@ -40,13 +40,17 @@ angular.module('aliceApp')
             return _.extend(item, _.findWhere(vm.projectWithGoals.validated, { _id: item._id }));
           });
           vm.projectValidator = vm.projectWithGoals.projectValidator;
+          console.log(vm.projectWithGoals);
         }
       });
       $http.get(API + `getDonationsForProject/${code}`).then(function (result) {
         if(result.data) {
           vm.projectWithGoals.donations = result.data[0].donations;
+          console.log(vm.projectWithGoals);
         }
+
       });
+
     }
 
     function convertHex(hex, opacity) {

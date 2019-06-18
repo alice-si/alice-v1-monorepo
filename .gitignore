@@ -35,6 +35,7 @@ clone-db.sh
 .yarnclean
 .ignore
 .jshintrc
+.css.map
 
 # Ingored scripts
 clone-db.sh
