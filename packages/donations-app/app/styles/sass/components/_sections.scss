@@ -55,9 +55,24 @@
      margin: 20px 0 5px;
    }
 
+   a {
+
+   }
+
    button {
      margin-top: 20px;
-     width: 180px;
+     width: 120px;
+     padding: 8px 0 10px !important;
+     background: $alice-blue;
+     border-radius: 2px;
+     font-size: 18px;
+     color: #fff;
+     border: none;
+     font-family: "Avenir" !important;
+     font-weight: 300;
+     letter-spacing: 1px;
+     @include box-shadow(0, 0, 2px, rgba(0, 0, 0, 0.23));
+     outline: none;
    }
 
    .grad-bottom:before {
