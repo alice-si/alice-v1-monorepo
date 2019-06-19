@@ -13,18 +13,20 @@ angular.module('aliceApp')
             validationId: validation._id,
             password: vm.password,
           };
-          vm.showSpinner = true;
-          $http.post(API + 'approveClaim', payload).then(response => {
-            vm.showSpinner = false;
-            vm.confirmationError = null;
-            $scope.$dismiss();
-            NotificationService.success(
-              'Claim has been successfully approved.');
-            $rootScope.$broadcast('validation');
-          }).catch(response => {
-            vm.showSpinner = false;
-            vm.confirmationError = response.data;
-          });
+          if (!vm.loading) {
+            vm.loading = true;
+            $http.post(API + 'approveClaim', payload).then(response => {
+              vm.loading = false;
+              vm.confirmationError = null;
+              $scope.$dismiss();
+              NotificationService.success(
+                'Claim has been successfully approved.');
+              $rootScope.$broadcast('validation');
+            }).catch(response => {
+              vm.loading = false;
+              vm.confirmationError = response.data;
+            });
+          }
         };
 
         return vm;
