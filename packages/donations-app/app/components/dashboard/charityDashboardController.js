@@ -45,11 +45,12 @@ angular.module('aliceApp')
       });
 
       $http.get(API + `getDonationsForProject/${code}`).then(function (result) {
+        vm.donations = result.data[0].donations;
         if (vm.projectWithGoals) {
-          vm.projectWithGoals.donations = result.data[0].donations;
+          vm.projectWithGoals.donations = vm.donations;
         } else {
           vm.projectWithGoals = result.data[0];
-        }
+        };
       });
 
     }
