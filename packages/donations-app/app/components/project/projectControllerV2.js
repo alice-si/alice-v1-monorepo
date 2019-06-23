@@ -1,5 +1,5 @@
 angular.module('aliceApp')
-  .controller('ProjectControllerV2', ['$stateParams', 'ProjectService',  '$state', function($stateParams, ProjectService, $state) {
+  .controller('ProjectControllerV2', ['$stateParams', 'ProjectService',  '$scope', '$state', function($stateParams, ProjectService, $scope, $state) {
     var vm = this;
 
 		ProjectService.getProjectDetails($stateParams.projectCode).then(function (result) {

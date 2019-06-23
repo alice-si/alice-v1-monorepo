@@ -36,10 +36,25 @@
     <label class="col-sm-3 control-label">My Story {{$index + 1}} - details</label>
 
     <div class="col-sm-9">
-      <input class="form-control" summernote ng-maxlength="1400" ng-model="story.details" name="storyDetails{{$index + 1}}">
+      <input class="form-control"
+             summernote
+             ng-maxlength="420"
+             ng-model="story.details"
+             name="storyDetails{{$index + 1}}"
+             placeholder="Story details (Max: 420 characters)">
       <error-message name="storyDetails{{$index + 1}}" error="maxlength">
-        Too much chracters were used - it could casue style problems
+        Too much characters were used - it could casue style problems
       </error-message>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-3 control-label">My Story {{$index + 1}} - extended Details</label>
+    <div class="col-sm-9">
+      <input class="form-control"
+             summernote
+             ng-model="story.extendedDetails"
+             name="storyDetails{{$index + 1}}"
+             placeholder="Place any additional story details here if this story exceeds 420 characters">
     </div>
   </div>
 </div>

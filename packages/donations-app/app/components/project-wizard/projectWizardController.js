@@ -81,6 +81,7 @@ angular.module('aliceApp')
     vm.submitSaveProject = function () {
       vm.projectForm.$submitted = true;
       if (vm.projectForm.$valid) {
+				console.log(vm.project);
         ProjectService.saveProjectWithOutcomes(vm.project)
           .then(function (response) {
             NotificationService.success("Project has been successfully saved.");
