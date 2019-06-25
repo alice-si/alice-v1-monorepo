@@ -35,24 +35,30 @@
         Hello, {{ dashCtrl.auth.getLoggedFullName() }}
       </h3>
     </div>
+  </div>
 
-
-    <div class="container">
-      <div class="row" style="padding-top: 120px">
-        <div class="col-sm-12">
-          <h3>Your projects</h3>
-        </div>
+  <!-- Individual dashboard -->
+  <div class="container">
+    <div class="row" style="padding-top: 120px">
+      <div class="col-sm-12">
+        <h3>Your projects</h3>
       </div>
+    </div>
 
-      <div class="row"
-           style="margin-top: 20px">
-        <div ng-repeat="project in dashCtrl.projectsForMain"
-             class="col-sm-12 col-md-6 col-lg-4">
-             <dashboard-project-card dashboard="dashCtrl.dashboardType"
-                                     project="project">
-             </dashboard-project-card>
-        </div>
+    <div class="row"
+         style="margin-top: 20px"
+         ng-if="dashCtrl.projectsForMain.length > 0">
+      <div ng-repeat="project in dashCtrl.projectsForMain"
+           class="col-sm-12 col-md-6 col-lg-4">
+        <dashboard-project-card dashboard="dashCtrl.dashboardType"
+                                project="project">
+        </dashboard-project-card>
       </div>
+    </div>
+    <div class="row"
+         style="margin-top: 20px"
+         ng-if="!dashCtrl.projectsForMain || dashCtrl.projectsForMain.length == 0">
+         <h5> You must donate to a project to track your impact </h5>
     </div>
   </div>
 </section>
