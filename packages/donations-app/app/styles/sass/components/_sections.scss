@@ -124,6 +124,12 @@
 
 @media screen and (max-width: 414px) {
   .splash-v2 {
+
+    h3 {
+      font-size: 26px;
+      margin-top: -10px;
+    }
+
     .header-image {
       height: 100vh;
     }
@@ -136,6 +142,42 @@
 
     p {
       font-size: 16px !important;
+    }
+
+    &__progress-section {
+      border-right: none;
+      margin-left: -15px;
+
+      span {
+        font-weight: 600;
+      }
+
+      &:first-child {
+        padding: none !important;
+      }
+
+      &:last-child {
+        border: none;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 330px) {
+  .splash-v2 {
+    h3 {
+      font-size: 24px;
+      line-height: 1.2;
+      margin-top: -10px;
+    }
+
+    p {
+      font-size: 12px !important;
+      margin-top: -10px;
+    }
+
+    &__progress-section:first-child {
+      margin-top: 10px;
     }
   }
 }
