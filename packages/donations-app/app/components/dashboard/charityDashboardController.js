@@ -19,6 +19,7 @@ angular.module('aliceApp')
           if(vm.projectWithGoals.current_project) {
             vm.project = result.data.current_project;
           }
+
           vm.general_outcomes = vm.projectWithGoals.goals;
 
           vm.projectWithGoals.validated.forEach((item) => {
@@ -37,16 +38,21 @@ angular.module('aliceApp')
           vm.validated_outcomes = vm.projectWithGoals.validated;
 
           vm.donated_outcomes = _.map(vm.general_outcomes, function(item) {
-            return _.extend(item, _.findWhere(vm.projectWithGoals.validated, { _id: item._id }));
+            return _.extend(item, _.findWhere(vm.validated_outcomes, { _id: item._id }));
           });
           vm.projectValidator = vm.projectWithGoals.projectValidator;
         }
       });
+
       $http.get(API + `getDonationsForProject/${code}`).then(function (result) {
-        if(result.data) {
-          vm.projectWithGoals.donations = result.data[0].donations;
-        }
+        vm.donations = result.data[0].donations;
+        if (vm.projectWithGoals) {
+          vm.projectWithGoals.donations = vm.donations;
+        } else {
+          vm.projectWithGoals = result.data[0];
+        };
       });
+
     }
 
     function convertHex(hex, opacity) {

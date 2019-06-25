@@ -100,6 +100,12 @@ angular.module('aliceApp')
             acc = acc.concat(elem);
             return acc;
           }, []);
+          vm.users.forEach((user) => {
+            user.totalReceived = user.received.reduce((acc, elem) => {
+              acc = acc + elem.amount;
+              return acc;
+            }, 0);
+          });
           vm.totalItems = vm.users.length;
         }
       });

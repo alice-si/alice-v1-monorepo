@@ -17,7 +17,7 @@
               class="c-dashboard__panel"
               heading="People Helped">
               <div class="container">
-                <div ng-repeat="goal in outcomesDonatedTo track by $index">
+                <div ng-repeat="goal in outcomesValidated track by $index">
                      <goal-progress-bar progress-in-units="goal.progressInUnits"
                                         percentage="goal.percentage"
                                         outcome="goal.outcome[0]">
@@ -30,7 +30,7 @@
               class="c-dashboard__panel"
               heading="Goals Breakdown">
               <div class="alice-table-container col-md-12">
-              <goals-breakdown-table outcomes="outcomesDonatedTo">
+              <goals-breakdown-table outcomes="outcomesValidated">
               </goals-breakdown-table>
             </div>
          </div>
