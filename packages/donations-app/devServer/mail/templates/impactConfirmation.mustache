@@ -1,0 +1,58 @@
+{{> header }}
+
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+  <tr>
+    <td
+      style="padding: 10px 65px 30px 65px; font-size: 16px; mso-height-rule: exactly; line-height: 20px;">
+      <p>
+        Dear {{user.firstName}},<br/><br/>
+        We have great news! {{project.charity.name}} have now received all or part of your donation towards
+        their "{{project.title}}" appeal.
+      </p>
+
+      <p>
+        This means they have achieved one or more of their project goals, and had them independently
+        validated.
+      </p>
+
+      <p>
+        Thank you for supporting the project. It must feel great to know your donation has had a direct
+        impact
+        on the lives of the people it is helping.
+      </p>
+
+      <h2>Goal achieved</h2>
+
+      <p>
+        To find out which goal(s) your donation paid for, please visit "My Impact" on Alice.
+        You can also give more to the project if it is still accepting donations.
+      </p>
+
+      <!-- Button : Begin -->
+      <table style="margin: 0 !important;">
+        <tr>
+          <td style="background: #1998a2; border: 7px solid #1998a2; text-align: center;"
+              class="button-td">
+            <a href="{{host}}/my-impact/"
+                style="background: #1998a2; font-size: 20px; line-height: 1.1; text-align: center; text-decoration: none; display: block;"
+                class="button-a">
+              &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ffffff">View goal</span>&nbsp;&nbsp;&nbsp;&nbsp;
+            </a>
+          </td>
+        </tr>
+      </table>
+
+      {{> spreadTheWorld}}
+
+      <h2>Donation details</h2>
+
+      Transaction number: {{impact._id}} <br/>
+      Donation amount: {{impact.money}} <br/>
+      Recipient charity: {{project.charity.legalName}} <br/>
+
+    </td>
+  </tr>
+</table>
+
+
+{{> footer }}

@@ -64,7 +64,9 @@ module.exports = function (app) {
                   $match: {
                     $and: [
                       {$expr: {$eq: ["$_projectId", "$$projectId"]}},
-                      {$expr: {$eq: ["$status", "DONATED"]}}
+                      //FIXME: Needs blockchain processing
+                      //{$expr: {$eq: ["$status", "DONATED"]}}
+                      {$expr: {$ne: ["$status", "FAILED"]}}
                     ]
                   }
                 },
@@ -74,7 +76,7 @@ module.exports = function (app) {
                 {
                   $lookup: {
                     from: "impacts",
-                    let: {userId: "$_id"},
+                    let: {userId: "$user._id"},
                     pipeline: [
                       {
                         $match: {
@@ -113,7 +115,9 @@ module.exports = function (app) {
                   $match: {
                     $and: [
                       {$expr: {$eq: ["$_projectId", "$$projectId"]}},
-                      {$expr: {$eq: ["$status", "DONATED"]}}
+                      //FIXME: Needs blockchain processing
+                      //{$expr: {$eq: ["$status", "DONATED"]}}
+                      {$expr: {$ne: ["$status", "FAILED"]}}
                     ]
                   }
                 },

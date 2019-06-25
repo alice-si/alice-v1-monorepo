@@ -64,7 +64,7 @@ angular.module('aliceApp')
       details.percentage = (details.raised / details.fundingTarget) * 100;
 
       // details.raised is in pence, details.perPerson is in pounds
-      details.peopleFunded = Math.floor((details.raised / 100) / details.perPerson);
+      details.peopleFunded = Math.round(details.amountValidated/ details.perPerson);
       details.host = HOST;
 
       return details;
