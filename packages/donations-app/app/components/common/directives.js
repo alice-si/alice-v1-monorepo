@@ -367,4 +367,9 @@ angular.module('aliceApp')
                     <auto-complete min-length="2" source="searchUser($query)"></auto-complete>\
                 </tags-input>'
     };
-  }]);
+  }])
+  .directive('loadingScreen', function () {
+    return {
+      templateUrl: '/components/global/loader.html',
+    };
+  });

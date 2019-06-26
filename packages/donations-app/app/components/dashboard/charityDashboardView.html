@@ -11,8 +11,9 @@
     </div>
   </div>
 
-
-    <div class="container">
+    <loading-screen ng-if="!dataLoaded"></loading-screen>
+    <div class="container"
+         ng-if="dataLoaded">
       <div class="row">
         <div class="col-xs-12">
           <h3 class="goals-dash__greeting">

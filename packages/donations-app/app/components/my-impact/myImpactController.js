@@ -36,21 +36,24 @@ angular.module('aliceApp')
               vm.charity = vm.project.charity;
             }
 
+
+						console.log(vm.project);
+
             vm.project.allImpactsForProject.forEach((elem) => {
               let impact = vm.project.impacts.find((e) => {
                 if (e._id === elem._id) {
                   return e
                 }
               });
-              elem.userSpent = impact.total;
-              elem.userPercentage = Math.floor(100 * impact.total / elem.target);
-              elem.totalPercentage = Math.floor(100 * elem.totalSpent / elem.target);
-              elem.lightColor = convertHex(elem.color, 0.4);
-              // For stacked progress
-              elem.stacked = [
-                {value: (elem.totalPercentage - elem.userPercentage), color: elem.color},
-                {value: elem.userPercentage, color: "#1998a2"}
-              ];
+							elem.userSpent = impact ? impact.total : 0;
+							elem.userPercentage = impact ? Math.floor(100 * impact.total / elem.target) : 0;
+							elem.totalPercentage = impact ? Math.floor(100 * elem.totalSpent / elem.target) : 0;
+							elem.lightColor = convertHex(elem.color, 0.4);
+							// For stacked progress
+							elem.stacked = [
+								{value: (elem.totalPercentage - elem.userPercentage), color: elem.color},
+								{value: elem.userPercentage, color: "#1998a2"}
+							];
             });
             vm.goals = vm.project.allImpactsForProject
           }
