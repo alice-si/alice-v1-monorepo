@@ -23,10 +23,6 @@ angular.module('aliceApp')
 			});
 
 			vm.model.percentageCompleted = Math.floor((100 * vm.model.amountValidated) / vm.model.fundingTarget);
-
-			// Split myStory array into 2 arrays: 1. of length 3, 2. of length: myStory.length - 3;
-			vm.model._outcomesExpanded = vm.model._outcomes.filter((e, index) => index > 2 );
-			vm.model._outcomesFirst3 = vm.model._outcomes.filter((e, index) => index < 3 );
 		});
 
 		function convertHex(hex, opacity) {

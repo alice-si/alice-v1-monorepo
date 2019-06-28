@@ -76,11 +76,11 @@
                              'other': 'Track the impact of donations through {} goals'}">
         </ng-pluralize>
       </h5>
-      <div ng-repeat="goal in projectCtrl.model._outcomesFirst3 track by $index"
+      <div ng-repeat="goal in projectCtrl.model._outcomes | limitTo: 3 track by $index"
            class="col-md-12 col-lg-12">
         <appeal-goal goal="goal" index="$index"></appeal-goal>
       </div>
-      <div ng-repeat="goal in projectCtrl.model._outcomesExpanded track by $index"
+      <div ng-repeat="goal in projectCtrl.model._outcomes | limitTo: projectCtrl.model._outcomes.length : 3 track by $index "
            class="col-md-12 col-lg-12"
            uib-collapse="!expandOutcomes">
         <appeal-goal goal="goal" index="$index + 3"></appeal-goal>

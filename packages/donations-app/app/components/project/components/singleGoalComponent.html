@@ -7,8 +7,8 @@
           ng-class="{ 'active' : (activeGoal !== index)}">
         <h6 class="white">Goal {{ (index + 1)}}</h6>
         <h5 class="white">{{ goal.title }}</h5>
-        <p class="white" ng-if="goal.totalPercentage > 0">We spent <span style="font-weight: bold;">{{ goal.totalValidatedForOutcome | money}}</span> to complete</p>
-        <p class="white" ng-if="goal.totalPercentage === 0">This goal has not yet been started</p>
+        <p class="white" ng-if="goal.totalValidatedForOutcome">We spent <span style="font-weight: bold;">{{ goal.totalValidatedForOutcome | money}}</span> to complete</p>
+        <p class="white" ng-if="!goal.totalValidatedForOutcome">This goal has not yet been started</p>
         <uib-progress class="progress-bar__med"
                       style="background-color: rgba(255, 255, 255, 0.3); margin-bottom: 3px">
             <uib-bar value="goal.totalPercentage"
