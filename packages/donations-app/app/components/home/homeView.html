@@ -123,8 +123,8 @@
       </div>
     </div>
     <div class="col-md-10 home-charities-list">
-      <div ng-repeat="charity in homeCtrl.charities | limitTo: 4" class="home-charity">
-        <a ng-href="{{ charity.url }}" target="_blank"><img ng-src="{{ charity.darkPicture }}" class="charity-logo charity-logo-homepage"/></a>
+      <div ng-repeat="charity in homeCtrl.charities" class="home-charity" ng-if="charity.darkPicture">
+        <a  ng-href="{{ charity.url }}" target="_blank"><img ng-src="{{ charity.darkPicture }}" class="charity-logo charity-logo-homepage"/></a>
       </div>
     </div>
   </div>
