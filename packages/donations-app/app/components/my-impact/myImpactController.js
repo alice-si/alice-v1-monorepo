@@ -42,15 +42,22 @@ angular.module('aliceApp')
                   return e
                 }
               });
-              elem.userSpent = impact.total;
-              elem.userPercentage = Math.floor(100 * impact.total / elem.target);
-              elem.totalPercentage = Math.floor(100 * elem.totalSpent / elem.target);
-              elem.lightColor = convertHex(elem.color, 0.4);
-              // For stacked progress
-              elem.stacked = [
-                {value: (elem.totalPercentage - elem.userPercentage), color: elem.color},
-                {value: elem.userPercentage, color: "#1998a2"}
-              ];
+							if(impact) {
+								elem.userSpent = impact.total;
+								elem.userPercentage = Math.floor(100 * impact.total / elem.target);
+								elem.totalPercentage = Math.floor(100 * elem.totalSpent / elem.target);
+							} else {
+								elem.userSpent = 0;
+								elem.userPercentage = 0;
+								elem.totalPercentage = 0;
+							}
+
+							elem.lightColor = convertHex(elem.color, 0.4);
+							// For stacked progress
+							elem.stacked = [
+								{value: (elem.totalPercentage - elem.userPercentage), color: elem.color},
+								{value: elem.userPercentage, color: "#1998a2"}
+							];
             });
             vm.goals = vm.project.allImpactsForProject
           }

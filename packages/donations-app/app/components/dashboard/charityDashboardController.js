@@ -1,10 +1,11 @@
 angular.module('aliceApp')
-  .controller('CharityDashboardController', ['AuthService', '$scope', '$http', 'API', '$stateParams', '$uibModal', function (AuthService, $scope, $http, API, $stateParams, $uibModal) {
+  .controller('CharityDashboardController', ['AuthService', '$scope', '$timeout', '$http', 'API', '$stateParams', '$uibModal', function (AuthService, $scope, $timeout, $http, API, $stateParams, $uibModal) {
     var vm = this;
     vm.auth = AuthService;
     vm.code = $stateParams.project;
     vm.loggedUser = vm.auth.getLoggedUser();
     vm.validated_outcomes = [];
+    $scope.dataLoaded = false;
 
     if (!AuthService.getLoggedUser()) {
       AuthService.showLogInModal();
@@ -42,6 +43,8 @@ angular.module('aliceApp')
           });
           vm.projectValidator = vm.projectWithGoals.projectValidator;
         }
+
+        $timeout(()=> {$scope.dataLoaded = true;}, 3000);
       });
 
       $http.get(API + `getDonationsForProject/${code}`).then(function (result) {
