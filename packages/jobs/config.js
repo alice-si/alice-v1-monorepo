@@ -52,8 +52,14 @@ if (mode == 'PROD') {
   config.mangoUrl = 'https://api.mangopay.com';
 }
 
+config.mnemonic = getEnv('MNEMONIC_KEY', 'tumble then poet spot sail spike forward system theory ankle pottery cute');
+
 if (!process.env.AWS_ACCESS_KEY_ID || !process.env.AWS_SECRET_ACCESS_KEY) {
   throw 'Config does not have credentials required for AWS SES';
 }
+
+// TODO - remove for tests
+// config.ethClientAddress = 'https://rinkeby.infura.io/v3/197cdc79ac3b4198a330490d7cb79f36';
+// config.networkName = 'rinkeby';
 
 module.exports = config;

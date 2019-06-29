@@ -4,8 +4,6 @@ const ModelUtils = require('./model-utils');
 const Mongoose = require('mongoose');
 const Mockgoose = require('mockgoose').Mockgoose;
 const mockgoose = new Mockgoose(Mongoose);
-const ContractUtils = require('./contract-utils');
-const web3 = ContractUtils.getWeb3();
 const BigNumber = web3.BigNumber;
 const MangoProxy = require('../gateways/mangoProxy');
 const KeyProxy = require('../gateways/keyProxy');
@@ -174,7 +172,6 @@ TestUtils.deployDefault = async () => {
   };
 
   let addresses = await Deploy.deployProject(
-    accounts[0],
     accounts[1],
     accounts[2],
     claimsRegistryAddress,
