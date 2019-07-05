@@ -1,7 +1,6 @@
 const JobUtils = require('../utils/job-utils');
 const ModelUtils = require('../utils/model-utils');
 const User = ModelUtils.loadModel('user');
-// const KeyProxy = require('../gateways/keyProxy');
 const EthProxy = require('../gateways/ethProxy');
 
 async function mainAction(jobContext) {

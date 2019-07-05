@@ -29,43 +29,6 @@ ContractUtils.getContractInstance = function (
   return new ethers.Contract(address, contract.abi, wallet);
 };
 
-ContractUtils.getClaimsRegistry = function (address) {
-  const ClaimsRegistry = ContractUtils.getTruffleContract('ClaimsRegistry');
-  return getContractInstance(ClaimsRegistry, address);
-};
-
-ContractUtils.getAllContractsForDocument = async function (project, wallet) {
-  function getAddress(project, name) {
-    if (project && project.ethAddresses && project.ethAddresses[name]) {
-      return project.ethAddresses[name];
-    } else {
-      throw 'Project: ' + JSON.stringify(project) +
-            ' doesn\'t have address for field: ' + name;
-    }
-  }
-
-  let projectContract = ContractUtils.getContractInstance(
-    'Project',
-    getAddress(project, 'project'),
-    wallet);
-
-  let impactRegistryContract = ContractUtils.getContractInstance(
-    'ImpactRegistry',
-    getAddress(project, 'impact'),
-    wallet);
-
-  let tokenContract = ContractUtils.getContractInstance(
-    'AliceToken',
-    getAddress(project, 'token'),
-    wallet);
-
-  return {
-    project: projectContract,
-    token: tokenContract,
-    impactRegistry: impactRegistryContract
-  };
-};
-
 ContractUtils.getWalletForIndex = function (index) {
   let path = `m/44'/60'/0'/0/${index}`;
   return new ethers.Wallet.fromMnemonic(config.mnemonic, path);
@@ -83,6 +46,17 @@ ContractUtils.getWallet = function (address) {
     }
   }
   throw new Error(`Could not get wallet for address: ${address}`);
+};
+
+ContractUtils.deployContract = async function (truffleContractObj, ...args) {
+  const { abi, bytecode } = truffleContractObj;
+  const contractFactory = new ethers.ContractFactory(
+    abi,
+    bytecode,
+    ContractUtils.mainWallet);
+  const contract = await contractFactory.deploy(...args);
+  await contract.deployed(); // waiting until it is mined
+  return contract;
 };
 
 function getProvider() {

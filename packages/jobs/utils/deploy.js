@@ -1,34 +1,19 @@
-const ethers = require('ethers');
-
 const ContractUtils = require('./contract-utils');
 const logger = require('./logger')('utils/deploy');
 const config = require('../config');
+const { getContract } = require('../gateways/contractProxy');
 
-// TODO important
-// TODO connect contract_proxies
-// const ImpactRegistry = require('../contract_proxies/ImpactRegistry');
-// const Linker = require('../contract_proxies/FlexibleImpactLinker');
-// const Project = require('../contract_proxies/Project');
-
-const Linker = ContractUtils.getTruffleContract('FlexibleImpactLinker');
-const ImpactRegistry = ContractUtils.getTruffleContract('ImpactRegistry');
-const Project = ContractUtils.getTruffleContract('Project');
-const AliceToken = ContractUtils.getTruffleContract('AliceToken');
-const ClaimsRegistry = ContractUtils.getTruffleContract('ClaimsRegistry');
+const Project = getContract('Project');
+const Linker = getContract('FlexibleImpactLinker');
+const ImpactRegistry = getContract('ImpactRegistry');
+const AliceToken = getContract('AliceToken');
+const ClaimsRegistry = getContract('ClaimsRegistry');
 
 const wallet = ContractUtils.mainWallet;
 const provider = wallet.provider;
 
-async function deployContract(truffleContractObj, ...args) {
-  const { abi, bytecode } = truffleContractObj;
-  const contractFactory = new ethers.ContractFactory(abi, bytecode, wallet);
-  const contract = await contractFactory.deploy(...args);
-  await contract.deployed(); // waiting until it is mined
-  return contract;
-}
-
 async function deployToken(contractsAddresses) {
-  const tokenContract = await deployContract(AliceToken);
+  const tokenContract = await AliceToken.new();
   logger.info('Token deployed: ' + tokenContract.address);
   contractsAddresses.token = tokenContract.address;
 }
@@ -44,7 +29,7 @@ async function deployProject(
   project,
   contractAddresses
 ) {
-  let projectContract = await deployContract(Project, project.code, project.upfrontPayment);
+  let projectContract = await Project.new(project.code, project.upfrontPayment);
   logger.info('Project deployed: ' + projectContract.address);
 
   let setValidatorTx = await projectContract.setValidator(validatorAccount);
@@ -59,10 +44,10 @@ async function deployProject(
   logger.info('setToken tx created: ' + setTokenTx.hash);
   await waitForTx(setTokenTx);
 
-  let impactContract = await deployContract(ImpactRegistry, projectContract.address);
+  let impactContract = await ImpactRegistry.new(projectContract.address);
   logger.info('ImpactRegistry deployed: ' + impactContract.address);
 
-  let linkerContract = await deployContract(Linker, impactContract.address, 10);
+  let linkerContract = await Linker.new(impactContract.address, 10);
   logger.info('Linker deployed: ' + linkerContract.address);
 
   let setLinkerTx = await impactContract.setLinker(linkerContract.address);
@@ -145,7 +130,7 @@ module.exports.deployProject = async (
 };
 
 module.exports.deployClaimsRegistry = async () => {
-  let claimsRegistryContract = await deployContract(ClaimsRegistry);
+  let claimsRegistryContract = await ClaimsRegistry.new();
   logger.info('ClaimsRegistry deployed: ' + claimsRegistryContract.address);
 
   return claimsRegistryContract.address;

@@ -59,20 +59,18 @@ contract('EthProxy', function (accounts) {
   });
 
   // TODO test it better
-  it('should fetch impact', async function () {
-    await EthProxy.fetchImpact(mocks.project, validationId).should.be.fulfilled;
-  });
-
-  // TODO test it better
   it('should get impact linked', async function () {
     await EthProxy.getImpactLinked(mocks.project, validationId).should.be.fulfilled;
   });
 
-  // TODO alex - check why this test does not work
-  // If ganache is running separately - tx is reverted (to test this problem run ganache separately)
   // TODO test it better
   it('should link impact', async function () {
-    // let txHash = await EthProxy.linkImpact(mocks.project, validationId);
-    // console.log(txHash);
+    await EthProxy.linkImpact(mocks.project, validationId).should.be.fulfilled;
+  });
+
+
+  // TODO test it better
+  it('should fetch impact', async function () {
+    await EthProxy.fetchImpact(mocks.project, validationId).should.be.fulfilled;
   });
 });

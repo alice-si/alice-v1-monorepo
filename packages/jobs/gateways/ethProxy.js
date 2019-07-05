@@ -3,8 +3,8 @@ const request = require('request');
 const ethers = require('ethers');
 
 const ContractUtils = require('../utils/contract-utils');
+const ContractProxy = require('./contractProxy');
 const Deploy = require('../utils/deploy');
-// const Project = require('../contract_proxies/Project');
 const logger = require('../utils/logger')('gateways/ethProxy');
 const config = require('../config');
 
@@ -15,7 +15,7 @@ EthProxy.getAddressForIndex = function (index) {
 };
 
 EthProxy.deposit = async (fromUserAccount, project, amount) => {
-  let contracts = await ContractUtils.getAllContractsForDocument(project);
+  let contracts = await ContractProxy.getAllContractsForDocument(project);
   logger.info('Depositing: ' + JSON.stringify({
     from: fromUserAccount,
     to: contracts.project.address,
@@ -76,7 +76,7 @@ EthProxy.deposit = async (fromUserAccount, project, amount) => {
 
 EthProxy.mint = async (project, amount) => {
   logger.info('Minting: ' + amount);
-  let contracts = await ContractUtils.getAllContractsForDocument(project);
+  let contracts = await ContractProxy.getAllContractsForDocument(project);
   return getTxHash(await contracts.token.mint(contracts.project.address, amount));
 };
 
@@ -89,7 +89,7 @@ EthProxy.validateOutcome = async (
 
   let validatorWallet = ContractUtils.getWallet(validatorAccount);
 
-  let contracts = await ContractUtils.getAllContractsForDocument(
+  let contracts = await ContractProxy.getAllContractsForDocument(
     project,
     validatorWallet);
 
@@ -128,7 +128,7 @@ EthProxy.fetchImpact = async (project, validationId) => {
   let validationIdBytes = mongoIdToBytes(validationId);
 
   let impacts = [];
-  let contracts = await ContractUtils.getAllContractsForDocument(project);
+  let contracts = await ContractProxy.getAllContractsForDocument(project);
 
   return await new Promise(function(resolve, reject) {
     return contracts.impactRegistry.getImpactCount(validationIdBytes).then(function (result) {
@@ -156,7 +156,7 @@ EthProxy.fetchImpact = async (project, validationId) => {
 
 EthProxy.getImpactLinked = async (project, validationId) => {
   let validationIdBytes = mongoIdToBytes(validationId);
-  let contracts = await ContractUtils.getAllContractsForDocument(project);
+  let contracts = await ContractProxy.getAllContractsForDocument(project);
 
   let result = await contracts.impactRegistry.getImpactLinked(validationIdBytes);
   return result.toNumber();
@@ -166,7 +166,7 @@ EthProxy.linkImpact = async (project, validationId) => {
   let validationIdBytes = mongoIdToBytes(validationId);
 
   logger.info('Linking impact: ' + validationId);
-  let contracts = await ContractUtils.getAllContractsForDocument(project);
+  let contracts = await ContractProxy.getAllContractsForDocument(project);
 
   let transaction = await contracts.impactRegistry.linkImpact(validationIdBytes);
   return getTxHash(transaction);
