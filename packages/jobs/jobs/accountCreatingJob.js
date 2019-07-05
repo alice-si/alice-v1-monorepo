@@ -7,7 +7,7 @@ async function mainAction(jobContext) {
   let user = jobContext.model;
   jobContext.msg('Found user without account: ' + user._id + ' ( ' + user.email + ' )');
 
-  const nextEthAddressIndex = 2;
+  const nextEthAddressIndex = (await User.findOne().sort('-ethAccountIndex')).ethAccountIndex;
 
   const address = EthProxy.getAddressForIndex(nextEthAddressIndex);
 
