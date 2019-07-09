@@ -4,7 +4,9 @@ const TestUtils = require('../test-utils');
 describe('DashboardController', async function () {
     let objects;
 
-    TestUtils.setBeforeAndAfterHooksForControllerTest('dashboard');
+    TestUtils.setBeforeAndAfterHooksForControllerTest({
+        name: 'dashboard'
+    });
 
     it('Should create objects', async function () {
         objects = await TestUtils.createTestObjects();

@@ -98,7 +98,8 @@ describe('Test model initializing', function() {
     'project',
     'projectHistory',
     'user',
-    'validation'
+    'validation',
+    'environment'
   ];
   for (let name of names) {
     testModelInit(name);

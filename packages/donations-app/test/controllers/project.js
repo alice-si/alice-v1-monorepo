@@ -11,7 +11,10 @@ const Charity = Utils.loadModel('charity');
 describe('ProjectController', function () {
     let objects;
 
-    TestUtils.setBeforeAndAfterHooksForControllerTest('project');
+    TestUtils.setBeforeAndAfterHooksForControllerTest({
+        name: 'project'
+    });
+    
 
     it('Should get no projects', function () {
         return TestUtils.testGet('getProjectsForAdmin', '', function (res) {
