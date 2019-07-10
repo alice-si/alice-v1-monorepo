@@ -61,7 +61,7 @@ ContractUtils.deployContract = async function (truffleContractObj, ...args) {
 };
 
 function getProvider() {
-  return new ethers.providers.JsonRpcProvider(config.ethClientAddress);
+  return new ethers.providers.JsonRpcProvider(config.ethEndpointUrl);
 };
 
 function getMainWallet() {
