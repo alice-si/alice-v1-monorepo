@@ -5,7 +5,7 @@
   "description": "A monorepo for Alice (https://alice.si)",
   "main": "index.js",
   "scripts": {
-    "test": "source packages/donations-app/.envrc && source packages/jobs/.envrc && yarn lerna run test --stream --loglevel debug"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "MIT",
