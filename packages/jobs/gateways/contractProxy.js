@@ -11,6 +11,7 @@ const ethers = require('ethers');
 const ContractUtils = require('../utils/contract-utils');
 const ModelUtils = require('../utils/model-utils');
 const logger = require('../utils/logger')('gateways/contractProxy');
+const config = require('../config');
 
 const ContractVersion = ModelUtils.loadModel('contractVersion');
 const DeployedContract = ModelUtils.loadModel('deployedContract');
@@ -69,7 +70,11 @@ function getContract(contractName) {
   };
 }
 
-async function getAllContractsForDocument(project, wallet) {
+async function getAllContractsForDocument(
+  project,
+  addressForWallet=config.mainAccount
+) {
+  const wallet = await ContractUtils.getWallet(addressForWallet);
 
   let Project = getContract('Project');
   let projectContract = await Project.at(

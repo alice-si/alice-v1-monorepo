@@ -51,11 +51,9 @@ EthProxy.validateOutcome = async (
     `Validating outcome, validation id: ${validation._id}, ` +
     `amount: ${validation.amount}`);
 
-  let validatorWallet = await ContractUtils.getWallet(validatorAccount);
-
   let contracts = await ContractProxy.getAllContractsForDocument(
     project,
-    validatorWallet);
+    validatorAccount);
 
   let idBytes = mongoIdToBytes(validation._id);
   let transaction = await contracts.project.validateOutcome(
@@ -70,12 +68,11 @@ EthProxy.claimOutcome = async (project, validation) => {
     `amount: ${validation.amount}`);
 
   let beneficiary = project.ethAddresses['beneficiary'];
-  let beneficiaryWallet = await ContractUtils.getWallet(beneficiary);
 
-  let claimsRegistry = ContractUtils.getContractInstance(
+  let claimsRegistry = await ContractUtils.getContractInstance(
     'ClaimsRegistry',
     project.ethAddresses['claimsRegistry'],
-    beneficiaryWallet);
+    beneficiary);
 
   let claimKey = mongoIdToBytes(validation._id);
   let claimValue = numberToBytes(validation.amount);

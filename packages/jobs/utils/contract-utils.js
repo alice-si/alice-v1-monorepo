@@ -9,52 +9,15 @@ const EthAddress = ModelUtils.loadModel('ethAddress');
 
 const contractsFolder = '../build/contracts/';
 
-let ContractUtils = {
-  getProvider,
-};
+const mainWallet = getMainWallet();
+validateNetworkId(mainWallet.provider);
 
-ContractUtils.mainWallet = getMainWallet();
-validateNetworkId(ContractUtils.mainWallet.provider);
-
-ContractUtils.getTruffleContract = function (name) {
-  const artefacts = require(contractsFolder + name + '.json');
-  return contract(artefacts);
-};
-
-ContractUtils.getContractInstance = function (
-  contractName,
-  address,
-  wallet=ContractUtils.mainWallet
-) {
-  const contract = ContractUtils.getTruffleContract(contractName);
-  return new ethers.Contract(address, contract.abi, wallet);
-};
-
-ContractUtils.getWalletForIndex = function (index) {
-  let path = `m/44'/60'/0'/0/${index}`;
-  return new ethers.Wallet.fromMnemonic(config.mnemonic, path);
-};
-
-ContractUtils.getWallet = async function (address) {
-  let ethAddress = await EthAddress.findOne({
-    address: { $regex : new RegExp(address, "i") }
-  });
-  if (!ethAddress) {
-    throw new Error(`Could not get wallet for address: ${address}`);
-  }
-  
-  let wallet = ContractUtils.getWalletForIndex(ethAddress.index);
-  let provider = getProvider();
-
-  return wallet.connect(provider);
-};
-
-ContractUtils.deployContract = async function (truffleContractObj, ...args) {
+async function deployContract(truffleContractObj, ...args) {
   const { abi, bytecode } = truffleContractObj;
   const contractFactory = new ethers.ContractFactory(
     abi,
     bytecode,
-    ContractUtils.mainWallet);
+    mainWallet);
   const contract = await contractFactory.deploy(...args);
   await contract.deployed(); // waiting until it is mined
   return contract;
@@ -63,6 +26,45 @@ ContractUtils.deployContract = async function (truffleContractObj, ...args) {
 function getProvider() {
   return new ethers.providers.JsonRpcProvider(config.ethEndpointUrl);
 };
+
+function getTruffleContract(name) {
+  const artefacts = require(contractsFolder + name + '.json');
+  return contract(artefacts);
+}
+
+async function getContractInstance(
+  contractName,
+  address,
+  addressForWallet=config.mainAccount
+) {
+  const contract = getTruffleContract(contractName);
+  let wallet = await getWallet(addressForWallet);
+  
+  return new ethers.Contract(address, contract.abi, wallet);
+}
+
+async function getWallet(address) {
+  if (equalAddresses(address, config.mainAccount)) {
+    return mainWallet;
+  }
+
+  let ethAddress = await EthAddress.findOne({
+    address: { $regex : new RegExp(address, "i") }
+  });
+  if (!ethAddress) {
+    throw new Error(`Could not get wallet for address: ${address}`);
+  }
+  
+  let wallet = getWalletForIndex(ethAddress.index);
+  let provider = getProvider();
+
+  return wallet.connect(provider);
+}
+
+function getWalletForIndex(index) {
+  let path = `m/44'/60'/0'/0/${index}`;
+  return new ethers.Wallet.fromMnemonic(config.mnemonic, path);
+}
 
 function getMainWallet() {
   const provider = getProvider();
@@ -92,8 +94,16 @@ async function validateNetworkId(provider) {
 
   const network = await provider.getNetwork();
   if (network.chainId !== networkId) {
-    logger.error(`Network id = ${network.chainId}, expected by config: ${networkId}`);
+    logger.error(`Network id = ${network.chainId}`
+      + `expected by config: ${networkId}`);
   }
 }
 
-module.exports = ContractUtils;
+module.exports = {
+  getProvider,
+  getWallet,
+  getWalletForIndex,
+  getContractInstance,
+  deployContract,
+  mainWallet,
+};

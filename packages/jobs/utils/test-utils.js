@@ -323,7 +323,8 @@ TestUtils.setBeforeAndAfterHooksForJobTest = function () {
 
 async function generateTestEthAddresses(number) {
   for (let i = 0; i < number; i++) {
-    await EthProxy.createNewAddress();
+    let address = await EthProxy.createNewAddress();
+    logger.info(`Eth address added to DB: ${address}`);
   }
 }
 
