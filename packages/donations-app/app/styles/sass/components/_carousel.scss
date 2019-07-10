@@ -1,0 +1,52 @@
+// I want to remove the carousel.css file ASAP
+// This means we have to decide if we're keeping the appeal page from 2018
+
+.c-dash__goals-carousel {
+  position: relative;
+
+  &-goal {
+    padding: 0 10px;
+  }
+
+  &-image {
+    width: 100%;
+    max-height: 155px;
+  }
+
+  &-content {
+    margin: 0;
+    background: #fff;
+    min-height: 350px;
+    @include box-shadow(0, 0, 3px, rgba(0, 0, 0, 0.1));
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    color: $alice-dark;
+    text-align: left;
+    position: relative;
+  }
+
+  &-proof {
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    padding: 0 5px;
+    border: 1px solid rgba(237, 30, 55, 0.35);
+  }
+
+  &-bottom {
+    padding-left: 22px;
+    position: absolute;
+    bottom: 20px;
+  }
+
+  &-title {
+    padding: 15px 22px;
+  }
+
+  .left-carousel-control, .right-carousel-control {
+    z-index: 1000;
+  }
+
+  .carousel-control.right, .carousel-control.left  {
+    background: linear-gradient(to right,rgba(0,0,0,0) 0,rgba(0,0,0,0) 100%)
+  }
+}

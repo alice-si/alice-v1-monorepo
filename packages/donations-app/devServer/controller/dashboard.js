@@ -169,7 +169,7 @@ module.exports = function (app) {
       let projectValidator = await findValidatorEmail(project._id);
       projectValidator = projectValidator[0];
 
-      // Info required for outcome-claim cards
+      // All goals - to be compared with validated goals in front-end
       let goals = await findGoals({
         _projectId: project._id,
       });
@@ -179,21 +179,22 @@ module.exports = function (app) {
         status: { $in: ['COMPLETED','IMPACT_FETCHING_COMPLETED'] }
       });
 
-      let donated = await findAndPrepareGoals({
+      let claimed = await findAndPrepareGoals({
         status: 'CREATED',
         _projectId: project._id,
       });
 
-      res.status(200).json({ projectValidator, current_project, validated, donated, goals });
+      res.status(200).json({ projectValidator, current_project, claimed, validated, goals });
 
       async function findAndPrepareGoals(filter) {
-        let label = (filter.status === 'CREATED') ? 'totalDonated' : 'totalValidated';
+        let label = (filter.status === 'CREATED') ? 'totalClaimed' : 'totalValidated';
         return await Validation.aggregate([
           {$match: filter},
           {
             $group : {
               _id :  "$_outcomeId",
               [label] : { $sum: "$amount" },
+              date: { $max: '$createdAt' },
             },
           },
           {
@@ -208,10 +209,7 @@ module.exports = function (app) {
       }
 
       async function findGoals(id) {
-        return await Outcome.aggregate([
-          {$match: id},
-          Utils.createProjection(["_id", "image", "title"]),
-        ]);
+        return await Outcome.aggregate([{$match: id}]);
       }
 
       // Can be extended for proof type

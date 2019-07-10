@@ -5,24 +5,8 @@ angular.module('aliceApp')
     ProjectService.getProjectDetails($stateParams.projectCode).then(function (result) {
       vm.model = ProjectService.prepareProjectDetails(result.data);
 			vm.supporters = result.data.supporters;
-			vm.model.outcomeCategories = {};
-			vm.model.goals = [];
-			var threeOutcomes = [];
-			vm.model._outcomes.forEach(function (outcome, index) {
-				threeOutcomes.push(outcome);
-				// Format the goals for carousel
-				if((index % 3) === 2) {
-					vm.model.goals.push(threeOutcomes);
-					threeOutcomes = [];
-				}
-				if (vm.model.outcomeCategories[outcome.category] === undefined) {
-					vm.model.outcomeCategories[outcome.category] = [];
-				}
-				vm.model.outcomeCategories[outcome.category].push(outcome);
-			});
-			if (threeOutcomes.length > 0) {
-        vm.model.goals.push(threeOutcomes);
-			}
+			vm.model.goals = _.chunk(vm.model._outcomes, 3);
+
 			vm.model.projectShareLink = REDIRECTION + 'redirection/project-' + vm.model.code + '.html';
 
       // For every story, match each p tag of a story's details and replace

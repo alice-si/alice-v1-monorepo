@@ -7,9 +7,6 @@ let OutcomeSchema = new Mongoose.Schema({
   reason: String,
   value: String,
   image: String,
-  // amount = price of validation
-  // it is basically the same as: costPerUnit
-  // so should we remove costPerUnit? 
   amount: Number,
   unit: String,
   costPerUnit: Number,

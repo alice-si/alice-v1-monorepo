@@ -23,29 +23,54 @@ angular.module('aliceApp')
 
           vm.general_outcomes = vm.projectWithGoals.goals;
 
+
+          // Here we iterate through validated goals and calculate
+          // overall progress of that goal
           vm.projectWithGoals.validated.forEach((item) => {
-            // Not checking for amount because it's a compulsory field
-            item.progressInUnits = item.outcome[0].costPerUnit ? (
-              Math.floor(item.totalValidated / item.outcome[0].costPerUnit)) : 0;
-            // Have to decide which one we want as the percentage!!
-            item.percentage = (item.totalValidated) ?
-              Math.floor(100 * (item.totalValidated / item.outcome[0].amount)) : 0;
-            // item.percentage = (item.progressInUnits / item.outcome[0].target) * 100;
+            item.progressInUnits = Math.min(Math.floor(item.totalValidated / (item.outcome[0].costPerUnit)),
+                                            item.outcome[0].quantityOfUnits);
+            item.percentage = Math.min(Math.floor(100 * item.totalValidated / (item.outcome[0].target)),
+                                        100);
             if(item.outcome[0].color) {
               item.outcome[0].lightColor = convertHex(item.outcome[0].color, 0.35);
             }
           });
 
-          vm.validated_outcomes = vm.projectWithGoals.validated;
+          // For each outcome in the project, check whether we have a validation in progress
+          // If not, initialise as: 0 it for the progress view - initialiseGoalStatus
+          vm.general_outcomes.forEach((elem) => {
+            if(!(_.where(vm.projectWithGoals.validated, {'_id': elem._id }).length)) {
+              vm.validated_outcomes.push(initialiseGoalStatus(elem));
+            }
+            else {
+              // This will always be the first value ([0]) since _id is unique.
+              vm.validated_outcomes.push(_.where(vm.projectWithGoals.validated, {'_id': elem._id })[0]);
+            }
+          })
 
-          vm.donated_outcomes = _.map(vm.general_outcomes, function(item) {
-            return _.extend(item, _.findWhere(vm.validated_outcomes, { _id: item._id }));
-          });
+          // Get the total number of goals achieved/validated
+          vm.totalGoalsAchieved = vm.validated_outcomes.reduce((acc, elem) => ({
+            progressInUnits: acc.progressInUnits + elem.progressInUnits})).progressInUnits;
+
           vm.projectValidator = vm.projectWithGoals.projectValidator;
         }
 
         $timeout(()=> {$scope.dataLoaded = true;}, 3000);
       });
+
+      function initialiseGoalStatus(goal) {
+        let init = {};
+        init._id = goal._id;
+        init.outcome = [1];
+        init.outcome[0] = goal;
+        init.totalValidated = 0;
+        init.progressInUnits = 0;
+        init.percentage = 0;
+        if(init.outcome[0].color) {
+          init.outcome[0].lightColor = convertHex(init.outcome[0].color, 0.35);
+        }
+        return init;
+      }
 
       $http.get(API + `getDonationsForProject/${code}`).then(function (result) {
         vm.donations = result.data[0].donations;
@@ -75,7 +100,7 @@ angular.module('aliceApp')
       scope: {
         donations: '=',
       },
-      templateUrl: '/components/dashboard/tabs/charityDashboardMoney.html'
+      templateUrl: '/components/dashboard/tabs/money/charityDashboardMoney.html'
     };
   })
   .directive('charityDashboardGoals', function() {
@@ -86,15 +111,15 @@ angular.module('aliceApp')
         outcomesOfProject: '=',
         projectValidator: '=',
       },
-      templateUrl: '/components/dashboard/tabs/charityDashboardGoals.html'
+      templateUrl: '/components/dashboard/tabs/goals/charityDashboardGoals.html'
     };
   })
-  .directive('charityDashboardPeople', function() {
+  .directive('charityDashboardPerformance', function() {
     return {
       scope: {
         people: '=',
       },
-      templateUrl: '/components/dashboard/tabs/charityDashboardPeople.html'
+      templateUrl: '/components/dashboard/tabs/performance/charityDashboardPerformance.html'
     };
   })
   .directive('charityDashboardDonationsGraph', function() {
@@ -109,15 +134,13 @@ angular.module('aliceApp')
       controller: 'CharityDashboardDonationsController as donCtrl',
     };
   })
-  .directive('goalProgressBar', function() {
+  .directive('goalProgressCarousel', function() {
     return {
       scope: {
-        color: '=',
-        progressInUnits: '=',
-        percentage: '=',
-        outcome: '=',
+        outcomes: '=',
       },
-      templateUrl: '/components/dashboard/panels/goalProgressBar.html',
+      templateUrl: '/components/dashboard/panels/goalProgressCarousel.html',
+      controller: 'goalCarouselController as crslCtrl',
     };
   })
   .directive('goalsBreakdownTable', function() {
@@ -126,6 +149,15 @@ angular.module('aliceApp')
         outcomes: '=',
       },
       templateUrl: '/components/dashboard/panels/goalsBreakdownTable.html'
+    };
+  })
+  .directive('goalsProgressGraph', function() {
+    return {
+      scope: {
+        outcomes: '=',
+      },
+      templateUrl: '/components/dashboard/panels/goalProgressGraph.html',
+      controller: 'GoalsGraphController as graphCtrl',
     };
   })
   .directive('claimOutcomeCard', () => {
