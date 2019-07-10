@@ -99,6 +99,9 @@ describe('Test model initializing', function() {
     'projectHistory',
     'user',
     'validation',
+    'ethAddress',
+    'deployedContract',
+    'contractVersion',
     'environment'
   ];
   for (let name of names) {

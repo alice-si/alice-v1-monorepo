@@ -4,11 +4,10 @@ const ModelUtils = require('./model-utils');
 const Mongoose = require('mongoose');
 const Mockgoose = require('mockgoose').Mockgoose;
 const mockgoose = new Mockgoose(Mongoose);
-const ContractUtils = require('./contract-utils');
-const web3 = ContractUtils.getWeb3();
 const BigNumber = web3.BigNumber;
 const MangoProxy = require('../gateways/mangoProxy');
 const KeyProxy = require('../gateways/keyProxy');
+const EthProxy = require('../gateways/ethProxy');
 const Deploy = require('../utils/deploy');
 const logger = require('../utils/logger')('utils/test-utils');
 const request = require('request-promise');
@@ -174,7 +173,6 @@ TestUtils.deployDefault = async () => {
   };
 
   let addresses = await Deploy.deployProject(
-    accounts[0],
     accounts[1],
     accounts[2],
     claimsRegistryAddress,
@@ -313,6 +311,7 @@ TestUtils.createMockValidations = async function () {
 TestUtils.setBeforeAndAfterHooksForJobTest = function () {
   before(async function () {
     await TestUtils.connectToMockDB();
+    await generateTestEthAddresses(10);
     logger.info('Connected to mock DB.');
   });
 
@@ -321,5 +320,12 @@ TestUtils.setBeforeAndAfterHooksForJobTest = function () {
     logger.info('Mock DB was reset.');
   });
 };
+
+async function generateTestEthAddresses(number) {
+  for (let i = 0; i < number; i++) {
+    let address = await EthProxy.createNewAddress();
+    logger.info(`Eth address added to DB: ${address}`);
+  }
+}
 
 module.exports = TestUtils;
