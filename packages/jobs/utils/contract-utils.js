@@ -3,10 +3,11 @@ const ethers = require('ethers');
 
 const config = require('../config');
 const logger = require('./logger')('utils/contract-utils');
+const ModelUtils = require('../utils/model-utils');
+
+const EthAddress = ModelUtils.loadModel('ethAddress');
 
 const contractsFolder = '../build/contracts/';
-const MAX_ITERATIONS_FOR_WALLET_SEARCHING = 10000;
-const LOG_INTERATIONS_INTERVAL = 1000;
 
 let ContractUtils = {
   getProvider,
@@ -34,18 +35,18 @@ ContractUtils.getWalletForIndex = function (index) {
   return new ethers.Wallet.fromMnemonic(config.mnemonic, path);
 };
 
-ContractUtils.getWallet = function (address) {
-  for (let counter = 0; counter < MAX_ITERATIONS_FOR_WALLET_SEARCHING; counter++) {
-    if (counter > 0 && counter % LOG_INTERATIONS_INTERVAL == 0) {
-      logger.info(`${counter} wallets checked, but address ${address} still was not found`);
-    }
-    let wallet = ContractUtils.getWalletForIndex(counter);
-    if (equalAddresses(wallet.address, address)) {
-      const provider = getProvider();
-      return wallet.connect(provider);
-    }
+ContractUtils.getWallet = async function (address) {
+  let ethAddress = await EthAddress.findOne({
+    address: { $regex : new RegExp(address, "i") }
+  });
+  if (!ethAddress) {
+    throw new Error(`Could not get wallet for address: ${address}`);
   }
-  throw new Error(`Could not get wallet for address: ${address}`);
+  
+  let wallet = ContractUtils.getWalletForIndex(ethAddress.index);
+  let provider = getProvider();
+
+  return wallet.connect(provider);
 };
 
 ContractUtils.deployContract = async function (truffleContractObj, ...args) {

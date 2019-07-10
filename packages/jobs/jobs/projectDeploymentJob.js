@@ -31,19 +31,13 @@ function mainAction(jobContext) {
       return jobContext.errorBehaviour('Wrong number of charityAdmins for project: ' + charityAdmins.length);
     }
     charityAdmin = charityAdmins[0];
-    // if (!charityAdmin.crypto) {
-    //   return jobContext.errorBehaviour('Charity admin does not have crypto');
-    // }
 
-    // let charityAdminPassword = KeyProxy.decrypt(charityAdmin.crypto);
     // creating an ethAccount for charity
     if (project.charity.ethAccount) {
       jobContext.msg('Charity already has ethAccount: ' + project.charity.ethAccount);
       return Promise.resolve(project.charity.ethAccount);
     } else {
-      // return EthProxy.createAccount(charityAdminPassword);
-      // TODO - think about potential problems of using charityAdmin's ethAccount
-      return Promise.resolve(charityAdmin.ethAccount);
+      return EthProxy.createNewAddress();
     }
   }).then(function (address) {
     if (address != project.charity.ethAccount) {

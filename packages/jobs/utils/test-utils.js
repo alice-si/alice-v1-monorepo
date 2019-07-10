@@ -7,6 +7,7 @@ const mockgoose = new Mockgoose(Mongoose);
 const BigNumber = web3.BigNumber;
 const MangoProxy = require('../gateways/mangoProxy');
 const KeyProxy = require('../gateways/keyProxy');
+const EthProxy = require('../gateways/ethProxy');
 const Deploy = require('../utils/deploy');
 const logger = require('../utils/logger')('utils/test-utils');
 const request = require('request-promise');
@@ -310,6 +311,7 @@ TestUtils.createMockValidations = async function () {
 TestUtils.setBeforeAndAfterHooksForJobTest = function () {
   before(async function () {
     await TestUtils.connectToMockDB();
+    await generateTestEthAddresses(10);
     logger.info('Connected to mock DB.');
   });
 
@@ -318,5 +320,11 @@ TestUtils.setBeforeAndAfterHooksForJobTest = function () {
     logger.info('Mock DB was reset.');
   });
 };
+
+async function generateTestEthAddresses(number) {
+  for (let i = 0; i < number; i++) {
+    await EthProxy.createNewAddress();
+  }
+}
 
 module.exports = TestUtils;

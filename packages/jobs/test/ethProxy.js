@@ -58,6 +58,12 @@ contract('EthProxy', function (accounts) {
     (await token.balanceOf(projectAddress)).toNumber().should.be.equal(0);
   });
 
+  it('should create new addresses', async function () {
+    let addressFirst = await EthProxy.createNewAddress();
+    let addressSecond = await EthProxy.createNewAddress();
+    addressFirst.toLowerCase().should.not.be.equal(addressSecond.toLowerCase());
+  });
+
   // TODO test it better
   it('should get impact linked', async function () {
     await EthProxy.getImpactLinked(mocks.project, validationId).should.be.fulfilled;

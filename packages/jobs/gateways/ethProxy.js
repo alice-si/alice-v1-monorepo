@@ -3,15 +3,27 @@ const request = require('request');
 const ethers = require('ethers');
 
 const ContractUtils = require('../utils/contract-utils');
+const ModelUtils = require('../utils/model-utils');
 const ContractProxy = require('./contractProxy');
 const Deploy = require('../utils/deploy');
 const logger = require('../utils/logger')('gateways/ethProxy');
 const config = require('../config');
 
+const EthAddress = ModelUtils.loadModel('ethAddress');
+
 let EthProxy = {};
 
-EthProxy.getAddressForIndex = function (index) {
-  return ContractUtils.getWalletForIndex(index).address;
+EthProxy.createNewAddress = async function () {
+  const lastEthAddress = await EthAddress.findOne(
+    { index: { $exists: true } }
+  ).sort('-index');
+  const index = lastEthAddress ? lastEthAddress.index + 1 : 1;
+  let newEthAddress = await new EthAddress({ index }).save();
+
+  newEthAddress.address = await ContractUtils.getWalletForIndex(index).address;  
+  await newEthAddress.save();
+
+  return newEthAddress.address;
 };
 
 EthProxy.deposit = async (fromUserAccount, project, amount) => {
@@ -26,54 +38,6 @@ EthProxy.deposit = async (fromUserAccount, project, amount) => {
   return getTxHash(transaction);
 };
 
-// TODO currently it is unused
-// const Dai = ContractUtils.initializeContract('ERC20');
-// current mechanism for skipping visited events, it could be optimised in the future
-// let eventsFilterFromBlock = 0;
-// EthProxy.getDaiDonations = function (projectCode) {
-//   let dai = Dai.at(getDaiAddress());
-//   result = [];
-//   return new Promise(function(resolve, reject) {
-//     let projectAddress;
-//     try {
-//       projectAddress = getProjectAddress(projectCode);
-//     }
-//     catch(err) {
-//       //Ugly workaround
-//       //TODO:  - we should keep project contract address in db, not a separate config
-//       resolve(result);
-//     }
-//     console.log("Checking transfers for dai: " + getDaiAddress() + " and project: " + projectAddress);
-//     dai.Transfer({to: projectAddress}, {
-//       fromBlock: eventsFilterFromBlock,
-//       toBlock: 'latest'
-//     }).get(function (err, events) {
-//       if (err) return reject(err);
-//       events.forEach(function (event) {
-//         result.push({
-//           daiAddress: event.address,
-//           daiTx: event.transactionHash,
-//           daiValue: web3.fromWei(event.args.value, 'ether')
-//         });
-//         eventsFilterFromBlock = event.blockNumber+1;
-//       });
-
-//       return resolve(result);
-//     });
-//   });
-// };
-
-// TODO this function should be fixed
-// EthProxy.payOutDai = function (project, toAddress, value) {
-//   const daiAddress = getDaiAddress();
-//   const weiValue = web3.toWei(value, 'ether');
-
-//   return unlockAccountAsync(mainAccount, mainPassword).then(function () {
-//     let projectContract = ContractUtils.getProjectContract(project);
-//     return projectContract.reclaimAlternativeTokensAsync(daiAddress, toAddress, weiValue, {from: mainAccount});
-//   });
-// };
-
 EthProxy.mint = async (project, amount) => {
   logger.info('Minting: ' + amount);
   let contracts = await ContractProxy.getAllContractsForDocument(project);
@@ -87,7 +51,7 @@ EthProxy.validateOutcome = async (
     `Validating outcome, validation id: ${validation._id}, ` +
     `amount: ${validation.amount}`);
 
-  let validatorWallet = ContractUtils.getWallet(validatorAccount);
+  let validatorWallet = await ContractUtils.getWallet(validatorAccount);
 
   let contracts = await ContractProxy.getAllContractsForDocument(
     project,
@@ -106,7 +70,7 @@ EthProxy.claimOutcome = async (project, validation) => {
     `amount: ${validation.amount}`);
 
   let beneficiary = project.ethAddresses['beneficiary'];
-  let beneficiaryWallet = ContractUtils.getWallet(beneficiary);
+  let beneficiaryWallet = await ContractUtils.getWallet(beneficiary);
 
   let claimsRegistry = ContractUtils.getContractInstance(
     'ClaimsRegistry',

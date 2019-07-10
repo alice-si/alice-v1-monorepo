@@ -7,14 +7,9 @@ async function mainAction(jobContext) {
   let user = jobContext.model;
   jobContext.msg('Found user without account: ' + user._id + ' ( ' + user.email + ' )');
 
-  const nextEthAddressIndex = (await User.findOne().sort('-ethAccountIndex')).ethAccountIndex;
-
-  const address = EthProxy.getAddressForIndex(nextEthAddressIndex);
-
-  jobContext.msg(`Created account with address: ${address} index: ${nextEthAddressIndex}`);
-
+  const address = await EthProxy.createNewAddress();
   user.ethAccount = address;
-  user.ethAccountIndex = nextEthAddressIndex;
+  jobContext.msg(`Created account with address: ${address}`);
 
   return await user.save();
 }

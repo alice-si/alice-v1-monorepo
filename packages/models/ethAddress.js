@@ -3,7 +3,7 @@ const ModelUtils = require('./model-utils');
 
 let EthAddressSchema = new Mongoose.Schema({
   address: String,
-  index: String,
+  index: Number,
 });
 
 module.exports = ModelUtils.exportModel('EthAddress', EthAddressSchema);
