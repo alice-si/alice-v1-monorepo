@@ -268,8 +268,7 @@ TestUtils.prepareMockObjectsForLoadTest = async function (numberOfUsers) {
   let testAmount = 10;
 
   // Deploy and configure claims registry.
-  let claimsRegistryAddress = await Deploy.deployClaimsRegistry(
-    config.mainAccount, config.mainPassword);
+  let claimsRegistryAddress = await Deploy.deployClaimsRegistry();
   Object.assign(config, { claimsRegistryAddress });
 
   let projectToDeploy = await TestUtils.createDefaultMockProject(
