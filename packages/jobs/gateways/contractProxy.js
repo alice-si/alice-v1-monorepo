@@ -59,7 +59,7 @@ function getContract(contractName) {
       if (deployedContract) {
         abi = json.parse(deployedContract.abi);
       } else {
-        logger.warn('Accessing Project with non-stable ABI! ' +
+        logger.warn(`Accessing ${contractName} with non-stable ABI! ` +
           'Don\'t do this in production!');
         abi = CurrentContract.abi;
       }
