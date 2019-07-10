@@ -7,7 +7,9 @@ const User = Utils.loadModel('user');
 describe('CharityController', function () {
     let charity1, charity2, charity1Saved, charity2Saved;
 
-    TestUtils.setBeforeAndAfterHooksForControllerTest('charity');
+    TestUtils.setBeforeAndAfterHooksForControllerTest({
+        name: 'charity'
+    });
 
     it('Should create charities', async function () {
         charity1 = new Charity({

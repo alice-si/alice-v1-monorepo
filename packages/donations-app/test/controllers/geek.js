@@ -7,8 +7,10 @@ const Validation = Utils.loadModel('validation');
 describe('GeekController', function () {
     const testAmount = 100;
     let donation, validation;
-
-    TestUtils.setBeforeAndAfterHooksForControllerTest('geek');
+    
+    TestUtils.setBeforeAndAfterHooksForControllerTest({
+        name: 'geek'
+    });
 
     it('Should create test objects', async function () {
         const userId = TestUtils.loggedUserId;

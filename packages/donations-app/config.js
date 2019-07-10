@@ -31,6 +31,7 @@ config.awsEmailSenderAddress = getEnv('ALICE_SENDER_EMAIL');
 config.awsRegion = 'eu-west-2';
 config.awsSesRegion = getEnv('AWS_SES_REGION');
 config.awsDefaultBucketName = 'alice-res';
+config.timeoutForMangoHooksResending = 5000; // ms
 
 if (mode == 'local') {
   config.pathToKeys = './secrets/keys/';

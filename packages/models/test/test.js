@@ -102,6 +102,7 @@ describe('Test model initializing', function() {
     'ethAddress',
     'deployedContract',
     'contractVersion',
+    'environment'
   ];
   for (let name of names) {
     testModelInit(name);

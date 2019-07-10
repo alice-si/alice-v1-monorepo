@@ -1,7 +1,7 @@
 let config = {};
 
 let mode = process.env.ALICE_MODE;
-const isLocal = !['DEV', 'STAGE', 'PROD'].includes(mode);
+const isLocal = !['EXP', 'STAGE', 'PROD'].includes(mode);
 if (isLocal) {
   mode = 'LOCAL';
 }
