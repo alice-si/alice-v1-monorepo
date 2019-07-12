@@ -16,6 +16,7 @@
      object-fit: cover;
      background-size: cover;
      background-blend-mode: multiply;
+     background-size: cover !important;
    }
 
    /* Keeping this here incase we don't want gradient */
@@ -25,6 +26,24 @@
      object-fit: cover;
      @include transition(0.2s, all, ease-out);
      filter: brightness(60%);
+   }
+
+   &__progress-section {
+     border-right: 1px solid #fff;
+     margin-right: 20px;
+
+     span {
+       font-weight: 600;
+     }
+
+     &:first-child {
+       padding: none !important;
+       margin-left: -15px;
+     }
+
+     &:last-child {
+       border: none;
+     }
    }
 
    &__container-title {
@@ -53,10 +72,6 @@
 
    .progress-bar__lg {
      margin: 20px 0 5px;
-   }
-
-   a {
-
    }
 
    button {
@@ -105,6 +120,12 @@
 
 @media screen and (max-width: 414px) {
   .splash-v2 {
+
+    h3 {
+      font-size: 26px;
+      margin-top: -10px;
+    }
+
     .header-image {
       height: 100vh;
     }
@@ -117,6 +138,42 @@
 
     p {
       font-size: 16px !important;
+    }
+
+    &__progress-section {
+      border-right: none;
+      margin-left: -15px;
+
+      span {
+        font-weight: 600;
+      }
+
+      &:first-child {
+        padding: none !important;
+      }
+
+      &:last-child {
+        border: none;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 330px) {
+  .splash-v2 {
+    h3 {
+      font-size: 24px;
+      line-height: 1.2;
+      margin-top: -10px;
+    }
+
+    p {
+      font-size: 12px !important;
+      margin-top: -10px;
+    }
+
+    &__progress-section:first-child {
+      margin-top: 10px;
     }
   }
 }

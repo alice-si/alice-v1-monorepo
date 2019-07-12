@@ -20,6 +20,11 @@
     &-goals {
       margin: 50px 0;
       padding: 35px 30px;
+
+      .aliceGoal__goal-right {
+        border-top-right-radius: 4px !important;
+        border-bottom-right-radius: 4px !important;
+      }
     }
   }
 

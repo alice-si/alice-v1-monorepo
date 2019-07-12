@@ -8,25 +8,22 @@
           <p class="white">See what your money achieves, with Blockchain's transparency.</p>
         </div>
         <div class="row splash-v2__container-progress">
-          <uib-progress class="progress-bar__lg"
-                         style="background-color: rgba(255, 255, 255, 0.3);">
-                <uib-bar class="inside"
-                         style="background-color: #fff"
-                         value="projectCtrl.model.percentageCompleted">
-                </uib-bar>
-           </uib-progress>
-           <p class="white goal-progress-bar__percentage">
-             <span style="font-size: 22px">{{ projectCtrl.model.percentageCompleted }}%</span> of goals completed
+           <p class="white col-md-3 splash-v2__progress-section">Target<br>
+             <span style="font-size: 22px;">{{ projectCtrl.model.fundingTarget | money}}</span>
            </p>
-           <p class="white goal-progress-bar__raised">
-             <span style="font-size: 22px">{{ projectCtrl.model.amountValidated | money }}</span> spent |
-             <span style="font-size: 22px">{{ projectCtrl.model.raised | money }}</span> donated
+           <p class="white col-md-3 splash-v2__progress-section">Raised<br>
+             <span style="font-size: 22px;">{{ projectCtrl.model.raised | money }}</span>
            </p>
-           <a href="/checkout/{{projectCtrl.model.code}}">
-             <button>
-               Donate
-             </button>
-           </a>
+           <p class="white col-md-4 splash-v2__progress-section">Completed<br>
+             <span style="font-size: 22px;">{{ projectCtrl.model.percentageCompleted }}%</span> of the goals
+           </p>
+        </div>
+        <div class="row">
+          <a href="/checkout/{{projectCtrl.model.code}}">
+            <button>
+              Donate
+            </button>
+          </a>
         </div>
       </div>
     </div>
@@ -60,6 +57,12 @@
              style="background-image: url('{{projectCtrl.model.charity.darkPicture}}')">
         </div>
       </div>
+      <button class="col-md-2 col-lg-2"
+              ng-click="expandSummary = !expandSummary">
+        Read <span ng-if="expandSummary">Less</span><span ng-if="!expandSummary">More</span>
+        <i class="pull-up glyphicon"
+           ng-class="expandSummary ? 'glyphicon-chevron-up' : 'glyphicon-chevron-down'"></i>
+      </button>
     </div>
     <div class="col-xs-12 col-md-12 col-lg-12 appeal-v2__goals">
       <h5>
@@ -69,9 +72,21 @@
                              'other': 'Track the impact of donations through {} goals'}">
         </ng-pluralize>
       </h5>
-      <div ng-repeat="goal in projectCtrl.model._outcomes track by $index">
+      <div ng-repeat="goal in projectCtrl.model._outcomes | limitTo: 3 track by $index"
+           class="col-md-12 col-lg-12">
         <appeal-goal goal="goal" index="$index"></appeal-goal>
       </div>
+      <div ng-repeat="goal in projectCtrl.model._outcomes | limitTo: projectCtrl.model._outcomes.length : 3 track by $index "
+           class="col-md-12 col-lg-12"
+           uib-collapse="!expandOutcomes">
+        <appeal-goal goal="goal" index="$index + 3"></appeal-goal>
+      </div>
+      <button class="col-md-2 col-lg-2"
+              ng-click="expandOutcomes = !expandOutcomes">
+        Read <span ng-if="expandOutcomes">Less</span><span ng-if="!expandOutcomes">More</span>
+        <i class="pull-up glyphicon"
+           ng-class="expandOutcomes ? 'glyphicon-chevron-up' : 'glyphicon-chevron-down'"></i>
+      </button>
     </div>
     <div class="col-xs-12 col-md-12 col-lg-12 appeal-v2__stories">
       <h5>Follow the story</h5>

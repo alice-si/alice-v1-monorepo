@@ -15,7 +15,10 @@ angular.module('aliceApp')
 				if(impact) {
 					elem.totalPercentage = Math.floor(100 * impact.totalValidatedForOutcome / elem.amount);
 					elem.totalValidatedForOutcome = impact.totalValidatedForOutcome;
-				} else { elem.totalPercentage = 0; }
+				} else {
+					elem.totalPercentage = 0;
+					elem.totalValidatedForOutcome = 0;
+				}
 				elem.lightColor = elem.color ? convertHex(elem.color, 0.4) : 'rgba(255, 255, 255, 0.3)';
 			});
 
@@ -47,5 +50,13 @@ angular.module('aliceApp')
 				$scope.activeGoal = undefined;
 			};
 		}]
+	};
+})
+.directive('appealStory', function() {
+	return {
+		scope: {
+			story: '='
+		},
+		templateUrl: 'components/project/components/singleStoryComponent.html',
 	};
 });

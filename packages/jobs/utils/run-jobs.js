@@ -46,6 +46,7 @@ function runDailyJob(job) {
 }
 
 module.exports = function (interval) {
+
   runJob(AccountCreatingJob.execute, interval);
 
   runJob(PaymentCollectingJob.execute, interval);
