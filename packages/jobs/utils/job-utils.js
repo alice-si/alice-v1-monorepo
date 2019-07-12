@@ -28,7 +28,7 @@ function createModellessJob(conf) {
       let jobContext = {};
       const jobId = createJobId(conf.processName + '_modelles_executor');
 
-      jobContext.msg = (msg) => logger.debug(jobId + ': ' + msg);
+      jobContext.msg = (msg) => logger.info(jobId + ': ' + msg);
       jobContext.errMsg = (msg) => logger.error(jobId + ': ' + msg);
       jobContext.errorBehaviour = (err) => jobContext.errMsg(err);
       jobContext.completedBehaviour = () => jobContext.msg('finished successfully');
@@ -132,7 +132,7 @@ function createJobInternal(jobIdPrefix, modelGetter, action) {
     const jobId = createJobId(jobIdPrefix);
 
     function jobMsg(msg) {
-      logger.debug(jobId + ': ' + msg);
+      logger.info(jobId + ': ' + msg);
     }
     function jobErrMsg(msg) {
       logger.error(jobId + ': ' + msg);
