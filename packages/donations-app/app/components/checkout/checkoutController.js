@@ -22,6 +22,11 @@ angular.module('aliceApp')
 
     vm.card = {};
 
+    vm.sth = function() {
+      console.log("AAA");
+      console.log($stateParams.projectCode);
+    }
+
     if (MANGO.url == 'https://api.sandbox.mangopay.com') {
       vm.card = {
         number: "3569990000000132",
