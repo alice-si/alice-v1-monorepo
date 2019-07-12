@@ -9,7 +9,9 @@ var api = new mangopay({
 
 var Mango = {};
 
-Mango.securityTreshold = 30000;
+// 3DS disabled for non-eurozone
+// Mango.securityTreshold = 30000;
+
 Mango.securityTresholdForCardsWith3DSSupport = 10100;
 
 const supportedCountryCodesFor3DS = [
