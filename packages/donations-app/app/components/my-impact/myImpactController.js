@@ -28,13 +28,14 @@ angular.module('aliceApp')
 						if(elem.code === vm.code) {
 							return elem;
 						}
-					});
-					if (vm.project) {
-            vm.project.overallProjectPercentage = Math.round(100 * vm.project.totalPaidOutOverall / vm.project.fundingTarget);
-            vm.project.individualProjectPercentage = Math.round(100 * vm.project.totalPaidOut / vm.project.fundingTarget);
-            if (vm.project) {
-              vm.charity = vm.project.charity;
-            }
+          });
+          
+          if (vm.project) {
+            vm.charity = vm.project.charity;
+            
+            vm.project.overallProjectPercentage = Math.floor(100 * vm.project.totalPaidOutOverall / vm.project.fundingTarget);
+            vm.project.individualProjectPercentage = Math.floor(100 * vm.project.totalPaidOut / vm.project.fundingTarget);
+
 
             vm.project.allImpactsForProject.forEach((elem) => {
               let impact = vm.project.impacts.find((e) => {
@@ -42,7 +43,8 @@ angular.module('aliceApp')
                   return e
                 }
               });
-							if(impact) {
+
+							if (impact) {
 								elem.userSpent = impact.total;
 								elem.userPercentage = Math.floor(100 * impact.total / elem.target);
 								elem.totalPercentage = Math.floor(100 * elem.totalSpent / elem.target);

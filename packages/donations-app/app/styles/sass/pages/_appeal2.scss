@@ -33,10 +33,31 @@
     }
 
     &-top {
+      margin-bottom: 15px;
 
       h6 {
         color: rgba($alice-blue, 0.6);
         font-size: 10px;
+      }
+
+      &-expanded > button {
+        margin-top: 15px;
+        padding: 8px 0 10px !important;
+        font-weight: 200;
+        background: $alice-blue;
+        border-radius: 2px;
+        color: #fff;
+        border: none;
+        font-weight: 300;
+        letter-spacing: 1px;
+        @include box-shadow(0, 0, 2px, rgba(0, 0, 0, 0.23));
+        outline: none;
+
+        .glyphicon {
+          font-weight: 200;
+          color: #fff;
+          top: 3px;
+        }
       }
     }
 
@@ -44,9 +65,9 @@
       padding-right: 20px;
     }
 
-    &-right {
-      // padding-top: 14px !important;
-    }
+    // &-right {
+    //   padding-top: 14px !important;
+    // }
 
     button {
       margin: 5px 0 15px;
@@ -122,6 +143,7 @@
         width: 100%;
         height: 180px;
         object-fit: cover;
+        filter: brightness(60%);
       }
     }
 
@@ -157,21 +179,21 @@
       }
 
       button {
-        margin: 5px 0 15px;
+        margin-bottom: 10px;
         padding: 8px 0 10px !important;
         font-weight: 200;
-        background: none;
+        background: $alice-blue;
         border-radius: 2px;
-        color: $alice-blue;
-        font-weight: 300;
+        color: #fff;
         border: none;
-        text-align: left;
+        font-weight: 300;
         letter-spacing: 1px;
+        @include box-shadow(0, 0, 2px, rgba(0, 0, 0, 0.23));
         outline: none;
 
         .glyphicon {
           font-weight: 200;
-          color: $alice-blue;
+          color: #fff;
           top: 3px;
         }
       }
