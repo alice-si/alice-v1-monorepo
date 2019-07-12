@@ -1,10 +1,11 @@
 angular.module('aliceApp')
-  .controller('CharityDashboardController', ['AuthService', '$scope', '$http', 'API', '$stateParams', '$uibModal', function (AuthService, $scope, $http, API, $stateParams, $uibModal) {
+  .controller('CharityDashboardController', ['AuthService', '$scope', '$timeout', '$http', 'API', '$stateParams', '$uibModal', function (AuthService, $scope, $timeout, $http, API, $stateParams, $uibModal) {
     var vm = this;
     vm.auth = AuthService;
     vm.code = $stateParams.project;
     vm.loggedUser = vm.auth.getLoggedUser();
     vm.validated_outcomes = [];
+    $scope.dataLoaded = false;
 
     if (!AuthService.getLoggedUser()) {
       AuthService.showLogInModal();
@@ -19,6 +20,7 @@ angular.module('aliceApp')
           if(vm.projectWithGoals.current_project) {
             vm.project = result.data.current_project;
           }
+
           vm.general_outcomes = vm.projectWithGoals.goals;
 
           vm.projectWithGoals.validated.forEach((item) => {
@@ -37,16 +39,23 @@ angular.module('aliceApp')
           vm.validated_outcomes = vm.projectWithGoals.validated;
 
           vm.donated_outcomes = _.map(vm.general_outcomes, function(item) {
-            return _.extend(item, _.findWhere(vm.projectWithGoals.validated, { _id: item._id }));
+            return _.extend(item, _.findWhere(vm.validated_outcomes, { _id: item._id }));
           });
           vm.projectValidator = vm.projectWithGoals.projectValidator;
         }
+
+        $timeout(()=> {$scope.dataLoaded = true;}, 3000);
       });
+
       $http.get(API + `getDonationsForProject/${code}`).then(function (result) {
-        if(result.data) {
-          vm.projectWithGoals.donations = result.data[0].donations;
-        }
+        vm.donations = result.data[0].donations;
+        if (vm.projectWithGoals) {
+          vm.projectWithGoals.donations = vm.donations;
+        } else {
+          vm.projectWithGoals = result.data[0];
+        };
       });
+
     }
 
     function convertHex(hex, opacity) {
