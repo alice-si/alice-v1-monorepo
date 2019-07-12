@@ -46,30 +46,29 @@ function runDailyJob(job) {
 }
 
 module.exports = function (interval) {
-  // FIXME uncomment jobs
 
-  // runJob(AccountCreatingJob.execute, interval);
+  runJob(AccountCreatingJob.execute, interval);
 
-  // runJob(PaymentCollectingJob.execute, interval);
+  runJob(PaymentCollectingJob.execute, interval);
 
-  // runJob(ImpactFetchingJob.execute, interval);
+  runJob(ImpactFetchingJob.execute, interval);
 
-  // runJob(MintingJob.execute, interval);
-  // runJob(MintingJob.check, interval);
+  runJob(MintingJob.execute, interval);
+  runJob(MintingJob.check, interval);
 
-  // runJob(DepositingJob.execute, interval);
-  // runJob(DepositingJob.check, interval);
+  runJob(DepositingJob.execute, interval);
+  runJob(DepositingJob.check, interval);
 
-  // runClassJob(new ClaimingJob(), interval);
+  runClassJob(new ClaimingJob(), interval);
 
-  // runClassJob(new ValidatingJob(), interval);
+  runClassJob(new ValidatingJob(), interval);
 
-  // runJob(LinkingJob.execute, interval);
-  // runJob(LinkingJob.check, interval);
+  runJob(LinkingJob.execute, interval);
+  runJob(LinkingJob.check, interval);
 
-  // runJob(ProjectDeploymentJob.execute, interval);
+  runJob(ProjectDeploymentJob.execute, interval);
 
   runQuickJob(MailSenderJob.execute);
 
-  // runDailyJob(DonationStatusCheckingJob.execute);
+  runDailyJob(DonationStatusCheckingJob.execute);
 };

@@ -64,9 +64,7 @@ module.exports = function (app) {
                   $match: {
                     $and: [
                       {$expr: {$eq: ["$_projectId", "$$projectId"]}},
-                      //FIXME: Needs blockchain processing
-                      //{$expr: {$eq: ["$status", "DONATED"]}}
-                      {$expr: {$ne: ["$status", "FAILED"]}}
+                      {$expr: {$eq: ["$status", "DONATED"]}}
                     ]
                   }
                 },
@@ -115,9 +113,7 @@ module.exports = function (app) {
                   $match: {
                     $and: [
                       {$expr: {$eq: ["$_projectId", "$$projectId"]}},
-                      //FIXME: Needs blockchain processing
-                      //{$expr: {$eq: ["$status", "DONATED"]}}
-                      {$expr: {$ne: ["$status", "FAILED"]}}
+                      {$expr: {$eq: ["$status", "DONATED"]}}
                     ]
                   }
                 },

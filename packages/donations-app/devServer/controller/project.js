@@ -79,9 +79,7 @@ module.exports = function (app) {
     let donations = await Donation.aggregate([
       {
         $match: {
-          //FIXME: Needs blockchain processing
-          //$and: [{ _projectId: project._id }, { status: 'DONATED' }]
-          $and: [{ _projectId: project._id }, { status: {$ne: 'FAILED'} }]
+          $and: [{ _projectId: project._id }, { status: 'DONATED' }]
         }
       },
       {
