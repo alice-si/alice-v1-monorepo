@@ -1,5 +1,5 @@
 angular.module('aliceApp')
-  .controller('CharityDashboardDonationsController', ['AuthService', '$http', 'API', 'Excel', '$timeout', '$stateParams', '$scope', '$filter', function (AuthService, $http, API, Excel, $timeout, $stateParams, $scope, $filter) {
+  .controller('CharityDashboardDonationsController', ['AuthService', '$http', 'API', 'Excel', '$timeout', '$stateParams', '$scope', '$filter', '$uibModal', function (AuthService, $http, API, Excel, $timeout, $stateParams, $scope, $filter, $uibModal) {
     var vm = this;
 
     vm.auth = AuthService;
@@ -142,6 +142,23 @@ angular.module('aliceApp')
           });
           vm.totalItems = vm.users.length;
         }
+      });
+    }
+
+    vm.openGiftAidAddress = function(user) {
+      $uibModal.open({
+        resolve: {
+          giftAidUser: function() {
+            return user;
+          }
+        },
+        templateUrl: '/components/dashboard/giftAidModal.html',
+        controller: ['$scope', 'giftAidUser', function($scope, giftAidUser) {
+          $scope.user = giftAidUser;
+          $scope.dismissModal = function() {
+            $scope.$dismiss();
+          }
+        }]
       });
     }
 

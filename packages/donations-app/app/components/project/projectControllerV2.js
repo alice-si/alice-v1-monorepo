@@ -1,5 +1,5 @@
 angular.module('aliceApp')
-  .controller('ProjectControllerV2', ['$stateParams', 'ProjectService',  '$scope', '$state', function($stateParams, ProjectService, $scope, $state) {
+  .controller('ProjectControllerV2', ['$uibModal', '$stateParams', 'ProjectService',  '$scope', '$state', function($uibModal, $stateParams, ProjectService, $scope, $state) {
     var vm = this;
 
 		ProjectService.getProjectDetails($stateParams.projectCode).then(function (result) {
@@ -33,6 +33,13 @@ angular.module('aliceApp')
 
 			let result = 'rgba(' + r + ',' + g + ',' + b + ',' + opacity + ')';
 			return result;
+		}
+
+		vm.donate = function() {
+      $uibModal.open({
+        templateUrl: '/components/checkout/checkoutModal.html',
+        controller: 'CheckoutController as checkCtrl',
+      });
 		}
 }])
 .directive('appealGoal', function() {
