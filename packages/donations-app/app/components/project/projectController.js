@@ -1,5 +1,5 @@
 angular.module('aliceApp')
-  .controller('ProjectController', ['$stateParams', 'ProjectService', '$timeout', '$scope', 'REDIRECTION', '$state', function($stateParams, ProjectService, $timeout, $scope, REDIRECTION, $state) {
+  .controller('ProjectController', ['$stateParams', 'ProjectService', '$timeout', '$scope', 'REDIRECTION', '$state', '$uibModal',  function($stateParams, ProjectService, $timeout, $scope, REDIRECTION, $state, $uibModal) {
     var vm = this;
 
     ProjectService.getProjectDetails($stateParams.projectCode).then(function (result) {
@@ -111,11 +111,19 @@ angular.module('aliceApp')
 			$state.go("404");
 		});
 
+    vm.donate = function() {
+      $uibModal.open({
+        templateUrl: '/components/checkout/checkoutModal.html',
+        controller: 'CheckoutController as checkCtrl',
+      });
+		}
+
   }])
   .directive('projectSplash', function() {
     return {
       scope: {
         model: '=',
+				onDonate: '&'
       },
       templateUrl: '/components/project/projectSplashTemplate.html'
     };

@@ -209,6 +209,10 @@ angular.module('aliceApp')
       });
     };
 
+    this.hasAfterLoginFunction = function() {
+      return (typeof afterLoginFunction != 'undefined' && afterLoginFunction);
+    };
+
     function checkUserAccess(user, field) {
       return user && ((user[field] && user[field].length > 0) || user.superadmin);
     }

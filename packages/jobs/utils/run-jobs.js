@@ -46,7 +46,8 @@ function runDailyJob(job) {
 }
 
 module.exports = function (interval) {
-  // FIXME uncomment jobs
+
+  runJob(AccountCreatingJob.execute, interval);
 
   // runJob(AccountCreatingJob.execute, interval);
 

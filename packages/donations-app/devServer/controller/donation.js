@@ -4,9 +4,12 @@ const Mail = require('../service/mail');
 const Utils = require('../service/utils');
 const Config = require('../../config');
 const Donation = Utils.loadModel('donation');
+const Environment = Utils.loadModel('environment');
 const Project = Utils.loadModel('project');
 const User = Utils.loadModel('user');
 const Lodash = require('lodash');
+const http = require('http');
+const url = require('url');
 
 const asyncHandler = require('express-async-handler');
 
@@ -123,9 +126,42 @@ module.exports = function (app) {
     return res.json(donations);
   }));
 
+  async function redirectRequestToAllExpEnvironments(req) {
+    const environments = await Environment.find({});
+    for (const environment of environments) {
+      const urlParsed = url.parse(req.url);
+      const newUrl = environment.url + urlParsed.pathname + urlParsed.search;
+      console.log('hookRedirection: Resending to ' + newUrl);
+      await new Promise((resolve) => {
+        let req = http.get(newUrl, (res) => {
+          console.log(`hookRedirection: Got reponse from ${environment.url}, statusCode: ${res.statusCode}`);
+          resolve();
+        });
+
+        req.on('timeout', () => {
+          console.log('hookRedirection: Time is out ' + environment.url);
+          req.abort();
+          resolve();
+        });
+
+        req.on('error', (err) => {
+          console.error('hookRedirection: Error occured ' + environment.url);
+          console.error(err);
+          resolve();
+        });
+
+        req.setTimeout(Config.timeoutForMangoHooksResending);
+      });
+    }
+  }
+
   async function mangoHookPayInEp(req, res) {
     let savedDonation;
     try {
+      if (Config.mode == 'stage') {
+        await redirectRequestToAllExpEnvironments(req);
+      }
+
       const transactionId = req.query.RessourceId;
       let {donation, mangoResult} = await getPayIn(transactionId);
       console.log('Got payIn: ' + JSON.stringify(mangoResult));
@@ -141,7 +177,6 @@ module.exports = function (app) {
         let project = await Project.findById(savedDonation._projectId).populate('charity');
         await Mail.sendDonationConfirmation(savedDonation._userId, project, savedDonation);
       }
-      res.send();
     } catch (err) {
       console.error('mangoHookPayInEp error');
       console.error(err.toString());
@@ -153,6 +188,7 @@ module.exports = function (app) {
       } else {
         console.error('Donation is undefined. Can not save error message in DB');
       }
+    } finally {
       res.send(); // we should respond with status code 200 in any case to avoid mango hook disabling
     }
   }

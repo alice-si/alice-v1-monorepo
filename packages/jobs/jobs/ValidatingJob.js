@@ -13,12 +13,10 @@ class ValidatingJob extends BlockchainJob {
   async run(validation) {
     validation = await validation.populate(
       '_projectId _validatorId').execPopulate();
-    let password = KeyProxy.decrypt(validation._validatorId.crypto);
     let tx = await EthProxy.validateOutcome(
       validation._projectId,
       validation,
-      validation._validatorId.ethAccount,
-      password);
+      validation._validatorId.ethAccount);
     return tx;
   }
 }

@@ -103,7 +103,8 @@ if (config.isProductionMode()) {
     cert : fs.readFileSync(config.pathToKeys + 'certificate.crt'),
     ca   : fs.readFileSync(config.pathToKeys + 'ca_bundle.crt')
   };
-  https.createServer(options, app).listen(4443, function () {
+  port = 4443;
+  https.createServer(options, app).listen(port, function () {
     console.log('Starting PROD server ' + port); // shoutout to the user
   });
 } else {

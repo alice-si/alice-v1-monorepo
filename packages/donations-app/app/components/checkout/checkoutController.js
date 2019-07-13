@@ -22,13 +22,18 @@ angular.module('aliceApp')
 
     vm.card = {};
 
+    vm.sth = function() {
+      console.log("AAA");
+      console.log($stateParams.projectCode);
+    }
+
     if (MANGO.url == 'https://api.sandbox.mangopay.com') {
       vm.card = {
         number: "3569990000000132",
         expiryDate: "11/20",
         cvc: "123",
         name: AuthService.getLoggedFullName()
-      }; 
+      };
     }
 
     ProjectService.getProjectDetails($stateParams.projectCode).then(function (project) {
@@ -107,7 +112,7 @@ angular.module('aliceApp')
         // So he currently has no privelleges to see his impact
         $state.go('project', {projectCode: $stateParams.projectCode});
       }
-      
+
 
       $uibModal.open({
         templateUrl: '/components/checkout/donationConfirmationModal.html',
@@ -316,9 +321,11 @@ angular.module('aliceApp')
         vm.noAmount = true;
         return;
       }
-      if (!vm.donationForm.$valid) {
+
+      if ((vm.mode == 'CARD' && !vm.cardForm.$valid) || (vm.mode == 'BANK_TRANSFER' && !vm.bankForm.$valid)) {
         return;
       }
+
       ga('send', 'event', 'donation', 'donateFromCheckout', $stateParams.projectCode, vm.amount/100);
       enableOverlaySpinner();
       if (!AuthService.getLoggedUser()) {
@@ -327,7 +334,7 @@ angular.module('aliceApp')
         if (vm.mode == 'BANK_TRANSFER') {
           sendDonation(); // get bank details to show
         } else {
-          vm.question(); // show modal confirmation window 
+          vm.question(); // show modal confirmation window
         }
       }
 
