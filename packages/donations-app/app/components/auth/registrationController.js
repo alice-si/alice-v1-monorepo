@@ -16,6 +16,7 @@ angular.module('aliceApp')
       vm.registrationForm.$submitted = true;
       if (vm.registrationForm.$valid) {
         vm.signing = true;
+        extendContactAgreement();
         AuthService.register(vm.registration).then(
           function (success) {
             vm.signing = false;
@@ -33,6 +34,22 @@ angular.module('aliceApp')
       }
     };
 
+    vm.dismissModal = function() {
+      $scope.$dismiss();
+    }
+
+    vm.startLogin = function () {
+      $scope.$dismiss();
+      $uibModal.open({
+        templateUrl: '/components/auth/loginModal.html'
+      });
+    };
+
+    let extendContactAgreement = function() {
+      let flag = vm.registration.disagreeContact;
+      vm.registration.agreeContact = !flag;
+      vm.registration.agreeAlice = !flag;
+    }
 
     return vm;
   }]);

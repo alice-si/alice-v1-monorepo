@@ -31,8 +31,10 @@ angular.module('aliceApp')
                                             item.outcome[0].quantityOfUnits);
             item.percentage = Math.min(Math.floor(100 * item.totalValidated / (item.outcome[0].target)),
                                         100);
+            item.doughnutData = [item.percentage, (100 - item.percentage)];
             if(item.outcome[0].color) {
               item.outcome[0].lightColor = convertHex(item.outcome[0].color, 0.35);
+              item.doughnutColors = [item.outcome[0].color, item.outcome[0].lightColor];
             }
           });
 
@@ -46,6 +48,10 @@ angular.module('aliceApp')
               // This will always be the first value ([0]) since _id is unique.
               vm.validated_outcomes.push(_.where(vm.projectWithGoals.validated, {'_id': elem._id })[0]);
             }
+          })
+
+          vm.validated_outcomes.forEach((elem) => {
+            elem.doughnutOptions = { cutoutPercentage: 80 };
           })
 
           // Get the total number of goals achieved/validated
@@ -68,7 +74,9 @@ angular.module('aliceApp')
         init.percentage = 0;
         if(init.outcome[0].color) {
           init.outcome[0].lightColor = convertHex(init.outcome[0].color, 0.35);
+          init.doughnutColors = [init.outcome[0].color, init.outcome[0].lightColor];
         }
+        init.doughnutData = [0, 100];
         return init;
       }
 

@@ -46,6 +46,10 @@ angular.module('aliceApp')
       );
     };
 
+    vm.dismissModal = function() {
+      $scope.$dismiss();
+    }
+
     vm.startRegistration = function () {
       $scope.$dismiss();
       $uibModal.open({
@@ -83,6 +87,8 @@ angular.module('aliceApp')
     };
 
     vm.registerEmail = function () {
+      // extendContactAgreement();
+      console.log(vm.credentials)
       AuthService.registerEmail(vm.credentials.email).then(function () {
         $uibModalStack.dismissAll('Closing modal after registering email');
       }).catch((failure) => {
@@ -95,6 +101,12 @@ angular.module('aliceApp')
     vm.signUpWithEmail = function (email) {
       $state.go('signup-finishing', {email});
     };
+    //
+    // let extendContactAgreement = function() {
+    //   let flag = vm.credentials.disagreeContact;
+    //   vm.credentials.agreeContact = !flag;
+    //   vm.credentials.agreeAlice = !flag;
+    // }
 
     return vm;
   }]);

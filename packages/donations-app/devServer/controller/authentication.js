@@ -145,7 +145,7 @@ module.exports = function (app) {
     });
     return res.json({token});
   }));
-  
+
   /* This function handles 3 cases:
     - registering a new simple user
     - registering a new full user
@@ -185,7 +185,7 @@ module.exports = function (app) {
     } else {
       unsavedUser = new User(selectedUserFields);
     }
-     
+
     unsavedUser.superadmin = false;
     if (unsavedUser.residence != 'GB') {
       unsavedUser.giftAid = false;
@@ -193,9 +193,9 @@ module.exports = function (app) {
     if (isFullUser) {
       unsavedUser.isSimpleUser = false;
       // could be uncommented after KYC changes
-      // unsavedUser.nationality = DEFAULT_NATIONALITY;
-      // unsavedUser.dateOfBirth = DEFAULT_BIRTHDAY;
-      // unsavedUser.residence = DEFAULT_RESIDENCE;
+      unsavedUser.nationality = DEFAULT_NATIONALITY;
+      unsavedUser.dateOfBirth = DEFAULT_BIRTHDAY;
+      unsavedUser.residence = DEFAULT_RESIDENCE;
     } else {
       unsavedUser.isSimpleUser = true;
       // Mangopay requires these fields not to be empty

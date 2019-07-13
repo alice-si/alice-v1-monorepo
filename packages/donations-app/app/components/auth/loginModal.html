@@ -1,78 +1,96 @@
-<div ng-controller="LoginController as loginCtrl">
-  <div class="modal-body">
-
-    <h2 class="section">{{ loginCtrl.getTextsForMode().title }}</h2>
+<div class="modal-body" ng-controller="LoginController as loginCtrl">
+    <a class="modal-close" ng-click="regCtrl.dismissModal()">×</a>
+    <h2 class="modal-title">{{ loginCtrl.getTextsForMode().title }}</h2>
 
     <div class="content">
 
-      <div class="description" style="padding: 0">
-        {{ loginCtrl.getTextsForMode().description }}
-      </div>
-
-      <form role="form" name="loginCtrl.loginForm" style="margin-top: 2%;" novalidate>
+      <form role="form"
+            name="loginCtrl.loginForm"
+            style="margin-top: 2%;"
+            novalidate>
         <div class="form-group">
           <label>Email</label>
-          <input id="login-email" type="email" placeholder="Email address"
+          <input id="login-email"
+                 type="email"
+                 placeholder="Email address"
                  ng-model="loginCtrl.credentials.email"
                  class="form-control">
         </div>
-        <div ng-hide="['RESET', 'EMAIL_REGISTRATION'].includes(loginCtrl.mode)" class="form-group">
+        <div ng-hide="['RESET', 'EMAIL_REGISTRATION'].includes(loginCtrl.mode)"
+             class="form-group">
           <label>Password</label>
-          <input id="login-password" type="password" placeholder="Password"
+          <input id="login-password"
+                 type="password"
+                 placeholder="Password"
                  ng-model="loginCtrl.credentials.password"
                  class="form-control">
         </div>
-        <div class="row" ng-show="loginCtrl.error">
+        <div class="row"
+             ng-show="loginCtrl.error">
           <div class="col-md-12">
             <p class="text-error">
-              {{loginCtrl.errorMessage}}
+               {{loginCtrl.errorMessage}}
             </p>
           </div>
         </div>
-        <div style="height: 25px;">
-          <div class="forgot-password-box" ng-show="loginCtrl.mode == 'LOGIN'">
-            <a ng-click="loginCtrl.mode = 'RESET'" href="#">
-              Forgot your password?
+        <div>
+          <div class="forgot-password-box col-md-12"
+               ng-show="loginCtrl.mode == 'LOGIN'">
+            <a ng-click="loginCtrl.mode = 'RESET'"
+               href="#">
+               Forgot your password?
             </a>
           </div>
-          <div style="float: right;">
-            <button id="login-button" class="btn btn-primary btn-donate btn-modal" ng-click="loginCtrl.action()"
+          <div style="col-md-12">
+            <button id="login-button"
+                    class="registration-sign-up btn btn-primary btn-donate btn-modal"
+                    ng-click="loginCtrl.action()"
                     type="submit">
-              {{ loginCtrl.getTextsForMode().button }}
+                    {{ loginCtrl.getTextsForMode().button }}
             </button>
+          </div>
+          <div ng-if="loginCtrl.mode == 'EMAIL_REGISTRATION'"
+               class="registration-agreement col-md-12">
+            <div class="registration-agreement-content">
+              <input icheck
+                     type="checkbox"
+                     ng-model="loginCtrl.credentials.disagreeContact">
+                 I don't want to receive marketing messages <br>from Alice or the charity.
+            </div>
           </div>
         </div>
       </form>
     </div>
-  </div>
 
   <div class="modal-footer">
     <div>
-        Not a member yet?
-        <a id="login-start-registration" href="#" style="color:white; text-decoration: underline;"
+        Don't have an account?
+        <a id="login-start-registration"
+           href="#"
+           style="text-decoration: underline;"
            ng-click="loginCtrl.startRegistration()">
-          Create my account.
+          Sign up
         </a>
     </div>
     <div ng-hide="loginCtrl.mode == 'EMAIL_REGISTRATION'">
       Want to skip registration?
-      <a id="register-email" href="#" style="color:white; text-decoration: underline;"
-          ng-click="loginCtrl.mode = 'EMAIL_REGISTRATION'">
-        Just put your email.
+      <a id="register-email"
+         href="#"
+         style="text-decoration: underline;"
+         ng-click="loginCtrl.mode = 'EMAIL_REGISTRATION'">
+         Just put your email
       </a>
     </div>
     <div ng-show="loginCtrl.mode == 'EMAIL_REGISTRATION'">
       Already have an account?
-      <a id="login-link" href="#" style="color:white; text-decoration: underline;"
-          ng-click="loginCtrl.mode = 'LOGIN'">
-        Log in.
+      <a id="login-link"
+         href="#"
+         style="text-decoration: underline;"
+         ng-click="loginCtrl.mode = 'LOGIN'">
+         Log in
       </a>
     </div>
 
   </div>
 
 </div>
-
-
-
-

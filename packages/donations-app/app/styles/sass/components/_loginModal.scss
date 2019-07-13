@@ -1,0 +1,189 @@
+/* MODALS */
+
+.modal {
+    &-close {
+        font-size: 25px;
+        position: absolute;
+        transform: translateX(-40px);
+        color: $alice-tonal-light;
+
+        &:hover {
+            color: $alice-tonal-dark;
+            cursor: pointer;
+        }
+    }
+
+    &-dialog {
+        max-width: 500px;
+    }
+
+    &-content {
+        border-radius: 4px !important;
+        border: none;
+        padding: 0 50px;
+    }
+
+    &-title {
+        font-size: 3.0rem;
+        text-align: center;
+        font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        font-weight: 100;
+        letter-spacing: 1px;
+        padding: 10px 0;
+        border-bottom: 1px solid #dddddd;
+        color: $alice-tonal-medium;
+    }
+
+    &-body h2.section {
+        margin-top: 0px;
+    }
+
+    &-footer {
+        text-align: center;
+        margin-top: 20px;
+        border-top: 1px solid #acacac;
+        width: 100%;
+        color: #9a9a9a;
+        font-size: 1.8rem;
+        font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
+        font-weight: 300;
+        letter-spacing: 0.8px;
+    }
+}
+
+.login-button:hover {
+  cursor: pointer;
+}
+
+.btn-primary.btn-donate.btn-modal {
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
+.btn-primary.btn-donate:focus {
+    background-color: #1998a2;
+}
+
+
+.btn.btn-primary.btn-splash:hover {
+    border: 1px solid #FFFFFF;
+}
+
+.btn.btn-primary:hover {
+    background-color: #FFFFFF;
+    color: #1998a2;
+    border: 1px solid $alice-tonal-medium;
+}
+
+@media (max-width: 768px) {
+    .btn-primary.btn-donate.btn-splash {
+        font-size: 1.5rem;
+        padding: 0.5rem 1rem 0.5rem 1rem;
+    }
+}
+
+div.footer-social {
+    text-align: center;
+    width: 100%;
+    font-size: 4rem;
+}
+
+div.footer-social i:hover {
+    color: #1998a2;
+    cursor: pointer;
+}
+
+div.footer-social a i {
+    color: #676a6c;
+}
+
+div.forgot-password-box {
+    float: left;
+    padding-top: 5px;
+}
+
+div.forgot-password-box a {
+    font-size: 1.8rem;
+    color: #1998a2;
+    text-decoration: underline;
+    letter-spacing: 0.8px;
+}
+
+.landing-form {
+    font-weight: normal;
+    padding-left: 2.5rem;
+    padding-top: 20px;
+}
+
+.form-inline .form-control {
+    width: 300px !important;
+}
+
+.form-group {
+    label {
+        font-weight: 200;
+    }
+}
+
+/* REGISTRATION */
+
+.registration {
+    font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
+    font-weight:300;
+    font-size: 1.5rem;
+    display: inline-flex;
+    justify-content: center;
+    margin-top: 20px;
+
+    &-terms {
+        margin: 10px 5%;
+        width: 90%;
+        text-align: center;
+        color: #9a9a9a;
+    }
+
+    &-sign-up {
+        width: 100%;
+        padding: 13px;
+        background-color: $alice-tonal-medium;
+        border: 1px solid #fff;
+        width: 100%;
+        color: #FFFFFF;
+        border-radius: 5px;
+        letter-spacing: 2px;
+        font-size: 16px;
+        font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
+        font-weight:300;
+        font-stretch:normal;
+        margin-top: 15px;
+    }
+
+    &-agreement {
+        margin-top: 20px;
+
+        .icheckbox_minimal-blue, .iradio_minimal-blue {
+            border-radius: 2px;
+        }
+
+        &-content {
+            margin-bottom: 10px;
+            text-align: center;
+
+            width: 100%;
+            text-align: center;
+            color: #333333;
+        };
+    }
+}
+
+
+
+div.registration .form-control {
+    font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
+    font-weight:300;
+    font-size: 1.5rem;
+}
+
+div.registration a{
+    color: #1998a2;
+}
