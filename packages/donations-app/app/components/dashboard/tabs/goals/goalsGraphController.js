@@ -120,7 +120,6 @@ angular.module('aliceApp')
     }
 
     function getDaysInWeek(latestDate) {
-      console.log(latestDate);
       var dates = [];
       var startDate = new Date(moment(latestDate).subtract(3, 'days'));
       var endDate = new Date(moment(latestDate).add(3, 'days'));

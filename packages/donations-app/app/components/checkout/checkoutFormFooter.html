@@ -1,12 +1,12 @@
 <div class="gift-aid-box">
+  <div class="gift-aid" ng-show="checkCtrl.amount">
+    <input icheck type="checkbox" ng-model="checkCtrl.giftAid" /> Yes, I want
+    to Gift Aid my donation
+  </div>
   <div ng-hide="checkCtrl.user.giftAid != undefined">
     <div class="gift-aid-text" ng-show="checkCtrl.amount">
       Turn your {{ checkCtrl.amount | money }} donation into
       {{ checkCtrl.amount * 1.25 | money }} at no extra cost with gift aid.
-    </div>
-    <div class="gift-aid" ng-show="checkCtrl.amount">
-      <input icheck type="checkbox" ng-model="checkCtrl.giftAid" /> Yes, I want
-      to Gift Aid my donation
     </div>
   </div>
   <div class="donate-button-box
