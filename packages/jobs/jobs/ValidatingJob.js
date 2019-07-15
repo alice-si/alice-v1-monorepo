@@ -1,5 +1,4 @@
 const EthProxy = require('../gateways/ethProxy');
-const KeyProxy = require('../gateways/keyProxy');
 const ModelUtils = require('../utils/model-utils');
 const { BlockchainJob } = require('./job');
 
