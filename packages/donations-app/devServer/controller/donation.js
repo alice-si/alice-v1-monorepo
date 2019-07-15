@@ -41,8 +41,7 @@ module.exports = function (app) {
       }
       // creating a new donation in DB
       let donation = await createNewDonation(req, mangoResult);
-      // updating giftAid for user
-      await updateGiftAid(req);
+
       // some post actions for different types of donations
       if (transferType == "BANK_TRANSFER") {
         await sendDonationEmail(req.user, donation);
@@ -218,6 +217,7 @@ module.exports = function (app) {
       type: req.body.type,
       amount: req.body.amount,
       createdAt: new Date(),
+      giftAidAddress: req.body.giftAidAddress,
       transactionId: mangoResult.Id,
       secureModeNeeded: mangoResult.SecureModeNeeded,
       bankTransferData: {
@@ -284,7 +284,7 @@ module.exports = function (app) {
       opts.donationData._projectId = opts.donationData.projectId;
     }
 
-    // sending error email to donor 
+    // sending error email to donor
     if (opts && opts.sendEmail && opts.user) {
       let project = await Project.findById(opts.donationData._projectId).populate("charity");
       await Mail.sendDonationError(opts.user, project, err, opts.is3DS);

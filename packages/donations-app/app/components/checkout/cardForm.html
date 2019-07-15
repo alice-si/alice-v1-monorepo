@@ -15,6 +15,7 @@
   <div class="row" style="margin-top: 20px;">
     <div class="col-xs-12">
       <div class="form-group" has-error>
+        <label>Name on the card</label>
         <input
           id="donate-card-name"
           type="text"
@@ -34,6 +35,7 @@
   <div class="row">
     <div class="col-xs-12">
       <div class="form-group" has-error>
+        <label>Card number</label>
         <input
           id="donate-card-number"
           type="text"
@@ -60,8 +62,9 @@
   </div>
 
   <div class="row">
-    <div class="col-xs-12 col-md-5">
+    <div class="col-xs-12 col-md-6">
       <div class="form-group" has-error>
+        <label>Expiration date</label>
         <input
           id="donate-expiry-date"
           type="text"
@@ -87,10 +90,11 @@
       </div>
     </div>
 
-    <div class="col-xs-0 col-md-2"></div>
 
-    <div class="col-xs-12 col-md-5" style="margin-bottom: 20px;">
+
+    <div class="col-xs-12 col-md-6" >
       <div class="form-group" has-error>
+        <label>Security code</label>
         <input
           id="donate-cvc"
           type="text"
@@ -102,10 +106,7 @@
           required=""
           ng-model="checkCtrl.card.cvc"
         />
-        <img
-          class="cvc"
-          src="https://s3.eu-west-2.amazonaws.com/alice-res/cvc.png"
-        />
+
         <error-message name="cvc" error="required"
           >This field is required
         </error-message>

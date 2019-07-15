@@ -6,10 +6,9 @@ angular.module('aliceApp')
     mangoPay.cardRegistration.clientId = MANGO.clientId;
 
     var amounts = {
-      amount10: 1000,
-      amount25: 2500,
-      amount50: 5000,
-      amount100: 10000,
+      amount20: 2000,
+      amount80: 8000,
+      amount150: 15000,
       amountOther: 0
     };
 
@@ -21,11 +20,6 @@ angular.module('aliceApp')
     vm.mode = 'CARD'; // enum: ["CARD", "3DS", "BANK_TRANSFER", "BANK_TRANSFER_REQUESTED"]
 
     vm.card = {};
-
-    vm.sth = function() {
-      console.log("AAA");
-      console.log($stateParams.projectCode);
-    }
 
     if (MANGO.url == 'https://api.sandbox.mangopay.com') {
       vm.card = {
@@ -105,6 +99,9 @@ angular.module('aliceApp')
     };
 
     var postDonationConfirmation = function () {
+      //We finally hide the current popup
+      $scope.$dismiss();
+
       if (AuthService.getLoggedUser()) {
         $state.go('my-impact');
       } else {
@@ -152,7 +149,6 @@ angular.module('aliceApp')
     var checkDonationStatus = function (donationId) {
       $http.get(API + 'checkDonationStatus/' + donationId).then(function (result) {
         var donation = result.data;
-        console.log(donation);
         if (successfullyDonated(donation)) {
           postDonationConfirmation();
         } else if (result.data.status == 'FAILED') {
@@ -167,10 +163,6 @@ angular.module('aliceApp')
     };
 
     var sendDonation = function () {
-      if (vm.user) {
-        vm.user.giftAid = vm.giftAid || (vm.user.giftAid === true);
-      }
-
       if (vm.mode == 'CARD') {
         sendDonationByCard();
       } else if (vm.mode == 'BANK_TRANSFER') {
@@ -191,7 +183,7 @@ angular.module('aliceApp')
       var payment = {
         amount: vm.amount,
         projectId: vm.project._id,
-        giftAid: vm.giftAid,
+        giftAidAddress: vm.giftAidAddress,
         user: vm.user,
         type: 'CARD'
       };
@@ -203,6 +195,7 @@ angular.module('aliceApp')
           accessKey: preRegistrationResponse.data.AccessKey,
           Id: preRegistrationResponse.data.Id
         });
+
         var cardData = {
           userId: preRegistrationResponse.data.userId,
           cardType: "CB_VISA_MASTERCARD",
@@ -275,7 +268,7 @@ angular.module('aliceApp')
       var payment = {
         amount: vm.amount,
         projectId: vm.project._id,
-        giftAid: vm.giftAid,
+        giftAidAddress: vm.giftAidAddress,
         user: vm.user,
         type: 'BANK_TRANSFER'
       };
