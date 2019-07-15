@@ -2,61 +2,48 @@ const JobUtils = require('../utils/job-utils');
 const ModelUtils = require('../utils/model-utils');
 const Project = ModelUtils.loadModel('project');
 const EthProxy = require('../gateways/ethProxy');
-const KeyProxy = require('../gateways/keyProxy');
 const User = ModelUtils.loadModel('user');
 const Monitor = require('../utils/monitor');
 
 const startStatus = 'CREATED';
 
-// TODO we need to refactor this job using async/await mechanism
-function mainAction(jobContext) {
+async function mainAction(jobContext) {
   let project = jobContext.model;
-  let validator, charityAdmin;
 
-  // getting validator
-  return User.find({validator: project._id}).then(function (validators) {
-    if (validators.length != 1) {
-      return jobContext.errorBehaviour('Wrong number of validators for project: ' + validators.length);
-    }
-    validator = validators[0];
-    if (!validator.ethAccount) {
-      jobContext.msg('validator does not have an ethAccount: ' + validator._id + ' skipping...');
-      return ModelUtils.changeStatus(project, startStatus);
-    }
+  // Checking validator ethAccount
+  let validators = await User.find({validator: project._id});
+  if (validators.length != 1) {
+    throw new Error('Wrong number of validators for project: '
+                    + validators.length);
+  }
+  let validator = validators[0];
 
-    // getting charityAdmin
-    return User.find({charityAdmin: project.charity._id});
-  }).then(async function (charityAdmins) {
-    if (charityAdmins.length != 1) {
-      return jobContext.errorBehaviour('Wrong number of charityAdmins for project: ' + charityAdmins.length);
-    }
-    charityAdmin = charityAdmins[0];
+  if (!validator.ethAccount) {
+    throw new Error('validator does not have an ethAccount: '
+                    + validator._id + ' skipping...');
+  }
 
-    // creating an ethAccount for charity
-    if (project.charity.ethAccount) {
-      jobContext.msg('Charity already has ethAccount: ' + project.charity.ethAccount);
-      return Promise.resolve(project.charity.ethAccount);
-    } else {
-      return EthProxy.createNewAddress();
-    }
-  }).then(function (address) {
-    if (address != project.charity.ethAccount) {
-      project.charity.ethAccount = address;
-      jobContext.msg('Created account for charity with address: ' + address);
-    }
-    return project.charity.save();
-  }).then(function () {
-    return EthProxy.deployProject(project, validator.ethAccount, project.charity.ethAccount);
-  }).then(function (addresses) {
-    jobContext.msg('Project was deployed: ' + addresses.lastTx);
-    project.ethAddresses = addresses;
-    return project.save();
-  }).then(function () {
-    jobContext.msg('Addresses were saved in DB');
-    return jobContext.completedBehaviour();
-  }).catch(function (err) {
-    return jobContext.errorBehaviour(err);
-  });
+  // Creating ethAccount for charity if needed
+  if (!project.charity.ethAccount) {
+    jobContext.msg('Charity has no ethAcount. Creating...');
+    project.charity.ethAccount = await EthProxy.createNewAddress();
+    await project.charity.save();
+    jobContext.msg(`Created ethAccount for charity: ${project.charity.ethAccount}`);
+  }
+
+  // Project deploying
+  let addresses = await EthProxy.deployProject(
+    project,
+    validator.ethAccount,
+    project.charity.ethAccount);
+  jobContext.msg('Project was deployed: ' + addresses.lastTx);
+
+  // Saving addresses in DB
+  project.ethAddresses = addresses;
+  await project.save();
+  jobContext.msg('Addresses were saved in DB');
+
+  await jobContext.completedBehaviour();
 }
 
 module.exports = JobUtils.createJob({
@@ -65,7 +52,6 @@ module.exports = JobUtils.createJob({
   createChecker: false,
   modelGetter: function () {
     return Project.findOneAndUpdate({status: startStatus}, {status: 'PROJECT_DEPLOYMENT_STARTED'}).populate('charity').then(function (res) {
-      Monitor.printStatus(Project);
       return res;
     });
   },
