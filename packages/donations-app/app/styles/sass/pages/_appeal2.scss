@@ -1,3 +1,11 @@
+.appeal-page {
+  .splash-v2 {
+    button {
+      padding: 8px 0 10px !important;
+    }
+  }
+}
+
 .appeal-v2 {
 
   &__container {
@@ -19,6 +27,7 @@
     &-image {
       height: 100px;
       width: auto;
+      max-width: 150px;
       background-size: contain;
       background-repeat: no-repeat;
     }
@@ -54,11 +63,30 @@
 
     &-left {
       padding-right: 20px;
-      margin: 20px 0 40px;
     }
 
-    &-right {
-      padding-top: 18px !important;
+    // &-right {
+    //   padding-top: 14px !important;
+    // }
+
+    button {
+      margin: 5px 0 15px;
+      padding: 8px 0 10px !important;
+      font-weight: 200;
+      background: none;
+      border-radius: 2px;
+      color: $alice-blue;
+      font-weight: 300;
+      border: none;
+      text-align: left;
+      letter-spacing: 1px;
+      outline: none;
+
+      .glyphicon {
+        font-weight: 200;
+        color: $alice-blue;
+        top: 3px;
+      }
     }
   }
 
@@ -67,6 +95,26 @@
 
     h5:first-child {
       margin-top: 30px;
+    }
+
+    button {
+      margin: 5px 0 15px 2px;
+      padding: 8px 0 10px !important;
+      font-weight: 200;
+      background: none;
+      border-radius: 2px;
+      color: $alice-blue;
+      font-weight: 300;
+      border: none;
+      text-align: left;
+      letter-spacing: 1px;
+      outline: none;
+
+      .glyphicon {
+        font-weight: 200;
+        color: $alice-blue;
+        top: 3px;
+      }
     }
   }
 
@@ -200,7 +248,7 @@
       }
 
       &-info {
-        padding: 55px 3px !important;
+        padding: 20px !important;
 
         p {
           font-size: 14px !important;

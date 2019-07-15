@@ -3,6 +3,7 @@ const asyncHandler = require('express-async-handler');
 const Auth = require('../service/auth');
 const AccessControl = require('../service/access-control');
 const Utils = require('../service/utils');
+const Mail = require('../service/mail');
 
 const Outcome = Utils.loadModel('outcome');
 const Project = Utils.loadModel('project');

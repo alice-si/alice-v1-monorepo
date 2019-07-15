@@ -34,3 +34,7 @@
 img.goal-card__image {
   height: 150px;
 }
+
+#spinner {
+  height: 50px;
+}

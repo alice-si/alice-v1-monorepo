@@ -6,7 +6,9 @@ const Utils = TestUtils.loadModuleFromDevServer('service/utils');
 const Validation = Utils.loadModel('validation');
 
 describe('ValidationController', function () {
-  TestUtils.setBeforeAndAfterHooksForControllerTest('validation');
+  TestUtils.setBeforeAndAfterHooksForControllerTest({
+    name: 'validation'
+  });
 
   describe('getValidatorSummary', () => {
     let projectFoo, projectBar, donor, validatorFoo, validatorBar;

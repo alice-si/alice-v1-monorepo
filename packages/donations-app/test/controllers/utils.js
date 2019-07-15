@@ -4,7 +4,9 @@ const Category = Utils.loadModel('category');
 
 // Currently we have not tests for EPs: contact, getAWSPostData
 describe('UtilsController', function () {
-    TestUtils.setBeforeAndAfterHooksForControllerTest('utils');
+    TestUtils.setBeforeAndAfterHooksForControllerTest({
+        name: 'utils'
+    });
 
     const categoryToCreate = {
         title: 'testTitle',

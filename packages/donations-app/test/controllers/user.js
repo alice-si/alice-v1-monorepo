@@ -5,7 +5,9 @@ const User = Utils.loadModel('user');
 describe('UserController', function () {
     let usersSaved = [], user1, user2, user3;
 
-    TestUtils.setBeforeAndAfterHooksForControllerTest('user');
+    TestUtils.setBeforeAndAfterHooksForControllerTest({
+        name: 'user'
+    });
 
     it('Should get user data', async function () {
         user1 = new User(TestUtils.getTestUserData('test_user_jan@gmail.com'));

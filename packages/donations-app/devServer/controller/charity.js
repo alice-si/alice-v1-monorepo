@@ -32,6 +32,17 @@ module.exports = function (app) {
     res.json(foundCharity);
   }));
 
+
+  app.get(
+    'api/getCharityForProject/:projectId',
+    Auth.auth(),
+    asyncHandler(async (req, res) => {
+      Charity.find({
+        projects: req.params.projectId
+      });
+    })
+  )
+
   app.get(
     '/api/getCharity/:code',
     Auth.auth(),
@@ -94,7 +105,7 @@ module.exports = function (app) {
       if (err) {
         return res.status(400).send(err);
       }
-      
+
 
       // Charity saving
       let savedCharity = await Utils.upsertEntityAsync(req.body, Charity, (entity => {

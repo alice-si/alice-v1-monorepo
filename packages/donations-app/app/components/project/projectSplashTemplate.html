@@ -59,7 +59,8 @@
                 <circle ng-style="{'stroke-dasharray': 100 * model.peopleFunded / model.peopleTarget + ',' + 100}" class="circle-chart-foreground" stroke="#46B3BC" stroke-width="2" stroke-linecap="none" fill="none" cx="16.91549431" cy="16.91549431" r="14.32549431" />
                 <text ng-hide="model.peopleFunded == 0" x="50%" y="53%" class="appeal-chart-amount" text-anchor="middle">
                   <tspan class="light">{{ model.peopleFunded }}</tspan><tspan class="dark"> / {{ model.peopleTarget }}</tspan>
-                  <tspan x="50%" y="65%" text-anchor="middle" class="subtext appeal-small">Helped</tspan>
+                  <!-- FIXME Styling -->
+                  <tspan x="50%" y="65%" text-anchor="middle" class="subtext appeal-small" style="letter-spacing: 0px; font-size: 3px;">Helped</tspan>
                 </text>
                 <text ng-show="model.peopleFunded == 0" x="50%" y="53%" textLength="50" class="appeal-chart-text" text-anchor="middle">
                   <tspan x="51%" y="42%" class="light">The charity is currently</tspan>

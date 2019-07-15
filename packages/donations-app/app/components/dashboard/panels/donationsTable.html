@@ -18,13 +18,17 @@
         <td>{{donation.email}}</td>
         <td>{{donation.donated | money}}</td>
         <td>{{donation.date | date}}</td>
-        <td>{{donation.received[0] ? 'donation.received[0] | money' : '0'}}</td>
-        <td>{{donation.giftAid ? '' : 'No'}}<a>{{donation.giftAid ? 'Show' : ''}}</a></td>
+        <td>{{donation.totalReceived | money : '0'}}</td>
+        <td>{{donation.giftAid ? 'Yes' : 'No'}}
+            <!--  FIXME: Turning link off until we implement what should be there
+            <a>{{donation.giftAid ? 'Show' : ''}}</a>
+            -->
+        </td>
         <td>{{donation.agreeContact ? 'Yes' : 'No'}}</td>
     </tr>
   </table>
   <div uib-pagination
-       total-items="donCtrl.totalItems"
+       total-items="donCtrl.totalItems * 2"
        ng-model="currentPage"
        max-size="maxSize"
        class="pagination-sm"

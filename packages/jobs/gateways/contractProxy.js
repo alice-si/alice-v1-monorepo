@@ -4,13 +4,14 @@
 
 const path = require('path');
 
-const Promise = require('bluebird');
 const contract = require('truffle-contract');
 const json = require('@stratumn/canonicaljson');
+const ethers = require('ethers');
 
 const ContractUtils = require('../utils/contract-utils');
 const ModelUtils = require('../utils/model-utils');
-const logger = require('../utils/logger')('contract_proxies/BaseProxy');
+const logger = require('../utils/logger')('gateways/contractProxy');
+const config = require('../config');
 
 const ContractVersion = ModelUtils.loadModel('contractVersion');
 const DeployedContract = ModelUtils.loadModel('deployedContract');
@@ -21,11 +22,9 @@ const CONTRACTS_DIR = '../build/contracts';
  * Create a proxy truffle-contract like module for interacting
  * with contracts of different versions.
  */
-function createProxy(contractName) {
-  let web3 = ContractUtils.getWeb3();
+function getContract(contractName) {
   let contractJson = require(path.join(CONTRACTS_DIR, `${contractName}.json`));
   let CurrentContract = contract(contractJson);
-  CurrentContract.setProvider(web3.currentProvider);
 
   return {
     new: async (...args) => {
@@ -39,7 +38,7 @@ function createProxy(contractName) {
           'Don\'t do this in production!');
       }
 
-      let instance = await CurrentContract.new(...args);
+      let instance = await ContractUtils.deployContract(CurrentContract, ...args);
 
       if (version) {
         await new DeployedContract({
@@ -53,7 +52,7 @@ function createProxy(contractName) {
       return instance;
     },
 
-    at: async (address) => {
+    at: async (address, wallet=ContractUtils.mainWallet) => {
       let deployedContract =
         await DeployedContract.findOne({ address: address });
 
@@ -61,21 +60,54 @@ function createProxy(contractName) {
       if (deployedContract) {
         abi = json.parse(deployedContract.abi);
       } else {
-        logger.warn('Accessing Project with non-stable ABI! ' +
+        logger.warn(`Accessing ${contractName} with non-stable ABI! ` +
           'Don\'t do this in production!');
         abi = CurrentContract.abi;
       }
 
-      let web3Contract = web3.eth.contract(abi).at(address);
-
-      // TODO move to web3 1.0 promievents and drop Bluebird.
-      // TODO allow contract proxies to redefine contract methods
-      //      for different contract versions.
-      return Promise.promisifyAll(web3Contract);
+      return new ethers.Contract(address, abi, wallet);
     },
   };
 }
 
+async function getAllContractsForDocument(
+  project,
+  addressForWallet=config.mainAccount
+) {
+  const wallet = await ContractUtils.getWallet(addressForWallet);
+
+  let Project = getContract('Project');
+  let projectContract = await Project.at(
+    getAddress(project, 'project'),
+    wallet);
+  
+  let ImpactRegistry = getContract('ImpactRegistry');
+  let impactRegistryContract = await ImpactRegistry.at(
+    getAddress(project, 'impact'),
+    wallet);
+
+  let AliceToken = getContract('AliceToken');
+  let tokenContract = await AliceToken.at(
+    getAddress(project, 'token'),
+    wallet);
+
+  return {
+    project: projectContract,
+    token: tokenContract,
+    impactRegistry: impactRegistryContract
+  };
+}
+
+function getAddress(project, name) {
+  if (project && project.ethAddresses && project.ethAddresses[name]) {
+    return project.ethAddresses[name];
+  } else {
+    throw 'Project: ' + JSON.stringify(project) +
+          ' doesn\'t have address for field: ' + name;
+  }
+}
+
 module.exports = {
-  createProxy,
+  getContract,
+  getAllContractsForDocument,
 };

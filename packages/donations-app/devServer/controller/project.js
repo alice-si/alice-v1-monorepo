@@ -179,19 +179,7 @@ module.exports = function (app) {
         );
 
         await checkMangoWallets(savedProject);
-
-        // TODO when we move to monorepo addProjectToCharity function
-        // should be refactored and be a Promise
-        await new Promise((resolve, reject) => {
-          Charity.addProjectToCharity(savedProject, (err) => {
-            if (err) {
-              reject();
-            } else {
-              resolve();
-            }
-          });
-        });
-
+        await Charity.addProjectToCharity(savedProject);
         await lazyOutcomesUpdate(projectWithOutcomes, savedProject);
 
         // adding project history

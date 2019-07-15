@@ -13,9 +13,8 @@ class ClaimingJob extends BlockchainJob {
   async run(validation) {
     validation =
       await validation.populate('_projectId _claimerId').execPopulate();
-    let password = KeyProxy.decrypt(validation._claimerId.crypto);
     let tx = await EthProxy.claimOutcome(
-      validation._projectId, validation, password);
+      validation._projectId, validation);
     return tx;
   }
 }

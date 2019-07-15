@@ -11,8 +11,9 @@
     </div>
   </div>
 
-  <protected-view validator-for-project="dashCtrl.project">
-    <div class="container">
+    <loading-screen ng-if="!dataLoaded"></loading-screen>
+    <div class="container"
+         ng-if="dataLoaded">
       <div class="row">
         <div class="col-xs-12">
           <h3 class="goals-dash__greeting">
@@ -40,10 +41,11 @@
         </uib-tab>
         <uib-tab heading="Money">
           <div class="row">
-            <charity-dashboard-money donations="dashCtrl.projectWithGoals.donations">
+            <charity-dashboard-money donations="dashCtrl.donations">
             </charity-dashboard-money>
           </div>
         </uib-tab>
+        <!-- No designs for these pages, yet
         <uib-tab disable="true" heading="People Helped">
           <div class="row">
             <charity-dashboard-people people="">
@@ -52,10 +54,9 @@
         </uib-tab>
         <uib-tab disable="true" heading="Performance">
           <div class="row">
-            <!-- No design for Performance yet -->
           </div>
-        </uib-tab>
+        </uib-tab> -->
       </uib-tabset>
     </div>
-  </protected-view>
+
 </section>

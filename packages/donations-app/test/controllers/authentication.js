@@ -10,7 +10,9 @@ describe('AuthenticationController', function () {
 
     const testUserData = TestUtils.getTestUserData(testEmail);
     
-    TestUtils.setBeforeAndAfterHooksForControllerTest('authentication');
+    TestUtils.setBeforeAndAfterHooksForControllerTest({
+        name: 'authentication'
+    });
 
     it('Should create test objects', async function () {
         objects = await TestUtils.createTestObjects();

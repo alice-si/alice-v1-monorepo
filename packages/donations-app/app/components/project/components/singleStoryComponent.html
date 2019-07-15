@@ -1,7 +1,25 @@
-<div class="story-image grad-bottom">
-  <div class="story-image__img">
-    <img src="{{story.img}}"
-         alt="Image for {{ story.title }}" />
+<div class="appeal-v2__stories-container col-xs-12 col-md-12 col-lg-12">
+  <div class="alice-card col-md-3 col-xs-12">
+    <div class="appeal-v2__stories-img grad-bottom">
+      <img src="{{story.img}}"
+           alt="Image for {{ story.title }}"/>
+    </div>
   </div>
-  <!-- <h4 class="white title-over-image__title-card">{{ project.title }}</h4> -->
+  <div class="appeal-v2__stories-info col-md-9 col-xs-12">
+    <h4 class="col-md-12">
+      "{{story.quote}}" - {{story.header}}
+    </h4>
+    <p class="col-md-12"
+       ng-bind-html="story.details">
+    </p>
+    <p class="col-md-12"
+       uib-collapse="!story.expandStory"
+       ng-bind-html="story.extendedDetails"></p>
+    <button class="col-md-2 col-lg-2"
+            ng-click="story.expandStory = !story.expandStory">
+      Read <span ng-if="story.expandStory">Less</span><span ng-if="!story.expandStory">More</span>
+      <i class="pull-up glyphicon"
+         ng-class="story.expandStory ? 'glyphicon-chevron-up' : 'glyphicon-chevron-down'"></i>
+    </button>
+  </div>
 </div>
