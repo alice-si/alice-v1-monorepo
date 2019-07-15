@@ -22,6 +22,7 @@ let UserSchema = new Schema({
   photo: String,
   passwordChangeToken: String,
   ethAccount: String,
+  ethAccountOld: String,
   daiAccount: String,
   mangoUserId: String,
   mangoWalletId: String,

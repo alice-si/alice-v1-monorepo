@@ -28,7 +28,7 @@ angular.module('aliceApp')
         expiryDate: "11/20",
         cvc: "123",
         name: AuthService.getLoggedFullName()
-      }; 
+      };
     }
 
     ProjectService.getProjectDetails($stateParams.projectCode).then(function (project) {
@@ -107,7 +107,7 @@ angular.module('aliceApp')
         // So he currently has no privelleges to see his impact
         $state.go('project', {projectCode: $stateParams.projectCode});
       }
-      
+
 
       $uibModal.open({
         templateUrl: '/components/checkout/donationConfirmationModal.html',
@@ -319,9 +319,11 @@ angular.module('aliceApp')
         vm.noAmount = true;
         return;
       }
-      if (!vm.donationForm.$valid) {
+
+      if ((vm.mode == 'CARD' && !vm.cardForm.$valid) || (vm.mode == 'BANK_TRANSFER' && !vm.bankForm.$valid)) {
         return;
       }
+
       ga('send', 'event', 'donation', 'donateFromCheckout', $stateParams.projectCode, vm.amount/100);
       enableOverlaySpinner();
       if (!AuthService.getLoggedUser()) {
@@ -330,7 +332,7 @@ angular.module('aliceApp')
         if (vm.mode == 'BANK_TRANSFER') {
           sendDonation(); // get bank details to show
         } else {
-          vm.question(); // show modal confirmation window 
+          vm.question(); // show modal confirmation window
         }
       }
 
