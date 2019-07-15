@@ -13,8 +13,8 @@
           <div class="col-md-12 col-xs-12 overlay-section-heading" style="float: left;">
             {{ overlay.title }}
           </div>
-          <div class="section-text-left col-md-12 hidden-xs hidden-sm" ng-repeat="line in overlay.details" ng-bind-html="line.paragraph"></div>
-          <div class="section-text-left col-xs-12 hidden-md hidden-lg hidden-xl" ng-repeat="line in overlay.details" ng-bind-html="line.paragraph"></div>
+          <div class="appeal-section-left col-md-12 hidden-xs hidden-sm" ng-repeat="line in overlay.details" ng-bind-html="line.paragraph"></div>
+          <div class="appeal-section-left col-xs-12 hidden-md hidden-lg hidden-xl" ng-repeat="line in overlay.details" ng-bind-html="line.paragraph"></div>
         </div>
         <div class="row alice-graph-overlay" ng-hide="!aliceGraph">
           <img style="margin-top: 0" src="{{ overlay.img }}" alt="">
@@ -31,13 +31,16 @@
 
 
   <project-splash model="projectCtrl.model"></project-splash>
-  <div class="appeal-tab-content" id="appealSummary">
-    <div class="row appeal-summary-content">
+  <div class="appeal-section" id="appealSummary">
+    <div class="row appeal-section-summary">
       <div class="col-md-12 col-xs-12 appeal-section-heading" style="float: left;">
-          <p>{{ projectCtrl.model.lead }}</p>
+          <p style="font-family: 'Avenir'">{{ projectCtrl.model.lead }}</p>
       </div>
       <div class="col-md-10 col-xs-12 summary-section">
-        <div class="section-text-left medium col-md-12 hidden-xs hidden-sm " ng-bind-html="projectCtrl.model.summary"></div>
+        <div class="appeal-section-left medium col-md-12 hidden-xs hidden-sm "
+             ng-bind-html="projectCtrl.model.summary"></div>
+        <div class="appeal-section-left medium col-md-12 hidden-xs hidden-sm "
+             ng-bind-html="projectCtrl.model.extendedSummary"></div>
       </div>
       <div class="col-md-12 col-xs-12 project-details-container">
         <div class="project-details-btn">
@@ -45,7 +48,7 @@
         </div>
       </div>
       <div class="col-md-10 hidden-xs hidden-sm summary-section">
-        <div class="section-text-left col-md-12 medium" ng-bind-html="projectCtrl.model.outcomesIntro"></div>
+        <div class="appeal-section-left col-md-12 medium" ng-bind-html="projectCtrl.model.outcomesIntro"></div>
       </div>
       <div class="col-md-12 col-xs-12 goals-section">
         <!-- FOR DESKTOP & LARGER -->
@@ -65,14 +68,12 @@
                 {{goal.value}}
               </div>
               <div class="goal-card-bottom row">
-                <!-- <div class="col-md-6 row"> -->
                 <div class="col-md-12 row">
                   <div class="goal-paid-title">
                     {{goal.costPerUnit | rounded }}
                   </div>
                   <div class="goal-card-bottom-subtext">
                     per {{ goal.unit }}
-                    <!-- Total Paid Out -->
                   </div>
                 </div>
               </div>
@@ -95,7 +96,6 @@
               {{goal.value}}
             </div>
             <div class="goal-card-bottom row">
-              <!-- <div class="col-xs-6 row"> -->
               <div class="col-xs-12 row">
                 <div class="goal-paid-title">
                   {{ goal.costPerUnit | rounded }}
@@ -113,27 +113,20 @@
 
       <div class="col-md-12 col-xs-12 project-details-container">
         <div class="col-md-10 col-xs-12 summary-section">
-          <div class="section-text-left medium col-md-12 col-xs-12">
+          <div class="appeal-section-left medium col-md-12 col-xs-12">
             Once you've donated, you can track your impact... <br>
             <div class="hidden-xs hidden-sm" style="margin-bottom: 20px"> </div>
-            <!-- <span class="hidden-sm hidden-xs">Click below for a preview:</span> -->
           </div>
         </div>
         <div class="col-md-12 col-xs-12 my-impact-screenshot">
           <img src="https://s3.eu-west-2.amazonaws.com/alice-res/impact+example.png" alt="">
         </div>
-        <!-- <div class="col-md-10 hidden-xs">
-          <div class="project-details-btn">
-            <a ng-click="clickForOverlay('trackImpact')">TRACKING YOUR IMPACT</a>
-          </div>
-        </div> -->
       </div>
-
     </div>
   </div>
 
 
-  <div class="appeal-tab-content" id="appealStories">
+  <div class="appeal-section" id="appealStories">
     <div class="row">
       <a class="col-md-6 col-xs-12 col-sm-12 story-container"
         ng-click="clickForOverlay('firstStory')"
@@ -153,7 +146,7 @@
     </div>
   </div>
 
-  <div class="appeal-tab-content" id="appealAlice">
+  <div class="appeal-section" id="appealAlice">
     <div class="row">
       <div class="appeal-section-heading col-md-10 col-md-offset-1 hidden-xs hidden-sm" style="float: left;">
         <h1>Track Your Donation's Impact</h1>
@@ -166,7 +159,7 @@
           Donating on Alice is different to donating anywhere else.
           You only give your full donation when the charity has achieved its goals. <br>
         </span>
-        <span class="section-text-left hidden-md hidden-lg hidden-xl">
+        <span class="appeal-section-left hidden-md hidden-lg hidden-xl">
           Donating on Alice is different to donating anywhere else. <br>
           You only give your full donation when the charity has achieved its goals. <br>
         </span>
@@ -180,7 +173,7 @@
         <span class="hidden-xs hidden-sm">
           That means you'll know exactly how many lives your money has improved and how.
         </span>
-        <span class="section-text-left hidden-md hidden-lg hidden-xl">
+        <span class="appeal-section-left hidden-md hidden-lg hidden-xl">
           That means you'll know exactly how many lives your money has improved and how.
         </span>
       </div>
@@ -192,7 +185,7 @@
   </div>
 
 
-  <div class="appeal-tab-content" id="appealNgo">
+  <div class="appeal-section" id="appealNgo">
     <!-- Desktop -->
     <ng-include src="'/components/project/desktopCharityAndValidatorProfiles.html'"></ng-include>
     <!-- Mobile  -->

@@ -1,0 +1,55 @@
+.loading-screen {
+	z-index: 9999;
+	margin-top: -10px;
+  background: $alice-blue;
+	padding: 0;
+  height: 100vh;
+  width: 100vw;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+
+	svg {
+		margin-left: -20px;
+	}
+}
+
+#alice-svg-logo, #alice-svg-text {
+	stroke: #fff;
+	fill: #fff;
+	fill-opacity: 0;
+	stroke-width: 1;
+	stroke-dasharray: 800;
+	stroke-dashoffset: 800;
+	-moz-animation: DASH3 2s ease-in-out 0.5s forwards;
+	-webkit-animation: DASH3 2s ease-in-out 0.5s forwards;
+	animation: DASH3 2s ease-in-out 0.5s forwards;
+}
+
+@-webkit-keyframes DASH3 {
+	0%  {
+		stroke-dashoffset: 800;
+	}
+	80% {
+		stroke-dashoffset:0;
+		fill-opacity:0;
+	}
+	100% {
+		stroke-dashoffset:0;
+		fill-opacity:1;
+	}
+}
+
+@-moz-keyframes DASH3 {
+	0%  {
+		stroke-dashoffset: 800;
+	}
+	80% {
+		stroke-dashoffset:0;
+		fill-opacity:0;
+	}
+	100% {
+		stroke-dashoffset:0;
+		fill-opacity:1;
+	}
+}

@@ -25,11 +25,26 @@ secrets
 .idea
 .vscode
 
+# Deploy-script directories
+deploy-test/
+deploy-test.zip
+clone-db.sh
+
 # Trash
 .DS_Store
-
+.yarnclean
 .ignore
+.jshintrc
+.css.map
 
 # Ingored scripts
 clone-db.sh
 cloneDB.sh
+deploy-test/
+deploy-test.zip
+
+# Sass mapping
+.css.map
+
+# Incase a temp db directory is left accidentally via manual cloning
+tmp_db/

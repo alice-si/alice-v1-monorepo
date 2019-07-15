@@ -1,0 +1,124 @@
+<div ng-controller="ProjectControllerV2 as projectCtrl" class="appeal-page">
+  <section class="splash-v2 grad-both">
+    <div class="header-image"
+         ng-style="{ 'background' : 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(' + projectCtrl.model.img + ') no-repeat center' }">
+      <div class="container splash-v2__container-title">
+        <div class="row">
+          <h3 class="white">{{ projectCtrl.model.title }}</h3>
+          <p class="white">See what your money achieves, with Blockchain's transparency.</p>
+        </div>
+        <div class="row splash-v2__container-progress">
+           <p class="white col-md-3 splash-v2__progress-section">Target<br>
+             <span style="font-size: 22px;">{{ projectCtrl.model.fundingTarget | money}}</span>
+           </p>
+           <p class="white col-md-3 splash-v2__progress-section">Raised<br>
+             <span style="font-size: 22px;">{{ projectCtrl.model.raised | money }}</span>
+           </p>
+           <p class="white col-md-4 splash-v2__progress-section">Completed<br>
+             <span style="font-size: 22px;">{{ projectCtrl.model.percentageCompleted }}%</span> of the goals
+           </p>
+        </div>
+        <div class="row">
+          <a href="/checkout/{{projectCtrl.model.code}}">
+            <button>
+              Donate
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container appeal-v2__container">
+    <div class="appeal-v2__info">
+      <div class="col-md-8 appeal-v2__info-left">
+        <div class="col-xs-12 col-md-12 col-lg-12 appeal-v2__info-top">
+          <!-- <h6 class="col-xs-12 col-md-3 col-lg-3">{{ projectCtrl.model.location }}</h6> -->
+          <!-- <h6 class="col-xs-12 col-md-3 col-lg-3">{{ projectCtrl.model.location }}</h6> -->
+          <h5 class="col-xs-12 col-md-12 col-lg-12">{{ projectCtrl.model.lead }}</h5>
+          <h6 class="col-xs-12 col-md-6 col-lg-6">{{ projectCtrl.model.peopleTarget }} {{ projectCtrl.model.typeOfBeneficiary }} | {{ projectCtrl.model.location }}</h6>
+        </div>
+        <div class="appeal-v2__info-top-expanded">
+          <p ng-bind-html="projectCtrl.model.summary"></p>
+          <div uib-collapse="!expandSummary">
+            <p ng-bind-html="projectCtrl.model.extendedSummary"></p>
+          </div>
+          <button class="col-md-2 col-lg-2"
+                  ng-click="expandSummary = !expandSummary">
+            Read <span ng-if="expandSummary">Less</span><span ng-if="!expandSummary">More</span>
+            <!-- <i class="pull-up glyphicon"
+               ng-class="expandSummary ? 'glyphicon-chevron-up' : 'glyphicon-chevron-down'"></i> -->
+          </button>
+        </div>
+      </div>
+      <div class="col-md-3 col-md-offset-1 appeal-v2__info-right">
+        <h5>Run by</h5>
+        <div class="appeal-v2__info-image"
+             style="background-image: url('{{projectCtrl.model.charity.darkPicture}}')">
+        </div>
+      </div>
+      <button class="col-md-2 col-lg-2"
+              ng-click="expandSummary = !expandSummary">
+        Read <span ng-if="expandSummary">Less</span><span ng-if="!expandSummary">More</span>
+        <i class="pull-up glyphicon"
+           ng-class="expandSummary ? 'glyphicon-chevron-up' : 'glyphicon-chevron-down'"></i>
+      </button>
+    </div>
+    <div class="col-xs-12 col-md-12 col-lg-12 appeal-v2__goals">
+      <h5>
+        <ng-pluralize count="projectCtrl.model._outcomes.length"
+                      when="{'0': '',
+                             '1': 'Track the impact of donations through 1 goal',
+                             'other': 'Track the impact of donations through {} goals'}">
+        </ng-pluralize>
+      </h5>
+      <div ng-repeat="goal in projectCtrl.model._outcomes | limitTo: 3 track by $index"
+           class="col-md-12 col-lg-12">
+        <appeal-goal goal="goal" index="$index"></appeal-goal>
+      </div>
+      <div ng-repeat="goal in projectCtrl.model._outcomes | limitTo: projectCtrl.model._outcomes.length : 3 track by $index "
+           class="col-md-12 col-lg-12"
+           uib-collapse="!expandOutcomes">
+        <appeal-goal goal="goal" index="$index + 3"></appeal-goal>
+      </div>
+      <button class="col-md-2 col-lg-2"
+              ng-click="expandOutcomes = !expandOutcomes">
+        Read <span ng-if="expandOutcomes">Less</span><span ng-if="!expandOutcomes">More</span>
+        <i class="pull-up glyphicon"
+           ng-class="expandOutcomes ? 'glyphicon-chevron-up' : 'glyphicon-chevron-down'"></i>
+      </button>
+    </div>
+    <div class="col-xs-12 col-md-12 col-lg-12 appeal-v2__stories">
+      <h5>Follow the story</h5>
+      <div ng-repeat="story in projectCtrl.model.myStory track by $index">
+        <div class="appeal-v2__stories-container col-xs-12 col-md-12 col-lg-12">
+          <div class="alice-card col-md-3 col-xs-12">
+            <div class="appeal-v2__stories-img grad-bottom">
+              <img src="{{story.img}}"
+                   alt="Image for {{ story.title }}"/>
+              <h6 class="white appeal-v2__stories-imgtext">{{story.header}}</h6>
+            </div>
+          </div>
+          <div class="appeal-v2__stories-info col-md-9 col-xs-12">
+            <h4 class="col-md-6">
+              "{{story.quote}}"
+            </h4>
+            <p class="col-md-12"
+               ng-bind-html="story.details">
+            </p>
+            <p class="col-md-12"
+               uib-collapse="!story.expandStory"
+               ng-bind-html="story.extendedDetails"></p>
+            <button class="col-md-2 col-lg-2"
+                    ng-click="story.expandStory = !story.expandStory">
+              Read <span ng-if="story.expandStory">Less</span><span ng-if="!story.expandStory">More</span>
+              <!-- <i class="pull-up glyphicon"
+                 ng-class="expandSummary ? 'glyphicon-chevron-up' : 'glyphicon-chevron-down'"></i> -->
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <alice-footer></alice-footer>
+</div>

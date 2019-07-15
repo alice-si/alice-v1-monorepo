@@ -8,6 +8,7 @@ const _ = require('lodash');
 
 // Model loading
 const Category = Utils.loadModel('category');
+const Validation = Utils.loadModel('validation');
 const Project = Utils.loadModel('project');
 const Charity = Utils.loadModel('charity');
 const Donation = Utils.loadModel('donation');
@@ -95,11 +96,33 @@ module.exports = function (app) {
 
     project.needed = project.fundingTarget - project.raised;
 
-    if (req.query.countValidations) {
+    // if (req.query.countValidations) {
       project.amountValidated =
         await Utils.getAmountValidatedForProject(project);
       project.amountAvailable = project.raised - project.amountValidated;
-    }
+    // }
+
+
+		// Added this backend function for new appeal page design
+		// Goals require current validation progress
+		// as well as goal features
+		let goalsV2 = await Validation.aggregate([
+	    {
+	      $match: {
+	        $and: [
+	          { _projectId: project._id },
+	          { status: { $not: /CREATED|CLAIMING_/ }},
+	        ]
+	      }
+	    },
+	    {
+	      $group: { _id: "$_outcomeId", totalValidatedForOutcome: {$sum: "$amount"} }
+	    },
+	    { $lookup: { from: "outcomes", localField: "_id", foreignField: "_id", as: "outcome"} },
+	    {$unwind: "$outcome"}
+	  ]);
+
+		project.goalsV2 = (goalsV2.length > 0) ? goalsV2 : [];
 
     res.json(project);
   }));
@@ -158,19 +181,7 @@ module.exports = function (app) {
         );
 
         await checkMangoWallets(savedProject);
-
-        // TODO when we move to monorepo addProjectToCharity function
-        // should be refactored and be a Promise
-        await new Promise((resolve, reject) => {
-          Charity.addProjectToCharity(savedProject, (err) => {
-            if (err) {
-              reject();
-            } else {
-              resolve();
-            }
-          });
-        });
-
+        await Charity.addProjectToCharity(savedProject);
         await lazyOutcomesUpdate(projectWithOutcomes, savedProject);
 
         // adding project history

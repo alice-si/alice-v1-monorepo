@@ -1,0 +1,38 @@
+<div class="donations">
+  <table class="impact-table">
+    <tr>
+      <td><p>Name</p></td>
+      <td><p>Email</p></td>
+      <td><p>Donated</p></td>
+      <td><p>Date</p></td>
+      <td><p>Received</p></td>
+      <td><p>Gift Aid</p></td>
+      <td><p>Contact</p></td>
+    </tr>
+    <tr ng-repeat="donation in donCtrl.users.slice(((currentPage - 1) * itemsPerPage),
+                   ((currentPage) * itemsPerPage))
+                   | filter:donCtrl.donationSearch
+                   | orderBy : donCtrl.sortField"
+        class="donation-row">
+        <td>{{donation.fullName}}</td>
+        <td>{{donation.email}}</td>
+        <td>{{donation.donated | money}}</td>
+        <td>{{donation.date | date}}</td>
+        <td>{{donation.totalReceived | money : '0'}}</td>
+        <td>{{donation.giftAid ? 'Yes' : 'No'}}
+            <!--  FIXME: Turning link off until we implement what should be there
+            <a>{{donation.giftAid ? 'Show' : ''}}</a>
+            -->
+        </td>
+        <td>{{donation.agreeContact ? 'Yes' : 'No'}}</td>
+    </tr>
+  </table>
+  <div uib-pagination
+       total-items="donCtrl.totalItems * 2"
+       ng-model="currentPage"
+       max-size="maxSize"
+       class="pagination-sm"
+       boundary-link-numbers="true"
+       rotate="false">
+  </div>
+</div>

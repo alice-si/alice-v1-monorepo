@@ -12,20 +12,11 @@
 
             <ul class="menu menu-left col-sm-6 col-md-6">
                 <menu-item id="menu-how-it-works" target="how-it-works/" label="How It Works"></menu-item>
-                <menu-item ng-if="!menuCtrl.auth.isValidator()"
-                           target="my-impact/"
-                           label="My Impact"></menu-item>
-                <menu-item ng-if="menuCtrl.auth.isValidator()"
-                           target="validation/"
-                           label="Validator dashboard"></menu-item>
-                <menu-item ng-if="menuCtrl.auth.isManager()"
-                           target="dashboard/main"
-                           label="My Dashboard"></menu-item>
                 <menu-item target="geek-mode/" label="Geek Mode"></menu-item>
                 <menu-item target="faq/" label="FAQ" last="true"></menu-item>
             </ul>
 
-            <ul class="menu menu-right col-sm-3 col-md-3">
+            <ul class="menu menu-right col-sm-4 col-md-4">
                 <li class="menu-item" ng-show="!menuCtrl.auth.getLoggedUser()">
                     <a id="menu-login" class="page-scroll" ng-click="menuCtrl.logIn()">
                     <span class="underline-from-center">Log in</span>
@@ -43,47 +34,52 @@
                     </a>
                     <ul class="dropdown-menu user-menu">
                         <li style="width: 100%;">
-                            <div style="border-top: 2px solid #fff" ng-if="menuCtrl.auth.isSuperadmin()">
+                            <div style="border-bottom: 2px solid #fff">
+                                <a href="/my-impact/">
+                                    My Impact
+                                </a>
+                            </div>
+                            <div style="border-bottom: 2px solid #fff" ng-if="menuCtrl.auth.isSuperadmin()">
+                                <a href="/super-admin/">
+                                    Superadmin Overview
+                                </a>
+                            </div>
+
+                            <div style="border-bottom: 1px solid #fff" ng-if="menuCtrl.auth.isCharityAdmin() && !menuCtrl.auth.isSuperadmin()">
+                                <a href="/charity-admin/{{menuCtrl.auth.getCharityCodeForCharityAdmin()}}">
+                                    Charity Profile
+                                </a>
+                            </div>
+
+                            <div ng-if="menuCtrl.auth.isManager()">
+                                <a href="/charity-dashboard/">
+                                    Charity Dashboard
+                                </a>
+                            </div>
+
+                            <div style="border-bottom: 2px solid #fff"
+                                 ng-if="menuCtrl.auth.isValidator()">
+                                 <a href="/validation/">
+                                     Validator Dashboard
+                                 </a>
+                            </div>
+
+                            <div ng-if="menuCtrl.auth.isSuperadmin()">
                                 <a href="/users/">
                                     Users
                                 </a>
                             </div>
 
-                            <div style="border-top: 2px solid #fff" ng-if="menuCtrl.auth.isSuperadmin()">
-                                <a href="/donations/">
-                                    Donations
-                                </a>
-                            </div>
-
-                            <div ng-if="menuCtrl.auth.isSuperadmin()">
-                                <a href="/validations/">
-                                    Validations
+                            <div style="border-bottom: 1px solid #fff" ng-if="menuCtrl.auth.isSuperadmin()">
+                                <a href="/charities/">
+                                    Charities
                                 </a>
                             </div>
 
                             <div style="border-bottom: 1px solid #fff" ng-if="menuCtrl.auth.isSuperadmin()">
-                                <a href="/impacts/">
-                                    Impacts
+                                <a href="/projects/">
+                                    Projects
                                 </a>
-                            </div>
-
-
-                            <div style="border-bottom: 1px solid #fff" ng-if="menuCtrl.auth.isCharityAdmin() && !menuCtrl.auth.isSuperadmin()">
-                            <a href="/charity-admin/{{menuCtrl.auth.getCharityCodeForCharityAdmin()}}">
-                                Charity panel
-                            </a>
-                            </div>
-
-                            <div style="border-bottom: 1px solid #fff" ng-if="menuCtrl.auth.isSuperadmin()">
-                            <a href="/charities/">
-                                Charities
-                            </a>
-                            </div>
-
-                            <div style="border-bottom: 1px solid #fff" ng-if="menuCtrl.auth.isAdmin() || menuCtrl.auth.isCharityAdmin()">
-                            <a href="/projects/">
-                                Projects
-                            </a>
                             </div>
 
                             <div>
@@ -93,6 +89,11 @@
                             </div>
                         </li>
                     </ul>
+                </li>
+                <li class="menu-item" ng-show="menuCtrl.auth.getLoggedUser() && menuCtrl.auth.isSuperadmin()">
+                    <a id="menu-create" class="page-scroll" href="/project-wizard/">
+                        <span class="underline-from-center">Create New Project</span><span class="divider hidden-xs">|</span>
+                    </a>
                 </li>
             </ul>
         </div>
@@ -136,8 +137,8 @@
                         FAQ
                     </a>
 
-                    <a href="/dashboard/main" ng-if="menuCtrl.auth.isManager()">
-                        Dashboard
+                    <a href="/charity-dashboard" ng-if="menuCtrl.auth.isManager()">
+                        Charity Dashboard
                     </a>
 
                     <a id="menu-mobile-sign-up" ng-click="menuCtrl.signUp()" ng-show="!menuCtrl.auth.getLoggedUser()">
@@ -157,4 +158,3 @@
         </div>
     </div>
 </div>
-

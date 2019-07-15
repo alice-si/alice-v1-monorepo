@@ -152,7 +152,7 @@ class BlockchainJob extends ModelJob {
   }
 
   async executeTransaction(target) {
-    this.logger.debug(`target was found: processing ${target._id}`);
+    this.logger.info(`target was found: processing ${target._id}`);
     try {
       let tx = await this.run(target);
       if (!tx) throw new Error('job did not return a transaction');
@@ -167,7 +167,7 @@ class BlockchainJob extends ModelJob {
   }
 
   async executeChecker(target) {
-    this.logger.debug(`checking transaction status for target ${target._id}`);
+    this.logger.info(`checking transaction status for target ${target._id}`);
     let tx = target[this.txFieldName()];
 
     try {
@@ -207,7 +207,7 @@ class BlockchainJob extends ModelJob {
   async postConfirmation(target, tx) { }
 
   async checkTransaction(target, tx) {
-    this.logger.debug('checking if transaction was processed...');
+    this.logger.info('checking if transaction was processed...');
 
     let receipt = await EthProxy.checkTransaction(tx);
     if (receipt) {

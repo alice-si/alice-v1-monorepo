@@ -5,7 +5,9 @@ const TestUtils = require('../test-utils');
 describe('DonationController', function () {
     let objects;
 
-    TestUtils.setBeforeAndAfterHooksForControllerTest('donation');
+    TestUtils.setBeforeAndAfterHooksForControllerTest({
+        name: 'donation'
+    });
     
     it('Should create objects', async function () {
         objects = await TestUtils.createTestObjects();

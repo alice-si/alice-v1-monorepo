@@ -21,9 +21,11 @@ angular.module('aliceApp')
             vm.signing = false;
             AuthService.login(vm.registration).then(function (success) {
               $scope.$dismiss();
-              $uibModal.open({
-                templateUrl: '/components/auth/registrationConfirmationModal.html'
-              });
+              if (!AuthService.hasAfterLoginFunction()) {
+                $uibModal.open({
+                  templateUrl: '/components/auth/registrationConfirmationModal.html'
+                });
+              }
             });
           }, function (failure) {
             vm.signing = false;

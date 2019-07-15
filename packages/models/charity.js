@@ -34,17 +34,16 @@ CharitySchema.methods.prepareForSaving = function () {
   this.description = htmlencode.htmlDecode(this.description);
 };
 
-CharitySchema.statics.addProjectToCharity = function(project, callback) {
+CharitySchema.statics.addProjectToCharity = async function (project) {
   if (!project.charity) {
     throw 'Saved project does not have charity field';
   } else {
-    this.findById(project.charity).then(function(charity) {
-      if (!charity.projects.includes(project._id)) {
-        charity.projects.push(project._id);
-      }
-      charity.save(callback);
-    }); 
+    const charity = await this.findById(project.charity);
+    if (!charity.projects.includes(project._id)) {
+      charity.projects.push(project._id);
+    }
+    await charity.save();
   }
-};
+}
 
 module.exports = ModelUtils.exportModel('Charity', CharitySchema);
