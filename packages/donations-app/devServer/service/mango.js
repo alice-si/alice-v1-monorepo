@@ -192,8 +192,9 @@ function createPayInInternal(user, amount, conf) {
   let defaultConf = {
     AuthorId: user.mangoUserId,
     // New KYC
-    // CreditedUserId: Config.technicalMangoUserId,
-    CreditedUserId: user.mangoUserId,
+    CreditedUserId: Config.technicalMangoUserId,
+    // Old KYC
+    // CreditedUserId: user.mangoUserId,
     CreditedWalletId: user.mangoWalletId,
     ExecutionType: "DIRECT",
   };
