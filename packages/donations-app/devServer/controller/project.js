@@ -4,6 +4,7 @@ const Mango = require('../service/mango');
 const Utils = require('../service/utils');
 const asyncHandler = require('express-async-handler');
 const mongoose = require('mongoose');
+const _ = require('lodash');
 
 // Model loading
 const Category = Utils.loadModel('category');
@@ -183,11 +184,26 @@ module.exports = function (app) {
         // Setting validator
         if (AccessControl.isSuperadmin(req.user)
             && req.body.validators
-            && req.body.validators.length > 0)
+            && req.body.validators.length == 1)
         {
-          let user = await User.findById(req.body.validators[0]);
-          user.validator.push(savedProject._id);
-          user.save();
+          let newValidatorId = req.body.validators[0];
+          let prevValidator = await User.findOne({
+            validator: savedProject._id
+          });
+
+          if (prevValidator && !prevValidator._id.equals(newValidatorId)) {
+            // Cleaning previous validator
+            _.remove(prevValidator.validator,
+              projectId => savedProject._id.equals(projectId));
+            await prevValidator.save();
+          }
+
+          if (!prevValidator || !prevValidator._id.equals(newValidatorId)) {
+            // Setting the new validator
+            let user = await User.findById(newValidatorId);
+            user.validator.push(savedProject._id);
+            await user.save();
+          }
         }
 
         res.json(savedProject);
