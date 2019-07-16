@@ -229,10 +229,10 @@ angular.module('aliceApp')
               } else {
                 if (result.data.secureModeNeeded) {
                   // 3DS disabled for non-eurozone
-                  // if (!supported3DS) {
-                  //   console.error('3DS was enforced but is not available');
-                  //   throw {type: 'securityModeUnsupported'};
-                  // }
+                  if (!supported3DS) {
+                    console.error('3DS was enforced but is not available');
+                    throw {type: 'securityModeUnsupported'};
+                  }
                   vm.mode = '3DS';
                   vm.secureModeUrl = $sce.trustAsResourceUrl(result.data.redirectUrl);
                 }
