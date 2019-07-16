@@ -9,7 +9,9 @@ var api = new mangopay({
 
 var Mango = {};
 
-Mango.securityTreshold = 30000;
+// 3DS disabled for non-eurozone
+// Mango.securityTreshold = 30000;
+
 Mango.securityTresholdForCardsWith3DSSupport = 10100;
 
 const supportedCountryCodesFor3DS = [
@@ -190,8 +192,9 @@ function createPayInInternal(user, amount, conf) {
   let defaultConf = {
     AuthorId: user.mangoUserId,
     // New KYC
-    // CreditedUserId: Config.technicalMangoUserId,
-    CreditedUserId: user.mangoUserId,
+    CreditedUserId: Config.technicalMangoUserId,
+    // Old KYC
+    // CreditedUserId: user.mangoUserId,
     CreditedWalletId: user.mangoWalletId,
     ExecutionType: "DIRECT",
   };

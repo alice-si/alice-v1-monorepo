@@ -117,7 +117,8 @@ module.exports = function (app) {
     const supported3DS = await Mango.cardSupports3DS(req.params.cardId);
     res.json({
       supported3DS,
-      securityTreshold: Mango.securityTreshold
+      // 3DS disabled for non-eurozone
+      // securityTreshold: Mango.securityTreshold
     });
   }));
 

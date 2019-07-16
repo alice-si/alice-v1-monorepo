@@ -33,7 +33,7 @@ Mail.sendDonationError = function (user, project, err, is3DS) {
       project: project,
       err: err,
       is3DS: is3DS,
-      securityTreshold: formatMoney(Mango.securityTreshold),
+      securityTreshold: formatMoney(Mango.securityTresholdForCardsWith3DSSupport),
       title: 'Donation failed',
       subtitle: 'Donation failed'
     },

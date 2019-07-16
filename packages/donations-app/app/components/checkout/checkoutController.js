@@ -215,9 +215,11 @@ angular.module('aliceApp')
                 supported3DS = securitySupportResult.data.supported3DS;
                 payment.cardId = cardRegistrationResult.CardId;
 
-                if (payment.amount >= securitySupportResult.data.securityTreshold && !supported3DS) {
-                  throw {type: 'securityModeUnsupported'};
-                }
+                // 3DS disabled for non-eurozone
+                // if (payment.amount >= securitySupportResult.data.securityTreshold && !supported3DS) {
+                //   throw {type: 'securityModeUnsupported'};
+                // }
+
                 return $http.post(API + 'sendDonation', payment);
               }
             ).then(function (result) {
@@ -226,6 +228,7 @@ angular.module('aliceApp')
                 postDonationConfirmation();
               } else {
                 if (result.data.secureModeNeeded) {
+                  // 3DS disabled for non-eurozone
                   if (!supported3DS) {
                     console.error('3DS was enforced but is not available');
                     throw {type: 'securityModeUnsupported'};
