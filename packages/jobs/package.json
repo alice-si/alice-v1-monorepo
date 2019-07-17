@@ -10,7 +10,6 @@
     "compile": "./scripts/compile.sh",
     "pretest": "yarn alice-cli generate-keys ./secrets/keys/ && yarn compile",
     "test": "./scripts/test.sh",
-    "test-local": "source .envrc && ./scripts/test.sh",
     "load-test": "./scripts/load-test.sh"
   },
   "dependencies": {
