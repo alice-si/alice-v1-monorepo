@@ -126,7 +126,10 @@ Mango.transfer = function (fromMangoUserId, fromMangoWalletId, toMangoUserId, to
   return api.Transfers.create({
     Tag: 'collecting',
     AuthorId: fromMangoUserId,
-    CreditedUserId: toMangoUserId,
+    // Old KYC
+    // CreditedUserId: toMangoUserId,
+    // New KYC
+    CreditedUserId: config.technicalMangoUserId,
     DebitedFunds: {
       'Currency': 'GBP',
       'Amount': amount

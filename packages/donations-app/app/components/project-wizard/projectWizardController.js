@@ -96,21 +96,23 @@ angular.module('aliceApp')
     };
 
     function getErrors() {
-      var errorsRequired = vm.projectForm.$error.required;
-      var errorsMaxLength = vm.projectForm.$error.maxlength;
-      var errors = [];
-      if (errorsMaxLength) {
-        errors = errors.concat(errorsMaxLength);
-      }
-      if (errorsRequired) {
-        errors = errors.concat(errorsRequired);
-      }
+      let errors = [];
+
+      for (const errType of ['required', 'maxlength', 'minTags', 'maxTags']) {
+        const errsOfSomeType = vm.projectForm.$error[errType];
+        if (errsOfSomeType) {
+          errors = errors.concat(errsOfSomeType);
+        }
+      } 
+
       return errors;
     }
 
 		function printErrors() {
-			var fields = getErrors().map(elem => { return elem.$name; });
-			NotificationService.error("Please fix validation errors before changing section, check the following: " + fields);
+			var fields = getErrors().map(elem => elem.$name);
+      NotificationService.error(
+        "Please fix validation errors before changing section, check the following fields: "
+        + JSON.stringify(fields));
 		}
 
     function visibleFormPartIsValid() {

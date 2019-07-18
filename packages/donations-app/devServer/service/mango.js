@@ -9,13 +9,17 @@ var api = new mangopay({
 
 var Mango = {};
 
-Mango.securityTreshold = 30000;
+// 3DS disabled for non-eurozone
+// Mango.securityTreshold = 30000;
+
 Mango.securityTresholdForCardsWith3DSSupport = 10100;
 
 const supportedCountryCodesFor3DS = [
   'AUT', 'BEL', 'CYP', 'EST', 'FIN', 'FRA', 'DEU', 'GRC', 'IRL', 'ITA', 'LVA',
   'LTU', 'LUX', 'MLT', 'NLD', 'PRT', 'SVK', 'SVN', 'ESP'
 ];
+
+const TEST_ALIAS = "356999XXXXXX0157";
 
 Mango.convertBirthday = function (dateOfBirth) {
   return (dateOfBirth.getTime() / 1000) - (dateOfBirth.getTimezoneOffset() * 60);
@@ -145,7 +149,7 @@ Mango.payInByBankTransfer = function (user, amount) {
 
 Mango.cardSupports3DS = async function (cardId) {
   const details = await api.Cards.get(cardId);
-  return supportedCountryCodesFor3DS.includes(details.Country);
+  return details.Alias == TEST_ALIAS || supportedCountryCodesFor3DS.includes(details.Country);
 };
 
 Mango.checkTransaction = function (transactionId) {
@@ -190,8 +194,9 @@ function createPayInInternal(user, amount, conf) {
   let defaultConf = {
     AuthorId: user.mangoUserId,
     // New KYC
-    // CreditedUserId: Config.technicalMangoUserId,
-    CreditedUserId: user.mangoUserId,
+    CreditedUserId: Config.technicalMangoUserId,
+    // Old KYC
+    // CreditedUserId: user.mangoUserId,
     CreditedWalletId: user.mangoWalletId,
     ExecutionType: "DIRECT",
   };
