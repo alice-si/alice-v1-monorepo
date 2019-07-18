@@ -46,7 +46,6 @@ angular.module('aliceApp')
       vm.donation.amount = vm.amountOtherValue * 100;
     };
 
-
     vm.validateGuest = function () {
       vm.guestForm.$submitted = true;
       if (vm.guestForm.$valid) {
@@ -80,7 +79,6 @@ angular.module('aliceApp')
           CheckoutService.showQuestion();
         }
       }
-
     };
 
     var sendDonation = function () {

@@ -236,8 +236,8 @@ TestUtils.payInToUserAccount = async function(user, amount) {
   let cardData = {
     accessKeyRef: preRegistrationData.AccessKey,
     data: preRegistrationData.PreregistrationData,
-    cardNumber: '4706750000000009',
-    cardExpirationDate: '1119',
+    cardNumber: '3569990000000132',
+    cardExpirationDate: '1120',
     cardCvx: '123'
   };
 
