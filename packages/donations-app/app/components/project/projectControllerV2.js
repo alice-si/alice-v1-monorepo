@@ -1,12 +1,10 @@
 angular.module('aliceApp')
-  .controller('ProjectControllerV2', ['$uibModal', '$stateParams', 'ProjectService',  '$scope', '$state', function($uibModal, $stateParams, ProjectService, $scope, $state) {
+  .controller('ProjectControllerV2', ['$uibModal', '$stateParams', 'ProjectService',  '$scope', '$state', 'CheckoutService', function($uibModal, $stateParams, ProjectService, $scope, $state, CheckoutService) {
     var vm = this;
 
 		ProjectService.getProjectDetails($stateParams.projectCode).then(function (result) {
 			vm.model = ProjectService.prepareProjectDetails(result.data);
 			vm.supporters = result.data.supporters;
-
-			console.log(vm.model);
 
 			vm.model._outcomes.forEach((elem) => {
 				let impact = vm.model.goalsV2.find((e) => {
@@ -39,11 +37,9 @@ angular.module('aliceApp')
 		}
 
 		vm.donate = function() {
-      $uibModal.open({
-        templateUrl: '/components/checkout/checkoutModal.html',
-        controller: 'CheckoutController as checkCtrl',
-      });
+			CheckoutService.startCheckout(vm.model);
 		}
+
 
 		$('.carousel .item').each(function(){
 			var next = $(this).next();

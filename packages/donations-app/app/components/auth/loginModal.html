@@ -1,5 +1,5 @@
 <div class="modal-body" ng-controller="LoginController as loginCtrl">
-    <a class="modal-close" ng-click="regCtrl.dismissModal()">×</a>
+    <a class="modal-close" ng-click="loginCtrl.dismissModal()">×</a>
     <h2 class="modal-title">{{ loginCtrl.getTextsForMode().title }}</h2>
 
     <div class="content">
@@ -48,10 +48,12 @@
         <div class="row">
           <div ng-if="loginCtrl.mode == 'EMAIL_REGISTRATION'"
                class="col-md-12">
-              <input icheck
-                     type="checkbox"
-                     ng-model="loginCtrl.credentials.disagreeContact">
-                 I don't want to receive marketing messages <br>from Alice or the charity.
+               <p class="alice-grey center">
+               <input icheck
+                      type="checkbox"
+                      ng-model="loginCtrl.credentials.disagreeContact">
+                      I don't want to receive marketing messages <br>from Alice or the charity.
+               </p>
           </div>
         </div>
       </form>

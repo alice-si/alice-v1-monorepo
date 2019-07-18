@@ -2,6 +2,7 @@ angular.module('aliceApp')
   .controller('CheckoutController', ['$rootScope', '$uibModal', '$http', '$stateParams', '$state', '$sce', '$timeout', 'AuthService', 'ProjectService', 'NotificationService', 'API', '$scope', 'MANGO', 'CheckoutService', function ($rootScope, $uibModal, $http, $stateParams, $state, $sce, $timeout, AuthService, ProjectService, NotificationService, API, $scope, MANGO, CheckoutService) {
 
     const amounts = {
+      amount10: 1000,
       amount20: 2000,
       amount80: 8000,
       amount150: 15000,

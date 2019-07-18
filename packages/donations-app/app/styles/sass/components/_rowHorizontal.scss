@@ -12,41 +12,45 @@
   white-space: normal;
   vertical-align: top;
 }
-.row-horizon > .col-xs-12 {
-  width: 90%;
-}
-.row-horizon > .col-xs-11 {
-  width: 82.5%;
-}
-.row-horizon > .col-xs-10 {
-  width: 75%;
-}
-.row-horizon > .col-xs-9 {
-  width: 67.5%;
-}
-.row-horizon > .col-xs-8 {
-  width: 60%;
-}
-.row-horizon > .col-xs-7 {
-  width: 52.5%;
-}
-.row-horizon > .col-xs-6 {
-  width: 45%;
-}
-.row-horizon > .col-xs-5 {
-  width: 37.5%;
-}
-.row-horizon > .col-xs-4 {
-  width: 30%;
-}
-.row-horizon > .col-xs-3 {
-  width: 22.5%;
-}
-.row-horizon > .col-xs-2 {
-  width: 15%;
-}
-.row-horizon > .col-xs-1 {
-  width: 7.5%;
+.row-horizon {
+  .col-xs {
+    &-12 {
+      width: 90%;
+    }
+    &-11 {
+      width: 82.5%;
+    }
+    &-10 {
+      width: 75%;
+    }
+    &-9 {
+      width: 67.5%;
+    }
+    &-8 {
+      width: 60%;
+    }
+    &-7 {
+      width: 52.5%;
+    }
+    &-6 {
+      width: 45%;
+    }
+    &-5 {
+      width: 37.5%;
+    }
+    &-4 {
+      width: 30%;
+    }
+    &-3 {
+      width: 22.5%;
+    }
+    &-2 {
+      width: 15%;
+    }
+    &-1 {
+      width: 7.5%;
+    }
+  }
 }
 @media (min-width: 768px) {
   .row-horizon {

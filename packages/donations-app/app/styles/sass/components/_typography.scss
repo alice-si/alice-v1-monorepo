@@ -32,7 +32,12 @@ h4 {
 }
 
 h5 {
-	// Unused so far
+	font-family: $source;
+	font-weight: 400 !important;
+	font-size: 22px;
+	letter-spacing: 0.25px;
+	color: $alice-blue;
+	line-height: 36px;
 }
 
 h6 {
@@ -67,6 +72,14 @@ a:-webkit-any-link {
 
 .center {
 	text-align: center !important;
+}
+
+.left {
+	text-align: left !important;
+}
+
+.right {
+	text-align: right !important;
 }
 
 
