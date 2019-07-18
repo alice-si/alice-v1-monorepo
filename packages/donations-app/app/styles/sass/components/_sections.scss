@@ -5,7 +5,7 @@
  * dashboard splash stylings.
  **/
 
- .splash-v2 {
+ .splash-v2, .splash-v3 {
    display: inline-block;
    position: relative;
    width: 100%;
@@ -66,7 +66,7 @@
 
    p {
      font-size: 20px !important;
-     font-family: 'Roboto';
+     font-family: 'Source Sans Pro';
      letter-spacing: 1px;
    }
 
@@ -77,7 +77,7 @@
    button {
      margin-top: 20px;
      width: 120px;
-     background: $alice-blue;
+     background: $alice-tonal-medium;
      border-radius: 2px;
      font-size: 18px;
      color: #fff;
@@ -116,22 +116,106 @@
    }
  }
 
-
-@media screen and (max-width: 414px) {
+@media screen and (max-width: 330px) {
   .splash-v2 {
-
     h3 {
-      font-size: 26px;
+      font-size: 24px;
+      line-height: 1.2;
       margin-top: -10px;
     }
 
+    p {
+      font-size: 12px !important;
+      margin-top: -10px;
+    }
+
+    &__progress-section:first-child {
+      margin-top: 10px;
+    }
+  }
+}
+
+
+
+/**
+ * 2. Common splash styling for Design #4 (Areti : 15/07/19)
+ * N.B -- These are minor changes to the one above.
+ *
+ * Note: This splash styling is not the same as the charity/validator
+ * dashboard splash stylings.
+ **/
+
+ .splash-v3 {
+
+    .header-image {
+      height: 550px;
+    }
+
+    &__progress-section {
+      border-right: 1px solid $alice-dark-grey;
+      font-size: 16px;
+    }
+
+    &__container-title {
+      width: 30%;
+      border-radius: 5px;
+      background: #fff;
+      padding: 5px 20px 30px 50px;
+      font-family: $source;
+      letter-spacing: 0.6;
+    }
+
+    &__container-progress {
+      width: 100%;
+      margin-top: 25px;
+    }
+
+    h3 {
+      font-family: $source;
+      color: $alice-dark-grey;
+      font-weight: 400;
+      font-size: 26px;
+      width: 90%;
+      line-height: 1.4;
+      margin-bottom: 15px;
+    }
+
+    a {
+      font-size: 18px !important;
+      font-family: $source !important;
+      border-bottom: 1px solid $alice-tonal-medium;
+      padding-bottom: 2px;
+      letter-spacing: 1px;
+      color: $alice-tonal-medium;
+    }
+
+    p {
+      font-size: 16px !important;
+      font-weight: 400;
+      color: $alice-dark-grey !important;
+      font-family: $source !important;
+      letter-spacing: 1px;
+    }
+
+    button {
+      width: 150px;
+      font-family: $source !important;
+      font-weight: 400;
+      @include box-shadow(0, 1px, 2px, rgba(91, 91, 91, 0.57));
+    }
+  }
+
+
+
+// Mobile for both splash v2 and v3
+
+@media screen and (max-width: 414px) {
+  .splash-v2, .splash-v3 {
     .header-image {
       height: 100vh;
     }
 
     &__container-title {
-      top: 80px;
-      left: 50px;
       width: 80%;
     }
 
@@ -154,6 +238,37 @@
       &:last-child {
         border: none;
       }
+    }
+  }
+
+  .splash-v2 {
+    h3 {
+      font-size: 26px;
+      margin-top: -10px;
+    }
+
+    &__container-title {
+      top: 80px;
+      left: 50px;
+    }
+  }
+
+  .splash-v3 {
+    h3 {
+      font-size: 20px;
+    }
+
+    .header-image {
+      height: 100vh;
+    }
+
+    &__container-title {
+      top: 100px;
+      left: 30px;
+    }
+
+    a {
+      font-size: 12px !important;
     }
   }
 }

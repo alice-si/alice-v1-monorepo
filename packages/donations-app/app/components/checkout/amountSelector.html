@@ -30,16 +30,6 @@
           />
           £50
         </div>
-        <div class="col-md-2 col-sm-12">
-          <input
-            id="donate-amount-100"
-            icheck
-            type="checkbox"
-            ng-model="checkCtrl.amount100"
-            ng-change="checkCtrl.onAmountChange('amount100')"
-          />
-          £100
-        </div>
         <div class="col-md-4 col-sm-12">
           <input
             id="donate-amount-other"
@@ -53,7 +43,6 @@
             <input
               ng-show="checkCtrl.amountOther"
               type="text"
-              class="form-control"
               name="amountOtherValue"
               ng-currency
               min="0"
