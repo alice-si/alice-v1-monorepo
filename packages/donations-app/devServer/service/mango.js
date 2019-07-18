@@ -17,6 +17,8 @@ const supportedCountryCodesFor3DS = [
   'LTU', 'LUX', 'MLT', 'NLD', 'PRT', 'SVK', 'SVN', 'ESP'
 ];
 
+const TEST_ALIAS = "356999XXXXXX0157";
+
 Mango.convertBirthday = function (dateOfBirth) {
   return (dateOfBirth.getTime() / 1000) - (dateOfBirth.getTimezoneOffset() * 60);
 };
@@ -145,7 +147,7 @@ Mango.payInByBankTransfer = function (user, amount) {
 
 Mango.cardSupports3DS = async function (cardId) {
   const details = await api.Cards.get(cardId);
-  return supportedCountryCodesFor3DS.includes(details.Country);
+  return details.Alias == TEST_ALIAS || supportedCountryCodesFor3DS.includes(details.Country);
 };
 
 Mango.checkTransaction = function (transactionId) {

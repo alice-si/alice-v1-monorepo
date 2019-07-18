@@ -1,25 +1,14 @@
 <div>
-    <div class="gift-aid-box">
-        <div class="gift-aid" ng-show="checkCtrl.amount">
-            <!--<div class="gift-aid-text" ng-show="checkCtrl.amount">-->
-                <!--Turn your {{ checkCtrl.amount | money }} donation into-->
-                <!--{{ checkCtrl.amount * 1.25 | money }} at no extra cost with gift aid.-->
-            <!--</div>-->
+    <div class="gift-aid">
+        <div ng-show="checkCtrl.donation.amount">
 
+            <div class="gift-aid-checkbox">
+                <input icheck type="checkbox" ng-model="checkCtrl.giftAid" /> Add Gift Aid to turn your donation into
+                {{ checkCtrl.donation.amount * 1.25 | money }}
+            </div>
 
-            <input icheck type="checkbox" ng-model="checkCtrl.giftAid"/> Add Gift Aid to turn your donation into
-            {{ checkCtrl.amount * 1.25 | money }}
-
-
-            <div
-                    ng-show="checkCtrl.giftAid"
-                    id="gift-aid-details"
-                    class="donation-footer"
-                    style="border-top: 0; padding-top: 0;"
-            >
-
-                <br/>
-                <div class="row" style="margin-top: 20px;">
+            <div ng-show="checkCtrl.giftAid" id="gift-aid-details" >
+                <div class="row">
                     <div class="col-xs-12">
                         <div class="form-group" has-error>
                             <label>Postal address including postcode</label>
@@ -80,11 +69,11 @@
             class="registration-sign-up btn btn-primary btn-donate btn-modal"
             ng-click="checkCtrl.donate()"
             type="submit">
-        <span ng-show="checkCtrl.mode == 'BANK_TRANSFER'">-->
+        <span ng-show="checkCtrl.mode == 'BANK_TRANSFER'">
             Show bank details
             </span>
         <span ng-show="checkCtrl.mode != 'BANK_TRANSFER'">
-            Donate {{ checkCtrl.amount | money }}
+            Donate {{ checkCtrl.donation.amount | money }}
             </span>
     </button>
 
