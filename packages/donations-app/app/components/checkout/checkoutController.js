@@ -75,21 +75,12 @@ angular.module('aliceApp')
         AuthService.showLogInModal(CheckoutService.showQuestion);
       } else {
         if (vm.mode == 'BANK_TRANSFER') {
-          sendDonation(); // get bank details to show
+          sendDonationByBankTransfer(); // get bank details to show
         } else {
           CheckoutService.showQuestion();
         }
       }
     };
-
-    var sendDonation = function () {
-      if (vm.mode == 'CARD') {
-        sendDonationByCard();
-      } else if (vm.mode == 'BANK_TRANSFER') {
-        sendDonationByBankTransfer();
-      }
-    };
-
 
 
     //TODO: Work on bank transfer once we've got a design for it

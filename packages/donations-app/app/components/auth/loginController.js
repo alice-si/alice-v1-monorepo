@@ -66,7 +66,6 @@ angular.module('aliceApp')
     };
 
     vm.getTextsForMode = function () {
-      console.log(vm.mode);
       switch (vm.mode) {
         case 'LOGIN':
           return {
