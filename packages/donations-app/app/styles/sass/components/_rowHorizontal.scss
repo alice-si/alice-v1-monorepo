@@ -1,9 +1,10 @@
 .row-horizon {
-  overflow-x: hidden;
+  // overflow-x: hidden;
   overflow-y: hidden;
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
   padding: 0 0 20px 0;
+  scroll-snap-type: x mandatory;
 }
 
 .row-horizon > [class*="col-lg"], .row-horizon > [class*="col-md"], .row-horizon > [class*="col-sm"], .row-horizon > [class*="col-xs"] {

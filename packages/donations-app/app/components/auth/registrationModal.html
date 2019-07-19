@@ -110,9 +110,20 @@
           </div>
           <div class="col-md-12">
                <p class="alice-grey center">
+                  Want to skip registration?
+                 <a id="register-email"
+                    href="#"
+                    style="text-decoration: underline;"
+                    ng-click="regCtrl.startLogin('EMAIL_REGISTRATION')">
+                    Just put your email
+                 </a>
+               </p>
+               <p class="alice-grey center">
                  Already have an account?
-                 <a id="login-link" href="#"
-                    ng-click="regCtrl.startLogin()">
+                 <a id="login-link"
+                    href="#"
+                    style="text-decoration: underline;"
+                    ng-click="regCtrl.startLogin('LOGIN')">
                     Log in.
                   </a>
                 </p>

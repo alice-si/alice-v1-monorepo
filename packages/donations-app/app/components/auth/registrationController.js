@@ -40,10 +40,17 @@ angular.module('aliceApp')
       $scope.$dismiss();
     }
 
-    vm.startLogin = function () {
+    vm.startLogin = function (mode) {
       $scope.$dismiss();
       $uibModal.open({
-        templateUrl: '/components/auth/loginModal.html'
+        templateUrl: '/components/auth/loginModal.html',
+        controller: 'LoginController',
+            controllerAs : 'loginCtrl',
+            resolve: {
+                modalMode : function() {
+                     return mode
+                }
+            }
       });
     };
 

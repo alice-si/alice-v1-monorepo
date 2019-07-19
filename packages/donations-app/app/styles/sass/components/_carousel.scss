@@ -78,6 +78,10 @@
   margin: 30px -10px;
   padding: 0;
 
+  &-goal {
+    scroll-snap-align: start;
+  }
+
   &-image {
     max-height: 255px;
   }

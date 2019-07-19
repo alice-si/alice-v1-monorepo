@@ -1,4 +1,4 @@
-<div class="modal-body" ng-controller="LoginController as loginCtrl">
+<div class="modal-body">
     <a class="modal-close" ng-click="loginCtrl.dismissModal()">×</a>
     <h2 class="modal-title">{{ loginCtrl.getTextsForMode().title }}</h2>
 
@@ -69,7 +69,6 @@
           Sign up
         </a>
       </p>
-      <!-- We cannot allow this registration mode until MangoPay new agreement -->
       <p class="alice-grey center"
          ng-hide="loginCtrl.mode == 'EMAIL_REGISTRATION'">
          Want to skip registration?

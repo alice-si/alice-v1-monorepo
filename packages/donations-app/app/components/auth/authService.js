@@ -193,7 +193,14 @@ angular.module('aliceApp')
     this.showLogInModal = function (followUp) {
       afterLoginFunction = followUp;
       $uibModal.open({
-        templateUrl: '/components/auth/loginModal.html'
+        templateUrl: '/components/auth/loginModal.html',
+        controller: 'LoginController',
+        controllerAs : 'loginCtrl',
+        resolve: {
+            modalMode : function() {
+                 return 'LOGIN'
+            }
+        }
       });
     };
 
