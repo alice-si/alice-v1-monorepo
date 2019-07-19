@@ -122,6 +122,13 @@ module.exports = function (app) {
           `is achieved`);
       }
 
+      let fundsAvailable = await Utils.getAmountAvailableForProject(project);
+      if (fundsAvailable < totalClaim) {
+        return res.status(400).send(
+          `Cannot claim ${totalClaim / 100} GBP: ` +
+          `Only ${fundsAvailable / 100} GBP unclaimed`);
+      }
+
       let validations = [];
       for (let i = 0; i < quantity; i++) {
         validations.push(new Validation({
