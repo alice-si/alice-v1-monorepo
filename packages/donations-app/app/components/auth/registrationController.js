@@ -4,7 +4,8 @@ angular.module('aliceApp')
     var vm = this;
     vm.credentials = {};
     vm.registration = {
-      agreeAlice: true
+      agreeAlice: true,
+      agreeContact: true,
     };
     vm.mode = 'REGISTRATION'; // enum: ['REGISTRATION', 'REGISTRATION_FININSHING']
     if (AuthService.getEmailForSignupFinishing()) {
@@ -45,12 +46,12 @@ angular.module('aliceApp')
       $uibModal.open({
         templateUrl: '/components/auth/loginModal.html',
         controller: 'LoginController',
-            controllerAs : 'loginCtrl',
-            resolve: {
-                modalMode : function() {
-                     return mode
-                }
+        controllerAs : 'loginCtrl',
+        resolve: {
+            modalMode : function() {
+                 return mode
             }
+        }
       });
     };
 
