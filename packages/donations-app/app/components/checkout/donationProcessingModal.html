@@ -1,26 +1,33 @@
 <div>
   <div id="donation-question-modal" class="modal-body" ng-show="dpCtrl.mode != '3DS'">
 
-    <div class="content" style="text-align: center">
+    <div class="content center">
 
       <treasure-overlay-spinner active="dpCtrl.donating">
 
-        <button id="close-question-button" class="btn btn-primary btn-donate btn-modal" ng-click="dpCtrl.edit()"
-                type="submit" style="margin: 13% 0 5% 0">
-          Edit donation
-        </button>
 
-        <div>
-          <div class="description" style="padding: 1rem 0 0 0">
+        <div class="row">
+          <h6 class="center alice-dark-grey col-md-12" style="margin: 5% 0 2%">
             You are about to donate
-          </div>
+          </h6>
 
-          <div class="description" style="font-size: 3rem; font-weight: 300; padding: 10%  0 0 0">
+          <h1 class="col-md-12 alice-blue center">
             {{dpCtrl.donation.amount | money}}
-          </div>
-
-          <button id="close-question-button" class="btn btn-primary btn-donate btn-modal" ng-click="dpCtrl.donate()"
-                  type="submit" style="margin: 13% 0 5% 0">
+          </h1>
+        </div>
+        <div class="row">
+          <a id="close-question-button"
+                  class="center col-md-12"
+                  ng-click="dpCtrl.edit()"
+                  type="submit">
+            Edit
+          </a>
+        </div>
+        <div class="row center">
+          <button id="close-question-button"
+                  class="col-md-12"
+                  ng-click="dpCtrl.donate()"
+                  type="submit" style="margin: 5% 0 8% 0">
             Confirm
           </button>
         </div>
@@ -36,7 +43,3 @@
   </iframe>
 
 </div>
-
-
-
-

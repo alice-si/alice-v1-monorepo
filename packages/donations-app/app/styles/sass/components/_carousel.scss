@@ -1,28 +1,43 @@
 // I want to remove the carousel.css file ASAP
 // This means we have to decide if we're keeping the appeal page from 2018
 
-.c-dash__goals-carousel {
+.c-dash__goals-carousel, .appeal-v3__goals-carousel {
   position: relative;
 
   &-goal {
-    padding: 0 10px;
+    padding: 0 10px !important;
   }
 
   &-image {
     width: 100%;
-    max-height: 155px;
+    max-height: 205px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
   }
 
   &-content {
     margin: 0;
     background: #fff;
-    min-height: 350px;
-    @include box-shadow(0, 0, 3px, rgba(0, 0, 0, 0.1));
+    min-height: 300px;
+    @include box-shadow(0, 0, 6px, rgba(0, 0, 0, 0.2));
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
     color: $alice-dark;
     text-align: left;
     position: relative;
+
+    h6 {
+      font-family: $source;
+      letter-spacing: 0px;
+      font-size: 14px;
+      font-weight: 300;
+    }
+
+    p {
+      font-family: $source;
+      font-size: 18px !important;
+      font-weight: 400 !important;
+    }
   }
 
   &-proof {
@@ -48,5 +63,46 @@
 
   .carousel-control.right, .carousel-control.left  {
     background: linear-gradient(to right,rgba(0,0,0,0) 0,rgba(0,0,0,0) 100%)
+  }
+}
+
+.c-dash__goals-carousel {
+
+  &-content {
+    min-height: 350px;
+  }
+}
+
+.appeal-v3__goals-carousel {
+  height: 460px;
+  margin: 30px -10px;
+  padding: 0;
+
+  &-goal {
+    scroll-snap-align: start;
+  }
+
+  &-image {
+    max-height: 255px;
+  }
+  &-content {
+    padding: 22px !important;
+    min-height: 260px;
+  }
+
+  &-bottom {
+    padding-left: 0;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .appeal-v3__goals-carousel {
+    .carousel-control .glyphicon-chevron-left, .carousel-control .icon-prev {
+      margin-left: -30px;
+    }
+
+    .carousel-control .glyphicon-chevron-right, .carousel-control .icon-prev {
+      margin-right: -30px;
+    }
   }
 }

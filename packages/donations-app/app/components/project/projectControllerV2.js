@@ -1,5 +1,5 @@
 angular.module('aliceApp')
-  .controller('ProjectControllerV2', ['$uibModal', '$stateParams', 'ProjectService',  '$scope', '$state', function($uibModal, $stateParams, ProjectService, $scope, $state) {
+  .controller('ProjectControllerV2', ['$uibModal', '$stateParams', 'ProjectService',  '$scope', '$state', 'CheckoutService', function($uibModal, $stateParams, ProjectService, $scope, $state, CheckoutService) {
     var vm = this;
 
 		ProjectService.getProjectDetails($stateParams.projectCode).then(function (result) {
@@ -22,9 +22,10 @@ angular.module('aliceApp')
 				elem.lightColor = elem.color ? convertHex(elem.color, 0.4) : 'rgba(255, 255, 255, 0.3)';
 			});
 
+			vm.goals = _.chunk(vm.model._outcomes, 3);
+
 			vm.model.percentageCompleted = Math.floor((100 * vm.model.amountValidated) / vm.model.fundingTarget);
 		});
-
 		function convertHex(hex, opacity) {
 			hex = hex.replace('#','');
 			let r = parseInt(hex.substring(0,2), 16);
@@ -36,11 +37,26 @@ angular.module('aliceApp')
 		}
 
 		vm.donate = function() {
-      $uibModal.open({
-        templateUrl: '/components/checkout/checkoutModal.html',
-        controller: 'CheckoutController as checkCtrl',
-      });
+			CheckoutService.startCheckout(vm.model);
 		}
+
+
+		$('.carousel .item').each(function(){
+			var next = $(this).next();
+			if (!next.length) {
+				next = $(this).siblings(':first');
+			}
+			next.children(':first-child').clone().appendTo($(this));
+
+			for (var i=0;i<2;i++) {
+				next=next.next();
+				if (!next.length) {
+					next = $(this).siblings(':first');
+				}
+
+				next.children(':first-child').clone().appendTo($(this));
+			}
+		});
 }])
 .directive('appealGoal', function() {
 	return {

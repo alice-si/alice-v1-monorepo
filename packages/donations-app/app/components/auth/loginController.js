@@ -1,5 +1,5 @@
 angular.module('aliceApp')
-  .controller('LoginController', ['$state', '$scope', 'AuthService', 'NotificationService', '$uibModal', '$uibModalStack', function ($state, $scope, AuthService, NotificationService, $uibModal, $uibModalStack) {
+  .controller('LoginController', ['$state', '$scope', 'AuthService', 'NotificationService', '$uibModal', '$uibModalStack', 'modalMode', function ($state, $scope, AuthService, NotificationService, $uibModal, $uibModalStack, modalMode) {
     var vm = this;
     vm.credentials = {};
     vm.mode = 'LOGIN'; // enum: ['LOGIN', 'EMAIL_REGISTRATION', 'RESET']
@@ -20,6 +20,10 @@ angular.module('aliceApp')
           throw `Error: mode is unknonw: ${vm.mode}`;
       }
     };
+
+    if(modalMode) {
+      vm.mode = modalMode;
+    }
 
     vm.login = function () {
       AuthService.login(vm.credentials).then(
@@ -62,6 +66,7 @@ angular.module('aliceApp')
     };
 
     vm.getTextsForMode = function () {
+      console.log(vm.mode);
       switch (vm.mode) {
         case 'LOGIN':
           return {
@@ -87,8 +92,6 @@ angular.module('aliceApp')
     };
 
     vm.registerEmail = function () {
-      // extendContactAgreement();
-      console.log(vm.credentials)
       AuthService.registerEmail(vm.credentials.email).then(function () {
         $uibModalStack.dismissAll('Closing modal after registering email');
       }).catch((failure) => {
@@ -101,12 +104,6 @@ angular.module('aliceApp')
     vm.signUpWithEmail = function (email) {
       $state.go('signup-finishing', {email});
     };
-    //
-    // let extendContactAgreement = function() {
-    //   let flag = vm.credentials.disagreeContact;
-    //   vm.credentials.agreeContact = !flag;
-    //   vm.credentials.agreeAlice = !flag;
-    // }
 
     return vm;
   }]);
