@@ -126,7 +126,7 @@ module.exports = function (app) {
       if (fundsAvailable < totalClaim) {
         return res.status(400).send(
           `Cannot claim ${totalClaim / 100} GBP: ` +
-          `Only ${fundsAvailable / 100} GBP donated so far`);
+          `Only ${fundsAvailable / 100} GBP unclaimed`);
       }
 
       let validations = [];
