@@ -6,7 +6,7 @@
 // - ETH_NETWORK_NAME (to rinkeby)
 // - DB_URL (to stage db url)
 
-// USAGE: source .envrc && node tools/send-concurrent-tx.js
+// USAGE: node tools/send-concurrent-tx.js
 
 const config = require('../config');
 const mongoose = require('mongoose');
