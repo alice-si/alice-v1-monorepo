@@ -1,0 +1,55 @@
+<div>
+    <div class="modal-body">
+        <a class="modal-close" ng-click="$dismiss()">×</a>
+        <h2 class="modal-title">Donate</h2>
+            <div class="row">
+                <div>
+                    <div ng-show="checkCtrl.project.status != 'ACTIVE' && checkCtrl.project.status != 'FINISHED' && checkCtrl.project.status">
+                        You can't donate to project with status: {{checkCtrl.project.status}}
+                    </div>
+
+                    <div ng-show="checkCtrl.project.status == 'ACTIVE'">
+
+                        <!-- TABS -->
+                        <!--<ul class="nav nav-tabs">-->
+                            <!--<li style="margin-left: 1vw" class="nav-item">-->
+                                <!--<a-->
+                                        <!--class="nav-link checkout-tab {{ ['CARD', '3DS'].includes(checkCtrl.mode) ? 'active' : '' }}"-->
+                                        <!--href="#" ng-click="checkCtrl.setMode('CARD')"-->
+                                <!--&gt;-->
+                                    <!--Card-->
+                                <!--</a>-->
+                            <!--</li>-->
+                            <!--<li class="nav-item">-->
+                                <!--<a-->
+                                        <!--class="nav-link checkout-tab {{ checkCtrl.mode == 'BANK_TRANSFER' ? 'active' : '' }}"-->
+                                        <!--href="#" ng-click="checkCtrl.setMode('BANK_TRANSFER')"-->
+                                <!--&gt;-->
+                                    <!--Bank transfer-->
+                                <!--</a>-->
+                            <!--</li>-->
+                            <!--<li ng-show="true && checkCtrl.donation && checkCtrl.donation.bankTransferData" class="nav-item">-->
+                                <!--<a-->
+                                        <!--class="nav-link checkout-tab {{ checkCtrl.mode == 'BANK_TRANSFER_REQUESTED' ? 'active' : '' }}"-->
+                                        <!--href="#" ng-click="checkCtrl.setMode('BANK_TRANSFER_REQUESTED')"-->
+                                <!--&gt;-->
+                                    <!--Bank transfer details-->
+                                <!--</a>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+
+
+                        <!-- CONTENT -->
+                        <ng-include src="'/components/checkout/3DS.html'"></ng-include>
+                        <ng-include src="'/components/checkout/cardForm.html'"></ng-include>
+                        <ng-include src="'/components/checkout/bankTransferForm.html'"></ng-include>
+                        <ng-include src="'/components/checkout/bankTransferDetails.html'"></ng-include>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+    </div>
+</div>

@@ -19,7 +19,7 @@
           <h3 class="goals-dash__greeting">
             Hi {{ dashCtrl.loggedUser.firstName }}
             <span><p style="margin: 2px 0 0 5px;">
-              <ng-pluralize count="dashCtrl.validated_outcomes.length"
+              <ng-pluralize count="dashCtrl.totalGoalsAchieved"
                             when="{'0': '- No goals have been validated yet',
                                    '1': '- We have achieved 1 goal',
                                    'other': '- We have achieved {} goals'}">
@@ -51,11 +51,11 @@
             <charity-dashboard-people people="">
             </charity-dashboard-people>
           </div>
-        </uib-tab>
-        <uib-tab disable="true" heading="Performance">
+        </uib-tab>-->
+        <!-- <uib-tab disable="true" heading="Performance">
           <div class="row">
           </div>
-        </uib-tab> -->
+        </uib-tab>  -->
       </uib-tabset>
     </div>
 

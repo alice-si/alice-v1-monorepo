@@ -66,6 +66,7 @@
     "mustache": "^2.2.1",
     "passport": "^0.3.0",
     "passport-jwt": "^2.2.1",
+    "random-name": "^0.1.2",
     "request-promise": "^4.2.4",
     "validator": "^7.0.0"
   },

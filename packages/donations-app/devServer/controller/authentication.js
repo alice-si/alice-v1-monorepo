@@ -145,7 +145,7 @@ module.exports = function (app) {
     });
     return res.json({token});
   }));
-  
+
   /* This function handles 3 cases:
     - registering a new simple user
     - registering a new full user
@@ -185,26 +185,25 @@ module.exports = function (app) {
     } else {
       unsavedUser = new User(selectedUserFields);
     }
-     
+
     unsavedUser.superadmin = false;
     if (unsavedUser.residence != 'GB') {
       unsavedUser.giftAid = false;
     }
     if (isFullUser) {
       unsavedUser.isSimpleUser = false;
-      // could be uncommented after KYC changes
-      // unsavedUser.nationality = DEFAULT_NATIONALITY;
-      // unsavedUser.dateOfBirth = DEFAULT_BIRTHDAY;
-      // unsavedUser.residence = DEFAULT_RESIDENCE;
     } else {
       unsavedUser.isSimpleUser = true;
       // Mangopay requires these fields not to be empty
       unsavedUser.firstName = TEMP_FIRST_NAME;
       unsavedUser.lastName = TEMP_LAST_NAME;
-      unsavedUser.dateOfBirth = DEFAULT_BIRTHDAY;
-      unsavedUser.nationality = DEFAULT_NATIONALITY;
-      unsavedUser.residence = DEFAULT_RESIDENCE;
     }
+
+    // Setting default values
+    unsavedUser.dateOfBirth = DEFAULT_BIRTHDAY;
+    unsavedUser.nationality = DEFAULT_NATIONALITY;
+    unsavedUser.residence = DEFAULT_RESIDENCE;
+
     // registering mango wallet and user
     if (!unsavedUser.mangoWalletId || !unsavedUser.mangoUserId) {
       unsavedUser = await Mango.registerUser(unsavedUser);

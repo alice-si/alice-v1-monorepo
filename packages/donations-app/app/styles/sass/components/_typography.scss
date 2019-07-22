@@ -1,3 +1,94 @@
+h1 {
+	font-family: $source;
+	font-weight: 400;
+	font-size: 40px;
+	color: $alice-dark-text;
+	line-height: 68px;
+}
+
+h2 {
+	font-family: $source;
+	font-weight: 400;
+	font-size: 28px;
+	color: $alice-blue;
+}
+
+h3 {
+	font-family: $source;
+	font-weight: 400;
+	font-size: 26px;
+	color: $alice-dark-grey;
+	line-height: 43px;
+	letter-spacing: 1px;
+}
+
+h4 {
+	font-family: $source;
+	font-weight: 400 !important;
+	font-size: 26px;
+	letter-spacing: 0.25px;
+	color: $alice-blue;
+	line-height: 36px;
+}
+
+h5 {
+	font-family: $source;
+	font-weight: 400 !important;
+	font-size: 22px;
+	letter-spacing: 0.25px;
+	color: $alice-blue;
+	line-height: 36px;
+}
+
+h6 {
+	font-family: $source;
+	font-size: 10px;
+	font-weight: 500;
+	letter-spacing: 5px;
+	text-transform: uppercase;
+}
+
+p {
+	font-family: $source !important;
+	letter-spacing: 0.75px;
+}
+
+a {
+	font-family: $source !important;
+	letter-spacing: 0.75px;
+}
+
+div {
+  font-family: "Avenir", "Helvetica", "Liberation Sans", "Arial", sans-serif;
+}
+
+a:hover {
+  text-decoration: none;
+	cursor: pointer;
+}
+
+a:-webkit-any-link {
+  text-decoration: none;
+}
+
+.center {
+	text-align: center !important;
+}
+
+.left {
+	text-align: left !important;
+}
+
+.right {
+	text-align: right !important;
+}
+
+
+
+/** This is now deprecated **/
+/** We will start to migrate to Source Sans Pro
+  * across the whole platform, in a couple months **/
+
 @font-face {
     font-family: "Avenir";
     src: url('https://s3.eu-west-2.amazonaws.com/alice-res/AvenirNext-UltraLight.ttf');
@@ -38,80 +129,6 @@
   font-weight: 500;
 }
 
-
-h1 {
-	font-family: "Avenir", "Helvetica", "Liberation Sans", "Arial", sans-serif;
-	font-weight: 400;
-	font-size: 44px;
-	color: $alice-dark-text;
-	line-height: 68px;
-}
-
-h2 {
-	font-family: "Avenir", "Helvetica", "Liberation Sans", "Arial", sans-serif;
-	font-weight: 500;
-	font-size: 30px;
-	color: $alice-blue;
-}
-
-h3 {
-	font-family: "Avenir", "Helvetica", "Liberation Sans", "Arial", sans-serif;
-	font-weight: 300;
-	font-size: 28px;
-	color: $alice-blue;
-	line-height: 43px;
-	letter-spacing: 1px;
-}
-
-h4 {
-	font-family: "Avenir", "Helvetica", "Liberation Sans", "Arial", sans-serif;
-	font-weight: 400 !important;
-	font-size: 20px;
-	letter-spacing: 0.25px;
-	color: $alice-blue;
-	line-height: 36px;
-}
-
-h5 {
-	font-family: "Avenir", "Helvetica", "Liberation Sans", "Arial", sans-serif;
-	font-size: 24px;
-	font-weight: 200;
-	letter-spacing: 1px;
-}
-
-h6 {
-	font-family: "Avenir", "Helvetica", "Liberation Sans", "Arial", sans-serif;
-	font-size: 10px;
-	font-weight: 500;
-	letter-spacing: 5px;
-	text-transform: uppercase;
-}
-
-p, a {
-	font-family: 'Roboto', sans-serif;
-	letter-spacing: 0.75px;
-}
-
-div {
-  font-family: "Avenir", "Helvetica", "Liberation Sans", "Arial", sans-serif;
-}
-
-a:hover {
-  text-decoration: none;
-}
-
-a:-webkit-any-link {
-  text-decoration: none;
-}
-
-.white {
-	color: $white;
-}
-
-.alice-blue {
-	color: $alice-blue !important;
-}
-
 .small {
 	font-size: 18px !important;
 	font-weight: 100 !important;
@@ -135,16 +152,6 @@ a:-webkit-any-link {
 	letter-spacing: 1px;
 }
 
-.label {
-	font-family: 'Roboto';
-	font-weight: 'Bold';
-	font-size: 13px;
-	color: $alice-grey;
-	letter-spacing: 1.5px;
-	text-transform: uppercase;
-	line-height: 22px;
-}
-
 .label-avenir {
 	font-family: 'Avenir';
 	font-weight: 200;
@@ -153,6 +160,10 @@ a:-webkit-any-link {
   letter-spacing: 2px;
 	text-transform: uppercase;
 	line-height: 22px;
+}
+
+.uppercase {
+	text-transform: uppercase !important;
 }
 
 /* `.main-title` : Title for appeal-page splash

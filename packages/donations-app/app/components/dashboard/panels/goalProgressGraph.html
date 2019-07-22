@@ -1,0 +1,36 @@
+<div class="donations">
+  <div class="row" style="margin-top: 25px;">
+    <div class="col-md-5 col-sm-6 col-xs-6">
+      <div class="col-md-3"
+           ng-repeat="option in graphCtrl.axisOptions"
+           style="margin-right: 3px;">
+        <button type="button"
+                name="button"
+                ng-click="setXAxis(option)"
+                class="graph-option">{{option}}</button>
+      </div>
+    </div>
+    <div class="col-md-7 col-sm-6 col-xs-6">
+      <div class="donations-total-header">
+        <p><span class="circle"
+                 style="background-color: #684fbe;"></span>
+          <span style="margin-left: 5px;">
+              {{graphCtrl.total}}
+            <ng-pluralize count="graphCtrl.total"
+                          when="{'1': 'Goal complete',
+                                 'other': 'Goals completed'}">
+            </ng-pluralize></span></p>
+        </div>
+      </div>
+  </div>
+  <div>
+      <!-- <canvas class="chart chart-line"
+              chart-data="graphCtrl.goalGraphData"
+              chart-labels="graphCtrl.dates"
+              chart-options="graphCtrl.lineChartOptions"
+              chart-dataset-override="graphCtrl.datasetOverride"
+              width="400"
+              height="150">
+      </canvas> -->
+  </div>
+</div>

@@ -441,11 +441,13 @@
 
 .table-search {
   border: 1px solid #CCCCCC;
+	border-radius: 4px;
   font-size: 1.2rem;
   color: black;
   width: 15vw;
   float: right;
-  margin-right: 50px;
+  margin-right: 20px;
+  padding: 5px 10px;
 }
 
 @media (max-width: 600px) {
@@ -458,12 +460,10 @@
   float: right;
   font-size: 1.4rem;
   padding: 4px 12px;
-  border-radius: 0;
-  margin-top: -5px;
-  background-color: #1998a2;
+  border-radius: 4px;
+  background-color: $alice-tonal-medium;;
   border: 1px solid #FFFFFF;
   color: #FFFFFF;
-  margin-right: 50px;
 }
 
 .donations-total-header {

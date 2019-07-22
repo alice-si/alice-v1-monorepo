@@ -9,7 +9,7 @@
 </div>
 
 <!-- Visible when outcome is selected -->
-<div class="col-md-8" ng-repeat="outcome in prWizardCtrl.project.outcomes"
+<div class="col-md-8" ng-repeat="outcome in prWizardCtrl.project.outcomes track by $index"
      ng-show="prWizardCtrl.mode == prWizardCtrl.modes.OUTCOMES && prWizardCtrl.selectedOutcome === outcome">
   <div class="form-group" has-error>
     <label class="col-sm-3 control-label">Title *</label>
@@ -67,21 +67,11 @@
   </div>
 
   <div class="form-group">
-    <label class="col-sm-3 control-label">Target *</label>
-
-    <div class="col-sm-9">
-      <input type="text" class="form-control" ng-model="outcome.target"
-             placeholder="Target"
-             name="target" required>
-    </div>
-  </div>
-
-  <div class="form-group">
     <label class="col-sm-3 control-label">Global cost *</label>
 
     <div class="col-sm-9">
       <input type="text" class="form-control" ng-model="outcome.amount"
-             placeholder="Cost" money00
+             placeholder="Cost per Validation" money00
              name="cost" required>
     </div>
   </div>
@@ -97,12 +87,33 @@
   </div>
 
   <div class="form-group">
-    <label class="col-sm-3 control-label">Cost per unit</label>
+    <label class="col-sm-3 control-label">Cost per Unit</label>
 
     <div class="col-sm-9">
       <input type="text" class="form-control" ng-model="outcome.costPerUnit"
              placeholder="Cost per unit" money00
              name="costPerUnit">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-3 control-label">Number of units</label>
+
+    <div class="col-sm-9">
+      <input type="text" class="form-control" ng-model="outcome.quantityOfUnits"
+             placeholder="Number of units in goal: 1 if singular goal."
+             name="quantityOfUnits" required>
+      <error-message name="quantityOfUnits" error="required"> You must enter the number of units in this outcome
+      </error-message>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-3 control-label">Total Target</label>
+
+    <div class="col-sm-9">
+      <p ng-if="!outcome.quantityOfUnits || !outcome.costPerUnit">Please enter number of units & cost above to calculate total</p>
+      <p ng-if="outcome.quantityOfUnits && outcome.costPerUnit ">{{outcome.quantityOfUnits * outcome.costPerUnit | money }}</p>
     </div>
   </div>
 

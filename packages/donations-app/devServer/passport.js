@@ -17,7 +17,8 @@ function checkScope (scope, req) {
     let allowedEndpoints = [
       'checkDonationStatus',
       'sendDonation',
-      'preRegisterCard'
+      'preRegisterCard',
+      'check3DSSupport'
     ];
     if (!epAllowed(req, allowedEndpoints)) {
       let err = new Error(`Access denied scope: ${scope}, path: ${req.path}`);
