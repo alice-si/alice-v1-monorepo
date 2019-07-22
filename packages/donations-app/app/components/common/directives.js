@@ -55,7 +55,7 @@ angular.module('aliceApp')
       restrict: 'E',
       transclude: true,
       scope: {},
-      template: '<span ng-show="(formCtrl.$submitted || inputCtrl.$touched) && inputCtrl.$error[error]" class="help-block" ng-transclude></span>',
+      template: '<p ng-show="(formCtrl.$submitted || inputCtrl.$touched) && inputCtrl.$error[error]" class="help-block" ng-transclude></p>',
       link: function ($scope, element, attrs, ctrl) {
         $scope.formCtrl = ctrl;
         $scope.inputCtrl = ctrl[attrs.name];

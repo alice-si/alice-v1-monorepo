@@ -1,17 +1,25 @@
 <div class="donations">
-  <table class="impact-table">
+  <div class="col-md-6 col-md-offset-6">
+    <a id="exportDonationsButton"
+           class="btn btn-primary btn-export"
+           ng-click="donCtrl.exportToExcel()">Export data</a>
+        <input class="table-search" ng-model="donCtrl.donationSearch" placeholder="Search">
+  </div>
+  <table id="donations"
+         class="impact-table"
+         style="margin-top: 20px;">
     <tr>
-      <td><p>Name</p></td>
-      <td><p>Email</p></td>
-      <td><p>Donated</p></td>
-      <td><p>Date</p></td>
-      <td><p>Received</p></td>
-      <td><p>Gift Aid</p></td>
-      <td><p>Contact</p></td>
+      <td><p>Name<sort action="donCtrl.sort" field="fullName" style="margin-left: 10px;"></sort></p></td>
+      <td><p>Email<sort action="donCtrl.sort" field="email" style="margin-left: 10px;"></sort></p></td>
+      <td><p>Donated<sort action="donCtrl.sort" field="donated" style="margin-left: 10px;"></sort></p></td>
+      <td><p>Date<sort action="donCtrl.sort" field="date" style="margin-left: 10px;"></sort></p></td>
+      <td><p>Received<sort action="donCtrl.sort" field="paidOut" style="margin-left: 10px;"></sort></p></td>
+      <td><p>Gift Aid<sort action="donCtrl.sort" field="giftAid" style="margin-left: 10px;"></sort></p></td>
+      <td><p>Contact<sort action="donCtrl.sort" field="agreeContact" style="margin-left: 10px;"></sort></p></td>
     </tr>
     <tr ng-repeat="donation in donCtrl.users.slice(((currentPage - 1) * itemsPerPage),
                    ((currentPage) * itemsPerPage))
-                   | filter:donCtrl.donationSearch
+                   | filter: donCtrl.donationSearch
                    | orderBy : donCtrl.sortField"
         class="donation-row">
         <td>{{donation.fullName}}</td>
@@ -19,11 +27,7 @@
         <td>{{donation.donated | money}}</td>
         <td>{{donation.date | date}}</td>
         <td>{{donation.totalReceived | money : '0'}}</td>
-        <td>{{donation.giftAid ? 'Yes' : 'No'}}
-            <!--  FIXME: Turning link off until we implement what should be there
-            <a>{{donation.giftAid ? 'Show' : ''}}</a>
-            -->
-        </td>
+        <td><a ng-click="donCtrl.openGiftAidAddress(donation)">{{donation.giftAid ? 'Show' : ''}}</a><span ng-hide="donation.giftAid">No</span></td>
         <td>{{donation.agreeContact ? 'Yes' : 'No'}}</td>
     </tr>
   </table>

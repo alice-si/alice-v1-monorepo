@@ -7,6 +7,7 @@
 // Components
 
 @import "components/typography";
+@import "components/rowHorizontal";
 @import "components/grid";
 @import "components/buttons";
 @import "components/navigation";
@@ -14,14 +15,17 @@
 @import "components/checkout";
 @import "components/card";
 @import "components/goals";
-@import "components/progressBar";
+@import "components/graph";
 @import "components/loader";
-
+@import "components/carousel";
+@import "components/loginModal";
+@import "components/forms";
 
 // Pages
 @import "pages/home";
 @import "pages/appeal";
 @import "pages/appeal2";
+@import "pages/appeal3";
 @import "pages/appealDesktop";
 @import "pages/appealMobile";
 @import "pages/dashboard";

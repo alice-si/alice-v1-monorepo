@@ -60,6 +60,11 @@
 
 
 @media screen and (min-width: 760px) {
+
+  #dashboardCarousel > .carousel-control {
+    width: 30px !important;
+  }
+  
   /******* CAROUSEL FOR HOMEPAGE ********/
   .projects-carousel {
     height: 320px;

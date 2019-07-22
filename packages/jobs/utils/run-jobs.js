@@ -49,26 +49,28 @@ module.exports = function (interval) {
 
   runJob(AccountCreatingJob.execute, interval);
 
-  runJob(PaymentCollectingJob.execute, interval);
+  // runJob(AccountCreatingJob.execute, interval);
 
-  runJob(ImpactFetchingJob.execute, interval);
+  // runJob(PaymentCollectingJob.execute, interval);
 
-  runJob(MintingJob.execute, interval);
-  runJob(MintingJob.check, interval);
+  // runJob(ImpactFetchingJob.execute, interval);
 
-  runJob(DepositingJob.execute, interval);
-  runJob(DepositingJob.check, interval);
+  // runJob(MintingJob.execute, interval);
+  // runJob(MintingJob.check, interval);
 
-  runClassJob(new ClaimingJob(), interval);
+  // runJob(DepositingJob.execute, interval);
+  // runJob(DepositingJob.check, interval);
 
-  runClassJob(new ValidatingJob(), interval);
+  // runClassJob(new ClaimingJob(), interval);
 
-  runJob(LinkingJob.execute, interval);
-  runJob(LinkingJob.check, interval);
+  // runClassJob(new ValidatingJob(), interval);
 
-  runJob(ProjectDeploymentJob.execute, interval);
+  // runJob(LinkingJob.execute, interval);
+  // runJob(LinkingJob.check, interval);
+
+  // runJob(ProjectDeploymentJob.execute, interval);
 
   runQuickJob(MailSenderJob.execute);
 
-  runDailyJob(DonationStatusCheckingJob.execute);
+  // runDailyJob(DonationStatusCheckingJob.execute);
 };

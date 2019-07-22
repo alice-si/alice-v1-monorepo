@@ -81,6 +81,9 @@ angular.module('aliceApp')
     vm.submitSaveProject = function () {
       vm.projectForm.$submitted = true;
       if (vm.projectForm.$valid) {
+				vm.project.outcomes.forEach((elem) => {
+					elem.target = elem.costPerUnit * elem.quantityOfUnits;
+				});
 				console.log(vm.project);
         ProjectService.saveProjectWithOutcomes(vm.project)
           .then(function (response) {
