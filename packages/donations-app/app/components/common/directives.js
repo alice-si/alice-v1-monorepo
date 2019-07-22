@@ -282,7 +282,7 @@ angular.module('aliceApp')
             $http.get(API + 'getAWSPostData/' + filename).then(function (result) {
               var postData = result.data.postData;
 
-              var formData = new FormData(result.data.postData);
+              var formData = new FormData();
               for (var key in postData) {
                 formData.append(key, postData[key]);
               }

@@ -1,6 +1,5 @@
 const contract = require('truffle-contract');
 const ethers = require('ethers');
-
 const config = require('../config');
 const logger = require('./logger')('utils/contract-utils');
 const ModelUtils = require('../utils/model-utils');
@@ -55,21 +54,18 @@ async function getWallet(address) {
     throw new Error(`Could not get wallet for address: ${address}`);
   }
   
-  let wallet = getWalletForIndex(ethAddress.index);
-  let provider = getProvider();
+  return getWalletForIndex(ethAddress.index);
+}
 
-  return wallet.connect(provider);
+function getMainWallet() {
+  return getWalletForIndex(0);
 }
 
 function getWalletForIndex(index) {
   let path = `m/44'/60'/0'/0/${index}`;
-  return new ethers.Wallet.fromMnemonic(config.mnemonic, path);
-}
-
-function getMainWallet() {
-  const provider = getProvider();
-  const mainWallet = ethers.Wallet.fromMnemonic(config.mnemonic);
-  return mainWallet.connect(provider);
+  let mnemonicWallet = ethers.Wallet.fromMnemonic(config.mnemonic, path);
+  let provider = getProvider();
+  return mnemonicWallet.connect(provider);
 }
 
 function equalAddresses(addr1, addr2) {
@@ -95,7 +91,7 @@ async function validateNetworkId(provider) {
   const network = await provider.getNetwork();
   if (network.chainId !== networkId) {
     logger.error(`Network id = ${network.chainId}`
-      + `expected by config: ${networkId}`);
+      + ` expected by config: ${networkId}`);
   }
 }
 

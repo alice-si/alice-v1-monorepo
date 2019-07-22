@@ -4815,10 +4815,9 @@ ethers@^4.0.27:
     uuid "2.0.1"
     xmlhttprequest "1.8.0"
 
-ethers@^4.0.31:
-  version "4.0.31"
-  resolved "https://registry.yarnpkg.com/ethers/-/ethers-4.0.31.tgz#50b066d8c74140944edfd2ad0a805162c30e3a20"
-  integrity sha512-S2zKBGvEBIng7hghAXZ9259xCkClyRr/bM0F297O3lAnC6sYjTHNIMtiqWmA89qieAIyzWUZn/aCLUslRlJFkw==
+"ethers@https://github.com/alice-si/ethers.js":
+  version "4.0.34"
+  resolved "https://github.com/alice-si/ethers.js#2d3347971032f0e1c654687053f39259d4f2a209"
   dependencies:
     "@types/node" "^10.3.2"
     aes-js "3.0.0"
@@ -5645,10 +5644,10 @@ ganache-cli@^6.0.3:
     source-map-support "0.5.9"
     yargs "11.1.0"
 
-ganache-cli@^6.4.4:
-  version "6.4.4"
-  resolved "https://registry.yarnpkg.com/ganache-cli/-/ganache-cli-6.4.4.tgz#9772bba8585d6e2049bd85adf24369c1cc165170"
-  integrity sha512-JWygbyZuM2GQl2ZvU7tBkjpgJaKE/XEtB99ech17XTouuqLU5rBcyO3sMb/L83wAtzr0gBnTgenIBl+OeREpJw==
+ganache-cli@^6.5.0:
+  version "6.5.0"
+  resolved "https://registry.yarnpkg.com/ganache-cli/-/ganache-cli-6.5.0.tgz#5b2198c2931d3f2d3a2e239943a7b7073f9df651"
+  integrity sha512-z0NAozUg/JFWhisIxYlRLyCoZfO+X2W2ao6BAyCkgwAON1Xvj1n+xSZb8YQm1ShOPQQXFrodsYasYGHwvf+PMQ==
   dependencies:
     bn.js "4.11.8"
     source-map-support "0.5.9"
