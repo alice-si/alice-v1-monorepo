@@ -68,9 +68,21 @@
 
       <!-- Carousel: -->
         <div class="col-md-12" style="padding: 0;">
-          <div class="row-horizon" style="margin: 0;">
-            <a href=""><i class="fa fa-chevron-circle-left" style="position: absolute; margin-top: 230px; z-index: 100; font-size: 20px"></i></a>
-            <a href=""><i class="fa fa-chevron-circle-right" style="position: absolute; color: #9b9b9b; right: -10px; margin-top: 230px; z-index: 100; font-size: 20px"></i></a>
+          <div class="row-horizon"
+               id="appeal-carousel"
+               style="margin: 0;">
+            <a href="">
+              <i class="fa fa-chevron-circle-left"
+                 style="position: absolute; margin-top: 230px; z-index: 100; font-size: 20px"
+                 ng-click="scroll('left')">
+              </i>
+            </a>
+            <a href="">
+              <i class="fa fa-chevron-circle-right"
+                 style="position: absolute; color: #9b9b9b; right: -10px; margin-top: 230px; z-index: 100; font-size: 20px"
+                 ng-click="scroll('right')">
+              </i>
+            </a>
             <div class="appeal-v3__goals-carousel-goal col-md-4"
                  ng-repeat="goal in projectCtrl.model._outcomes">
               <div class="title-over-image">

@@ -2,7 +2,6 @@ angular.module('aliceApp')
   .controller('CheckoutController', ['$rootScope', '$uibModal', '$http', '$stateParams', '$state', '$sce', '$timeout', 'AuthService', 'ProjectService', 'NotificationService', 'API', '$scope', 'MANGO', 'CheckoutService', function ($rootScope, $uibModal, $http, $stateParams, $state, $sce, $timeout, AuthService, ProjectService, NotificationService, API, $scope, MANGO, CheckoutService) {
 
     const amounts = {
-      amount10: 1000,
       amount20: 2000,
       amount80: 8000,
       amount150: 15000,
@@ -106,7 +105,6 @@ angular.module('aliceApp')
         type: 'BANK_TRANSFER'
       };
       return $http.post(API + 'sendDonation', payment).then(function (result) {
-        console.log(result.data);
         NotificationService.success("Your donation request has been successfully saved");
         vm.setMode('BANK_TRANSFER_REQUESTED');
         vm.donation = result.data.donation;
