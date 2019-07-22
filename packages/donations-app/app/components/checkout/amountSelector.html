@@ -1,61 +1,30 @@
-<div class="row">
-  <div class="col-xs-12">
-    <p class="alice-grey">Enter Amount</p>
-    <div class="form-group" style="margin-bottom: 0px;">
-      <div class="row donation-amounts">
-        <div id="donate-amount-20" class="col-md-3 col-sm-3 col-xs-3">
-          <input
-            icheck
-            type="checkbox"
-            ng-model="checkCtrl.amount20"
-            ng-change="checkCtrl.onAmountChange('amount20')"
-          />
-          £20
-        </div>
-        <div id="donate-amount-80" class="col-md-3 col-sm-3 col-xs-3">
-          <input
-            icheck
-            type="checkbox"
-            ng-model="checkCtrl.amount80"
-            ng-change="checkCtrl.onAmountChange('amount80')"
-          />
-          £80
-        </div>
-        <div class="col-md-3 col-sm-3 col-xs-3">
-          <input
-            id="donate-amount-150"
-            icheck
-            type="checkbox"
-            ng-model="checkCtrl.amount150"
-            ng-change="checkCtrl.onAmountChange('amount150')"
-          />
-          £150
-        </div>
-        <div class="col-md-3 col-sm-3 col-xs-3">
-          <input
-            id="donate-amount-other"
-            icheck
-            type="checkbox"
-            ng-model="checkCtrl.amountOther"
-            ng-change="checkCtrl.onAmountChange('amountOther')"
-          />
-          <span>Other</span>
-        </div>
-        <div has-error
-             class="col-md-12 form-group">
-          <input
-            ng-show="checkCtrl.amountOther"
-            type="text"
-            class="col-md-12"
-            name="amountOtherValue"
-            ng-currency
-            min="0"
-            currency-symbol="£"
-            ng-model="checkCtrl.amountOtherValue"
-            ng-change="checkCtrl.onOtherChange()"
-          />
-        </div>
-      </div>
+<div class="row amount-selector">
+
+    <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12">
+      <p class="alice-grey amount-title">Enter Amount (£)</p>
     </div>
-  </div>
+    
+    <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-xs-4">
+      <img
+        class="amount-selector circle-icon"
+        src="https://alice-res.s3.eu-west-2.amazonaws.com/remove_circle_icon.svg"
+        ng-click="checkCtrl.decAmount()"
+      >
+    </div>
+    <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-xs-4">
+      <span class="gbp-input">
+        <input
+          class="amount-selector amount-input"
+          money00
+          ng-model="checkCtrl.donation.amount"
+        >    
+      </span>
+    </div>
+    <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-xs-4">
+      <img
+        class="amount-selector circle-icon"
+        src="https://alice-res.s3.eu-west-2.amazonaws.com/add_circle_icon.svg"
+        ng-click="checkCtrl.incAmount()"
+      >    
+    </div>
 </div>
