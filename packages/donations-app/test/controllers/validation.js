@@ -89,18 +89,19 @@ describe('ValidationController', function () {
   });
 
   describe('claimOutcome', async () => {
-    let charity, project, outcome, admin, donor;
+    let charity, project, outcome, admin, donor, amount = 100;
 
     beforeEach(async () => {
       charity = await TestUtils.createCharity();
       project = await TestUtils.createProject(charity, {fundingTarget: 1000});
-      outcome = await TestUtils.createOutcome(project, {amount: 100});
+      outcome = await TestUtils.createOutcome(project, {amount});
 
       admin = await TestUtils.createUser({
         password: 'foo',
         charityAdmin: charity._id,
       });
       donor = await TestUtils.createUser({password: 'bar'});
+      await TestUtils.createDonation(donor, project, {amount});
     });
 
     it('should create Validation objects if requested by admin', async () => {
@@ -164,13 +165,12 @@ describe('ValidationController', function () {
   });
 
   describe('approveClaim', async () => {
-    let charity, project, outcome, admin, validator;
-    let validation;
+    let charity, project, outcome, admin, validator, validation, amount = 100;
 
     beforeEach(async() => {
       charity = await TestUtils.createCharity();
       project = await TestUtils.createProject(charity);
-      outcome = await TestUtils.createOutcome(project, {amount: 100});
+      outcome = await TestUtils.createOutcome(project, {amount});
 
       admin = await TestUtils.createUser({
         password: 'foo',
@@ -182,15 +182,15 @@ describe('ValidationController', function () {
         validator: [project._id],
       });
 
-      [validation] = await TestUtils.testPost('claimOutcome', {
-        outcomeId: outcome._id,
-        quantity: 1,
-        password: 'foo',
-      }, null, admin);
+      validation = await TestUtils.createValidation(outcome, {
+        status: 'CREATED',
+        amount: outcome.amount,
+        _claimerId: admin._id
+      });
     });
 
     async function receiveDonations(amount) {
-      await TestUtils.createDonation(TestUtils.createUser(), project, {amount});
+      await TestUtils.createDonation(await TestUtils.createUser(), project, {amount});
     }
 
     async function finishClaiming() {
