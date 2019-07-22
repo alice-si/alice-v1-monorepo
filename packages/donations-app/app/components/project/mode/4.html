@@ -111,6 +111,46 @@
     </div>
     <div class="col-xs-12 col-md-12 col-lg-12 appeal-v3__stories">
       <h3 class="uppercase">Follow the story</h3>
+      <div class="col-md-12" style="padding: 0;">
+        <div class="row-horizon"
+             style="margin: 0;">
+          <a href="">
+            <i class="fa fa-chevron-circle-left"
+               style="position: absolute; margin-top: 230px; z-index: 100; font-size: 20px"
+               ng-click="scroll('left')">
+            </i>
+          </a>
+          <a href="">
+            <i class="fa fa-chevron-circle-right"
+               style="position: absolute; color: #9b9b9b; right: -10px; margin-top: 230px; z-index: 100; font-size: 20px"
+               ng-click="scroll('right')">
+            </i>
+          </a>
+          <div class="appeal-v3__goals-carousel-goal col-md-4"
+               ng-repeat="goal in projectCtrl.model._outcomes">
+            <div class="title-over-image">
+              <img src="{{ goal.image }}"
+                   alt="Image for {{ goal.title }}"
+                   class="appeal-v3__goals-carousel-image"
+                   style="filter: brightness(100%);"/>
+            </div>
+
+            <div class="appeal-v3__goals-carousel-content">
+              <div class="col-md-12 appeal-v3__goals-carousel-title">
+                <h6 style="opacity: 0.5;">Goal {{ $index + 1 }}</h6>
+                <p>{{ goal.description }}</p>
+              </div>
+              <div class="col-md-12 appeal-v3__goals-carousel-bottom">
+                <div class="col-md-12"
+                     style="padding: 0 20px 0 0;">
+                  <p>Cost per {{ goal.unit }}</p>
+                  <p style="font-weight: 600 !important; font-size: 22px !important">{{ goal.costPerUnit | money }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div ng-repeat="story in projectCtrl.model.myStory track by $index">
         <appeal-story story="story"></appeal-story>
       </div>
