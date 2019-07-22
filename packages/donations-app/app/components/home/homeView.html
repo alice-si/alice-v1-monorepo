@@ -1,4 +1,5 @@
-<div ng-controller="HomeController as homeCtrl">
+<div ng-controller="HomeController as homeCtrl"
+     class="home-container">
 
   <div class="home-splash-wrapper home-section col-md-12">
     <img id="home-splash-logo" src="https://s3.eu-west-2.amazonaws.com/alice-res/AliceLogoWhite.png"/>
@@ -79,10 +80,6 @@
     <div id="pilot-image" class="hidden-xs hidden-sm wow fadeInRight right">
       <img src="https://alex-s3-hatskier.s3.amazonaws.com/1534336890389_tom-parsons-426898-unsplash.jpg"/>
     </div>
-    <!-- Might remove -->
-    <!-- <div class="home-pilot-btn col-md-12">
-      <a href="#" class="underline-from-center">VIEW REPORT</a>
-    </div> -->
   </div>
 
   <div id="home-projects" class="home-projects-wrapper home-section col-md-12">
@@ -108,7 +105,7 @@
           <!--TODO parametrize the defualt landing mode for home page links -->
           <a href="/#/project/{{slide.projectCode}}/2">
             <div class="col-md-5 col-md-offset-1 col-xs-12 carousel-text">
-              <h1>{{ slide.projectTitle }}</h1>
+              <h1 style="color: #38D2DA;">{{ slide.projectTitle }}</h1>
               <div class="project-charity"> {{ slide.projectCharity }} </div>
               <div ng-bind-html="slide.projectDetails"></div>
             </div>
@@ -127,8 +124,8 @@
       </div>
     </div>
     <div class="col-md-10 home-charities-list">
-      <div ng-repeat="charity in homeCtrl.charities | limitTo: 4" class="home-charity">
-        <a ng-href="{{ charity.url }}" target="_blank"><img ng-src="{{ charity.darkPicture }}" class="charity-logo charity-logo-homepage"/></a>
+      <div ng-repeat="charity in homeCtrl.charities" class="home-charity" ng-if="charity.darkPicture">
+        <a  ng-href="{{ charity.url }}" target="_blank"><img ng-src="{{ charity.darkPicture }}" class="charity-logo charity-logo-homepage"/></a>
       </div>
     </div>
   </div>
@@ -156,7 +153,6 @@
                 </error-message>
               </div>
             </div>
-            <!-- -->
             <div class="form-small" id="form-email" has-error>
               <label class="sr-only" for="contactEmail">Email</label>
               <div>

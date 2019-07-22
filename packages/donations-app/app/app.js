@@ -69,50 +69,9 @@ angular.module('aliceApp', ['ui.router', 'angular-jwt', 'ui.bootstrap', 'ui.boot
         url: '/how-it-works/',
         templateUrl: '/components/how-it-works/howItWorksTemplate.html'
       })
-      .state('my-impact', {
-        url: '/my-impact/',
-        templateUrl: '/components/my-impact/myImpactView.html'
-      })
-      .state('validation', {
-        url: '/validation/',
-        templateUrl: '/components/validation/summaryView.html'
-      })
-      .state('validation-goals-dashboard', {
-        url: '/validation/:project',
-        templateUrl: '/components/validation/goalsDashboard.html'
-      })
-      .state('checkout', {
+			.state('checkout', {
         url: '/checkout/:projectCode',
         templateUrl: '/components/checkout/checkoutView.html'
-      })
-      .state('project-wizard', {
-        url: '/project-wizard/:code',
-        templateUrl: '/components/project-wizard/projectWizardView.html'
-      })
-      // PROJECT WIZARD
-      .state('projects', {
-        url: '/projects/',
-        templateUrl: '/components/project-wizard/projectsView.html'
-      })
-      .state('users', {
-        url: '/users/',
-        templateUrl: '/components/user/usersView.html'
-      })
-      .state('donations', {
-        url: '/donations/',
-        templateUrl: '/components/backoffice/donationsView.html'
-      })
-      .state('validations', {
-        url: '/validations/',
-        templateUrl: '/components/backoffice/validationsView.html'
-      })
-      .state('dashboard', {
-        url: '/dashboard/:tab',
-        templateUrl: '/components/dashboard/dashboardView.html'
-      })
-      .state('impacts', {
-        url: '/impacts/',
-        templateUrl: '/components/backoffice/impactsView.html'
       })
       .state('geek-mode', {
         url: '/geek-mode/',
@@ -121,10 +80,6 @@ angular.module('aliceApp', ['ui.router', 'angular-jwt', 'ui.bootstrap', 'ui.boot
       .state('faq', {
         url: '/faq/',
         templateUrl: '/components/faq/faqTemplate.html'
-      })
-      .state('charities', {
-        url: '/charities/',
-        templateUrl: '/components/charity/charitiesView.html'
       })
       .state('charity-admin', {
         url: '/charity-admin/:code',
@@ -153,7 +108,56 @@ angular.module('aliceApp', ['ui.router', 'angular-jwt', 'ui.bootstrap', 'ui.boot
       .state('oauth2', {
         url: '/oauth2',
         templateUrl: 'components/auth/oauth2View.html'
+      })
+			// Dashboards:
+      .state('validation', {
+        url: '/validation/',
+        templateUrl: '/components/validation/summaryView.html'
+      })
+      .state('validation-goals-dashboard', {
+        url: '/validation/:project',
+        templateUrl: '/components/validation/goalsDashboard.html'
+      })
+			.state('charity-dashboard', {
+        url: '/charity-dashboard/',
+        templateUrl: '/components/dashboard/charityDashboardHome.html'
+      })
+      .state('charity-dashboard-project', {
+        url: '/charity-dashboard/:project',
+        templateUrl: '/components/dashboard/charityDashboardView.html'
+      })
+			.state('my-impact', {
+        url: '/my-impact/',
+        templateUrl: '/components/my-impact/myImpactHomeView.html'
+      })
+			.state('my-impact-project', {
+        url: '/my-impact/:project',
+        templateUrl: '/components/my-impact/myImpactView.html'
+      })
+			.state('project-wizard', {
+        url: '/project-wizard/:code',
+        templateUrl: '/components/project-wizard/projectWizardView.html'
+      })
+      // PROJECT WIZARD
+			// Superadmin Dashboard:
+			.state('super-admin', {
+				url: '/super-admin/',
+				templateUrl: '/components/backoffice/dashboardView.html'
+			})
+			// We will move the following >>>>>>>>
+      .state('projects', {
+        url: '/projects/',
+        templateUrl: '/components/project-wizard/projectsView.html'
+      })
+      .state('users', {
+        url: '/users/',
+        templateUrl: '/components/user/usersView.html'
+      })
+			.state('charities', {
+        url: '/charities/',
+        templateUrl: '/components/charity/charitiesView.html'
       });
+			// <<<<<<<<< into Superadmin Dashboard
   }])
 
   .factory('ErrorInterceptor', ['$rootScope', '$q', '$injector', function ($rootScope, $q) {

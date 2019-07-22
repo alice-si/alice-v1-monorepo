@@ -193,7 +193,14 @@ angular.module('aliceApp')
     this.showLogInModal = function (followUp) {
       afterLoginFunction = followUp;
       $uibModal.open({
-        templateUrl: '/components/auth/loginModal.html'
+        templateUrl: '/components/auth/loginModal.html',
+        controller: 'LoginController',
+        controllerAs : 'loginCtrl',
+        resolve: {
+            modalMode : function() {
+                 return 'LOGIN'
+            }
+        }
       });
     };
 
@@ -207,6 +214,10 @@ angular.module('aliceApp')
       $uibModal.open({
         templateUrl: '/components/auth/registrationModal.html'
       });
+    };
+
+    this.hasAfterLoginFunction = function() {
+      return (typeof afterLoginFunction != 'undefined' && afterLoginFunction);
     };
 
     function checkUserAccess(user, field) {

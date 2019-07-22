@@ -1,107 +1,4 @@
-html,body
-{
-    width: 100%;
-    height: auto;
-    min-height: 100%;
-    margin: 0px;
-    padding: 0px;
-    overflow-x: hidden;
-}
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: "Avenir", "Helvetica", "Liberation Sans", "Arial", sans-serif;;
-}
-
-p, div, a {
-    font-family: "Avenir", "Helvetica", "Liberation Sans", "Arial", sans-serif;
-}
-
-a:hover {
-  text-decoration: none;
-}
-
-a:-webkit-any-link {
-  text-decoration: none;
-}
-
-html {
-    font-size: 10px;
-}
-
-
-/***** FONTS *****/
-@font-face {
-    font-family: "Avenir";
-    src: url('https://s3.eu-west-2.amazonaws.com/alice-res/AvenirNext-UltraLight.ttf');
-    src: url('https://s3.eu-west-2.amazonaws.com/alice-res/ultralight.eot') format('embedded-opentype');
-    src: url('https://s3.eu-west-2.amazonaws.com/alice-res/ultralight.woff') format('woff');
-    font-weight: 100;
-}
-
-@font-face {
-    font-family: "Avenir";
-    src: url('https://s3.eu-west-2.amazonaws.com/alice-res/AvenirNext-Regular.ttf');
-    src: url('https://s3.eu-west-2.amazonaws.com/alice-res/regular.eot') format('embedded-opentype');
-    src: url('https://s3.eu-west-2.amazonaws.com/alice-res/regular.woff') format('woff');
-    font-weight: 200;
-}
-
-@font-face {
-    font-family: "Avenir";
-    src: url('https://s3.eu-west-2.amazonaws.com/alice-res/AvenirNext-Medium.ttf');
-    src: url('https://s3.eu-west-2.amazonaws.com/alice-res/medium.eot') format('embedded-opentype');
-    src: url('https://s3.eu-west-2.amazonaws.com/alice-res/medium.woff') format('woff');
-    font-weight: 300;
-}
-
-@font-face {
-    font-family: "Avenir";
-    src: url('https://s3.eu-west-2.amazonaws.com/alice-res/AvenirNext-DemiBold.ttf');
-    src: url('https://s3.eu-west-2.amazonaws.com/alice-res/demi.eot') format('embedded-opentype');
-    src: url('https://s3.eu-west-2.amazonaws.com/alice-res/demi.woff') format('woff');
-    font-weight: 400;
-}
-
-@font-face {
-  font-family: "Avenir";
-  src: url('https://s3.eu-west-2.amazonaws.com/alice-res/AvenirNext-Bold.ttf');
-  src: url('https://s3.eu-west-2.amazonaws.com/alice-res/bold.eot') format('embedded-opentype');
-  src: url('https://s3.eu-west-2.amazonaws.com/alice-res/bold.woff') format('woff');
-  font-weight: 500;
-}
-
-
-@media (max-width: 550px) {
-    html {
-        font-size: 8px;
-    }
-}
-
-@media (max-width: 450px) {
-    html {
-        font-size: 7px;
-    }
-
-    .campaign-box {
-        font-size: 4px;
-    }
-}
-
-@media (max-width: 400px) {
-    html {
-        font-size: 6px;
-    }
-
-    .campaign-box {
-        font-size: 3px;
-    }
-}
-
-@media (max-width: 350px) {
-    html {
-        font-size: 5px;
-    }
-}
 
 /* Global font styles */
 .header {
@@ -140,297 +37,6 @@ html {
 
 h1 {
     text-align: left;
-}
-
-/* MENU */
-
-#navbar-menu {
-    height: 80px;
-    position: fixed;
-    z-index: 1000;
-    background: rgba(0,0,0,0);
-    color: #000;
-    width: 100%;
-    transition: all ease-out 0.5s;
-    -webkit-transition: all ease-out 0.5s;
-    -moz-transition: all ease-out 0.5s;
-}
-
-.navbar-hide {
-  top: -75px;
-}
-
-.subnav-fixed {
-    top: 20px;
-    z-index: 999;
-    position: fixed;
-}
-
-.menu-coloured {
-  height: 80px;
-  position: static;
-  z-index: 900;
-  background: #1998a5 !important;
-  color: #000;
-  width: 100%;
-}
-
-#menu-top:hover {
-  cursor: pointer;
-}
-
-#menu-login:hover, #menu-sign-up:hover {
-  cursor: pointer;
-}
-
-.alice-logo {
-    position: relative;
-}
-
-.alice-logo img{
-    margin: 25px -20px 0 20px;
-    height: 30px;
-}
-
-ul.menu {
-    position: relative;
-    margin-top: 30px;
-    list-style-type: none;
-}
-
-ul.menu-left {
-    float: left;
-    position: relative;
-    margin-left: 30px;
-    margin-top: 32px;
-}
-
-ul.menu-left li {
-    float: left;
-}
-
-ul.menu-right {
-    float: right;
-    margin-right: 50px;
-}
-
-ul.menu-right li {
-    float: right;
-}
-
-/*** BLOCK SPACER ***/
-
-.block-spacer {
-  position: relative;
-  top: 0;
-  background: linear-gradient(to bottom right, #6dbac2, #11939e);
-  height: 170px;
-  width: 100%;
-}
-
-/*** END ***/
-
-/*** UNDERLINE ANIMATIONS ***/
-
-
-/* Underline From Center */
-.underline-from-center {
-  display: inline-block;
-  vertical-align: middle;
-  -webkit-transform: perspective(1px) translateZ(0);
-  transform: perspective(1px) translateZ(0);
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-  position: relative;
-  overflow: hidden;
-}
-.underline-from-center:before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  left: 51%;
-  right: 51%;
-  bottom: 0;
-  background: #fff;
-  height: 1px;
-  -webkit-transition-property: left, right;
-  transition-property: left, right;
-  -webkit-transition-duration: 0.3s;
-  transition-duration: 0.3s;
-  -webkit-transition-timing-function: ease-out;
-  transition-timing-function: ease-out;
-}
-.underline-from-center:hover:before, .underline-from-center:focus:before, .underline-from-center:active:before {
-  left: 0;
-  right: 0;
-}
-
-.underline-from-center-dark {
-  display: inline-block;
-  vertical-align: middle;
-  -webkit-transform: perspective(1px) translateZ(0);
-  transform: perspective(1px) translateZ(0);
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-  position: relative;
-  overflow: hidden;
-}
-.underline-from-center-dark:before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  left: 51%;
-  right: 51%;
-  bottom: 0;
-  background: rgba(#353e42, 0.73);
-  height: 1px;
-  -webkit-transition-property: left, right;
-  transition-property: left, right;
-  -webkit-transition-duration: 0.3s;
-  transition-duration: 0.3s;
-  -webkit-transition-timing-function: ease-out;
-  transition-timing-function: ease-out;
-}
-
-.underline-from-center-dark:hover:before, .underline-from-center-dark:focus:before, .underline-from-center-dark:active:before {
-  left: 0;
-  right: 0;
-}
-
-
-.landing-page .menu-item a {
-    font-size: 15px;
-    font-weight: 200;
-    color: #fff;
-    margin-left: 20px;
-    padding-bottom: 3px;
-}
-
-.menu-item li:first-child a {
-    margin-left: 0 !important;
-    display: block;
-    width: 100%;
-}
-
-
-.landing-page .text-center h1 {
-    font-size: 3rem;
-}
-
-.landing-page section .text-center p {
-    font-size: 1.6rem;
-    font-weight: 300;
-}
-
-.landing-page .navbar-default .nav li a {
-    text-transform: none;
-    padding-right: 0px;
-}
-
-span.divider {
-    text-transform: none;
-    padding-left: 5px;
-    margin-right: -15px;
-    color: #1998a2;
-}
-
-.hamburger {
-    font-size: 30px;
-    position: absolute;
-    padding: 0 0 5px 0;
-    cursor: pointer;
-    right: 0;
-    margin-right: -30px;
-    margin-top: 13px;
-    top: 0;
-    color: #fff;
-    background-color: rgba(0, 0, 0, 0);
-}
-
-.landing-page ul.menu-mobile {
-    right: 0;
-    left: auto;
-    border-radius: 0;
-    top: 73px;
-    background-color: rgb(185, 185, 185);
-}
-
-.landing-page ul.menu-mobile a {
-    color: #fff;
-    padding: 10px 0 10px 10px;
-    border-bottom: 1px solid #fff;
-    margin: 0;
-}
-
-.landing-page ul.menu-mobile li div {
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-.landing-page ul.menu-mobile a:last-child {
-  border-bottom: none !important;
-}
-
-.landing-page .navbar-default .navbar-nav > .active > a, .landing-page .navbar-default .navbar-nav > .active > a:hover {
-    border-top: 6px solid transparent;
-}
-
-.landing-page .navbar-default .nav li a {
-    font-family: "Helvetica Neue", "Helvetica", "Liberation Sans", "Arial", sans-serif;
-    font-size: 2.0rem;
-    font-weight: 400;
-    color: #fff !important;
-}
-
-
-#color-picker {
-  width: 80px;
-  height: 50px;
-  border: 1px solid rgba(158, 186, 189, 0.21);
-  border-radius: 5px;
-  margin-top: -2px;
-  color: white;
-  padding: 2px;
-}
-
-@media (max-width: 800px) {
-  .alice-logo {
-      margin-top: 0;
-  }
-
-  .alice-logo img {
-      height: 28px !important;
-      margin-top: 18px;
-  }
-
-  .menu-coloured {
-    height: 65px;
-    position: static;
-    z-index: 1000;
-    background: #1998a5 !important;
-    color: #000;
-    width: 100%;
-  }
-
-  .menu-top {
-      height: 40px;
-      width: 100%;
-  }
-}
-
-@media (max-width: 990px) {
-    .alice-logo {
-        margin-top: 0;
-    }
-
-    .menu-top {
-        height: 75px;
-    }
-}
-
-
-/* No header border */
-
-.landing-page .navbar-fixed-top.navbar-scroll {
-    border-bottom: 0 !important;
 }
 
 .text-error {
@@ -473,55 +79,6 @@ div.image-crop img.splash-right {
     margin-left: -200px;
 }
 
-div.campaign-wrapper{
-    font-size: 1rem;
-    padding: 0;
-    width: 100%;
-    height: 536px;
-    overflow: hidden;
-    margin-bottom: 20px;
-    float:left; /* important */
-    position:relative; /* important(so we can absolutely position the description div */
-}
-
-@media (max-width: 600px) {
-    div.campaign-wrapper{
-        height: 250px;
-    }
-}
-
-@media (max-width: 400px) {
-    div.campaign-wrapper{
-        height: 200px;
-    }
-}
-
-div.campaign-pilot {
-    margin: 20px 2.5rem 0 2.5rem;
-    width: auto;
-}
-
-div.campaign-wrapper img {
-    width: 100%;
-    position: absolute;
-    top:-50%; left:0; right: 0; bottom:-100%;
-    margin: auto;
-}
-
-@media (max-width: 600px) {
-    div.campaign-wrapper img {
-        top: -100%;
-    }
-}
-
-div.campaign-overlay{
-    position:absolute; /* absolute position (so we can position it where we want)*/
-    right:0; /* position will be on bottom */
-    top:0;
-    width:50%;
-    height: 100%;
-}
-
 div.mobile-overlay {
     position:absolute;
     left:0;
@@ -532,85 +89,9 @@ div.mobile-overlay {
     opacity: 0.5;
 }
 
-h1.campaign-title {
-    margin-top: 0;
-    font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", "TeXGyreHerosRegular", "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
-}
-
-div.campaign-info {
-    position:absolute;
-    right:50%;
-    bottom: 0;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-color: transparent transparent #1998a2 transparent;
-    opacity:0.95; /* transparency */
-    filter:alpha(opacity=95); /* IE transparency */
-    border-width: 0;
-}
-
-.campaign-info-full {
-    border-bottom-width: 10000px !important;
-    border-left-width: 1000px !important;
-}
-
-.campaign-info-small {
-    border-bottom-width: 185px !important;
-}
-
-
-div.campaign-info-text {
-    position:absolute; /* absolute position (so we can position it where we want)*/
-    color: white;
-    font-size: 2.2rem;
-    font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
-    font-weight: 300;
-    line-height: 3rem;
-}
-
-.landing-page div.campaign-info-text p{
-    color: white;
-}
-
-div.campaign-info-header {
-    font-size: 2.5rem;
-    font-weight: 400;
-}
-
-div.campaign-info-text p {
-    font-size: 1.8rem;
-    margin-top: 2rem;
-}
-
 span.highlight-info {
     font-size: 2.2rem;
     color: black;
-}
-
-div.text-hook {
-    bottom: 20px;
-    right: 50%;
-    padding-right: 20px;
-    font-size: 3em;
-    line-height: 1.15em;
-}
-
-div.text-expanded {
-    top: 50px;
-    left: 8%;
-    width: 34%;
-}
-
-.campaign-wrapper img.info-expand-icon {
-    position: absolute;
-    right: 50%;
-    bottom: -550px;
-    height: 48px;
-    width: 48px;
-    color: #DADADA;
-    margin-right: 20px;
-    cursor: pointer;
 }
 
 div.element-hidden {
@@ -631,134 +112,6 @@ div.element-visible {
     transition: all 0.5s ease-in-out;
 }
 
-@media (max-width: 960px) {
-    div.campaign-info {
-        right: 0;
-    }
-
-    .campaign-wrapper img.info-expand-icon {
-        right: 0;
-        font-size: 40px;
-    }
-
-    div.text-hook {
-        bottom: 10px;
-        right: 0;
-        padding-right: 10px;
-    }
-
-    div.text-expanded {
-        top: 10px;
-        width: 80%;
-    }
-
-    div.campaign-info-header {
-        font-size: 2.2rem;
-    }
-
-    div.campaign-info-text p {
-        font-size: 1.5rem;
-        margin-top: 0.5rem;
-        line-height: 2.5rem;
-    }
-
-    span.highlight-info {
-        font-size: 1.8rem;
-    }
-}
-
-@media (max-width: 425px) {
-    .campaign-wrapper img.info-expand-icon {
-        bottom: 60px;
-    }
-}
-
-
-.campaign-background {
-    background-color:black;
-    opacity:0.75; /* transparency */
-    filter:alpha(opacity=75); /* IE transparency */
-    border-left: 1px solid #1998a2;
-}
-
-.campaign-box {
-    padding: 2% 2% 3% 2%;
-    color: #DADADA;
-    font-weight: normal;
-}
-
-.campaign-box h1 {
-    color: #FFFFFF;
-    text-align: center;
-    font-size: 3.2em;
-    font-weight: 300;
-    line-height: 5rem;
-    letter-spacing: 1px;
-    margin-top: 0;
-
-}
-
-.campaign-box h2 {
-    text-align: center;
-    font-size: 2.2em;
-    font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif; font-weight:300; font-stretch:normal;
-    margin-top: 6%;
-    line-height: 1.8em;
-}
-
-.campaign-box .progress-box {
-    position: absolute;
-    width: 92%;
-    top: 50%;
-    font-size: 1.6em;
-    font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif; font-weight:300; font-stretch:normal;
-}
-
-.campaign-box .progress-box .progress-wrapper {
-    height: 1.8em;
-    border: 2px solid #1998a2;
-    position: relative;
-    background-color: transparent
-}
-
-.campaign-box .progress-box .progress {
-    height: 99%;
-    border-radius: 0;
-    position: relative;
-    background-color: white;
-}
-
-.campaign-box .progress-box .progress-bar {
-    font-size: 1em;
-    height: 2.51em;
-    background-color: #1998a2;
-}
-
-.progress-bar-caption-wrapper {
-    position: absolute;
-    height: 100%;
-    display: table;
-}
-
-.progress-bar-caption {
-    display: table-cell;
-    vertical-align: middle;
-    padding-left:10px;
-}
-
-.campaign-box span.target-amount {
-    font-size: 2.5em;
-    margin-right: 3%;
-    color: #FFFFFF;
-}
-
-.progress-box p:first-child {
-    margin-bottom: 0px;
-}
-
-.progress-box p:last-child {
-    margin-top: 10px;
-}
 
 p span.target {
     float: left;
@@ -766,44 +119,6 @@ p span.target {
 
 p span.sub-target {
     float: right;
-}
-
-.social-box {
-    position: absolute;
-    bottom: 2%;
-    width: 92%;
-    text-align: right;
-    font-size: 1.5em;
-}
-
-.social-box .fa {
-    font-size: 3em;
-    margin-right: 2%;
-    cursor: pointer;
-    color: white;
-}
-
-.social-box .fa:hover {
-    color: #1998a2;
-}
-
-.supporter {
-    padding-left: 20px;
-}
-
-.supporter p {
-    font-size: 1.8rem;
-    margin-bottom: 0;
-}
-
-.supporter p+p {
-    font-size: 2rem;
-}
-
-.supporter .supporter-link{
-    width: 50%;
-    height: 20px;
-    border-right: solid 1px #1998a2;
 }
 
 /* HOME */
@@ -819,187 +134,8 @@ p span.sub-target {
 }
 
 .wrapper-content {
+    margin-top: 80px;
     padding-bottom: 0 !important;
-}
-
-/* MENU */
-@media (max-width: 768px) {
-    .landing-page .navbar-scroll .navbar-nav > li > a {
-        padding: 0px !important;
-    }
-}
-
-.landing-page .navbar-scroll.navbar-default .nav li a:hover {
-    color: #1998A2;
-}
-
-.landing-page .features-text {
-    padding-left: 8%;
-    padding-right: 8%;
-    margin-top: 100px;
-}
-.landing-page .features-text.geek {
-    margin-top: 0;
-    padding-left: 0;
-    padding-right: 0;
-}
-
-.landing-page .features-text p {
-    color: #010708;
-    font-size: 1.8rem;
-    font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
-    font-weight:300;
-    font-stretch:normal;
-    line-height: 2.8rem;
-}
-
-.landing-page .features-text h2 {
-    font-size: 3rem;
-    font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
-    font-weight:300;
-    font-stretch:normal;
-    color: #1998A2;
-    letter-spacing: 0.8px;
-    margin-bottom: 5rem;
-}
-
-.landing-page .features-block {
-    margin-top: 20px;
-    padding-bottom: 20px;
-}
-
-
-.landing-page .features-block:not(:last-child) {
-    border-bottom: 1px solid #dddddd;
-}
-
-.landing-page .features-block.features-block-mobile:not(:last-child) {
-    border-bottom: none;
-}
-
-.landing-page .features-block.features-block-mobile {
-    margin-left: 0;
-    margin-right: 0;
-}
-
-.landing-page .features-text.features-text-mobile {
-    margin-top: 0;
-    padding-left: 0;
-    padding-right: 0;
-}
-
-.landing-page .features-text.features-text-mobile h2 {
-    margin-bottom: 20px;
-}
-
-.landing-page .features-text.features-text-mobile p {
-    margin-bottom: 20px;
-}
-
-.campaign-button-box {
-    position: absolute;
-    width: 92%;
-    top: 50%;
-    height: 40%;
-    left: 4%;
-}
-
-.donate-description {
-    font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
-    font-weight:300;
-    font-stretch:normal;
-    font-size: 1.8em;
-}
-
-
-.donate-button-box {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-}
-
-@media (max-width: 500px) {
-    .donate-button-box {
-        position: relative;
-        margin-top: 10px;
-        margin-bottom: -10px;
-        width: 100%;
-        text-align: center;
-    }
-}
-
-.gift-aid-box {
-    position:relative;
-    padding-bottom: 10px;
-    min-height: 30px;
-}
-
-.gift-aid-text {
-    font-size: 1.5rem;
-    font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
-    font-weight:300;
-    margin-bottom: 30px;
-    color: black;
-}
-
-@media (max-width: 500px) {
-    .gift-aid-text {
-        margin-bottom: 10px;
-    }
-}
-
-div.campaign-gauge-description {
-    text-align: left;
-    position: absolute;
-    top: 170px;
-    left: 39%;
-    line-height: 30px;
-    font-size: 2.0em;
-}
-
-div.campaign-gauge-button-wrapper {
-    position: absolute;
-    bottom: 170px;
-    right: 30px;
-    z-index: 99;
-}
-
-div.campaign-gauge-button-wrapper a.btn-primary.btn-donate {
-    font-size: 2.5rem;
-    border-width: 2px;
-    padding-top: 4px;
-    padding-bottom: 4px;
-    letter-spacing: 1px;
-}
-
-div.campaign-box div.gauge-link-description {
-    font-size: 1.8rem;
-    color: #1998a2;
-    width: 40%;
-    position: absolute;
-    bottom: 160px;
-    text-align: center;
-    font-weight: 300;
-    font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", "TeXGyreHerosRegular", "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
-}
-
-.donate-link-cell {
-    width: 15%;
-}
-.donate-link {
-    height: 4.5em;
-    border-right: 1px solid;
-    margin-right: 15%;
-}
-
-.round-progress-wrapper {
-    z-index: 99;
-}
-
-.donate-link .donate-link-horizontal {
-    width: 100%;
-    height: 50%;
-    border-bottom: 1px solid;
 }
 
 span.description-highlight {
@@ -1298,41 +434,6 @@ div.description {
     font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif; font-weight:300; font-stretch:normal;
 }
 
-.btn-primary.btn-donate {
-    padding: 0.5rem 5rem 0.5rem 5rem;
-    background-color: #1998a2;
-    border: 1px solid #FFFFFF;
-    color: #FFFFFF;
-    border-radius: 0;
-    letter-spacing: 2px;
-    font-size: 2.0rem;
-    font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
-    font-weight:300;
-    font-stretch:normal;
-}
-
-.btn-primary.btn-donate:focus {
-    background-color: #1998a2;
-}
-
-
-.btn.btn-primary.btn-splash:hover {
-    border: 1px solid #FFFFFF;
-}
-
-.btn.btn-primary:hover {
-    background-color: #FFFFFF;
-    color: #1998a2;
-    border: 1px solid #1998a2;
-}
-
-@media (max-width: 768px) {
-    .btn-primary.btn-donate.btn-splash {
-        font-size: 1.5rem;
-        padding: 0.5rem 1rem 0.5rem 1rem;
-    }
-}
-
 div.outcomes {
     padding: 1% 0 0 4%;
 }
@@ -1415,20 +516,6 @@ div.border-column {
    }
 }
 
-div.impact-campaign-title {
-    font-size: 2.2rem;
-    font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
-    font-weight:300;
-    margin-left: -15px;
-    margin-top: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-img.impact-campaign-img {
-   margin-left: -15px;
-   width: 110%;
-}
-
 span.highlight {
     color: #1998a2;
 }
@@ -1465,38 +552,6 @@ div.outcome-image{
     display: inline-block;
     vertical-align: middle;
     float: none;
-}
-
-
-div.campaign-gauge-image {
-    background-size: contain;
-    background-repeat: no-repeat;
-    height: 85%;
-    position: absolute;
-    left: 15%;
-    right: 0;
-}
-
-div.campaign-gauge-box {
-    position: absolute;
-    bottom: 170px;
-    left: 55px;
-    text-align: center;
-}
-
-.campaign-video-container {
-    position: relative;
-    width: 100%;
-    height: 0;
-    padding: 1rem 2.5rem 56.25% 2.5rem;
-}
-
-.campaign-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
 }
 
 div.my-story {
@@ -1566,10 +621,6 @@ div.outcome-gauge {
     min-height: 63px;
 }
 
-div.outcome-gauge .round-progress-wrapper {
-    position: absolute !important;
-}
-
 div.outcome-icon {
     background-size: contain;
     background-repeat: no-repeat;
@@ -1622,136 +673,6 @@ div.outcome-cost {
     font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif; font-weight:300; font-stretch:normal;
 }
 
-
-.landing-page section p.campaign-summary-title {
-    font-size: 1.7em;
-    font-weight: 400;
-    color: #1998a2;
-}
-
-.landing-page section p.campaign-summary p {
-    font-size: 1.7em;
-    font-weight: 300;
-}
-
-.campaign-right {
-    padding: 0 0 0 40px;
-}
-
-@media (max-width: 990px) {
-    .campaign-right {
-        padding: 0;
-    }
-}
-
-/* CATEGORIES */
-
-div.category-wrap {
-    position:relative;
-}
-
-h2.category-title {
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform: translateX(-50%) translateY(-50%);
-    margin: 0;
-    text-align:center;
-    font-size: 1.9em;
-    font-weight: 400;
-    color: white;
-}
-
-@media (max-width: 768px) {
-    h2.category-title {
-        font-size: 3rem;
-    }
-}
-
-div.category-background {
-    width: 100%;
-    height: 100%;
-    background-color: black;
-    opacity: 0.5;
-    position: absolute;
-    top: 0;
-    transition: opacity .3s ease-out;
-    -moz-transition: opacity .3s ease-out;
-    -webkit-transition: opacity .3s ease-out;
-    -o-transition: opacity .3s ease-out;
-}
-
-div.category-background:hover {
-    opacity: 0;
-    transition: opacity .5s ease-out;
-    -moz-transition: opacity .5s ease-out;
-    -webkit-transition: opacity .5s ease-out;
-    -o-transition: opacity .5s ease-out;
-}
-
-/* My Impact */
-div.summary-box {
-    text-align: center;
-}
-
-table.my-outcomes {
-    width: 100%;
-}
-
-table.my-outcomes td {
-    width: 65%;
-    vertical-align: top;
-}
-
-table.my-outcomes td+td {
-    padding-left: 8%;
-    width: 35%;
-    vertical-align: top;
-}
-
-table.my-outcomes div.outcome-title {
-    font-size: 1.7em;
-}
-
-.progress-percentage-wrapper {
-    position: relative;
-}
-
-.progress-percentage {
-    position: absolute;
-    font-size: 3.5em;
-    color: #1998a2;
-    width: 100%;
-    text-align: center !important;
-    bottom: 10%;
-}
-
-div.vertical-centered {
-    position: absolute;
-    width: 100%;
-    text-align: center !important;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-div.outcome-content {
-    padding-top: 15px;
-    font-size: 1.8em;
-    font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif; font-weight:300; font-stretch:normal;
-
-}
-
-table.impact-details {
-    width: 100%;
-    margin-top: 10%;
-}
-
-table.impact-details td {
-    width: 33.333%;
-    text-align: center;
-    vertical-align: top;
-}
-
 /* Validation */
 
 section.validation div.outcome-box {
@@ -1775,204 +696,11 @@ section.validation div.outcome-content div {
     top: 10px;
 }
 
-section.validation .round-progress-wrapper {
-    z-index: 0;
-}
-
 input.validation-quantity {
     float: left;
     width: 40px;
     margin-right: 10px;
     font-size: 2.3em;
-}
-
-/* Menu */
-
-.nav .open>a, .nav .open>a:focus, .nav .open>a:hover {
-    border-color: white;
-}
-
-span.menu-arrow {
-    font-family: 'FontAwesome';
-    margin-left: 5px;
-}
-
-span.menu-arrow:before {
-    content: "\f107";
-
-}
-.open span.menu-arrow:before {
-    content: "\f106";
-}
-
-.user-menu {
-    z-index: 1000;
-  background: rgba(143, 143, 143, 0.65);
-}
-
-.user-menu li div {
-   padding: 5px 5px 5px 10px;
-   border-bottom: 1px solid #fff;
-   -webkit-transform: perspective(1px) translateZ(0);
-   transform: perspective(1px) translateZ(0);
-   box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-   position: relative;
-   -webkit-transition-property: color;
-   transition-property: color;
-   -webkit-transition-duration: 0.3s;
-   transition-duration: 0.3s;
-}
-
-.user-menu li div:last-child {
-  border-bottom: none;
-}
-
-.user-menu li div a {
-    font-size: 1.8rem !important;
-}
-
-/* Sweep To Right */
-
-.user-menu li div:before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(255, 255, 255,0.4);
-  -webkit-transform: scaleX(0);
-  transform: scaleX(0);
-  -webkit-transform-origin: 0 50%;
-  transform-origin: 0 50%;
-  -webkit-transition-property: transform;
-  transition-property: transform;
-  -webkit-transition-duration: 0.3s;
-  transition-duration: 0.3s;
-  -webkit-transition-timing-function: ease-out;
-  transition-timing-function: ease-out;
-}
-
-.user-menu li div:hover, .user-menu li div:focus, .user-menu li div:active {
-  color: white;
-  cursor: pointer;
-}
-
-.user-menu li div:hover:before, .user-menu li div:focus:before, .user-menu li div:active:before {
-  -webkit-transform: scaleX(1);
-  transform: scaleX(1);
-}
-
-.dropdown-menu {
-  border: medium none;
-  border-radius: 3px;
-  box-shadow: 0 0 3px rgba(86, 96, 117, 0.7);
-  display: none;
-  float: left;
-  font-size: 12px;
-  left: 0;
-  list-style: none outside none;
-  padding: 0;
-  position: absolute;
-  text-shadow: none;
-  top: 100%;
-  z-index: 999;
-}
-.dropdown-menu > li > a {
-  border-radius: 3px;
-  color: inherit;
-  line-height: 25px;
-  margin: 4px;
-  text-align: left;
-  font-weight: normal;
-}
-.dropdown-menu > li > a.font-bold {
-  font-weight: 600;
-}
-
-.dropdown-toggle {
-    background-color: transparent !important;
-}
-
-/* FORMS */
-
-.form-control {
-    border: 0;
-    border-bottom: 1px solid #1998a2;
-}
-
-.form-control:focus {
-    border-bottom: 2px solid #1998a2;
-}
-
-.form-control:hover {
-    border-bottom: 2px solid #1998a2;
-}
-
-.has-error .form-control {
-    box-shadow: none;
-    -moz-box-shadow: none;
-    -webkit-box-shadow: none;
-    -o-box-shadow: none;
-}
-
-.has-error .form-control:hover {
-    border-bottom: 2px solid #ed5565;
-}
-
-.has-error .form-control:focus {
-    border-bottom: 2px solid #ed5565 !important;
-}
-
-/* CHECKOUT */
-
-div.donation-amounts {
-    color: #1998a2;
-    width: 100%;
-    font-size: 1.5rem;
-    font-weight: 300;
-}
-
-div.donation-amounts div {
-    padding-right: 0;
-    margin-bottom: 3px;
-}
-
-div.gift-aid {
-    color: #1998a2;
-    font-size: 1.5rem;
-    font-weight: 300;
-}
-
-div.donation-footer {
-    font-size: 1.5rem;
-    font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
-    font-weight:300;
-    color: black;
-    border-top: 1px solid black;
-    margin-top: 20px;
-    padding-top: 15px;
-    text-align: justify;
-}
-
-div.donation-footer a {
-    color: #1998a2;
-    text-decoration: underline;
-}
-
-img.cvc {
-    position: absolute;
-    top: 0;
-    right: 10px;
-}
-
-@media (min-width: 1000px) {
-    .error-max {
-        position: absolute;
-        left: -300px;
-        top: 20px;
-    }
 }
 
 .fb-share-button
@@ -1987,113 +715,6 @@ img.cvc {
     -webkit-transform-origin: top left;
     -moz-transform-origin: top left;
     -webkit-transform-origin: top left;
-}
-
-/* MODALS */
-
-.login-button:hover {
-  cursor: pointer;
-}
-
-.modal-dialog {
-    max-width: 500px;
-}
-
-.modal-content {
-    border-radius: 0 !important;
-    border: 2px solid #1998a2;
-}
-
-.modal-body h2.section {
-    margin-top: 0px;
-}
-
-.modal-body div.content {
-    padding-left: 4%;
-    padding-right: 4%;
-}
-
-.btn-primary.btn-donate.btn-modal {
-    padding-left: 3rem;
-    padding-right: 3rem;
-}
-
-.modal-footer {
-    text-align: center;
-    color: white;
-    background-color: #1998a2;
-    width: 100%;
-    font-size: 1.8rem;
-    font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
-    font-weight: 300;
-    letter-spacing: 0.8px;
-}
-
-div.footer-social {
-    text-align: center;
-    width: 100%;
-    font-size: 4rem;
-}
-
-div.footer-social i:hover {
-    color: #1998a2;
-    cursor: pointer;
-}
-
-div.footer-social a i {
-    color: #676a6c;
-}
-
-div.forgot-password-box {
-    float: left;
-    padding-top: 5px;
-}
-
-div.forgot-password-box a {
-    font-size: 1.8rem;
-    color: #1998a2;
-    text-decoration: underline;
-    letter-spacing: 0.8px;
-}
-
-.landing-form {
-    font-weight: normal;
-    padding-left: 2.5rem;
-    padding-top: 20px;
-}
-
-.form-inline .form-control {
-    width: 300px !important;
-}
-
-/* REGISTRATION */
-
-div.registration {
-    font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
-    font-weight:300;
-    font-size: 1.5rem;
-}
-
-div.registration .form-control {
-    font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
-    font-weight:300;
-    font-size: 1.5rem;
-}
-
-div.registration-terms {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-div.registration-agreement-content {
-    margin-left: 25px;
-    margin-top: -20px;
-    margin-bottom: 10px;
-    text-align: justify;
-}
-
-div.registration a{
-    color: #1998a2;
 }
 
 /* DASHBOARD */
@@ -2143,4 +764,66 @@ img.programmes-img {
 }
 @-ms-keyframes circle-chart-fill {
   to { stroke-dasharray: 0 100; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#color-picker {
+  width: 80px;
+  height: 50px;
+  border: 1px solid rgba(158, 186, 189, 0.21);
+  border-radius: 5px;
+  margin-top: -2px;
+  color: white;
+  padding: 2px;
 }

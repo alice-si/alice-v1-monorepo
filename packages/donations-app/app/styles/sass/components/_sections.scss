@@ -1,0 +1,293 @@
+/**
+ * 1. Common splash styling for Design #3 (Areti : 12/06/19)
+ *
+ * Note: This splash styling is not the same as the charity/validator
+ * dashboard splash stylings.
+ **/
+
+ .splash-v2, .splash-v3 {
+   display: inline-block;
+   position: relative;
+   width: 100%;
+
+   .header-image {
+     width: 100%;
+     height: 500px;
+     object-fit: cover;
+     background-size: cover;
+     background-blend-mode: multiply;
+     background-size: cover !important;
+   }
+
+   /* Keeping this here incase we don't want gradient */
+   img {
+     width: 100%;
+     height: 400px;
+     object-fit: cover;
+     @include transition(0.2s, all, ease-out);
+     filter: brightness(60%);
+   }
+
+   &__progress-section {
+     border-right: 1px solid #fff;
+     margin-right: 20px;
+
+     span {
+       font-weight: 600;
+     }
+
+     &:first-child {
+       padding: none !important;
+       margin-left: -15px;
+     }
+
+     &:last-child {
+       border: none;
+     }
+   }
+
+   &__container-title {
+     position: absolute;
+     top: 100px;
+     left: 85px;
+     width: 60%;
+     // margin: 0 0 30px 15px;
+   }
+
+   &__container-progress {
+     width: 90%;
+   }
+
+   h3 {
+     margin-bottom: 30px;
+     font-size: 40px;
+     width: 80%;
+   }
+
+   p {
+     font-size: 20px !important;
+     font-family: 'Source Sans Pro';
+     letter-spacing: 1px;
+   }
+
+   .progress-bar__lg {
+     margin: 20px 0 5px;
+   }
+
+   button {
+     margin-top: 20px;
+     width: 120px;
+     background: $alice-tonal-medium;
+     border-radius: 2px;
+     font-size: 18px;
+     color: #fff;
+     border: none;
+     font-family: "Avenir" !important;
+     font-weight: 300;
+     letter-spacing: 1px;
+     @include box-shadow(0, 0, 2px, rgba(0, 0, 0, 0.23));
+     outline: none;
+   }
+
+   .grad-bottom:before {
+     display: inline-block;
+     content: '';
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
+     opacity: .6;
+   }
+
+   .grad-both:before {
+     display: inline-block;
+     content: '';
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     background-image:
+       linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8)),
+       linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
+     opacity: .6;
+   }
+ }
+
+@media screen and (max-width: 330px) {
+  .splash-v2 {
+    h3 {
+      font-size: 24px;
+      line-height: 1.2;
+      margin-top: -10px;
+    }
+
+    p {
+      font-size: 12px !important;
+      margin-top: -10px;
+    }
+
+    &__progress-section:first-child {
+      margin-top: 10px;
+    }
+  }
+}
+
+
+
+/**
+ * 2. Common splash styling for Design #4 (Areti : 15/07/19)
+ * N.B -- These are minor changes to the one above.
+ *
+ * Note: This splash styling is not the same as the charity/validator
+ * dashboard splash stylings.
+ **/
+
+ .splash-v3 {
+
+    .header-image {
+      height: 550px;
+    }
+
+    &__progress-section {
+      border-right: 1px solid $alice-dark-grey;
+      font-size: 16px;
+    }
+
+    &__container-title {
+      width: 30%;
+      border-radius: 5px;
+      background: #fff;
+      padding: 5px 20px 30px 50px;
+      font-family: $source;
+      letter-spacing: 0.6;
+    }
+
+    &__container-progress {
+      width: 100%;
+      margin-top: 25px;
+    }
+
+    h3 {
+      font-family: $source;
+      color: $alice-dark-grey;
+      font-weight: 400;
+      font-size: 26px;
+      width: 90%;
+      line-height: 1.4;
+      margin-bottom: 15px;
+    }
+
+    a {
+      font-size: 18px !important;
+      font-family: $source !important;
+      border-bottom: 1px solid $alice-tonal-medium;
+      padding-bottom: 2px;
+      letter-spacing: 1px;
+      color: $alice-tonal-medium;
+    }
+
+    p {
+      font-size: 16px !important;
+      font-weight: 400;
+      color: $alice-dark-grey !important;
+      font-family: $source !important;
+      letter-spacing: 1px;
+    }
+
+    button {
+      width: 150px;
+      font-family: $source !important;
+      font-weight: 400;
+      @include box-shadow(0, 1px, 2px, rgba(91, 91, 91, 0.57));
+    }
+  }
+
+
+
+// Mobile for both splash v2 and v3
+
+@media screen and (max-width: 414px) {
+  .splash-v2, .splash-v3 {
+    .header-image {
+      height: 100vh;
+    }
+
+    &__container-title {
+      width: 80%;
+    }
+
+    p {
+      font-size: 16px !important;
+    }
+
+    &__progress-section {
+      border-right: none;
+      margin-left: -15px;
+
+      span {
+        font-weight: 600;
+      }
+
+      &:first-child {
+        padding: none !important;
+      }
+
+      &:last-child {
+        border: none;
+      }
+    }
+  }
+
+  .splash-v2 {
+    h3 {
+      font-size: 26px;
+      margin-top: -10px;
+    }
+
+    &__container-title {
+      top: 80px;
+      left: 50px;
+    }
+  }
+
+  .splash-v3 {
+    h3 {
+      font-size: 20px;
+    }
+
+    .header-image {
+      height: 100vh;
+    }
+
+    &__container-title {
+      top: 100px;
+      left: 30px;
+    }
+
+    a {
+      font-size: 12px !important;
+    }
+  }
+}
+
+@media screen and (max-width: 330px) {
+  .splash-v2 {
+    h3 {
+      font-size: 24px;
+      line-height: 1.2;
+      margin-top: -10px;
+    }
+
+    p {
+      font-size: 12px !important;
+      margin-top: -10px;
+    }
+
+    &__progress-section:first-child {
+      margin-top: 10px;
+    }
+  }
+}

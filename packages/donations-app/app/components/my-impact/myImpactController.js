@@ -1,7 +1,10 @@
 angular.module('aliceApp')
-  .controller('MyImpactController', ['$http', 'AuthService', '$scope', 'API', '$rootScope', function ($http, AuthService, $scope, API, $rootScope) {
+  .controller('MyImpactController', ['$http', 'AuthService', '$stateParams', '$scope', 'API', '$rootScope', function ($http, AuthService, $stateParams, $scope, API, $rootScope) {
     var vm = this;
     vm.auth = AuthService;
+		vm.loggedUser = vm.auth.getLoggedUser();
+		vm.dashboardType = 'my-impact';
+		vm.code = $stateParams.project;
 
     if (!AuthService.getLoggedUser()) {
       AuthService.showLogInModal();
@@ -13,102 +16,73 @@ angular.module('aliceApp')
       getProjects();
     });
 
-    vm.navHeight = $('#navbar-menu').height();
-
     function getProjects() {
       if (vm.loaded) return;
       vm.loaded = true;
       $http.get(API + 'getMyProjects').then(function (result) {
-        vm.projects = result.data;
-        const reducer = function (accumulator, project) {
-          accumulator.totalDonated += project.totalDonated;
-          accumulator.totalPaidOut += project.totalPaidOut;
-          accumulator.goalsAchieved += project.goalsAchieved;
-          return accumulator;
-        };
-        vm.activeProject = (vm.projects === undefined || vm.projects.length == 0) ? null : vm.projects[0];
-        vm.summary = vm.projects.reduce(reducer, {totalDonated: 0, totalPaidOut: 0, goalsAchieved: 0});
-        vm.summary.remaining = vm.summary.totalDonated - vm.summary.totalPaidOut;
-				// Keeping percentage commented makes the filtering easier
-				// We don't use the percentage for the impact cards for now
-        // var percentage = vm.summary.totalDonated === 0 ? 0 : vm.summary.totalPaidOut / vm.summary.totalDonated * 100;
-				// vm.summary.percentage = Math.round(percentage);
+        vm.projectsForMain = result.data;
+
+        if(vm.projectsForMain) {
+					// Get single
+					vm.project = vm.projectsForMain.find(function (elem) {
+						if(elem.code === vm.code) {
+							return elem;
+						}
+					});
+					if (vm.project) {
+            vm.project.overallProjectPercentage = Math.round(100 * vm.project.totalPaidOutOverall / vm.project.fundingTarget);
+            vm.project.individualProjectPercentage = Math.round(100 * vm.project.totalPaidOut / vm.project.fundingTarget);
+            if (vm.project) {
+              vm.charity = vm.project.charity;
+            }
+
+            vm.project.allImpactsForProject.forEach((elem) => {
+              let impact = vm.project.impacts.find((e) => {
+                if (e._id === elem._id) {
+                  return e
+                }
+              });
+							if(impact) {
+								elem.userSpent = impact.total;
+								elem.userPercentage = Math.floor(100 * impact.total / elem.target);
+								elem.totalPercentage = Math.floor(100 * elem.totalSpent / elem.target);
+							} else {
+								elem.userSpent = 0;
+								elem.userPercentage = 0;
+								elem.totalPercentage = 0;
+							}
+
+							elem.lightColor = convertHex(elem.color, 0.4);
+							// For stacked progress
+							elem.stacked = [
+								{value: (elem.totalPercentage - elem.userPercentage), color: elem.color},
+								{value: elem.userPercentage, color: "#1998a2"}
+							];
+            });
+            vm.goals = vm.project.allImpactsForProject
+          }
+				}
       });
     }
 
-    vm.selectProject = function(code) {
-      if(code) {
-        vm.activeProject = _.findWhere(vm.projects, { code: code });
-      }
-    };
+		function convertHex(hex, opacity) {
+      hex = hex.replace('#','');
+      let r = parseInt(hex.substring(0,2), 16);
+      let g = parseInt(hex.substring(2,4), 16);
+      let b = parseInt(hex.substring(4,6), 16);
+
+      let result = 'rgba(' + r + ',' + g + ',' + b + ',' + opacity + ')';
+      return result;
+    }
+
     return vm;
   }])
-  .directive('myImpactCard', function() {
-    return {
-      scope: {
-        project: '=',
-        summary: '='
-      },
-      templateUrl: '/components/my-impact/myImpactCard.html',
-			controller: ['$scope', function ($scope) {
-				/*jshint -W030 */
-				$scope.currentGoal;
-				$scope.labels = [];
-				$scope.data = [];
-				$scope.colors = [];
-				function prepareDataForDonut(project) {
-					if(project && project.impacts) {
-						project.impacts.forEach((elem) => {
-							$scope.labels.push(elem.title);
-							$scope.data.push(elem.total);
-							$scope.colors.push(elem.color);
-						});
-					}
-					else {
-						// Dummy data & labels
-						// These are only used when no impact has been made yet
-						$scope.labels = ['Example Goal One', 'Example Goal Two', 'Example Goal Three', 'Example Goal Four'];
-						$scope.data = [200, 400, 150, 600];
-						$scope.colors = ['#9355DE', '#1CB8C4', '#097A82', '#FFCA54'];
-					}
-				}
-
-				prepareDataForDonut($scope.project);
-				$scope.apply;
-    		// Chart-js object
-				$scope.doughnut = {
-					labels: $scope.labels,
-					// Data & colours should be passed in
-					data: $scope.data,
-					colours: $scope.colors,
-					options: {
-						responsive: true,
-						maintainAspectRatio: true,
-						onHover: function(evt, item) {
-							// Hover animations for the doughnuts
-							$("#doughnut").css("cursor", item[0] ? "pointer" : "default");
-							if (item[0]) {
-									$scope.$apply(function () {
-										$scope.currentGoal = item[0]._index;
-									});
-									item[0]._chart.config.data.datasets[0].backgroundColor[item[0]._index];
-									$(".project-card-default").animate({opacity: 0}, 200);
-									$(".project-card-active").animate({opacity: 1}, 400).delay(200);
-									$(".doughnut-title").css("color");
-							}
-							else {
-								$scope.$apply(function () {
-									$scope.currentGoal = undefined;
-								});
-								$(".project-card-active").animate({opacity: 0}, 200);
-								$(".project-card-default").animate({opacity: 1}, 400).delay(200);
-							}
-						},
-						tooltips: {
-							enabled: false
-						}
-					}
-				};
-			}]
-    };
-  });
+	.directive('myImpactGoal', function() {
+		return {
+			scope: {
+				goal: '=',
+				index: '='
+			},
+			templateUrl: '/components/my-impact/singleGoalComponent.html'
+		};
+	});

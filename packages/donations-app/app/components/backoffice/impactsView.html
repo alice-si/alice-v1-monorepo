@@ -1,4 +1,4 @@
-<section class="page container" ng-controller="BackofficeController as backofficeCtrl">
+<section class="page container">
   <div class="row">
     <div class="col-lg-12 text-center">
       <div class="navy-line"></div>
@@ -19,7 +19,7 @@
     </thead>
     <tbody>
 
-    <tr ng-repeat="impact in backofficeCtrl.impacts" class="gradeA" role="row">
+    <tr ng-repeat="impact in impacts" class="gradeA" role="row">
       <td>{{impact._projectId.title}}</td>
       <td>{{impact._outcomeId.title}}</td>
       <td>{{impact._userId.firstName}} {{impact._userId.lastName}}</td>

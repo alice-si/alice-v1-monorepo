@@ -1,0 +1,330 @@
+/* This may become deprecated soon */
+.large-button {
+	width: 320px;
+	height: 60px;
+	border-radius: 6px;
+	border-radius: 6px;
+	@include transition(0.3s, all, ease-in-out);
+
+	&__main {
+		background: $alice-blue;
+		border: 1px solid $alice-tonal-dark;
+		&:hover {
+			background: $alice-tonal-medium;
+			border: 1px solid $alice-blue;
+		}
+	}
+
+	&__empty {
+		background: none;
+		border: 1px solid $alice-blue;
+		&:hover {
+			background: $alice-UI-light;
+		}
+	}
+}
+
+.standard-button {
+	&__main, &__empty {
+		font-family: 'Roboto';
+		font-weight: 300;
+    font-size: 16px;
+		width: 300px;
+		height: 40px;
+    letter-spacing: 1px;
+    line-height: 28px;
+		border-radius: 6px;
+		border-radius: 6px;
+		@include transition(0.3s, all, ease-in-out);
+	}
+
+	&__main {
+		color: $white;
+		background: $alice-blue;
+		border: 1px solid $alice-tonal-dark;
+
+		&:hover {
+			background: $alice-tonal-medium;
+			border: 1px solid $alice-blue;
+		}
+	}
+
+	&__empty {
+		color: $alice-dark-text;
+		background: none;
+		border: 1px solid $alice-blue;
+
+		&:hover {
+			background: $alice-UI-light;
+		}
+	}
+}
+
+.small-button {
+	&__main {
+		width: 140px;
+		height: 40px;
+		border-radius: 6px;
+		border-radius: 6px;
+		@include transition(0.3s, all, ease-in-out);
+		color: #fff;
+		background: $alice-blue;
+		border: 1px solid $alice-UI-light;
+		&:hover {
+			background: $alice-tonal-medium;
+		}
+	}
+
+	&__empty {
+		width: 140px;
+		height: 40px;
+		border-radius: 6px;
+		border-radius: 6px;
+		@include transition(0.3s, all, ease-in-out);
+
+		background: none;
+		border: 1px solid $alice-blue;
+		&:hover {
+			background: $alice-UI-light;
+		}
+	}
+}
+
+.white-button {
+  border: 1px solid #fff;
+  border-radius: 3px;
+  height: 40px;
+
+	margin: 10px 0 0 20px;
+	font-size: 14px;
+
+  text-align: center;
+  font-weight: 200;
+
+  letter-spacing: 1px;
+  line-height: 34px;
+
+	background-color: rgba(255, 255, 255, 0.3);
+  @include transition(0.2s, all, ease-in-out);
+}
+
+.white-button:hover {
+	background-color: rgba(255,255,255,0.2);
+}
+
+
+@media screen and (min-width: 10px) and (max-width: 330px) {
+	.appeal-donate-btn {
+		width: 120px !important;
+		padding-top: 16px !important;
+		padding-left: 22px !important;
+
+		& > a {
+			letter-spacing: 4px !important;
+			font-size: 14px !important;
+		}
+	}
+
+	.donate-button a {
+		padding: 14px 85px !important;
+	}
+
+	.project-details-btn {
+		width: 120%;
+	}
+}
+
+@media screen and (max-width: 760px) {
+
+	.project-details-btn {
+		padding: 10px 0;
+
+		a {
+			color: $alice-blue;
+			border: 2px solid #46B3BC;
+			letter-spacing: 5px;
+			background: none;
+			margin: 25px 0;
+			font-weight: 400;
+			font-size: 11px;
+			height: 50px;
+			padding: 10px 25px;
+			width: 100%;
+		}
+
+		&:last-child {
+			transform: translateY(10px) !important;
+		}
+	}
+
+  .appeal-donate-btn {
+    height: 50px;
+    width: 180px;
+    display: inline-block;
+    background-color: $alice-blue;
+    float: right;
+    margin-top: -5px;
+    margin-right: 60px;
+    padding-top: 12px;
+    padding-left: 40px;
+
+    &:active {
+      background-color: #488d93;
+    }
+
+    a {
+      text-align: center;
+      font-weight: 200;
+      letter-spacing: 4px;
+      font-size: 18px;
+      height: 35px;
+      margin: 0 auto;
+      width: 100%;
+      color: #fff;
+
+      &:active {
+        text-decoration: none;
+      }
+    }
+  }
+
+	.donate-button-container {
+		margin-top: 30px;
+		height: 60px;
+
+		a {
+			border: 4px solid $alice-dark;
+			outline: 4px solid #fff;
+			text-shadow: 0px 2px #32787d;
+			padding: 14px 110px;
+			color: #fff;
+			letter-spacing: 5px;
+			font-weight: 400;
+			font-size: 16px;
+			margin: 20px 0 0 20px;
+			background: $alice-blue;
+		}
+	}
+
+	.donate-button > button > a {
+		color: #fff;
+	}
+
+	.sm-icons {
+		height: 30px;
+		transform: translateY(-10px);
+		width: 200px;
+		float: left;
+
+		&-container {
+			margin-left: 10px;
+			height: 40px;
+			float: left;
+		}
+	}
+
+	.social-icon {
+		background: none;
+		border-radius: 11px;
+		border: 1px solid #fff;
+		height: 22px;
+		width: 22px;
+		padding: 0;
+		outline: none;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		vertical-align: center;
+		margin-right: 7px;
+	}
+}
+
+@media screen and (min-width: 760px) {
+	.project-details-btn {
+		margin: 20px 0 50px;
+		padding-top: 20px;
+
+	  a {
+	    border: 1px solid $alice-blue;
+			color: $alice-blue;
+	    letter-spacing: 4px;
+	    background: none;
+			text-align: center;
+	    font-weight: 400;
+	    font-size: 12px;
+	    width: 275px;
+	    height: 50px;
+	    padding: 20px 30px;
+
+			transition: 0.3s all ease-out;
+			-webkit-transition: 0.3s all ease-out;
+			-moz-transition: 0.3s all ease-out;
+			-o-transition: 0.3s all ease-out;
+	  }
+
+	  a:hover {
+			cursor: pointer;
+			background: rgba(104, 204, 210, 0.2);
+		}
+	}
+
+	.donate-button > a {
+		border: 8px solid $alice-dark;
+		outline: 8px solid #fff;
+		letter-spacing: 7px;
+		font-weight: 400;
+		font-size: 28px;
+		width: 340px;
+		padding: 25px 65px;
+		color: #fff;
+		height: 100px;
+		background: $alice-blue;
+		text-shadow: 0px 3px #136e75;
+		box-shadow: inset 0px -4px 0px #136e75;
+
+		transition: 0.1s all ease-out;
+    -webkit-transition: 0.1s all ease-out;
+    -moz-transition: 0.1s all ease-out;
+
+		&:hover {
+			text-shadow: 0px 1px #136e75;
+			box-shadow: inset 0px -1px 0px #136e75;
+		}
+  }
+
+// These are the share buttons located on the splash screen
+	.sm-icons {
+		height: 30px;
+		transform: translate(10px, -12px);
+		width: 200px;
+		float: left;
+
+		&-container {
+			height: 22px;
+			width: 75%;
+			float: right;
+		}
+	}
+
+	.social-icon {
+		background: none;
+		border-radius: 13px;
+		border: 1px solid #fff;
+		height: 25px;
+		width: 25px;
+		padding: 0;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		vertical-align: center;
+		margin-right: 7px;
+
+		transition: 0.2s all ease-out;
+		-webkit-transition: 0.2s all ease-out;
+		-moz-transition: 0.2s all ease-out;
+
+		&:hover {
+			background: rgba(255, 255, 255, 0.2);
+		}
+	}
+}

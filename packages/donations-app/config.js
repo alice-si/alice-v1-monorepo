@@ -25,11 +25,13 @@ function getEnv(variable, defaultForLocal) {
 }
 
 config.mode = mode;
+config.deploymentId = process.env.DEPLOYMENT_ID || "";
 
 config.awsEmailSenderAddress = getEnv('ALICE_SENDER_EMAIL');
 config.awsRegion = 'eu-west-2';
 config.awsSesRegion = getEnv('AWS_SES_REGION');
 config.awsDefaultBucketName = 'alice-res';
+config.timeoutForMangoHooksResending = 5000; // ms
 
 if (mode == 'local') {
   config.pathToKeys = './secrets/keys/';
@@ -39,13 +41,13 @@ if (mode == 'local') {
 
 config.hostnames = {
   local: 'http://localhost:8080',
-  dev: 'http://dev.alice.si',
+  exp: `http://${config.deploymentId}.alice.si`,
   stage: 'https://stage.alice.si',
   prod: 'https://donationsapp.alice.si'
 };
 config.apiHostnames = {
   local: '',
-  dev: 'http://dev.alice.si',
+  exp: `http://${config.deploymentId}.alice.si`,
   stage: 'https://api.stage.alice.si',
   prod: 'https://api.alice.si'
 };

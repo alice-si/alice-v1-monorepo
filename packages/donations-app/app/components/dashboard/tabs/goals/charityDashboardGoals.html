@@ -1,0 +1,52 @@
+<div class="col-xs-12 col-sm-6 col-md-12">
+  <uib-accordion ng-hide="outcomesOfProject.length === 0"
+                 close-others="false">
+    <div ng-hide="outcomesValidated.length > 0">
+      <h3>
+        No goals have been validated yet. Please check back again later.
+      </h3>
+    </div>
+    <div ng-hide="outcomesValidated.length === 0">
+         <div uib-accordion-group
+              template-url="/components/dashboard/panels/panel.html"
+              class="c-dashboard__panel"
+              heading="Goals Progress">
+              <div class="col-md-12">
+                <goal-progress-carousel outcomes="outcomesValidated">
+                </goal-progress-carousel>
+              </div>
+         </div>
+         <div uib-accordion-group
+              template-url="/components/dashboard/panels/panel.html"
+              class="c-dashboard__panel"
+              heading="Goals Breakdown">
+              <div class="alice-table-container col-md-12">
+              <goals-breakdown-table outcomes="outcomesValidated">
+              </goals-breakdown-table>
+            </div>
+         </div>
+         <div uib-accordion-group
+              template-url="/components/dashboard/panels/panel.html"
+              class="c-dashboard__panel"
+              heading="Goals Completed over time">
+              <div class="alice-table-container col-md-12">
+              <goals-progress-graph outcomes="outcomesValidated">
+              </goals-progress-graph>
+            </div>
+         </div>
+    </div>
+    <div uib-accordion-group
+         template-url="/components/dashboard/panels/panel.html"
+         class="c-dashboard__panel"
+         heading="Goals Claim"
+         id="claimGoals">
+         <div ng-repeat="outcome in outcomesOfProject"
+              class="col-sm-12 col-md-6 col-md-4">
+              <claim-outcome-card outcome="outcome"
+                                  validator="projectValidator.email"/>
+         </div>
+
+    </div>
+  </uib-accordion>
+
+</div>

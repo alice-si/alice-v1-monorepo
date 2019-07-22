@@ -1,0 +1,92 @@
+/* Styles used for various cards across the site. */
+
+#claimGoals {
+  .alice-card {
+    min-height: 500px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+
+    &__content {
+      --content-padding: 10px;
+      padding: 20px var(--content-padding) 5px;
+
+      p {
+        font-size: 14px;
+      }
+
+      input {
+        border: none;
+        padding: none;
+        text-align: center;
+        border-bottom: 1px solid $alice-tonal-light;
+        background: none;
+
+        &:focus {
+          caret-color: $alice-dark-text;
+          font-weight: 200;
+          outline: 0;
+        }
+      }
+    }
+
+    &__buttons {
+      float: right;
+      margin-right: -10px;
+    }
+  }
+}
+
+.alice-card {
+  display: block;
+  color: inherit;
+  background-color: #fff;
+  margin: 10px;
+  border-radius: 4px;
+
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 15px;
+  }
+
+}
+
+.alice-card__content {
+  --content-padding: 10px;
+  padding: 20px var(--content-padding) 5px;
+}
+
+.alice-card__content .alice-card__collapsible-title {
+  cursor: pointer;
+  padding: 5px 15px;
+  margin: 0px calc(-1 * var(--content-padding));
+  margin-bottom: 10px;
+}
+
+.alice-card__content .alice-card__collapsible-title:after {
+  font: normal normal normal 14px/1 FontAwesome;
+  content: "\f078";   /* Font Awesome: chevron-down */
+  float: right;
+  margin-left: 5px;
+}
+
+.alice-card__content .alice-card__collapsible-title:hover {
+  background-color: #eee;
+}
+
+.alice-card__content .alice-card__collapsible-title.active:after {
+  content: "\f077";   /* Font Awesome: chevron-up */
+}
+
+.alice-card__buttons {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-bottom: 15px;
+}
+
+.alice-card__buttons .btn {
+  min-width: 130px;
+}

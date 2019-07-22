@@ -1,0 +1,44 @@
+.donate-button-box {
+    margin-top: 30px;
+}
+
+.donation-amounts {
+    color: $alice-blue;
+    width: 100%;
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+.donation-amounts div {
+    padding-right: 0;
+    margin-bottom: 3px;
+}
+
+img.cvc {
+    position: absolute;
+    top: 0;
+    right: 10px;
+}
+
+@media (min-width: 1000px) {
+    .error-max {
+        position: absolute;
+        left: -300px;
+        top: 20px;
+    }
+}
+
+
+@media (max-width: 500px) {
+    .donate-button-box {
+        position: relative;
+        margin-top: 10px;
+        margin-bottom: -10px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .gift-aid-text {
+        margin-bottom: 10px;
+    }
+}

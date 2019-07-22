@@ -34,7 +34,6 @@ function getModelAndUpdate(model, startStatus, newStatus, dateField) {
   }
   return function() {
     return model.findOneAndUpdate({status: startStatus}, update).sort(dateField || '_id').populate('_userId _projectId').then(function (res) {
-      Monitor.printStatus(model);
       return res;
     });
   };

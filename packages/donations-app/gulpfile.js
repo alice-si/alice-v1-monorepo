@@ -54,7 +54,7 @@ gulp.task("deploy-dev", ["set-dev-env", "clean-build-frontend-app", "validate-de
       DIST_PATH : paths.getDistPath()
     }
   });
-})
+});
 
 // Used to publish frontend to stage s3 bucket - needs invalidation in Cloudfront
 gulp.task("publish-stage", ["set-stage-env", "clean-build-frontend-app"], function() {
@@ -236,9 +236,9 @@ function runNodaemonServer(options = {}) {
 function initPipesFunctions() {
   let pipes = {};
 
+  // TODO we should remove jshint and use eslint instead
   pipes.validatedDevServerScripts = function () {
     return gulp.src(paths.scriptsDevServer)
-      .pipe(plugins.jshint('.jshintrc'))
       .pipe(plugins.jshint.reporter("jshint-stylish"));
   };
 
@@ -303,8 +303,8 @@ function initPipesFunctions() {
     let conf = gulp.src(paths.getEnvConfPath())
       .pipe(plugins.rename("envConfig.js"));
 
+    // TODO we should remove jshint and use eslint instead
     return es.merge(gulp.src(paths.scripts), conf)
-      .pipe(plugins.jshint('.jshintrc'))
       .pipe(plugins.jshint.reporter("jshint-stylish"));
   };
 

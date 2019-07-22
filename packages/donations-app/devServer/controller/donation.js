@@ -4,9 +4,12 @@ const Mail = require('../service/mail');
 const Utils = require('../service/utils');
 const Config = require('../../config');
 const Donation = Utils.loadModel('donation');
+const Environment = Utils.loadModel('environment');
 const Project = Utils.loadModel('project');
 const User = Utils.loadModel('user');
 const Lodash = require('lodash');
+const http = require('http');
+const url = require('url');
 
 const asyncHandler = require('express-async-handler');
 
@@ -24,7 +27,7 @@ module.exports = function (app) {
       let mangoResult;
       let project = await Project.findById(req.body.projectId);
       if (project.status != 'ACTIVE') throw 'Campaing not active';
-      transferType = req.body.type;
+      let transferType = req.body.type;
       // payIn
       if (transferType == "CARD") {
         mangoResult = await Mango.payIn(req.user, req.body.amount, req.body.cardId);
@@ -34,12 +37,11 @@ module.exports = function (app) {
         throw "Unknown transfer type";
       }
       if (mangoResult.Status == 'FAILED') {
-        throw result.ResultMessage;
+        throw mangoResult.ResultMessage;
       }
       // creating a new donation in DB
       let donation = await createNewDonation(req, mangoResult);
-      // updating giftAid for user
-      await updateGiftAid(req);
+
       // some post actions for different types of donations
       if (transferType == "BANK_TRANSFER") {
         await sendDonationEmail(req.user, donation);
@@ -114,7 +116,8 @@ module.exports = function (app) {
     const supported3DS = await Mango.cardSupports3DS(req.params.cardId);
     res.json({
       supported3DS,
-      securityTreshold: Mango.securityTreshold
+      // 3DS disabled for non-eurozone
+      // securityTreshold: Mango.securityTreshold
     });
   }));
 
@@ -123,9 +126,42 @@ module.exports = function (app) {
     return res.json(donations);
   }));
 
+  async function redirectRequestToAllExpEnvironments(req) {
+    const environments = await Environment.find({});
+    for (const environment of environments) {
+      const urlParsed = url.parse(req.url);
+      const newUrl = environment.url + urlParsed.pathname + urlParsed.search;
+      console.log('hookRedirection: Resending to ' + newUrl);
+      await new Promise((resolve) => {
+        let req = http.get(newUrl, (res) => {
+          console.log(`hookRedirection: Got reponse from ${environment.url}, statusCode: ${res.statusCode}`);
+          resolve();
+        });
+
+        req.on('timeout', () => {
+          console.log('hookRedirection: Time is out ' + environment.url);
+          req.abort();
+          resolve();
+        });
+
+        req.on('error', (err) => {
+          console.error('hookRedirection: Error occured ' + environment.url);
+          console.error(err);
+          resolve();
+        });
+
+        req.setTimeout(Config.timeoutForMangoHooksResending);
+      });
+    }
+  }
+
   async function mangoHookPayInEp(req, res) {
     let savedDonation;
     try {
+      if (Config.mode == 'stage') {
+        await redirectRequestToAllExpEnvironments(req);
+      }
+
       const transactionId = req.query.RessourceId;
       let {donation, mangoResult} = await getPayIn(transactionId);
       console.log('Got payIn: ' + JSON.stringify(mangoResult));
@@ -136,11 +172,11 @@ module.exports = function (app) {
       if (savedDonation.status == 'FAILED') {
         throw 'PayIn failed ' + savedDonation._id;
       }
-      if (['CREATED', 'BIG_TRANSFER_CREATED'].includes(savedDonation.status)) {
+      // FIXME remove 'DONATED' from this list
+      if (['DONATED', 'CREATED', 'BIG_TRANSFER_CREATED'].includes(savedDonation.status)) {
         let project = await Project.findById(savedDonation._projectId).populate('charity');
         await Mail.sendDonationConfirmation(savedDonation._userId, project, savedDonation);
       }
-      res.send();
     } catch (err) {
       console.error('mangoHookPayInEp error');
       console.error(err.toString());
@@ -152,6 +188,7 @@ module.exports = function (app) {
       } else {
         console.error('Donation is undefined. Can not save error message in DB');
       }
+    } finally {
       res.send(); // we should respond with status code 200 in any case to avoid mango hook disabling
     }
   }
@@ -181,6 +218,7 @@ module.exports = function (app) {
       type: req.body.type,
       amount: req.body.amount,
       createdAt: new Date(),
+      giftAidAddress: req.body.giftAidAddress,
       transactionId: mangoResult.Id,
       secureModeNeeded: mangoResult.SecureModeNeeded,
       bankTransferData: {
@@ -200,7 +238,9 @@ module.exports = function (app) {
         if (mangoResult.DebitedFunds.Amount >= BIG_TRANSFER_TRESHOLD) {
           return 'BIG_TRANSFER_CREATED';
         }
-        return 'CREATED';
+        // return 'CREATED';
+        // FIXME donation should go through blockchain
+        return 'DONATED';
       case 'CREATED':
         if (mangoResult.PaymentType == 'BANK_WIRE') {
           return 'BANK_TRANSFER_REQUESTED';
@@ -245,7 +285,7 @@ module.exports = function (app) {
       opts.donationData._projectId = opts.donationData.projectId;
     }
 
-    // sending error email to donor 
+    // sending error email to donor
     if (opts && opts.sendEmail && opts.user) {
       let project = await Project.findById(opts.donationData._projectId).populate("charity");
       await Mail.sendDonationError(opts.user, project, err, opts.is3DS);

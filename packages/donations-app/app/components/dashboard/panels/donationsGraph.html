@@ -1,0 +1,48 @@
+<div ng-if="donCtrl.allowPageLoad">
+  <div class="donations">
+    <div class="row" style="margin-top: 55px;">
+      <div class="col-md-6 col-sm-6 col-xs-6">
+        <div class="col-md-3"
+             ng-repeat="option in donCtrl.axisOptions"
+             style="margin-right: 3px;">
+          <button type="button"
+                  name="button"
+                  ng-click="setXAxis(option)"
+                  class="graph-option">{{option}}</button>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-6 col-xs-6">
+        <div class="col-md-6 col-sm-6 col-xs-6">
+          <div class="donations-total-header">
+            <p><span class="circle" style="background-color: #1998a2;"></span>
+              <span style="margin-left: 5px;">Total raised</span></p>
+              <div class="donations-total-value">
+                {{donCtrl.totalDonated | money}}
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-6 col-xs-6">
+            <div class="donations-total-header">
+              <p><span class="circle" style="background-color: #FFCA54;"></span>
+                <span style="margin-left: 5px;">Total received</span></p>
+                <div class="donations-total-value">
+                  {{donCtrl.totalValidated | money}}
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+
+    <div ng-if="donCtrl.donationsGraphData.length > 0">
+        <canvas class="chart chart-line"
+                chart-data="donCtrl.donationsGraphData"
+                chart-labels="donCtrl.dates"
+                chart-options="donCtrl.lineChartOptions"
+                chart-dataset-override="donCtrl.datasetOverride"
+                width="400"
+                height="150">
+        </canvas>
+    </div>
+  </div>
+</div>

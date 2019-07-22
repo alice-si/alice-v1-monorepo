@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-8">
+  <div style="min-height: 100vh" class="col-md-8">
     <div ng-show="prWizardCtrl.mode == prWizardCtrl.modes.GENERAL">
       <div class="form-group" has-error>
         <label class="col-sm-3 control-label">Project image</label>
@@ -49,12 +49,45 @@
         </div>
       </div>
 
-      <div class="form-group" ng-if="prWizardCtrl.auth.isSuperadmin()">
+      <!-- Charity should be selectable only when project is being created -->
+      <div class="form-group" ng-if="prWizardCtrl.auth.isSuperadmin() && !prWizardCtrl.project._id">
         <label class="col-sm-3 control-label">Charity</label>
 
         <select class="col-sm-9" ng-model="prWizardCtrl.project.charity">
           <option ng-repeat="charity in prWizardCtrl.charities" value="{{charity._id}}">{{charity.name}}</option>
         </select>
+      </div>
+
+      <!-- Validator should be selectable only when project is being created -->
+      <div class="form-group" ng-if="prWizardCtrl.auth.isSuperadmin() && !prWizardCtrl.project._id">
+        <label class="col-sm-3 control-label">Validator *<p style="font-size: 8px;">Please select exactly one validator</p></label>
+        
+        <div user-list min-tags="1" max-tags="1" model="prWizardCtrl.project.validators" name="validators" required></div>
+        <error-message name="validators" error="minTags">Please select exactly one validator</error-message>
+        <error-message name="validators" error="maxTags">Please select exactly one validator</error-message>
+        <error-message name="validators" error="required">This field is required</error-message>
+      </div>
+
+      <div class="form-group" has-error>
+        <label class="col-sm-3 control-label">Location of project</label>
+
+        <div class="col-sm-9">
+          <input type="text"
+                 class="form-control"
+                 ng-model="prWizardCtrl.project.location"
+                 placeholder="United Kingdom"
+                 name="location">
+        </div>
+      </div>
+      <div class="form-group" has-error>
+        <label class="col-sm-3 control-label">Type Of Beneficiary</label>
+
+        <div class="col-sm-9">
+          <input type="text" class="form-control" ng-model="prWizardCtrl.project.typeOfBeneficiary"
+                 placeholder="eg. People, Animals, Trees etc." name="typeOfBeneficiary" required>
+          <error-message name="typeOfBeneficiary" error="required">This field is required
+          </error-message>
+        </div>
       </div>
     </div>
 
@@ -110,6 +143,13 @@
 
         <div class="col-sm-9">
           <div class="form-control" summernote ng-model="prWizardCtrl.project.summary"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Extended Summary</label>
+
+        <div class="col-sm-9">
+          <div class="form-control" summernote ng-model="prWizardCtrl.project.extendedSummary"></div>
         </div>
       </div>
 

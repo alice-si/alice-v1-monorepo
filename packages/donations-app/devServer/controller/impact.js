@@ -21,6 +21,33 @@ module.exports = function (app) {
         {$unwind: "$project"},
         {$addFields: {"project.totalDonated": "$totalDonated"}},
         {$replaceRoot: {newRoot: "$project"}},
+        {$lookup: {from: "charities", localField: "charity", foreignField: "_id", as: "charity"}},
+        {$unwind: "$charity"},
+        {
+          $lookup:
+            {
+              from: "impacts",
+              let: {projectId: "$_id"},
+              pipeline: [
+                {
+                  $match: {$expr:{$eq: ["$_projectId", "$$projectId"]}}
+                },
+                {$lookup: {from: "outcomes", localField: "_outcomeId", foreignField: "_id", as: "outcome"}},
+                {$unwind: "$outcome"},
+                {$group: {
+                  _id: "$outcome._id",
+                  totalSpent: {$sum: "$amount"},
+                  target: {$first: "$outcome.amount"},
+                  title: {$first: "$outcome.title"},
+                  description: {$first: "$outcome.value"},
+                  image: {$first: "$outcome.image"},
+                  color: {$first: "$outcome.color"}
+                }}
+              ],
+              as: "allImpactsForProject"
+            }
+        },
+        {$addFields: {"project.totalDonated": "$totalDonated"}},
         {
           $lookup:
             {
@@ -74,6 +101,7 @@ module.exports = function (app) {
         },
         {
           $addFields: {
+            totalPaidOutOverall: {$sum: "$allImpactsForProject.totalSpent"},
             totalPaidOut: {$sum: "$impacts.total"},
             goalsAchieved: {$sum: "$impacts.count"},
             donatedByAll: {$add: [{$sum: "$donations.amount"}, {$ifNull: ["$externalFunding", 0]}]}
@@ -82,6 +110,8 @@ module.exports = function (app) {
         {
           $project: {
             "totalDonated": 1,
+            "allImpactsForProject": 1,
+            "totalPaidOutOverall": 1,
             "code": 1,
             "fundingTarget": 1,
             "title": 1,
@@ -92,9 +122,10 @@ module.exports = function (app) {
             "donatedByAll": 1,
             "externalFunding": 1,
             "lead": 1,
+            "charity": 1,
             "ethAddresses": 1
           }
-        },
+        }
       ]);
       return res.json(result);
     }));

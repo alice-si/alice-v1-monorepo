@@ -1,0 +1,44 @@
+/* MODALS */
+
+.modal {
+    &-close {
+        font-size: 25px;
+        position: absolute;
+        transform: translateX(-40px);
+        color: $alice-tonal-light;
+
+        &:hover {
+            color: $alice-tonal-dark;
+            cursor: pointer;
+        }
+    }
+
+    &-content {
+        border-radius: 4px !important;
+        border: none;
+        padding: 0 50px;
+    }
+
+    &-title {
+        padding: 30px 0 10px;
+        color: $alice-tonal-medium;
+    }
+
+    &-body a {
+        color: $alice-blue;
+
+        &:hover {
+            color: $alice-tonal-light;
+        }
+    }
+
+    &-footer {
+        margin-top: 20px;
+        border-top: 1px solid #ccc;
+        width: 100%;
+    }
+}
+
+.login-button:hover {
+  cursor: pointer;
+}

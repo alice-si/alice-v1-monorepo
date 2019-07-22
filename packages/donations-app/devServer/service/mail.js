@@ -33,7 +33,7 @@ Mail.sendDonationError = function (user, project, err, is3DS) {
       project: project,
       err: err,
       is3DS: is3DS,
-      securityTreshold: formatMoney(Mango.securityTreshold),
+      securityTreshold: formatMoney(Mango.securityTresholdForCardsWith3DSSupport),
       title: 'Donation failed',
       subtitle: 'Donation failed'
     },
@@ -138,6 +138,23 @@ Mail.sendPasswordReset = function (user) {
   });
 };
 
+Mail.sendImpactConfirmation = function (user, project, impact) {
+  impact.money = formatMoney(impact.amount);
+  return MailSender.requestSending({
+    template: 'impactConfirmation.mustache',
+    subject: 'Donation paid',
+    to: user.email,
+    data: {
+      user: user,
+      project: project,
+      impact: impact,
+      title: 'Donation paid',
+      subtitle: 'Success!'
+    },
+    type: 'ImpactConfirmation'
+  });
+};
+
 function prepareDonationBankInfo(donation) {
   let idFieldName, idValue;
   const account = donation.bankTransferData.account;
@@ -155,7 +172,7 @@ function prepareDonationBankInfo(donation) {
       idValue = account.AccountNumber;
       break;
   }
-  
+
   donation.bankTransferData.account.idFieldname = idFieldName;
   donation.bankTransferData.account.idValue = idValue;
 

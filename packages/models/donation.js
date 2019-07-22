@@ -23,11 +23,11 @@ let donationSchemaObj = {
     enum: ['BANK_TRANSFER', 'CARD', 'DAI'],
     default: 'CARD'
   },
-
   status: {
     type: String,
     enum: ModelUtils.evaluateStatuses(processNames, statuses)
   },
+  giftAidAddress: String,
   transactionId: String,
   secureModeNeeded: Boolean,
   errorChecked: Boolean,

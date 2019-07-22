@@ -75,7 +75,11 @@ TestUtils.getTestUserData = function (email) {
   };
 };
 
-TestUtils.loadController = async function (name, authStubbing = true) {
+TestUtils.loadController = async function ({
+  name,
+  authStubbing = true,
+  rewireVars = {}
+}) {
   let controller = rewire('../devServer/controller/' + name);
 
   if (authStubbing) {
@@ -106,6 +110,10 @@ TestUtils.loadController = async function (name, authStubbing = true) {
       comparePassword: realAuthService.comparePassword,
       getJWT: realAuthService.getJWT
     });
+  }
+
+  for (const rewireKey in rewireVars) {
+    controller.__set__(rewireKey, rewireVars[rewireKey]);
   }
 
   return controller;
@@ -141,11 +149,19 @@ TestUtils.stopAppWithController = async function (controller) {
   });
 };
 
-TestUtils.setBeforeAndAfterHooksForControllerTest = function (controllerName) {
+TestUtils.setBeforeAndAfterHooksForControllerTest = function ({
+  name,
+  authStubbing = true,
+  rewireVars = {}
+}) {
   before(async function() {
     await TestUtils.connectToTestDB();
     console.log('Connected to test DB');
-    let controller = await TestUtils.loadController(controllerName);
+    let controller = await TestUtils.loadController({
+      name,
+      authStubbing,
+      rewireVars
+    });
     await TestUtils.startAppWithController(controller);
   });
 
@@ -200,7 +216,14 @@ TestUtils.testGet = async (epName, param='', testFunction, user) => {
   };
 
   let res = await request.get(options);
-  res = JSON.parse(res);
+
+  try {
+    // We parse response if it is a valid JSON
+    res = JSON.parse(res);
+  } catch (err) {
+    console.error('GET response can not be parsed: ', err);
+  }
+  
 
   // TODO migrate all usages to async and remove the parameter.
   if (testFunction) {

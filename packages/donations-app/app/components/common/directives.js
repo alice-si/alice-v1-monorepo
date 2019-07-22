@@ -55,7 +55,7 @@ angular.module('aliceApp')
       restrict: 'E',
       transclude: true,
       scope: {},
-      template: '<span ng-show="(formCtrl.$submitted || inputCtrl.$touched) && inputCtrl.$error[error]" class="help-block" ng-transclude></span>',
+      template: '<p ng-show="(formCtrl.$submitted || inputCtrl.$touched) && inputCtrl.$error[error]" class="help-block" ng-transclude></p>',
       link: function ($scope, element, attrs, ctrl) {
         $scope.formCtrl = ctrl;
         $scope.inputCtrl = ctrl[attrs.name];
@@ -265,7 +265,7 @@ angular.module('aliceApp')
             $http.get(API + 'getAWSPostData/' + filename).then(function (result) {
               var postData = result.data.postData;
 
-              var formData = new FormData(result.data.postData);
+              var formData = new FormData();
               for (var key in postData) {
                 formData.append(key, postData[key]);
               }
@@ -319,7 +319,9 @@ angular.module('aliceApp')
     return {
       restrict: 'A',
       scope: {
-        model: "="
+        model: "=",
+        maxTags: "@",
+        minTags: "@",
       },
       link: function (scope) {
         scope.modelLoaded = false;
@@ -335,8 +337,9 @@ angular.module('aliceApp')
         scope.searchUser = function (query) {
           if (!query) {
             return {data: []};
+          } else {
+            return $http.get(API + 'userSearch/' + query);
           }
-          return $http.get(API + 'userSearch/' + query);
         };
 
         scope.addUser = function (user) {
@@ -362,9 +365,14 @@ angular.module('aliceApp')
         };
       },
       /*jshint multistr: true */
-      template: '<tags-input ng-model="userList" display-property="details" add-from-autocomplete-only="true"\
+      template: '<tags-input ng-model="userList" min-tags="{{minTags}}" max-tags="{{maxTags}}" display-property="details" add-from-autocomplete-only="true"\
                  on-tag-added="addUser($tag)" on-tag-removed="removeUser($tag)" placeholder="Start typing an email address...">\
                     <auto-complete min-length="2" source="searchUser($query)"></auto-complete>\
                 </tags-input>'
     };
-  }]);
+  }])
+  .directive('loadingScreen', function () {
+    return {
+      templateUrl: '/components/global/loader.html',
+    };
+  });

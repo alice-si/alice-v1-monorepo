@@ -4,14 +4,17 @@ const Mango = require('../service/mango');
 const Utils = require('../service/utils');
 const asyncHandler = require('express-async-handler');
 const mongoose = require('mongoose');
+const _ = require('lodash');
 
 // Model loading
 const Category = Utils.loadModel('category');
+const Validation = Utils.loadModel('validation');
 const Project = Utils.loadModel('project');
 const Charity = Utils.loadModel('charity');
 const Donation = Utils.loadModel('donation');
 const ProjectHistory = Utils.loadModel('projectHistory');
 const Outcome = Utils.loadModel('outcome');
+const User = Utils.loadModel('user');
 
 module.exports = function (app) {
 
@@ -78,7 +81,9 @@ module.exports = function (app) {
     let donations = await Donation.aggregate([
       {
         $match: {
-          $and: [{ _projectId: project._id }, { status: 'DONATED' }]
+          //FIXME: Needs blockchain processing
+          //$and: [{ _projectId: project._id }, { status: 'DONATED' }]
+          $and: [{ _projectId: project._id }, { status: {$ne: 'FAILED'} }]
         }
       },
       {
@@ -93,11 +98,33 @@ module.exports = function (app) {
 
     project.needed = project.fundingTarget - project.raised;
 
-    if (req.query.countValidations) {
+    // if (req.query.countValidations) {
       project.amountValidated =
         await Utils.getAmountValidatedForProject(project);
       project.amountAvailable = project.raised - project.amountValidated;
-    }
+    // }
+
+
+		// Added this backend function for new appeal page design
+		// Goals require current validation progress
+		// as well as goal features
+		let goalsV2 = await Validation.aggregate([
+	    {
+	      $match: {
+	        $and: [
+	          { _projectId: project._id },
+	          { status: { $not: /CREATED|CLAIMING_/ }},
+	        ]
+	      }
+	    },
+	    {
+	      $group: { _id: "$_outcomeId", totalValidatedForOutcome: {$sum: "$amount"} }
+	    },
+	    { $lookup: { from: "outcomes", localField: "_id", foreignField: "_id", as: "outcome"} },
+	    {$unwind: "$outcome"}
+	  ]);
+
+		project.goalsV2 = (goalsV2.length > 0) ? goalsV2 : [];
 
     res.json(project);
   }));
@@ -156,27 +183,41 @@ module.exports = function (app) {
         );
 
         await checkMangoWallets(savedProject);
-
-        // TODO when we move to monorepo addProjectToCharity function
-        // should be refactored and be a Promise
-        await new Promise((resolve, reject) => {
-          Charity.addProjectToCharity(savedProject, (err) => {
-            if (err) {
-              reject();
-            } else {
-              resolve();
-            }
-          });
-        });
-
+        await Charity.addProjectToCharity(savedProject);
         await lazyOutcomesUpdate(projectWithOutcomes, savedProject);
 
         // adding project history
         await new ProjectHistory({
           project: savedProject,
           outcomes: req.body.outcomes,
+          validators: req.body.validators,
           changedBy: req.user._id
         }).save();
+
+        // Setting validator
+        if (AccessControl.isSuperadmin(req.user)
+            && req.body.validators
+            && req.body.validators.length == 1)
+        {
+          let newValidatorId = req.body.validators[0];
+          let prevValidator = await User.findOne({
+            validator: savedProject._id
+          });
+
+          if (prevValidator && !prevValidator._id.equals(newValidatorId)) {
+            // Cleaning previous validator
+            _.remove(prevValidator.validator,
+              projectId => savedProject._id.equals(projectId));
+            await prevValidator.save();
+          }
+
+          if (!prevValidator || !prevValidator._id.equals(newValidatorId)) {
+            // Setting the new validator
+            let user = await User.findById(newValidatorId);
+            user.validator.push(savedProject._id);
+            await user.save();
+          }
+        }
 
         res.json(savedProject);
 

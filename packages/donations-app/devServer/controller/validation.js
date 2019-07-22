@@ -3,10 +3,152 @@ const asyncHandler = require('express-async-handler');
 const Auth = require('../service/auth');
 const AccessControl = require('../service/access-control');
 const Utils = require('../service/utils');
+const Mail = require('../service/mail');
 
 const Outcome = Utils.loadModel('outcome');
 const Project = Utils.loadModel('project');
 const Validation = Utils.loadModel('validation');
+
+// FIXME: remove this function
+async function linkImpacts(validation) {
+  console.log('Linking outcomes and fetching impacts for validation: ' + validation._id);
+
+  // We load modules here for being able to remove it with function after demo
+  const User = Utils.loadModel('user');
+  const Impact = Utils.loadModel('impact');
+
+  const usersFromDB = await User.aggregate([
+    {
+      $lookup: {
+        from: "donations",
+        let: {
+          projectId: validation._projectId,
+          userId: "$_id"
+        },
+        pipeline: [
+          {
+            $match: {
+              $and: [
+                {$expr: {$eq: ["$_projectId", "$$projectId"]}},
+                {$expr: {$eq: ["$_userId", "$$userId"]}},
+                {$expr: {$eq: ["$status", "DONATED"]}}
+              ]
+            }
+          }
+        ],
+        as: "donations"
+      },
+    },
+    {
+      $lookup: {
+        from: "impacts",
+        let: {
+          projectId: validation._projectId,
+          userId: "$_id"
+        },
+        pipeline: [
+          {
+            $match: {
+              $and: [
+                {$expr: {$eq: ["$_projectId", "$$projectId"]}},
+                {$expr: {$eq: ["$_userId", "$$userId"]}},
+              ]
+            }
+          }
+        ],
+        as: "impacts"
+      },
+    }
+  ]);
+
+  // Calculating balance for each user
+  const users = usersFromDB.map(function (userFromDB) {
+    function sumAmount(acc, cur) {
+      return acc + cur.amount;
+    }
+
+    const userDonated = userFromDB.donations.reduce(sumAmount, 0);
+    const userImpactAmount = userFromDB.impacts.reduce(sumAmount, 0);
+
+    userFromDB.balance = userDonated - userImpactAmount;
+
+    return userFromDB;
+  });
+
+  // Filtering donors (only donors with positive balance could make a new impact)
+  let donors = users.filter(function (user) {
+    return user.balance > 0;
+  });
+
+  // Donors sorting based on balances for current project
+  donors.sort(function (donor1, donor2) {
+    return donor1.balance - donor2.balance;
+  });
+
+  // Donors list logging
+  console.log(donors.map(function ({_id, email, balance, donations, impacts}) {
+    return {
+      _id,
+      email,
+      balance,
+      donationsLen: donations.length,
+      impactsLen: impacts.length
+    };
+  }))
+
+  let amountAvailable = donors.reduce(function (acc, cur) {
+    return acc + cur.balance;
+  }, 0);
+  let amountLeft = validation.amount;
+  let counter = 0;
+  for (let donor of donors) {
+    console.log(`Donor: ${donor.email}, Amount left: ${amountLeft}, Available: ${amountAvailable}`);
+
+    if (amountLeft > 0) {
+      // Calculating impact amount for current donor
+      const minImpactValue = 50;
+
+      // First option (almost equal impact amount for everyone)
+      const donorsLeft = donors.length - counter; // donorsLeft > 0
+      let amountForDonor = Math.max(amountLeft / donorsLeft, minImpactValue);
+
+      // Second option (impact amount depends on donor's balance) - currently disabled
+      // let amountForDonor = Math.max((donor.balance / amountAvailable) * amountLeft, minImpactValue);
+
+      // If we came to the last donor (donor with the biggest balance)
+      if (counter == donors.length - 1) {
+        amountForDonor = amountLeft;
+      }
+
+      if (amountForDonor > donor.balance) {
+        amountForDonor = donor.balance;
+      }
+
+      console.log(`Donor impact: ${amountForDonor}`);
+
+      // Creating a new impact for current donor
+      let savedImpact = await new Impact({
+        _projectId: validation._projectId,
+        _outcomeId: validation._outcomeId,
+        _userId: donor._id,
+        _validationId: validation._id,
+        amount: amountForDonor
+      }).save();
+
+      //Send confirmation email
+      let projectWithCharity = await Project.findById(validation._projectId).populate('charity');
+      await Mail.sendImpactConfirmation(donor, projectWithCharity, savedImpact);
+
+      // Updating accumulated values
+      amountLeft -= amountForDonor;
+      amountAvailable -= amountForDonor;
+      donor.balance -= amountForDonor;
+      counter++;
+    } else {
+      console.log('Donor skipped');
+    }
+  }
+}
 
 module.exports = function (app) {
   // Returns a summary for all projects that the user is a validator of.
@@ -121,6 +263,13 @@ module.exports = function (app) {
           `is achieved`);
       }
 
+      let fundsAvailable = await Utils.getAmountAvailableForProject(project);
+      if (fundsAvailable < totalClaim) {
+        return res.status(400).send(
+          `Cannot claim ${totalClaim / 100} GBP: ` +
+          `Only ${fundsAvailable / 100} GBP unclaimed`);
+      }
+
       let validations = [];
       for (let i = 0; i < quantity; i++) {
         validations.push(new Validation({
@@ -129,7 +278,9 @@ module.exports = function (app) {
           _claimerId: req.user._id,
           amount: outcome.amount,
           createdAt: new Date(),
-          status: 'CREATED'
+          // status: 'CREATED'
+          // FIXME claiming should go through blockhain
+          status: 'CLAIMING_COMPLETED'
         }));
       }
 
@@ -164,7 +315,11 @@ module.exports = function (app) {
           `but outcome requires ${validation.amount / 100} GBP`);
       }
 
-      validation.status = 'APPROVED';
+      // FIXME remove
+      await linkImpacts(validation);
+      // FIXME validation should go through blockchain
+      // validation.status = 'APPROVED';
+      validation.status = 'IMPACT_FETCHING_COMPLETED';
       validation._validatorId = req.user._id;
       await validation.save();
 
