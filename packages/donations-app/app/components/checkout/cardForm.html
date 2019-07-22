@@ -12,16 +12,16 @@
     <span class="help-block">Please select an amount</span>
   </div>
 
-  <div class="row" style="margin-top: 20px;">
-    <div class="col-xs-12">
+  <div class="row" style="margin-top: 20px">
+    <p class="alice-grey col-md-12">Enter your details</p>
+    <div class="col-xs-12 col-md-12">
       <div class="form-group" has-error>
+        <label>Cardholder Name</label>
         <input
           id="donate-card-name"
           type="text"
-          class="form-control"
           name="cardName"
           required
-          placeholder="Name on the card"
           ng-model="checkCtrl.card.name"
         />
         <error-message name="cardName" error="required"
@@ -32,16 +32,15 @@
   </div>
 
   <div class="row">
-    <div class="col-xs-12">
+    <div class="col-xs-12 col-md-12">
       <div class="form-group" has-error>
+        <label>Card Number</label>
         <input
           id="donate-card-number"
           type="text"
-          class="form-control"
           name="cardNumber"
           cc-number
           non-amex
-          placeholder="Card number"
           required=""
           ng-model="checkCtrl.card.number"
           style="z-index: 0"
@@ -65,7 +64,6 @@
         <input
           id="donate-expiry-date"
           type="text"
-          class="form-control"
           name="cardExpiryDate"
           placeholder="Expiration date (MM/YY)"
           maxlength="5"
@@ -94,7 +92,6 @@
         <input
           id="donate-cvc"
           type="text"
-          class="form-control"
           name="cvc"
           placeholder="Security code"
           ng-pattern="/\d{2}/"

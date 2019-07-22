@@ -7,7 +7,7 @@
       </div>
 
       <div style="font-size: 3rem; font-weight: 300; padding-top: 10%;">
-        {{donation | money}}
+        {{donation.amount | money}}
       </div>
 
       <div class="description" style="padding-left: 0">
@@ -18,16 +18,9 @@
 
         <!-- We show this button only if user is logged in -->
         <button ng-show="loggedUser" id="close-confirmation-button" class="btn btn-primary btn-donate btn-modal"
-                ng-click="$dismiss()"
+                ng-click="goToMyImpact()"
                 type="submit" style="margin-top: 20px; width: 240px; border: 2px solid #B7B7B7;">
           View My Impact
-        </button>
-
-        <button style="margin-top: 20px; width: 240px; border: 2px solid #B7B7B7" id="back-to-applean-button"
-                class="btn btn-primary btn-donate btn-modal"
-                ng-click="returnToAppeal()"
-                type="submit">
-          Return to project
         </button>
 
         <div class="row" style="margin: 5% 10% 0 10%">

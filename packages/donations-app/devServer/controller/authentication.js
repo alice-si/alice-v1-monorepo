@@ -145,7 +145,7 @@ module.exports = function (app) {
     });
     return res.json({token});
   }));
-  
+
   /* This function handles 3 cases:
     - registering a new simple user
     - registering a new full user
@@ -185,7 +185,7 @@ module.exports = function (app) {
     } else {
       unsavedUser = new User(selectedUserFields);
     }
-     
+
     unsavedUser.superadmin = false;
     if (unsavedUser.residence != 'GB') {
       unsavedUser.giftAid = false;
@@ -198,7 +198,7 @@ module.exports = function (app) {
       unsavedUser.firstName = TEMP_FIRST_NAME;
       unsavedUser.lastName = TEMP_LAST_NAME;
     }
-    
+
     // Setting default values
     unsavedUser.dateOfBirth = DEFAULT_BIRTHDAY;
     unsavedUser.nationality = DEFAULT_NATIONALITY;

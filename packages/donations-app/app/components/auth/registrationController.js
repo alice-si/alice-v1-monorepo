@@ -4,7 +4,8 @@ angular.module('aliceApp')
     var vm = this;
     vm.credentials = {};
     vm.registration = {
-      agreeAlice: true
+      agreeAlice: true,
+      agreeContact: true,
     };
     vm.mode = 'REGISTRATION'; // enum: ['REGISTRATION', 'REGISTRATION_FININSHING']
     if (AuthService.getEmailForSignupFinishing()) {
@@ -16,6 +17,7 @@ angular.module('aliceApp')
       vm.registrationForm.$submitted = true;
       if (vm.registrationForm.$valid) {
         vm.signing = true;
+        extendContactAgreement();
         AuthService.register(vm.registration).then(
           function (success) {
             vm.signing = false;
@@ -35,6 +37,29 @@ angular.module('aliceApp')
       }
     };
 
+    vm.dismissModal = function() {
+      $scope.$dismiss();
+    }
+
+    vm.startLogin = function (mode) {
+      $scope.$dismiss();
+      $uibModal.open({
+        templateUrl: '/components/auth/loginModal.html',
+        controller: 'LoginController',
+        controllerAs : 'loginCtrl',
+        resolve: {
+            modalMode : function() {
+                 return mode
+            }
+        }
+      });
+    };
+
+    let extendContactAgreement = function() {
+      let flag = vm.registration.disagreeContact;
+      vm.registration.agreeContact = !flag;
+      vm.registration.agreeAlice = !flag;
+    }
 
     return vm;
   }]);

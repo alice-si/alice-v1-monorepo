@@ -1,0 +1,180 @@
+.row-horizon {
+  // overflow-x: hidden;
+  overflow-y: hidden;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  padding: 0 0 20px 0;
+  scroll-snap-type: x mandatory;
+}
+
+.row-horizon > [class*="col-lg"], .row-horizon > [class*="col-md"], .row-horizon > [class*="col-sm"], .row-horizon > [class*="col-xs"] {
+  float: none;
+  display: inline-block;
+  white-space: normal;
+  vertical-align: top;
+}
+.row-horizon {
+  .col-xs {
+    &-12 {
+      width: 90%;
+    }
+    &-11 {
+      width: 82.5%;
+    }
+    &-10 {
+      width: 75%;
+    }
+    &-9 {
+      width: 67.5%;
+    }
+    &-8 {
+      width: 60%;
+    }
+    &-7 {
+      width: 52.5%;
+    }
+    &-6 {
+      width: 45%;
+    }
+    &-5 {
+      width: 37.5%;
+    }
+    &-4 {
+      width: 30%;
+    }
+    &-3 {
+      width: 22.5%;
+    }
+    &-2 {
+      width: 15%;
+    }
+    &-1 {
+      width: 7.5%;
+    }
+  }
+}
+@media (min-width: 768px) {
+  .row-horizon {
+    .col-sm {
+      &-12 {
+        width: 90%;
+      }
+      &-11 {
+        width: 82.5%;
+      }
+      &-10 {
+        width: 75%;
+      }
+      &-9 {
+        width: 67.5%;
+      }
+      &-8 {
+        width: 60%;
+      }
+      &-7 {
+        width: 52.5%;
+      }
+      &-6 {
+        width: 45%;
+      }
+      &-5 {
+        width: 37.5%;
+      }
+      &-4 {
+        width: 30%;
+      }
+      &-3 {
+        width: 22.5%;
+      }
+      &-2 {
+        width: 15%;
+      }
+      &-1 {
+        width: 7.5%;
+      }
+    }
+  }
+}
+@media (min-width: 992px) {
+  .row-horizon
+    .col-md {
+      &-12 {
+        width: 90%;
+      }
+      &-11 {
+        width: 82.5%;
+      }
+      &-10 {
+        width: 75%;
+      }
+      &-9 {
+        width: 67.5%;
+      }
+      &-8 {
+        width: 60%;
+      }
+      &-7 {
+        width: 52.5%;
+      }
+      &-6 {
+        width: 45%;
+      }
+      &-5 {
+        width: 37.5%;
+      }
+      &-4 {
+        width: 30%;
+      }
+      &-3 {
+        width: 22.5%;
+      }
+      &-2 {
+        width: 15%;
+      }
+      &-1 {
+        width: 7.5%;
+      }
+    }
+}
+@media (min-width: 1200px) {
+  .row-horizon {
+    .col-lg {
+      &-12 {
+        width: 90%;
+      }
+      &-11 {
+        width: 82.5%;
+      }
+      &-10 {
+        width: 75%;
+      }
+      &-9 {
+        width: 67.5%;
+      }
+      &-8 {
+        width: 60%;
+      }
+      &-7 {
+        width: 52.5%;
+      }
+      &-6 {
+        width: 45%;
+      }
+      &-5 {
+        width: 37.5%;
+      }
+      &-4 {
+        width: 30%;
+      }
+      &-3 {
+        width: 22.5%;
+      }
+      &-2 {
+        width: 15%;
+      }
+      &-1 {
+        width: 7.5%;
+      }
+    }
+  }
+}

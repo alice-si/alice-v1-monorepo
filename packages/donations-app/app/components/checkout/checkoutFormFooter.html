@@ -1,146 +1,171 @@
-<div class="gift-aid-box">
-  <div ng-hide="checkCtrl.user.giftAid != undefined">
-    <div class="gift-aid-text" ng-show="checkCtrl.amount">
-      Turn your {{ checkCtrl.amount | money }} donation into
-      {{ checkCtrl.amount * 1.25 | money }} at no extra cost with gift aid.
+<div class="modal-footer">
+    <div class="row">
+        <div ng-show="checkCtrl.donation.amount">
+
+            <p class="form-group col-md-12 center alice-blue">
+                <input icheck type="checkbox" ng-model="checkCtrl.giftAid" /> Add Gift Aid to turn your donation into
+                {{ checkCtrl.donation.amount * 1.25 | money }}
+            </p>
+
+            <div ng-show="checkCtrl.giftAid" id="gift-aid-details">
+                <div class="row">
+                    <div class="col-xs-12 col-md-12">
+                        <div class="form-group left" has-error>
+                            <label>Postal address including postcode</label>
+                            <textarea
+                                    id="donate-address-1"
+                                    type="text"
+                                    class="col-md-12"
+                                    name="address1"
+                                    rows="3"
+                                    ng-required="checkCtrl.giftAid"
+                                    ng-model="checkCtrl.giftAidAddress"
+                            />
+                            <error-message name="address1" error="required">This field is required</error-message>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <p class="alice-grey center col-md-12"
+                       ng-show="!checkCtrl.giftAid">
+                       By tapping Donate you agree to our
+                       <a href="https://s3.eu-west-2.amazonaws.com/alice-res/terms_of_use.pdf"
+                          target="_blank">
+                          Terms & Conditions
+                       </a> and our
+                       <a href="https://s3.eu-west-2.amazonaws.com/alice-res/privacy_policy.pdf"
+                          target="_blank">
+                          Privacy Policy
+                       </a>
+                    </p>
+                </div>
+                <div class="row">
+                    <p class="alice-grey col-md-12 left" ng-show="checkCtrl.giftAid">
+                       Yes – I confirm I am a UK taxpayer and would like my donation to
+                       {{ checkCtrl.project.charity.legalName }}
+                       to be treated as a Gift Aid donation. I understand that if I pay less Income Tax and/or
+                       Capital Gains Tax, in the current tax year, than the amount of Gift Aid claimed on all
+                       my donations it is my responsibility to pay any difference.
+                       <a href="https://s3.eu-west-2.amazonaws.com/alice-res/terms_of_use.pdf"
+                          target="_blank">
+                          Terms & Conditions
+                       </a> and our
+                       <a href="https://s3.eu-west-2.amazonaws.com/alice-res/privacy_policy.pdf"
+                          target="_blank">
+                          Privacy Policy
+                       </a>
+                    </p>
+                </div>
+            </div>
+
+        </div>
     </div>
-    <div class="gift-aid" ng-show="checkCtrl.amount">
-      <input icheck type="checkbox" ng-model="checkCtrl.giftAid" /> Yes, I want
-      to Gift Aid my donation
+    <div class="row">
+        <button id="registration-sign-up-button"
+                class="col-md-12"
+                ng-click="checkCtrl.donate()"
+                type="submit">
+                <span ng-show="checkCtrl.mode == 'BANK_TRANSFER'">
+                    Show bank details
+                </span>
+                <span ng-show="checkCtrl.mode != 'BANK_TRANSFER'">
+                    Donate {{ checkCtrl.donation.amount | money }}
+                </span>
+        </button>
     </div>
-  </div>
-  <div class="donate-button-box
-  {{checkCtrl.mode == 'BANK_TRANSFER' ? 'bank-wire-button-box' : ''}}">
-    <button
-      id="donate-pay-button"
-      class="btn btn-primary btn-donate"
-      type="submit"
-      ng-click="checkCtrl.donate()"
-    >
-      <span ng-show="checkCtrl.mode == 'BANK_TRANSFER'">
-        Show bank details
-      </span>
-      <span ng-show="checkCtrl.mode != 'BANK_TRANSFER'">
-        Donate {{ checkCtrl.amount | money }}
-      </span>
-    </button>
-  </div>
 </div>
-<div
-  ng-show="checkCtrl.giftAid"
-  id="gift-aid-details"
-  class="donation-footer"
-  style="border-top: 0; padding-top: 0;"
->
-  Yes – I confirm I am a UK taxpayer and would like all my donations to {{ checkCtrl.project.charity.legalName }}
-  made now, in the past four years and
-  in the future to be treated as Gift Aid donations. I understand that if I pay
-  less Income Tax and/or Capital Gains Tax in any tax year than the amount of
-  Gift Aid claimed on all my donations it is my responsibility to pay any
-  difference.<br />
-  <br />
-  Please provide your address to add Gift Aid:<br />
-  <div class="row" style="margin-top: 20px;">
-    <div class="col-xs-12">
-      <div class="form-group" has-error>
-        <input
-          id="donate-address-1"
-          type="text"
-          class="form-control"
-          name="address1"
-          ng-required="checkCtrl.giftAid"
-          placeholder="Address line 1"
-          ng-model="checkCtrl.user.address1"
-        />
-        <error-message name="address1" error="required"
-          >This field is required
-        </error-message>
-      </div>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="form-group" has-error>
-        <input
-          id="donate-address-2"
-          type="text"
-          class="form-control"
-          name="address2"
-          placeholder="Address line 2"
-          ng-model="checkCtrl.user.address2"
-        />
-      </div>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="col-xs-12 col-md-5">
-      <div class="form-group" has-error>
-        <input
-          id="donate-address-city"
-          type="text"
-          class="form-control"
-          name="city"
-          placeholder="City"
-          ng-required="checkCtrl.giftAid"
-          ng-model="checkCtrl.user.city"
-        />
-        <error-message name="city" error="required"
-          >This field is required
-        </error-message>
-      </div>
-    </div>
+<!--<div class="row">-->
+<!--<div class="col-xs-12">-->
+<!--<div class="form-group" has-error>-->
+<!--<input-->
+<!--id="donate-address-2"-->
+<!--type="text"-->
+<!--class="form-control"-->
+<!--name="address2"-->
+<!--placeholder="Address line 2"-->
+<!--ng-model="checkCtrl.user.address2"-->
+<!--/>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
 
-    <div class="col-xs-0 col-md-2"></div>
+<!--<div class="row">-->
+<!--<div class="col-xs-12 col-md-5">-->
+<!--<div class="form-group" has-error>-->
+<!--<input-->
+<!--id="donate-address-city"-->
+<!--type="text"-->
+<!--class="form-control"-->
+<!--name="city"-->
+<!--placeholder="City"-->
+<!--ng-required="checkCtrl.giftAid"-->
+<!--ng-model="checkCtrl.user.city"-->
+<!--/>-->
+<!--<error-message name="city" error="required"-->
+<!--&gt;This field is required-->
+<!--</error-message>-->
+<!--</div>-->
+<!--</div>-->
 
-    <div class="col-xs-12 col-md-5">
-      <div class="form-group" has-error>
-        <input
-          id="donate-address-post-code"
-          type="text"
-          class="form-control"
-          name="postCode"
-          ng-required="checkCtrl.giftAid"
-          placeholder="Post code"
-          ng-model="checkCtrl.user.postCode"
-        />
-        <error-message name="postCode" error="required"
-          >This field is required
-        </error-message>
-      </div>
-    </div>
-  </div>
-  <br />
-  Please notify us by emailing
-  <a href="mailto: alice@alice.si">alice@alice.si</a> if: <br />
-  <br />
-  - You want to cancel this declaration.<br />
-  - You change your name or home address.<br />
-  - Your tax status changes and you no longer pay sufficient Income Tax and/or
-  Capital Gains Tax.<br />
-  <br />
-  If you pay tax at the higher rate you can claim further tax relief in your
-  self-assessment tax return.
+<!--<div class="col-xs-0 col-md-2"></div>-->
 
-  <div style="position:relative;">
-    <div class="donate-button-box
-      {{checkCtrl.mode == 'BANK_TRANSFER' ? 'bank-wire-button-box' : ''}}"
-      style="bottom: auto;"
-    >
-      <button
-        id="donate-pay-button-address"
-        class="btn btn-primary btn-donate"
-        type="submit"
-        ng-click="checkCtrl.donate()"
-      >
-        <span ng-show="checkCtrl.mode == 'BANK_TRANSFER'">
-          Show bank details
-        </span>
-        <span ng-show="checkCtrl.mode != 'BANK_TRANSFER'">
-          Donate {{ checkCtrl.amount | money }}
-        </span>
-      </button>
-    </div>
-  </div>
-</div>
+<!--<div class="col-xs-12 col-md-5">-->
+<!--<div class="form-group" has-error>-->
+<!--<input-->
+<!--id="donate-address-post-code"-->
+<!--type="text"-->
+<!--class="form-control"-->
+<!--name="postCode"-->
+<!--ng-required="checkCtrl.giftAid"-->
+<!--placeholder="Post code"-->
+<!--ng-model="checkCtrl.user.postCode"-->
+<!--/>-->
+<!--<error-message name="postCode" error="required"-->
+<!--&gt;This field is required-->
+<!--</error-message>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+
+
+<!--<div class="donate-button-box-->
+<!--{{checkCtrl.mode == 'BANK_TRANSFER' ? 'bank-wire-button-box' : ''}}">-->
+<!--<button-->
+<!--id="donate-pay-button"-->
+<!--class="btn btn-primary btn-donate"-->
+<!--type="submit"-->
+<!--ng-click="checkCtrl.donate()"-->
+<!--&gt;-->
+<!--<span ng-show="checkCtrl.mode == 'BANK_TRANSFER'">-->
+<!--Show bank details-->
+<!--</span>-->
+<!--<span ng-show="checkCtrl.mode != 'BANK_TRANSFER'">-->
+<!--Donate {{ checkCtrl.amount | money }}-->
+<!--</span>-->
+<!--</button>-->
+<!--</div>-->
+
+
+<!--<div style="position:relative;">-->
+<!--<div class="donate-button-box-->
+<!--{{checkCtrl.mode == 'BANK_TRANSFER' ? 'bank-wire-button-box' : ''}}"-->
+<!--style="bottom: auto;"-->
+<!--&gt;-->
+<!--<button-->
+<!--id="donate-pay-button-address"-->
+<!--class="btn btn-primary btn-donate"-->
+<!--type="submit"-->
+<!--ng-click="checkCtrl.donate()"-->
+<!--&gt;-->
+<!--<span ng-show="checkCtrl.mode == 'BANK_TRANSFER'">-->
+<!--Show bank details-->
+<!--</span>-->
+<!--<span ng-show="checkCtrl.mode != 'BANK_TRANSFER'">-->
+<!--Donate {{ checkCtrl.amount | money }}-->
+<!--</span>-->
+<!--</button>-->
+<!--</div>-->
+<!--</div>-->

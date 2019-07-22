@@ -1,0 +1,45 @@
+<div>
+  <div id="donation-question-modal" class="modal-body" ng-show="dpCtrl.mode != '3DS'">
+
+    <div class="content center">
+
+      <treasure-overlay-spinner active="dpCtrl.donating">
+
+
+        <div class="row">
+          <h6 class="center alice-dark-grey col-md-12" style="margin: 5% 0 2%">
+            You are about to donate
+          </h6>
+
+          <h1 class="col-md-12 alice-blue center">
+            {{dpCtrl.donation.amount | money}}
+          </h1>
+        </div>
+        <div class="row">
+          <a id="edit-button"
+                  class="center col-md-12"
+                  ng-click="dpCtrl.edit()"
+                  type="submit">
+            Edit
+          </a>
+        </div>
+        <div class="row center">
+          <button id="confirm-button"
+                  class="col-md-12"
+                  ng-click="dpCtrl.donate()"
+                  type="submit" style="margin: 5% 0 8% 0">
+            Confirm
+          </button>
+        </div>
+      </treasure-overlay-spinner>
+    </div>
+  </div>
+
+  <iframe width="500px" height="500px"
+          ng-show="dpCtrl.mode == '3DS'"
+          style="margin-left: -50px; -webkit-transform:scale({{dpCtrl.iframeScale}});-moz-transform-scale({{dpCtrl.iframeScale}});-webkit-transform-origin:top left;-moz-transform-origin:top left;"
+          scrolling="no" marginwidth="0" marginheight="0" frameborder="0" vspace="0" hspace="0"
+          ng-src="{{dpCtrl.secureModeUrl}}">
+  </iframe>
+
+</div>

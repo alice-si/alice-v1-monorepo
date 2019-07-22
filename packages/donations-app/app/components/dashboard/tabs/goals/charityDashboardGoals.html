@@ -10,14 +10,10 @@
          <div uib-accordion-group
               template-url="/components/dashboard/panels/panel.html"
               class="c-dashboard__panel"
-              heading="Goals Achieved">
-              <div class="container">
-                <div ng-repeat="goal in outcomesValidated track by $index">
-                     <goal-progress-bar progress-in-units="goal.progressInUnits"
-                                        percentage="goal.percentage"
-                                        outcome="goal.outcome[0]">
-                     </goal-progress-bar>
-                </div>
+              heading="Goals Progress">
+              <div class="col-md-12">
+                <goal-progress-carousel outcomes="outcomesValidated">
+                </goal-progress-carousel>
               </div>
          </div>
          <div uib-accordion-group
@@ -27,6 +23,15 @@
               <div class="alice-table-container col-md-12">
               <goals-breakdown-table outcomes="outcomesValidated">
               </goals-breakdown-table>
+            </div>
+         </div>
+         <div uib-accordion-group
+              template-url="/components/dashboard/panels/panel.html"
+              class="c-dashboard__panel"
+              heading="Goals Completed over time">
+              <div class="alice-table-container col-md-12">
+              <goals-progress-graph outcomes="outcomesValidated">
+              </goals-progress-graph>
             </div>
          </div>
     </div>

@@ -1,28 +1,12 @@
 angular.module('aliceApp')
-  .controller('ProjectController', ['$stateParams', 'ProjectService', '$timeout', '$scope', 'REDIRECTION', '$state', function($stateParams, ProjectService, $timeout, $scope, REDIRECTION, $state) {
+  .controller('ProjectController', ['$stateParams', 'ProjectService', '$timeout', '$scope', 'REDIRECTION', '$state', 'CheckoutService',  function($stateParams, ProjectService, $timeout, $scope, REDIRECTION, $state, CheckoutService) {
     var vm = this;
 
     ProjectService.getProjectDetails($stateParams.projectCode).then(function (result) {
       vm.model = ProjectService.prepareProjectDetails(result.data);
 			vm.supporters = result.data.supporters;
-			vm.model.outcomeCategories = {};
-			vm.model.goals = [];
-			var threeOutcomes = [];
-			vm.model._outcomes.forEach(function (outcome, index) {
-				threeOutcomes.push(outcome);
-				// Format the goals for carousel
-				if((index % 3) === 2) {
-					vm.model.goals.push(threeOutcomes);
-					threeOutcomes = [];
-				}
-				if (vm.model.outcomeCategories[outcome.category] === undefined) {
-					vm.model.outcomeCategories[outcome.category] = [];
-				}
-				vm.model.outcomeCategories[outcome.category].push(outcome);
-			});
-			if (threeOutcomes.length > 0) {
-        vm.model.goals.push(threeOutcomes);
-			}
+			vm.model.goals = _.chunk(vm.model._outcomes, 3);
+
 			vm.model.projectShareLink = REDIRECTION + 'redirection/project-' + vm.model.code + '.html';
 
       // For every story, match each p tag of a story's details and replace
@@ -127,11 +111,16 @@ angular.module('aliceApp')
 			$state.go("404");
 		});
 
+    vm.donate = function() {
+      CheckoutService.startCheckout(vm.model);
+		}
+
   }])
   .directive('projectSplash', function() {
     return {
       scope: {
         model: '=',
+				onDonate: '&'
       },
       templateUrl: '/components/project/projectSplashTemplate.html'
     };

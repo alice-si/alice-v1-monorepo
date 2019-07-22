@@ -1,0 +1,36 @@
+<div uib-carousel id="dashboardCarousel" class=".c-dash__goals-carousel hidden-xs hidden-sm" active="slide.active" interval="0" no-wrap="false" >
+  <div uib-slide ng-repeat="slide in crslCtrl.goals " class="col-md-12" index="$index">
+    <!-- <div class="col-md-12"> -->
+      <div class="col-md-4 c-dash__goals-carousel-goal container" ng-repeat="goal in slide">
+        <div class="title-over-image">
+          <img src="{{ goal.outcome[0].image }}"
+               alt="Image for {{ goal.outcome[0].title }}"
+               class="c-dash__goals-carousel-image"
+               style="filter: brightness(100%);"/>
+        </div>
+
+        <div class="c-dash__goals-carousel-content">
+          <div class="col-md-12 c-dash__goals-carousel-proof">
+            <h4 class="col-md-12">Proof Status</h4>
+          </div>
+          <div class="col-md-12 c-dash__goals-carousel-title">
+            <h6 style="opacity: 0.5;">Goal {{ $index + 1 }}</h6>
+            <p>{{ goal.outcome[0].description }}</p>
+          </div>
+          <div class="col-md-12 c-dash__goals-carousel-bottom">
+            <div class="col-md-6"
+                 style="padding: 0 20px 0 0;">
+              <p>Cost per {{ goal.outcome[0].unit }}</p>
+              <p style="font-weight: 600;">{{ goal.outcome[0].costPerUnit | money }}</p>
+            </div>
+            <div class="col-md-6"
+                 style="padding: 0;">
+              <p>Status</p>
+              <p style="font-weight: 600;">{{ goal.progressInUnits }} completed</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- </div> -->
+  </div>
+</div>

@@ -27,7 +27,7 @@ module.exports = function (app) {
       let mangoResult;
       let project = await Project.findById(req.body.projectId);
       if (project.status != 'ACTIVE') throw 'Campaing not active';
-      transferType = req.body.type;
+      let transferType = req.body.type;
       // payIn
       if (transferType == "CARD") {
         mangoResult = await Mango.payIn(req.user, req.body.amount, req.body.cardId);
@@ -37,12 +37,11 @@ module.exports = function (app) {
         throw "Unknown transfer type";
       }
       if (mangoResult.Status == 'FAILED') {
-        throw result.ResultMessage;
+        throw mangoResult.ResultMessage;
       }
       // creating a new donation in DB
       let donation = await createNewDonation(req, mangoResult);
-      // updating giftAid for user
-      await updateGiftAid(req);
+
       // some post actions for different types of donations
       if (transferType == "BANK_TRANSFER") {
         await sendDonationEmail(req.user, donation);
@@ -173,7 +172,8 @@ module.exports = function (app) {
       if (savedDonation.status == 'FAILED') {
         throw 'PayIn failed ' + savedDonation._id;
       }
-      if (['CREATED', 'BIG_TRANSFER_CREATED'].includes(savedDonation.status)) {
+      // FIXME remove 'DONATED' from this list
+      if (['DONATED', 'CREATED', 'BIG_TRANSFER_CREATED'].includes(savedDonation.status)) {
         let project = await Project.findById(savedDonation._projectId).populate('charity');
         await Mail.sendDonationConfirmation(savedDonation._userId, project, savedDonation);
       }
@@ -218,6 +218,7 @@ module.exports = function (app) {
       type: req.body.type,
       amount: req.body.amount,
       createdAt: new Date(),
+      giftAidAddress: req.body.giftAidAddress,
       transactionId: mangoResult.Id,
       secureModeNeeded: mangoResult.SecureModeNeeded,
       bankTransferData: {
@@ -237,7 +238,9 @@ module.exports = function (app) {
         if (mangoResult.DebitedFunds.Amount >= BIG_TRANSFER_TRESHOLD) {
           return 'BIG_TRANSFER_CREATED';
         }
-        return 'CREATED';
+        // return 'CREATED';
+        // FIXME donation should go through blockchain
+        return 'DONATED';
       case 'CREATED':
         if (mangoResult.PaymentType == 'BANK_WIRE') {
           return 'BANK_TRANSFER_REQUESTED';
@@ -282,7 +285,7 @@ module.exports = function (app) {
       opts.donationData._projectId = opts.donationData.projectId;
     }
 
-    // sending error email to donor 
+    // sending error email to donor
     if (opts && opts.sendEmail && opts.user) {
       let project = await Project.findById(opts.donationData._projectId).populate("charity");
       await Mail.sendDonationError(opts.user, project, err, opts.is3DS);

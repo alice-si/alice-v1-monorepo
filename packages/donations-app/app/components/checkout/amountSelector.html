@@ -1,46 +1,37 @@
 <div class="row">
   <div class="col-xs-12">
+    <p class="alice-grey">Enter Amount</p>
     <div class="form-group" style="margin-bottom: 0px;">
       <div class="row donation-amounts">
-        <div id="donate-amount-10" class="col-md-2 col-sm-12">
+        <div id="donate-amount-20" class="col-md-3 col-sm-3 col-xs-3">
           <input
             icheck
             type="checkbox"
-            ng-model="checkCtrl.amount10"
-            ng-change="checkCtrl.onAmountChange('amount10')"
+            ng-model="checkCtrl.amount20"
+            ng-change="checkCtrl.onAmountChange('amount20')"
           />
-          £10
+          £20
         </div>
-        <div id="donate-amount-25" class="col-md-2 col-sm-12">
+        <div id="donate-amount-80" class="col-md-3 col-sm-3 col-xs-3">
           <input
             icheck
             type="checkbox"
-            ng-model="checkCtrl.amount25"
-            ng-change="checkCtrl.onAmountChange('amount25')"
+            ng-model="checkCtrl.amount80"
+            ng-change="checkCtrl.onAmountChange('amount80')"
           />
-          £25
+          £80
         </div>
-        <div class="col-md-2 col-sm-12">
+        <div class="col-md-3 col-sm-3 col-xs-3">
           <input
-            id="donate-amount-50"
+            id="donate-amount-150"
             icheck
             type="checkbox"
-            ng-model="checkCtrl.amount50"
-            ng-change="checkCtrl.onAmountChange('amount50')"
+            ng-model="checkCtrl.amount150"
+            ng-change="checkCtrl.onAmountChange('amount150')"
           />
-          £50
+          £150
         </div>
-        <div class="col-md-2 col-sm-12">
-          <input
-            id="donate-amount-100"
-            icheck
-            type="checkbox"
-            ng-model="checkCtrl.amount100"
-            ng-change="checkCtrl.onAmountChange('amount100')"
-          />
-          £100
-        </div>
-        <div class="col-md-4 col-sm-12">
+        <div class="col-md-3 col-sm-3 col-xs-3">
           <input
             id="donate-amount-other"
             icheck
@@ -48,22 +39,21 @@
             ng-model="checkCtrl.amountOther"
             ng-change="checkCtrl.onAmountChange('amountOther')"
           />
-          <span ng-show="!checkCtrl.amountOther">Other</span>
-          <span has-error>
-            <input
-              ng-show="checkCtrl.amountOther"
-              type="text"
-              class="form-control"
-              name="amountOtherValue"
-              ng-currency
-              min="0"
-              currency-symbol="£"
-              placeholder="My choice"
-              ng-model="checkCtrl.amountOtherValue"
-              ng-change="checkCtrl.onOtherChange()"
-              style="display: inline; width: 100px; padding-top:0; height: 100%; line-height: normal; padding-bottom: 0;"
-            />
-          </span>
+          <span>Other</span>
+        </div>
+        <div has-error
+             class="col-md-12 form-group">
+          <input
+            ng-show="checkCtrl.amountOther"
+            type="text"
+            class="col-md-12"
+            name="amountOtherValue"
+            ng-currency
+            min="0"
+            currency-symbol="£"
+            ng-model="checkCtrl.amountOtherValue"
+            ng-change="checkCtrl.onOtherChange()"
+          />
         </div>
       </div>
     </div>
