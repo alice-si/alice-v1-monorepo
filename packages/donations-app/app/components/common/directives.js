@@ -171,6 +171,12 @@ angular.module('aliceApp')
       require: 'ngModel',
       link: function (scope, elm, attrs, ctrl) {
         ctrl.$parsers.unshift(function (value) {
+          // Slash autoadding
+          if (value.length == 2) {
+            elm.val(value + '/');
+          }
+
+          // Validity checking
           var date = moment(value, 'MM/YY').endOf('month');
           ctrl.$setValidity('futureDate', date.isAfter(moment()));
           return value;

@@ -1,4 +1,5 @@
 var Project = artifacts.require("Project");
+const projectJson = require('../..//build/contracts/Project.json');
 var ProjectWithBonds = artifacts.require("ProjectWithBonds");
 var ProjectCatalog = artifacts.require("ProjectCatalog");
 var Coupon = artifacts.require("Coupon");
@@ -10,7 +11,7 @@ var Linker = artifacts.require("FlexibleImpactLinker");
 
 require("../test-setup");
 
-contract('Project - single donation', function([owner, beneficiary, validator, donor]) {
+contract('Project - single donation', function([owner, beneficiary, validator]) {
 	var project;
 	var projectWithBonds;
 	var coupon;
@@ -23,28 +24,30 @@ contract('Project - single donation', function([owner, beneficiary, validator, d
 	var registryForProjectWithBonds;
 	var linker;
 
+  const OUTCOME = web3.utils.fromAscii('OUTCOME');
+
 	it("should deploy Project with Bonds contract", async function() {
 		project = await Project.new("TEST", 0);
-		projectWithBonds = await ProjectWithBonds.new("TEST_WITH_BONDS", 0, 100, 1000);
-		registry = await ImpactRegistry.new(project.address);
+    projectWithBonds = await ProjectWithBonds.new("TEST_WITH_BONDS", 0, 100, 1000);
+    registry = await ImpactRegistry.new(project.address);
     registryForProjectWithBonds = await ImpactRegistry.new(projectWithBonds.address);
-		linker = await Linker.new(registry.address, 10);
+    linker = await Linker.new(registry.address, 10);
     token = await AliceToken.deployed();
 
-		await registry.setLinker(linker.address);
-		await project.setImpactRegistry(registry.address);
-		await project.setBeneficiary(beneficiary);
-		await project.setValidator(validator);
-		await project.setToken(token.address);
+    await registry.setLinker(linker.address);
+    await project.setImpactRegistry(registry.address);
+    await project.setBeneficiary(beneficiary);
+    await project.setValidator(validator);
+    await project.setToken(token.address);
 
     await projectWithBonds.setImpactRegistry(registryForProjectWithBonds.address);
     await projectWithBonds.setBeneficiary(beneficiary);
     await projectWithBonds.setValidator(validator);
     await projectWithBonds.setToken(token.address);
-    coupon = Coupon.at(await projectWithBonds.getCoupon());
+    coupon = await Coupon.at(await projectWithBonds.getCoupon());
 
-		catalog = await ProjectCatalog.new();
-		await catalog.addProject("TEST", project.address);
+    catalog = await ProjectCatalog.new();
+    await catalog.addProject("TEST", project.address);
     await catalog.addProject("TEST_WITH_BONDS", projectWithBonds.address);
 	});
 
@@ -55,8 +58,8 @@ contract('Project - single donation', function([owner, beneficiary, validator, d
   });
 
 	it("should validate", async function() {
-		await project.validateOutcome("OUTCOME", 100, {from: validator});
-		await registry.linkImpact("OUTCOME");
+		await project.validateOutcome(OUTCOME, 100, {from: validator});
+		await registry.linkImpact(OUTCOME);
 	});
 
 
@@ -65,19 +68,19 @@ contract('Project - single donation', function([owner, beneficiary, validator, d
 
 		await token.mint(investementWallet.address, 100);
 
-		(await token.balanceOf(investementWallet.address)).should.be.bignumber.equal(100);
+		(await token.balanceOf(investementWallet.address)).should.be.bignumber.equal('100');
 	});
 
 	it("should invest and get coupons", async function() {
-		(await token.balanceOf(beneficiary)).should.be.bignumber.equal(100);
+		(await token.balanceOf(beneficiary)).should.be.bignumber.equal('100');
 		await investementWallet.invest(100, "TEST_WITH_BONDS");
 
-		(await token.balanceOf(investementWallet.address)).should.be.bignumber.equal(0);
-		(await token.balanceOf(beneficiary)).should.be.bignumber.equal(200);
-		(await coupon.balanceOf(investementWallet.address)).should.be.bignumber.equal(1);
+		(await token.balanceOf(investementWallet.address)).should.be.bignumber.equal('0');
+		(await token.balanceOf(beneficiary)).should.be.bignumber.equal('200');
+		(await coupon.balanceOf(investementWallet.address)).should.be.bignumber.equal('1');
 
-		(await projectWithBonds.getLiability()).should.be.bignumber.equal(110);
-		(await projectWithBonds.getValidatedLiability()).should.be.bignumber.equal(0);
+		(await projectWithBonds.getLiability()).should.be.bignumber.equal('110');
+		(await projectWithBonds.getValidatedLiability()).should.be.bignumber.equal('0');
 	});
 
 	it("should donate to the project", async function() {
@@ -85,50 +88,50 @@ contract('Project - single donation', function([owner, beneficiary, validator, d
 		await token.mint(donationWallet.address, 120);
 		await donationWallet.donate(120, "TEST_WITH_BONDS");
 
-		(await token.balanceOf(projectWithBonds.address)).should.be.bignumber.equal(120);
+		(await token.balanceOf(projectWithBonds.address)).should.be.bignumber.equal('120');
 	});
 
 	it("should validate liability", async function() {
-		await projectWithBonds.validateOutcome("OUTCOME", 110, {from: validator});
+		await projectWithBonds.validateOutcome(OUTCOME, 110, {from: validator});
 
-		(await projectWithBonds.getLiability()).should.be.bignumber.equal(110);
-		(await projectWithBonds.getValidatedLiability()).should.be.bignumber.equal(110);
+		(await projectWithBonds.getLiability()).should.be.bignumber.equal('110');
+		(await projectWithBonds.getValidatedLiability()).should.be.bignumber.equal('110');
 	});
 
 	it("should redeem coupon", async function() {
 		await investementWallet.redeemCoupons(1, "TEST_WITH_BONDS");
 
-		(await projectWithBonds.getLiability()).should.be.bignumber.equal(0);
-		(await projectWithBonds.getValidatedLiability()).should.be.bignumber.equal(0);
-		(await token.balanceOf(investementWallet.address)).should.be.bignumber.equal(110);
+		(await projectWithBonds.getLiability()).should.be.bignumber.equal('0');
+		(await projectWithBonds.getValidatedLiability()).should.be.bignumber.equal('0');
+		(await token.balanceOf(investementWallet.address)).should.be.bignumber.equal('110');
+
+
 	});
 
 	it("should link impact", async function() {
-    (await project.getBalance(wallet.address)).should.be.bignumber.equal(990);
+    (await project.getBalance(wallet.address)).should.be.bignumber.equal('990');
 		for (var i = 0; i < 5; i++) {
-      await registry.linkImpact("OUTCOME");
+      await registry.linkImpact(OUTCOME);
 		}
-		(await project.getBalance(wallet.address)).should.be.bignumber.equal(940);
+		(await project.getBalance(wallet.address)).should.be.bignumber.equal('940');
 	});
 
 	it("should link limited number of impacts", async function() {
     for (var i = 0; i < 10; i++) {
-      await registry.linkImpact("OUTCOME");
+      await registry.linkImpact(OUTCOME);
     }
-    (await project.getBalance(wallet.address)).should.be.bignumber.equal(900);
+    (await project.getBalance(wallet.address)).should.be.bignumber.equal('900');
 	});
 
 	it("should pay back to donor", async function() {
-		(await token.balanceOf(project.address)).should.be.bignumber.equal(900);
-		(await project.getBalance(wallet.address)).should.be.bignumber.equal(900);
-    (await token.balanceOf(wallet.address)).should.be.bignumber.equal(0);
+		(await token.balanceOf(project.address)).should.be.bignumber.equal('900');
+		(await project.getBalance(wallet.address)).should.be.bignumber.equal('900');
+    (await token.balanceOf(wallet.address)).should.be.bignumber.equal('0');
 
 		await project.payBack(wallet.address);
 
-		(await token.balanceOf(project.address)).should.be.bignumber.equal(0);
-		(await token.balanceOf(wallet.address)).should.be.bignumber.equal(900);
-
-
+		(await token.balanceOf(project.address)).should.be.bignumber.equal('0');
+		(await token.balanceOf(wallet.address)).should.be.bignumber.equal('900');
 	});
 
 });

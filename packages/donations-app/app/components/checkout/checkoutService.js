@@ -143,6 +143,7 @@ angular.module('aliceApp')
           $scope.projectTitle = CheckoutService.project.title;
           $scope.projectShareLink = HOST + 'redirection/project-' + CheckoutService.project.code + '.html';
           $scope.projectCode = CheckoutService.project.code;
+          $scope.messageToShare = `I've just donated to ${CheckoutService.project.title} on Alice. I'll only pay if the project works!`;
 
           $scope.goToMyImpact = function() {
             $scope.$dismiss();

@@ -1,4 +1,4 @@
-pragma solidity ^0.4.11;
+pragma solidity ^0.5.2;
 
 import 'openzeppelin-solidity/contracts/token/ERC20/ERC20.sol';
 
@@ -38,7 +38,7 @@ contract TwoPhaseTransfers {
     }
 
 
-    constructor(address[] _proposers, address[] _validators) public {
+    constructor(address[] memory _proposers, address[] memory _validators) public {
         if (_proposers.length > 0) {
             checkProposers = true;
             for(uint i=0; i<_proposers.length; i++) {
@@ -58,14 +58,14 @@ contract TwoPhaseTransfers {
     function proposeTransfer(ERC20 token, address to, uint value) public onlyProposer returns(uint) {
         uint id = nonce++;
         transferProposals[id] = TransferProposal(token, to, value);
-        emit TransferProposed(id, token, to, value);
+        emit TransferProposed(id, address(token), to, value);
         return id;
     }
 
     function confirmTransfer(uint _transferId) public onlyValidator {
         TransferProposal storage proposal = transferProposals[_transferId];
         require(ERC20(proposal.token).transfer(proposal.to, proposal.value));
-        emit TransferConfirmed(_transferId, proposal.token, proposal.to, proposal.value);
+        emit TransferConfirmed(_transferId, address(proposal.token), proposal.to, proposal.value);
     }
 
 

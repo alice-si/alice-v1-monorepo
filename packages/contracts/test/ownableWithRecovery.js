@@ -21,7 +21,7 @@ contract('OwnableWithRecover', function(accounts) {
 		(await ownableWithRecovery.recoveryVote(recovery2)).should.be.equal(initialOwner);
 		(await ownableWithRecovery.recoveryVote(recovery3)).should.be.equal(initialOwner);
 
-		(await ownableWithRecovery.voteCount(initialOwner)).should.be.bignumber.equal(3);
+		(await ownableWithRecovery.voteCount(initialOwner)).should.be.bignumber.equal('3');
 	});
 
 	it("should attempt to update owner after vote (1/3)", async function() {
@@ -34,8 +34,8 @@ contract('OwnableWithRecover', function(accounts) {
 		(await ownableWithRecovery.recoveryVote(recovery3)).should.be.equal(initialOwner);
 
 		//Voting count
-		(await ownableWithRecovery.voteCount(newOwner)).should.be.bignumber.equal(1);
-		(await ownableWithRecovery.voteCount(initialOwner)).should.be.bignumber.equal(2);
+		(await ownableWithRecovery.voteCount(newOwner)).should.be.bignumber.equal('1');
+		(await ownableWithRecovery.voteCount(initialOwner)).should.be.bignumber.equal('2');
 
 		//Effective owner
 		(await ownableWithRecovery.owner()).should.be.equal(initialOwner);
@@ -51,8 +51,8 @@ contract('OwnableWithRecover', function(accounts) {
 		(await ownableWithRecovery.recoveryVote(recovery3)).should.be.equal(initialOwner);
 
 		//Voting count
-		(await ownableWithRecovery.voteCount(newOwner)).should.be.bignumber.equal(2);
-		(await ownableWithRecovery.voteCount(initialOwner)).should.be.bignumber.equal(1);
+		(await ownableWithRecovery.voteCount(newOwner)).should.be.bignumber.equal('2');
+		(await ownableWithRecovery.voteCount(initialOwner)).should.be.bignumber.equal('1');
 
 		//Effective owner
 		(await ownableWithRecovery.owner()).should.be.equal(newOwner);
@@ -68,8 +68,8 @@ contract('OwnableWithRecover', function(accounts) {
 		(await ownableWithRecovery.recoveryVote(recovery3)).should.be.equal(newOwner);
 
 		//Voting count
-		(await ownableWithRecovery.voteCount(newOwner)).should.be.bignumber.equal(3);
-		(await ownableWithRecovery.voteCount(initialOwner)).should.be.bignumber.equal(0);
+		(await ownableWithRecovery.voteCount(newOwner)).should.be.bignumber.equal('3');
+		(await ownableWithRecovery.voteCount(initialOwner)).should.be.bignumber.equal('0');
 
 		//Effective owner
 		(await ownableWithRecovery.owner()).should.be.equal(newOwner);

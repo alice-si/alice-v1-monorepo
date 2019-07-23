@@ -1,4 +1,4 @@
-pragma solidity ^0.4.24;
+pragma solidity ^0.5.2;
 
 import 'openzeppelin-solidity/contracts/ownership/Ownable.sol';
 import 'openzeppelin-solidity/contracts/math/SafeMath.sol';
@@ -22,7 +22,7 @@ contract ProjectWithBonds is Project {
     Coupon coupon;
 
 
-    constructor(string _name, uint8 _upfrontPaymentPercentage, uint256 _couponNominalPrice, uint256 _couponInterestRate) public
+    constructor(string memory _name, uint8 _upfrontPaymentPercentage, uint256 _couponNominalPrice, uint256 _couponInterestRate) public
     Project(_name, _upfrontPaymentPercentage) {
         couponNominalPrice = _couponNominalPrice;
         couponInterestRate = _couponInterestRate;
@@ -66,7 +66,7 @@ contract ProjectWithBonds is Project {
         uint256 redeemedValue = getPriceWithInterests(_amount.mul(couponNominalPrice));
         require(validatedLiability >= redeemedValue);
 
-        coupon.burn(msg.sender, _amount);
+        coupon.burnFrom(msg.sender, _amount);
         getToken().transfer(msg.sender, redeemedValue);
 
         liability = liability.sub(redeemedValue);

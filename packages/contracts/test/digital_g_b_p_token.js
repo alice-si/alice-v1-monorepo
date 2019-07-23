@@ -1,16 +1,16 @@
 var DigitalGBPToken = artifacts.require("DigitalGBPToken");
 
+require("./test-setup");
+
 contract('DigitalGBPToken', function(accounts) {
 
   var token;
   var name = 'DigitalGBPToken';
-  var symbol = 'DGBP';
-  var dec = 2;
-  var owner;
+
+
 
   before('deploy DigitalGBPToken', async function() {
     token = await DigitalGBPToken.new();
-    owner = await token.owner();
   });
 
 
@@ -19,24 +19,21 @@ contract('DigitalGBPToken', function(accounts) {
       (await token.name()).should.equal(name);
     });
 
-    it('Has correct symbol', async function() {
-      (await token.symbol()).should.equal(symbol);
+    it('Has correct decimals', async function() {
+      (await token.decimals()).should.be.bignumber.equal('2');
     });
 
-    it('Has correct decimals', async function() {
-      (await token.decimals()).should.be.bignumber.equal(dec);
-    });
   });
 
   describe('Minting and Burning Tokens', function() {
     it('Should Mint 100 tokens', async function() {
-      await token.mint(accounts[1], 100, { from: owner });
-      (await token.balanceOf(accounts[1])).should.be.bignumber.equal(100, 'Minted 100');
+      await token.mint(accounts[1], 100, { from: accounts[0] });
+      (await token.balanceOf(accounts[1])).should.be.bignumber.equal('100', 'Minted 100');
     });
 
     it('Should Mint 100, then Burn 100 Successfully', async function() {
-        await token.burn(accounts[1], 100);
-        (await token.balanceOf(accounts[1])).should.be.bignumber.equal(0, 'Burnt 100');
+        await token.burn(100, {from: accounts[1]});
+        (await token.balanceOf(accounts[1])).should.be.bignumber.equal('0', 'Burnt 100');
     });
 
     it('Reject Burn when burning more than account supply', async function() {

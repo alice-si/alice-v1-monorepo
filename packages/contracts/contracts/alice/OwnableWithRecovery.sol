@@ -1,4 +1,4 @@
-pragma solidity ^0.4.24;
+pragma solidity ^0.5.2;
 
 import 'openzeppelin-solidity/contracts/ownership/Ownable.sol';
 
@@ -20,16 +20,16 @@ contract OwnableWithRecovery is Ownable {
      * @dev The Ownable constructor sets the original `owner` of the contract to the sender
      * account.
      */
-    constructor(address[] _recoveryAddresses, uint8 _minVoteCount)
+    constructor(address[] memory _recoveryAddresses, uint8 _minVoteCount)
         Ownable() public {
         require(_recoveryAddresses.length >= 2 && _recoveryAddresses.length <= 10);
 
-        owner = msg.sender;
+
         minVoteCount = _minVoteCount;
         for (uint i=0; i<_recoveryAddresses.length; i++) {
-            recoveryVote[_recoveryAddresses[i]] = owner;
+            recoveryVote[_recoveryAddresses[i]] = owner();
         }
-        voteCount[owner] = _recoveryAddresses.length;
+        voteCount[owner()] = _recoveryAddresses.length;
     }
 
 
@@ -48,8 +48,7 @@ contract OwnableWithRecovery is Ownable {
         emit OwnershipTransferAttempt(msg.sender, _newOwner);
 
         if (voteCount[_newOwner] >= minVoteCount) {
-            owner = _newOwner;
-            emit OwnershipTransferred(owner, _newOwner);
+            _transferOwnership(_newOwner);
         }
     }
 
