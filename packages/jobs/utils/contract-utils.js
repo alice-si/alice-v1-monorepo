@@ -91,7 +91,7 @@ async function validateNetworkId(provider) {
   const network = await provider.getNetwork();
   if (network.chainId !== networkId) {
     logger.error(`Network id = ${network.chainId}`
-      + `expected by config: ${networkId}`);
+      + ` expected by config: ${networkId}`);
   }
 }
 
