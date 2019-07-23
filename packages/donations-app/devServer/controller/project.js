@@ -28,7 +28,8 @@ module.exports = function (app) {
           "_id",
           "code",
           "title",
-          "status"
+          "status",
+          "ethAddresses",
         ])
       ]);
       return res.json(projects);
@@ -157,6 +158,27 @@ module.exports = function (app) {
 
       return res.json(donations);
     }));
+
+    app.post(
+      '/api/setProjectStatus',
+      Auth.auth(),
+      AccessControl.Middleware.isSuperadmin,
+      asyncHandler(async (req, res) => {
+        const allowedStatuses = ['CREATED'];
+
+        let project = await Project.findOne({ code: req.body.code });
+        if (!project) {
+          return res.status(400).send(`Project not found: ${req.body.code}`);
+        }
+        if (!allowedStatuses.includes(req.body.status)) {
+          return res.status(400).send(`Status is not allowed: ${req.body.status}`);
+        }
+
+        project.status = req.body.status
+        await project.save();
+
+        return res.json();
+      }));
 
     app.post(
       '/api/saveProjectWithOutcomes',
