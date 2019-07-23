@@ -14,10 +14,61 @@
     margin-bottom: 3px;
 }
 
+.amount-selector.circle-icon {
+    cursor: pointer;
+    width: 60px;
+}
+
+.amount-selector.circle-icon:hover {
+    opacity: 0.8;
+}
+
+.amount-selector.amount-input {
+    border: none;
+    border-bottom: solid 1px #ccc;
+    border-radius: 0;
+    font-size: 3rem;
+    width: 100px;
+}
+
+.amount-selector {
+    text-align: center;
+    margin: auto;
+}
+
+.checkout-subtitle {
+    font-size: 2rem;
+}
+
+.amount-selector.gbp-symbol {
+    font-size: 2rem;
+    top: 12px;
+    left: 35px;
+    color: #ccc;
+    position: absolute;
+}
+
+.amount-selector.add-amount-button {
+    margin-left: -100px;
+}
+
+.amount-selector.subtract-amount-button {
+    margin-right: -100px;
+}
+
+.amount-selector-container {
+    padding-bottom: 20px;
+    border-bottom: solid 1px #ccc;
+}
+
 img.cvc {
     position: absolute;
-    top: 0;
-    right: 10px;
+    top: 27px;
+    right: 20px;
+}
+
+img.social-icon-after-donation {
+    width: 20px;
 }
 
 @media (min-width: 1000px) {

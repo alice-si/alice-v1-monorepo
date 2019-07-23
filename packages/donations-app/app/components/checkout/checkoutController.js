@@ -56,11 +56,11 @@ angular.module('aliceApp')
       }
     };
 
-    vm.incAmount = function () {
+    vm.addAmount = function () {
       vm.donation.amount += ADD_AMOUNT_VALUE;
     }
 
-    vm.decAmount = function () {
+    vm.subtractAmount = function () {
       if (vm.donation.amount >= ADD_AMOUNT_VALUE) {
         vm.donation.amount -= ADD_AMOUNT_VALUE;
       }
