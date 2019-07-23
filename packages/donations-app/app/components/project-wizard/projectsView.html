@@ -24,8 +24,16 @@
         </a>
       </td>
       <td>
-        <a href="#" class="btn btn-warning" ng-click="projectsCtrl.changeStatusToCreated(project)" >Deploy</a>
-        <a href="/project-wizard/{{project.code}}" class="btn btn-danger" >Edit</a>
+        <a href="#" class="btn btn-warning" ng-click="projectsCtrl.startDeployment(project)" >Deploy</a>
+        <a
+          href="#"
+          class="btn btn-warning"
+          ng-click="projectsCtrl.makeActive(project)"
+          ng-if="project.status == 'PROJECT_DEPLOYMENT_COMPLETED'"
+        >
+          Make active
+        </a>
+        <a href="/project-wizard/{{project.code}}" class="btn btn-warning" >Edit</a>
         <a href="/project/{{project.code}}/" class="btn btn-success">Preview</a>
       </td>
 

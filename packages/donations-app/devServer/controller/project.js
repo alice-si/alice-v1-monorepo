@@ -164,7 +164,7 @@ module.exports = function (app) {
       Auth.auth(),
       AccessControl.Middleware.isSuperadmin,
       asyncHandler(async (req, res) => {
-        const allowedStatuses = ['CREATED'];
+        const allowedStatuses = ['CREATED', 'ACTIVE'];
 
         let project = await Project.findOne({ code: req.body.code });
         if (!project) {
