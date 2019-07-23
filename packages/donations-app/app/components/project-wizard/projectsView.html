@@ -16,10 +16,24 @@
         {{project.title}}
       </td>
       <td>
-        {{project.status}}
+        <a ng-if="project.ethAddresses.project" target="_blank" href="{{projectsCtrl.ETHERSCAN}}/address/{{project.ethAddresses.project}}">
+          {{project.status}}
+        </a>
+        <a ng-if="!project.ethAddresses.project" href="#" ng-click="projectsCtrl.noAddresseForProject(project)">
+            {{project.status}}
+        </a>
       </td>
       <td>
-        <a href="/project-wizard/{{project.code}}" class="btn btn-danger" >Edit</a>
+        <a href="#" class="btn btn-warning" ng-click="projectsCtrl.startDeployment(project)" >Deploy</a>
+        <a
+          href="#"
+          class="btn btn-warning"
+          ng-click="projectsCtrl.makeActive(project)"
+          ng-if="project.status == 'PROJECT_DEPLOYMENT_COMPLETED'"
+        >
+          Make active
+        </a>
+        <a href="/project-wizard/{{project.code}}" class="btn btn-warning" >Edit</a>
         <a href="/project/{{project.code}}/" class="btn btn-success">Preview</a>
       </td>
 
