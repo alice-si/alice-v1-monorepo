@@ -135,7 +135,7 @@ contract('ProjectWithBonds - mixed investment and donations', function([owner, b
 		catalog = await ProjectCatalog.new();
 		await catalog.addProject("TEST", project.address);
 
-		//(await project.couponNominalPrice()).should.be.bignumber.equal('100');
+		(await project.couponNominalPrice()).should.be.bignumber.equal('100');
 	});
 
 	it("should create coupon contract", async function() {
@@ -143,7 +143,7 @@ contract('ProjectWithBonds - mixed investment and donations', function([owner, b
 		coupon = await Coupon.at(couponAddress);
 
 		(await coupon.name()).should.be.equal("Alice Coupon");
-		//(await coupon.nominalPrice()).should.be.bignumber.equal('100');
+		(await coupon.nominalPrice()).should.be.bignumber.equal('100');
 	});
 
 	it("should configure investment wallet", async function() {

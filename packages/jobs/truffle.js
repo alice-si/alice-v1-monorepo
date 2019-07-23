@@ -7,11 +7,11 @@ module.exports = {
     }
   },
   mocha: {
-    enableTimeouts: false 
+    enableTimeouts: false
   },
   compilers: {
     solc: {
-      version: '^0.4.24'
+      version: "0.5.2"  // ex:  "0.4.20". (Default: Truffle's installed solc)
     }
   }
 };
