@@ -18,7 +18,7 @@ contract('TwoPhaseTransfers', function(accounts) {
 	});
 
 	it("should correctly deposit tokens", async function() {
-		(await token.balanceOf(twoPhaseTransfers.address)).should.be.bignumber.equal(100);
+		(await token.balanceOf(twoPhaseTransfers.address)).should.be.bignumber.equal('100');
 	});
 
 	it("should prevent proposing transfer from unauthorized account", async function() {
@@ -32,7 +32,7 @@ contract('TwoPhaseTransfers', function(accounts) {
 
 		event.args.token.should.equal(token.address);
 		event.args.to.should.equal(target);
-		event.args.value.should.bignumber.equal(100);
+		event.args.value.should.bignumber.equal('100');
 	});
 
 	it("should prevent confirming transfer from unauthorized account", async function() {
@@ -46,10 +46,10 @@ contract('TwoPhaseTransfers', function(accounts) {
 		event.args.id.should.bignumber.equal(proposalId);
 		event.args.token.should.equal(token.address);
 		event.args.to.should.equal(target);
-		event.args.value.should.bignumber.equal(100);
+		event.args.value.should.bignumber.equal('100');
 
-		(await token.balanceOf(twoPhaseTransfers.address)).should.be.bignumber.equal(0);
-		(await token.balanceOf(target)).should.be.bignumber.equal(100);
+		(await token.balanceOf(twoPhaseTransfers.address)).should.be.bignumber.equal('0');
+		(await token.balanceOf(target)).should.be.bignumber.equal('100');
 	});
 
 });

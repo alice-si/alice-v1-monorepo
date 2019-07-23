@@ -1,4 +1,4 @@
-pragma solidity ^0.4.24;
+pragma solidity ^0.5.2;
 
 import 'openzeppelin-solidity/contracts/token/ERC20/ERC20.sol';
 import './CuratedWithWarnings.sol';
@@ -10,7 +10,7 @@ import './CuratedWithWarnings.sol';
  */
 contract Vault is CuratedWithWarnings {
 
-    constructor(address[] _whistleblowers, address _curator, address[] _proposers, address[] _validators)
+    constructor(address[] memory _whistleblowers, address _curator, address[] memory _proposers, address[] memory _validators)
         CuratedWithWarnings(_whistleblowers, _curator, _proposers, _validators) public {
     }
 

@@ -26,24 +26,24 @@ contract('DonationWallet', function(accounts) {
 
 	  await token.mint(wallet.address, 100);
 
-	  (await wallet.balance(token.address)).should.be.bignumber.equal(100);
+	  (await wallet.balance(token.address)).should.be.bignumber.equal('100');
 	});
 
 	it("should refund outstanding tokens", async function() {
 		await wallet.refund(token.address, 50);
 
-		(await wallet.balance(token.address)).should.be.bignumber.equal(50);
-		(await token.balanceOf(donor)).should.be.bignumber.equal(50);
-		(await token.balanceOf(wallet.address)).should.be.bignumber.equal(50);
+		(await wallet.balance(token.address)).should.be.bignumber.equal('50');
+		(await token.balanceOf(donor)).should.be.bignumber.equal('50');
+		(await token.balanceOf(wallet.address)).should.be.bignumber.equal('50');
 	});
 
 	it("should donate from wallet", async function() {
 		await wallet.donate(10, "PROJECT");
 
 		var projectAddress = await projectCatalog.getProjectAddress("PROJECT");
-		var project = Project.at(projectAddress);
-		(await wallet.balance(token.address)).should.be.bignumber.equal(40);
-		(await project.getBalance(wallet.address)).should.be.bignumber.equal(10);
+		var project = await Project.at(projectAddress);
+		(await wallet.balance(token.address)).should.be.bignumber.equal('40');
+		(await project.getBalance(wallet.address)).should.be.bignumber.equal('10');
 	});
 
 

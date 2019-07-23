@@ -1,4 +1,4 @@
-pragma solidity ^0.4.24;
+pragma solidity ^0.5.2;
 
 //Contract only for testing purposes.
 //Don't connect to other contracts or use in a production environment.
@@ -16,25 +16,25 @@ contract MockValidation {
 
     Validation[] validations;
 
-    function validate(string outcome, uint value) public {
+    function validate(string memory outcome, uint value) public {
         Validation memory validation = Validation(now, msg.sender, outcome, value);
         validations.push(validation);
         emit ValidationEvent(validation.time, validation.validator, validation.outcome, validation.value);
     }
 
-    function getValidationsCount() constant public returns(uint count) {
+    function getValidationsCount() view public returns(uint count) {
         return validations.length;
     }
 
-    function getValidatorByIndex(uint index) constant public returns(address validator) {
+    function getValidatorByIndex(uint index) view public returns(address validator) {
         return validations[index].validator;
     }
 
-    function getOutcomeByIndex(uint index) constant public returns(string outcome) {
+    function getOutcomeByIndex(uint index) view public returns(string memory outcome) {
         return validations[index].outcome;
     }
 
-    function getValueByIndex(uint index) constant public returns(uint value) {
+    function getValueByIndex(uint index) view public returns(uint value) {
         return validations[index].value;
     }
 
