@@ -1,14 +1,10 @@
 angular.module('aliceApp')
   .controller('CheckoutController', ['$rootScope', '$uibModal', '$http', '$stateParams', '$state', '$sce', '$timeout', 'AuthService', 'ProjectService', 'NotificationService', 'API', '$scope', 'MANGO', 'CheckoutService', function ($rootScope, $uibModal, $http, $stateParams, $state, $sce, $timeout, AuthService, ProjectService, NotificationService, API, $scope, MANGO, CheckoutService) {
-
-    const amounts = {
-      amount20: 2000,
-      amount80: 8000,
-      amount150: 15000,
-      amountOther: 0
-    };
-
     var vm = this;
+
+    const ADD_AMOUNT_VALUE = 1000;
+    const DEFAULT_DONATION_AMOUNT = 3000;
+
     vm.validatedGuest = false;
     vm.guest = {};
     vm.auth = AuthService;
@@ -23,28 +19,7 @@ angular.module('aliceApp')
     vm.card = CheckoutService.card;
     vm.project = CheckoutService.project;
     vm.donation = CheckoutService.donation;
-
-    //TODO: Logic for amount selector - preferably moved to another component
-    vm.onAmountChange = function (target) {
-      if (vm[target]) {
-        vm.donation.amount = amounts[target];
-        vm.noAmount = false;
-        if (target != 'amountOther') {
-          vm.amountOtherValue = null;
-        }
-        Object.keys(amounts).forEach(function (key) {
-          if (key != target) {
-            vm[key] = false;
-          }
-        });
-      } else {
-        vm.donation.amount = 0;
-      }
-    };
-
-    vm.onOtherChange = function () {
-      vm.donation.amount = vm.amountOtherValue * 100;
-    };
+    vm.donation.amount = DEFAULT_DONATION_AMOUNT;
 
     vm.validateGuest = function () {
       vm.guestForm.$submitted = true;
@@ -81,14 +56,15 @@ angular.module('aliceApp')
       }
     };
 
-    var sendDonation = function () {
-      if (vm.mode == 'CARD') {
-        sendDonationByCard();
-      } else if (vm.mode == 'BANK_TRANSFER') {
-        sendDonationByBankTransfer();
-      }
-    };
+    vm.addAmount = function () {
+      vm.donation.amount += ADD_AMOUNT_VALUE;
+    }
 
+    vm.subtractAmount = function () {
+      if (vm.donation.amount >= ADD_AMOUNT_VALUE) {
+        vm.donation.amount -= ADD_AMOUNT_VALUE;
+      }
+    }
 
 
     //TODO: Work on bank transfer once we've got a design for it

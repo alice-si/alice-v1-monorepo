@@ -1,50 +1,44 @@
-const ClaimsRegistry = artifacts.require('ClaimsRegistry');
+var ClaimsRegistry = artifacts.require("ClaimsRegistry");
 
-require('./test-setup');
+require("./test-setup");
 
-contract('ClaimsRegistry', ([main, issuer, validator, subject]) => {
-  let claimsRegistry;
+contract('Claims registry', function([main, issuer, validator, subject]) {
+  var claimsRegistry;
+  const KEY_1 = '0x0000000000000000000000000000000000000000000000000000000000000001';
+  const CLAIM = '0x000000000000000000000000000000000000000000000000000000000000000c';
+  const CLAIM_UPDATED = '0x000000000000000000000000000000000000000000000000000000000000000d';
 
-  beforeEach(async () => {
+  before("deploy Claim Registry", async function() {
     claimsRegistry = await ClaimsRegistry.new();
   });
 
 
-  it('should not return claims from an empty registry', async () => {
-    (await claimsRegistry.getClaim(issuer, subject, 'KEY_1')).should.be.bignumber.equal(0);
+  it("should not return claims from an empty registry", async function() {
+    (await claimsRegistry.getClaim(issuer, subject, KEY_1)).should.be.zeroAddress();
   });
 
 
-  it('should save added claims', async () => {
-    await claimsRegistry.setClaim(subject, 'KEY_1', 'CLAIM', {from: issuer});
-    web3.toUtf8((await claimsRegistry.getClaim(issuer, subject, 'KEY_1'))).should.be.equal('CLAIM');
+  it("should add a claim", async function() {
+    await claimsRegistry.setClaim(subject, KEY_1, CLAIM, {from: issuer});
+    (await claimsRegistry.getClaim(issuer, subject, KEY_1)).should.be.equal(CLAIM);
   });
 
 
-  it('should not keep removed claims', async () => {
-    await claimsRegistry.setClaim(subject, 'KEY_1', 'CLAIM', {from: issuer});
-    await claimsRegistry.removeClaim(subject, 'KEY_1', {from: issuer});
-    (await claimsRegistry.getClaim(issuer, subject, 'KEY_1')).should.be.bignumber.equal(0);
+  it("should not report approval before making one", async function() {
+    (await claimsRegistry.isApproved(validator, issuer, subject, KEY_1)).should.be.false;
   });
 
 
-  it('should not consider new claims approved', async () => {
-    await claimsRegistry.setClaim(subject, 'KEY_1', 'CLAIM', {from: issuer});
-    (await claimsRegistry.isApproved(validator, issuer, subject, 'KEY_1')).should.be.false;
+  it("should approve a claim", async function() {
+    await claimsRegistry.approveClaim(issuer, subject, KEY_1, {from: validator});
+    (await claimsRegistry.isApproved(validator, issuer, subject, KEY_1)).should.be.true;
   });
 
 
-  it('should save approvals', async () => {
-    await claimsRegistry.setClaim(subject, 'KEY_1', 'CLAIM', {from: issuer});
-    await claimsRegistry.approveClaim(issuer, subject, 'KEY_1', {from: validator});
-    (await claimsRegistry.isApproved(validator, issuer, subject, 'KEY_1')).should.be.true;
+  it("a changed claim should not longer be approved", async function() {
+    await claimsRegistry.setClaim(subject, KEY_1, CLAIM_UPDATED, {from: issuer});
+    (await claimsRegistry.isApproved(validator, issuer, subject, KEY_1)).should.be.false;
   });
 
 
-  it('should no longer consider changed claims approved', async () => {
-    await claimsRegistry.setClaim(subject, 'KEY_1', 'CLAIM', {from: issuer});
-    await claimsRegistry.approveClaim(issuer, subject, 'KEY_1', {from: validator});
-    await claimsRegistry.setClaim(subject, 'KEY_1', 'CLAIM_UPDATED', {from: issuer});
-    (await claimsRegistry.isApproved(validator, issuer, subject, 'KEY_1')).should.be.false;
-  });
 });

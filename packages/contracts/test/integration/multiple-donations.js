@@ -10,6 +10,8 @@ contract('Multiple donations', function(accounts) {
   var beneficiary = accounts[2];
   var project, token;
 
+  const OUTCOME = web3.utils.fromAscii('OUTCOME');
+
   it("should create a project", async function() {
     project = await Project.new("Project", 0);
   });
@@ -46,20 +48,20 @@ contract('Multiple donations', function(accounts) {
     }
 
     await token.mint(project.address, 500);
-    (await token.balanceOf(project.address)).should.be.bignumber.equal(500);
+    (await token.balanceOf(project.address)).should.be.bignumber.equal('500');
   });
 
 
   it("should validate outcome from multiple accounts", async function () {
     //Before
-    (await token.balanceOf(project.address)).should.be.bignumber.equal(500);
-    (await token.balanceOf(beneficiary)).should.be.bignumber.equal(0);
+    (await token.balanceOf(project.address)).should.be.bignumber.equal('500');
+    (await token.balanceOf(beneficiary)).should.be.bignumber.equal('0');
 
-    await project.validateOutcome("Outcome", 500, {from: validator});
+    await project.validateOutcome(OUTCOME, 500, {from: validator});
 
     //After
-    (await token.balanceOf(project.address)).should.be.bignumber.equal(0);
-    (await token.balanceOf(beneficiary)).should.be.bignumber.equal(500);
+    (await token.balanceOf(project.address)).should.be.bignumber.equal('0');
+    (await token.balanceOf(beneficiary)).should.be.bignumber.equal('500');
   });
 
 

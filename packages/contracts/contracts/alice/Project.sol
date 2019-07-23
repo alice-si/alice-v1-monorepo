@@ -1,4 +1,4 @@
-pragma solidity ^0.4.24;
+pragma solidity ^0.5.2;
 
 import 'openzeppelin-solidity/contracts/ownership/Ownable.sol';
 import 'openzeppelin-solidity/contracts/math/SafeMath.sol';
@@ -36,7 +36,7 @@ contract Project is Ownable {
     event OutcomeEvent(bytes32 claimId, uint value);
     event DonationEvent(address indexed from, uint value);
 
-    constructor(string _name, uint8 _upfrontPaymentPercentage) public {
+    constructor(string memory _name, uint8 _upfrontPaymentPercentage) public {
         require(_upfrontPaymentPercentage >= 0 && _upfrontPaymentPercentage < 100);
         name = _name;
         upfrontPaymentPercentage = _upfrontPaymentPercentage;
@@ -63,7 +63,7 @@ contract Project is Ownable {
     }
 
     function notify(address _from, uint _amount) public onlyOwner {
-        require(_from != 0x0);
+        require(_from != address(0));
         require(_amount > 0);
         registerDonation(_from, _amount);
     }
@@ -95,7 +95,7 @@ contract Project is Ownable {
         require (!isClaimValidated[_claimId]);
 
         // Can only validate claimed outcomes if claims registry is present.
-        if (address(CLAIMS_REGISTRY) != 0x0) {
+        if (address(CLAIMS_REGISTRY) != address(0)) {
             uint claimedValue = uint(
                 CLAIMS_REGISTRY.getClaim(beneficiaryAddress, address(this), _claimId));
             require (claimedValue == _value);
@@ -121,8 +121,8 @@ contract Project is Ownable {
         }
     }
 
-    function getBalance(address donor) public view returns(uint) {
-        return ImpactRegistry(IMPACT_REGISTRY_ADDRESS).getBalance(donor);
+    function getBalance(address _donor) public view returns(uint balance) {
+        return ImpactRegistry(IMPACT_REGISTRY_ADDRESS).getBalance(_donor);
     }
 
     /* Extra security measure to save funds in case of critical error or attack */
@@ -136,7 +136,7 @@ contract Project is Ownable {
     * but we can handle various tokens and convert them to our own stable coin on case by case basis
     */
     function reclaimAlternativeTokens(ERC20 _alternativeToken, address _targetAddress, uint256 _value) public onlyOwner {
-        require(address(_alternativeToken) != 0x0, "Undefined ERC20 tokens");
+        require(address(_alternativeToken) != address(0), "Undefined ERC20 tokens");
         require(_alternativeToken.balanceOf(address(this)) >= _value, "Insufficient funds deposited on the contract");
         _alternativeToken.transfer(_targetAddress, _value);
     }

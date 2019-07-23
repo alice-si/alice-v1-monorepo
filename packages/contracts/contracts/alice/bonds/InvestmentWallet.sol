@@ -1,4 +1,4 @@
-pragma solidity ^0.4.24;
+pragma solidity ^0.5.2;
 
 import './ProjectWithBonds.sol';
 import './Coupon.sol';
@@ -12,7 +12,7 @@ contract InvestmentWallet is DonationWallet {
     }
 
 
-    function invest(uint _amount, string _projectName) public onlyOwner {
+    function invest(uint _amount, string memory _projectName) public onlyOwner {
         address projectAddress = projectCatalog.getProjectAddress(_projectName);
         require(projectAddress != address(0));
         ERC20 token = ProjectWithBonds(projectAddress).getToken();
@@ -22,13 +22,14 @@ contract InvestmentWallet is DonationWallet {
     }
 
 
-    function redeemCoupons(uint _amount, string _projectName) public onlyOwner {
+    function redeemCoupons(uint _amount, string memory _projectName) public onlyOwner {
         address projectAddress = projectCatalog.getProjectAddress(_projectName);
         require(projectAddress != address(0));
         ProjectWithBonds project = ProjectWithBonds(projectAddress);
         Coupon coupon = project.getCoupon();
-        require(coupon.balanceOf(this) >= _amount);
+        require(coupon.balanceOf(address(this)) >= _amount);
 
+        require(coupon.approve(address(project), _amount));
         project.redeemCoupons(_amount);
     }
 

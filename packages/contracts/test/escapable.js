@@ -17,7 +17,7 @@ contract('Escapable', function(accounts) {
 	});
 
 	it("should correctly deposit tokens", async function() {
-		(await token.balanceOf(escapable.address)).should.be.bignumber.equal(100);
+		(await token.balanceOf(escapable.address)).should.be.bignumber.equal('100');
 	});
 
 	it("should prevent escaping from non controller", async function() {
@@ -33,8 +33,8 @@ contract('Escapable', function(accounts) {
 	it("should escape funds", async function() {
 		await escapable.escape(token.address, {from: escapeController});
 
-		(await token.balanceOf(escapable.address)).should.be.bignumber.equal(0);
-		(await token.balanceOf(escapeTarget)).should.be.bignumber.equal(100);
+		(await token.balanceOf(escapable.address)).should.be.bignumber.equal('0');
+		(await token.balanceOf(escapeTarget)).should.be.bignumber.equal('100');
 	});
 
 });

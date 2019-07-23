@@ -7,8 +7,22 @@
                 {{ checkCtrl.donation.amount * 1.25 | money }}
             </p>
 
-            <div ng-show="checkCtrl.giftAid" id="gift-aid-details">
+            <div id="gift-aid-details">
                 <div class="row">
+                    <p class="alice-grey center col-md-12"
+                        ng-show="checkCtrl.donation.amount">
+                        By tapping Donate you agree to our
+                        <a href="https://s3.eu-west-2.amazonaws.com/alice-res/terms_of_use.pdf"
+                            target="_blank">
+                            Terms & Conditions
+                        </a> and our
+                        <a href="https://s3.eu-west-2.amazonaws.com/alice-res/privacy_policy.pdf"
+                            target="_blank">
+                            Privacy Policy
+                        </a>
+                    </p>
+                </div>
+                <div ng-show="checkCtrl.giftAid" class="row">
                     <div class="col-xs-12 col-md-12">
                         <div class="form-group left" has-error>
                             <label>Postal address including postcode</label>
@@ -26,20 +40,6 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <p class="alice-grey center col-md-12"
-                       ng-show="!checkCtrl.giftAid">
-                       By tapping Donate you agree to our
-                       <a href="https://s3.eu-west-2.amazonaws.com/alice-res/terms_of_use.pdf"
-                          target="_blank">
-                          Terms & Conditions
-                       </a> and our
-                       <a href="https://s3.eu-west-2.amazonaws.com/alice-res/privacy_policy.pdf"
-                          target="_blank">
-                          Privacy Policy
-                       </a>
-                    </p>
-                </div>
                 <div class="row">
                     <p class="alice-grey col-md-12 left" ng-show="checkCtrl.giftAid">
                        Yes – I confirm I am a UK taxpayer and would like my donation to
@@ -62,7 +62,7 @@
         </div>
     </div>
     <div class="row">
-        <button id="registration-sign-up-button"
+        <button 
                 class="col-md-12"
                 ng-click="checkCtrl.donate()"
                 type="submit">

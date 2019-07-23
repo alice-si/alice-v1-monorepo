@@ -1,4 +1,4 @@
-var Project = artifacts.require("Project");
+var Project = artifacts.require("project");
 var AliceToken = artifacts.require("AliceToken");
 var ImpactRegistry = artifacts.require("ImpactRegistry");
 var Linker = artifacts.require("FlexibleImpactLinker");
@@ -12,6 +12,8 @@ contract('Double donations', function(accounts) {
   var validator = accounts[3];
   var beneficiary = accounts[4];
   var project, token, impactRegistry;
+
+  const OUTCOME = web3.utils.fromAscii('OUTCOME');
 
   it("should create a project", async function() {
     project = await Project.new("Project", 0);
@@ -44,35 +46,35 @@ contract('Double donations', function(accounts) {
 
   it("should notify from donor1", async function () {
     await project.notify(donor1, 10, {from: main});
-   (await project.total()).should.be.bignumber.equal(10);
-   (await project.getBalance(donor1)).should.be.bignumber.equal(10);
+   (await project.total()).should.be.bignumber.equal('10');
+   (await project.getBalance(donor1)).should.be.bignumber.equal('10');
   });
 
 
   it("should notify from donor2", async function () {
     await project.notify(donor2, 20, {from: main});
-    (await project.total()).should.be.bignumber.equal(30);
-    (await project.getBalance(donor2)).should.be.bignumber.equal(20);
+    (await project.total()).should.be.bignumber.equal('30');
+    (await project.getBalance(donor2)).should.be.bignumber.equal('20');
   });
 
 
   it("should mint tokens", async function () {
     await token.mint(project.address, 30);
-    (await token.balanceOf(project.address)).should.be.bignumber.equal(30);
+    (await token.balanceOf(project.address)).should.be.bignumber.equal('30');
   });
 
 
 
   it("should validate outcome", async function () {
     //Before
-    (await token.balanceOf(project.address)).should.be.bignumber.equal(30);
-    (await token.balanceOf(beneficiary)).should.be.bignumber.equal(0);
+    (await token.balanceOf(project.address)).should.be.bignumber.equal('30');
+    (await token.balanceOf(beneficiary)).should.be.bignumber.equal('0');
 
-    await project.validateOutcome("Outcome", 25, {from: validator});
+    await project.validateOutcome(OUTCOME, 25, {from: validator});
 
     //After
-    (await token.balanceOf(project.address)).should.be.bignumber.equal(5);
-    (await token.balanceOf(beneficiary)).should.be.bignumber.equal(25);
+    (await token.balanceOf(project.address)).should.be.bignumber.equal('5');
+    (await token.balanceOf(beneficiary)).should.be.bignumber.equal('25');
   });
 
 
@@ -80,44 +82,44 @@ contract('Double donations', function(accounts) {
 		linker = await Linker.new(impactRegistry.address, 10);
 		await impactRegistry.setLinker(linker.address);
 
-		(await linker.unit()).should.be.bignumber.equal(10);
+		(await linker.unit()).should.be.bignumber.equal('10');
 		(await linker.registry()).should.be.equal(impactRegistry.address);
   });
 
 
   it("should link impactRegistry", async function () {
-    await impactRegistry.linkImpact("Outcome");
-    (await impactRegistry.getImpactLinked("Outcome")).should.be.bignumber.equal(10);
-    (await impactRegistry.getImpactCount("Outcome")).should.be.bignumber.equal(1);
-    (await impactRegistry.getImpactDonor("Outcome", 0)).should.be.equal(donor1);
-    (await impactRegistry.getImpactValue("Outcome", donor1)).should.be.bignumber.equal(10);
+    await impactRegistry.linkImpact(OUTCOME);
+    (await impactRegistry.getImpactLinked(OUTCOME)).should.be.bignumber.equal('10');
+    (await impactRegistry.getImpactCount(OUTCOME)).should.be.bignumber.equal('1');
+    (await impactRegistry.getImpactDonor(OUTCOME, 0)).should.be.equal(donor1);
+    (await impactRegistry.getImpactValue(OUTCOME, donor1)).should.be.bignumber.equal('10');
 
-    await impactRegistry.linkImpact("Outcome");
-    (await impactRegistry.getImpactLinked("Outcome")).should.be.bignumber.equal(20);
-    (await impactRegistry.getImpactCount("Outcome")).should.be.bignumber.equal(2);
-    (await impactRegistry.getImpactDonor("Outcome", 1)).should.be.equal(donor2);
-    (await impactRegistry.getImpactValue("Outcome", donor2)).should.be.bignumber.equal(10);
+    await impactRegistry.linkImpact(OUTCOME);
+    (await impactRegistry.getImpactLinked(OUTCOME)).should.be.bignumber.equal('20');
+    (await impactRegistry.getImpactCount(OUTCOME)).should.be.bignumber.equal('2');
+    (await impactRegistry.getImpactDonor(OUTCOME, 1)).should.be.equal(donor2);
+    (await impactRegistry.getImpactValue(OUTCOME, donor2)).should.be.bignumber.equal('10');
 
-    await impactRegistry.linkImpact("Outcome");
-    (await impactRegistry.getImpactLinked("Outcome")).should.be.bignumber.equal(25);
-    (await impactRegistry.getImpactCount("Outcome")).should.be.bignumber.equal(2);
-    (await impactRegistry.getImpactDonor("Outcome", 1)).should.be.equal(donor2);
-    (await impactRegistry.getImpactValue("Outcome", donor2)).should.be.bignumber.equal(15);
+    await impactRegistry.linkImpact(OUTCOME);
+    (await impactRegistry.getImpactLinked(OUTCOME)).should.be.bignumber.equal('25');
+    (await impactRegistry.getImpactCount(OUTCOME)).should.be.bignumber.equal('2');
+    (await impactRegistry.getImpactDonor(OUTCOME, 1)).should.be.equal(donor2);
+    (await impactRegistry.getImpactValue(OUTCOME, donor2)).should.be.bignumber.equal('15');
 
   });
 
   it("should pay back outstanding balance", async function () {
     //Before
-    (await token.balanceOf(project.address)).should.be.bignumber.equal(5);
-    (await token.balanceOf(donor1)).should.be.bignumber.equal(0);
-    (await token.balanceOf(donor2)).should.be.bignumber.equal(0);
+    (await token.balanceOf(project.address)).should.be.bignumber.equal('5');
+    (await token.balanceOf(donor1)).should.be.bignumber.equal('0');
+    (await token.balanceOf(donor2)).should.be.bignumber.equal('0');
 
     await project.payBack(donor2);
 
     //After
-    (await token.balanceOf(project.address)).should.be.bignumber.equal(0);
-    (await token.balanceOf(donor1)).should.be.bignumber.equal(0);
-    (await token.balanceOf(donor2)).should.be.bignumber.equal(5);
+    (await token.balanceOf(project.address)).should.be.bignumber.equal('0');
+    (await token.balanceOf(donor1)).should.be.bignumber.equal('0');
+    (await token.balanceOf(donor2)).should.be.bignumber.equal('5');
   });
 
 });

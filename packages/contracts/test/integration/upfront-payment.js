@@ -7,13 +7,15 @@ var Linker = artifacts.require("FlexibleImpactLinker");
 
 require("../test-setup");
 
-contract('Project - single donation', function([owner, beneficiary, validator, donor]) {
+contract('Upfront payment scenario', function([owner, beneficiary, validator, donor]) {
   var project;
   var catalog;
   var wallet;
   var gbp;
   var registry;
   var linker;
+
+  const OUTCOME = web3.utils.fromAscii('OUTCOME');
 
   it("should deploy Project contract", async function() {
     project = await Project.new("TEST", 40);
@@ -38,37 +40,38 @@ contract('Project - single donation', function([owner, beneficiary, validator, d
   });
 
   it("should keep sent upfront payment to beneficiary", async function() {
-    (await gbp.balanceOf(project.address)).should.be.bignumber.equal(60);
-    (await gbp.balanceOf(beneficiary)).should.be.bignumber.equal(40);
+    (await gbp.balanceOf(project.address)).should.be.bignumber.equal('60');
+    (await gbp.balanceOf(beneficiary)).should.be.bignumber.equal('40');
   });
 
 
 
   it("should validate", async function() {
-    await project.validateOutcome("OUTCOME", 50, {from: validator});
-    (await gbp.balanceOf(project.address)).should.be.bignumber.equal(10);
-    (await gbp.balanceOf(beneficiary)).should.be.bignumber.equal(90);
+    await project.validateOutcome(OUTCOME, 50, {from: validator});
+    (await gbp.balanceOf(project.address)).should.be.bignumber.equal('10');
+    (await gbp.balanceOf(beneficiary)).should.be.bignumber.equal('90');
   });
 
 
   it("should link impact", async function() {
     for (var i = 0; i < 5; i++) {
-      await registry.linkImpact("OUTCOME");
-      (await project.getBalance(wallet.address)).should.be.bignumber.equal(60 -(i+1)*10);
+      await registry.linkImpact(OUTCOME);
+      let expectedBalance = 60 -(i+1)*10;
+      (await project.getBalance(wallet.address)).should.be.bignumber.equal(expectedBalance.toString());
     }
   });
 
 
 
   it("should pay back to donor", async function() {
-    (await gbp.balanceOf(project.address)).should.be.bignumber.equal(10);
-    (await project.getBalance(wallet.address)).should.be.bignumber.equal(10);
-    (await gbp.balanceOf(wallet.address)).should.be.bignumber.equal(0);
+    (await gbp.balanceOf(project.address)).should.be.bignumber.equal('10');
+    (await project.getBalance(wallet.address)).should.be.bignumber.equal('10');
+    (await gbp.balanceOf(wallet.address)).should.be.bignumber.equal('0');
 
     await project.payBack(wallet.address);
 
-    (await gbp.balanceOf(project.address)).should.be.bignumber.equal(0);
-    (await gbp.balanceOf(wallet.address)).should.be.bignumber.equal(10);
+    (await gbp.balanceOf(project.address)).should.be.bignumber.equal('0');
+    (await gbp.balanceOf(wallet.address)).should.be.bignumber.equal('10');
   });
 
 });
