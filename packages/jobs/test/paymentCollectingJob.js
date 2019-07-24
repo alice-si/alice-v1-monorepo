@@ -2,8 +2,6 @@ const TestUtils = require('../utils/test-utils');
 const ModelUtils = require('../utils/model-utils');
 const Donation = ModelUtils.loadModel('donation');
 const PaymentCollectingJob = require('../jobs/paymentCollectingJob');
-const Mango = require('../gateways/mangoProxy');
-const request = require('request-promise');
 
 contract('PaymentCollectingJob', async function (accounts) {
   let mocks;

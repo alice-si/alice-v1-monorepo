@@ -5,10 +5,7 @@ const Moment = require('moment');
 const Donation = ModelUtils.loadModel('donation');
 const Mail = ModelUtils.loadModel('mail');
 const DonationStatusCheckingJob = require('../jobs/donationStatusCheckingJob');
-const MailSendingJob = require('../jobs/mailSendingJob');
 const Config = require('../config');
-
-const SHOULD_TEST_EMAIL_SENDING = true;
 
 contract('DonationStatusCheckingJob', async function () {
   const timeout = 500;
@@ -37,16 +34,6 @@ contract('DonationStatusCheckingJob', async function () {
     await sleep();
     mails = await Mail.find();
     mails.length.should.be.gt(0);
-  });
-
-  it('Checking email sending if needed', async () => {
-    if (SHOULD_TEST_EMAIL_SENDING) {
-      await MailSendingJob.execute();
-      await sleep();
-      let mail = await Mail.findOne();
-      mail.status.should.be.equal('MAIL_SENDING_COMPLETED');
-      mail.sendDate.should.be.a('date');
-    }
   });
 
   async function sleep() {
