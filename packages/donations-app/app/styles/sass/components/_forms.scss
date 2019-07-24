@@ -1,10 +1,9 @@
-input {
+input, textarea {
   border-width: 1px;
   box-shadow: none;
   -webkit-box-shadow: none;
   display: block;
   width: 100%;
-  height: 34px;
   padding: 20px 11px;
   font-size: 16px;
   line-height: 1.5;
@@ -24,6 +23,10 @@ input {
     border-color: $alice-tonal-medium;
     outline: none;
   }
+}
+
+input {
+  height: 34px;
 }
 
 select:focus,
@@ -48,7 +51,7 @@ button:focus {
 
 
 button {
-  width: 100%;
+  width: 100% !important;
   padding: 13px 0;
   background-color: $alice-tonal-medium;
   border: 1px solid #fff;

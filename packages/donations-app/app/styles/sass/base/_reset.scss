@@ -160,3 +160,8 @@
     margin-right: 0;
   }
 }
+
+// To be used to overrride Bootstrap col-padding
+.no-padding {
+  padding: 0 !important;
+}

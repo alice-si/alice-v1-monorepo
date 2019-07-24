@@ -4,8 +4,38 @@
  *
  */
 
-.home-container {
-  a {
-    font-family: 'Avenir';
+ .home-container {
+   .row {
+     margin: 0 30px;
+   }
+
+   .header-image {
+     .container {
+       transform: translateY(45%);
+     }
+   }
+ }
+
+
+
+.home-project-card {
+  min-height: 400px;
+  height: auto;
+  padding: 0 25px 10px 0;
+}
+
+.home-charity {
+  height: 125px;
+
+  &-container {
+    margin-bottom: 20px;
+  }
+
+  &-picture {
+      max-height: 125px;
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      vertical-align: middle;
   }
 }
