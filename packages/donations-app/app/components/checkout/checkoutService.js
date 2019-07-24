@@ -91,8 +91,10 @@ angular.module('aliceApp')
 
     var self = this;
     $rootScope.$on('user:login', function (event, data) {
-      self.card.name = AuthService.getLoggedFullName();
-      self.donation.user = AuthService.getLoggedUser();
+      if (self.card) {
+        self.card.name = AuthService.getLoggedFullName();
+        self.donation.user = AuthService.getLoggedUser();
+      }
     });
 
 
