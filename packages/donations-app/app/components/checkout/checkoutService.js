@@ -5,8 +5,10 @@ angular.module('aliceApp')
     mangoPay.cardRegistration.baseURL = MANGO.url;
     mangoPay.cardRegistration.clientId = MANGO.clientId;
 
-    const MANGO_TEST_CARD = "4706750000000009";
-    const MANGO_TEST_CARD_3DS = "3569990000000157"; // For testing of payments over 50EUR
+    //const MANGO_TEST_CARD = "4706750000000009";
+    const MANGO_TEST_CARD = "3569990000000157"; // For testing of payments over 50EUR
+
+    const DEFAULT_DONATION_AMOUNT = 3000;
 
     var registerCard = function(card) {
       return $q(function(resolve, reject) {
@@ -104,7 +106,7 @@ angular.module('aliceApp')
         name: AuthService.getLoggedFullName()
       };
       this.donation = {
-        amount: 0,
+        amount: DEFAULT_DONATION_AMOUNT,
         projectId: project._id,
         user: AuthService.getLoggedUser(),
         type: 'CARD'

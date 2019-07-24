@@ -3,7 +3,6 @@ angular.module('aliceApp')
     var vm = this;
 
     const ADD_AMOUNT_VALUE = 1000;
-    const DEFAULT_DONATION_AMOUNT = 3000;
 
     vm.validatedGuest = false;
     vm.guest = {};
@@ -19,8 +18,7 @@ angular.module('aliceApp')
     vm.card = CheckoutService.card;
     vm.project = CheckoutService.project;
     vm.donation = CheckoutService.donation;
-    vm.donation.amount = DEFAULT_DONATION_AMOUNT;
-
+    
     vm.validateGuest = function () {
       vm.guestForm.$submitted = true;
       if (vm.guestForm.$valid) {
