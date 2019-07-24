@@ -103,7 +103,7 @@ angular.module('aliceApp')
         if (errsOfSomeType) {
           errors = errors.concat(errsOfSomeType);
         }
-      } 
+      }
 
       return errors;
     }
@@ -132,7 +132,7 @@ angular.module('aliceApp')
     }
 
     function isVisible(domEl) {
-      const isSummernoteVisible = domEl[0].attributes.summernote && domEl.next().is(':visible');
+      const isSummernoteVisible = domEl[0] && domEl[0].attributes.summernote && domEl.next().is(':visible');
       const isCasualElementVisible = domEl.is(':visible');
       return isCasualElementVisible || isSummernoteVisible;
     }

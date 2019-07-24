@@ -58,14 +58,15 @@
         </select>
       </div>
 
-      <!-- Validator should be selectable only when project is being created -->
-      <div class="form-group" ng-if="prWizardCtrl.auth.isSuperadmin() && !prWizardCtrl.project._id">
-        <label class="col-sm-3 control-label">Validator *<p style="font-size: 8px;">Please select exactly one validator</p></label>
-        
-        <div user-list min-tags="1" max-tags="1" model="prWizardCtrl.project.validators" name="validators" required></div>
+
+      <div class="form-group" ng-if="prWizardCtrl.auth.isSuperadmin()">
+        <label class="col-sm-3 control-label">Validator<p style="font-size: 8px;">Change of validator requires contract deployment</p></label>
+
+        <div user-list model="prWizardCtrl.project.validators" name="validators"></div>
+        <!-- Allow setting validator at the later stage
         <error-message name="validators" error="minTags">Please select exactly one validator</error-message>
         <error-message name="validators" error="maxTags">Please select exactly one validator</error-message>
-        <error-message name="validators" error="required">This field is required</error-message>
+        -->
       </div>
 
       <div class="form-group" has-error>

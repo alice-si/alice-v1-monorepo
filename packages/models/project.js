@@ -2,7 +2,7 @@ const Mongoose = require('mongoose');
 const htmlencode = require('htmlencode');
 const ModelUtils = require('./model-utils');
 
-const projectStatuses = ['FINISHED', 'ACTIVE', 'CREATED'];
+const projectStatuses = ['FINISHED', 'ACTIVE', 'CREATED', 'PROTOTYPE'];
 const processNames = ['PROJECT_DEPLOYMENT'];
 const fieldsToDecode = ['lead', 'summary', 'project', 'serviceProvider', 'beneficiary', 'validator', 'costBreakdown', 'outcomesIntro'];
 
@@ -12,7 +12,7 @@ let projectSchemaObject = {
   status: {
     type: String,
     enum: ModelUtils.evaluateStatuses(processNames, projectStatuses),
-    default: 'CREATED'
+    default: 'PROTOTYPE'
   },
   lead: String,
   charity: {
