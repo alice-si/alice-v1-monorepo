@@ -1,11 +1,12 @@
 <div>
     <div class="modal-body">
         <a class="modal-close" ng-click="$dismiss()">×</a>
-        <h2 style="text-align: center;" class="modal-title">Track your donation's impact</h2>
+        <h2 style="text-align: center;" class="modal-title">
+            {{checkCtrl.project.status == 'ACTIVE' ? "Track your donation's impact" : "Donations are closed"}}</h2>
             <div class="row">
                 <div>
-                    <div ng-show="checkCtrl.project.status != 'ACTIVE' && checkCtrl.project.status != 'FINISHED' && checkCtrl.project.status">
-                        You can't donate to project with status: {{checkCtrl.project.status}}
+                    <div ng-show="checkCtrl.project.status != 'ACTIVE'">
+                        Sorry, the project cannot accept donations now.
                     </div>
 
                     <div ng-show="checkCtrl.project.status == 'ACTIVE'">

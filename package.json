@@ -10,8 +10,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "mongoose": "5.3.12",
-    "openzeppelin-solidity": "^1.11.0"
+    "mongoose": "5.3.12"
   },
   "devDependencies": {
     "eslint": "^5.16.0",

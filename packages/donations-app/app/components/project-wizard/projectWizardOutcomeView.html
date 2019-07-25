@@ -97,12 +97,12 @@
   </div>
 
   <div class="form-group">
-    <label class="col-sm-3 control-label">Number of units</label>
+    <label class="col-sm-3 control-label">Number of units *</label>
 
     <div class="col-sm-9">
       <input type="text" class="form-control" ng-model="outcome.quantityOfUnits"
              placeholder="Number of units in goal: 1 if singular goal."
-             name="quantityOfUnits" required>
+             name="goalQuantityOfUnits" required>
       <error-message name="quantityOfUnits" error="required"> You must enter the number of units in this outcome
       </error-message>
     </div>
