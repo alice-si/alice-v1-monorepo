@@ -10,22 +10,22 @@ jobs:
     executor: node-executor
     steps:
       - checkout
-      # - restore_cache:
-      #     # See https://circleci.com/docs/2.0/caching/
-      #     key: npm-v2-{{ checksum "yarn.lock" }}
+      - restore_cache:
+          # See https://circleci.com/docs/2.0/caching/
+          key: npm-v2-{{ checksum "yarn.lock" }}
       - run:
           name: install
           command: yarn
-      # - save_cache:
-      #     key: npm-v2-{{ checksum "yarn.lock" }}
-      #     paths:
-      #       - ./node_modules
-      #       - ./packages/cli/node_modules
-      #       - ./packages/contracts/node_modules
-      #       - ./packages/demo-app/node_modules
-      #       - ./packages/donations-app/node_modules
-      #       - ./packages/jobs/node_modules
-      #       - ./packages/models/node_modules
+      - save_cache:
+          key: npm-v2-{{ checksum "yarn.lock" }}
+          paths:
+            - ./node_modules
+            - ./packages/cli/node_modules
+            - ./packages/contracts/node_modules
+            - ./packages/demo-app/node_modules
+            - ./packages/donations-app/node_modules
+            - ./packages/jobs/node_modules
+            - ./packages/models/node_modules
       - persist_to_workspace:
           root: .
           paths:
