@@ -24,11 +24,9 @@
            </p>
         </div>
         <div class="row">
-          <a href="/checkout/{{impactCtrl.project.code}}">
-            <button class="standard-button__main">
+            <button class="standard-button__main" ng-click="impactCtrl.boostDonation()">
               Donate
             </button>
-          </a>
         </div>
       </div>
     </div>
@@ -38,7 +36,7 @@
       <div class="col-xs-12 col-md-12 col-lg-12">
         <h3 class="goals-dash__greeting alice-blue">
           Hi {{ impactCtrl.loggedUser.firstName }}
-          <!-- NEED TO CHANGE COPY TO ADHERE TO NEW ARCHITECTURE! 
+          <!-- NEED TO CHANGE COPY TO ADHERE TO NEW ARCHITECTURE!
           <span ng-if="impactCtrl.project.individualProjectPercentage > 0"><p style="margin: 2px 0 0 5px;">
             You helped complete {{ impactCtrl.project.individualProjectPercentage }}% of this project's goals
           </p></span>

@@ -113,6 +113,7 @@ module.exports = function (app) {
             "allImpactsForProject": 1,
             "totalPaidOutOverall": 1,
             "code": 1,
+            "status": 1,
             "fundingTarget": 1,
             "title": 1,
             "img": 1,

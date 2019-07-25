@@ -1,4 +1,4 @@
-var Privileged     = artifacts.require("Privileged");
+var Privileged = artifacts.require("Privileged");
 
 require("./test-setup");
 

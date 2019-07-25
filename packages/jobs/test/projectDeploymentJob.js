@@ -28,7 +28,8 @@ contract('ProjectDeploymentJob', async function (accounts) {
     project = await new Project({
       code: code,
       upfrontPayment: 20,
-      charity: charity._id
+      charity: charity._id,
+      status: 'CREATED',
     }).save();
 
     // Validator creating

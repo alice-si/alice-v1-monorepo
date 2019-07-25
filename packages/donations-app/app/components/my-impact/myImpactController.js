@@ -1,5 +1,5 @@
 angular.module('aliceApp')
-  .controller('MyImpactController', ['$http', 'AuthService', '$stateParams', '$scope', 'API', '$rootScope', function ($http, AuthService, $stateParams, $scope, API, $rootScope) {
+  .controller('MyImpactController', ['$http', 'AuthService', '$stateParams', '$scope', '$state', 'API', '$rootScope', 'CheckoutService', function ($http, AuthService, $stateParams, $scope, $state, API, $rootScope, CheckoutService) {
     var vm = this;
     vm.auth = AuthService;
 		vm.loggedUser = vm.auth.getLoggedUser();
@@ -64,6 +64,11 @@ angular.module('aliceApp')
 				}
       });
     }
+
+    vm.boostDonation = function() {
+      $state.go('project', { projectCode: vm.project.code });
+      CheckoutService.startCheckout(vm.project);
+    };
 
 		function convertHex(hex, opacity) {
       hex = hex.replace('#','');

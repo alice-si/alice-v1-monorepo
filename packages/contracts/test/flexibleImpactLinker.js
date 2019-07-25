@@ -1,5 +1,4 @@
 var Project = artifacts.require("Project");
-var SimpleContractRegistry = artifacts.require("SimpleContractRegistry");
 var ImpactRegistry = artifacts.require("ImpactRegistry");
 var Linker = artifacts.require("FlexibleImpactLinker");
 
