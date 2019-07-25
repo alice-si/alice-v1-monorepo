@@ -1,8 +1,26 @@
 angular.module('aliceApp')
-  .controller('HowItWorksController', ['AuthService', '$scope', '$stateParams', function (AuthService, $scope, $stateParams) {
+  .controller('HowItWorksController', ['AuthService', '$scope', 'API', 'NotificationService', '$http', function (AuthService, $scope, API, NotificationService, $http) {
     var vm = this;
-    vm.mode = $stateParams.tab;
 
+    vm.sendMessage = function () {
+      vm.contactForm.$submitted = true;
+      if (vm.contactForm.$valid) {
+        vm.sending = true;
+        $http.post(API + 'sendMessage', vm.contact).then(
+          function (response) {
+            NotificationService.success('Message has been sent.');
+            vm.contact = {};
+            vm.contactForm.$submitted = false;
+            vm.contactForm.$setUntouched();
+            vm.contactForm.$setPristine();
+            vm.sending = false;
+          }, function (rejection) {
+            NotificationService.error('Unfortunately we couldn\'t sent your message.');
+            vm.sending = false;
+          }
+        );
+      }
+    };
 
     return vm;
   }]);

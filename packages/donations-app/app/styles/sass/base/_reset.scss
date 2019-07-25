@@ -164,4 +164,12 @@
 // To be used to overrride Bootstrap col-padding
 .no-padding {
   padding: 0 !important;
+
+  &-right {
+    padding-right: 0 !important;
+  }
+
+  &-left {
+    padding-left: 0 !important;
+  }
 }

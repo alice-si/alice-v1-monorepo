@@ -1,12 +1,13 @@
 <div ng-controller="HomeController as homeCtrl"
      class="home-container">
 
-   <section class="splash-v3 grad-both" style="background: #000;">
-     <div class="header-image">
+   <section class="splash-v3 grad-both">
+     <div class="header-image"
+          style="background: url('https://alice-res.s3.eu-west-2.amazonaws.com/home-splash-1.jpg') no-repeat 100% 50%;">
        <div class="container">
          <div class="row">
-           <h4 class="white">Fund social projects.</h4>
-           <h4 class="white">Track your impact.</h4>
+           <h2 class="white">Fund social projects.<br>
+             Track your impact.</h2>
          </div>
          <div class="row">
             <p class="col-md-6 white no-padding">Donate, grant, invest in social projects
@@ -19,13 +20,12 @@
            <div class="col-md-12 hidden-xs hidden-sm no-padding">
              <div class="form-group col-md-3 no-padding">
                <button ng-click="homeCtrl.explore()">
-                 <i class="white glyphicon glyphicon-chevron-right" style="transform: translateY(1px); margin-left: -10px"></i>
+                 <i class="glyphicon glyphicon-chevron-right"></i>
                  EXPLORE PROJECTS
                </button>
              </div>
              <div class="form-group col-md-3">
-               <button ng-click="homeCtrl.explore()">
-                 <i class="white glyphicon glyphicon-chevron-right" style="transform: translateY(1px); margin-left: -10px"></i>
+               <button class="inverse-button" ng-click="homeCtrl.explore()">
                  SEE HOW IT WORKS
                </button>
              </div>
@@ -48,7 +48,7 @@
    <section class="container">
      <div class="row">
        <h3 class="uppercase">
-         Explore projects
+         Explore our social projects
        </h3>
      </div>
      <div class="row">
@@ -136,7 +136,6 @@
                       name="contactEmail"
                       class="required email"
                       ng-model="homeCtrl.contact.email"
-                      id="contactEmail"
                       required>
                       <error-message name="contactEmail"
                                      error="required">
@@ -159,12 +158,11 @@
              </textarea>
            </div>
          </div>
-         <div class="col-md-12  no-padding">
+         <div class="col-md-12 no-padding">
            <div class="form-group col-md-3 no-padding">
              <button name="sendMessage"
                      ng-click="homeCtrl.sendMessage()">
-                     <i class="white glyphicon glyphicon-chevron-right"
-                        style="transform: translateY(1px); margin-left: -10px"></i>
+                     <i class="glyphicon glyphicon-chevron-right"></i>
                      SEND MESSAGE
              </button>
            </div>
