@@ -8,6 +8,7 @@
     "url": "https://github.com/alice-si/monorepo.git"
   },
   "scripts": {
+    "pretest": "truffle compile",
     "test": "scripts/test.sh"
   },
   "license": "MIT",
