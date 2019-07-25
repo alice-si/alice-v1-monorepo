@@ -18,7 +18,7 @@ angular.module('aliceApp')
     vm.card = CheckoutService.card;
     vm.project = CheckoutService.project;
     vm.donation = CheckoutService.donation;
-    
+
     vm.validateGuest = function () {
       vm.guestForm.$submitted = true;
       if (vm.guestForm.$valid) {
@@ -47,7 +47,7 @@ angular.module('aliceApp')
         AuthService.showLogInModal(CheckoutService.showQuestion);
       } else {
         if (vm.mode == 'BANK_TRANSFER') {
-          sendDonation(); // get bank details to show
+          sendDonationByBankTransfer(); // get bank details to show
         } else {
           CheckoutService.showQuestion();
         }
