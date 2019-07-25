@@ -14,7 +14,8 @@
   },
   "devDependencies": {
     "eslint": "^5.16.0",
-    "lerna": "^3.13.4"
+    "lerna": "^3.13.4",
+    "wait-port": "^0.2.2"
   },
   "workspaces": ["packages/*"]
 }
