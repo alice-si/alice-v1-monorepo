@@ -1,4 +1,4 @@
-var OwnableWithRecovery     = artifacts.require("OwnableWithRecovery");
+var OwnableWithRecovery = artifacts.require("OwnableWithRecovery");
 
 require("./test-setup");
 
