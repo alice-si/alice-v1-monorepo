@@ -35,7 +35,8 @@
     "chart.js": "^2.7.3",
     "xlsx.full.min": "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.1/xlsx.full.min.js",
     "ngstorage": "^0.3.11",
-    "ngclipboard": "^2.0.0"
+    "ngclipboard": "^2.0.0",
+    "angular-cookies": "1.5.9"
   },
   "devDependencies": {
     "angular-mocks": "^1.2.23"
