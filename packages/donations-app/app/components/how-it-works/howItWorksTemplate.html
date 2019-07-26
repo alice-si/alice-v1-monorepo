@@ -1,61 +1,161 @@
-<div class="how-it-works" ng-controller="HowItWorksController as hiwCtrl">
-  <div class="splash col-md-12 col-xs-12">
-    <img id="home-splash-logo" src="https://s3.eu-west-2.amazonaws.com/alice-res/AliceLogoWhite.png"/>
-    <img id="hiw-splash-graph" src="https://s3.eu-west-2.amazonaws.com/alice-res/how+it+works.png"/>
-    <div class="home-splash-text">
-      <div class="home-splash-title">ONLY PAY IF IT WORKS</div>
-      <div class="section-heading-border"></div>
-      <div class="home-splash-subtitle">
-        When you donate on Alice, your money is guaranteed to make a difference… <br><br>
-        Because you only pay if it does.
-      </div>
-    </div>
-  </div>
+<div class="hiw-container" ng-controller="HowItWorksController as hiwCtrl">
+   <section class="splash-v3 grad-both"
+            id="hiw-create">
+     <div class="header-image purple-grad">
+       <div class="container">
+         <div class="row">
+           <div class="col-md-6 col-xs-12 no-padding">
+             <h2 class="white no-padding">Track your donation's impact.</h2>
+             <h4 class="white uppercase">Social organisation sets goals</h4>
+             <p class="white no-padding">
+               A social organisation consults with the people it helps to create
+               a project that addresses their needs. It sets goals catering to these
+               needs and presents the project for funding to donors, grant-making
+               bodies or impact investors.
+             </p>
+           </div>
+           <div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
+             <ng-include src="'components/how-it-works/create.html'"></ng-include>
+           </div>
+           <div class="col-md-3 col-md-offset-1 hidden-xs">
+             <ng-include src="'components/how-it-works/create.html'"></ng-include>
+           </div>
+         </div>
+       </div>
+     </div>
+   </section>
 
-  <div class="giving-wrapper home-section col-md-12 col-xs-12">
-    <div class="section-text col-md-6 col-xs-12 left">
-      <div class="title wow fadeInLeft">TRANSPARENT GIVING</div>
-      <div class="section-heading-border wow fadeInLeft"></div>
-      <div class="subtitle wow fadeInLeft">
-        Alice is all about being transparent and accountable to donors.<br><br>
-        That’s why Charities on Alice only receive donations if they achieve
-        the goals listed on their project page.
-      </div>
-    </div>
-    <div id="transparent-image" class="wow fadeInRight right">
-      <img src="https://alex-s3-hatskier.s3.amazonaws.com/1534336890389_tom-parsons-426898-unsplash.jpg"/>
-    </div>
-  </div>
+   <section class="container"
+            id="hiw-donate">
+     <div class="row">
+       <div class="col-md-3 col-md-offset-right-3">
+         <ng-include src="'components/how-it-works/donate.html'"></ng-include>
+       </div>
+       <div class="col-md-6 hiw-container-text">
+         <h4 class="alice-dark-text uppercase">You donate to a project</h4>
+         <p class="alice-dark-text no-padding">
+           A percentage of your donation is received upfront by the social
+           organisation to deliver on the project. The rest of your donation is
+           received every time the organisation completes a goal. If a goal is not
+           fulfilled, you may choose to refund your donation.
+         </p>
+       </div>
+     </div>
+   </section>
 
-  <div class="track-wrapper home-section dark-blue col-md-12 col-xs-12">
-    <img class="track-fundraise-logo" src="https://s3.eu-west-2.amazonaws.com/alice-res/AliceLogoWhite.png"/>
-    <div class="wow fadeInLeft hidden-xs col-md-6">
-      <img class="wizard-screenshot" src="https://s3.eu-west-2.amazonaws.com/alice-res/Wizard.png"/>
-    </div>
-    <div class="section-text right col-md-4 col-md-offset-2 col-xs-10 col-xs-offset-1">
-      <div class="title wow fadeInRight">TRACK YOUR DONATION</div>
-      <div class="section-heading-border wow fadeInRight"></div>
-      <div class="subtitle wow fadeInRight">
-        Just click on “My Impact” in the menu bar to see how your donation has performed: how much has been received by the charity, and which goals it has paid for.
-      </div>
-    </div>
-    <div class="wow fadeInLeft hidden-md hidden-lg col-xs-10 col-xs-offset-1">
-      <img class="wizard-screenshot" src="https://s3.eu-west-2.amazonaws.com/alice-res/Wizard.png"/>
-    </div>
-  </div>
+   <section class="container"
+            id="hiw-validate">
+     <div class="row">
+       <div class="col-md-6 hiw-container-text no-padding">
+         <h4 class="alice-dark-text uppercase">Machine or human validates</h4>
+         <p class="alice-dark-text col-md-10 no-padding">
+           Every time a social organisation completes a goal, it uploads evidence
+           for a human validator to verify. Otherwise, it defines the data that triggers
+           automated validation. Once a validation takes place, you receive a notification
+           showing what your money achieved and the remaining sum of your donation gets
+           received by the organisation.
+         </p>
+       </div>
+        <div class="col-md-3">
+          <ng-include src="'components/how-it-works/validator.html'"></ng-include>
+        </div>
+     </div>
+   </section>
 
-  <div class="edge-wrapper home-section col-md-12 col-xs-12">
-    <div class="section-text col-md-8 col-xs-12">
-      <div class="title wow fadeInLeft">CUTTING-EDGE TECHNOLOGY</div>
-      <div class="section-heading-border wow fadeInLeft"></div>
-      <div class="subtitle wow fadeInLeft">
-        Alice is powered by “smart contracts” on the Ethereum blockchain. This ensures the traceability of your donation, and keeps funds secure until the charity’s goals are achieved.
-      </div>
-    </div>
-    <div id="edge-screenshot" class="col-md-4 col-xs-12 wow fadeInRight">
-      <img class="" src="https://s3.eu-west-2.amazonaws.com/alice-res/hiw_3.png" alt="">
-    </div>
-  </div>
+   <section>
+     <div class="container">
+       <div class="row">
+         <h3 class="uppercase">
+           Are you a social organisation?
+         </h3>
+         <h4 class="alice-dark-text">Get in touch with your project</h4>
+       </div>
+
+
+
+
+       <form id="contactForm"
+             name="hiwCtrl.contactForm"
+             novalidate=""
+             class="row">
+         <div class="col-md-12 no-padding">
+           <div class="form-group col-md-5 no-padding"
+                has-error>
+             <label for="contactName">Full name</label>
+               <input type="text"
+                      value=""
+                      name="contactName"
+                      ng-model="hiwCtrl.contact.name"
+                      id="contactName"
+                      required>
+                      <error-message name="contactName"
+                                     error="required">
+                                     This field is required
+                      </error-message>
+           </div>
+           <!-- Desktop: Padded -->
+           <div class="form-group hidden-xs hidden-sm col-md-5"
+                style="padding-right: 0;"
+                has-error>
+             <label for="contactEmail">Email</label>
+               <input type="email"
+                      value=""
+                      name="contactEmail"
+                      class="required email"
+                      ng-model="hiwCtrl.contact.email"
+                      id="contactEmail"
+                      required>
+                      <error-message name="contactEmail"
+                                     error="required">
+                                     This field is required
+                      </error-message>
+                      <error-message name="contactEmail"
+                                     error="email">
+                                     Please provide correct email address
+                      </error-message>
+           </div>
+           <!-- Mobile: No-padding -->
+           <div class="form-group hidden-md hidden-lg col-md-5 no-padding"
+                has-error>
+             <label for="contactEmail">Email</label>
+               <input type="email"
+                      value=""
+                      name="contactEmail"
+                      class="required email"
+                      ng-model="hiwCtrl.contact.email"
+                      required>
+                      <error-message name="contactEmail"
+                                     error="required">
+                                     This field is required
+                      </error-message>
+                      <error-message name="contactEmail"
+                                     error="email">
+                                     Please provide correct email address
+                      </error-message>
+           </div>
+
+         </div>
+         <div class="col-md-12  no-padding">
+           <div class="form-group col-md-10 no-padding">
+             <label for="contactMessage">Project Description</label>
+             <textarea rows="3"
+                       name="contactMessage"
+                       id="contactMessage"
+                       ng-model="hiwCtrl.contact.message">
+             </textarea>
+           </div>
+         </div>
+         <div class="col-md-12 no-padding">
+           <div class="form-group col-md-3 no-padding">
+             <button name="sendMessage"
+                     ng-click="hiwCtrl.sendMessage()">
+                     <i class="glyphicon glyphicon-chevron-right"></i>
+                     SEND MESSAGE
+             </button>
+           </div>
+         </div>
+        </form>
+     </div>
+   </section>
+  <alice-footer></alice-footer>
 </div>
-
-<alice-footer></alice-footer>

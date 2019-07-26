@@ -132,12 +132,4 @@ angular.module('aliceApp')
 			},
       templateUrl: '/components/project/projectSocials.html',
     };
-  })
-  .directive('aliceFooter', function() {
-    return {
-      scope: {
-        model: '=',
-      },
-      templateUrl: '/components/global/footer.html'
-    };
   });

@@ -10,6 +10,7 @@ h2 {
 	font-family: $source;
 	font-weight: 400;
 	font-size: 28px;
+	line-height: 1.4;
 	color: $alice-blue;
 }
 
@@ -246,5 +247,12 @@ a:-webkit-any-link {
 		letter-spacing: .75px;
 		font-weight: 200!important;
 		line-height: 24px;
+	}
+}
+
+
+@media screen and (max-width: 460px) {
+	p {
+		font-size: 16px !important;
 	}
 }
