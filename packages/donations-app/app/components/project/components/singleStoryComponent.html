@@ -1,17 +1,17 @@
-<div class="appeal-v2__stories-container col-xs-12 col-md-12 col-lg-12">
-  <div class="alice-card col-md-3 col-xs-12">
+<!-- <div class="appeal-v3__stories-carousel-story col-xs-12 col-md-6 col-lg-6">
+  <div class="col-md-12 col-xs-12">
     <div class="appeal-v2__stories-img grad-bottom">
       <img src="{{story.img}}"
            alt="Image for {{ story.title }}"/>
     </div>
   </div>
-  <div class="appeal-v2__stories-info col-md-9 col-xs-12">
+  <div class="appeal-v2__stories-info col-md-12 col-xs-12">
+    <h6 class="col-md-12">
+      {{ story.header }}
+    </h6>
     <h4 class="col-md-12">
-      "{{story.quote}}" - {{story.header}}
+      {{ story.quote }}
     </h4>
-    <p class="col-md-12"
-       ng-bind-html="story.details">
-    </p>
     <p class="col-md-12"
        uib-collapse="!story.expandStory"
        ng-bind-html="story.extendedDetails"></p>
@@ -21,5 +21,28 @@
       <i class="pull-up glyphicon"
          ng-class="story.expandStory ? 'glyphicon-chevron-up' : 'glyphicon-chevron-down'"></i>
     </button>
+  </div>
+</div> -->
+
+<div class="appeal-v3__goals-carousel-goal col-md-6">
+  <div class="title-over-image">
+    <img src="{{ story.image }}"
+         alt="Image for {{ story.title }}"
+         class="appeal-v3__goals-carousel-image"
+         style="filter: brightness(100%);"/>
+  </div>
+
+  <div class="appeal-v3__goals-carousel-content">
+    <div class="col-md-12 appeal-v3__goals-carousel-title">
+      <h6 style="opacity: 0.5;">Goal {{ $index + 1 }}</h6>
+      <p>{{ story.description }}</p>
+    </div>
+    <div class="col-md-12 appeal-v3__goals-carousel-bottom">
+      <div class="col-md-12"
+           style="padding: 0 20px 0 0;">
+        <p>Cost per {{ story.unit }}</p>
+        <p style="font-weight: 600 !important; font-size: 22px !important">{{ story.costPerUnit | money }}</p>
+      </div>
+    </div>
   </div>
 </div>

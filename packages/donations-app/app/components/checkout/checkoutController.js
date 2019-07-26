@@ -18,7 +18,7 @@ angular.module('aliceApp')
     vm.card = CheckoutService.card;
     vm.project = CheckoutService.project;
     vm.donation = CheckoutService.donation;
-    
+
     vm.validateGuest = function () {
       vm.guestForm.$submitted = true;
       if (vm.guestForm.$valid) {
@@ -79,7 +79,6 @@ angular.module('aliceApp')
         type: 'BANK_TRANSFER'
       };
       return $http.post(API + 'sendDonation', payment).then(function (result) {
-        console.log(result.data);
         NotificationService.success("Your donation request has been successfully saved");
         vm.setMode('BANK_TRANSFER_REQUESTED');
         vm.donation = result.data.donation;

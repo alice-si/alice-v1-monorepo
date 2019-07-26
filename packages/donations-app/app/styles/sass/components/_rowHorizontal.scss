@@ -1,5 +1,5 @@
 .row-horizon {
-  // overflow-x: hidden;
+  overflow-x: hidden;
   overflow-y: hidden;
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
@@ -13,6 +13,7 @@
   white-space: normal;
   vertical-align: top;
 }
+
 .row-horizon {
   .col-xs {
     &-12 {
