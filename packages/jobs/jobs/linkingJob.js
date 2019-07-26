@@ -3,6 +3,8 @@ const ModelUtils = require('../utils/model-utils');
 const Validation = ModelUtils.loadModel('validation');
 const EthProxy = require('../gateways/ethProxy');
 
+// TODO refactor it using new Job class mechanism
+
 function mainAction(jobContext) {
   let validation = jobContext.model;
   jobContext.msg('Linking impact for validation: ' + validation._id);

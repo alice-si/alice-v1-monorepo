@@ -8,6 +8,8 @@ const MailUtils = require('../utils/mail-utils');
 const EthProxy = require('../gateways/ethProxy');
 const Promise = require('bluebird');
 
+// TODO refactor it using new Job class mechanism
+
 function mainAction(jobContext) {
   let lastUser, lastImpact;
   let validation = jobContext.model;

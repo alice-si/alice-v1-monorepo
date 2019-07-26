@@ -101,9 +101,9 @@ class ModelJob extends BasicJob {
   startedStatus()    { return `${this.name}_STARTED`; }
   inProgressStatus() { return `${this.name}_IN_PROGRESS`; }
   errorStatus()      { return `${this.name}_ERROR`; }
-  completedStatus()  { return `${this.name}_COMPLETED`; }
   resolvedStatus()   { return `${this.name}_REVERTED`; }
   lostStatus()       { return `${this.name}_LOST`; }
+  completedStatus()  { return `${this.name}_COMPLETED`; }
 }
 
 const MAX_IN_PROGRESS_TXS = 5;
@@ -240,7 +240,3 @@ module.exports = {
   BlockchainJob,
   ModelJob,
 };
-
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
