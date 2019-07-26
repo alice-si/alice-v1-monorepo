@@ -19,7 +19,6 @@ angular.module('aliceApp')
             charity_info = _.pick(charity_info, keyList);
             project.charity = charity_info;
           });
-          console.log(vm.charities);
         }
       );
     };
@@ -30,7 +29,7 @@ angular.module('aliceApp')
       vm.contactForm.$submitted = true;
       if (vm.contactForm.$valid) {
         vm.sending = true;
-        $http.post(API + 'sendMessage', vm.contact).then(
+        $http.post(API + 'contact', vm.contact).then(
           function (response) {
             NotificationService.success('Message has been sent.');
             vm.contact = {};
@@ -45,6 +44,10 @@ angular.module('aliceApp')
         );
       }
     };
+
+    vm.explore = function(event) {
+      document.getElementById("home-projects").scrollIntoView();
+    }
 
     return vm;
 

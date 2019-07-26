@@ -249,3 +249,10 @@ a:-webkit-any-link {
 		line-height: 24px;
 	}
 }
+
+
+@media screen and (max-width: 460px) {
+	p {
+		font-size: 16px !important;
+	}
+}

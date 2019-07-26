@@ -2,10 +2,10 @@
   <section class="splash-v3 grad-both">
     <div class="header-image"
          ng-style="{ 'background' : 'linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url(' + projectCtrl.model.img + ') no-repeat center' }">
-      <div class="container splash-v3__container-title">
+      <div class="container col-lg-4 col-md-6 col-sm-6 col-xs-10 splash-v3__container-title">
         <div class="row">
           <h3>{{ projectCtrl.model.title }}</h3>
-          <a href="/how-it-works/">Track your donation's impact <i class="glyphicon glyphicon-chevron-right"></i></a>
+          <a ui-sref="how-it-works">Track your donation's impact <i class="glyphicon glyphicon-chevron-right"></i></a>
         </div>
         <div class="row splash-v3__container-progress">
            <p class=" col-md-6 splash-v3__progress-section">We need to raise<br>
@@ -16,10 +16,10 @@
            </p>
         </div>
         <div class="row">
-          <div class="col-md-5 no-padding">
+          <div class="col-md-5 col-xs-10 no-padding">
             <a ng-click="projectCtrl.donate()">
               <button>
-                <i class="white glyphicon glyphicon-chevron-right"></i>
+                <i class="glyphicon glyphicon-chevron-right"></i>
                 DONATE
               </button>
             </a>

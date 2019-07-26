@@ -6,7 +6,7 @@ angular.module('aliceApp')
       vm.contactForm.$submitted = true;
       if (vm.contactForm.$valid) {
         vm.sending = true;
-        $http.post(API + 'sendMessage', vm.contact).then(
+        $http.post(API + 'contact', vm.contact).then(
           function (response) {
             NotificationService.success('Message has been sent.');
             vm.contact = {};
