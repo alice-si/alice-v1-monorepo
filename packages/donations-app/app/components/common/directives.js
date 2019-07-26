@@ -50,6 +50,14 @@ angular.module('aliceApp')
       }
     }
   })
+  .directive('aliceFooter', function() {
+    return {
+      scope: {
+        model: '=',
+      },
+      templateUrl: '/components/global/footer.html'
+    };
+  })
   .directive('hasError', [function () {
     return {
       require: '^form',

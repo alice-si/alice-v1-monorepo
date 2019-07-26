@@ -318,6 +318,7 @@ function initPipesFunctions() {
   };
 
   pipes.builtStylesForDevelopment = function() {
+    console.log("Auto-generating styles from app/styles/sass files");
     return gulp.src(paths.styles)
       .pipe(plugins.sass())
       .pipe(gulp.dest(paths.getDistPath()));
