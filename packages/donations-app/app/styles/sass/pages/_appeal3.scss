@@ -1,9 +1,4 @@
 .appeal-page {
-  // h5, p {
-  //   font-family: $source !important;
-  //   color: $alice-dark-grey;
-  // }
-
   h5 {
     font-weight: 400;
   }
@@ -56,17 +51,14 @@
         font-size: 10px;
         font-family: $source;
       }
-    }
 
-    &-left, &-right {
-      padding-right: 20px;
-      h5 {
-        font-weight: 400;
+      &-expanded {
+        margin-top: -55px;
       }
     }
 
     button {
-      margin: -15px 0 15px;
+      margin: -55px 0 15px;
       padding: 8px 0 10px !important;
       background: none;
       border-radius: 2px;

@@ -47,7 +47,8 @@ async function deployProject(
   let impactContract = await ImpactRegistry.new(projectContract.address);
   logger.info('ImpactRegistry deployed: ' + impactContract.address);
 
-  let linkerContract = await Linker.new(impactContract.address, 10);
+  //Defaul value is 10GBP expressed in pennies (x100)
+  let linkerContract = await Linker.new(impactContract.address, 1000);
   logger.info('Linker deployed: ' + linkerContract.address);
 
   let setLinkerTx = await impactContract.setLinker(linkerContract.address);

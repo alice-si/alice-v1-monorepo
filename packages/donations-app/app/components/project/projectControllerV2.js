@@ -26,6 +26,7 @@ angular.module('aliceApp')
 
 			vm.model.percentageCompleted = Math.floor((100 * vm.model.amountValidated) / vm.model.fundingTarget);
 		});
+
 		function convertHex(hex, opacity) {
 			hex = hex.replace('#','');
 			let r = parseInt(hex.substring(0,2), 16);

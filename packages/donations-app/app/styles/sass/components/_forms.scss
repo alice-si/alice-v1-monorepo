@@ -1,10 +1,9 @@
-input {
+input, textarea {
   border-width: 1px;
   box-shadow: none;
   -webkit-box-shadow: none;
   display: block;
   width: 100%;
-  height: 34px;
   padding: 20px 11px;
   font-size: 16px;
   line-height: 1.5;
@@ -24,6 +23,10 @@ input {
     border-color: $alice-tonal-medium;
     outline: none;
   }
+}
+
+input {
+  height: 34px;
 }
 
 select:focus,
@@ -48,11 +51,10 @@ button:focus {
 
 
 button {
-  width: 100%;
+  width: 100% !important;
   padding: 13px 0;
   background-color: $alice-tonal-medium;
-  border: 1px solid #fff;
-  width: 100%;
+  border: 1px solid $alice-tonal-medium !important;
   color: #FFFFFF;
   border-radius: 5px;
   letter-spacing: 2px;
@@ -61,10 +63,36 @@ button {
   font-weight:300;
   font-stretch:normal;
   margin: 10px 0;
+  @include transition(0.1s, all, ease-out);
 
   &:hover {
     background-color: #FFFFFF;
     color: $alice-tonal-medium;
+
+    i {color: $alice-tonal-medium}
     border: 1px solid $alice-tonal-medium;
+  }
+
+  i {
+    color: #fff;
+    transform: translateY(1px);
+    margin-left: -10px;
+  }
+}
+
+.no-border {
+  border: none !important;
+}
+
+.inverse-button {
+  background-color: #FFFFFF !important;
+  color: $alice-tonal-medium !important;
+  width: 100% !important;
+  padding: 13px 0;
+  border: 1px solid $alice-tonal-medium !important;
+  @include transition(0.1s, all, ease-out);
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.2) !important;
   }
 }

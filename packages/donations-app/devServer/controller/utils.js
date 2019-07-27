@@ -1,13 +1,13 @@
 const Auth = require('../service/auth');
 const Utils = require('../service/utils');
-const Mail = Utils.loadModel('mail');
+const MailService = require('../service/mail');
 const Category = Utils.loadModel('category');
 const Aws = require('../service/aws');
 const asyncHandler = require('express-async-handler');
 
 module.exports = function (app) {
   app.post('/api/contact', asyncHandler(async (req, res) => {
-    await Mail.sendContactMessage(req.body);
+    await MailService.sendContactMessage(req.body);
     return res.send('Message has been sent.');
   }));
 
