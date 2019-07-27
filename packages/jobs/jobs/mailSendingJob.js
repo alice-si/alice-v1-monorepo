@@ -1,21 +1,19 @@
-const JobUtils = require('../utils/job-utils');
 const ModelUtils = require('../utils/model-utils');
 const MailProxy = require('../gateways/mailProxy');
+const { ModelJob } = require('./job');
+
 const Mail = ModelUtils.loadModel('mail');
 
-function mainAction(jobContext) {
-  let mail = jobContext.model;
-  return MailProxy.send(mail).then(function () {
+class MailSendingJob extends ModelJob {
+  constructor() {
+    super('MAIL_SENDING', Mail, 'CREATED');
+  }
+
+  async run(mail) {
+    await MailProxy.send(mail);
     mail.sendDate = new Date();
-    return mail.save().then(jobContext.completedBehaviour);
-  }, function (err) {
-    return jobContext.errorBehaviour(err);
-  });
+    await mail.save();
+  }
 }
 
-module.exports = JobUtils.createJob({
-  processName: 'MAIL_SENDING',
-  createChecker: false,
-  modelGetter: (() => Mail.findOneAndUpdate({status: 'CREATED'}, {status: 'MAIL_SENDING_STARTED'})),
-  action: mainAction
-});
+module.exports = MailSendingJob;

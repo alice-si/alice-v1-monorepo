@@ -4,11 +4,11 @@ const logger = require('../utils/logger')('test/donationStatusCheckingJob');
 const Moment = require('moment');
 const Donation = ModelUtils.loadModel('donation');
 const Mail = ModelUtils.loadModel('mail');
-const DonationStatusCheckingJob = require('../jobs/donationStatusCheckingJob');
-const MailSendingJob = require('../jobs/mailSendingJob');
+const DonationStatusCheckingJob = require('../jobs/DonationStatusCheckingJob');
+const MailSendingJob = require('../jobs/MailSendingJob');
 const Config = require('../config');
 
-const SHOULD_TEST_EMAIL_SENDING = true;
+const SHOULD_TEST_EMAIL_SENDING = false;
 
 contract('DonationStatusCheckingJob', async function () {
   const timeout = 500;
@@ -30,7 +30,7 @@ contract('DonationStatusCheckingJob', async function () {
   });
 
   it('Execute DonationStatusChecking job', async function () {
-    await DonationStatusCheckingJob.execute();
+    await new DonationStatusCheckingJob().execute();
   });
 
   it('Mail for developers should be created', async () => {
@@ -41,7 +41,7 @@ contract('DonationStatusCheckingJob', async function () {
 
   it('Checking email sending if needed', async () => {
     if (SHOULD_TEST_EMAIL_SENDING) {
-      await MailSendingJob.execute();
+      await new MailSendingJob().execute();
       await sleep();
       let mail = await Mail.findOne();
       mail.status.should.be.equal('MAIL_SENDING_COMPLETED');

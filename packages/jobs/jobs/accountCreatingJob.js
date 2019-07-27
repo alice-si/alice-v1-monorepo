@@ -1,22 +1,27 @@
-const JobUtils = require('../utils/job-utils');
-const ModelUtils = require('../utils/model-utils');
-const User = ModelUtils.loadModel('user');
 const EthProxy = require('../gateways/ethProxy');
+const ModelUtils = require('../utils/model-utils');
+const { ModelJob } = require('./job');
 
-async function mainAction(jobContext) {
-  let user = jobContext.model;
-  jobContext.msg('Found user without account: ' + user._id + ' ( ' + user.email + ' )');
+const User = ModelUtils.loadModel('user');
 
-  const address = await EthProxy.createNewAddress();
-  user.ethAccount = address;
-  jobContext.msg(`Created account with address: ${address}`);
+class AccountCreatingJob extends ModelJob {
+  constructor() {
+    super('ACCOUNT_CREATING', User);
+  }
 
-  return await user.save();
+  async findReady() {
+    return await User.findOne({
+      ethAccount: null
+    });
+  }
+
+  async run(user) {
+    this.logger.info('Found user without account: ' + user._id + ' ( ' + user.email + ' )');
+    const address = await EthProxy.createNewAddress();
+    user.ethAccount = address;
+    this.logger.info(`Created account with address: ${address}`);
+    await user.save();
+  }
 }
 
-module.exports = JobUtils.createJob({
-  processName: 'ACCOUNT_CREATING',
-  createChecker: false,
-  modelGetter: (() => User.findOne({ethAccount: null, crypto: {$exists: true}})),
-  action: mainAction
-});
+module.exports = AccountCreatingJob;

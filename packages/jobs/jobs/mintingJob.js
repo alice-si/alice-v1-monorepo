@@ -1,22 +1,20 @@
-const JobUtils = require('../utils/job-utils');
-const ModelUtils = require('../utils/model-utils');
-const Donation = ModelUtils.loadModel('donation');
 const EthProxy = require('../gateways/ethProxy');
+const ModelUtils = require('../utils/model-utils');
+const { BlockchainJob } = require('./job');
 
-function mainAction(jobContext) {
-  let donation = jobContext.model;
-  return EthProxy.mint(donation._projectId, donation.amount).then(function (tx) {
-    jobContext.msg('Minting was finished successfully ' + JSON.stringify(tx));
-    return jobContext.inProgressBehaviour(tx);
-  }).catch(function (err) {
-    return jobContext.errorBehaviour(err);
-  });
+const Donation = ModelUtils.loadModel('donation');
+
+class MintingJob extends BlockchainJob {
+  constructor() {
+    super('MINTING', Donation, 'COLLECTING_COMPLETED');
+  }
+
+  async run(donation) {
+    donation =
+      await donation.populate('_projectId').execPopulate();
+    let tx = await EthProxy.mint(donation._projectId, donation.amount);
+    return tx;
+  }
 }
 
-module.exports = JobUtils.createJob({
-  processName: 'MINTING',
-  createChecker: true,
-  startStatus: 'COLLECTING_COMPLETED',
-  model: Donation,
-  action: mainAction
-});
+module.exports = MintingJob;

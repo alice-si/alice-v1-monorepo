@@ -1,11 +1,14 @@
 const TestUtils = require('../utils/test-utils');
 const ModelUtils = require('../utils/model-utils');
-const logger = require('../utils/logger')('test/impactFetchingJob');
 const ImpactFetchingJob = require('../jobs/impactFetchingJob');
-const MailSendingJob = require('../jobs/mailSendingJob');
+const MailSendingJob = require('../jobs/MailSendingJob');
+const EthProxy = require('../gateways/ethProxy');
+const logger = require('../utils/logger')('test/impactFetchingJob');
+
 const Validation = ModelUtils.loadModel('validation');
 const Mail = ModelUtils.loadModel('mail');
-const EthProxy = require('../gateways/ethProxy');
+
+const SHOULD_TEST_EMAIL_SENDING = false;
 
 contract('ImpactFetchingJob', async function () {
   let mocks, validator;
@@ -37,12 +40,11 @@ contract('ImpactFetchingJob', async function () {
       Validation, 'IMPACT_FETCHING_COMPLETED', mocks.validation._id);
   });
 
-  it('should execute MailSendingJob job', async function () {
-    await MailSendingJob.execute();
-  });
-
-  it('should change emails status', async () => {
-    let mail = await Mail.findOne({});
-    await TestUtils.testStatus(Mail, 'MAIL_SENDING_COMPLETED', mail);
+  it('should send impact confirmation', async function () {
+    if (SHOULD_TEST_EMAIL_SENDING) {
+      await new MailSendingJob().execute();
+      let mail = await Mail.findOne({});
+      await TestUtils.testStatus(Mail, 'MAIL_SENDING_COMPLETED', mail);
+    }
   });
 });

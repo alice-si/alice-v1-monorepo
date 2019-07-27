@@ -1,6 +1,6 @@
 const TestUtils = require('../utils/test-utils');
 const ModelUtils = require('../utils/model-utils');
-const ProjectDeploymentJob = require('../jobs/projectDeploymentJob');
+const ProjectDeploymentJob = require('../jobs/ProjectDeploymentJob');
 const Project = ModelUtils.loadModel('project');
 const User = ModelUtils.loadModel('user');
 const Charity = ModelUtils.loadModel('charity');
@@ -42,7 +42,7 @@ contract('ProjectDeploymentJob', async function (accounts) {
   });
 
   it('Should execute projectDeploymentJob', async function () {
-    await ProjectDeploymentJob.execute();
+    await new ProjectDeploymentJob().execute();
   });
 
   it('Project should have status PROJECT_DEPLOYMENT_COMPLETED', async () => {
