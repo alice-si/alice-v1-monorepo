@@ -107,7 +107,6 @@ class ModelJob extends BasicJob {
 }
 
 const MAX_IN_PROGRESS_TXS = 5;
-const CHECK_TX_INTERVAL_MS = 5000;
 const MIN_AGE_FOR_ETHERSCAN_CHECKING_MS = 300000;
 
 class BlockchainJob extends ModelJob {
@@ -155,7 +154,13 @@ class BlockchainJob extends ModelJob {
     this.logger.info(`target was found: processing ${target._id}`);
     try {
       let tx = await this.run(target);
-      if (!tx) throw new Error('job did not return a transaction');
+      if (!tx) {
+        if (this.canReturnEmptyTx()) {
+          return;
+        } else {
+          throw new Error('job did not return a transaction');
+        }
+      }
       this.logger.info(`transaction ${tx} was sent`);
 
       target[this.txFieldName()] = tx;
@@ -233,6 +238,7 @@ class BlockchainJob extends ModelJob {
 
   timeFieldName() { return `${this.name.toLowerCase()}Time`; }
   txFieldName() { return `${this.name.toLowerCase()}Tx`; }
+  canReturnEmptyTx() { return false; }
 }
 
 module.exports = {

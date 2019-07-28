@@ -1,6 +1,6 @@
 const TestUtils = require('../utils/test-utils');
 const ModelUtils = require('../utils/model-utils');
-const LinkingJob = require('../jobs/linkingJob');
+const LinkingJob = require('../jobs/LinkingJob');
 const Validation = ModelUtils.loadModel('validation');
 const EthProxy = require('../gateways/ethProxy');
 
@@ -25,7 +25,7 @@ contract('LinkingJob', async function () {
   });
 
   it('should execute linking job', async function () {
-    await LinkingJob.execute();
+    await new LinkingJob().execute();
   });
 
   it('validation should have status LINKING_IN_PROGRESS', async () => {
@@ -34,7 +34,7 @@ contract('LinkingJob', async function () {
   });
 
   it('should execute linking job checker', async function () {
-    await LinkingJob.check();
+    await new LinkingJob().execute();
   });
 
   // It is not a bug - it is an odd job mechanism
@@ -44,7 +44,7 @@ contract('LinkingJob', async function () {
   });
 
   it('should execute linking job again', async function () {
-    await LinkingJob.execute();
+    await new LinkingJob().execute();
   });
 
   it('validation should have status LINKING_COMPLETED', async () => {

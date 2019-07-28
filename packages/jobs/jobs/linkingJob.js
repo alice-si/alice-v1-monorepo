@@ -1,44 +1,57 @@
-const JobUtils = require('../utils/job-utils');
-const ModelUtils = require('../utils/model-utils');
-const Validation = ModelUtils.loadModel('validation');
 const EthProxy = require('../gateways/ethProxy');
+const ModelUtils = require('../utils/model-utils');
+const { BlockchainJob } = require('./job');
 
-// TODO refactor it using new Job class mechanism
+const Validation = ModelUtils.loadModel('validation');
 
-function mainAction(jobContext) {
-  let validation = jobContext.model;
-  jobContext.msg('Linking impact for validation: ' + validation._id);
-  let project = validation._projectId;
-  return EthProxy.getImpactLinked(project, validation._id.toString())
-    .then(function (linkedAmount) {
-      jobContext.msg('Currently linked: ' + linkedAmount + ' of: ' + validation.amount);
-      if (linkedAmount == validation.amount) {
-        jobContext.msg('All impact linked for validation: ' + validation._id);
-        return ModelUtils.changeStatus(validation, 'LINKING_COMPLETED');
-      } else {
-        EthProxy.linkImpact(project, validation._id.toString()).then(function (linkingTx) {
-          validation.linkingTransactions.push(linkingTx);
-          return validation.save().then(function () {
-            return jobContext.inProgressBehaviour(linkingTx);
-          });
-        });
-      }
-    }).catch(function (err) {
-      return jobContext.errorBehaviour(err);
-    });
-}
+class LinkingJob extends BlockchainJob {
+  constructor() {
+    super('LINKING', Validation, 'APPROVED');
+  }
 
-module.exports = JobUtils.createJob({
-  processName: 'LINKING',
-  createChecker: true,
-  modelGetter: function () {
-    return Validation.findOneAndUpdate({
-      status: ['VALIDATING_COMPLETED', 'LINKING_STEP_COMPLETED']
+  async findReady() {
+    return await Validation.findOneAndUpdate({
+      status: ['LINKING_STEP_COMPLETED', 'VALIDATING_COMPLETED']
     }, {
       status: 'LINKING_STARTED',
-    }).populate('_projectId');
-  },
-  completedStatus: 'LINKING_STEP_COMPLETED',
-  model: Validation,
-  action: mainAction
-});
+    });
+  }
+
+  completedStatus() {
+    return 'LINKING_STEP_COMPLETED';
+  }
+
+  canReturnEmptyTx() {
+    return true;
+  }
+
+  async run(validation) {
+    validation = await validation.populate(
+      '_projectId _validatorId').execPopulate();
+    let validationIdStr = validation._id.toString();
+    let project = validation._projectId;
+
+    this.logger.info(`Linking impact for validation:  ${validationIdStr}`);
+
+    let linkedAmount = await EthProxy.getImpactLinked(
+      project, validationIdStr);
+    this.logger.info(
+      `Currently linked: ${linkedAmount} of: ${validation.amount}`);
+
+    if (linkedAmount > validation.amount) {
+      throw new Error(
+        `Linked amount is greater than validation amount: ${validationIdStr}`);
+    } else if (linkedAmount == validation.amount) {
+      this.logger.info(
+        `All impact linked for validation: ${validationIdStr}`);
+      await ModelUtils.changeStatus(validation, 'LINKING_COMPLETED');
+    } else {
+      let linkingTx = await EthProxy.linkImpact(project, validationIdStr);
+      validation.linkingTransactions.push(linkingTx);
+      await validation.save();
+      return linkingTx;
+    }
+  }
+}
+
+module.exports = LinkingJob;
