@@ -1,4 +1,4 @@
-const TestUtils = require('../utils/test-utils');
+const TestUtils = require('../utils/test-utils'); // TestUtils must be included firstly
 const ModelUtils = require('../utils/model-utils');
 const LinkingJob = require('../jobs/LinkingJob');
 const Validation = ModelUtils.loadModel('validation');

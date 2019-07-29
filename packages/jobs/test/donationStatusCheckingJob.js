@@ -1,4 +1,4 @@
-const TestUtils = require('../utils/test-utils');
+const TestUtils = require('../utils/test-utils'); // TestUtils must be included firstly
 const ModelUtils = require('../utils/model-utils');
 const logger = require('../utils/logger')('test/donationStatusCheckingJob');
 const Moment = require('moment');

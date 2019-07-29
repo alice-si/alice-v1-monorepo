@@ -2,7 +2,7 @@
 set -e
 set -x
 
-npx ganache-cli -a 100 -i 3 -s 123 >/dev/null &
+npx ganache-cli -a 100 -i 5 -s 123 >/dev/null &
 GANACHE_PID=$!
 trap "kill $GANACHE_PID" EXIT
 npx wait-port 8545

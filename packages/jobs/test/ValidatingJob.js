@@ -1,9 +1,8 @@
+const TestUtils = require('../utils/test-utils'); // TestUtils must be included firstly
 const ClaimingJob = require('../jobs/ClaimingJob');
 const EthProxy = require('../gateways/ethProxy');
 const ModelUtils = require('../utils/model-utils');
-const TestUtils = require('../utils/test-utils');
 const ValidatingJob = require('../jobs/ValidatingJob');
-const config = require('../config');
 
 const Validation = ModelUtils.loadModel('validation');
 

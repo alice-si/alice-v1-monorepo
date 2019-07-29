@@ -1,4 +1,5 @@
 const config = require('../config');
+config.enableAutoNonce = false;
 const TestConfig = require('../test-config');
 const ModelUtils = require('./model-utils');
 const ContractUtils = require('./contract-utils');

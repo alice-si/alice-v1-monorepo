@@ -1,7 +1,7 @@
+const TestUtils = require('../utils/test-utils');
 const ModelUtils = require('../utils/model-utils');
 const RunJobs = require('../utils/run-jobs');
 const Schedule = require('node-schedule');
-const TestUtils = require('../utils/test-utils');
 const ProjectDeploymentJob = require('../jobs/ProjectDeploymentJob');
 
 const Donation = ModelUtils.loadModel('donation');

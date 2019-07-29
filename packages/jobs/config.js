@@ -25,6 +25,8 @@ config.mainAccount = getEnv('ETH_MAIN_ACCOUNT');
 config.ethEndpointUrl = getEnv('ETH_ENDPOINT_URL', 'http://localhost:8545');
 config.networkName = getEnv('ETH_NETWORK_NAME', 'local'); // enum: ['local', 'rinkeby', 'main'];
 
+config.enableAutoNonce = true;
+
 config.mode = mode;
 config.logLevel = 'debug'; // enum ['debug', 'info', 'warn', 'error']
 

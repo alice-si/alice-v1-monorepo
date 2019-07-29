@@ -1,5 +1,6 @@
 const EthProxy = require('../gateways/ethProxy');
 const MailUtils = require('../utils/mail-utils');
+const Monitor = require('../utils/monitor');
 const logger = require('../utils/logger')('jobs/Job');
 
 class BasicJob {
@@ -89,6 +90,7 @@ class ModelJob extends BasicJob {
     this.logger.info(`changing status to: ${newStatus}`);
     target.status = newStatus;
     await target.save();
+    await Monitor.printStatus(target.constructor);
   }
 
   async error(msg, cause, target) {

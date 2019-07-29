@@ -64,8 +64,10 @@ function getMainWallet() {
 function getWalletForIndex(index) {
   let path = `m/44'/60'/0'/0/${index}`;
   let mnemonicWallet = ethers.Wallet.fromMnemonic(config.mnemonic, path);
+
   let provider = getProvider();
-  return mnemonicWallet.connect(provider);
+  let wallet = mnemonicWallet.connect(provider);
+  return wallet.setAutoNonce(config.enableAutoNonce);
 }
 
 function equalAddresses(addr1, addr2) {

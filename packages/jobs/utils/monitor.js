@@ -11,10 +11,9 @@ Monitor.getAggregatedResult = function (model) {
   }]);
 };
 
-Monitor.printStatus = function(model) {
-  Monitor.getAggregatedResult(model).then(function(result) {
-    logger.info(model.modelName + ': ' + JSON.stringify(result));
-  });
+Monitor.printStatus = async function(model) {
+  let result = await Monitor.getAggregatedResult(model);
+  logger.info(model.modelName + ': ' + JSON.stringify(result));
 };
 
 module.exports = Monitor;

@@ -1,4 +1,4 @@
-const TestUtils = require('../utils/test-utils');
+const TestUtils = require('../utils/test-utils'); // TestUtils must be included firstly
 const ModelUtils = require('../utils/model-utils');
 const Mail = ModelUtils.loadModel('mail');
 const MailSendingJob = require('../jobs/MailSendingJob');

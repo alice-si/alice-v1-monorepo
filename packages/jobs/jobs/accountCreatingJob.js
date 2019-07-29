@@ -15,6 +15,10 @@ class AccountCreatingJob extends ModelJob {
     });
   }
 
+  saveAndUpdateStatus() {
+    // Overriding as we don't have status for users
+  }
+
   async run(user) {
     this.logger.info('Found user without account: ' + user._id + ' ( ' + user.email + ' )');
     const address = await EthProxy.createNewAddress();
