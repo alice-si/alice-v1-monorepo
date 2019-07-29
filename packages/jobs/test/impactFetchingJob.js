@@ -1,6 +1,6 @@
 const TestUtils = require('../utils/test-utils');
 const ModelUtils = require('../utils/model-utils');
-const ImpactFetchingJob = require('../jobs/impactFetchingJob');
+const ImpactFetchingJob = require('../jobs/ImpactFetchingJob');
 const MailSendingJob = require('../jobs/MailSendingJob');
 const EthProxy = require('../gateways/ethProxy');
 const logger = require('../utils/logger')('test/impactFetchingJob');
@@ -32,7 +32,7 @@ contract('ImpactFetchingJob', async function () {
   });
 
   it('should execute ImpactFetching job', async function () {
-    await ImpactFetchingJob.execute();
+    await new ImpactFetchingJob().execute();
   });
 
   it('validation should have status IMPACT_FETCHING_COMPLETED', async () => {
