@@ -37,12 +37,18 @@ async function getContractInstance(
   addressForWallet=config.mainAccount
 ) {
   const contract = getTruffleContract(contractName);
-  let wallet = await getWallet(addressForWallet);
+  let wallet = await getWallet({
+    address: addressForWallet,
+    checkBalance: true
+  });
   
   return new ethers.Contract(address, contract.abi, wallet);
 }
 
-async function getWallet(address) {
+async function getWallet({
+  address,
+  checkBalance=false,
+}) {
   if (equalAddresses(address, config.mainAccount)) {
     return mainWallet;
   }
@@ -54,7 +60,13 @@ async function getWallet(address) {
     throw new Error(`Could not get wallet for address: ${address}`);
   }
   
-  return getWalletForIndex(ethAddress.index);
+  let wallet = getWalletForIndex(ethAddress.index);
+
+  if (checkBalance) {
+    await checkWalletBalance(wallet);
+  }
+
+  return wallet;
 }
 
 function getMainWallet() {
@@ -64,7 +76,6 @@ function getMainWallet() {
 function getWalletForIndex(index) {
   let path = `m/44'/60'/0'/0/${index}`;
   let mnemonicWallet = ethers.Wallet.fromMnemonic(config.mnemonic, path);
-
   let provider = getProvider();
   let wallet = mnemonicWallet.connect(provider);
   return wallet.setAutoNonce(config.enableAutoNonce);
@@ -95,6 +106,23 @@ async function validateNetworkId(provider) {
     logger.error(`Network id = ${network.chainId}`
       + ` expected by config: ${networkId}`);
   }
+}
+
+async function checkWalletBalance(wallet) {
+  let balance = await wallet.provider.getBalance(wallet.address);
+  minimalBalanceBN = ethers.utils.parseEther(config.minimalBalance);
+  if (balance.lt(minimalBalanceBN)) {
+    let amountToSend = ethers.utils.parseEther(config.defaultLoadAmount);
+    logger.info(`Loading wallet: ${wallet.address}`);
+    await loadWallet(wallet, amountToSend);
+  }
+}
+
+async function loadWallet(wallet, amount) {
+  await mainWallet.sendTransaction({
+    to: wallet.address,
+    value: amount
+  });
 }
 
 module.exports = {

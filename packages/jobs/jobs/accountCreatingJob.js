@@ -16,7 +16,7 @@ class AccountCreatingJob extends ModelJob {
   }
 
   saveAndUpdateStatus() {
-    // Overriding as we don't have status for users
+    // Nothing here as we don't have status field for users
   }
 
   async run(user) {

@@ -5,7 +5,6 @@ const Schedule = require('node-schedule');
 const ProjectDeploymentJob = require('../jobs/ProjectDeploymentJob');
 
 const Donation = ModelUtils.loadModel('donation');
-const Project = ModelUtils.loadModel('project');
 const Validation = ModelUtils.loadModel('validation');
 
 const numberOfUsers = 10;

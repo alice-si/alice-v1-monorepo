@@ -314,8 +314,8 @@ TestUtils.createMockValidations = async function () {
 TestUtils.setBeforeAndAfterHooksForJobTest = function () {
   before(async function () {
     await TestUtils.connectToMockDB();
-    await generateTestEthAddresses(10);
     logger.info('Connected to mock DB.');
+    await generateTestEthAddresses(10);
   });
 
   after(async function () {

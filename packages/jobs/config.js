@@ -25,6 +25,8 @@ config.mainAccount = getEnv('ETH_MAIN_ACCOUNT');
 config.ethEndpointUrl = getEnv('ETH_ENDPOINT_URL', 'http://localhost:8545');
 config.networkName = getEnv('ETH_NETWORK_NAME', 'local'); // enum: ['local', 'rinkeby', 'main'];
 
+config.minimalBalance = '0.01'; // minimal balance for accounts that send transactions
+config.defaultLoadAmount = '0.05';
 config.enableAutoNonce = true;
 
 config.mode = mode;
