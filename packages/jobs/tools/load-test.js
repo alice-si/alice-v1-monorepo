@@ -2,14 +2,13 @@ const ModelUtils = require('../utils/model-utils');
 const RunJobs = require('../utils/run-jobs');
 const Schedule = require('node-schedule');
 const TestUtils = require('../utils/test-utils');
-const EthProxy = require('../gateways/ethProxy.js');
 const ProjectDeploymentJob = require('../jobs/ProjectDeploymentJob');
 
 const Donation = ModelUtils.loadModel('donation');
 const Project = ModelUtils.loadModel('project');
 const Validation = ModelUtils.loadModel('validation');
 
-const numberOfUsers = 1;
+const numberOfUsers = 10;
 const interval = 1; // second
 
 TestUtils.connectToMockDB().then(async function () {
@@ -22,12 +21,10 @@ TestUtils.connectToMockDB().then(async function () {
   Schedule.scheduleJob('*/1 * * * * *', async () => {
     console.log('Searching for donated donations started...');
 
-    let project = await Project.findOne({});
     let donationsDonated = await Donation.find({status: 'DONATED'});
 
     if (donationsDonated.length == numberOfUsers && !validationsWereCreated) {
       console.log('All donations have DONATED status - validations creating started...');
-
       await TestUtils.createMockValidations();
       validationsWereCreated = true;
     } else {

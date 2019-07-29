@@ -9,17 +9,17 @@ ModelUtils.loadModel('category');
 
 const Schedule = require('node-schedule');
 
-const MintingJob = require('../jobs/mintingJob');
-const DepositingJob = require('../jobs/depositingJob');
-const AccountCreatingJob = require('../jobs/accountCreatingJob');
+const MintingJob = require('../jobs/MintingJob');
+const DepositingJob = require('../jobs/DepositingJob');
+const AccountCreatingJob = require('../jobs/AccountCreatingJob');
 const ClaimingJob = require('../jobs/ClaimingJob');
 const ValidatingJob = require('../jobs/ValidatingJob');
-const LinkingJob = require('../jobs/linkingJob');
-const PaymentCollectingJob = require('../jobs/paymentCollectingJob');
-const ImpactFetchingJob = require('../jobs/impactFetchingJob');
-const ProjectDeploymentJob = require('../jobs/projectDeploymentJob');
-const MailSenderJob = require('../jobs/mailSendingJob');
-const DonationStatusCheckingJob = require('../jobs/donationStatusCheckingJob');
+const LinkingJob = require('../jobs/LinkingJob');
+const PaymentCollectingJob = require('../jobs/PaymentCollectingJob');
+const ImpactFetchingJob = require('../jobs/ImpactFetchingJob');
+const ProjectDeploymentJob = require('../jobs/ProjectDeploymentJob');
+const MailSenderJob = require('../jobs/MailSendingJob');
+const DonationStatusCheckingJob = require('../jobs/DonationStatusCheckingJob');
 
 function runJob(job, interval) {
   Schedule.scheduleJob('*/' + interval + ' * * * * *', function () {
