@@ -23,54 +23,34 @@ const DonationStatusCheckingJob = require('../jobs/donationStatusCheckingJob');
 
 function runJob(job, interval) {
   Schedule.scheduleJob('*/' + interval + ' * * * * *', function () {
-    job();
-  });
-}
-
-function runClassJob(job, interval) {
-  Schedule.scheduleJob('*/' + interval + ' * * * * *', function () {
     job.execute();
   });
 }
 
-function runQuickJob(job) {
-  Schedule.scheduleJob('*/2 * * * * *', function () {
-    job();
-  });
-}
-
 function runDailyJob(job) {
-  Schedule.scheduleJob('0 0 8,16 * * *', function () { // runs job every day at 8am
-    job();
+  Schedule.scheduleJob('0 0 8,16 * * *', function () { // runs job every day at 8am and 4pm
+    job.execute();
   });
 }
 
 module.exports = function (interval) {
 
-  runJob(AccountCreatingJob.execute, interval);
+  jobs = [
+    AccountCreatingJob,
+    PaymentCollectingJob,
+    ImpactFetchingJob,
+    MintingJob,
+    DepositingJob,
+    ClaimingJob,
+    ValidatingJob,
+    LinkingJob,
+    ProjectDeploymentJob,
+    MailSenderJob
+  ];
 
-  runJob(AccountCreatingJob.execute, interval);
+  for (let job of jobs) {
+    runJob(new job(), interval);
+  }
 
-  runJob(PaymentCollectingJob.execute, interval);
-
-  runJob(ImpactFetchingJob.execute, interval);
-
-  runJob(MintingJob.execute, interval);
-  runJob(MintingJob.check, interval);
-
-  runJob(DepositingJob.execute, interval);
-  runJob(DepositingJob.check, interval);
-
-  runClassJob(new ClaimingJob(), interval);
-
-  runClassJob(new ValidatingJob(), interval);
-
-  runJob(LinkingJob.execute, interval);
-  runJob(LinkingJob.check, interval);
-
-  runJob(ProjectDeploymentJob.execute, interval);
-
-  runQuickJob(MailSenderJob.execute);
-
-  runDailyJob(DonationStatusCheckingJob.execute);
+  runDailyJob(new DonationStatusCheckingJob());
 };
