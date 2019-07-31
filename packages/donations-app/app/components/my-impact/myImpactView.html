@@ -63,7 +63,7 @@
     <!-- Goals -->
     <div class="col-xs-12 col-md-12 col-lg-12 my-impact__container-goals">
       <h5 class="alice-dark-grey">TRACK IMPACT THROUGH {{ impactCtrl.goals.length }} GOALS </h5>
-      <a href="">
+      <!-- <a href="">
           <i class="fa fa-chevron-circle-left"
              style="position: absolute; color: #1CB8C4; margin-top: 230px; z-index: 100; font-size: 20px"
              ng-click="impactCtrl.scrollGoal('left')">
@@ -74,7 +74,7 @@
              style="position: absolute; color: #1CB8C4; right: -10px; margin-top: 230px; z-index: 100; font-size: 20px"
              ng-click="impactCtrl.scrollGoal('right')">
           </i>
-        </a>
+        </a> -->
         <div ng-repeat="goal in impactCtrl.goals" index="$index">
             <my-impact-goal goal="goal" index="$index"></my-impact-goal>
         </div>
