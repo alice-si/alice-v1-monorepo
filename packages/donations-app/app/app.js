@@ -1,7 +1,7 @@
 angular.module('aliceApp', ['ui.router', 'angular-jwt', 'ui.bootstrap', 'ui.bootstrap.modal', 'ngAnimate',
   'toastr', 'ngFileUpload', 'angularMoment', 'datetime', 'ngSanitize', 'summernote', 'ng-currency',
   'angular-svg-round-progressbar', 'treasure-overlay-spinner', 'ui.bootstrap', 'credit-cards', 'angular-flot',
-	'ngTagsInput', 'chart.js', 'ngclipboard', 'ngCookies'])
+	'ngTagsInput', 'chart.js', 'ngclipboard', 'ngCookies', 'ui.carousel'])
 
   .constant('AUTH_EVENTS', {
     notAuthenticated: 'auth-not-authenticated'
