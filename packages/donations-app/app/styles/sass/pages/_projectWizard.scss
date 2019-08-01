@@ -719,9 +719,11 @@ input.validation-quantity {
 
 button.note-btn {
   width: initial !important;
-  background-color: $alice-blue !important;
+  background-color: white !important;
+  
 
   i {
+    color: $alice-blue !important;
     margin-left: 0 !important;
   }
 }

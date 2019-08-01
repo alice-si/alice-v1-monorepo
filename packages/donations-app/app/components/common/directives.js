@@ -329,13 +329,13 @@ angular.module('aliceApp')
       },
       /*jshint multistr: true */
       template: '<div >\
-                  <div class="btn btn-sm btn-primary"\
-                      style="height:34px; padding-top:7px; margin-top: 3px; text-align:center; width:10vw" ngf-select\
+                  <button\
+                      style="width:10vw !important" ngf-select\
                       ngf-pattern="\'image/*\'"\
                       ngf-accept="\'*\'" ngf-max-size="20MB" ngf-min-height="100"\
                       ng-model="imgFileModel">\
                     Browse\
-                  </div>\
+                  </button>\
                    <span ng-if="status != \'undefined\'">\
                     <img style="width:80px; margin-left: 10px;" src="{{statusIconUrl}}">\
                     {{description}}\
