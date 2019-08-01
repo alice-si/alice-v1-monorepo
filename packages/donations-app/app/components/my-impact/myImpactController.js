@@ -50,7 +50,11 @@ angular.module('aliceApp')
 								elem.userSpent = 0;
 								elem.userPercentage = 0;
 								elem.totalPercentage = 0;
-							}
+              }
+
+              
+              
+              elem.status = getStatusForGoal(elem.totalSpent, elem.target);
 
 							elem.lightColor = convertHex(elem.color, 0.4);
 							// For stacked progress
@@ -59,11 +63,29 @@ angular.module('aliceApp')
 								{value: elem.userPercentage, color: "#1998a2"}
 							];
             });
-            vm.goals = vm.project.allImpactsForProject
+						vm.goals = vm.project.allImpactsForProject
+						
+						console.log(vm);
           }
 				}
       });
     }
+
+    function getStatusForGoal(totalSpent, target) {
+      if (totalSpent == 0) {
+        return 'Not started';
+      }
+      if (totalSpent == target) {
+        return 'Completed';
+      }
+      return 'In progress';
+    }
+
+    vm.scrollGoal = function(direction) {
+			let position = (direction === 'left') ? '-=300': '+=300';
+			angular.element('#appeal-goals').animate({ scrollLeft: position }, 400);
+			event.preventDefault();
+		}
 
     vm.boostDonation = function() {
       $state.go('project', { projectCode: vm.project.code });
@@ -88,6 +110,6 @@ angular.module('aliceApp')
 				goal: '=',
 				index: '='
 			},
-			templateUrl: '/components/my-impact/singleGoalComponent.html'
+			templateUrl: '/components/my-impact/myImpactGoal.html'
 		};
 	});
