@@ -3,8 +3,8 @@ angular.module('aliceApp')
     var vm = this, navHeight = $('#navbar-menu').height();
 
     const appealVersionsForProject = {
-      'gift-of-walking': 2,
-      'save-from-abuse': 2
+      // 'gift-of-walking': 2,
+      // 'save-from-abuse': 2
     };
     const defaultAppealVersion = 4;
 
