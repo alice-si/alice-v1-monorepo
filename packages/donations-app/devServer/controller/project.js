@@ -306,6 +306,7 @@ module.exports = function (app) {
   }
 
   async function lazyOutcomesUpdate(projectWithOutcomes, savedProject) {
+
     let outcomesWithIds = [];
     let outcomesWithoutIds = [];
     for (let outcome of projectWithOutcomes.outcomes) {

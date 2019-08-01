@@ -97,6 +97,7 @@ angular.module('aliceApp')
       // }
     };
 
+    // Disable unused editor options
     vm.summernoteConfig = {
       toolbar: [
         ['font', ['bold', 'italic', 'underline', 'clear']],

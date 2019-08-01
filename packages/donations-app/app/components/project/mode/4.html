@@ -127,22 +127,22 @@
             <img src="{{ story.img }}"
                 alt="Image for {{ story.title }}"
                 class="appeal-v3__goals-carousel-image"
-                style="filter: brightness(100%);"/>
+                style="filter: brightness(100%);">
           </div>
 
           <div class="appeal-v3__stories-info">
-            <div class="col-md-12 appeal-v3__goals-carousel-title">
+            <div class="">
               <h5 class="alice-grey" style="font-size: small;" >{{ story.header.toUpperCase() }}</h5>
               <p>"{{ story.quote }}"</p>
             </div>
-            <div class="appeal-v3__goals-carousel-expand col-xs-12 col-md-12 col-lg-12"
+            <div
                 uib-collapse="!expandStory">
-                <div class="col-md-12">
+                <div>
                   <p ng-bind-html="story.details"></p>
                 </div>
             </div>
-            <div class="col-md-12 appeal-v3__stories-readMore">
-              <button class="col-md-6 col-lg-6 no-border"
+            <div class="appeal-v3__stories-readMore">
+              <button class="no-border"
                       ng-click="expandStory = !expandStory">
                       Read <span ng-if="expandStory">Less</span><span ng-if="!expandStory">{{ story.header }}'s story</span>
                       <i class="pull-up glyphicon"
