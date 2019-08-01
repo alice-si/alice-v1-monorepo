@@ -38,6 +38,7 @@
     <div class="col-sm-9">
       <input class="form-control"
              summernote
+             config="prWizardCtrl.summernoteConfig"
              ng-maxlength="420"
              ng-model="story.details"
              name="storyDetails{{$index + 1}}"
@@ -52,6 +53,7 @@
     <div class="col-sm-9">
       <input class="form-control"
              summernote
+             config="prWizardCtrl.summernoteConfig"
              ng-model="story.extendedDetails"
              name="storyDetails{{$index + 1}}"
              placeholder="Place any additional story details here if this story exceeds 420 characters">

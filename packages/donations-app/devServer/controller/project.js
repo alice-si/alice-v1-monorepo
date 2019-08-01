@@ -103,6 +103,9 @@ module.exports = function (app) {
       project.amountAvailable = project.raised - project.amountValidated;
     // }
 
+    // Added for a new project wizard mechanism of validator setting
+    project.validators = (await User.find({validator: project._id}, '_id'))
+      .map(project => project._id);
 
 		// Added this backend function for new appeal page design
 		// Goals require current validation progress
