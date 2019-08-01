@@ -5,7 +5,8 @@
   position: relative;
 
   &-goal {
-    padding: 0 10px !important;
+    padding-right: 10px !important;
+    margin-bottom: 40px;
   }
 
   &-image {
@@ -97,14 +98,14 @@
   }
 }
 
-@media screen and (min-width: 768px) {
-  .appeal-v3__goals-carousel {
-    .carousel-control .glyphicon-chevron-left, .carousel-control .icon-prev {
-      margin-left: -30px;
-    }
+// @media screen and (min-width: 768px) {
+//   .appeal-v3__goals-carousel {
+//     .carousel-control .glyphicon-chevron-left, .carousel-control .icon-prev {
+//       margin-left: -30px;
+//     }
 
-    .carousel-control .glyphicon-chevron-right, .carousel-control .icon-prev {
-      margin-right: -30px;
-    }
-  }
-}
+//     .carousel-control .glyphicon-chevron-right, .carousel-control .icon-prev {
+//       margin-right: -30px;
+//     }
+//   }
+// }

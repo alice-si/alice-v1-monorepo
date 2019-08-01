@@ -44,9 +44,7 @@
    &__container-title {
      position: absolute;
      top: 100px;
-     left: 85px;
-     // width: 60%;
-     // margin: 0 0 30px 15px;
+     left: 7vw;
    }
 
    &__container-progress {
@@ -162,7 +160,8 @@
 
     &__container-progress {
       width: 100%;
-      margin-top: 25px;
+      margin-top: 30px;
+      margin-bottom: 15px;
     }
 
     h3 {
@@ -172,7 +171,7 @@
       font-size: 26px;
       width: 90%;
       line-height: 1.4;
-      margin-bottom: 15px;
+      margin-bottom: 30px;
     }
 
     a {
@@ -185,7 +184,7 @@
     }
 
     p {
-      font-size: 14px !important;
+      font-size: 16px !important;
       font-weight: 400;
       font-family: $source !important;
       letter-spacing: 1px;
@@ -249,7 +248,7 @@
 
     &__container-title {
       top: 80px;
-      left: 50px;
+      // left: 50px;
     }
   }
 

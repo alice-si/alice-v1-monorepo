@@ -41,18 +41,6 @@ angular.module('aliceApp')
 			CheckoutService.startCheckout(vm.model);
 		}
 
-		$scope.scrollGoal = function(direction) {
-			let position = (direction === 'left') ? '-=300': '+=300';
-			angular.element('#appeal-goals').animate({ scrollLeft: position }, 400);
-			event.preventDefault();
-		}
-
-		$scope.scrollStory = function(direction) {
-			let width = angular.element('.appeal-v3__stories-container').width() + 20;
-			let position = (direction === 'left') ? '-=' + width : '+=' + width;
-			angular.element('#appeal-stories').animate({ scrollLeft: position }, 400);
-			event.preventDefault();
-		}
 }])
 .directive('appealGoal', function() {
 	return {

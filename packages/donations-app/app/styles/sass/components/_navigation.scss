@@ -44,8 +44,8 @@ ul.menu {
 
 ul.menu-left {
     float: left;
-    position: relative;
-    margin-left: 30px;
+    position: absolute;
+    left: 130px;
     margin-top: 32px;
 }
 
@@ -229,13 +229,10 @@ span.divider {
 }
 
 @media (max-width: 800px) {
-  .alice-logo {
-      margin-top: 0;
-  }
 
   .alice-logo img {
       height: 28px !important;
-      margin-top: 18px;
+      margin-top: 27px;
   }
 
   .menu-coloured {
@@ -261,14 +258,6 @@ span.divider {
     // .alice-logo img {
     //     height: 80px;
     // }
-
-    .menu-left {
-        margin-left: 100px;
-    }
-
-    .menu-top {
-        height: 75px;
-    }
 }
 
 
