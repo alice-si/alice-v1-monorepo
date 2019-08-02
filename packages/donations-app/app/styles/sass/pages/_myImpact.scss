@@ -8,6 +8,7 @@
 
   &__progress-title {
     font-size: 14px !important;
+    width: 150px;
   }
 
   &__progress-value {
@@ -70,6 +71,10 @@
     margin-top: 50px;
     padding: 0;
 
+    &-section {
+      margin-bottom: 40px !important;
+    }
+
     div {
       p {
         height: 30px;
@@ -97,13 +102,32 @@
   }
 }
 
+@media screen and (max-width: 992px) {
+  #my-impact-project-title {
+    margin-bottom: 5px !important;
+  }
+
+  .my_impact__goal-progress-section.right-border {
+    border-right: none !important;
+  }
+}
+
+@media screen and (max-width: 555px) {
+  .my-impact {
+    &__splash_container {
+      width: 80vw !important
+    }
+  }
+
+  #my-impact-project-title {
+    font-size: 18px !important;
+  }
+}
+
 @media screen and (max-width: 414px) {
   .my-impact {
     &__container {
       width: 100%;
-      h3 {
-        font-size: 18px;
-      }
     }
 
     &__overview {

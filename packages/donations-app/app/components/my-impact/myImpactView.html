@@ -4,7 +4,7 @@
          ng-style="{ 'background' : 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0)), url(' + impactCtrl.project.img + ') no-repeat center' }">
       <div class="container my-impact__splash_container splash-v3__container-title">
         <div class="row">
-          <h3>{{ impactCtrl.project.title }}</h3>
+          <h3 id="my-impact-project-title">{{ impactCtrl.project.title }}</h3>
         </div>
         <div class="row ">
            <div class=" col-md-4 splash-v3__progress-section">
@@ -42,16 +42,16 @@
         </h3>
       </div>
       <div class="col-xs-12 col-md-12 col-lg-12 my-impact__overview">
-        <div class="col-md-3 col-xs-6">
+        <div class="my-impact__overview-section col-md-4 col-sm-6 col-xs-12">
           <p>You donated</p>
           <h3 class="alice-blue">{{ impactCtrl.project.totalDonated | money }}</h3>
         </div>
-        <div class="col-md-3 col-xs-6">
+        <div class="my-impact__overview-section col-md-4 col-sm-6 col-xs-12">
           <p>{{ impactCtrl.charity.name }} used</p>
           <h3 class="alice-blue">{{ impactCtrl.project.totalPaidOut | money }}</h3>
           <p>so far</p>
         </div>
-        <div class="col-md-3 col-xs-6">
+        <div class="my-impact__overview-section col-md-4 col-sm-6 col-xs-12">
           <p>To complete</p>
           <!-- TODO - update tfis field -->
           <h3 class="alice-blue">1</h3>
@@ -75,9 +75,12 @@
              ng-click="impactCtrl.scrollGoal('right')">
           </i>
         </a> -->
-        <div ng-repeat="goal in impactCtrl.goals" index="$index">
+        <div class="row">
+          <div ng-repeat="goal in impactCtrl.goals" index="$index">
             <my-impact-goal goal="goal" index="$index"></my-impact-goal>
+          </div>
         </div>
+
   
     </div>
   </section>
