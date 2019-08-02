@@ -70,6 +70,16 @@ angular.module('aliceApp')
       return details;
     };
 
+    this.getAppealPageVersion = function (projectCode) {
+      const appealVersionsForProject = {
+        // 'gift-of-walking': 2,
+        // 'save-from-abuse': 2
+      };
+      const defaultAppealVersion = 4;
+
+      return appealVersionsForProject[projectCode] || defaultAppealVersion;
+    }
+
     this.model = model;
 
   }]);

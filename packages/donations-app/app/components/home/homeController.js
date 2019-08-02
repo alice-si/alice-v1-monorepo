@@ -2,17 +2,11 @@ angular.module('aliceApp')
   .controller('HomeController', ['ProjectService', 'NotificationService', 'API', '$location', '$http', function (ProjectService, NotificationService, API, $location, $http) {
     var vm = this, navHeight = $('#navbar-menu').height();
 
-    const appealVersionsForProject = {
-      // 'gift-of-walking': 2,
-      // 'save-from-abuse': 2
-    };
-    const defaultAppealVersion = 4;
-
     var loadData = function () {
       vm.contact = {};
       ProjectService.getActiveProjects().then(function (projects) {
         vm.projects = _.map(projects.data, (project) => {
-          project.apealPageVersion = appealVersionsForProject[project.code] || defaultAppealVersion;
+          project.apealPageVersion = ProjectService.getAppealPageVersion(project.code);
           let keyList = ['title', 'code', 'charity', 'lead', 'img', 'apealPageVersion'];
 
           return _.pick(project, keyList);

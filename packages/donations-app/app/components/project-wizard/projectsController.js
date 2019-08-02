@@ -1,6 +1,6 @@
 angular.module('aliceApp')
 
-  .controller('ProjectsController', ['AuthService', 'NotificationService', '$http', '$state', 'API', 'ETHERSCAN', function (AuthService, NotificationService, $http, $state, API, ETHERSCAN) {
+  .controller('ProjectsController', ['AuthService', 'NotificationService', 'ProjectService', '$http', '$state', 'API', 'ETHERSCAN', function (AuthService, NotificationService, ProjectService, $http, $state, API, ETHERSCAN) {
     var vm = this;
     vm.auth = AuthService;
 
@@ -36,7 +36,10 @@ angular.module('aliceApp')
 
     function loadData() {
       $http.get(API + 'getProjectsForAdmin').then(function (projects) {
-        vm.projects = projects.data;
+        vm.projects = projects.data.map(project => {
+          project.appealPageVersion = ProjectService.getAppealPageVersion(project.code);
+          return project;
+        });
       });
     }
 
