@@ -93,6 +93,8 @@ button {
   @include transition(0.1s, all, ease-out);
 
   &:hover {
-    background-color: rgba(255, 255, 255, 0.2) !important;
+    // background-color: rgba(255, 255, 255, 0.2) !important;
+    background-color: $alice-tonal-medium !important;
+    color: #FFFFFF !important;
   }
 }

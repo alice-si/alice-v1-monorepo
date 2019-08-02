@@ -141,7 +141,6 @@ ul.menu-right li {
     font-weight: 200;
     color: #fff;
     margin-left: 20px;
-    padding-bottom: 3px;
   }
 
   li:first-child a {
@@ -296,7 +295,6 @@ span.menu-arrow {
   margin-top: 5px;
 
   li div {
-     padding: 5px 5px 5px 10px;
      border-bottom: 1px solid #fff;
      -webkit-transform: perspective(1px) translateZ(0);
      transform: perspective(1px) translateZ(0);
@@ -344,7 +342,8 @@ span.menu-arrow {
      }
 
      a {
-         font-size: 14px !important;
+        padding: 10px 10px 10px 10px;
+        font-size: 14px !important;
      }
   }
 }
