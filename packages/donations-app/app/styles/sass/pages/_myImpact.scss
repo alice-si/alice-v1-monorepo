@@ -35,6 +35,10 @@
     color: #676a6c;
   }
 
+  &__goal-progress-section {
+    margin-bottom: 20px;
+  }
+
   &__goal-progress-section.right-border {
     border-right: 1px solid #4a4a4a;
   }
@@ -126,8 +130,13 @@
     margin-bottom: 5px !important;
   }
 
-  .my_impact__goal-progress-section.right-border {
-    border-right: none !important;
+  .my-impact {
+    &__container {
+      margin-left: 3vw;
+    }
+    &__goal-progress-section.right-border {
+      border-right: none;
+    }
   }
 }
 
