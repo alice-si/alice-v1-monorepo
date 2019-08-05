@@ -131,13 +131,21 @@
   }
 
   .my-impact {
-    &__container {
-      margin-left: 3vw;
-    }
     &__goal-progress-section.right-border {
       border-right: none;
     }
   }
+}
+
+@media screen and (max-width: 835px) {
+  .my-impact {
+    &__container {
+      &-greeting {
+        margin-left: 3vw;
+      }
+    }
+  }
+
 }
 
 @media screen and (max-width: 555px) {
