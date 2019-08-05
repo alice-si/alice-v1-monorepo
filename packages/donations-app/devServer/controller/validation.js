@@ -112,6 +112,8 @@ module.exports = function (app) {
         return res.status(403).send('Forbidden');
       }
 
+      // TODO - very important change below
+      // TODO - replace outcome.amount with outcome.costPerUnit
       let totalClaim = quantity * outcome.amount;
       let maximumClaim = project.fundingTarget
         - await Utils.getAmountClaimedForProject(project);

@@ -11,6 +11,11 @@
     width: 150px;
   }
 
+  &__boost-donation-button {
+    width: 300px !important;
+    border-radius: 2px;
+  }
+
   &__progress-value {
     font-family: "Source Sans Pro", sans-serif !important;
     font-size: 22px;
@@ -34,6 +39,26 @@
     border-right: 1px solid #4a4a4a;
   }
 
+  &__goal-we-used-amount {
+    font-weight: 500;
+    font-size: 16px;
+  }
+
+  &__goal-we-used-section {
+    font-family: "Source Sans Pro", sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    background: white;
+    border-radius: 3px;
+    border: 1px solid $alice-blue;
+  }
+
   &__splash_container {
     width: 480px;
   }
@@ -49,16 +74,10 @@
   }
 
   &__container {
-    width: 75vw;
     margin: auto;
-
-    &-greeting {
-      margin: 0 23px;
-    }
 
     &-goals {
       margin: 50px 0;
-      padding: 35px 30px;
 
       .aliceGoal__goal-right {
         border-top-right-radius: 4px !important;
