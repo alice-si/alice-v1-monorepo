@@ -63,7 +63,18 @@ angular.module('aliceApp', ['ui.router', 'angular-jwt', 'ui.bootstrap', 'ui.boot
       })
       .state('project-simple', {
         url: '/project/:projectCode',
-        templateUrl: '/components/project/mode/4.html'
+        templateUrl: function(params) {
+          const appealVersionsForProject = {
+            'fusion-housing-1': 2,
+            // 'gift-of-walking': 2,
+            // 'save-from-abuse': 2
+          };
+          const defaultAppealVersion = 4;
+          const defaultVersionForProject =
+            appealVersionsForProject[params.projectCode] || defaultAppealVersion;
+
+          return `/components/project/mode/${defaultVersionForProject}.html`;
+        }
       })
       .state('how-it-works', {
         url: '/how-it-works/',

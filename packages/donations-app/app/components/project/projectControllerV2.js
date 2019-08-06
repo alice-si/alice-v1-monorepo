@@ -1,11 +1,6 @@
 angular.module('aliceApp')
   .controller('ProjectControllerV2', ['$stateParams', '$state', 'ProjectService', 'CheckoutService', function($stateParams, $state, ProjectService, CheckoutService) {
 		var vm = this;
-		
-		if (!$stateParams.mode) {
-			const mode = ProjectService.getAppealPageVersion($stateParams.projectCode);
-			$state.go('project', Object.assign({ mode }, $stateParams));
-		}
 
 		ProjectService.getProjectDetails($stateParams.projectCode).then(function (result) {
 			vm.model = ProjectService.prepareProjectDetails(result.data);
