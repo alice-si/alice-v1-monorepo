@@ -1,14 +1,11 @@
 #! /bin/bash
+set -e
+set -x
 
-scripts_dir=`dirname ${BASH_SOURCE[0]}`
-bash $scripts_dir/run-ganache.sh
-# TRAP SETTING
-function finish {
-  GANACHE_EXECUTABLE="./node_modules/.bin/ganache-cli"
-  echo " RECEIVED EXIT SIGNAL!!! Disabling ganache instance"
-  pkill $GANACHE_EXECUTABLE
-}
-trap finish EXIT
+npx ganache-cli -a 100 -i 5 -s 123 >/dev/null &
+GANACHE_PID=$!
+trap "kill $GANACHE_PID" EXIT
+npx wait-port 8545
 
-# gulp deploy --useDefault && # currently we deploy contracts in JS code
+# Load tests running
 node ./tools/load-test.js

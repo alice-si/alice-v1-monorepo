@@ -1,7 +1,7 @@
-const TestUtils = require('../utils/test-utils');
+const TestUtils = require('../utils/test-utils'); // TestUtils must be included firstly
 const ModelUtils = require('../utils/model-utils');
 const Donation = ModelUtils.loadModel('donation');
-const PaymentCollectingJob = require('../jobs/paymentCollectingJob');
+const PaymentCollectingJob = require('../jobs/PaymentCollectingJob');
 
 contract('PaymentCollectingJob', async function (accounts) {
   let mocks;
@@ -17,7 +17,7 @@ contract('PaymentCollectingJob', async function (accounts) {
   });
 
   it('should execute payment collecting job', async function () {
-    await PaymentCollectingJob.execute();
+    await new PaymentCollectingJob().execute();
   });
 
   it('donation should have status COLLECTING_COMPLETED', async () => {

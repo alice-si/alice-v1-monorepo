@@ -74,7 +74,10 @@ async function getAllContractsForDocument(
   project,
   addressForWallet=config.mainAccount
 ) {
-  const wallet = await ContractUtils.getWallet(addressForWallet);
+  const wallet = await ContractUtils.getWallet({
+    address: addressForWallet,
+    checkBalance: true
+  });
 
   let Project = getContract('Project');
   let projectContract = await Project.at(

@@ -1,8 +1,10 @@
+const TestUtils = require('../utils/test-utils'); // TestUtils must be included firstly
 const ClaimingJob = require('../jobs/ClaimingJob');
 const EthProxy = require('../gateways/ethProxy');
 const ModelUtils = require('../utils/model-utils');
-const TestUtils = require('../utils/test-utils');
+const ContractUtils = require('../utils/contract-utils');
 const ValidatingJob = require('../jobs/ValidatingJob');
+const ethers = require('ethers');
 
 const Validation = ModelUtils.loadModel('validation');
 
@@ -21,6 +23,17 @@ contract('ValidatingJob', async () => {
     await EthProxy.mint(mocks.project, validation.amount);
     await EthProxy.deposit(
       mocks.project.ethAddresses.owner, mocks.project, validation.amount);
+  });
+
+  step('should unload validator account', async () => {
+    let validator = mocks.project.ethAddresses.validator;
+    let validatorWallet = await ContractUtils.getWallet({
+      address: validator
+    });
+    await validatorWallet.sendTransaction({
+      to: ContractUtils.mainWallet.address,
+      value: ethers.utils.parseEther('99.999') // We save about 0.001 ethers for gas
+    });
   });
 
   step('claiming job sends transaction', async () => {

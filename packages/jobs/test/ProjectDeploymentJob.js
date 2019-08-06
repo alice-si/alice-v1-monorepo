@@ -1,11 +1,12 @@
-const TestUtils = require('../utils/test-utils');
+const TestUtils = require('../utils/test-utils'); // TestUtils must be included firstly
 const ModelUtils = require('../utils/model-utils');
-const ProjectDeploymentJob = require('../jobs/projectDeploymentJob');
+const ProjectDeploymentJob = require('../jobs/ProjectDeploymentJob');
+const TestConfig = require('../test-config');
+const KeyProxy = require('../gateways/keyProxy');
+
 const Project = ModelUtils.loadModel('project');
 const User = ModelUtils.loadModel('user');
 const Charity = ModelUtils.loadModel('charity');
-const TestConfig = require('../test-config');
-const KeyProxy = require('../gateways/keyProxy');
 
 contract('ProjectDeploymentJob', async function (accounts) {
   const code = 'TEST_FOR_PRJ_DEPLOY';
@@ -42,7 +43,7 @@ contract('ProjectDeploymentJob', async function (accounts) {
   });
 
   it('Should execute projectDeploymentJob', async function () {
-    await ProjectDeploymentJob.execute();
+    await new ProjectDeploymentJob().execute();
   });
 
   it('Project should have status PROJECT_DEPLOYMENT_COMPLETED', async () => {

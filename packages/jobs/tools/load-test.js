@@ -1,12 +1,10 @@
+const TestUtils = require('../utils/test-utils');
 const ModelUtils = require('../utils/model-utils');
 const RunJobs = require('../utils/run-jobs');
 const Schedule = require('node-schedule');
-const TestUtils = require('../utils/test-utils');
-const EthProxy = require('../gateways/ethProxy.js');
-const ProjectDeploymentJob = require('../jobs/projectDeploymentJob');
+const ProjectDeploymentJob = require('../jobs/ProjectDeploymentJob');
 
 const Donation = ModelUtils.loadModel('donation');
-const Project = ModelUtils.loadModel('project');
 const Validation = ModelUtils.loadModel('validation');
 
 const numberOfUsers = 10;
@@ -15,22 +13,17 @@ const interval = 1; // second
 TestUtils.connectToMockDB().then(async function () {
   await TestUtils.prepareMockObjectsForLoadTest(numberOfUsers);
   // Project should be deployed before other jobs running
-  await ProjectDeploymentJob.execute();
+  await new ProjectDeploymentJob().execute();
   RunJobs(interval);
 
   let validationsWereCreated = false;
   Schedule.scheduleJob('*/1 * * * * *', async () => {
     console.log('Searching for donated donations started...');
 
-    let project = await Project.findOne({});
     let donationsDonated = await Donation.find({status: 'DONATED'});
 
     if (donationsDonated.length == numberOfUsers && !validationsWereCreated) {
       console.log('All donations have DONATED status - validations creating started...');
-
-      // transfer some ether to claimer so he can pay for transaction
-      await EthProxy.loadAccount(project.ethAddresses['beneficiary']);
-
       await TestUtils.createMockValidations();
       validationsWereCreated = true;
     } else {

@@ -1,11 +1,14 @@
-const TestUtils = require('../utils/test-utils');
+const TestUtils = require('../utils/test-utils'); // TestUtils must be included firstly
 const ModelUtils = require('../utils/model-utils');
 const logger = require('../utils/logger')('test/donationStatusCheckingJob');
 const Moment = require('moment');
 const Donation = ModelUtils.loadModel('donation');
 const Mail = ModelUtils.loadModel('mail');
-const DonationStatusCheckingJob = require('../jobs/donationStatusCheckingJob');
+const DonationStatusCheckingJob = require('../jobs/DonationStatusCheckingJob');
+const MailSendingJob = require('../jobs/MailSendingJob');
 const Config = require('../config');
+
+const SHOULD_TEST_EMAIL_SENDING = false;
 
 contract('DonationStatusCheckingJob', async function () {
   const timeout = 500;
@@ -27,13 +30,23 @@ contract('DonationStatusCheckingJob', async function () {
   });
 
   it('Execute DonationStatusChecking job', async function () {
-    await DonationStatusCheckingJob.execute();
+    await new DonationStatusCheckingJob().execute();
   });
 
   it('Mail for developers should be created', async () => {
     await sleep();
     mails = await Mail.find();
     mails.length.should.be.gt(0);
+  });
+
+  it('Checking email sending if needed', async () => {
+    if (SHOULD_TEST_EMAIL_SENDING) {
+      await new MailSendingJob().execute();
+      await sleep();
+      let mail = await Mail.findOne();
+      mail.status.should.be.equal('MAIL_SENDING_COMPLETED');
+      mail.sendDate.should.be.a('date');
+    }
   });
 
   async function sleep() {

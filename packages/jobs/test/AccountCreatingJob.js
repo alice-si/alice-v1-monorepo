@@ -1,7 +1,7 @@
-const TestUtils = require('../utils/test-utils');
+const TestUtils = require('../utils/test-utils'); // TestUtils must be included firstly
 const ModelUtils = require('../utils/model-utils');
 const User = ModelUtils.loadModel('user');
-const AccountCreatingJob = require('../jobs/accountCreatingJob');
+const AccountCreatingJob = require('../jobs/AccountCreatingJob');
 const logger = require('../utils/logger')('test/accountCreatingJob');
 
 contract('AccountCreatingJob', async function (accounts) {
@@ -15,13 +15,15 @@ contract('AccountCreatingJob', async function (accounts) {
     user = mocks.user;
   });
 
-  it('user should be found', async function () {
+  it('should unset ethAccount for user', async function () {
     let userFound = await User.findOne({_id: user._id});
     userFound.should.not.be.null;
+    userFound.ethAccount = null;
+    await userFound.save();
   });
 
   it('Execute accountCreating job', async function () {
-    await AccountCreatingJob.execute();
+    await new AccountCreatingJob().execute();
   });
 
   it('User should have ethAccount', function (done) {

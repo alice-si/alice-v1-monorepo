@@ -4860,7 +4860,7 @@ ethers@^4.0.27:
 
 "ethers@https://github.com/alice-si/ethers.js":
   version "4.0.34"
-  resolved "https://github.com/alice-si/ethers.js#2d3347971032f0e1c654687053f39259d4f2a209"
+  resolved "https://github.com/alice-si/ethers.js#b2bebab0b2fa717dcd66827b67952f8a5bdca917"
   dependencies:
     "@types/node" "^10.3.2"
     aes-js "3.0.0"

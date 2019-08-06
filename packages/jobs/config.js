@@ -22,11 +22,17 @@ config.technicalMangoUserId = getEnv('TECHNICAL_MANGO_USER_ID');
 config.mangoUrl = 'https://api.sandbox.mangopay.com';
 
 config.mainAccount = getEnv('ETH_MAIN_ACCOUNT');
+config.mainAccountPrivateKey = getEnv('ETH_MAIN_ACCOUNT_PRIVATE_KEY');
+
 config.ethEndpointUrl = getEnv('ETH_ENDPOINT_URL', 'http://localhost:8545');
 config.networkName = getEnv('ETH_NETWORK_NAME', 'local'); // enum: ['local', 'rinkeby', 'main'];
 
+config.minimalBalance = '0.01'; // minimal balance for accounts that send transactions
+config.defaultLoadAmount = '0.05';
+config.enableAutoNonce = true;
+
 config.mode = mode;
-config.logLevel = 'info'; // enum ['debug', 'info', 'warn', 'error']
+config.logLevel = 'debug'; // enum ['debug', 'info', 'warn', 'error']
 
 // Mockgoose is used in tests, so a connection string is not needed.
 config.db = getEnv('DB_URL', '');
