@@ -39,6 +39,10 @@ MailProxy.requestSending = function (conf) {
 
 
 MailProxy.send = function (mail) {
+  if (isTestMail(mail)) {
+    return Promise.resolve();
+  }
+
   return new promise(function (resolve, reject) {
     var params = {
       Destination: {
@@ -92,6 +96,12 @@ function getCC(mail) {
 
 function getRecipients(mail) {
   return [].concat(mail.to);
+}
+
+function isTestMail(mail) {
+  return mail.to.length > 0
+    && mail.to[0].includes('test_mail')
+    && mail.to[0].includes('alice.si');
 }
 
 function readTemplateFilesWithPartials(conf) {
