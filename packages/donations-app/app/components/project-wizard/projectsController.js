@@ -36,10 +36,7 @@ angular.module('aliceApp')
 
     function loadData() {
       $http.get(API + 'getProjectsForAdmin').then(function (projects) {
-        vm.projects = projects.data.map(project => {
-          project.appealPageVersion = ProjectService.getAppealPageVersion(project.code);
-          return project;
-        });
+        vm.projects = projects.data;
       });
     }
 

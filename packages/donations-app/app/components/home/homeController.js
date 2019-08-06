@@ -6,8 +6,7 @@ angular.module('aliceApp')
       vm.contact = {};
       ProjectService.getActiveProjects().then(function (projects) {
         vm.projects = _.map(projects.data, (project) => {
-          project.apealPageVersion = ProjectService.getAppealPageVersion(project.code);
-          let keyList = ['title', 'code', 'charity', 'lead', 'img', 'apealPageVersion'];
+          let keyList = ['title', 'code', 'charity', 'lead', 'img'];
 
           return _.pick(project, keyList);
         });

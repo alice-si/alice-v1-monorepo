@@ -1,5 +1,5 @@
 angular.module('aliceApp')
-  .controller('ProjectController', ['$stateParams', 'ProjectService', '$timeout', '$scope', 'REDIRECTION', '$state', 'CheckoutService',  function($stateParams, ProjectService, $timeout, $scope, REDIRECTION, $state, CheckoutService) {
+  .controller('ProjectController', ['$stateParams', 'ProjectService', '$scope', 'REDIRECTION', '$state', 'CheckoutService',  function($stateParams, ProjectService, $scope, REDIRECTION, $state, CheckoutService) {
     var vm = this;
 
     ProjectService.getProjectDetails($stateParams.projectCode).then(function (result) {

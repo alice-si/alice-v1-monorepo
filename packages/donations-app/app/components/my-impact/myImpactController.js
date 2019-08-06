@@ -43,7 +43,7 @@ angular.module('aliceApp')
             }, 0);
             vm.project.unitsHelpedWithUserDonations = vm.project.impacts.length;
 
-            // Calculating totalCost per each outcome
+            // Calculating totalCost and status for each outcome
             vm.project.outcomes.forEach(elem => {
               elem.totalCost = (elem.quantityOfUnits || 0) * (elem.costPerUnit || 0);
               if (elem.totalCost == elem.moneyUsed) {
@@ -52,51 +52,9 @@ angular.module('aliceApp')
                 elem.status = elem.moneyUsed > 0 ? 'In progress' : 'Not started';
               }
             });
-
-            // TODO remove unused code
-            // vm.project.allImpactsForProject.forEach((elem) => {
-              // let impact = vm.project.impacts.find((e) => {
-              //   if (e._id === elem._id) {
-              //     return e
-              //   }
-              // });
-							// if(impact) {
-							// 	elem.userSpent = impact.total;
-							// 	elem.userPercentage = Math.floor(100 * impact.total / elem.target);
-							// 	elem.totalPercentage = Math.floor(100 * elem.totalSpent / elem.target);
-							// } else {
-							// 	elem.userSpent = 0;
-							// 	elem.userPercentage = 0;
-							// 	elem.totalPercentage = 0;
-              // }
-
-              
-              
-              // elem.status = getStatusForGoal(elem.totalSpent, elem.target);
-
-							// elem.lightColor = convertHex(elem.color, 0.4);
-							// // For stacked progress
-							// elem.stacked = [
-							// 	{value: (elem.totalPercentage - elem.userPercentage), color: elem.color},
-							// 	{value: elem.userPercentage, color: "#1998a2"}
-							// ];
-            // });
-						// vm.goals = vm.project.allImpactsForProject
-						
-						console.log(vm);
           }
 				}
       });
-    }
-
-    function getStatusForGoal(totalSpent, target) {
-      if (totalSpent == 0) {
-        return 'Not started';
-      }
-      if (totalSpent == target) {
-        return 'Completed';
-      }
-      return 'In progress';
     }
 
     vm.scrollGoal = function(direction) {

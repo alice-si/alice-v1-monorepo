@@ -57,13 +57,13 @@ angular.module('aliceApp', ['ui.router', 'angular-jwt', 'ui.bootstrap', 'ui.boot
           if (params.mode) {
             return '/components/project/mode/' + params.mode + '.html';
           } else {
-            return '/components/project/mode/2.html';
+            return '/components/project/mode/4.html';
           }
         }
       })
       .state('project-simple', {
         url: '/project/:projectCode',
-        templateUrl: '/components/project/mode/2.html'
+        templateUrl: '/components/project/mode/4.html'
       })
       .state('how-it-works', {
         url: '/how-it-works/',

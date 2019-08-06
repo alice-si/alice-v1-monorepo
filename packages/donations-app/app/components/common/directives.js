@@ -55,6 +55,9 @@ angular.module('aliceApp')
       scope: {
         model: '=',
       },
+      link: function ($scope) {
+        $scope.currentYear =  new Date().getFullYear();
+      },
       templateUrl: '/components/global/footer.html'
     };
   })

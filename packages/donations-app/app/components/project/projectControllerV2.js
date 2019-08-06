@@ -1,6 +1,11 @@
 angular.module('aliceApp')
-  .controller('ProjectControllerV2', ['$uibModal', '$stateParams', 'ProjectService',  '$scope', '$state', '$timeout', 'CheckoutService', function($uibModal, $stateParams, ProjectService, $scope, $state, $timeout, CheckoutService) {
-    var vm = this;
+  .controller('ProjectControllerV2', ['$stateParams', '$state', 'ProjectService', 'CheckoutService', function($stateParams, $state, ProjectService, CheckoutService) {
+		var vm = this;
+		
+		if (!$stateParams.mode) {
+			const mode = ProjectService.getAppealPageVersion($stateParams.projectCode);
+			$state.go('project', Object.assign({ mode }, $stateParams));
+		}
 
 		ProjectService.getProjectDetails($stateParams.projectCode).then(function (result) {
 			vm.model = ProjectService.prepareProjectDetails(result.data);
