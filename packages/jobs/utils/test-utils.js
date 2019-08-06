@@ -99,7 +99,7 @@ TestUtils.createDefaultMockUser = async function (postfix, ethAccount, charity, 
   const crypto = KeyProxy.encrypt(TestConfig.defaultPassword);
 
   let testUserObj = {
-    email: 'test_email@gmail.com' + postfix,
+    email: `test_email_${postfix}@alice.si`,
     crypto: crypto,
     ethAccount: ethAccount,
     firstName: 'Tom' + postfix,
