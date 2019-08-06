@@ -70,17 +70,6 @@ angular.module('aliceApp')
       return details;
     };
 
-    this.getAppealPageVersion = function (projectCode) {
-      const appealVersionsForProject = {
-        'fusion-housing-1': 2,
-        // 'gift-of-walking': 2,
-        // 'save-from-abuse': 2
-      };
-      const defaultAppealVersion = 4;
-
-      return appealVersionsForProject[projectCode] || defaultAppealVersion;
-    }
-
     this.model = model;
 
   }]);
