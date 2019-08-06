@@ -21,6 +21,10 @@
     }
   }
 
+  &__story-quote {
+    min-height: 50px;
+  }
+
   &__goals-carousel {
     // padding: 0 !important;
 
@@ -37,7 +41,7 @@
     }
 
     &-image {
-      height: 100px;
+      height: 150px;
       width: auto;
       max-width: 150px;
       background-size: contain;
@@ -127,16 +131,11 @@
       padding-bottom: 10px;
       @include box-shadow(0, 0, 6px, rgba(0, 0, 0, 0.2));
       border-radius: 4px;
-
-      .alice-card {
-        height: 180px;
-      }
     }
 
     &-info {
       padding: 22px !important;
       height: auto;
-      min-height: 200px;
 
       button {
         margin: 5px 0 15px;
@@ -149,7 +148,6 @@
         border: none;
         text-align: left;
         letter-spacing: 1px;
-        outline: none;
 
         .glyphicon {
           font-weight: 200;
@@ -158,10 +156,6 @@
         }
       }
 
-    }
-
-    .alice-card {
-      margin: 0;
     }
   }
 

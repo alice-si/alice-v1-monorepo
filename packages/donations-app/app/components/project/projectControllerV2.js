@@ -1,6 +1,6 @@
 angular.module('aliceApp')
-  .controller('ProjectControllerV2', ['$uibModal', '$stateParams', 'ProjectService',  '$scope', '$state', '$timeout', 'CheckoutService', function($uibModal, $stateParams, ProjectService, $scope, $state, $timeout, CheckoutService) {
-    var vm = this;
+  .controller('ProjectControllerV2', ['$stateParams', '$state', 'ProjectService', 'CheckoutService', function($stateParams, $state, ProjectService, CheckoutService) {
+		var vm = this;
 
 		ProjectService.getProjectDetails($stateParams.projectCode).then(function (result) {
 			vm.model = ProjectService.prepareProjectDetails(result.data);
@@ -41,18 +41,6 @@ angular.module('aliceApp')
 			CheckoutService.startCheckout(vm.model);
 		}
 
-		$scope.scrollGoal = function(direction) {
-			let position = (direction === 'left') ? '-=300': '+=300';
-			angular.element('#appeal-goals').animate({ scrollLeft: position }, 400);
-			event.preventDefault();
-		}
-
-		$scope.scrollStory = function(direction) {
-			let width = angular.element('.appeal-v3__stories-container').width() + 20;
-			let position = (direction === 'left') ? '-=' + width : '+=' + width;
-			angular.element('#appeal-stories').animate({ scrollLeft: position }, 400);
-			event.preventDefault();
-		}
 }])
 .directive('appealGoal', function() {
 	return {

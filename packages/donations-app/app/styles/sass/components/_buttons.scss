@@ -227,8 +227,9 @@
 		background: none;
 		border-radius: 11px;
 		border: 1px solid #fff;
-		height: 22px;
-		width: 22px;
+		// Adding important to width and height to fix problem caused by _forms.scss
+		height: 22px !important;
+		width: 22px !important;
 		padding: 0;
 		outline: none;
 		display: inline-flex;
@@ -310,8 +311,9 @@
 		background: none;
 		border-radius: 13px;
 		border: 1px solid #fff;
-		height: 25px;
-		width: 25px;
+		// Adding important to width and height to fix problem caused by _forms.scss
+		height: 25px !important;
+		width: 25px !important;
 		padding: 0;
 		display: inline-flex;
 		align-items: center;

@@ -1,0 +1,33 @@
+
+<div class="col-md-4 appeal-v3__goals-carousel-goal">
+  <div class="title-over-image">
+    <img src="{{ goal.image }}"
+          alt="Image for {{ goal.title }}"
+          class="appeal-v3__goals-carousel-image"
+          style="filter: brightness(100%);"/>
+    <div ng-if="goal.moneyUsedForUser" class="my-impact__goal-we-used-section" >
+      We used
+      <span class="my-impact__goal-we-used-amount">
+        {{ goal.moneyUsedForUser | money }}
+      </span>
+      of your donation to complete this goal
+    </div>
+  </div>
+  <div class="appeal-v3__goals-carousel-content">
+    <div class="col-md-12">
+      <h6 style="opacity: 0.5;">Goal {{ $parent.$index + 1 }}</h6>
+      <p class="my-impact__goal-title">{{ goal.title }}</p>
+
+      <div class="row my-impact__goal-progress-container">
+        <div class="col-md-6 my-impact__goal-progress-section right-border">
+          <p class="my-impact__goal-progress-title">Toal goal cost</p>
+          <span class="my-impact__goal-progress-value">{{ goal.totalCost | money }}</span>
+        </div>
+        <div class="col-md-6 my-impact__goal-progress-section">
+          <p class="my-impact__goal-progress-title">Status</p>
+          <span class="my-impact__goal-progress-value">{{ goal.status }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

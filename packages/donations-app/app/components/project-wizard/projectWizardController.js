@@ -80,7 +80,9 @@ angular.module('aliceApp')
 
     vm.submitSaveProject = function () {
       vm.projectForm.$submitted = true;
-      if (vm.projectForm.$valid) {
+      // alex@alice.si switched errors validation off
+
+      // if (vm.projectForm.$valid) {
 				vm.project.outcomes.forEach((elem) => {
 					elem.target = elem.costPerUnit * elem.quantityOfUnits;
 				});
@@ -90,20 +92,28 @@ angular.module('aliceApp')
             NotificationService.success("Project has been successfully saved.");
             $state.go('project-wizard', {code: response.data.code});
           });
-      } else {
-				printErrors();
-      }
+      // } else {
+			// 	printErrors();
+      // }
     };
+
+    // Disable unused editor options
+    vm.summernoteConfig = {
+      toolbar: [
+        ['font', ['bold', 'italic', 'underline', 'clear']],
+      ],
+    }
 
     function getErrors() {
       let errors = [];
 
-      for (const errType of ['required', 'maxlength', 'minTags', 'maxTags']) {
-        const errsOfSomeType = vm.projectForm.$error[errType];
-        if (errsOfSomeType) {
-          errors = errors.concat(errsOfSomeType);
-        }
-      }
+      // alex@alice.si switched errors validation off
+      // for (const errType of ['required', 'maxlength', 'minTags', 'maxTags']) {
+      //   const errsOfSomeType = vm.projectForm.$error[errType];
+      //   if (errsOfSomeType) {
+      //     errors = errors.concat(errsOfSomeType);
+      //   }
+      // }
 
       return errors;
     }
@@ -116,19 +126,22 @@ angular.module('aliceApp')
 		}
 
     function visibleFormPartIsValid() {
-			if (!vm.projectForm.$valid) {
-        const errors = getErrors();
-        return errors.reduce(function (acc, el) {
-          var domEl = $("[name='" + el.$name + "']");
-          el.$setTouched();
-          if (isVisible(domEl)) {
-            acc = false;
-          }
-          return acc;
-        }, true);
-      } else {
-        return true;
-      }
+      // alex@alice.si switched errors validation off
+			// if (!vm.projectForm.$valid) {
+      //   const errors = getErrors();
+      //   return errors.reduce(function (acc, el) {
+      //     var domEl = $("[name='" + el.$name + "']");
+      //     el.$setTouched();
+      //     if (isVisible(domEl)) {
+      //       acc = false;
+      //     }
+      //     return acc;
+      //   }, true);
+      // } else {
+      //   return true;
+      // }
+
+      return true;
     }
 
     function isVisible(domEl) {
