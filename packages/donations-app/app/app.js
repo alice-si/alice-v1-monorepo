@@ -1,7 +1,7 @@
 angular.module('aliceApp', ['ui.router', 'angular-jwt', 'ui.bootstrap', 'ui.bootstrap.modal', 'ngAnimate',
   'toastr', 'ngFileUpload', 'angularMoment', 'datetime', 'ngSanitize', 'summernote', 'ng-currency',
   'angular-svg-round-progressbar', 'treasure-overlay-spinner', 'ui.bootstrap', 'credit-cards', 'angular-flot',
-	'ngTagsInput', 'chart.js', 'ngclipboard', 'ngCookies'])
+	'ngTagsInput', 'chart.js', 'ngclipboard', 'ngCookies', 'ui.carousel'])
 
   .constant('AUTH_EVENTS', {
     notAuthenticated: 'auth-not-authenticated'
@@ -57,13 +57,24 @@ angular.module('aliceApp', ['ui.router', 'angular-jwt', 'ui.bootstrap', 'ui.boot
           if (params.mode) {
             return '/components/project/mode/' + params.mode + '.html';
           } else {
-            return '/components/project/mode/2.html';
+            return '/components/project/mode/4.html';
           }
         }
       })
       .state('project-simple', {
         url: '/project/:projectCode',
-        templateUrl: '/components/project/mode/2.html'
+        templateUrl: function(params) {
+          const appealVersionsForProject = {
+            'fusion-housing-1': 2,
+            // 'gift-of-walking': 2,
+            // 'save-from-abuse': 2
+          };
+          const defaultAppealVersion = 4;
+          const defaultVersionForProject =
+            appealVersionsForProject[params.projectCode] || defaultAppealVersion;
+
+          return `/components/project/mode/${defaultVersionForProject}.html`;
+        }
       })
       .state('how-it-works', {
         url: '/how-it-works/',

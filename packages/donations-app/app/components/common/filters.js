@@ -77,7 +77,10 @@ angular.module('aliceApp')
   })
 	.filter('vowelize', function() {
 		return function(word) {
-			const vowelRegex = '^[aieouAIEOU].*';
+      const vowelRegex = '^[aieouAIEOU].*';
+      if (!word) {
+        return '';
+      }
 			if(word.match(vowelRegex)) {
 				return 'An ' + word;
 			}

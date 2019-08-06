@@ -2,24 +2,86 @@
   background: $white;
   min-height: 100vh;
 
-  .goal-progress-bar {
-  	&__percentage {
-  		width: 70%;
-  		float: left;
-  	}
+  &__show-appeal-button {
+    padding: 30px;
+  }
+
+  &__progress-title {
+    font-size: 14px !important;
+    width: 150px;
+  }
+
+  &__boost-donation-button {
+    width: 300px !important;
+    border-radius: 2px;
+  }
+
+  &__progress-value {
+    font-family: "Source Sans Pro", sans-serif !important;
+    font-size: 22px;
+    color: #676a6c;
+  }
+
+  &__goal-progress-title {
+    font-family: "Source Sans Pro", sans-serif !important;
+    font-weight: 300;
+    font-size: 14px !important;
+  }
+
+  &__goal-progress-value {
+    font-family: "Source Sans Pro", sans-serif !important;
+    font-size: 16px;
+    font-weight: 600;
+    color: #676a6c;
+  }
+
+  &__goal-progress-section {
+    margin-bottom: 20px;
+  }
+
+  &__goal-progress-section.right-border {
+    border-right: 1px solid #4a4a4a;
+  }
+
+  &__goal-we-used-amount {
+    font-weight: 500;
+    font-size: 16px;
+  }
+
+  &__goal-we-used-section {
+    font-family: "Source Sans Pro", sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    background: white;
+    border-radius: 3px;
+    border: 1px solid $alice-blue;
+  }
+
+  &__splash_container {
+    width: 480px;
+  }
+
+  &__units {
+    font-size: 14px;
+    font-weight: 300 !important;
+    font-stretch: normal;
+  }
+
+  &__goal-title {
+    min-height: 70px;
   }
 
   &__container {
-    width: 75vw;
     margin: auto;
-
-    &-greeting {
-      margin: 0 23px;
-    }
 
     &-goals {
       margin: 50px 0;
-      padding: 35px 30px;
 
       .aliceGoal__goal-right {
         border-top-right-radius: 4px !important;
@@ -27,10 +89,14 @@
       }
     }
   }
-
+  
   &__overview {
     margin-top: 50px;
     padding: 0;
+
+    &-section {
+      margin-bottom: 40px !important;
+    }
 
     div {
       p {
@@ -46,7 +112,7 @@
         display: inline-block;
 
         h3 {
-          width: auto;
+          // width: auto;
           margin-right: 8px;
           float: left;
         }
@@ -59,13 +125,45 @@
   }
 }
 
+@media screen and (max-width: 992px) {
+  #my-impact-project-title {
+    margin-bottom: 5px !important;
+  }
+
+  .my-impact {
+    &__goal-progress-section.right-border {
+      border-right: none;
+    }
+  }
+}
+
+@media screen and (max-width: 835px) {
+  .my-impact {
+    &__container {
+      &-greeting {
+        margin-left: 3vw;
+      }
+    }
+  }
+
+}
+
+@media screen and (max-width: 555px) {
+  .my-impact {
+    &__splash_container {
+      width: 80vw !important
+    }
+  }
+
+  #my-impact-project-title {
+    font-size: 18px !important;
+  }
+}
+
 @media screen and (max-width: 414px) {
   .my-impact {
     &__container {
       width: 100%;
-      h3 {
-        font-size: 18px;
-      }
     }
 
     &__overview {
