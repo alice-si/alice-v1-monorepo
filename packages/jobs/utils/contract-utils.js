@@ -2,6 +2,7 @@ const contract = require('truffle-contract');
 const ethers = require('ethers');
 const config = require('../config');
 const logger = require('./logger')('utils/contract-utils');
+const keyProxy = require('../gateways/keyProxy');
 const ModelUtils = require('../utils/model-utils');
 
 const EthAddress = ModelUtils.loadModel('ethAddress');
@@ -59,8 +60,21 @@ async function getWallet({
   if (!ethAddress) {
     throw new Error(`Could not get wallet for address: ${address}`);
   }
-  
-  let wallet = getWalletForIndex(ethAddress.index);
+
+  let wallet;
+
+  if (ethAddress.index) {
+    wallet = getWalletForIndex(ethAddress.index);
+  } else {
+    const privateKey = keyProxy.decrypt(ethAddress.privateKey);
+    wallet = getWalletFromPrivateKey(privateKey);
+  }
+
+  // Generated address must be equal to the address argument
+  if (!equalAddresses(address, wallet.address)) {
+    throw new Error(`Wallet generating failed. `
+      + `Addresses are different: ${address}, ${wallet.address}`);
+  }
 
   if (checkBalance) {
     await checkWalletBalance(wallet);
@@ -70,15 +84,29 @@ async function getWallet({
 }
 
 function getMainWallet() {
-  return getWalletForIndex(0);
+  let wallet = getWalletFromPrivateKey(config.mainAccountPrivateKey);
+  if (!equalAddresses(wallet.address, config.mainAccount)) {
+    throw new Error(`Main wallet generating failed`
+      + `Addresses are different: ${wallet.address, config.mainAccount}`);
+  }
+  return wallet;
+}
+
+function initWallet(wallet) {
+  let provider = getProvider();
+  wallet = wallet.connect(provider);
+  return wallet.setAutoNonce(config.enableAutoNonce);
 }
 
 function getWalletForIndex(index) {
   let path = `m/44'/60'/0'/0/${index}`;
   let mnemonicWallet = ethers.Wallet.fromMnemonic(config.mnemonic, path);
-  let provider = getProvider();
-  let wallet = mnemonicWallet.connect(provider);
-  return wallet.setAutoNonce(config.enableAutoNonce);
+  return initWallet(mnemonicWallet);
+}
+
+function getWalletFromPrivateKey(privateKey) {
+  let walletFromPrivateKey = new ethers.Wallet(privateKey);
+  return initWallet(walletFromPrivateKey);
 }
 
 function equalAddresses(addr1, addr2) {
