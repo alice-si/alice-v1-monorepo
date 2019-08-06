@@ -7,8 +7,12 @@ import '../DonationWallet.sol';
 
 contract InvestmentWallet is DonationWallet {
 
+    event WalletCreated(address indexed owner);
+
+
     constructor(ProjectCatalog _projectCatalog) public
         DonationWallet(_projectCatalog) {
+        emit WalletCreated(msg.sender);
     }
 
 

@@ -1,0 +1,85 @@
+diff --git a/packages/jobs/config.js b/packages/jobs/config.js
+index 0fcb356..5cf3b75 100644
+--- a/packages/jobs/config.js
++++ b/packages/jobs/config.js
+@@ -22,6 +22,8 @@ config.technicalMangoUserId = getEnv('TECHNICAL_MANGO_USER_ID');
+ config.mangoUrl = 'https://api.sandbox.mangopay.com';
+ 
+ config.mainAccount = getEnv('ETH_MAIN_ACCOUNT');
++config.mainAccountPrivateKey = getEnv('ETH_MAIN_ACCOUNT_PRIVATE_KEY');
++
+ config.ethEndpointUrl = getEnv('ETH_ENDPOINT_URL', 'http://localhost:8545');
+ config.networkName = getEnv('ETH_NETWORK_NAME', 'local'); // enum: ['local', 'rinkeby', 'main'];
+ 
+diff --git a/packages/jobs/utils/contract-utils.js b/packages/jobs/utils/contract-utils.js
+index b5033c4..f79922e 100644
+--- a/packages/jobs/utils/contract-utils.js
++++ b/packages/jobs/utils/contract-utils.js
+@@ -2,6 +2,7 @@ const contract = require('truffle-contract');
+ const ethers = require('ethers');
+ const config = require('../config');
+ const logger = require('./logger')('utils/contract-utils');
++const keyProxy = require('../gateways/keyProxy');
+ const ModelUtils = require('../utils/model-utils');
+ 
+ const EthAddress = ModelUtils.loadModel('ethAddress');
+@@ -59,8 +60,21 @@ async function getWallet({
+   if (!ethAddress) {
+     throw new Error(`Could not get wallet for address: ${address}`);
+   }
+-  
+-  let wallet = getWalletForIndex(ethAddress.index);
++
++  let wallet;
++
++  if (ethAddress.index) {
++    wallet = getWalletForIndex(ethAddress.index);
++  } else {
++    const privateKey = keyProxy.decrypt(ethAddress.privateKey);
++    wallet = getWalletFromPrivateKey(privateKey);
++  }
++
++  // Generated address must be equal to the address argument
++  if (!equalAddresses(address, wallet.address)) {
++    throw new Error(`Wallet generating failed. `
++      + `Addresses are different: ${address}, ${wallet.address}`);
++  }
+ 
+   if (checkBalance) {
+     await checkWalletBalance(wallet);
+@@ -70,17 +84,31 @@ async function getWallet({
+ }
+ 
+ function getMainWallet() {
+-  return getWalletForIndex(0);
++  let mainWallet = getWalletFromPrivateKey(config.mainAccountPrivateKey);
++  if (!equalAddresses(mainWallet.address, config.mainAccount)) {
++    throw new Error(`Main wallet generating failed`
++      + `Addresses are different: ${mainWallet.address, config.mainAccount}`);
++  }
++  return mainWallet;
+ }
+ 
+-function getWalletForIndex(index) {
+-  let path = `m/44'/60'/0'/0/${index}`;
+-  let mnemonicWallet = ethers.Wallet.fromMnemonic(config.mnemonic, path);
++function initWallet(wallet) {
+   let provider = getProvider();
+   let wallet = mnemonicWallet.connect(provider);
+   return wallet.setAutoNonce(config.enableAutoNonce);
+ }
+ 
++function getWalletForIndex(index) {
++  let path = `m/44'/60'/0'/0/${index}`;
++  let mnemonicWallet = ethers.Wallet.fromMnemonic(config.mnemonic, path);
++  return initWallet(mnemonicWallet);
++}
++
++function getWalletFromPrivateKey(privateKey) {
++  let walletFromPrivateKey = new ethers.Wallet(privateKey);
++  return initWallet(walletFromPrivateKey);
++}
++
+ function equalAddresses(addr1, addr2) {
+   return addr1.toLowerCase() == addr2.toLowerCase();
+ }
