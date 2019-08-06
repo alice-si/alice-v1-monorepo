@@ -33,6 +33,31 @@ angular.module('aliceApp')
       }
     };
   }])
+  .directive('cookieConsent', function($cookies) {
+    return {
+      scope: {},
+      templateUrl: '/components/global/cookieConsent.html',
+      controller: function ($scope) {
+        var _consent = $cookies.get('consent');
+        $scope.consent = function (consent) {
+          if (consent === undefined) {
+            return _consent;
+          } else if (consent) {
+            $cookies.put('consent', true);
+            _consent = true;
+          }
+        };
+      }
+    }
+  })
+  .directive('aliceFooter', function() {
+    return {
+      scope: {
+        model: '=',
+      },
+      templateUrl: '/components/global/footer.html'
+    };
+  })
   .directive('hasError', [function () {
     return {
       require: '^form',

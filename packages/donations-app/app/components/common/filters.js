@@ -74,4 +74,13 @@ angular.module('aliceApp')
     return function(input) {
       return input ? "\u2714" : "\u2716";
     };
-  });
+  })
+	.filter('vowelize', function() {
+		return function(word) {
+			const vowelRegex = '^[aieouAIEOU].*';
+			if(word.match(vowelRegex)) {
+				return 'An ' + word;
+			}
+			return 'A ' + word;
+		}
+	});

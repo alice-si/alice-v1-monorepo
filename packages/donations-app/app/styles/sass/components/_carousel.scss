@@ -19,6 +19,7 @@
     margin: 0;
     background: #fff;
     min-height: 300px;
+    height: auto !important;
     @include box-shadow(0, 0, 6px, rgba(0, 0, 0, 0.2));
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
@@ -88,6 +89,7 @@
   &-content {
     padding: 22px !important;
     min-height: 260px;
+    height: auto !important;
   }
 
   &-bottom {

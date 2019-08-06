@@ -50,7 +50,7 @@
      position: absolute;
      top: 100px;
      left: 85px;
-     width: 60%;
+     // width: 60%;
      // margin: 0 0 30px 15px;
    }
 
@@ -157,7 +157,7 @@
     }
 
     &__container-title {
-      width: 30%;
+      // width: 30%;
       border-radius: 5px;
       background: #fff;
       padding: 5px 20px 30px 50px;
@@ -192,7 +192,6 @@
     p {
       font-size: 16px !important;
       font-weight: 400;
-      color: $alice-dark-grey !important;
       font-family: $source !important;
       letter-spacing: 1px;
     }
@@ -290,4 +289,12 @@
       margin-top: 10px;
     }
   }
+}
+
+.purple-grad {
+  background: #894dd8;
+  background: -moz-linear-gradient(left, #894dd8 0%, #6175d9 58%, #2cb6c3 100%);
+  background: -webkit-linear-gradient(left, #894dd8 0%,#6175d9 58%,#2cb6c3 100%);
+  background: linear-gradient(to right, #894dd8 0%,#6175d9 58%,#2cb6c3 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#894dd8', endColorstr='#2cb6c3',GradientType=1 );
 }

@@ -1,5 +1,5 @@
 angular.module('aliceApp')
-  .controller('ProjectControllerV2', ['$uibModal', '$stateParams', 'ProjectService',  '$scope', '$state', 'CheckoutService', function($uibModal, $stateParams, ProjectService, $scope, $state, CheckoutService) {
+  .controller('ProjectControllerV2', ['$uibModal', '$stateParams', 'ProjectService',  '$scope', '$state', '$timeout', 'CheckoutService', function($uibModal, $stateParams, ProjectService, $scope, $state, $timeout, CheckoutService) {
     var vm = this;
 
 		ProjectService.getProjectDetails($stateParams.projectCode).then(function (result) {
@@ -26,6 +26,7 @@ angular.module('aliceApp')
 
 			vm.model.percentageCompleted = Math.floor((100 * vm.model.amountValidated) / vm.model.fundingTarget);
 		});
+
 		function convertHex(hex, opacity) {
 			hex = hex.replace('#','');
 			let r = parseInt(hex.substring(0,2), 16);
@@ -40,23 +41,18 @@ angular.module('aliceApp')
 			CheckoutService.startCheckout(vm.model);
 		}
 
+		$scope.scrollGoal = function(direction) {
+			let position = (direction === 'left') ? '-=300': '+=300';
+			angular.element('#appeal-goals').animate({ scrollLeft: position }, 400);
+			event.preventDefault();
+		}
 
-		$('.carousel .item').each(function(){
-			var next = $(this).next();
-			if (!next.length) {
-				next = $(this).siblings(':first');
-			}
-			next.children(':first-child').clone().appendTo($(this));
-
-			for (var i=0;i<2;i++) {
-				next=next.next();
-				if (!next.length) {
-					next = $(this).siblings(':first');
-				}
-
-				next.children(':first-child').clone().appendTo($(this));
-			}
-		});
+		$scope.scrollStory = function(direction) {
+			let width = angular.element('.appeal-v3__stories-container').width() + 20;
+			let position = (direction === 'left') ? '-=' + width : '+=' + width;
+			angular.element('#appeal-stories').animate({ scrollLeft: position }, 400);
+			event.preventDefault();
+		}
 }])
 .directive('appealGoal', function() {
 	return {

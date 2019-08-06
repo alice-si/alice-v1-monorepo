@@ -196,8 +196,6 @@ angular.module('aliceApp')
     }
 
     function findLatestActivity(donations, validations) {
-      console.log(donations);
-      console.log(validations);
       let latestDonation = donations.length > 0 ? Date.parse(_.last(donations).createdAt) : 0;
       let latestValidation = validations.length > 0 ? Date.parse(_.last(validations).createdAt) : 0;
       if (latestDonation > latestValidation) {

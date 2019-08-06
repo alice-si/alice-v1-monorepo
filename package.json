@@ -10,12 +10,12 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "mongoose": "5.3.12",
-    "openzeppelin-solidity": "^1.11.0"
+    "mongoose": "5.3.12"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
-    "lerna": "^3.13.4"
+    "lerna": "^3.13.4",
+    "wait-port": "^0.2.2"
   },
   "workspaces": ["packages/*"]
 }

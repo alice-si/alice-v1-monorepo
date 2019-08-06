@@ -1,9 +1,4 @@
 .appeal-page {
-  // h5, p {
-  //   font-family: $source !important;
-  //   color: $alice-dark-grey;
-  // }
-
   h5 {
     font-weight: 400;
   }
@@ -24,12 +19,13 @@
     .col, [class*="col-"] {
       padding: 0;
     }
+  }
 
-    &__goals-carousel {
-      padding: 0 !important;
-    }
+  &__goals-carousel {
+    // padding: 0 !important;
 
-    .carousel {
+    &-expand {
+      background: #fff !important;
 
     }
   }
@@ -55,17 +51,14 @@
         font-size: 10px;
         font-family: $source;
       }
-    }
 
-    &-left, &-right {
-      padding-right: 20px;
-      h5 {
-        font-weight: 400;
+      &-expanded {
+        margin-top: -55px;
       }
     }
 
     button {
-      margin: -15px 0 15px;
+      margin: -55px 0 15px;
       padding: 8px 0 10px !important;
       background: none;
       border-radius: 2px;
@@ -130,9 +123,10 @@
 
     &-container {
       height: auto;
-      margin: 20px 0 0;
+      margin: 20px 5px 0 5px;
       padding-bottom: 10px;
-      @include box-shadow(0, 0, 1px, rgba(0, 0, 0, 0.2));
+      @include box-shadow(0, 0, 6px, rgba(0, 0, 0, 0.2));
+      border-radius: 4px;
 
       .alice-card {
         height: 180px;
@@ -140,16 +134,9 @@
     }
 
     &-info {
-      padding: 2px 25px !important;
+      padding: 22px !important;
       height: auto;
-
-      h4 {
-        font-weight: 200 !important;
-      }
-
-      p {
-        font-size: 14px !important;
-      }
+      min-height: 200px;
 
       button {
         margin: 5px 0 15px;
@@ -189,17 +176,6 @@
       padding-bottom: 20px;
     }
 
-    &__info {
-      &-left {
-        margin: 10px 0;
-      }
-
-      &-right {
-        padding-top: 5px !important;
-        margin-bottom: 10px;
-      }
-    }
-
     &__stories {
       h5 {
         margin-top: 30px;
@@ -217,7 +193,7 @@
       &-container {
         height: auto;
         padding: 20px 0;
-        margin: 30px 0 40px;
+        margin: 20px 5px 0 5px;
       }
 
       &-info {
