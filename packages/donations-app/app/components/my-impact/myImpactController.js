@@ -43,14 +43,9 @@ angular.module('aliceApp')
             }, 0);
             vm.project.unitsHelpedWithUserDonations = vm.project.impacts.length;
 
-            // Calculating totalCost and status for each outcome
+            // Calculating totalCost for each outcome
             vm.project.outcomes.forEach(elem => {
               elem.totalCost = (elem.quantityOfUnits || 0) * (elem.costPerUnit || 0);
-              if (elem.totalCost == elem.moneyUsed) {
-                elem.status = 'Completed';
-              } else {
-                elem.status = elem.moneyUsed > 0 ? 'In progress' : 'Not started';
-              }
             });
           }
 				}

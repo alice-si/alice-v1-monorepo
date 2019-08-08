@@ -25,7 +25,10 @@
         </div>
         <div class="col-md-6 my-impact__goal-progress-section">
           <p class="my-impact__goal-progress-title">Status</p>
-          <span class="my-impact__goal-progress-value">{{ goal.status }}</span>
+          <span class="my-impact__goal-progress-value">
+            Helped {{ goal.impactsForUser }}
+            {{ $parent.impactCtrl.project.typeOfBeneficiary }}
+          </span>
         </div>
       </div>
     </div>
