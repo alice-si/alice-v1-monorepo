@@ -65,7 +65,7 @@ class PaymentCollectingJob extends ModelJob {
         amount);
 
       if (mangoResult.Status == 'FAILED') {
-        throw 'Transfer failed: ' + data.Id;
+        throw 'Transfer failed: ' + mangoResult.Id;
       }
 
       this.logger.info('Mango transfer completed: '
