@@ -2,17 +2,20 @@
   <section class="splash-v3 grad-both">
     <div class="header-image"
          ng-style="{ 'background' : 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0)), url(' + projectCtrl.model.img + ') no-repeat center' }">
-      <div class="container col-lg-4 col-md-6 col-sm-6 col-xs-10 splash-v3__container-title">
+      <div class="container splash-v3__container-title">
         <div class="row">
           <h3>{{ projectCtrl.model.title }}</h3>
           <a ui-sref="how-it-works">Track your donation's impact <i class="glyphicon glyphicon-chevron-right"></i></a>
         </div>
         <div class="row splash-v3__container-progress">
           <div class="row">
-            <p class=" col-md-6 splash-v3__progress-section">We need to raise<br>
+            <p class="col-md-4 col-sm-4 col-xs-12 splash-v3__progress-section">We need to raise<br>
               <span style="font-size: 22px;">{{ projectCtrl.model.fundingTarget | money}}</span>
             </p>
-            <p class=" col-md-6 splash-v3__progress-section">To complete<br>
+            <p class=" col-md-4 col-sm-4 col-xs-12 splash-v3__progress-section">Raised so far<br>
+              <span style="font-size: 22px;">{{ projectCtrl.model.raised | money }}</span>
+            </p>
+            <p class=" col-md-4 col-sm-4 col-xs-12 splash-v3__progress-section">To complete<br>
               <span style="font-size: 22px;">{{ projectCtrl.model._outcomes.length }}</span> goals
             </p>
           </div>
