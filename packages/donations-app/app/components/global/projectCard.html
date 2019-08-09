@@ -1,10 +1,8 @@
-<a href="/{{dashboard}}/{{project.code}}"
-   class="alice-card">
-  <div class="title-over-image grad-bottom">
-    <div class="title-over-image__img">
-      <img src="{{project.img}}"
-           alt="Image for {{ project.title }}" />
-      <h4 class="white title-over-image__title-card">{{ project.title }}</h4>
-    </div>
-  </div>
-</a>
+<div class="home-project-card">
+  <a href="/{{dashboard}}/{{project.code}}">
+    <img src="{{project.img}}"
+          alt="Image for {{ project.title }}"/>
+    <h6 class="uppercase alice-grey">Run by: {{ project.charity.name }}</h6>
+    <h4 class="alice-dark-text">{{ project.title }}</h4>
+  </a>
+</div>

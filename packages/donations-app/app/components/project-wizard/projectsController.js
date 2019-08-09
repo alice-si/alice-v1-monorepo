@@ -1,6 +1,6 @@
 angular.module('aliceApp')
 
-  .controller('ProjectsController', ['AuthService', 'NotificationService', '$http', '$state', 'API', 'ETHERSCAN', function (AuthService, NotificationService, $http, $state, API, ETHERSCAN) {
+  .controller('ProjectsController', ['AuthService', 'NotificationService', 'ProjectService', '$http', '$state', 'API', 'ETHERSCAN', function (AuthService, NotificationService, ProjectService, $http, $state, API, ETHERSCAN) {
     var vm = this;
     vm.auth = AuthService;
 

@@ -4,24 +4,32 @@ angular.module('aliceApp')
 
     var loadData = function () {
       vm.contact = {};
+      loadProjectsWithCharities();
+    };
+
+    var loadProjectsWithCharities = function () {
       ProjectService.getActiveProjects().then(function (projects) {
         vm.projects = _.map(projects.data, (project) => {
           let keyList = ['title', 'code', 'charity', 'lead', 'img'];
+
           return _.pick(project, keyList);
         });
+        loadCharities();
       });
+    }
 
+    var loadCharities = function () {
       $http.get(API + 'getCharities').then(function (response) {
-          vm.charities = response.data;
-          _.each(vm.projects, (project) => {
-            let charity_info = _.where(vm.charities, { _id: project.charity })[0];
-            let keyList = ['name', 'url'];
-            charity_info = _.pick(charity_info, keyList);
-            project.charity = charity_info;
-          });
-        }
-      );
-    };
+        vm.charities = response.data;
+        _.each(vm.projects, (project) => {
+          let charityInfo = _.where(vm.charities, { _id: project.charity })[0];
+          let keyList = ['name', 'url'];
+          charityInfo = _.pick(charityInfo, keyList);
+          project.charity = charityInfo;
+        });
+      }
+    );
+    }
 
     loadData();
 

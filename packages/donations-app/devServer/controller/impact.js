@@ -23,7 +23,7 @@ module.exports = function (app) {
         {$replaceRoot: {newRoot: "$project"}},
         {$lookup: {from: "charities", localField: "charity", foreignField: "_id", as: "charity"}},
         {$unwind: "$charity"},
-        {
+        { // All impacts for project
           $lookup:
             {
               from: "impacts",
@@ -48,7 +48,7 @@ module.exports = function (app) {
             }
         },
         {$addFields: {"project.totalDonated": "$totalDonated"}},
-        {
+        { // User impacts for project
           $lookup:
             {
               from: "impacts",
@@ -82,8 +82,64 @@ module.exports = function (app) {
               as: "impacts"
             }
         },
-        //TODO: Check if we still need donatedByAll
-        {
+        { // All outcomes for project
+          $lookup: {
+            from: "outcomes",
+            let: {projectId: "$_id"},
+            pipeline: [
+              {$match: {$expr: 
+                {$eq: ["$_projectId", "$$projectId"]}
+              }},
+              {
+                $lookup: { // User impacts for each outcome
+                  from: "impacts",
+                  let: {outcomeId: "$_id"},
+                  pipeline: [
+                    {$match: {$expr:
+                      {$eq: ["$_outcomeId", "$$outcomeId"]},
+                    }},
+                    {$project: {
+                      amount: "$amount",
+                      amountForUser: {
+                        $cond: [{$eq: ["$_userId", req.user._id]}, "$amount", 0]
+                      },
+                      impactForUser: {
+                        $cond: [{$eq: ["$_userId", req.user._id]}, 1, 0]
+                      },
+                    }}
+                  ],
+                  as: "impacts"
+                }
+              },
+              {$project: {
+                "title": 1,
+                "image": 1,
+                "costPerUnit": 1,
+                "quantityOfUnits": 1,
+                "moneyUsed": { $sum: "$impacts.amount" },
+                "moneyUsedForUser": { $sum: "$impacts.amountForUser" },
+                "impactsForUser": { $sum: "$impacts.impactForUser" },
+              }},
+            ],
+            as: "outcomes"
+          }
+        },
+        { // All completed validations for project
+          $lookup: {
+            from: "validations",
+            let: {projectId: "$_id"},
+            pipeline: [
+              {$match: {$expr: {
+                $and: [
+                  {$eq: ["$_projectId", "$$projectId"]},
+                  {$eq: ["$status", "IMPACT_FETCHING_COMPLETED"]},
+                ]}}},
+              {$project: {"amount": 1}}
+            ],
+            as: "completedValidations",
+          }
+        },
+        { // All donations that went through
           $lookup: {
             from: "donations",
             let: {projectId: "$_id"},
@@ -111,6 +167,7 @@ module.exports = function (app) {
           $project: {
             "totalDonated": 1,
             "allImpactsForProject": 1,
+            "completedValidations": 1,
             "totalPaidOutOverall": 1,
             "code": 1,
             "status": 1,
@@ -124,7 +181,9 @@ module.exports = function (app) {
             "externalFunding": 1,
             "lead": 1,
             "charity": 1,
-            "ethAddresses": 1
+            "ethAddresses": 1,
+            "outcomes": 1,
+            "typeOfBeneficiary": 1,
           }
         }
       ]);

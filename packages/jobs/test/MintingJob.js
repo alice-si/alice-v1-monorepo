@@ -1,6 +1,6 @@
-const TestUtils = require('../utils/test-utils');
+const TestUtils = require('../utils/test-utils'); // TestUtils must be included firstly
 const ModelUtils = require('../utils/model-utils');
-const MintingJob = require('../jobs/mintingJob');
+const MintingJob = require('../jobs/MintingJob');
 const Donation = ModelUtils.loadModel('donation');
 
 contract('MintingJob', async function (accounts) {
@@ -13,7 +13,7 @@ contract('MintingJob', async function (accounts) {
   });
 
   it('should execute minting job', async function () {
-    await MintingJob.execute();
+    await new MintingJob().execute();
   });
 
   it('donation should have status MINTING_IN_PROGRESS', async () => {
@@ -22,7 +22,7 @@ contract('MintingJob', async function (accounts) {
   });
 
   it('should execute minting job checker', async function () {
-    await MintingJob.check();
+    await new MintingJob().execute();
   });
 
   it('donation should have status MINTING_COMPLETED', async () => {

@@ -1,19 +1,25 @@
 <div ng-controller="ProjectControllerV2 as projectCtrl" class="appeal-page">
   <section class="splash-v3 grad-both">
     <div class="header-image"
-         ng-style="{ 'background' : 'linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url(' + projectCtrl.model.img + ') no-repeat center' }">
-      <div class="container col-lg-4 col-md-6 col-sm-6 col-xs-10 splash-v3__container-title">
+         ng-style="{ 'background' : 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0)), url(' + projectCtrl.model.img + ') no-repeat center' }">
+      <div class="container splash-v3__container-title">
         <div class="row">
           <h3>{{ projectCtrl.model.title }}</h3>
           <a ui-sref="how-it-works">Track your donation's impact <i class="glyphicon glyphicon-chevron-right"></i></a>
         </div>
         <div class="row splash-v3__container-progress">
-           <p class=" col-md-6 splash-v3__progress-section">We need to raise<br>
-             <span style="font-size: 22px;">{{ projectCtrl.model.fundingTarget | money}}</span>
-           </p>
-           <p class=" col-md-5 splash-v3__progress-section">To complete<br>
-             <span style="font-size: 22px;">{{ projectCtrl.model._outcomes.length }}</span> goals
-           </p>
+          <div class="row">
+            <p class="col-md-4 col-sm-4 col-xs-12 splash-v3__progress-section">We need to raise<br>
+              <span style="font-size: 22px;">{{ projectCtrl.model.fundingTarget | money}}</span>
+            </p>
+            <p class=" col-md-4 col-sm-4 col-xs-12 splash-v3__progress-section">Raised so far<br>
+              <span style="font-size: 22px;">{{ projectCtrl.model.raised | money }}</span>
+            </p>
+            <p class=" col-md-4 col-sm-4 col-xs-12 splash-v3__progress-section">To complete<br>
+              <span style="font-size: 22px;">{{ projectCtrl.model._outcomes.length }}</span> goals
+            </p>
+          </div>
+           
         </div>
         <div class="row">
           <div class="col-md-5 col-xs-10 no-padding">
@@ -43,7 +49,7 @@
         <div class="col-md-3 col-md-offset-1">
             <p>Run by</p>
             <div class="appeal-v3__info-image"
-                 style="background-image: url('{{projectCtrl.model.charity.darkPicture}}')">
+                 style="background-image: url('{{projectCtrl.model.charity.picture}}')">
             </div>
         </div>
       </div>
@@ -53,14 +59,15 @@
           <p ng-bind-html="projectCtrl.model.extendedSummary"></p>
         </div>
       </div>
-      <button class="col-md-2 col-lg-2 no-border"
+      <!-- TODO alex - check "read more" implementation -->
+      <!-- <button class="col-md-2 col-lg-2 no-border"
               ng-click="expandSummary = !expandSummary">
         Read <span ng-if="expandSummary">Less</span><span ng-if="!expandSummary">More</span>
         <i class="pull-up glyphicon"
            ng-class="expandSummary ? 'glyphicon-chevron-up' : 'glyphicon-chevron-down'"
            ng-style="{'margin-top': expandSummary ? '50px' : '0'}"
            style="margin-left: 3px;"></i>
-      </button>
+      </button> -->
     </div>
 
     <div class="col-xs-12 col-md-12 col-lg-12 appeal-v3__goals">
@@ -87,41 +94,31 @@
       </div>
       <h3 class="col-md-12 no-padding">Our Goals</h3>
         <div class="col-md-12 no-padding">
-          <div class="row-horizon"
-               id="appeal-goals"
-               style="margin: 0;">
-            <a href="">
-              <i class="fa fa-chevron-circle-left"
-                 style="position: absolute; color: #1CB8C4; margin-top: 230px; z-index: 100; font-size: 20px"
-                 ng-click="scrollGoal('left')">
-              </i>
-            </a>
-            <a href="">
-              <i class="fa fa-chevron-circle-right"
-                 style="position: absolute; color: #1CB8C4; right: -10px; margin-top: 230px; z-index: 100; font-size: 20px"
-                 ng-click="scrollGoal('right')">
-              </i>
-            </a>
-            <div class="appeal-v3__goals-carousel-goal col-md-4"
-                 ng-repeat="goal in projectCtrl.model._outcomes">
-              <div class="title-over-image">
-                <img src="{{ goal.image }}"
-                     alt="Image for {{ goal.title }}"
-                     class="appeal-v3__goals-carousel-image"
-                     style="filter: brightness(100%);"/>
-              </div>
+          <div class="appeal-v3__goals-carousel-goal col-md-4 col-sm-6"
+                ng-repeat="goal in projectCtrl.model._outcomes">
+            <div class="title-over-image">
+              <img src="{{ goal.image }}"
+                    alt="Image for {{ goal.title }}"
+                    class="appeal-v3__goals-carousel-image"
+                    style="filter: brightness(100%);"/>
+            </div>
 
-              <div class="appeal-v3__goals-carousel-content">
-                <div class="col-md-12 appeal-v3__goals-carousel-title">
-                  <h6 style="opacity: 0.5;">Goal {{ $index + 1 }}</h6>
-                  <p>{{ goal.title }}</p>
-                </div>
-                <div class="col-md-12 appeal-v3__goals-carousel-bottom">
-                  <div class="col-md-12"
-                       style="padding: 0 20px 0 0;">
-                    <p>Cost per {{ goal.unit }}</p>
-                    <p style="font-weight: 600 !important; font-size: 22px !important">{{ goal.costPerUnit | money }}</p>
-                  </div>
+            <div class="appeal-v3__goals-carousel-content">
+              <div class="col-md-12 appeal-v3__goals-carousel-title">
+                <h6 style="opacity: 0.5;">Goal {{ $index + 1 }}</h6>
+                <p>
+                  {{ goal.title }}
+                </p>
+                <p style="font-size: 14px;">
+                  {{goal.value}}
+                </p>
+                  
+              </div>
+              <div class="col-md-12 appeal-v3__goals-carousel-bottom">
+                <div class="col-md-12"
+                      style="padding: 0 20px 0 0;">
+                  <p>Cost per {{ goal.unit }}</p>
+                  <p style="font-weight: 600 !important; font-size: 22px !important">{{ goal.costPerUnit | money }}</p>
                 </div>
               </div>
             </div>
@@ -129,53 +126,38 @@
         </div>
     </div>
 
-    <div class="col-xs-12 col-md-12 col-lg-12 appeal-v3__stories">
-      <h3 class="uppercase">Follow the story</h3>
-      <div class="col-md-12" style="padding: 0;">
-        <div class="row-horizon"
-             id="appeal-stories"
-             style="margin: 0;">
-          <a href="">
-            <i class="fa fa-chevron-circle-left"
-               style="position: absolute; color: #1CB8C4; margin-top: 230px; z-index: 100; font-size: 20px"
-               ng-click="scrollStory('left')">
-            </i>
-          </a>
-          <a href="">
-            <i class="fa fa-chevron-circle-right"
-               style="position: absolute; color: #1CB8C4; right: -10px; margin-top: 230px; z-index: 100; font-size: 20px"
-               ng-click="scrollStory('right')">
-            </i>
-          </a>
-          <div class="appeal-v3__goals-carousel appeal-v3__stories-container col-md-6"
-               ng-repeat="story in projectCtrl.model.myStory">
-            <div class="title-over-image">
-              <img src="{{ story.img }}"
-                   alt="Image for {{ story.title }}"
-                   class="appeal-v3__goals-carousel-image"
-                   style="filter: brightness(100%);"/>
-            </div>
+    <div class="col-xs-12 col-md-12 col-lg-12">
 
-            <div class="appeal-v3__stories-info">
-              <div class="col-md-12 appeal-v3__goals-carousel-title">
-                <h6 style="opacity: 0.5;">{{ story.header }}</h6>
-                <p>"{{ story.quote }}"</p>
-              </div>
-              <div class="appeal-v3__goals-carousel-expand col-xs-12 col-md-12 col-lg-12"
-                   uib-collapse="!expandStory">
-                   <div class="col-md-12">
-                     <p ng-bind-html="story.details"></p>
-                   </div>
-              </div>
-              <div class="col-md-12 appeal-v3__stories-readMore">
-                <button class="col-md-6 col-lg-6 no-border"
-                        ng-click="expandStory = !expandStory">
-                        Read <span ng-if="expandStory">Less</span><span ng-if="!expandStory">More</span>
-                        <i class="pull-up glyphicon"
-                           style="margin-left: 5px;"
-                           ng-class="expandStory ? 'glyphicon-chevron-up' : 'glyphicon-chevron-down'"></i>
-                </button>
-              </div>
+      <h3 class="uppercase">Follow their stories</h3>
+
+      <div class="col-md-6" ng-repeat="story in projectCtrl.model.myStory">
+        <div class="appeal-v3__stories-container">
+          <div class="title-over-image">
+            <img src="{{ story.img }}"
+                alt="Image for {{ story.title }}"
+                class="appeal-v3__goals-carousel-image"
+                style="filter: brightness(100%);">
+          </div>
+
+          <div class="appeal-v3__stories-info">
+            <div class="">
+              <h5 class="alice-grey" style="font-size: small;" >{{ story.header.toUpperCase() }}</h5>
+              <p class="appeal-v3__story-quote">{{ story.quote }}</p>
+            </div>
+            <div
+                uib-collapse="!expandStory">
+                <div>
+                  <p ng-bind-html="story.details"></p>
+                </div>
+            </div>
+            <div class="appeal-v3__stories-readMore">
+              <button class="no-border"
+                      ng-click="expandStory = !expandStory">
+                      Read <span ng-if="expandStory">Less</span><span ng-if="!expandStory">{{ story.header }}'s story</span>
+                      <i class="pull-up glyphicon"
+                        style="margin-left: 5px;"
+                        ng-class="expandStory ? 'glyphicon-chevron-up' : 'glyphicon-chevron-down'"></i>
+              </button>
             </div>
           </div>
         </div>

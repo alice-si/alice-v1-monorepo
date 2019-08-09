@@ -1,5 +1,6 @@
 const EthProxy = require('../gateways/ethProxy');
 const MailUtils = require('../utils/mail-utils');
+const Monitor = require('../utils/monitor');
 const logger = require('../utils/logger')('jobs/Job');
 
 class BasicJob {
@@ -89,6 +90,7 @@ class ModelJob extends BasicJob {
     this.logger.info(`changing status to: ${newStatus}`);
     target.status = newStatus;
     await target.save();
+    await Monitor.printStatus(target.constructor);
   }
 
   async error(msg, cause, target) {
@@ -101,13 +103,12 @@ class ModelJob extends BasicJob {
   startedStatus()    { return `${this.name}_STARTED`; }
   inProgressStatus() { return `${this.name}_IN_PROGRESS`; }
   errorStatus()      { return `${this.name}_ERROR`; }
-  completedStatus()  { return `${this.name}_COMPLETED`; }
   resolvedStatus()   { return `${this.name}_REVERTED`; }
   lostStatus()       { return `${this.name}_LOST`; }
+  completedStatus()  { return `${this.name}_COMPLETED`; }
 }
 
 const MAX_IN_PROGRESS_TXS = 5;
-const CHECK_TX_INTERVAL_MS = 5000;
 const MIN_AGE_FOR_ETHERSCAN_CHECKING_MS = 300000;
 
 class BlockchainJob extends ModelJob {
@@ -155,7 +156,13 @@ class BlockchainJob extends ModelJob {
     this.logger.info(`target was found: processing ${target._id}`);
     try {
       let tx = await this.run(target);
-      if (!tx) throw new Error('job did not return a transaction');
+      if (!tx) {
+        if (this.canReturnEmptyTx()) {
+          return;
+        } else {
+          throw new Error('job did not return a transaction');
+        }
+      }
       this.logger.info(`transaction ${tx} was sent`);
 
       target[this.txFieldName()] = tx;
@@ -233,6 +240,7 @@ class BlockchainJob extends ModelJob {
 
   timeFieldName() { return `${this.name.toLowerCase()}Time`; }
   txFieldName() { return `${this.name.toLowerCase()}Tx`; }
+  canReturnEmptyTx() { return false; }
 }
 
 module.exports = {
@@ -240,7 +248,3 @@ module.exports = {
   BlockchainJob,
   ModelJob,
 };
-
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}

@@ -1,7 +1,7 @@
-const TestUtils = require('../utils/test-utils');
+const TestUtils = require('../utils/test-utils'); // TestUtils must be included firstly
 const ModelUtils = require('../utils/model-utils');
 const Mail = ModelUtils.loadModel('mail');
-const MailSendingJob = require('../jobs/mailSendingJob');
+const MailSendingJob = require('../jobs/MailSendingJob');
 
 contract('MailSendingJob', async function () {
   const timeout = 500;
@@ -24,7 +24,7 @@ contract('MailSendingJob', async function () {
   });
 
   it('Should execute mailSending job', async function () {
-    await MailSendingJob.execute();
+    await new MailSendingJob().execute();
   });
 
   it('Mail should be sent', function (done) {

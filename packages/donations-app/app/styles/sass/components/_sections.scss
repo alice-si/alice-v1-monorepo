@@ -30,15 +30,10 @@
 
    &__progress-section {
      border-right: 1px solid #fff;
-     margin-right: 20px;
+    //  margin-right: 20px;
 
      span {
        font-weight: 600;
-     }
-
-     &:first-child {
-       padding: none !important;
-       margin-left: -15px;
      }
 
      &:last-child {
@@ -49,9 +44,8 @@
    &__container-title {
      position: absolute;
      top: 100px;
-     left: 85px;
-     // width: 60%;
-     // margin: 0 0 30px 15px;
+     left: 7vw;
+     width: 480px;
    }
 
    &__container-progress {
@@ -160,14 +154,15 @@
       // width: 30%;
       border-radius: 5px;
       background: #fff;
-      padding: 5px 20px 30px 50px;
+      padding: 5px 10px 30px 40px;
       font-family: $source;
       letter-spacing: 0.6;
     }
 
     &__container-progress {
       width: 100%;
-      margin-top: 25px;
+      margin-top: 30px;
+      margin-bottom: 15px;
     }
 
     h3 {
@@ -177,7 +172,7 @@
       font-size: 26px;
       width: 90%;
       line-height: 1.4;
-      margin-bottom: 15px;
+      margin-bottom: 30px;
     }
 
     a {
@@ -205,8 +200,36 @@
   }
 
 
+@media screen and (max-width: 990px) {
+  .splash-v3 {
+    &__progress-section {
+      border-right: none;
+    }
+  }
+}
 
 // Mobile for both splash v2 and v3
+
+@media screen and (max-width: 771px) {
+  .splash-v3 {
+    h3 {
+      margin-bottom: 20px;
+      font-size: 22px;
+    }
+
+    &__container-progress,h3 {
+      margin-bottom: 5px;
+    }
+  }
+}
+
+@media screen and (max-width: 565px) {
+  .splash-v3 {
+    &__container-title {
+      width: 86vw;
+    }
+  }
+}
 
 @media screen and (max-width: 414px) {
   .splash-v2, .splash-v3 {
@@ -224,7 +247,6 @@
 
     &__progress-section {
       border-right: none;
-      margin-left: -15px;
 
       span {
         font-weight: 600;
@@ -248,7 +270,7 @@
 
     &__container-title {
       top: 80px;
-      left: 50px;
+      // left: 50px;
     }
   }
 

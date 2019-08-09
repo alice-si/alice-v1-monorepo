@@ -1,6 +1,6 @@
-const TestUtils = require('../utils/test-utils');
+const TestUtils = require('../utils/test-utils'); // TestUtils must be included firstly
 const ModelUtils = require('../utils/model-utils');
-const DepositingJob = require('../jobs/depositingJob');
+const DepositingJob = require('../jobs/DepositingJob');
 const Donation = ModelUtils.loadModel('donation');
 
 contract('DepositingJob', async function (accounts) {
@@ -13,7 +13,7 @@ contract('DepositingJob', async function (accounts) {
   });
 
   it('should execute depositing job', async function () {
-    await DepositingJob.execute();
+    await new DepositingJob().execute();
   });
 
   it('donation should have status DEPOSITING_IN_PROGRESS', async () => {
@@ -22,7 +22,7 @@ contract('DepositingJob', async function (accounts) {
   });
 
   it('should execute checker part for depositing job', async function () {
-    await DepositingJob.check();
+    await new DepositingJob().execute();
   });
 
   it('donation should have status DONATED', async () => {

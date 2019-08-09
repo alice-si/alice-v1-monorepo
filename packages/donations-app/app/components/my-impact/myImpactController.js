@@ -36,37 +36,30 @@ angular.module('aliceApp')
               vm.charity = vm.project.charity;
             }
 
-            vm.project.allImpactsForProject.forEach((elem) => {
-              let impact = vm.project.impacts.find((e) => {
-                if (e._id === elem._id) {
-                  return e
-                }
-              });
-							if(impact) {
-								elem.userSpent = impact.total;
-								elem.userPercentage = Math.floor(100 * impact.total / elem.target);
-								elem.totalPercentage = Math.floor(100 * elem.totalSpent / elem.target);
-							} else {
-								elem.userSpent = 0;
-								elem.userPercentage = 0;
-								elem.totalPercentage = 0;
-							}
+            // Calculating unitsToHelp and unitHelped
+            vm.project.unitsHelped = vm.project.completedValidations.length;
+            vm.project.totalUnitsToHelp = vm.project.outcomes.reduce((acc, outcome) => {
+              return (Number(outcome.quantityOfUnits) || 0) + acc;
+            }, 0);
+            vm.project.unitsHelpedWithUserDonations = vm.project.impacts.length;
 
-							elem.lightColor = convertHex(elem.color, 0.4);
-							// For stacked progress
-							elem.stacked = [
-								{value: (elem.totalPercentage - elem.userPercentage), color: elem.color},
-								{value: elem.userPercentage, color: "#1998a2"}
-							];
+            // Calculating totalCost for each outcome
+            vm.project.outcomes.forEach(elem => {
+              elem.totalCost = (elem.quantityOfUnits || 0) * (elem.costPerUnit || 0);
             });
-            vm.goals = vm.project.allImpactsForProject
           }
 				}
       });
     }
 
+    vm.scrollGoal = function(direction) {
+			let position = (direction === 'left') ? '-=300': '+=300';
+			angular.element('#appeal-goals').animate({ scrollLeft: position }, 400);
+			event.preventDefault();
+		}
+
     vm.boostDonation = function() {
-      $state.go('project', { projectCode: vm.project.code });
+      // $state.go('project', { projectCode: vm.project.code });
       CheckoutService.startCheckout(vm.project);
     };
 
@@ -88,6 +81,6 @@ angular.module('aliceApp')
 				goal: '=',
 				index: '='
 			},
-			templateUrl: '/components/my-impact/singleGoalComponent.html'
+			templateUrl: '/components/my-impact/myImpactGoal.html'
 		};
 	});

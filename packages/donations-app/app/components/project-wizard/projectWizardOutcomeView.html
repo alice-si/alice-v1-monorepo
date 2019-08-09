@@ -3,7 +3,7 @@
   <div class="form-group">
     <label class="col-sm-3 control-label">Outcomes intro</label>
     <div class="col-sm-9">
-      <div class="form-control" summernote ng-model="prWizardCtrl.project.outcomesIntro"></div>
+      <div class="form-control" summernote config="prWizardCtrl.summernoteConfig" ng-model="prWizardCtrl.project.outcomesIntro"></div>
     </div>
   </div>
 </div>
@@ -67,7 +67,7 @@
   </div>
 
   <div class="form-group">
-    <label class="col-sm-3 control-label">Global cost *</label>
+    <label class="col-sm-3 control-label">Amount <p style="font-size: 8px;">Deprecated field - must be equal to "Cost per Unit"</p></label>
 
     <div class="col-sm-9">
       <input type="text" class="form-control" ng-model="outcome.amount"
