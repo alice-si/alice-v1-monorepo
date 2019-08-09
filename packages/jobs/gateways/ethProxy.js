@@ -13,6 +13,12 @@ const EthAddress = ModelUtils.loadModel('ethAddress');
 
 let EthProxy = {};
 
+// Fix proposed by ethers author (ricmoo)
+// https://github.com/ethers-io/ethers.js/issues/469
+const overrides = {
+  gasLimit: 750000
+};
+
 EthProxy.createNewAddress = async function () {
   const lastEthAddress = await EthAddress.findOne(
     { index: { $exists: true } }
@@ -57,7 +63,7 @@ EthProxy.validateOutcome = async (
 
   let idBytes = mongoIdToBytes(validation._id);
   let transaction = await contracts.project.validateOutcome(
-    idBytes, validation.amount);
+    idBytes, validation.amount, overrides);
 
   return getTxHash(transaction);
 };
