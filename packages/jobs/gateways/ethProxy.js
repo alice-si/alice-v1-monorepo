@@ -49,7 +49,7 @@ EthProxy.validateOutcome = async (
 ) => {
   logger.info(
     `Validating outcome, validation id: ${validation._id}, ` +
-    `amount: ${validation.amount}`);
+    `amount: ${validation.amount}, account: ${validatorAccount}`);
 
   let contracts = await ContractProxy.getAllContractsForDocument(
     project,

@@ -103,7 +103,7 @@ async function deploy(
     owner: config.mainAccount,
     validator: validatorAccount,
     beneficiary: beneficiaryAccount,
-    lastTx: lastTx.transactionHash
+    lastTx: lastTx.hash
   });
 }
 
