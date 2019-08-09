@@ -45,6 +45,7 @@
      position: absolute;
      top: 100px;
      left: 7vw;
+     width: 480px;
    }
 
    &__container-progress {
@@ -153,7 +154,7 @@
       // width: 30%;
       border-radius: 5px;
       background: #fff;
-      padding: 5px 20px 30px 50px;
+      padding: 5px 10px 30px 40px;
       font-family: $source;
       letter-spacing: 0.6;
     }
@@ -208,6 +209,27 @@
 }
 
 // Mobile for both splash v2 and v3
+
+@media screen and (max-width: 771px) {
+  .splash-v3 {
+    h3 {
+      margin-bottom: 20px;
+      font-size: 22px;
+    }
+
+    &__container-progress,h3 {
+      margin-bottom: 5px;
+    }
+  }
+}
+
+@media screen and (max-width: 565px) {
+  .splash-v3 {
+    &__container-title {
+      width: 86vw;
+    }
+  }
+}
 
 @media screen and (max-width: 414px) {
   .splash-v2, .splash-v3 {
