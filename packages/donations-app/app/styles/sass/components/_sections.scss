@@ -14,6 +14,7 @@
      width: 100%;
      height: 500px;
      object-fit: cover;
+     object-position: center top;
      background-size: cover;
      background-blend-mode: multiply;
      background-size: cover !important;
@@ -24,6 +25,7 @@
      width: 100%;
      height: 400px;
      object-fit: cover;
+     object-position: center top;
      @include transition(0.2s, all, ease-out);
      filter: brightness(60%);
    }
