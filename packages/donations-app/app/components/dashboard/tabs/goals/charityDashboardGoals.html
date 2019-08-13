@@ -40,6 +40,10 @@
          class="c-dashboard__panel"
          heading="Goals Claim"
          id="claimGoals">
+
+         <h2 class="goals-claim-balance">Available balance: <span>{{ 10000 | money }}</span></h2>
+
+
          <div ng-repeat="outcome in outcomesOfProject"
               class="col-sm-12 col-md-6 col-md-4">
               <claim-outcome-card outcome="outcome"

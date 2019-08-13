@@ -1,31 +1,56 @@
-<div class="alice-card">
-  <div class="title-over-image grad-bottom">
-    <img src="{{ outcome.image }}"
-         alt="Image for {{ outcome.title }}"
-         class="goal-card__image" />
-    <h4 class="title-over-image__title white">{{ outcome.title }}</h4>
-  </div>
 
-  <div class="alice-card__content">
-    <h4 class="col-md-12">Proof</h4>
-    <div class="col-md-12" style="opacity: 0.5;">
-      <h6>Proof Required</h6>
-      <p>Proof type</p>
-    </div>
-    <div class="col-md-12">
-      <h6>Validator's Email Address</h6>
-      <p>{{ validator }}</p>
-    </div>
-    <p class="col-md-6">No of people providing proof for</p>
-    <div class="col-md-6">
-      <input ng-model="quantity"
-             class="col-md-12"/>
+<div class="appeal-v3__goals-carousel-goal">
+  <div class="title-over-image">
+    <img src="{{ outcome.image }}"
+          alt="Image for {{ outcome.title }}"
+          class="appeal-v3__goals-carousel-image"
+          style="filter: brightness(100%);"/>
+    <div ng-if="outcome.moneyUsedForUser" class="my-impact__goal-we-used-section" >
+      We used
+      <span class="my-impact__goal-we-used-amount">
+        {{ outcome.moneyUsedForUser | money }}
+      </span>
+      of your donation to complete this outcome
     </div>
   </div>
-  <div class="col-md-12">
-    <div class="form-group">
-      <button ng-click="claimFn(outcome, quantity)"
-              class="col-md-3">Submit</button>
+  <div class="appeal-v3__goals-carousel-content goal-claim-container">
+    <div class="col-md-12">
+      <h6 style="opacity: 0.5;">GOAL {{ $parent.$index + 1 }}</h6>
+      <p class="my-impact__goal-title">{{ outcome.title }}</p>
+
+      <div class="row my-impact__goal-progress-container">
+        <div class="col-md-6 my-impact__goal-progress-section right-border">
+          <p class="my-impact__goal-progress-title">Cost per unit</p>
+          <span class="my-impact__goal-progress-value">{{ 1000 | money }}</span>
+        </div>
+        <div class="col-md-6 my-impact__goal-progress-section">
+          <p class="my-impact__goal-progress-title">Helped</p>
+          <span class="my-impact__goal-progress-value">
+             3/5
+          </span>
+        </div>
+
+
+        <div class="goal-claim-input-form">
+          <p class="col-md-6 my-impact__goal-progress-title">
+            No of units providing proof for
+          </p>
+          <div class="col-md-6">
+            <input ng-model="quantity"
+                    class="col-md-12"/>
+          </div>
+  
+          <button ng-click="claimFn(outcome, quantity)" class="col-md-3">
+            Submit
+          </button>
+        </div>
+
+      </div>
     </div>
+
+      <!-- <div class="col-md-12">
+        <h6>Validator's Email Address</h6>
+        <p>{{ validator }}</p>
+      </div> -->
   </div>
 </div>
