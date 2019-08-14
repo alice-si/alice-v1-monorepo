@@ -21,12 +21,14 @@
       <div class="row my-impact__goal-progress-container">
         <div class="col-md-6 my-impact__goal-progress-section right-border">
           <p class="my-impact__goal-progress-title">Cost per unit</p>
-          <span class="my-impact__goal-progress-value">{{ 1000 | money }}</span>
+          <span class="my-impact__goal-progress-value">{{ outcome.costPerUnit | money }}</span>
         </div>
         <div class="col-md-6 my-impact__goal-progress-section">
-          <p class="my-impact__goal-progress-title">Helped</p>
+          <p class="my-impact__goal-progress-title">Units claimed</p>
           <span class="my-impact__goal-progress-value">
-             3/5
+            {{ outcome.claimsCreated || 0 }}
+            /
+            {{ outcome.quantityOfUnits || 0 }}
           </span>
         </div>
 

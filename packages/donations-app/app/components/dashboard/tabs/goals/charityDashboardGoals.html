@@ -41,7 +41,12 @@
          heading="Goals Claim"
          id="claimGoals">
 
-         <h2 class="goals-claim-balance">Available balance: <span>{{ 10000 | money }}</span></h2>
+         <h2 class="goals-claim-balance">
+           Amount available:
+           <span>
+            {{ amountAvailable | money }}
+          </span>
+        </h2>
 
 
          <div ng-repeat="outcome in outcomesOfProject"
