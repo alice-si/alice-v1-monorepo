@@ -59,7 +59,8 @@ module.exports = function (app) {
           "description",
           "projectAdmins",
           "projectManagers",
-          "picture"
+          "picture",
+          "whitePicture",
         ])
       ];
 
