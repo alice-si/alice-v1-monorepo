@@ -1,0 +1,89 @@
+.splash {
+  width: 100%;
+  background-color: #353e42;
+  background-blend-mode: multiply;
+  height: 540px;
+}
+
+.splash-text {
+  display: block;
+  margin-left: 10%;
+  color: #fff;
+  transform: translateY(-250px);
+}
+
+.splash-text > .splash-title {
+  font-size: 40px;
+  font-weight: 100;
+  letter-spacing: 3px;
+}
+
+.splash-text > .section-heading-border {
+  width: 26%;
+  border-bottom: 0.5px solid #fff;
+}
+
+.splash-text > .splash-subtitle {
+  font-size: 16px;
+  font-weight: 200;
+  letter-spacing: 1px;
+}
+
+.questions > .question > .title {
+  font-size: 16px;
+}
+
+.support-wrapper > .section-text > .section-heading-border,
+.eth-account-wrapper > .left > .section-heading-border,
+.etheroscope-wrapper > .left > .section-heading-border,
+.questions > .question > .section-heading-border {
+  width: 26%;
+  border-bottom: 1px solid #fff;
+  margin: 20px 0 20px 0;
+}
+
+.questions > .question > .section-heading-border {
+  border-color: #353e42;
+}
+
+.question {
+  color: #353e42;
+  z-index: -1;
+}
+
+.questions > .question > .title {
+  text-transform: uppercase;
+  color: #1998a4;
+  letter-spacing: 3px;
+}
+
+.question {
+  padding: 0 40px 40px;
+}
+
+.questions > .question > .title {
+  font-size: 12px;
+}
+
+.faq > .splash {
+  margin-bottom: 40px;
+}
+
+.faq > .splash {
+  margin-bottom: 60px;
+}
+
+.answer {
+  font-weight: 200;
+}
+
+#geek-splash-logo {
+  height:450px;
+  width: 500px;
+  position: relative;
+  transform: translate(-100px, 20px);
+  opacity: 0.02;
+  left: -100px;
+  top: 40px;
+  bottom: 50px;
+}

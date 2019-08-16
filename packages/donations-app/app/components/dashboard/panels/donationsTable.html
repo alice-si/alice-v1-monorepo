@@ -26,7 +26,7 @@
         <td>{{donation.email}}</td>
         <td>{{donation.donated | money}}</td>
         <td>{{donation.date | date}}</td>
-        <td>{{donation.totalReceived | money : '0'}}</td>
+        <td>{{donation.receviedForDonation | money : '0'}}</td>
         <td><a ng-click="donCtrl.openGiftAidAddress(donation)">{{donation.giftAid ? 'Show' : ''}}</a><span ng-hide="donation.giftAid">No</span></td>
         <td>{{donation.agreeContact ? 'Yes' : 'No'}}</td>
     </tr>

@@ -140,6 +140,7 @@ angular.module('aliceApp')
               return acc;
             }, 0);
           });
+          vm.users = calculateReceivedForUsers(vm.users);
           vm.totalItems = vm.users.length;
         }
       });
@@ -171,6 +172,31 @@ angular.module('aliceApp')
         delete elem.createdAt;
         return elem;
       });
+    }
+
+    // Hacky function to calculate received value for each donation
+    // (here we use word "users" to be consistent with the rest of the code)
+    // users here mean donations - it could be misleading and we should refactor it later
+    function calculateReceivedForUsers(users) {
+      let result = [];
+      let visited = {};
+      let usersReceived = {};
+
+      users.sort((elem1, elem2) => 
+        new Date(elem1.date).getTime() - new Date(elem2.date).getTime());
+
+      for (let user of users) {
+        const userKey = user._id;
+        if (!visited[userKey]) {
+          visited[userKey] = true;
+          usersReceived[userKey] = user.totalReceived;
+        }
+        user.receviedForDonation = Math.min(usersReceived[userKey], user.donated);
+        usersReceived[userKey] -= user.receviedForDonation;
+        result.push(user);
+      }
+
+      return result;
     }
 
     // Donation table pagination config
