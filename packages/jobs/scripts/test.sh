@@ -5,7 +5,7 @@ set -x
 
 function test() {
   CONTRACTS_DIR=$(node -e "console.log(path.dirname(require.resolve('@alice-si/contracts/package.json')));")/contracts
-  npx truffle test --contracts_directory=$CONTRACTS_DIR $1
+  npx nyc truffle test --contracts_directory=$CONTRACTS_DIR $1
 }
 
 npx ganache-cli --networkId=3 --seed=123 --accounts=100 >/dev/null &
