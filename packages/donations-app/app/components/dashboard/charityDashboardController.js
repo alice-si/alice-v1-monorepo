@@ -1,5 +1,5 @@
 angular.module('aliceApp')
-  .controller('CharityDashboardController', ['AuthService', '$scope', '$timeout', '$http', 'API', '$stateParams', '$uibModal', function (AuthService, $scope, $timeout, $http, API, $stateParams, $uibModal) {
+  .controller('CharityDashboardController', ['AuthService', '$scope', '$timeout', '$http', 'API', '$stateParams', 'ProjectService', function (AuthService, $scope, $timeout, $http, API, $stateParams, ProjectService) {
     var vm = this;
     vm.auth = AuthService;
     vm.code = $stateParams.project;
@@ -11,6 +11,9 @@ angular.module('aliceApp')
       AuthService.showLogInModal();
     }
 
+    ProjectService.getProjectDetails(vm.code).then(function (projectDetails) {
+      vm.projectDetails = projectDetails.data;
+    });
     loadGoalsFromProject(vm.code);
 
     function loadGoalsFromProject(code) {
@@ -118,6 +121,7 @@ angular.module('aliceApp')
         outcomesValidated: '=',
         outcomesOfProject: '=',
         projectValidator: '=',
+        amountAvailable: '=',
       },
       templateUrl: '/components/dashboard/tabs/goals/charityDashboardGoals.html'
     };
