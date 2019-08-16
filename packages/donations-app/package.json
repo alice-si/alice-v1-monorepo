@@ -5,7 +5,7 @@
   "scripts": {
     "postinstall": "bower install --allow-root --force-latest",
     "pretest": "yarn alice-cli generate-keys ./secrets/keys/",
-    "test": "mocha",
+    "test": "nyc mocha",
     "e2e-load": "bash ./scripts/e2e.sh ./test/e2e/load.js --run-donations-app",
     "e2e": "bash ./scripts/e2e.sh ./test/e2e/regression.js --run-donations-app",
     "e2e-stage": "bash ./scripts/e2e.sh ./test/e2e/regression-stage.js",
