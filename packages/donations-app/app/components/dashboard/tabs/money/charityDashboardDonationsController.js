@@ -182,6 +182,9 @@ angular.module('aliceApp')
       let visited = {};
       let usersReceived = {};
 
+      users.sort((elem1, elem2) => 
+        new Date(elem1.date).getTime() - new Date(elem2.date).getTime());
+
       for (let user of users) {
         const userKey = user._id;
         if (!visited[userKey]) {
