@@ -22,7 +22,6 @@ config.technicalMangoUserId = getEnv('TECHNICAL_MANGO_USER_ID');
 config.mangoUrl = 'https://api.sandbox.mangopay.com';
 
 config.mainAccount = getEnv('ETH_MAIN_ACCOUNT');
-config.mainAccountPrivateKey = getEnv('ETH_MAIN_ACCOUNT_PRIVATE_KEY');
 
 config.ethEndpointUrl = getEnv('ETH_ENDPOINT_URL', 'http://localhost:8545');
 config.networkName = getEnv('ETH_NETWORK_NAME', 'local'); // enum: ['local', 'rinkeby', 'main'];

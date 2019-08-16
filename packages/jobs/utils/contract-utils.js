@@ -84,12 +84,7 @@ async function getWallet({
 }
 
 function getMainWallet() {
-  let wallet = getWalletFromPrivateKey(config.mainAccountPrivateKey);
-  if (!equalAddresses(wallet.address, config.mainAccount)) {
-    throw new Error(`Main wallet generating failed. `
-      + `Addresses are different: ${wallet.address}, ${config.mainAccount}`);
-  }
-  return wallet;
+  return getWalletForIndex(0);
 }
 
 function initWallet(wallet) {
