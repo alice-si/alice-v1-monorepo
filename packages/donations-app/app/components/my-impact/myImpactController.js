@@ -54,7 +54,7 @@ angular.module('aliceApp')
               'KEEP A TEMPORARY HOME (6 months)',
               'KEEP A PERMANENT HOME',
               'KEEP A PERMANENT HOME (6 months)',
-              'RECEIVE MENTAL HEALTH SUPPORT',
+              // 'RECEIVE MENTAL HEALTH SUPPORT',
               'CONNECT TO SERVICES OUTSIDE LONDON'
             ];
             vm.project.outcomes = vm.project.outcomes.filter(elem => {
@@ -80,7 +80,29 @@ angular.module('aliceApp')
 
             //FIXME: Check why the goal calculations are wrong (helped == 0)
             if (vm.project.code == 'mungos-15-lives') {
+              vm.project.unitsHelped = 15;
               vm.project.totalUnitsToHelp = 15;
+            }
+
+            //Add off-chain goals that have been achieved by St Mungos
+            if (vm.project.code == 'mungos-15-lives') {
+              vm.project.outcomes.forEach((outcome) => {
+                console.log(outcome.title);
+                if (outcome.title === 'Register with a GP to receive support for their physical or mental health') {
+                  outcome.moneyUsed += 2500;
+                }
+                if (outcome.title === 'Get a mental health assessment - proper diagnosis can be life changing') {
+                  outcome.moneyUsed += 300000;
+                }
+                if (outcome.title === 'Find a temporary home - a place in a hostel, or similar temporary home') {
+                  outcome.moneyUsed += 20000;
+                }
+                if (outcome.title === 'Receive mental health support' || outcome.title == 'RECEIVE MENTAL HEALTH SUPPORT') {
+                  outcome.costPerUnit = 100000;
+                  outcome.moneyUsed += 300000;
+                }
+
+              });
             }
 
 

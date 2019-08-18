@@ -115,7 +115,7 @@
         </a> -->
         <div class="row">
           <div ng-repeat="outcome in impactCtrl.project.outcomes" index="$index">
-            <my-impact-goal goal="outcome" index="$index" finished="impactCtrl.project.status == 'FINISHED'" goals-count="impactCtrl.project.unitsHelped"></my-impact-goal>
+            <my-impact-goal goal="outcome" index="$index" finished="impactCtrl.project.status == 'FINISHED'" goals-count="impactCtrl.project.totalUnitsToHelp"></my-impact-goal>
           </div>
         </div>
 
