@@ -54,7 +54,7 @@ angular.module('aliceApp')
               'KEEP A TEMPORARY HOME (6 months)',
               'KEEP A PERMANENT HOME',
               'KEEP A PERMANENT HOME (6 months)',
-              // 'RECEIVE MENTAL HEALTH SUPPORT',
+              'Tackle substance misuse: register with a specialist  they trust to get the help they need',
               'CONNECT TO SERVICES OUTSIDE LONDON'
             ];
             vm.project.outcomes = vm.project.outcomes.filter(elem => {
