@@ -7,12 +7,12 @@
           <h3 id="my-impact-project-title">{{ impactCtrl.project.title }}</h3>
         </div>
         <div class="row ">
-           <div class=" col-md-4 splash-v3__progress-section">
-             <p class="my-impact__progress-title">We need to raise</p>
+          <div ng-hide="impactCtrl.project.status == 'FINISHED'"  class=" col-md-4 splash-v3__progress-section">
+             <p class="my-impact__progress-title">'We need to raise'</p>
              <span class="my-impact__progress-value">{{ impactCtrl.project.fundingTarget | money}}</span>
            </div>
            <div class="col-md-4 splash-v3__progress-section">
-             <p class="my-impact__progress-title">Raised so far</p>
+             <p class="my-impact__progress-title">{{impactCtrl.project.status == "FINISHED" ? 'Raised' : 'Raised so far'}}</p>
              <span class="my-impact__progress-value">{{ impactCtrl.project.donatedByAll | money}}</span>
            </div>
            <div class="col-md-4 splash-v3__progress-section">
@@ -28,7 +28,27 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6 col-xs-10 no-padding">
+          <div ng-show="impactCtrl.project.status == 'FINISHED'" class="col-md-10 col-xs-10 no-padding"
+               style="margin-top: 30px;" >
+            <div class="row">
+              <div class="col-md-6">
+                <p>Run by</p>
+                <div class="appeal-v3__info-image"
+                     style="height: 50px; background-image: url('{{impactCtrl.project.charity.picture}}')">
+                </div>
+              </div>
+              <div class="col-md-6" style="padding-top: 10px;">
+              <a href="/project/{{impactCtrl.project.code}}/4">
+                <button class="inverse-button my-impact__show-appeal-button">
+                  <i class="glyphicon glyphicon-chevron-right"></i>
+                  VIEW REPORT
+                </button>
+              </a>
+              </div>
+            </div>
+          </div>
+
+          <div ng-hide="impactCtrl.project.status == 'FINISHED'" class="col-md-6 col-xs-10 no-padding">
             <a href="/project/{{impactCtrl.project.code}}/4">
               <button class="inverse-button my-impact__show-appeal-button">
                 <i class="glyphicon glyphicon-chevron-right"></i>
@@ -36,6 +56,7 @@
               </button>
             </a>
           </div>
+
         </div>
       </div>
     </div>
@@ -61,7 +82,7 @@
         <div ng-if="impactCtrl.project.unitsHelpedWithUserDonations > 0" class="my-impact__overview-section col-md-4 col-sm-6 col-xs-12">
           <p>To help</p>
           <h3 class="alice-blue">
-            {{ impactCtrl.project.unitsHelpedWithUserDonations }}
+            {{impactCtrl.project.peopleHelped}}
           </h3>
           <p>{{ impactCtrl.project.typeOfBeneficiary }}</p>
         </div>
@@ -76,7 +97,7 @@
         </button>
       </div>
     </div>
-    
+
     <!-- Goals -->
     <div class="my-impact__container-goals">
       <h5 class="alice-dark-grey">TRACK IMPACT THROUGH {{ impactCtrl.project.outcomes.length }} GOALS </h5>
@@ -98,7 +119,7 @@
           </div>
         </div>
 
-  
+
     </div>
   </section>
 

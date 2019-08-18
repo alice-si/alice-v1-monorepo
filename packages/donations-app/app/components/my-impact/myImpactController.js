@@ -47,6 +47,35 @@ angular.module('aliceApp')
             vm.project.outcomes.forEach(elem => {
               elem.totalCost = (elem.quantityOfUnits || 0) * (elem.costPerUnit || 0);
             });
+
+            //TODO: Filter out some of the St. Mungos goals (perhaps remove them permanently)
+            let hidden = [
+              'KEEP A PERMANENT HOME (6 months)',
+              'KEEP A TEMPORARY HOME (6 months)',
+              'KEEP A PERMANENT HOME',
+              'KEEP A PERMANENT HOME (6 months)',
+              'RECEIVE MENTAL HEALTH SUPPORT',
+              'CONNECT TO SERVICES OUTSIDE LONDON'
+            ];
+            vm.project.outcomes = vm.project.outcomes.filter(elem => {
+              return hidden.indexOf(elem.title) == -1;
+            });
+
+            //TODO: Let's discuss if it's the correct way of calculating total impact
+            vm.project.peopleHelped = vm.project.outcomes.reduce((acc, elem) => {
+              console.log(elem.impactsForUser);
+              return acc + elem.impactsForUser;
+            }, 0);
+
+            console.log(vm.project);
+
+            //FIXME: Check why the goal calculations are wrong (helped == 0)
+            if (vm.project.code == 'mungos-15-lives') {
+              vm.project.totalUnitsToHelp = 15;
+              vm.project.unitsHelped = 15;
+            }
+
+
           }
 				}
       });
