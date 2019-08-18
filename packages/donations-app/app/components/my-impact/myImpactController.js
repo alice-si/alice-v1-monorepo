@@ -71,12 +71,16 @@ angular.module('aliceApp')
               return acc + elem.impactsForUser;
             }, 0);
 
-            console.log(vm.project);
+            vm.project.unitsHelped = vm.project.outcomes.reduce((acc, elem) => {
+              console.log(elem);
+              return acc + Math.round(elem.moneyUsed / elem.costPerUnit);
+            }, 0);
+
+            console.log("All helped: " + vm.project.unitsHelped );
 
             //FIXME: Check why the goal calculations are wrong (helped == 0)
             if (vm.project.code == 'mungos-15-lives') {
               vm.project.totalUnitsToHelp = 15;
-              vm.project.unitsHelped = 15;
             }
 
 
