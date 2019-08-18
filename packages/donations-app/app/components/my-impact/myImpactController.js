@@ -87,17 +87,17 @@ angular.module('aliceApp')
             //Add off-chain goals that have been achieved by St Mungos
             if (vm.project.code == 'mungos-15-lives') {
               vm.project.outcomes.forEach((outcome) => {
-                console.log(outcome.title);
-                if (outcome.title === 'Register with a GP to receive support for their physical or mental health') {
+                console.log(outcome._id + " " + outcome.title);
+                if (outcome._id === '58d9041ffc008d7f9aabd43f') {
                   outcome.moneyUsed += 2500;
                 }
-                if (outcome.title === 'Get a mental health assessment - proper diagnosis can be life changing') {
+                if (outcome._id === '58d904e7fc008d7f9aabd441') {
                   outcome.moneyUsed += 300000;
                 }
-                if (outcome.title === 'Find a temporary home - a place in a hostel, or similar temporary home') {
+                if (outcome._id === '57d7e78504efabbc43d4f8b9') {
                   outcome.moneyUsed += 20000;
                 }
-                if (outcome.title === 'Receive mental health support' || outcome.title == 'RECEIVE MENTAL HEALTH SUPPORT') {
+                if (outcome._id === '58d905bffc008d7f9aabd442') {
                   outcome.costPerUnit = 100000;
                   outcome.moneyUsed += 300000;
                 }
