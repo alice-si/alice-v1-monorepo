@@ -34,10 +34,10 @@
               <div class="col-md-6">
                 <p>Run by</p>
                 <div class="appeal-v3__info-image"
-                     style="margin-bottom: -150px; background-image: url('{{impactCtrl.project.charity.picture}}')">
+                     style="margin-bottom: -100px; background-image: url('{{impactCtrl.project.charity.picture}}')">
                 </div>
               </div>
-              <div class="col-md-6" style="padding-top: 10px;">
+              <div ng-show="false" class="col-md-6" style="padding-top: 10px;">
               <a href="/project/{{impactCtrl.project.code}}/4">
                 <button class="inverse-button my-impact__show-appeal-button">
                   <i class="glyphicon glyphicon-chevron-right"></i>
@@ -115,7 +115,7 @@
         </a> -->
         <div class="row">
           <div ng-repeat="outcome in impactCtrl.project.outcomes" index="$index">
-            <my-impact-goal goal="outcome" index="$index"></my-impact-goal>
+            <my-impact-goal goal="outcome" index="$index" finished="impactCtrl.project.status == 'FINISHED'" goals-count="impactCtrl.project.unitsHelped"></my-impact-goal>
           </div>
         </div>
 

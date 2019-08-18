@@ -61,9 +61,13 @@ angular.module('aliceApp')
               return hidden.indexOf(elem.title) == -1;
             });
 
+            console.log(vm.project);
+
+            //"FIND A TEMPORARY HOME": 3,
+
             //TODO: Let's discuss if it's the correct way of calculating total impact
             vm.project.peopleHelped = vm.project.outcomes.reduce((acc, elem) => {
-              console.log(elem.impactsForUser);
+              console.log(elem);
               return acc + elem.impactsForUser;
             }, 0);
 
@@ -108,7 +112,9 @@ angular.module('aliceApp')
 		return {
 			scope: {
 				goal: '=',
-				index: '='
+				index: '=',
+        finished: '=',
+        goalsCount: '='
 			},
 			templateUrl: '/components/my-impact/myImpactGoal.html'
 		};
