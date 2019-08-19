@@ -71,10 +71,10 @@ angular.module('aliceApp')
               return acc + elem.impactsForUser;
             }, 0);
 
-            vm.project.unitsHelped = vm.project.outcomes.reduce((acc, elem) => {
-              console.log(elem);
-              return acc + Math.round(elem.moneyUsed / elem.costPerUnit);
-            }, 0);
+            // vm.project.unitsHelped = vm.project.outcomes.reduce((acc, elem) => {
+            //   console.log(elem);
+            //   return acc + Math.round(elem.moneyUsed / elem.costPerUnit);
+            // }, 0);
 
             console.log("All helped: " + vm.project.unitsHelped );
 

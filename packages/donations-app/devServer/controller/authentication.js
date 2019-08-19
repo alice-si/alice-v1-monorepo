@@ -13,6 +13,7 @@ const User = Utils.loadModel('user');
 const AccessRequest = Utils.loadModel('accessRequest');
 const Charity = Utils.loadModel('charity');
 
+const ANOTHER_USER_TOKEN_TTL = 120; // seconds
 const ACCESS_REQUEST_TTL = 120; // seconds
 const JWT_OAUTH_TTL = 300; // seconds
 const DEFAULT_RESIDENCE = "GB";
@@ -92,7 +93,10 @@ module.exports = function (app) {
         return res.status(400).json('Authentication failed. User was not found.');
       }
       // TODO - maybe we should disable access to endpoints for making claims and validations
-      const token = Auth.getJWT(user._id, {scope: 'full_access'});
+      const token = Auth.getJWT(user._id, {
+        scope: 'full_access',
+        expiresIn: ANOTHER_USER_TOKEN_TTL,
+      });
       return res.json({token});
   }));
 

@@ -7,8 +7,8 @@
           <h3 id="my-impact-project-title">{{ impactCtrl.project.title }}</h3>
         </div>
         <div class="row ">
-          <div ng-hide="impactCtrl.project.status == 'FINISHED'"  class=" col-md-4 splash-v3__progress-section">
-             <p class="my-impact__progress-title">'We need to raise'</p>
+          <div ng-if="impactCtrl.project.status !== 'FINISHED' class=" col-md-4 splash-v3__progress-section">
+             <p class="my-impact__progress-title">We need to raise</p>
              <span class="my-impact__progress-value">{{ impactCtrl.project.fundingTarget | money}}</span>
            </div>
            <div class="col-md-4 splash-v3__progress-section">
