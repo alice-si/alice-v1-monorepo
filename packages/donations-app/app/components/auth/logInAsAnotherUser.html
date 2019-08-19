@@ -1,0 +1,17 @@
+<section class="wrapper-content" ng-controller="LogInAsAnotherUserController as logInAsCtrl">
+  <div class="row">
+    <div class="col-md-5 col-sm-12">
+      <h2>Log in as another user</h2>
+      <form role="form">
+          <input id="registration-password" type="text" name="email"
+            placeholder="Another user's email"
+            ng-model="logInAsCtrl.email"
+            required>
+
+          <button ng-click="logInAsCtrl.logInAsAnotherUser()" type="submit">
+            Log in as another user
+          </button>
+      </form>
+    </div>
+  </div>
+</section>
