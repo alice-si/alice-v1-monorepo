@@ -72,16 +72,16 @@ angular.module('aliceApp')
             //Add off-chain goals that have been achieved by St Mungos
             if (vm.project.code == 'mungos-15-lives') {
               vm.project.outcomes.forEach((outcome) => {
-                console.log(outcome._id + " " + outcome.title);
                 if (outcome._id === '58d9041ffc008d7f9aabd43f') {
                   outcome.moneyUsed += 2500;
                 }
                 if (outcome._id === '58d904e7fc008d7f9aabd441') {
                   outcome.moneyUsed += 300000;
                 }
-                if (outcome._id === '57d7e78504efabbc43d4f8b9') {
-                  outcome.moneyUsed += 20000;
-                }
+                // Duplicated outcome
+                // if (outcome._id === '57d7e78504efabbc43d4f8b9') {
+                //   outcome.moneyUsed += 20000;
+                // }
                 if (outcome._id === '58d905bffc008d7f9aabd442') {
                   outcome.costPerUnit = 100000;
                   outcome.moneyUsed += 300000;
