@@ -1,0 +1,60 @@
+<div class="outcome-card">
+  <!-- Outcome card image -->
+  <img class="outcome-card__image" src="{{ outcome.image }}">
+
+  <!-- Outcome card content  -->
+  <div class="outcome-card__content">
+    <p class="outcome-card__outcome-nr">
+      GOAL {{ outcome.nr }}
+    </p>
+    <p class="outcome-card__outcome-title">
+      {{ outcome.title }}
+    </p>
+
+    <div class="outcome-card__main-content">
+      <!-- Description -->
+      <p class="outcome-card__description">
+        {{ outcome.description }}
+      </p>
+
+      <!-- Cost per unit -->
+      <div class="outcome-card__cost-per-unit">
+        <p class="outcome-card__cost-per-unit-title">
+          Cost per {{ outcome.unit }}
+        </p>
+        <p class="outcome-card__cost-per-unit-value">
+          {{ outcome.costPerUnit | money }}
+        </p>
+      </div>
+
+      <!-- Outcome status -->
+      <div class="outcome-card__status">
+        <p class="outcome-card__status-title">
+          <span ng-if="outcome.helped > 0">
+            Helped
+          </span>
+          <span ng-if="!outcome.helped || outcome.helped == 0">
+            To help
+          </span>
+        </p>
+        <p class="outcome-card__status-value">
+          <span ng-if="outcome.helped > 0">
+            {{ outcome.helped }}
+            /
+          </span>
+          <span>
+            {{ outcome.numberOfUnits }}
+          </span>
+          <span class="outcome-card__status-unit">
+            {{ outcome.unit }}
+          </span>
+        </p>
+      </div>
+
+      <!-- FOR OUTCOME CARDS ON CHARITY DASHBOARD - CLAIMING PANEL -->
+      <div ng-if="inludesClaimingForm">
+        TODO
+      </div>
+    </div>
+  </div>
+</div>
