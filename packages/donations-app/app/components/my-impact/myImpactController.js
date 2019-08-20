@@ -1,5 +1,5 @@
 angular.module('aliceApp')
-  .controller('MyImpactController', ['$http', 'AuthService', '$stateParams', '$scope', '$state', 'API', '$rootScope', 'CheckoutService', function ($http, AuthService, $stateParams, $scope, $state, API, $rootScope, CheckoutService) {
+  .controller('MyImpactController', ['$http', 'AuthService', '$stateParams', '$scope', '$state', 'API', '$rootScope', 'CheckoutService', 'ETHERSCAN', function ($http, AuthService, $stateParams, $scope, $state, API, $rootScope, CheckoutService, ETHERSCAN) {
     var vm = this;
     vm.auth = AuthService;
 		vm.loggedUser = vm.auth.getLoggedUser();
@@ -65,22 +65,7 @@ angular.module('aliceApp')
 
             //"FIND A TEMPORARY HOME": 3,
 
-            //TODO: Let's discuss if it's the correct way of calculating total impact
-            vm.project.peopleHelped = vm.project.outcomes.reduce((acc, elem) => {
-              console.log(elem);
-              return acc + elem.impactsForUser;
-            }, 0);
-
-            // vm.project.unitsHelped = vm.project.outcomes.reduce((acc, elem) => {
-            //   console.log(elem);
-            //   return acc + Math.round(elem.moneyUsed / elem.costPerUnit);
-            // }, 0);
-
-            console.log("All helped: " + vm.project.unitsHelped );
-
-            //FIXME: Check why the goal calculations are wrong (helped == 0)
             if (vm.project.code == 'mungos-15-lives') {
-              vm.project.unitsHelped = 15;
               vm.project.totalUnitsToHelp = 15;
             }
 
@@ -115,11 +100,23 @@ angular.module('aliceApp')
 			let position = (direction === 'left') ? '-=300': '+=300';
 			angular.element('#appeal-goals').animate({ scrollLeft: position }, 400);
 			event.preventDefault();
-		}
+		};
 
     vm.boostDonation = function() {
       // $state.go('project', { projectCode: vm.project.code });
       CheckoutService.startCheckout(vm.project);
+    };
+
+    vm.getEtherscanLinkForProject = function() {
+      // Hack for St' Mungos because it doesn't contain ethAddresses field
+      if (vm.project && vm.project.code == 'mungos-15-lives') {
+        vm.project.ethAddresses = {
+          project: '0xbd897c8885b40d014fb7941b3043b21adcc9ca1c'
+        };
+      }
+      if (vm.project) {
+        return `${ETHERSCAN}/address/${vm.project.ethAddresses.project}`;
+      }
     };
 
 		function convertHex(hex, opacity) {
