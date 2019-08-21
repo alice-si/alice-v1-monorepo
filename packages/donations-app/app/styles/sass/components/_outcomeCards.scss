@@ -10,6 +10,27 @@
     border-radius: 5px 5px 0 0;
   }
 
+  &__we-used-container {
+    line-height: 20px;
+    text-align: left; padding: 5px;
+    font-size: 14px;
+    font-family: "Source Sans Pro", sans-serif;
+    height: 50px;
+    position: relative;
+    top: -50px;
+    font-weight: 300;
+    width: 100%;
+    background: white;
+    border-radius: 3px;
+    border: 1px solid #1998A2;
+    z-index: 1;
+  }
+
+  &__we-used-amount {
+    font-weight: 500;
+    font-size: 16px;
+  }
+
   &__outcome-description {
     min-height: 150px;
   }
