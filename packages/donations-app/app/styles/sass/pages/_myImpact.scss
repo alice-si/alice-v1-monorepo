@@ -12,8 +12,16 @@
   }
 
   &__boost-donation-button {
-    width: 300px !important;
+    // width: 300px !important;
     border-radius: 2px;
+  }
+
+  &__see-on-blockchain-button {
+    // width: 300px !important;
+    border-radius: 2px;
+    i {
+      color: $alice-tonal-medium;
+    }
   }
 
   &__progress-value {

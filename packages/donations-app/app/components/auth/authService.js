@@ -2,6 +2,7 @@ angular.module('aliceApp')
 
   .service('AuthService', ['$q', '$http', '$rootScope', 'jwtHelper', 'UserService', '$uibModal', 'API', '$state', function ($q, $http, $rootScope, jwtHelper, UserService, $uibModal, API, $state) {
     var LOCAL_TOKEN_KEY = 'openReferenceToken';
+    var LOGGED_IN_AS_ANOTHER_USER_KEY = 'loggedInAsAnotherUser';
     var loggedUser;
     var isAuthenticated = false;
     var authToken;
@@ -29,9 +30,14 @@ angular.module('aliceApp')
       }
     }
 
-    function storeUserCredentials(token) {
+    function storeUserCredentials(token, loggedAsAnotherUser) {
       window.localStorage.setItem(LOCAL_TOKEN_KEY, token);
       useCredentials(token);
+      if (loggedAsAnotherUser) {
+        window.localStorage.setItem(LOGGED_IN_AS_ANOTHER_USER_KEY, true);
+      } else {
+        window.localStorage.setItem(LOGGED_IN_AS_ANOTHER_USER_KEY, false);
+      }
     }
 
     function useCredentials(token) {
@@ -103,6 +109,22 @@ angular.module('aliceApp')
         });
       });
     };
+
+    this.logInAsAnotherUser = function (email) {
+      return $http.post(API + 'authenticateAsAnotherUser', { email }).then(function (result) {
+        if (result.data && result.data.token) {
+          storeUserCredentials(result.data.token, true);
+          return result.data.token;
+        } else {
+          throw new Error(`Authentication for user "${email}" failed`);
+        }
+      });
+    };
+
+    this.loggedInAsAnotherUser = function () {
+      let isLoggedInAsAnotherUser = window.localStorage.getItem(LOGGED_IN_AS_ANOTHER_USER_KEY);
+      return isLoggedInAsAnotherUser == 'true';
+    }
 
     this.resetPassword = function (credentials) {
       return $q(function (resolve, reject) {
