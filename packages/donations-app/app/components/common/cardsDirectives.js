@@ -1,32 +1,38 @@
 angular.module('aliceApp')
-.directive('outcomeCard', function () {
+.directive('outcomeCard', ['$uibModal', function ($uibModal) {
   return {
     scope: {
       projectUnit: '=',
       outcome: '=',
       index: '=',
+      showClaimingForm: '=',
+    },
+    link: function (scope) {
+      scope.claimFn = function (outcome, quantity) {
+        $uibModal.open({
+          templateUrl: '/components/global/claimModal.html',
+          controller: 'ImpactClaimController as claimCtrl',
+          resolve: {
+            outcome: () => outcome,
+            quantity: () => quantity,
+          }
+        });
+      };
     },
     templateUrl: '/components/global/outcomeCard.html'
   };
-}).directive('outcomeCards', ['$http', 'API', function ($http, API) {
+}]).directive('outcomeCards', ['$http', 'API', function ($http, API) {
   return {
     scope: {
       project: '=',
       showImpact: '=',
+      showClaimingForm: '=',
     },
     link: function (scope, elm, attrs, ctrls) {
       scope.$watch('project', function (projectCode) {
+        console.log(projectCode); // TODO alex remove
         loadOutcomes(projectCode);
       });
-
-      // TODO remove later
-      // Mock outcomes
-      // scope.outcomes = [
-      //   { description: 'Keep a temporary home for some days. Keep a temporary home for some days.', imageOld: 'https://alice-res.s3.amazonaws.com/1543758202572_Goal2.png', image: 'https://alice-res.s3.amazonaws.com/1543758282025_Goal3.jpg', costPerUnit: 1000, numberOfUnits: 5, helped: 1, unit: 'people' },
-      //   { description: ' Keep a temporary home for some days.', image: 'https://alice-res.s3.amazonaws.com/1543758282025_Goal3.jpg', costPerUnit: 1000, numberOfUnits: 5, helped: 1, unit: 'people' },
-      //   { description: 'Keep a temporary home for some days. Keep a temporary home for some days.', image: 'https://alice-res.s3.amazonaws.com/1543758282025_Goal3.jpg', costPerUnit: 1000, numberOfUnits: 5, helped: 0, unit: 'people' },
-      //   { description: 'Keep a temporary home for some days. Keep a temporary home for some days.', image: 'https://alice-res.s3.amazonaws.com/1543758282025_Goal3.jpg', costPerUnit: 1000, numberOfUnits: 5, helped: 5, unit: 'people' },
-      // ]
 
       // FIXME - we should modify data in DB, so StMungos will be
       // displayed correctly without this hack
@@ -72,14 +78,6 @@ angular.module('aliceApp')
               }
             });
           });
-
-        
-        // TODO alex - remove
-        // used for impact mocking
-        // scope.outcomes.forEach(outcome => {
-        //   outcome.helpedWithUserDonations = 3;
-        //   outcome.userDonationsUsedAmount = 10000;
-        // });
       }
 
       function loadOutcomes(projectCode) {
@@ -103,6 +101,7 @@ angular.module('aliceApp')
     template: `<div class="row">
                 <outcome-card
                   project-unit="projectUnit"  
+                  show-claiming-form="showClaimingForm"
                   ng-repeat="outcome in outcomes"
                   outcome="outcome"
                   index="$index">

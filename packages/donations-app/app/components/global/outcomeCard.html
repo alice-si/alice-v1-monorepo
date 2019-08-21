@@ -74,10 +74,21 @@
           </table>
         </div>
 
-        <!-- FOR OUTCOME CARDS ON CHARITY DASHBOARD - CLAIMING PANEL -->
-        <div ng-if="inludesClaimingForm">
-          TODO
-        </div>
+        <!-- FOR OUTCOME CARDS IN CHARITY DASHBOARD - CLAIMING PANEL -->
+
+        <div ng-if="showClaimingForm" class="row outcome-card__claiming-form">
+            <p class="col-md-6 outcome-card__claiming-form-units-number-header">
+              No of units providing proof for
+            </p>
+            <div class="col-md-6">
+              <input ng-model="quantity"
+                      class="col-md-12"/>
+            </div>
+    
+            <button ng-click="claimFn(outcome, quantity)" class="col-md-3">
+              Submit
+            </button>
+          </div>
       </div>
     </div>
   </div>

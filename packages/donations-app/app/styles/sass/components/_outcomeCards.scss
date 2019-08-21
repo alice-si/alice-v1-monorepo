@@ -75,6 +75,14 @@
     font-size: 22px !important;
     font-weight: 600 !important;
   }
+
+  &__claiming-form {
+    margin-top: 25px;
+
+    &-units-number-header {
+      font-size: 12px !important;
+    }
+  }
 }
 
 @media screen and (max-width: 767px) {
