@@ -109,23 +109,17 @@
     <!-- Goals -->
     <div class="my-impact__container-goals">
       <h5 class="alice-dark-grey">TRACK IMPACT THROUGH {{ impactCtrl.project.outcomes.length }} GOALS </h5>
-      <!-- <a href="">
-          <i class="fa fa-chevron-circle-left"
-             style="position: absolute; color: #1CB8C4; margin-top: 230px; z-index: 100; font-size: 20px"
-             ng-click="impactCtrl.scrollGoal('left')">
-          </i>
-        </a>
-        <a href="">
-          <i class="fa fa-chevron-circle-right"
-             style="position: absolute; color: #1CB8C4; right: -10px; margin-top: 230px; z-index: 100; font-size: 20px"
-             ng-click="impactCtrl.scrollGoal('right')">
-          </i>
-        </a> -->
-        <div class="row">
+        <outcome-cards
+          project="impactCtrl.project.code"
+          show-impact="true">
+        </outcome-cards>
+
+        <!-- TODO alex - remove the commented code -->
+        <!-- <div class="row">
           <div ng-repeat="outcome in impactCtrl.project.outcomes" index="$index">
             <my-impact-goal goal="outcome" index="$index" finished="impactCtrl.project.status == 'FINISHED'" goals-count="impactCtrl.project.totalUnitsToHelp"></my-impact-goal>
           </div>
-        </div>
+        </div> -->
 
 
     </div>

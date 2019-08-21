@@ -41,7 +41,10 @@ angular.module('aliceApp')
             vm.project.totalUnitsToHelp = vm.project.outcomes.reduce((acc, outcome) => {
               return (Number(outcome.quantityOfUnits) || 0) + acc;
             }, 0);
-            vm.project.unitsHelpedWithUserDonations = vm.project.impacts.length;
+            vm.project.unitsHelpedWithUserDonations =
+              vm.project.impacts.reduce((acc, userImpact) => {
+                return acc + (userImpact.count);
+              }, 0);
 
             // Calculating totalCost for each outcome
             vm.project.outcomes.forEach(elem => {
@@ -119,26 +122,18 @@ angular.module('aliceApp')
       }
     };
 
-		function convertHex(hex, opacity) {
-      hex = hex.replace('#','');
-      let r = parseInt(hex.substring(0,2), 16);
-      let g = parseInt(hex.substring(2,4), 16);
-      let b = parseInt(hex.substring(4,6), 16);
-
-      let result = 'rgba(' + r + ',' + g + ',' + b + ',' + opacity + ')';
-      return result;
-    }
-
     return vm;
-  }])
-	.directive('myImpactGoal', function() {
-		return {
-			scope: {
-				goal: '=',
-				index: '=',
-        finished: '=',
-        goalsCount: '='
-			},
-			templateUrl: '/components/my-impact/myImpactGoal.html'
-		};
-	});
+  }]);
+
+  // TODO alex - remove the commented code
+	// .directive('myImpactGoal', function() {
+	// 	return {
+	// 		scope: {
+	// 			goal: '=',
+	// 			index: '=',
+  //       finished: '=',
+  //       goalsCount: '='
+	// 		},
+	// 		templateUrl: '/components/my-impact/myImpactGoal.html'
+	// 	};
+	// });

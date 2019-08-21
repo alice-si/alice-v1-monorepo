@@ -5,7 +5,7 @@ const Auth = require('../service/auth');
 const AccessControl = require('../service/access-control');
 const Utils = require('../service/utils');
 
-const Outcome = Utils.loadModel('outcome');
+const Impact = Utils.loadModel('impact');
 const Project = Utils.loadModel('project');
 const Validation = Utils.loadModel('validation');
 
@@ -39,9 +39,50 @@ module.exports = function (app) {
   }));
 
   app.get(
-    '/api/getUserMoneyUsageForOutcomes/:projectCode',
+    '/api/getImpactForOutcomes/:projectCode',
+    Auth.auth(),
     asyncHandler(async (req, res) => {
-      // TODO implement
+      let outcomes = await Impact.aggregate([
+        {
+          $match: { _userId: req.user._id },
+        },
+        {
+          $lookup: {
+            from: 'validations',
+            localField: '_validationId',
+            foreignField: '_id',
+            as: 'validations'
+          }
+        },
+        {
+          $addFields: {
+            validation: { $arrayElemAt: ['$validations', 0] }
+          }
+        },
+        {
+          $group: {
+            _id: '$_validationId',
+            moneyUsed: { $sum: '$amount' },
+            outcomeId: {
+              $first: '$validation._outcomeId'
+            }
+          }
+        },
+        {
+          $group: {
+            _id: '$outcomeId',
+            moneyUsed: { $sum: '$moneyUsed' },
+            helped: { $sum: 1 }
+          }
+        }
+      ]);
+      
+      let moneyImpact = {};
+      for (let outcome of outcomes) {
+        moneyImpact[outcome._id] = outcome;
+      }
+
+      return res.json(moneyImpact);
   }));
 
 };

@@ -3,17 +3,19 @@
     <!-- Outcome card image -->
     <img class="outcome-card__image" src="{{ outcome.image }}">
 
-    <div class="outcome-card__we-used-container" >
-      We used
-      <span class="outcome-card__we-used-amount">
-        {{ outcome.userDonationsUsedAmount | money }}
-      </span>
-      of your donation to help
-      <span class="outcome-card__we-used-amount">
-        {{ outcome.helpedWithUserDonations }}
-      </span>
-      {{ projectUnit }}
-      complete this goal
+    <div class="outcome-card__we-used-container">
+        <div ng-if="outcome.userDonationsUsedAmount"  class="outcome-card__we-used">
+            We used
+            <span class="outcome-card__we-used-amount">
+              {{ outcome.userDonationsUsedAmount | money }}
+            </span>
+            of your donation to help
+            <span class="outcome-card__we-used-amount">
+              {{ outcome.helpedWithUserDonations }}
+            </span>
+            {{ projectUnit }}
+            complete this goal
+          </div>
     </div>
 
     <!-- Outcome card content  -->

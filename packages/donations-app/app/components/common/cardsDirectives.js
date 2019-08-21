@@ -12,8 +12,13 @@ angular.module('aliceApp')
   return {
     scope: {
       project: '=',
+      showImpact: '=',
     },
     link: function (scope, elm, attrs, ctrls) {
+      scope.$watch('project', function (projectCode) {
+        loadOutcomes(projectCode);
+      });
+
       // TODO remove later
       // Mock outcomes
       // scope.outcomes = [
@@ -56,7 +61,28 @@ angular.module('aliceApp')
         return newOutcomes;
       }
 
-      scope.$watch('project', function (projectCode) {
+      function loadImpact(projectCode) {
+        $http.get(API + `getImpactForOutcomes/${projectCode}`)
+          .then(function (result) {
+            moneyImpact = result.data;
+            scope.outcomes.forEach(outcome => {
+              if (moneyImpact[outcome._id]) {
+                outcome.helpedWithUserDonations = moneyImpact[outcome._id].helped;
+                outcome.userDonationsUsedAmount = moneyImpact[outcome._id].moneyUsed;
+              }
+            });
+          });
+
+        
+        // TODO alex - remove
+        // used for impact mocking
+        // scope.outcomes.forEach(outcome => {
+        //   outcome.helpedWithUserDonations = 3;
+        //   outcome.userDonationsUsedAmount = 10000;
+        // });
+      }
+
+      function loadOutcomes(projectCode) {
         if (projectCode) {
           $http.get(API + `getOutcomes/${projectCode}`).then(function (result) {
             let {outcomes, projectUnit} = result.data;
@@ -66,11 +92,13 @@ angular.module('aliceApp')
             }
             scope.outcomes = outcomes;
             scope.projectUnit = projectUnit;
+
+            if (scope.showImpact) {
+              loadImpact(projectCode);
+            }
           });
         }
-      });
-
-      
+      }      
     },
     template: `<div class="row">
                 <outcome-card
