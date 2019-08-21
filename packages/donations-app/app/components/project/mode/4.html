@@ -59,7 +59,6 @@
           <p ng-bind-html="projectCtrl.model.extendedSummary"></p>
         </div>
       </div>
-      <!-- TODO alex - check "read more" implementation -->
       <!-- <button class="col-md-2 col-lg-2 no-border"
               ng-click="expandSummary = !expandSummary">
         Read <span ng-if="expandSummary">Less</span><span ng-if="!expandSummary">More</span>
@@ -94,6 +93,7 @@
       </div>
       <h3 class="col-md-12 no-padding">Our Goals</h3>
       <outcome-cards project="projectCtrl.model.code"></outcome-cards>
+        <!-- TODO alex - remove commented html -->
         <!-- <div class="col-md-12 no-padding">
           <div class="appeal-v3__goals-carousel-goal col-md-4 col-sm-6"
                 ng-repeat="goal in projectCtrl.model._outcomes">
@@ -131,7 +131,10 @@
 
       <h3 class="uppercase">Follow their stories</h3>
 
-      <div class="col-md-6" ng-repeat="story in projectCtrl.model.myStory">
+      <story-cards stories="projectCtrl.model.myStory"></story-cards>
+
+      <!-- TODO alex - remove the commented code -->
+      <!-- <div class="col-md-6" ng-repeat="story in projectCtrl.model.myStory">
         <div class="appeal-v3__stories-container">
           <div class="title-over-image">
             <img src="{{ story.img }}"
@@ -162,7 +165,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </section>
   <alice-footer></alice-footer>
