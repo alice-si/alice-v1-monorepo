@@ -413,6 +413,7 @@ angular.module('aliceApp')
   .directive('outcomeCard', function () {
     return {
       scope: {
+        projectUnit: '=',
         outcome: '=',
         index: '=',
       },
@@ -424,23 +425,56 @@ angular.module('aliceApp')
         project: '=',
       },
       link: function (scope, elm, attrs, ctrls) {
-        // Implement fetching outcomes for project
-        // Testing outcomes
+        // TODO remove later
+        // Mock outcomes
         // scope.outcomes = [
         //   { description: 'Keep a temporary home for some days. Keep a temporary home for some days.', imageOld: 'https://alice-res.s3.amazonaws.com/1543758202572_Goal2.png', image: 'https://alice-res.s3.amazonaws.com/1543758282025_Goal3.jpg', costPerUnit: 1000, numberOfUnits: 5, helped: 1, unit: 'people' },
         //   { description: ' Keep a temporary home for some days.', image: 'https://alice-res.s3.amazonaws.com/1543758282025_Goal3.jpg', costPerUnit: 1000, numberOfUnits: 5, helped: 1, unit: 'people' },
         //   { description: 'Keep a temporary home for some days. Keep a temporary home for some days.', image: 'https://alice-res.s3.amazonaws.com/1543758282025_Goal3.jpg', costPerUnit: 1000, numberOfUnits: 5, helped: 0, unit: 'people' },
         //   { description: 'Keep a temporary home for some days. Keep a temporary home for some days.', image: 'https://alice-res.s3.amazonaws.com/1543758282025_Goal3.jpg', costPerUnit: 1000, numberOfUnits: 5, helped: 5, unit: 'people' },
         // ]
-        $http.get(API + 'getMyProjects').then(function (result) {
-          let projects = result.data;
-          let project = projects.find(prj => prj.code == scope.project);
-          console.log(project);
-          scope.outcomes = project.outcomes;
+
+        // FIXME - we should modify data in DB, so StMungos will be
+        // displayed correctly without this hack
+        function doHackForStMungos(outcomes) {
+          // TODO do more hacks - amke data consistent with my-impact after Kuba's fixes
+          outcomes.forEach(outcome => {
+            if (outcome._id === '58d9041ffc008d7f9aabd43f') {
+              outcome.moneyUsed += 2500;
+            }
+            if (outcome._id === '58d904e7fc008d7f9aabd441') {
+              outcome.moneyUsed += 300000;
+            }
+            if (outcome._id === '57d7e78504efabbc43d4f8b9') {
+              outcome.moneyUsed += 20000;
+            }
+            if (outcome._id === '58d905bffc008d7f9aabd442') {
+              outcome.costPerUnit = 100000;
+              outcome.moneyUsed += 300000;
+            }
+          });
+        }
+
+        scope.$watch('project', function (projectCode) {
+          if (projectCode) {
+            $http.get(API + `getOutcomes/${projectCode}`).then(function (result) {
+              let {outcomes, projectUnit} = result.data;
+              // FIXME - modify StMungo data in DB
+              doHackForStMungos(outcomes);
+              scope.outcomes = outcomes;
+              scope.projectUnit = projectUnit;
+            });
+          }
         });
+
+        
       },
       template: `<div class="row">
-                  <outcome-card ng-repeat="outcome in outcomes" outcome="outcome" index="$index">
+                  <outcome-card
+                    project-unit="projectUnit"  
+                    ng-repeat="outcome in outcomes"
+                    outcome="outcome"
+                    index="$index">
                   </outcome-card>
                 </div>`
     };

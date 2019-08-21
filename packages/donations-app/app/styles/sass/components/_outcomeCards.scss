@@ -1,6 +1,5 @@
 .outcome-card {
-  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.2);
-  // box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  @include box-shadow(0, 0, 6px, rgba(0, 0, 0, 0.2));
   transition: 0.3s;
   border-radius: 3px; /* 3px rounded corners */
   margin: 10px;
@@ -12,7 +11,7 @@
   }
 
   &__outcome-description {
-    min-height: 100px;
+    min-height: 150px;
   }
 
   &__outcome-nr {
