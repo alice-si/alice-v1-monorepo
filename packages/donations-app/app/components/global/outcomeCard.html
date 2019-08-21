@@ -1,59 +1,67 @@
-<div class="outcome-card">
-  <!-- Outcome card image -->
-  <img class="outcome-card__image" src="{{ outcome.image }}">
+<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 outcome-card__container">
+  <div class="outcome-card">
+    <!-- Outcome card image -->
+    <img class="outcome-card__image" src="{{ outcome.image }}">
 
-  <!-- Outcome card content  -->
-  <div class="outcome-card__content">
-    <p class="outcome-card__outcome-nr">
-      GOAL {{ outcome.nr }}
-    </p>
-    <p class="outcome-card__outcome-title">
-      {{ outcome.title }}
-    </p>
-
-    <div class="outcome-card__main-content">
-      <!-- Description -->
-      <p class="outcome-card__description">
-        {{ outcome.description }}
+    <!-- Outcome card content  -->
+    <div class="outcome-card__content">
+      <p class="outcome-card__outcome-nr">
+        GOAL {{ index + 1 }}
+      </p>
+      <p class="outcome-card__outcome-description">
+        {{ outcome.value }}
       </p>
 
-      <!-- Cost per unit -->
-      <div class="outcome-card__cost-per-unit">
-        <p class="outcome-card__cost-per-unit-title">
-          Cost per {{ outcome.unit }}
-        </p>
-        <p class="outcome-card__cost-per-unit-value">
-          {{ outcome.costPerUnit | money }}
-        </p>
-      </div>
+      <div class="outcome-card__main-content">
 
-      <!-- Outcome status -->
-      <div class="outcome-card__status">
-        <p class="outcome-card__status-title">
-          <span ng-if="outcome.helped > 0">
-            Helped
-          </span>
-          <span ng-if="!outcome.helped || outcome.helped == 0">
-            To help
-          </span>
-        </p>
-        <p class="outcome-card__status-value">
-          <span ng-if="outcome.helped > 0">
-            {{ outcome.helped }}
-            /
-          </span>
-          <span>
-            {{ outcome.numberOfUnits }}
-          </span>
-          <span class="outcome-card__status-unit">
-            {{ outcome.unit }}
-          </span>
-        </p>
-      </div>
+        <!-- Outcome details -->
+        <div class="outcome-card__table-container">
+          <table class="outcome-card__details-table">
+            <tr>
+              <th>
+                <p class="outcome-card__cost-per-unit-header">
+                  Cost per {{ outcome.unit }}
+                </p>
+              </th>
+              <th>
+                <p class="outcome-card__status-header">
+                  <span ng-if="outcome.helped > 0">
+                    Helped
+                  </span>
+                  <span ng-if="!outcome.helped || outcome.helped == 0">
+                    To help
+                  </span>
+                </p>
+              </th>
+            </tr>
+            <tr>
+              <td>
+                <p class="outcome-card__bold-value">
+                  {{ outcome.costPerUnit | money }}
+                </p>
+              </td>
+              <td>
+                <p class="outcome-card__status-value">
+                  <span ng-if="outcome.helped > 0" class="outcome-card__bold-value">
+                    {{ outcome.helped }}
+                    /
+                  </span>
+                  <span class="outcome-card__bold-value">
+                    {{ outcome.numberOfUnits }}
+                  </span>
+                  <span class="outcome-card__status-unit">
+                    {{ outcome.unit }}
+                  </span>
+                </p>
+              </td>
+            </tr>
+          </table>
+        </div>
 
-      <!-- FOR OUTCOME CARDS ON CHARITY DASHBOARD - CLAIMING PANEL -->
-      <div ng-if="inludesClaimingForm">
-        TODO
+        <!-- FOR OUTCOME CARDS ON CHARITY DASHBOARD - CLAIMING PANEL -->
+        <div ng-if="inludesClaimingForm">
+          TODO
+        </div>
       </div>
     </div>
   </div>
