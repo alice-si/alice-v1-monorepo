@@ -436,23 +436,35 @@ angular.module('aliceApp')
 
         // FIXME - we should modify data in DB, so StMungos will be
         // displayed correctly without this hack
-        function doHackForStMungos(outcomes) {
-          // TODO do more hacks - amke data consistent with my-impact after Kuba's fixes
-          outcomes.forEach(outcome => {
-            if (outcome._id === '58d9041ffc008d7f9aabd43f') {
-              outcome.moneyUsed += 2500;
+        function doHackForStMungos(outcomes) {       
+          let hiddenOutcomes = [
+            'KEEP A PERMANENT HOME (6 months)',
+            'KEEP A TEMPORARY HOME (6 months)',
+            'KEEP A PERMANENT HOME',
+            'KEEP A PERMANENT HOME (6 months)',
+            'Tackle substance misuse: register with a specialist  they trust to get the help they need',
+            'CONNECT TO SERVICES OUTSIDE LONDON'
+          ];
+          let helped = {
+            '57d7e78504efabbc43d4f8b9': 3,
+            '57d7e8b404efabbc43d4f8ba': 1,
+            '57d7ea4d04efabbc43d4f8bb': 3,
+            '58d9041ffc008d7f9aabd43f': 2,
+            '58d904e7fc008d7f9aabd441': 3,
+            '58d905bffc008d7f9aabd442': 3
+          };
+          let newOutcomes = [];
+          for (let outcome of outcomes) {
+            if (!hiddenOutcomes.includes(outcome.title)) {
+              outcome.value = outcome.title;
+              outcome.unit = 'person';
+              outcome.helped = helped[outcome._id];
+              outcome.quantityOfUnits = 15;
+              newOutcomes.push(outcome);
             }
-            if (outcome._id === '58d904e7fc008d7f9aabd441') {
-              outcome.moneyUsed += 300000;
-            }
-            if (outcome._id === '57d7e78504efabbc43d4f8b9') {
-              outcome.moneyUsed += 20000;
-            }
-            if (outcome._id === '58d905bffc008d7f9aabd442') {
-              outcome.costPerUnit = 100000;
-              outcome.moneyUsed += 300000;
-            }
-          });
+          }
+
+          return newOutcomes;
         }
 
         scope.$watch('project', function (projectCode) {
@@ -460,7 +472,10 @@ angular.module('aliceApp')
             $http.get(API + `getOutcomes/${projectCode}`).then(function (result) {
               let {outcomes, projectUnit} = result.data;
               // FIXME - modify StMungo data in DB
-              doHackForStMungos(outcomes);
+              if (projectCode == 'mungos-15-lives') {
+                outcomes = doHackForStMungos(outcomes);
+              }
+              console.log(outcomes);
               scope.outcomes = outcomes;
               scope.projectUnit = projectUnit;
             });
