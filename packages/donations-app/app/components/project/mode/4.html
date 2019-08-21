@@ -41,10 +41,9 @@
 
     <div class="appeal-v3__info">
       <div class="col-xs-12 col-md-12 col-lg-12">
-        <h2 class="col-xs-12 col-md-12 col-lg-12 uppercase alice-dark-text">{{ projectCtrl.model.charity.name | vowelize }} Initiative</h2>
-        <div class="col-md-8">
-          <p class="col-xs-12 col-md-12 col-lg-12"
-             ng-bind-html="projectCtrl.model.summary"></p>
+        <h2 class="uppercase alice-dark-text">{{ projectCtrl.model.charity.name | vowelize }} Initiative</h2>
+        <div class="col-md-8 no-padding">
+          <p ng-bind-html="projectCtrl.model.summary"></p>
         </div>
         <div class="col-md-3 col-md-offset-1">
             <p>Run by</p>
