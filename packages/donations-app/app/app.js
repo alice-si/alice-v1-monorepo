@@ -164,6 +164,10 @@ angular.module('aliceApp', ['ui.router', 'angular-jwt', 'ui.bootstrap', 'ui.boot
         url: '/users/',
         templateUrl: '/components/user/usersView.html'
       })
+      .state('log-in-as-another-user', {
+        url: '/log-in-as-another-user/',
+        templateUrl: '/components/auth/logInAsAnotherUser.html'
+      })
 			.state('charities', {
         url: '/charities/',
         templateUrl: '/components/charity/charitiesView.html'
