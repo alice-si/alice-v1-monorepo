@@ -30,7 +30,6 @@ angular.module('aliceApp')
     },
     link: function (scope, elm, attrs, ctrls) {
       scope.$watch('project', function (projectCode) {
-        console.log(projectCode); // TODO alex remove
         loadOutcomes(projectCode);
       });
 

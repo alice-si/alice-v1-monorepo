@@ -28,7 +28,7 @@
           </div>
         </div>
         <div class="row">
-          <div ng-show="impactCtrl.project.status == 'FINISHED'" class="col-md-10 col-xs-10 no-padding"
+          <div ng-if="impactCtrl.project.status == 'FINISHED'" class="col-md-10 col-xs-10 no-padding"
                style="margin-top: 30px;" >
             <div class="row">
               <div class="col-md-6">
@@ -37,13 +37,13 @@
                      style="margin-bottom: -100px; background-image: url('{{impactCtrl.project.charity.picture}}')">
                 </div>
               </div>
-              <div ng-show="false" class="col-md-6" style="padding-top: 10px;">
-              <a href="/project/{{impactCtrl.project.code}}/4">
-                <button class="inverse-button my-impact__show-appeal-button">
-                  <i class="glyphicon glyphicon-chevron-right"></i>
-                  VIEW REPORT
-                </button>
-              </a>
+              <div class="col-md-6" style="padding-top: 10px;">
+                <a href="/project/{{impactCtrl.project.code}}/4">
+                  <button class="inverse-button my-impact__show-appeal-button">
+                    <i class="glyphicon glyphicon-chevron-right"></i>
+                    VIEW REPORT
+                  </button>
+                </a>
               </div>
             </div>
           </div>
@@ -77,14 +77,20 @@
         <div ng-if="impactCtrl.project.totalPaidOut > 0" class="my-impact__overview-section col-md-4 col-sm-6 col-xs-12">
           <p>{{ impactCtrl.charity.name }} used</p>
           <h3 class="alice-blue">{{ impactCtrl.project.totalPaidOut | money }}</h3>
-          <p>so far</p>
+          <p class="my-impact__overview-section-value-postfix">so far</p>
         </div>
         <div ng-if="impactCtrl.project.unitsHelpedWithUserDonations > 0" class="my-impact__overview-section col-md-4 col-sm-6 col-xs-12">
           <p>To help</p>
           <h3 class="alice-blue">
             {{impactCtrl.project.unitsHelpedWithUserDonations}}
           </h3>
-          <p>{{ impactCtrl.project.typeOfBeneficiary }}</p>
+          <p class="my-impact__overview-section-value-postfix">{{ impactCtrl.project.typeOfBeneficiary }}</p>
+        </div>
+        <div ng-if="impactCtrl.project.unitsHelpedWithUserDonations == 0" class="col-md-4 col-sm-6 col-xs-12">
+          <p class="my-impact__empty-impact-text">{{ impactCtrl.charity.name }} is working hard to deliver on the goals below.
+            Once your donation is used we will email you, with a link to this page,
+            to see the goals your donations completed and how many people it helped.
+          </p>
         </div>
       </div>
     </div>
