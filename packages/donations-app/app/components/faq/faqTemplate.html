@@ -11,10 +11,10 @@
   </div>
   <div class="questions-wrapper">
     <div class="questions"  ng-repeat="question in faqCtrl.questions">
-      <div class="question left col-md-10">
+      <div class="question left col-10">
         <div class="title wow fadeInLeft">{{ question.question }}</div>
         <div class="section-heading-border wow fadeInLeft"></div>
-        <div class="subtitle wow fadeInLeft" ng-bind-html="question.answer"></div>
+        <div class="answer wow fadeInLeft" ng-bind-html="question.answer"></div>
       </div>
     </div>
   </div>

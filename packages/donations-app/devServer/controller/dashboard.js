@@ -205,7 +205,29 @@ module.exports = function (app) {
       }
 
       async function findGoals(id) {
-        return await Outcome.aggregate([{$match: id}]);
+        return await Outcome.aggregate([
+          { $match: id },
+          { $lookup: {
+            from: "validations",
+            let: { outcomeId: "$_id"} ,
+            pipeline: [
+              {
+                $match: {$expr: {
+                  $and: [
+                    {$eq: ["$_outcomeId", "$$outcomeId"]},
+                    // May be uncommented if we want to count only completed validations
+                    // {$eq: ["$status", "IMPACT_FETCHING_COMPLETED"]},
+                  ]}},
+              },
+            ],
+            as: "claimed"
+          }},
+          {
+            $addFields: {
+              claimsCreated: {$size: "$claimed"},
+            }
+          }
+        ]);
       }
 
       // Can be extended for proof type
