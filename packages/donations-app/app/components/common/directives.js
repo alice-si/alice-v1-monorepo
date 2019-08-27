@@ -37,9 +37,9 @@ angular.module('aliceApp')
     return {
       scope: {},
       templateUrl: '/components/global/cookieConsent.html',
-      controller: function ($scope) {
+      link: function (scope) {
         var _consent = $cookies.get('consent');
-        $scope.consent = function (consent) {
+        scope.consent = function (consent) {
           if (consent === undefined) {
             return _consent;
           } else if (consent) {

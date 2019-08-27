@@ -122,6 +122,7 @@ angular.module('aliceApp')
         outcomesOfProject: '=',
         projectValidator: '=',
         amountAvailable: '=',
+        projectCode: '=',
       },
       templateUrl: '/components/dashboard/tabs/goals/charityDashboardGoals.html'
     };
@@ -171,26 +172,28 @@ angular.module('aliceApp')
       templateUrl: '/components/dashboard/panels/goalProgressGraph.html',
       controller: 'GoalsGraphController as graphCtrl',
     };
-  })
-  .directive('claimOutcomeCard', () => {
-    return {
-      templateUrl: '/components/dashboard/panels/claimOutcomeCard.html',
-      scope: {
-        outcome: '=',
-        validator: '=',
-      },
-      controller: ['$scope', '$uibModal', function($scope, $uibModal) {
-        // Claiming function for a validation
-        $scope.claimFn = function(outcome, quantity) {
-          let modal = $uibModal.open({
-            templateUrl: '/components/global/claimModal.html',
-            controller: 'ImpactClaimController as claimCtrl',
-            resolve: {
-              outcome: () => outcome,
-              quantity: () => quantity,
-            }
-          });
-        };
-      }],
-    };
   });
+
+  // TODO alex - remove the commented code
+  // .directive('claimOutcomeCard', () => {
+  //   return {
+  //     templateUrl: '/components/dashboard/panels/claimOutcomeCard.html',
+  //     scope: {
+  //       outcome: '=',
+  //       validator: '=',
+  //     },
+  //     controller: ['$scope', '$uibModal', function($scope, $uibModal) {
+  //       // Claiming function for a validation
+  //       $scope.claimFn = function(outcome, quantity) {
+  //         let modal = $uibModal.open({
+  //           templateUrl: '/components/global/claimModal.html',
+  //           controller: 'ImpactClaimController as claimCtrl',
+  //           resolve: {
+  //             outcome: () => outcome,
+  //             quantity: () => quantity,
+  //           }
+  //         });
+  //       };
+  //     }],
+  //   };
+  // });

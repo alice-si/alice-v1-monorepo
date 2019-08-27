@@ -13,7 +13,7 @@ const User = Utils.loadModel('user');
 const AccessRequest = Utils.loadModel('accessRequest');
 const Charity = Utils.loadModel('charity');
 
-const ANOTHER_USER_TOKEN_TTL = 120; // seconds
+const ANOTHER_USER_TOKEN_TTL = 600; // seconds
 const ACCESS_REQUEST_TTL = 120; // seconds
 const JWT_OAUTH_TTL = 300; // seconds
 const DEFAULT_RESIDENCE = "GB";
