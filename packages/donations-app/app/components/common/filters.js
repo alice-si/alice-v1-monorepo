@@ -86,4 +86,18 @@ angular.module('aliceApp')
 			}
 			return 'A ' + word;
 		}
+	})
+	.filter('pastTense', function() {
+		return function(verb, current, target) {
+			// return(verb);
+			console.log(verb, current, target);
+			if(current === target) {
+				console.log('TENSIFYEYE');
+				console.log(tensify(verb).past);
+			}
+			else {
+				console.log('DO NOT TENSIFYFYFYF');
+				return 'To ' + verb;
+			}
+		}
 	});
