@@ -1,6 +1,12 @@
 angular.module('aliceApp')
-  .controller('HowItWorksController', ['AuthService', '$scope', 'API', 'NotificationService', '$http', function (AuthService, $scope, API, NotificationService, $http) {
+  .controller('HowItWorksController', ['AuthService', '$scope', 'API', 'NotificationService', '$http', '$uibModal', function (AuthService, $scope, API, NotificationService, $http, $uibModal) {
     var vm = this;
+    
+    $uibModal.open({
+      templateUrl: '/components/vodafone/howItWorksModal.html',
+      backdrop: 'static',
+      resolve: {}
+    });
 
     vm.sendMessage = function () {
       vm.contactForm.$submitted = true;

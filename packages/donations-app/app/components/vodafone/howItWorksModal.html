@@ -1,0 +1,34 @@
+<div class="modal-body"
+  style="text-align: center; font-size: 16px; font-weight: 300;"
+  ng-controller="InfoModalController as infoModalCtrl">
+
+  <a class="modal-close" style="position: absolute; left: 10px; top: 10px;" ng-click="infoModalCtrl.dismissModal()">×</a>
+
+  <h2 class="modal-title" style="margin-bottom: 20px;">Hi there!</h2>
+
+  <div class="content">
+    <p style="margin-bottom: 20px;">
+        This page is not part of the main feedback session.
+    </p>        
+
+    <p style="margin-bottom: 20px;">
+      If you’d like to give us <b>extra input</b>,
+      just follow the instructions in the gray banner
+      on the bottom right corner of the page.
+    </p style="margin-bottom: 20px;">
+
+    <p style="margin-bottom: 20px;">
+      If you’d like to <b>skip this one</b>,
+      click go back on your browser.
+    </p>
+
+    <p style="margin-bottom: 20px;">
+      Thanks,
+    </p>
+
+    <button style="width: 100px !important" ng-click="infoModalCtrl.dismissModal()" >
+        OK
+    </button>
+
+  </div>
+</div>
