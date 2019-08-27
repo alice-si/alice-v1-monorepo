@@ -8,13 +8,9 @@ angular.module('aliceApp')
     };
 
     $uibModal.open({
-      templateUrl: '/components/vodafone/infoModal.html',
+      templateUrl: '/components/vodafone/homePageModal.html',
       backdrop: 'static',
-      resolve: {
-          // modalMode : function() {
-          //      return 'LOGIN'
-          // }
-      }
+      resolve: {}
     });
 
     var loadProjectsWithCharities = function () {
