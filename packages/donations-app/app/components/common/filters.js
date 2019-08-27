@@ -92,11 +92,9 @@ angular.module('aliceApp')
 			// return(verb);
 			console.log(verb, current, target);
 			if(current === target) {
-				console.log('TENSIFYEYE');
 				console.log(tensify(verb).past);
 			}
 			else {
-				console.log('DO NOT TENSIFYFYFYF');
 				return 'To ' + verb;
 			}
 		}
