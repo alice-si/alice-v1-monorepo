@@ -64,8 +64,6 @@ angular.module('aliceApp')
               return hidden.indexOf(elem.title) == -1;
             });
 
-            console.log(vm.project);
-
             //"FIND A TEMPORARY HOME": 3,
 
             if (vm.project.code == 'mungos-15-lives') {

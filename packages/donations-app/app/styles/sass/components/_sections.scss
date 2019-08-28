@@ -228,7 +228,11 @@
 
 @media screen and (max-width: 565px) {
   .splash-v3 {
+    height: 100vh;
+
     &__container-title {
+      top: 30vh !important;
+      @include box-shadow(0, 1px, 3px, rgba(0,0,0,0.4));
       width: 86vw;
     }
   }
@@ -237,7 +241,7 @@
 @media screen and (max-width: 414px) {
   .splash-v2, .splash-v3 {
     .header-image {
-      height: 100vh;
+      height: 40vh !important;
     }
 
     &__container-title {
