@@ -87,15 +87,16 @@ angular.module('aliceApp')
 			return 'A ' + word;
 		}
 	})
-	.filter('pastTense', function() {
+	.filter('pastTense', ['Tensify', function(Tensify) {
 		return function(verb, current, target) {
 			// return(verb);
 			console.log(verb, current, target);
 			if(current === target) {
-				console.log(tensify(verb).past);
+				console.log(Tensify.tensify(verb).past);
+				return Tensify.tensify(verb).past;
 			}
 			else {
 				return 'To ' + verb;
 			}
 		}
-	});
+	}]);
