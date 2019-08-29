@@ -101,6 +101,7 @@ angular.module('aliceApp')
     vm.summernoteConfig = {
       toolbar: [
         ['font', ['bold', 'italic', 'underline', 'clear']],
+        ['view', ['codeview']],
       ],
     }
 
