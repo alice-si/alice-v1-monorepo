@@ -148,9 +148,15 @@
       // height: 100vh;
     }
 
-    &__progress-section {
-      border-right: 1px solid $alice-dark-grey;
-      font-size: 16px;
+    &__progress {
+      &-section {
+        border-right: 1px solid $alice-dark-grey;
+        font-size: 16px;
+      }
+
+      &-amount {
+        font-size: 22px;
+      }
     }
 
     &__container-title {
@@ -205,8 +211,14 @@
 
 @media screen and (max-width: 990px) {
   .splash-v3 {
-    &__progress-section {
-      border-right: none;
+    &__progress {
+      &-section {
+        border-right: 1px solid $alice-dark-grey;
+      }
+
+      &-amount {
+        font-size: 18px;
+      }
     }
   }
 }
@@ -235,12 +247,24 @@
       @include box-shadow(0, 1px, 3px, rgba(0,0,0,0.4));
       width: 86vw;
     }
+
+    &__progress {
+      &-section {
+        border-right: 1px solid $alice-dark-grey;
+      }
+    }
+  }
+  .appeal-page > .splash-v3 {
+    height: 80vh;
   }
 }
 
 @media screen and (max-width: 414px) {
   .splash-v2, .splash-v3 {
     .header-image {
+      height: 100vh !important;
+    }
+    .appeal-splash {
       height: 40vh !important;
     }
 
@@ -249,11 +273,11 @@
     }
 
     p {
-      font-size: 16px !important;
+      font-size: 12px !important;
     }
 
     &__progress-section {
-      border-right: none;
+      // border-right: none;
 
       span {
         font-weight: 600;
