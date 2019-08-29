@@ -89,14 +89,19 @@ angular.module('aliceApp')
 	})
 	.filter('pastTense', ['Tensify', function(Tensify) {
 		return function(verb, current, target) {
-			// return(verb);
-			console.log(verb, current, target);
 			if(current === target) {
-				console.log(Tensify.tensify(verb).past);
 				return Tensify.tensify(verb).past;
 			}
 			else {
-				return 'To ' + verb;
+				return 'to ' + verb;
 			}
 		}
-	}]);
+	}])
+	.filter('capitalize', function () {
+		return function(input) {
+			if (input && (typeof input) == 'string' && input.length > 0) {
+				return input.charAt(0).toUpperCase() + input.substr(1).toLowerCase();
+			}
+			return input;
+		}
+	});

@@ -16,7 +16,7 @@
              <span class="my-impact__progress-value">{{ impactCtrl.project.donatedByAll | money}}</span>
            </div>
            <div class="col-md-4 splash-v3__progress-section">
-            <p ng-if="impactCtrl.project.unitsHelped > 0" class="my-impact__progress-title">{{ 'help' | pastTense:impactCtrl.project.unitsHelped:impactCtrl.project.totalUnitsToHelp }}</p>
+            <p ng-if="impactCtrl.project.unitsHelped > 0" class="my-impact__progress-title">{{ 'help' | pastTense:impactCtrl.project.unitsHelped:impactCtrl.project.totalUnitsToHelp | capitalize }}</p>
             <!-- <p ng-if="impactCtrl.project.unitsHelped == 0" class="my-impact__progress-title">To help</p> -->
             <span class="my-impact__progress-value">
               <span ng-if="impactCtrl.project.unitsHelped > 0">{{ impactCtrl.project.unitsHelped }}/</span>

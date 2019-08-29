@@ -41,7 +41,7 @@
               </th>
               <th>
                 <p class="outcome-card__status-header">
-                  <span>{{ outcome.actionVerbForProgress }}</span>
+                  <span>{{ (outcome.actionVerbForProgress || 'help') | pastTense:outcome.helped:outcome.quantityOfUnits | capitalize }}</span>
                 </p>
               </th>
             </tr>
