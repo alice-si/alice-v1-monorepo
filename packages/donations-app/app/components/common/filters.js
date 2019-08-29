@@ -89,7 +89,7 @@ angular.module('aliceApp')
 	})
 	.filter('pastTense', ['Tensify', function(Tensify) {
 		return function(verb, current, target) {
-			if(current === target) {
+			if (current > 0) {
 				return Tensify.tensify(verb).past;
 			}
 			else {
