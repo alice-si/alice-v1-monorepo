@@ -14,12 +14,8 @@ angular.module('aliceApp')
     });
 
     var loadProjectsWithCharities = function () {
-      ProjectService.getActiveProjects().then(function (projects) {
-        vm.projects = _.map(projects.data, (project) => {
-          let keyList = ['title', 'code', 'charity', 'lead', 'img'];
-
-          return _.pick(project, keyList);
-        });
+      ProjectService.getProjects().then(function (projects) {
+        vm.projects = projects.data;
         loadCharities();
       });
     }
