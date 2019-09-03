@@ -27,6 +27,10 @@
   <!-- Hotjar Tracking Code for https://stage.alice.si/ -->
   <script>
     (function(h,o,t,j,a,r){
+        // Added by alex@alice.si to disable hotjar on production
+        if (location.href.includes('donationsapp.alice.si')) {
+          return;
+        }
         h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
         h._hjSettings={hjid:1451891,hjsv:6};
         a=o.getElementsByTagName('head')[0];

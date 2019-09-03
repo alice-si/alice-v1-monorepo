@@ -1,5 +1,5 @@
 angular.module('aliceApp')
-  .controller('HomeController', ['ProjectService', 'NotificationService', 'API', '$location', '$http', '$uibModal', function (ProjectService, NotificationService, API, $location, $http, $uibModal) {
+  .controller('HomeController', ['ProjectService', 'NotificationService', 'API', '$location', '$http', '$uibModal', 'MODE', function (ProjectService, NotificationService, API, $location, $http, $uibModal, MODE) {
     var vm = this, navHeight = $('#navbar-menu').height();
 
     var loadData = function () {
@@ -7,11 +7,13 @@ angular.module('aliceApp')
       loadProjectsWithCharities();
     };
 
-    $uibModal.open({
-      templateUrl: '/components/vodafone/homePageModal.html',
-      backdrop: 'static',
-      resolve: {}
-    });
+    if (MODE != 'prod') {
+      $uibModal.open({
+        templateUrl: '/components/vodafone/homePageModal.html',
+        backdrop: 'static',
+        resolve: {}
+      });
+    }
 
     var loadProjectsWithCharities = function () {
       ProjectService.getProjects().then(function (projects) {
