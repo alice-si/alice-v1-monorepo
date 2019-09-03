@@ -109,7 +109,7 @@
       }
     }
   }
-  
+
   &__overview {
     margin-top: 50px;
     padding: 0;
@@ -156,7 +156,7 @@
 @media screen and (max-width: 835px) {
   .my-impact {
     &__container {
-      &-greeting {
+      &-greeting, &-boost-donation {
         margin-left: 3vw;
       }
     }
@@ -169,6 +169,20 @@
     &__splash_container {
       width: 80vw !important
     }
+
+    &__overview {
+      margin-top: 0 !important;
+
+      &-section {
+        margin-bottom: 0 !important;
+      }
+
+      div {
+        &:nth-child(2) , &:last-child {
+          margin-bottom: 100px;
+        }
+      }
+    }
   }
 
   #my-impact-project-title {
@@ -180,6 +194,12 @@
   .my-impact {
     &__container {
       width: 100%;
+    }
+
+    &__boost-donation, &__see-on-blockchain {
+      &-button {
+        font-size: 14px;
+      }
     }
 
     &__overview {

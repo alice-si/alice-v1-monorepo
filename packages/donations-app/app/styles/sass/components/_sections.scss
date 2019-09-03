@@ -264,9 +264,6 @@
     .header-image {
       height: 100vh !important;
     }
-    .appeal-splash {
-      height: 40vh !important;
-    }
 
     &__container-title {
       width: 80%;
@@ -323,6 +320,18 @@
       font-size: 12px !important;
     }
   }
+
+  .my-impact-splash > .header-image {
+    height: 40vh !important;
+  }
+
+  .appeal-page {
+    .splash-v3 {
+      .header-image {
+        height: 40vh !important;
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 330px) {
@@ -340,6 +349,20 @@
 
     &__progress-section:first-child {
       margin-top: 10px;
+    }
+  }
+
+  .appeal-page > .splash-v3 {
+    height: 100vh !important;
+
+    p {
+      font-size: 10px !important;
+    }
+  }
+
+  .splash-v3__progress {
+    &-amount {
+      font-size: 14px !important;
     }
   }
 }
