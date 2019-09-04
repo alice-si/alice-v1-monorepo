@@ -15,9 +15,29 @@ angular.module('aliceApp')
       });
     }
 
+    // FIXME
+    // Livia asked to move fusion-housing project from the first position of
+    // active projects
+    // The problem is connected with the fact that fusion housing project was
+    // the second project created on stage (after st-mungos)
+    function doHackForFusionHousing(projects) {
+      function getNewIndex({code}) {
+        const newProjectIndexes = {
+          'mungos-15-lives': 0,
+          'save-from-abuse': 1,
+          'gift-of-walking': 2,
+          'fusion-housing-1': 3,
+        }
+        return newProjectIndexes[code] || 4;
+      }
+      projects.sort(
+        (prj1, prj2) => getNewIndex(prj1) - getNewIndex(prj2));
+      return projects;
+    }
+
     var loadProjectsWithCharities = function () {
       ProjectService.getProjects().then(function (projects) {
-        vm.projects = projects.data;
+        vm.projects = doHackForFusionHousing(projects.data);
         loadCharities();
       });
     }
