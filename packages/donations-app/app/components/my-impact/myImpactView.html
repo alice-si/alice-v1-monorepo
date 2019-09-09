@@ -88,7 +88,7 @@
         <div ng-if="impactCtrl.project.unitsHelpedWithUserDonations == 0" class="col-md-4 col-sm-6 col-xs-12">
           <p class="my-impact__empty-impact-text">{{ impactCtrl.charity.name }} is working hard to deliver on the goals below.
             Once your donation is used we will email you, with a link to this page,
-            to see the goals your donations completed and how many people it helped.
+            to see the goals your donations completed and how many {{ impactCtrl.project.typeOfBeneficiary | lowercase }} it helped.
           </p>
         </div>
       </div>
