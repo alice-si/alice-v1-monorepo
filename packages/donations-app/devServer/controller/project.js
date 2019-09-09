@@ -346,6 +346,7 @@ module.exports = function (app) {
     // setting _outcomes field in project document
     const newOutcomesIds = await Outcome
       .find({_projectId: savedProject._id})
+      .sort("orderNumber")
       .select("_id");
     savedProject._outcomes = newOutcomesIds;
     await savedProject.save();

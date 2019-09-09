@@ -9,8 +9,24 @@
 </div>
 
 <!-- Visible when outcome is selected -->
+
+
+
 <div class="col-md-8" ng-repeat="outcome in prWizardCtrl.project.outcomes track by $index"
      ng-show="prWizardCtrl.mode == prWizardCtrl.modes.OUTCOMES && prWizardCtrl.selectedOutcome === outcome">
+
+  <div class="form-group">
+    <label class="col-sm-3 control-label">Outcome order number *</label>
+
+    <div class="col-sm-9">
+      <input type="text" class="form-control" ng-model="outcome.orderNumber"
+              placeholder="Outcome order number"
+              name="outcomeOrderNumber" required>
+      <error-message name="outcomeOrderNumber" error="required"> You must enter the outcome order number in this outcome
+      </error-message>
+    </div>
+  </div>
+
   <div class="form-group" has-error>
     <label class="col-sm-3 control-label">Title *</label>
 
