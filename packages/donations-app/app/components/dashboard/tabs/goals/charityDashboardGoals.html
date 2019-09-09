@@ -49,11 +49,17 @@
         </h2>
 
 
-         <div ng-repeat="outcome in outcomesOfProject"
+         <!-- TODO alex - remove the commented code -->
+         <!-- <div ng-repeat="outcome in outcomesOfProject"
               class="col-sm-12 col-md-6 col-md-4">
               <claim-outcome-card outcome="outcome"
                                   validator="projectValidator.email"/>
-         </div>
+         </div> -->
+
+         <outcome-cards
+          project="projectCode"
+          show-claiming-form="true">
+        </outcome-cards>
 
     </div>
   </uib-accordion>
