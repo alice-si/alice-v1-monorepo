@@ -19,7 +19,11 @@ async function deployContract(truffleContractObj, ...args) {
     bytecode,
     mainWallet);
   const contract = await contractFactory.deploy(...args);
+  logger.debug('Contract deployment started: '
+    + JSON.stringify(contract.deployTransaction.hash));
   await contract.deployed(); // waiting until it is mined
+  logger.debug('Contract deployment finished: '
+    + JSON.stringify(contract.deployTransaction.hash));
   return contract;
 };
 
