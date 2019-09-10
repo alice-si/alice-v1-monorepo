@@ -4,9 +4,10 @@
     height: $menu-height;
     position: fixed;
     z-index: 1000;
+    width: 100%;
+    padding: 12px 50px 10px 100px !important;
     background: rgba(0,0,0,0);
     color: #000;
-    width: 100%;
     @include transition(0.5s, all, ease-out);
 }
 
@@ -15,12 +16,14 @@
 }
 
 .menu-coloured {
-  height: $menu-height;
   position: static;
   z-index: 900;
-  background: $alice-blue !important;
   color: #000;
   width: 100%;
+}
+
+.navbar-coloured {
+  background: $alice-blue !important;
 }
 
 #menu-top:hover, #menu-login:hover, #menu-sign-up:hover {
@@ -32,21 +35,21 @@
 }
 
 .alice-logo img{
-    margin: 25px -20px 0 20px;
-    height: 30px;
+    margin: 25px 20px 0 -20px;
+    height: 45px;
+    width: auto;
 }
 
 ul.menu {
     position: relative;
-    margin-top: 30px;
+    margin-top: 35px;
     list-style-type: none;
 }
 
 ul.menu-left {
     float: left;
-    position: absolute;
-    left: 130px;
-    margin-top: 32px;
+    margin-left: 70px;
+    margin-top: 36px;
 }
 
 ul.menu-left li {
@@ -55,7 +58,6 @@ ul.menu-left li {
 
 ul.menu-right {
     float: right;
-    margin-right: 50px;
 }
 
 ul.menu-right li {
@@ -137,10 +139,10 @@ ul.menu-right li {
 
 .landing-page {
   .menu-item a {
-    font-size: 15px;
+    font-size: 20px;
     font-weight: 200;
     color: #fff;
-    margin-left: 20px;
+    margin: 0 21.5px;
   }
 
   li:first-child a {
@@ -209,8 +211,8 @@ ul.menu-right li {
 
 span.divider {
     text-transform: none;
-    padding-left: 5px;
-    margin-right: -15px;
+    padding-left: 20px;
+    margin-right: -20px;
     color: white;
 }
 
@@ -379,4 +381,17 @@ span.menu-arrow {
 
 .dropdown-toggle {
     background-color: transparent !important;
+}
+
+
+@media screen and (max-width: 440px) {
+  #navbar-menu {
+    width: 100%;
+    left: 0;
+  }
+
+  .alice-logo img {
+    margin-top: 20px;
+    margin-left: 10px;
+  }
 }
