@@ -22,7 +22,7 @@ async function deployContract(truffleContractObj, ...args) {
     gasLimit: 3000000,
     gasPrice: 15000000000 // 15 gwei
   };
-  const contract = await contractFactory.deploy(...args);
+  const contract = await contractFactory.deploy(...args, overrides);
   logger.debug('Contract deployment started: '
     + JSON.stringify(contract.deployTransaction.hash));
   await contract.deployed(); // waiting until it is mined

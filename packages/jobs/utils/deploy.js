@@ -40,6 +40,7 @@ async function deployProject(
   let projectContract;
   if (project.ethAddresses && project.ethAddresses.project) {
     projectContract = await Project.at(project.ethAddresses.project);
+    contractsAddresses.project = project.ethAddresses.project;
     logger.info('Project deployment skipped (already deployed)');
   } else {
     projectContract = await Project.new(project.code, project.upfrontPayment);
@@ -63,6 +64,7 @@ async function deployProject(
   let impactContract;
   if (project.ethAddresses && project.ethAddresses.impact) {
     impactContract = await ImpactRegistry.at(project.ethAddresses.impact);
+    contractsAddresses.impact = project.ethAddresses.impact;
     logger.info('ImpactRegistry deployment skipped (already deployed)');
   } else {
     impactContract = await ImpactRegistry.new(projectContract.address);
@@ -74,6 +76,7 @@ async function deployProject(
   let linkerContract;
   if (project.ethAddresses && project.ethAddresses.linker) {
     linkerContract = await Linker.at(project.ethAddresses.linker);
+    contractsAddresses.linker = project.ethAddresses.linker;
     logger.info('Linker deployment skipped (already deployed)');
   } else {
     //Defaul value is 10GBP expressed in pennies (x100)
@@ -124,6 +127,7 @@ async function deploy(
 
   if (project.ethAddresses && project.ethAddresses.token) {
     logger.info('Token deployment skipped (already deployed)');
+    contractsAddresses.token = project.ethAddresses.token;
   } else {
     await deployToken(contractsAddresses);
     await updateContractAddressesForProject(contractsAddresses, project);
