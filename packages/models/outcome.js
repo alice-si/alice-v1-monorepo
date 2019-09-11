@@ -3,6 +3,7 @@ const ModelUtils = require('./model-utils');
 
 let OutcomeSchema = new Mongoose.Schema({
   title: String,
+  orderNumber: Number,
   description: String,
   reason: String,
   value: String,
