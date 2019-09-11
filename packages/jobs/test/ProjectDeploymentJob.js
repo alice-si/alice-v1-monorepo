@@ -50,4 +50,21 @@ contract('ProjectDeploymentJob', async function (accounts) {
     await TestUtils.testStatus(
       Project, 'PROJECT_DEPLOYMENT_COMPLETED', project._id);
   });
+
+  it('Project should have ethAddresses', async () => {
+    const project = await Project.findOne({});
+    // console.log(JSON.stringify(project, null, 2));
+    for (let prop of [
+      'validator',
+      'beneficiary',
+      'token',
+      'project',
+      'impact',
+      'linker',
+      'owner']) {
+      if (!project.ethAddresses[prop]) {
+        throw 'ethAddresses should have the following property: ' + prop;
+      }
+    }
+  });
 });
