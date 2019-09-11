@@ -71,7 +71,7 @@
      </div>
      <div class="row">
          <homepage-project-card ng-repeat="project in homeCtrl.projects"
-                                ng-if="project.status == 'FINISHED'"
+                                ng-if="project.status == 'FINISHED' && !project.code.includes('mock')"
                                 project="project"
                                 dashboard="'project'">
          </homepage-project-card>
