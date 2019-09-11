@@ -2,12 +2,14 @@ var CompliantCoupon = artifacts.require("CompliantCoupon");
 var BlockingTransferChecker = artifacts.require("BlockingTransferChecker");
 var SingleLimitTransferChecker = artifacts.require("SingleLimitTransferChecker");
 var AccountLimitTransferChecker = artifacts.require("AccountLimitTransferChecker");
+var WhitelistedTransferChecker = artifacts.require("WhitelistedTransferChecker");
 
 require("../test-setup");
 
 contract('Compliant Coupon', function ([operator, sender, recipient]) {
 
-  var compliantCoupon, blockingChecker, singleLimitChecker, accountLimitTransferChecker;
+  var compliantCoupon;
+  var blockingChecker, singleLimitChecker, accountLimitTransferChecker, whitelistedChecker;
 
   step("should define compliant coupon", async function () {
     compliantCoupon = await CompliantCoupon.new(100);
@@ -86,6 +88,52 @@ contract('Compliant Coupon', function ([operator, sender, recipient]) {
 
     (await compliantCoupon.balanceOf(sender)).should.be.bignumber.equal('60');
     (await compliantCoupon.balanceOf(recipient)).should.be.bignumber.equal('40');
+  });
+
+
+  step("should allow transfer after removing account limit checker", async function () {
+    await compliantCoupon.removeChecker(accountLimitTransferChecker.address, {from:operator});
+
+    await compliantCoupon.transfer(recipient, 10, {from: sender});
+
+    (await compliantCoupon.balanceOf(sender)).should.be.bignumber.equal('50');
+    (await compliantCoupon.balanceOf(recipient)).should.be.bignumber.equal('50');
+  });
+
+
+  step("should block transfer if sender is not whitelisted", async function () {
+    whitelistedChecker = await WhitelistedTransferChecker.new();
+    await compliantCoupon.addChecker(whitelistedChecker.address, {from:operator});
+    (await whitelistedChecker.isWhitelisted(sender)).should.be.false;
+
+    await compliantCoupon.transfer(recipient, 10, {from: sender}).shouldBeReverted();
+
+    (await compliantCoupon.balanceOf(sender)).should.be.bignumber.equal('50');
+    (await compliantCoupon.balanceOf(recipient)).should.be.bignumber.equal('50');
+  });
+
+
+  step("should block transfer if recipient is not whitelisted", async function () {
+    await whitelistedChecker.whitelist(sender, {from: operator});
+    (await whitelistedChecker.isWhitelisted(sender)).should.be.true;
+    (await whitelistedChecker.isWhitelisted(recipient)).should.be.false;
+
+    await compliantCoupon.transfer(recipient, 10, {from: sender}).shouldBeReverted();
+
+    (await compliantCoupon.balanceOf(sender)).should.be.bignumber.equal('50');
+    (await compliantCoupon.balanceOf(recipient)).should.be.bignumber.equal('50');
+  });
+
+
+  step("should allow transfer if both recipient and sender are whitelisted", async function () {
+    await whitelistedChecker.whitelist(recipient, {from: operator});
+    (await whitelistedChecker.isWhitelisted(sender)).should.be.true;
+    (await whitelistedChecker.isWhitelisted(recipient)).should.be.true;
+
+    await compliantCoupon.transfer(recipient, 10, {from: sender});
+
+    (await compliantCoupon.balanceOf(sender)).should.be.bignumber.equal('40');
+    (await compliantCoupon.balanceOf(recipient)).should.be.bignumber.equal('60');
   });
 
 });

@@ -1,6 +1,6 @@
 /*
 This contract implements the ITransferChecker interface.
-It's a implementation allows the operator to set a limit per account
+It's a implementation that allows the operator to set a limit per account
 and tracks the total value of tokens transferred by an individual account.
 */
 
@@ -11,7 +11,7 @@ import 'openzeppelin-solidity/contracts/math/SafeMath.sol';
 import './BaseTransferChecker.sol';
 
 
-contract AccountLimitTransferChecker {
+contract AccountLimitTransferChecker is BaseTransferChecker {
     using SafeMath for uint256;
 
     uint256 public limit;
