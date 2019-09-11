@@ -1,7 +1,8 @@
 <div class="col-md-4 col-lg-4 home-project-card">
   <a href="/{{dashboard}}/{{project.code}}">
-    <img src="{{project.img}}"
-         alt="Image for {{ project.title }}"/>
+    <div class="project-card-image"
+         style="background: url('{{project.img}}');">
+    </div>
     <h6 class="uppercase alice-grey">Run by: {{ project.charity.name }}</h6>
     <h4 class="alice-dark-text">{{ project.title }}</h4>
   </a>

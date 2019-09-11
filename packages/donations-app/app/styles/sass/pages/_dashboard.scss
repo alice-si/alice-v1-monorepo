@@ -234,7 +234,7 @@
 /**** Overview ****/
 
 .project-card {
-  height: 480px;
+  height: 490px;
   background: #fff;
   border-radius: 5px;
   margin-bottom: 40px;
@@ -522,7 +522,7 @@
 }
 
 .dashboard-content {
-  margin: 80px 0;
+  margin: 120px 0;
   background: $dashboard-background;
 }
 
@@ -530,6 +530,16 @@
   .donations .btn-export {
       margin-right: 10px;
   }
+
+	.dashboard {
+		&-image {
+		  margin-left: 10px !important;
+		}
+
+		&-content {
+		  margin: 60px 0 !important;
+		}
+	}
 }
 
 .impact-table {

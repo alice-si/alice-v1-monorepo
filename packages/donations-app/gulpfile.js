@@ -27,6 +27,7 @@ let paths = {
   partials: ["app/**/*.html", "!app/index.html"],
   scriptsDevServer: "devServer/**/*.js",
   env: "local",
+  babelPolyfill: "../../node_modules/babel-polyfill/dist/polyfill.min.js",
   getDistPath: function () {
     return "./dist." + this.env;
   },
@@ -304,7 +305,7 @@ function initPipesFunctions() {
       .pipe(plugins.rename("envConfig.js"));
 
     // TODO we should remove jshint and use eslint instead
-    return es.merge(gulp.src(paths.scripts), conf)
+    return es.merge([gulp.src(paths.babelPolyfill), gulp.src(paths.scripts), conf])
       .pipe(plugins.jshint.reporter("jshint-stylish"));
   };
 
@@ -369,6 +370,7 @@ function initPipesFunctions() {
     return es.merge(scriptedPartials, validatedAppScripts)
       .pipe(pipes.orderedAppScripts())
       .pipe(plugins.sourcemaps.init())
+      .pipe(plugins.babel({presets: ['@babel/env']}))
       .pipe(plugins.concat('app.min.js'))
       .pipe(plugins.uglifyEs.default())
       .pipe(plugins.sourcemaps.write())

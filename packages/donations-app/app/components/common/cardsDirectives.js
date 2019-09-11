@@ -46,7 +46,8 @@ angular.module('aliceApp')
         ];
         let helped = {
           '57d7e78504efabbc43d4f8b9': 3,
-          '57d7e8b404efabbc43d4f8ba': 1,
+          // '57d7e8b404efabbc43d4f8ba': 1,
+          '58d902fdfc008d7f9aabd43c': 1,
           '57d7ea4d04efabbc43d4f8bb': 3,
           '58d9041ffc008d7f9aabd43f': 2,
           '58d904e7fc008d7f9aabd441': 3,
