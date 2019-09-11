@@ -38,7 +38,9 @@ contract PreventiveComplianceWrapper is ERC20 {
      */
     function transfer(address recipient, uint256 amount) public returns (bool) {
         require(checkTransfer(recipient, amount), 'Transfer is not compliant');
-        return super.transfer(recipient, amount);
+        bool executed =  super.transfer(recipient, amount);
+        notifyAfterTransfer(recipient, amount, executed);
+        return executed;
     }
 
     function checkTransfer(address to, uint256 amount) internal view returns (bool) {
@@ -47,6 +49,12 @@ contract PreventiveComplianceWrapper is ERC20 {
             isCompliant = isCompliant && checkers[i].canTransfer(this, msg.sender, to, amount);
         }
         return isCompliant;
+    }
+
+    function notifyAfterTransfer(address to, uint256 amount, bool executed) internal {
+        for(uint8 i=0; i < checkers.length; i++) {
+            checkers[i].afterTransfer(this, msg.sender, to, amount, executed);
+        }
     }
 
     function addChecker(ITransferChecker _checker) public onlyOperator {
