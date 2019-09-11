@@ -1,39 +1,28 @@
 <div ng-controller="ProjectControllerV2 as projectCtrl" class="appeal-page">
   <section class="splash-v3 grad-both">
-    <div class="header-image appeal-splash"
+    <div class="header-image"
          ng-style="{ 'background' : 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0)), url(' + projectCtrl.model.img + ') no-repeat center center' }">
       <div class="container splash-v3__container-title">
         <div class="row">
-          <h1>{{ projectCtrl.model.title }}</h1>
+          <h3>{{ projectCtrl.model.title }}</h3>
           <a ui-sref="how-it-works">Track your donation's impact <i class="glyphicon glyphicon-chevron-right"></i></a>
         </div>
         <div class="row splash-v3__container-progress">
           <div class="row">
-            <p ng-if="projectCtrl.model.status != 'FINISHED'" class="col-md-4 col-sm-4 col-xs-4 splash-v3__progress-section">We need to raise<br>
-              <span class="splash-v3__progress-amount">{{ projectCtrl.model.fundingTarget | money}}</span>
+            <p class="col-md-4 col-sm-4 col-xs-12 splash-v3__progress-section">We need to raise<br>
+              <span style="font-size: 22px;">{{ projectCtrl.model.fundingTarget | money}}</span>
             </p>
-            <p class=" col-md-4 col-sm-4 col-xs-4 splash-v3__progress-section">
-              {{ projectCtrl.model.status == 'FINISHED' ? 'Raised' : 'Raised so far' }}
-              <br>
-              <span class="splash-v3__progress-amount">{{ projectCtrl.model.raised | money }}</span>
+            <p class=" col-md-4 col-sm-4 col-xs-12 splash-v3__progress-section">Raised so far<br>
+              <span style="font-size: 22px;">{{ projectCtrl.model.raised | money }}</span>
             </p>
-            <!-- TODO it is not calculated correctly -->
-            <p ng-if="projectCtrl.model.status != 'FINISHED'" class=" col-md-4 col-sm-4 col-xs-4 splash-v3__progress-section">To complete<br>
-              <span class="splash-v3__progress-amount">{{ projectCtrl.model._outcomes.length }}</span> goals
-            </p>
-            <p ng-if="projectCtrl.model.status == 'FINISHED'" class=" col-md-4 col-sm-4 col-xs-4 splash-v3__progress-section">
-              Helped<br>
-              <span class="splash-v3__progress-amount">
-                {{ projectCtrl.model.unitsHelped }}
-                /
-                {{ projectCtrl.model.totalUnitsToHelp }}
-              </span> people
+            <p class=" col-md-4 col-sm-4 col-xs-12 splash-v3__progress-section">To complete<br>
+              <span style="font-size: 22px;">{{ projectCtrl.model._outcomes.length }}</span> goals
             </p>
           </div>
-
+           
         </div>
         <div class="row">
-          <div ng-if="projectCtrl.model.status != 'FINISHED'" class="col-md-5 col-xs-10 no-padding">
+          <div class="col-md-5 col-xs-10 no-padding">
             <a ng-click="projectCtrl.donate()">
               <button>
                 <i class="glyphicon glyphicon-chevron-right"></i>
@@ -56,7 +45,7 @@
         <div class="col-md-8 no-padding">
           <p ng-bind-html="projectCtrl.model.summary"></p>
         </div>
-        <div class="col-md-3 col-md-offset-1 no-padding">
+        <div class="col-md-3 col-md-offset-1">
             <p>Run by</p>
             <div class="appeal-v3__info-image"
                  style="background-image: url('{{projectCtrl.model.charity.picture}}')">
@@ -93,7 +82,7 @@
           <div class="col-md-8 no-padding">
             <p ng-bind-html="projectCtrl.model.project"></p>
           </div>
-          <div class="col-md-3 col-md-offset-1 no-padding">
+          <div class="col-md-3 col-md-offset-1">
             <p>Validated by</p>
             <div class="appeal-v3__info-image"
                  style="background-image: url('{{projectCtrl.model.validatorImg}}')">
@@ -123,7 +112,7 @@
                 <p style="font-size: 14px;">
                   {{goal.value}}
                 </p>
-
+                  
               </div>
               <div class="col-md-12 appeal-v3__goals-carousel-bottom">
                 <div class="col-md-12"

@@ -6,13 +6,6 @@ angular.module('aliceApp')
 			vm.model = ProjectService.prepareProjectDetails(result.data);
 			vm.supporters = result.data.supporters;
 
-			// TODO alex - solve it better
-			// Probably we should have global directive for project white card on splash
-			if (vm.model.code == 'mungos-15-lives') {
-				vm.model.unitsHelped = 15;
-				vm.model.totalUnitsToHelp = 15;
-			}
-
 			vm.model._outcomes.forEach((elem) => {
 				let impact = vm.model.goalsV2.find((e) => {
 					if(e._id === elem._id){

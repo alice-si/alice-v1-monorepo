@@ -20,10 +20,7 @@ let OutcomeSchema = new Mongoose.Schema({
   _projectId: {
     type: Mongoose.Schema.ObjectId,
     ref: 'Project'
-  },
-
-  actionVerbForProgress: String,
-  unitForActionVerb: String,
+  }
 });
 
 module.exports = ModelUtils.exportModel('Outcome', OutcomeSchema);

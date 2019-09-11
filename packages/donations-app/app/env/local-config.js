@@ -1,5 +1,4 @@
 angular.module('aliceApp').constant('HOST', 'http://localhost:8080/');
-angular.module('aliceApp').constant('MODE', 'local');
 angular.module('aliceApp').constant('REDIRECTION', 'http://localhost:8080/');
 angular.module('aliceApp').constant('API', '/api\/');
 angular.module('aliceApp').constant('MANGO', {clientId: 'kuba', url: 'https://api.sandbox.mangopay.com'});

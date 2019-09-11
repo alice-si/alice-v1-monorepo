@@ -50,12 +50,6 @@ html,body
     overflow-x: hidden;
 }
 
-// To prevent page scrolling when modal is opened
-body.modal-open {
-    height: 100vh;
-    overflow-y: hidden;
-}
-
 html {
     font-size: 10px;
 }

@@ -7,15 +7,10 @@ angular.module('aliceApp')
       return $http.get(API + 'getCategories');
     };
 
-    // Deprectated - TODO remove later
-		// this.getActiveProjects = function () {
-		// 	return $http.get(API + 'getActiveProjects');
-    // };
+		this.getActiveProjects = function () {
+			return $http.get(API + 'getActiveProjects');
+		};
 
-    this.getProjects = function () {
-      return $http.get(API + 'getProjects');
-    }
-    
     this.saveProject = function (project) {
       return $http.post(API + 'saveProject', project);
     };

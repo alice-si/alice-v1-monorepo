@@ -1,5 +1,4 @@
 angular.module('aliceApp').constant('HOST', 'https://stage.alice.si/');
-angular.module('aliceApp').constant('MODE', 'stage');
 angular.module('aliceApp').constant('REDIRECTION', 'https://s3.eu-west-2.amazonaws.com/stage.alice.si/');
 angular.module('aliceApp').constant('API', 'https://api.stage.alice.si/api/');
 angular.module('aliceApp').constant('MANGO', {clientId: 'kuba', url: 'https://api.sandbox.mangopay.com'});
