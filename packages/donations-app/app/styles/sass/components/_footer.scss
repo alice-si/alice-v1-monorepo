@@ -1,8 +1,16 @@
 .alice-footer {
   margin-bottom: 60px;
 
+  .uppercase {
+    font-weight: 600;
+  }
+
+  p {
+    font-weight: 100;
+  }
+
   &-link {
-    color: $alice-grey;
+    color: #6b7c93;
 
     &:hover {
       color: $alice-tonal-medium;

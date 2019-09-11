@@ -9,8 +9,24 @@
 </div>
 
 <!-- Visible when outcome is selected -->
+
+
+
 <div class="col-md-8" ng-repeat="outcome in prWizardCtrl.project.outcomes track by $index"
      ng-show="prWizardCtrl.mode == prWizardCtrl.modes.OUTCOMES && prWizardCtrl.selectedOutcome === outcome">
+
+  <div class="form-group">
+    <label class="col-sm-3 control-label">Outcome order number *</label>
+
+    <div class="col-sm-9">
+      <input type="text" class="form-control" ng-model="outcome.orderNumber"
+              placeholder="Outcome order number"
+              name="outcomeOrderNumber" required>
+      <error-message name="outcomeOrderNumber" error="required"> You must enter the outcome order number in this outcome
+      </error-message>
+    </div>
+  </div>
+
   <div class="form-group" has-error>
     <label class="col-sm-3 control-label">Title *</label>
 
@@ -67,7 +83,7 @@
   </div>
 
   <div class="form-group">
-    <label class="col-sm-3 control-label">Amount <p style="font-size: 8px;">Deprecated field - must be equal to "Cost per Unit"</p></label>
+    <label class="col-sm-3 control-label">Amount <p><small>Deprecated field - must be equal to "Cost per Unit"</small></p></label>
 
     <div class="col-sm-9">
       <input type="text" class="form-control" ng-model="outcome.amount"
@@ -114,6 +130,26 @@
     <div class="col-sm-9">
       <p ng-if="!outcome.quantityOfUnits || !outcome.costPerUnit">Please enter number of units & cost above to calculate total</p>
       <p ng-if="outcome.quantityOfUnits && outcome.costPerUnit ">{{outcome.quantityOfUnits * outcome.costPerUnit | money }}</p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-3 control-label">Action verb for progress</label>
+
+    <div class="col-sm-9">
+      <input type="text" class="form-control" ng-model="outcome.actionVerbForProgress"
+             placeholder="Outcome action verb for progress, example: help"
+             name="actionVerbForProgress" required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-3 control-label">Outcome unit <p><small>Displayed on outcome card in bottom right corner after the action verb</small></p></label>
+
+    <div class="col-sm-9">
+      <input type="text" class="form-control" ng-model="outcome.unitForActionVerb"
+             placeholder="Unit for outcome action verb, example: people"
+             name="unitForActionVerb" required>
     </div>
   </div>
 

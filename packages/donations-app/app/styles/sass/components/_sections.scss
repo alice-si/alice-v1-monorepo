@@ -32,7 +32,6 @@
 
    &__progress-section {
      border-right: 1px solid #fff;
-    //  margin-right: 20px;
 
      span {
        font-weight: 600;
@@ -45,9 +44,13 @@
 
    &__container-title {
      position: absolute;
-     top: 100px;
+     top: 125px;
      left: 7vw;
-     width: 480px;
+     width: 490px;
+
+     .row > h1 {
+       padding-right: 20px;
+     }
    }
 
    &__container-progress {
@@ -61,7 +64,7 @@
    }
 
    p {
-     font-size: 20px !important;
+     // font-size: 22px !important;
      font-family: 'Source Sans Pro';
      letter-spacing: 1px;
    }
@@ -74,7 +77,7 @@
      margin-top: 20px;
      width: 120px;
      background: $alice-tonal-medium;
-     border-radius: 2px;
+     border-radius: 4px;
      font-size: 18px;
      color: #fff;
      border: none;
@@ -144,17 +147,21 @@
  .splash-v3 {
 
     .header-image {
-      height: 550px;
-      // height: 100vh;
+      height: 615px;
     }
 
-    &__progress-section {
-      border-right: 1px solid $alice-dark-grey;
-      font-size: 16px;
+    &__progress {
+      &-section {
+        border-right: 1px solid $alice-dark-grey;
+        font-size: 16px !important;
+      }
+
+      &-amount {
+        font-size: 22px;
+      }
     }
 
     &__container-title {
-      // width: 30%;
       border-radius: 5px;
       background: #fff;
       padding: 5px 10px 30px 40px;
@@ -188,7 +195,7 @@
     }
 
     p {
-      font-size: 16px !important;
+      // font-size: 16px !important;
       font-weight: 400;
       font-family: $source !important;
       letter-spacing: 1px;
@@ -205,8 +212,14 @@
 
 @media screen and (max-width: 990px) {
   .splash-v3 {
-    &__progress-section {
-      border-right: none;
+    &__progress {
+      &-section {
+        border-right: 1px solid $alice-dark-grey;
+      }
+
+      &-amount {
+        font-size: 18px;
+      }
     }
   }
 }
@@ -228,16 +241,33 @@
 
 @media screen and (max-width: 565px) {
   .splash-v3 {
+    height: 100vh;
+
     &__container-title {
+      top: 30vh !important;
+      @include box-shadow(0, 1px, 3px, rgba(0,0,0,0.4));
       width: 86vw;
     }
+
+    &__progress {
+      &-section {
+        border-right: 1px solid $alice-dark-grey;
+      }
+    }
+
+    &__container-progress,h3 {
+      margin-bottom: 10px;
+    }
+  }
+  .appeal-page > .splash-v3 {
+    height: 80vh;
   }
 }
 
 @media screen and (max-width: 414px) {
   .splash-v2, .splash-v3 {
     .header-image {
-      height: 100vh;
+      height: 100vh !important;
     }
 
     &__container-title {
@@ -249,7 +279,6 @@
     }
 
     &__progress-section {
-      border-right: none;
 
       span {
         font-weight: 600;
@@ -273,7 +302,6 @@
 
     &__container-title {
       top: 80px;
-      // left: 50px;
     }
   }
 
@@ -295,6 +323,18 @@
       font-size: 12px !important;
     }
   }
+
+  .my-impact-splash > .header-image {
+    height: 40vh !important;
+  }
+
+  .appeal-page {
+    .splash-v3 {
+      .header-image {
+        height: 40vh !important;
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 330px) {
@@ -312,6 +352,20 @@
 
     &__progress-section:first-child {
       margin-top: 10px;
+    }
+  }
+
+  .appeal-page > .splash-v3 {
+    height: 75vh !important;
+
+    p {
+      font-size: 10px !important;
+    }
+  }
+
+  .splash-v3__progress {
+    &-amount {
+      font-size: 14px !important;
     }
   }
 }

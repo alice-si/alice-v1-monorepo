@@ -35,10 +35,20 @@ module.exports = function (app) {
       return res.json(projects);
     }));
 
-	app.get(
-    '/api/getActiveProjects',
+  // Deprecated - TODO remove later
+	// app.get(
+  //   '/api/getActiveProjects',
+  //   asyncHandler(async (req, res) => {
+  //     const projects = await Project.find({status: 'ACTIVE'});
+  //     return res.json(projects);
+  //   }));
+
+  app.get(
+    '/api/getProjects',
     asyncHandler(async (req, res) => {
-      const projects = await Project.find({status: 'ACTIVE'});
+      const projects = await Project
+        .find({})
+        .select('title code charity lead img status');
       return res.json(projects);
     }));
 
@@ -346,6 +356,7 @@ module.exports = function (app) {
     // setting _outcomes field in project document
     const newOutcomesIds = await Outcome
       .find({_projectId: savedProject._id})
+      .sort("orderNumber")
       .select("_id");
     savedProject._outcomes = newOutcomesIds;
     await savedProject.save();
