@@ -1,4 +1,6 @@
 const EthProxy = require('../gateways/ethProxy');
+const Deploy = require('../utils/deploy');
+const config = require('../config');
 const ModelUtils = require('../utils/model-utils');
 const { ModelJob } = require('./job');
 
@@ -36,16 +38,12 @@ class ProjectDeploymentJob extends ModelJob {
     }
 
     // Project deploying
-    let addresses = await EthProxy.deployProject(
-      project,
+    let addresses = await Deploy.deployProject(
       validator.ethAccount,
-      project.charity.ethAccount);
+      project.charity.ethAccount,
+      config.claimsRegistryAddress,
+      project);
     this.logger.info('Project was deployed: ' + addresses.lastTx);
-
-    // Saving addresses in DB
-    project.ethAddresses = addresses;
-    await project.save();
-    this.logger.info('Addresses were saved in DB');
   }
 }
 

@@ -18,8 +18,16 @@ async function deployContract(truffleContractObj, ...args) {
     abi,
     bytecode,
     mainWallet);
-  const contract = await contractFactory.deploy(...args);
+  const overrides = {
+    gasLimit: 3000000,
+    gasPrice: 15000000000 // 15 gwei
+  };
+  const contract = await contractFactory.deploy(...args, overrides);
+  logger.debug('Contract deployment started: '
+    + JSON.stringify(contract.deployTransaction.hash));
   await contract.deployed(); // waiting until it is mined
+  logger.debug('Contract deployment finished: '
+    + JSON.stringify(contract.deployTransaction.hash));
   return contract;
 };
 
