@@ -1,5 +1,5 @@
-<div ng-controller="MyImpactController as impactCtrl" class="appeal-page">
-  <section class="splash-v3 grad-both">
+<div ng-controller="MyImpactController as impactCtrl" class="appeal-page my-impact">
+  <section class="splash-v3 my-impact-splash grad-both">
     <div class="header-image"
          ng-style="{ 'background' : 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0)), url(' + impactCtrl.project.img + ') no-repeat center center' }">
       <div class="container my-impact__splash_container splash-v3__container-title">
@@ -7,25 +7,24 @@
           <h3 id="my-impact-project-title">{{ impactCtrl.project.title }}</h3>
         </div>
         <div class="row ">
-          <div ng-if="impactCtrl.project.status !== 'FINISHED'" class="col-md-4 splash-v3__progress-section">
-             <p class="my-impact__progress-title">We need to raise</p>
-             <span class="my-impact__progress-value">{{ impactCtrl.project.fundingTarget | money}}</span>
-           </div>
-           <div class="col-md-4 splash-v3__progress-section">
-             <p class="my-impact__progress-title">{{impactCtrl.project.status == "FINISHED" ? 'Raised' : 'Raised so far'}}</p>
-             <span class="my-impact__progress-value">{{ impactCtrl.project.donatedByAll | money}}</span>
-           </div>
-           <div class="col-md-4 splash-v3__progress-section">
-            <p ng-if="impactCtrl.project.unitsHelped > 0" class="my-impact__progress-title">Helped</p>
-            <p ng-if="impactCtrl.project.unitsHelped == 0" class="my-impact__progress-title">To help</p>
-            <span class="my-impact__progress-value">
+          <p ng-if="impactCtrl.project.status !== 'FINISHED'" class="col-md-4 col-sm-4 col-xs-4 no-padding splash-v3__progress-section">
+            We need to raise<br>
+             <span class="splash-v3__progress-amount">{{ impactCtrl.project.fundingTarget | money}}</span>
+           </p>
+           <p class="col-md-4 col-sm-4 col-xs-4 splash-v3__progress-section">
+             {{impactCtrl.project.status == "FINISHED" ? 'Raised' : 'Raised so far'}}<br>
+             <span class="splash-v3__progress-amount">{{ impactCtrl.project.donatedByAll | money}}</span>
+           </p>
+           <p class="col-md-4 col-sm-4 col-xs-4  splash-v3__progress-section">
+             {{ 'help' | pastTense:impactCtrl.project.unitsHelped:impactCtrl.project.totalUnitsToHelp | capitalize }}<br>
+            <span class="splash-v3__progress-amount">
               <span ng-if="impactCtrl.project.unitsHelped > 0">{{ impactCtrl.project.unitsHelped }}/</span>
               <span>{{ impactCtrl.project.totalUnitsToHelp }}</span>
               <span class="my-impact__units">
                 {{ impactCtrl.project.typeOfBeneficiary }}
               </span>
             </span>
-          </div>
+          </p>
         </div>
         <div class="row">
           <div ng-if="impactCtrl.project.status == 'FINISHED'" class="col-md-10 col-xs-10 no-padding"
@@ -96,15 +95,15 @@
     </div>
 
     <div class="row my-impact__container-boost-donation">
-      <div class="col-md-4 col-xs-10">
+      <div class="col-md-4 col-xs-11">
         <button ng-click="impactCtrl.boostDonation()" class="my-impact__boost-donation-button">
           <i class="glyphicon glyphicon-chevron-right"></i>
           BOOST YOUR DONATION
         </button>
       </div>
-      <div class="col-md-4 col-xs-10">
+      <div class="col-md-4 col-xs-11">
         <a target="_blank" href="{{ impactCtrl.getEtherscanLinkForProject() }}">
-          <button  class="inverse-button my-impact__see-on-blockchain-button">
+          <button class="inverse-button my-impact__see-on-blockchain-button">
             <i class="glyphicon glyphicon-chevron-right"></i>
             SEE IT ON BLOCKCHAIN
           </button>

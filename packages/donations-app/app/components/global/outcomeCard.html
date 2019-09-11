@@ -41,12 +41,7 @@
               </th>
               <th>
                 <p class="outcome-card__status-header">
-                  <span ng-if="outcome.helped > 0">
-                    Helped
-                  </span>
-                  <span ng-if="!outcome.helped || outcome.helped == 0">
-                    To help
-                  </span>
+                  <span>{{ (outcome.actionVerbForProgress || 'help') | pastTense:outcome.helped:outcome.quantityOfUnits | capitalize }}</span>
                 </p>
               </th>
             </tr>
@@ -66,7 +61,7 @@
                     {{ outcome.quantityOfUnits }}
                   </span>
                   <span class="outcome-card__status-unit">
-                    {{ projectUnit }}
+                    {{ outcome.unitForActionVerb }}
                   </span>
                 </p>
               </td>
@@ -84,7 +79,6 @@
               <input ng-model="quantity"
                       class="col-md-12"/>
             </div>
-    
             <button ng-click="claimFn(outcome, quantity)" class="col-md-3">
               Submit
             </button>
