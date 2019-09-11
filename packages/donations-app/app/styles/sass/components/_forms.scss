@@ -39,9 +39,9 @@ button:focus {
 .form-group {
   label {
     font-weight: 300;
-    color: #6b7c93;
+    color: $alice-dark;
     font-family: $source;
-    font-size: 18px;
+    font-size: 14px;
   }
 
   &:focus-within label {
@@ -51,16 +51,16 @@ button:focus {
 
 
 button {
-  min-width: 100%;
-  min-height: 50px;
+  width: 100% !important;
+  padding: 13px 0;
   background-color: $alice-tonal-medium;
   border: 1px solid $alice-tonal-medium !important;
   color: #FFFFFF;
-  border-radius: 4px;
+  border-radius: 5px;
   letter-spacing: 2px;
   font-size: 18px;
   font-family: $source;
-  font-weight: 300;
+  font-weight:300;
   font-stretch:normal;
   margin: 10px 0;
   @include transition(0.1s, all, ease-out);
@@ -87,10 +87,13 @@ button {
 .inverse-button {
   background-color: #FFFFFF !important;
   color: $alice-tonal-medium !important;
+  width: 100% !important;
+  padding: 13px 0;
   border: 1px solid $alice-tonal-medium !important;
   @include transition(0.1s, all, ease-out);
 
   &:hover {
+    // background-color: rgba(255, 255, 255, 0.2) !important;
     background-color: $alice-tonal-medium !important;
     color: #FFFFFF !important;
 
