@@ -1,0 +1,89 @@
+<div class="container splash-v3__container-title">
+  <div class="row">
+    <h3>{{ project.title }}</h3>
+    <a ui-sref="how-it-works"
+       ng-if="page === 'APPEAL_PAGE' && project.status != 'FINISHED'">Track your donation's impact <i class="glyphicon glyphicon-chevron-right"></i></a>
+  </div>
+  <div class="row splash-v3__container-progress">
+      <p ng-if="project.status !== 'FINISHED'" class="col-md-4 col-sm-4 col-xs-4 no-padding splash-v3__progress-section">
+        We need to raise<br>
+        <span class="splash-v3__progress-amount">{{ project.fundingTarget | money}}</span>
+      </p>
+      <p class="col-md-4 col-sm-4 col-xs-4 splash-v3__progress-section"
+         ng-class="{ 'no-padding' : project.status == 'FINISHED' }">
+        {{ project.status == 'FINISHED' ? 'Raised' : 'Raised so far' }}
+        <br>
+        <span ng-if="page === 'MY_IMPACT'" class="splash-v3__progress-amount">{{ project.donatedByAll | money}}</span>
+        <span ng-if="page === 'APPEAL_PAGE'" class="splash-v3__progress-amount">{{ project.raised | money }}</span>
+      </p>
+
+      <div ng-if="page === 'APPEAL_PAGE'">
+        <!-- TODO it is not calculated correctly -->
+        <p ng-if="project.status != 'FINISHED'" class=" col-md-4 col-sm-4 col-xs-4 splash-v3__progress-section">To complete<br>
+          <span class="splash-v3__progress-amount">{{ project._outcomes.length }}</span> goals
+        </p>
+        <p ng-if="project.status == 'FINISHED'" class="col-md-6 col-sm-4 col-xs-4 splash-v3__progress-section">
+          Helped<br>
+          <span class="splash-v3__progress-amount">
+            {{ project.unitsHelped }}
+            /
+            {{ project.totalUnitsToHelp }}
+          </span> people
+        </p>
+      </div>
+
+      <p class="col-md-4 col-sm-4 col-xs-4 splash-v3__progress-section"
+         ng-if="page === 'MY_IMPACT'">
+        {{ 'help' | pastTense:project.unitsHelped:project.totalUnitsToHelp | capitalize }}<br>
+       <span class="splash-v3__progress-amount">
+         <span ng-if="project.unitsHelped > 0">{{ project.unitsHelped }}/</span>
+         <span>{{ project.totalUnitsToHelp }}</span>
+         <span class="my-impact__units">
+           {{ project.typeOfBeneficiary }}
+         </span>
+       </span>
+     </p>
+  </div>
+
+  <div class="row">
+    <div ng-if="project.status == 'FINISHED'" class="col-md-10 col-xs-10 no-padding"
+         style="margin-top: 30px;" >
+      <div class="row">
+        <div class="col-md-6">
+          <p>Run by</p>
+          <div class="appeal-v3__info-image"
+               style="margin-bottom: -100px; background-image: url('{{project.charity.picture}}')">
+          </div>
+        </div>
+        <div class="col-md-6" style="padding-top: 10px;">
+          <a href="/project/{{project.code}}/4">
+            <button class="inverse-button my-impact__show-appeal-button">
+              <i class="glyphicon glyphicon-chevron-right"></i>
+              VIEW REPORT
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div ng-if="page === 'APPEAL_PAGE'">
+      <div ng-if="project.status != 'FINISHED'" class="col-md-5 col-xs-10 no-padding">
+        <a ng-click="projectCtrl.donate()">
+          <button>
+            <i class="glyphicon glyphicon-chevron-right"></i>
+            DONATE
+          </button>
+        </a>
+      </div>
+    </div>
+    <div ng-if="page === 'MY_IMPACT'">
+      <div ng-hide="project.status == 'FINISHED'" class="col-md-6 col-xs-10 no-padding">
+        <a href="/project/{{project.code}}/4">
+          <button class="inverse-button my-impact__show-appeal-button">
+            <i class="glyphicon glyphicon-chevron-right"></i>
+            VIEW APPEAL PAGE
+          </button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
