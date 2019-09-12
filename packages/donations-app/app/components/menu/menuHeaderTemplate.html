@@ -1,17 +1,16 @@
 <div ng-controller="MenuController as menuCtrl">
-    <div class="menu-top" ng-class="{ 'navbar-coloured' : menuColoured }" id="navbar-menu" ng-hide="menuHidden">
-        <div class="hidden-xs" ng-class="{'menu-coloured' : menuColoured }">
+    <div class="menu-top" id="navbar-menu" ng-hide="menuHidden">
+        <div class="hidden-xs" ng-class="{ 'menu-coloured' : menuColoured }">
             <div class="alice-logo col-sm-1 col-md-1" ng-class="{'ng-hide': menuColoured }">
                 <a href="/"><img src="https://s3.eu-west-2.amazonaws.com/alice-res/alice-white.png"/></a>
             </div>
 
             <div class="alice-logo col-sm-1 col-md-1 col-xs-1" ng-class="{'ng-hide': !menuColoured }">
-                <a href="https://alice.si" ><img src="https://s3.eu-west-2.amazonaws.com/alice-res/AliceFullWhite.png"/></a>
+                <a href="/" ><img src="https://s3.eu-west-2.amazonaws.com/alice-res/AliceFullWhite.png"/></a>
             </div>
 
 
             <ul class="menu menu-left col-sm-6 col-md-6 col-xs-6">
-                <menu-item target="" label="Projects"></menu-item>
                 <menu-item id="menu-how-it-works" target="how-it-works/" label="How It Works"></menu-item>
                 <menu-item target="geek-mode/" label="Geek Mode"></menu-item>
                 <menu-item target="faq/" label="FAQ" last="true"></menu-item>

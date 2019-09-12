@@ -6,8 +6,8 @@
           style="background: url('https://alice-res.s3.eu-west-2.amazonaws.com/home-splash-1.jpg') no-repeat 100% 50%;">
        <div class="container">
          <div class="row">
-           <h1 class="white home-title">Fund social projects.<br>
-             Track your impact.</h1>
+           <h2 class="white">Fund social projects.<br>
+             Track your impact.</h2>
          </div>
          <div class="row">
             <p class="col-md-6 white no-padding">Donate, grant, invest in social projects
@@ -78,24 +78,23 @@
      </div>
    </section>
 
-   <section class="container" id="social-organisation-list">
+   <section class="container">
      <div class="row">
        <h3 class="uppercase">
          Social organisations we work with
        </h3>
      </div>
-
-     <ul class="investors-and-media-list justify-content-around align-items-center align-content-lg-start">
-        <li class="investor-and-media-item m-2"
+     <div class="row home-charity-container">
+       <div class="col-md-2 col-sm-4 col-xs-6"
             ng-repeat="charity in homeCtrl.charities | limitTo: 6">
-          <div class="investors-and-media-link col-md-2 col-xs-6">
-            <img src="{{charity.picture}}" class="home-charity-picture" height="97" width="auto">
-          </div>
-        </li>
-      </ul>
+            <div class="home-charity">
+              <img src="{{charity.picture}}" class="home-charity-picture">
+            </div>
+       </div>
+     </div>
    </section>
 
-   <section id="sign-up-social-organisation">
+   <section>
      <div class="container">
        <div class="row">
          <h3 class="uppercase">
