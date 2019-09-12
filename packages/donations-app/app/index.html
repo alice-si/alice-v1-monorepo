@@ -28,14 +28,14 @@
   <script>
     (function(h,o,t,j,a,r){
         // Added by alex@alice.si to disable hotjar on production
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
         if (location.href.indexOf('stage.alice.si') == -1) {
-          console.log('Hotjar loading skipped');
-          return;
+          console.log('Hotjar loading started on production');
+          h._hjSettings={hjid:1481120,hjsv:6};
         } else {
           console.log('Hotjar loading started on stage');
+          h._hjSettings={hjid:1451891,hjsv:6};
         }
-        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-        h._hjSettings={hjid:1451891,hjsv:6};
         a=o.getElementsByTagName('head')[0];
         r=o.createElement('script');r.async=1;
         r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
