@@ -7,6 +7,7 @@
   <table class="table table-striped table-bordered table-hover dataTables-example dataTable">
     <tr>
       <th>Name</th>
+      <th>Code</th>
       <th>Status</th>
       <th></th>
     </tr>
@@ -14,6 +15,9 @@
     <tr ng-repeat="project in projectsCtrl.projects">
       <td>
         {{project.title}}
+      </td>
+      <td>
+        {{ project.code }}
       </td>
       <td>
         <a ng-if="project.ethAddresses.project" target="_blank" href="{{projectsCtrl.ETHERSCAN}}/address/{{project.ethAddresses.project}}">
@@ -33,13 +37,21 @@
         >
           Make active
         </a>
+        <a
+          href="#"
+          class="btn btn-warning"
+          ng-click="projectsCtrl.syncWithStage(project)"
+          ng-if="project.status != 'ACTIVE' && projectsCtrl.MODE != 'stage'"
+        >
+          Sync
+        </a>
         <a href="/project-wizard/{{project.code}}" class="btn btn-warning" >Edit</a>
         <a href="/project/{{project.code}}" class="btn btn-success">Preview</a>
       </td>
 
     </tr>
     <tr>
-      <td colspan="3">
+      <td colspan="4">
         <a href="/project-wizard/" class="btn btn-primary">Create new project</a>
       </td>
     </tr>
