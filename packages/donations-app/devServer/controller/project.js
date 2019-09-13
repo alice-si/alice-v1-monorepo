@@ -265,15 +265,21 @@ module.exports = function (app) {
       if (!projectCode) {
         return res.status(400).send(`Empty project code`);
       }
-      let { project, outcomes } =
-        await getProjectWithOutcomesFromStage(projectCode);
-      if (!project) {
+      let project = await Project.findOne({ code: projectCode });
+      if (!project.charity) {
+        return res.status(400)
+          .send(`You should set cahrity for the project before syncing`);
+      }
+      let fromStage = await getProjectWithOutcomesFromStage(projectCode);
+      let stageProject = fromStage.project;
+      let stageOutcomes = fromStage.outcomes;
+      if (!stageProject) {
         return res.status(400)
           .send(`Project was not found on stage: ${projectCode}`);
       }
 
-      await syncProject(project);
-      await syncOutcomesForProject(projectCode, outcomes);
+      await syncProject(project, stageProject);
+      await syncOutcomesForProject(project, stageOutcomes);
 
       return res.json();
     }));
@@ -390,24 +396,22 @@ module.exports = function (app) {
 
   // Copies values for selected fields from stage project
   // to the project with the same code
-  async function syncProject(projectFromStage) {
+  async function syncProject(project, projectFromStage) {
     const projectSyncFields = [
-      'title', 'lead', 'charity', 'img', 'video', 'summary', 'extendedSummary',
+      'title', 'lead', 'img', 'video', 'summary', 'extendedSummary',
       'project', 'serviceProvider', 'beneficiary', 'typeOfBeneficiary', 'validator',
       'initializerImg', 'validatorImg', 'validatorWhiteImg', 'validatorUrl', 'costBreakdown',
       'location', 'upfrontPayment', 'peopleTarget', 'fundingTarget', 'perPerson', 'externalFunding',
       'outcomesIntro', 'myStory', '_categoryId'
     ];
 
-    let project = await Project.findOne({ code: projectFromStage.code });
     Object.assign(project, _.pick(projectFromStage, projectSyncFields));
     await project.save();
   }
 
   // Removes old outcomes and copies new ones for project with the passed code
   // Also updates _outcomes field for the project
-  async function syncOutcomesForProject(code, outcomes) {
-    let project = await Project.findOne({ code });
+  async function syncOutcomesForProject(project, outcomes) {
     let bulk = Outcome.collection.initializeUnorderedBulkOp();
 
     // Removing old outcomes for the project
@@ -428,12 +432,18 @@ module.exports = function (app) {
   }
 
   async function getProjectWithOutcomesFromStage(code) {
+    let ProjectStageModel = Utils.loadStageModel('project');
+    let OutcomeStageModel = Utils.loadStageModel('outcome');
+
+    let project = await ProjectStageModel.findOne({ code });
+    let outcomes = [];
+    if (project) {
+      outcomes = await OutcomeStageModel.find({ _projectId: project._id });
+    }
+
     return {
-      project: { code, title: 'Test title'  },
-      outcomes: [
-        { title: 'Test outcome 1' },
-        { title: 'Test outcome 2' }
-      ]
+      project: project ? project.toObject() : null,
+      outcomes: outcomes.map(outcome => outcome.toObject()),
     };
   }
 };

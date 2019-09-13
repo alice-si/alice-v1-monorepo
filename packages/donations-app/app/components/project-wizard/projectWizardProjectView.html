@@ -50,11 +50,11 @@
       </div>
 
       <!-- Charity should be selectable only when project is being created -->
-      <div class="form-group" ng-if="prWizardCtrl.auth.isSuperadmin() && !prWizardCtrl.project._id">
+      <div class="form-group" ng-if="prWizardCtrl.auth.isSuperadmin()">
         <label class="col-sm-3 control-label">Charity</label>
 
-        <select class="col-sm-9" ng-model="prWizardCtrl.project.charity">
-          <option ng-repeat="charity in prWizardCtrl.charities" value="{{charity._id}}">{{charity.name}}</option>
+        <select ng-disabled="prWizardCtrl.project.charity" class="col-sm-9" ng-model="prWizardCtrl.project.charity">
+          <option ng-repeat="charity in prWizardCtrl.charities" value="{{charity._id}}" ng-selected="prWizardCtrl.project.charity._id == charity._id">{{charity.name}}</option>
         </select>
       </div>
 
