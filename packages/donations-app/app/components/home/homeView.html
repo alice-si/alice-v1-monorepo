@@ -4,7 +4,8 @@
    <section class="splash-v3 grad-both">
      <div class="header-image"
           style="background: url('https://alice-res.s3.eu-west-2.amazonaws.com/home-splash-1.jpg') no-repeat 100% 50%;">
-       <div class="container">
+       <!-- Desktop -->
+       <div class="container hidden-xs">
          <div class="row">
            <h2 class="white">Fund social projects.<br>
              Track your impact.</h2>
@@ -16,7 +17,6 @@
             </p>
          </div>
          <div class="row">
-           <!-- Desktop -->
            <div class="col-md-12 hidden-xs hidden-sm no-padding">
              <div class="form-group col-md-3 no-padding">
                <button ng-click="homeCtrl.explore()">
@@ -31,18 +31,35 @@
                </button>
              </div>
            </div>
+         </div>
+       </div>
 
-           <!-- Mobile -->
-           <div class="col-xs-12 hidden-md hidden-lg no-padding">
-             <div class="form-group col-xs-12 no-padding">
-               <button ng-click="homeCtrl.explore()">
-                 <i class="white glyphicon glyphicon-chevron-right" style="transform: translateY(1px); margin-left: -10px"></i>
-                 EXPLORE PROJECTS
+       <!-- Mobile -->
+       <div class="container splash-v3__container-title
+                   hidden-sm hidden-md hidden-lg
+                   no-padding">
+           <h3 class="col-xs-12">
+             Fund social projects.<br>
+             Track your impact.
+           </h3>
+            <p class="col-xs-12">Donate, grant, invest in social projects
+              &amp; track what is achieved with your money. Alice is the blockchain
+              standard of social funding and impact management.
+            </p>
+           <div class="col-xs-12">
+             <div class="form-group col-md-3 no-padding">
+               <button ui-sref="how-it-works">
+                 SEE HOW IT WORKS
                </button>
              </div>
            </div>
-         </div>
+
        </div>
+
+
+
+
+
      </div>
    </section>
 

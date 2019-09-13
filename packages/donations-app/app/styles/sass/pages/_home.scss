@@ -6,7 +6,7 @@
 
  .home-container, .hiw-container {
    .row {
-     margin: 20px 30px;
+     margin: 20px 30px 40px;
    }
 
    .header-image {
@@ -43,7 +43,7 @@
 }
 
 .home-charity {
-  height: 125px;
+  height: 100px;
 
   &-container {
     margin-bottom: 20px;
@@ -74,6 +74,14 @@
 
 
 @media screen and (max-width: 330px) {
+
+  .home-container {
+    section:first-child {
+      border-bottom: none;
+      height: 75vh !important;
+    }
+  }
+
   #hiw {
     &-create {
       .header-image {
@@ -121,13 +129,41 @@
       transform: translate(-30px, 80px);
     }
   }
+
+  h3 {
+    font-size: 18px;
+    line-height: 23px;
+  }
+
+  h4 {
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .home-project-card {
+    min-height: 240px;
+  }
 }
 
 
 @media screen and (max-width: 470px) {
+  .home-container {
+    section:first-child {
+      border-bottom: none;
+      height: 58vh;
+    }
+
+    .alice-footer .row {
+      margin: 0 !important;
+    }
+  }
+
+
   #hiw {
     &-create {
       .header-image {
+        height: 100vh;
+
         .container {
           transform: translateY(10%);
         }
@@ -140,10 +176,16 @@
     }
 
     &-validate {
-      margin-top: 30px;
+      margin-top: 0;
       margin-bottom: 15px;
       padding-bottom: 105px;
       border-bottom: 1px solid $alice-UI-light-grey;
+
+      .row {
+        div:last-child {
+          margin-top: 50px;
+        }
+      }
     }
   }
 
@@ -165,6 +207,10 @@
       height: 134px;
       transform: translate(-30px, 80px);
     }
+  }
+
+  .home-charity-picture {
+    max-height: 75px;
   }
 }
 

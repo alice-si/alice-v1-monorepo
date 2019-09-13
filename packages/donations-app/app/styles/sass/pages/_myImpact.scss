@@ -4,8 +4,15 @@
   background: $white;
   min-height: 100vh;
 
+  &-splash {
+    .splash-v3__container-progress {
+        margin-top: 0;
+    }
+  }
+
   &__show-appeal-button {
     padding: 30px;
+    margin-top: 30px;
   }
 
   &__progress-title {
@@ -194,6 +201,20 @@
   .my-impact {
     &__container {
       width: 100%;
+
+      &-goals {
+        margin: 40px 25px 0;
+      }
+    }
+
+    &-splash {
+      .splash-v3__container-progress {
+          margin-top: 30px;
+      }
+    }
+
+    &__show-appeal-button {
+      font-size: 14px !important;
     }
 
     &__boost-donation, &__see-on-blockchain {
@@ -207,5 +228,11 @@
         height: 20px;
       }
     }
+  }
+}
+
+@media screen and (max-width: 340px) {
+  .my-impact__show-appeal-button {
+    font-size: 12px !important;
   }
 }
