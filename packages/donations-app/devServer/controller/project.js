@@ -257,6 +257,34 @@ module.exports = function (app) {
       }));
 
   app.post(
+    '/api/syncProjectWithStage',
+    Auth.auth(),
+    AccessControl.Middleware.isSuperadmin,
+    asyncHandler(async (req, res) => {
+      let projectCode = req.body.code;
+      if (!projectCode) {
+        return res.status(400).send(`Empty project code`);
+      }
+      let project = await Project.findOne({ code: projectCode });
+      if (!project.charity) {
+        return res.status(400)
+          .send(`You should set cahrity for the project before syncing`);
+      }
+      let fromStage = await getProjectWithOutcomesFromStage(projectCode);
+      let stageProject = fromStage.project;
+      let stageOutcomes = fromStage.outcomes;
+      if (!stageProject) {
+        return res.status(400)
+          .send(`Project was not found on stage: ${projectCode}`);
+      }
+
+      await syncProject(project, stageProject);
+      await syncOutcomesForProject(project, stageOutcomes);
+
+      return res.json();
+    }));
+
+  app.post(
     '/api/removeProjectWithOutcomes',
     Auth.auth(),
     AccessControl.Middleware.hasAdminAccess(req => req.body._id),
@@ -353,12 +381,69 @@ module.exports = function (app) {
       await bulk.execute();
     }
 
+    await updateOutcomesFieldInProject(savedProject);
+  }
+
+  async function updateOutcomesFieldInProject(project) {
     // setting _outcomes field in project document
     const newOutcomesIds = await Outcome
-      .find({_projectId: savedProject._id})
+      .find({_projectId: project._id})
       .sort("orderNumber")
       .select("_id");
-    savedProject._outcomes = newOutcomesIds;
-    await savedProject.save();
+      project._outcomes = newOutcomesIds;
+    await project.save();
+  }
+
+  // Copies values for selected fields from stage project
+  // to the project with the same code
+  async function syncProject(project, projectFromStage) {
+    const projectSyncFields = [
+      'title', 'lead', 'img', 'video', 'summary', 'extendedSummary',
+      'project', 'serviceProvider', 'beneficiary', 'typeOfBeneficiary', 'validator',
+      'initializerImg', 'validatorImg', 'validatorWhiteImg', 'validatorUrl', 'costBreakdown',
+      'location', 'upfrontPayment', 'peopleTarget', 'fundingTarget', 'perPerson', 'externalFunding',
+      'outcomesIntro', 'myStory', '_categoryId'
+    ];
+
+    Object.assign(project, _.pick(projectFromStage, projectSyncFields));
+    await project.save();
+  }
+
+  // Removes old outcomes and copies new ones for project with the passed code
+  // Also updates _outcomes field for the project
+  async function syncOutcomesForProject(project, outcomes) {
+    let bulk = Outcome.collection.initializeUnorderedBulkOp();
+
+    // Removing old outcomes for the project
+    bulk.find({ _projectId: project._id }).remove();
+
+    // Inserting new outcomes for the porject
+    for (let outcome of outcomes) {
+      outcome._projectId = project._id;
+      bulk.insert(outcome);
+    }
+
+    // Executing bulk DB operation
+    if (Utils.bulkHasOperations(bulk)) {
+      await bulk.execute();
+    }
+
+    await updateOutcomesFieldInProject(project);
+  }
+
+  async function getProjectWithOutcomesFromStage(code) {
+    let ProjectStageModel = Utils.loadStageModel('project');
+    let OutcomeStageModel = Utils.loadStageModel('outcome');
+
+    let project = await ProjectStageModel.findOne({ code });
+    let outcomes = [];
+    if (project) {
+      outcomes = await OutcomeStageModel.find({ _projectId: project._id });
+    }
+
+    return {
+      project: project ? project.toObject() : null,
+      outcomes: outcomes.map(outcome => outcome.toObject()),
+    };
   }
 };
