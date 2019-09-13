@@ -15,7 +15,7 @@
         {{ project.status == 'FINISHED' ? 'Raised' : 'Raised so far' }}
         <br>
         <span class="splash-v3__progress-amount hidden-xs">{{ project.raised | money }}</span>
-        <span class="splash-v3__progress-amount hidden-sm hidden-md hidden-lg">{{ project.raised | roundedK }}</span>
+        <span class="splash-v3__progress-amount hidden-sm hidden-md hidden-lg">{{ project.raised | rounded }}</span>
       </p>
 
       <!-- TODO it is not calculated correctly -->

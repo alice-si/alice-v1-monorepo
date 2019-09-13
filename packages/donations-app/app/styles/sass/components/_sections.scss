@@ -244,6 +244,7 @@
     &__container-title {
       @include box-shadow(0, 1px, 3px, rgba(0,0,0,0.4));
       width: 86vw;
+      top: 190px;
     }
 
     &__progress {
@@ -253,7 +254,7 @@
     }
   }
   .appeal-page > .splash-v3 {
-    height: 80vh;
+    height: 75vh;
   }
 }
 
@@ -334,7 +335,7 @@
   }
 
   .appeal-page > .splash-v3 {
-    height: 100vh !important;
+    height: 95vh;
 
     p {
       font-size: 10px !important;
