@@ -91,7 +91,7 @@ angular.module('aliceApp')
               });
             }
 
-
+						console.log(vm.project);
           }
 				}
       });
