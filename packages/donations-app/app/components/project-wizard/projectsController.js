@@ -23,6 +23,23 @@ angular.module('aliceApp')
       setProjectStatus(code, 'ACTIVE', question, successMsg);
     };
 
+    vm.syncWithStage = function ({ code }) {
+      const question =
+        `Are you sure you want to sync the project "${code}" with stage?`
+        + ` Project fields and outcomes will be updated.`
+        + `  Please note that it is unsafe to sync active projects`
+      const successMsg = `Project is synced: ${code}`;
+
+      if (confirm(question)) {
+        $http.post(API + 'syncProjectWithStage', {
+          code,
+        }).then(function () {
+          NotificationService.success(successMsg);
+          $state.reload();
+        });
+      }
+    }
+
     vm.noAddresseForProject = function ({ code }) {
       NotificationService.error(`Project "${code}" does not have an ethAddress`);
     }
