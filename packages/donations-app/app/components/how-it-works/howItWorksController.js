@@ -2,7 +2,8 @@ angular.module('aliceApp')
   .controller('HowItWorksController', ['AuthService', '$scope', 'API', 'NotificationService', '$http', '$uibModal', 'MODE', function (AuthService, $scope, API, NotificationService, $http, $uibModal, MODE) {
     var vm = this;
 
-    if (MODE != 'prod') {
+    if (MODE != 'prod' && !localStorage.vodafoneWidonOpenedHowItWorks) {
+      localStorage.vodafoneWidonOpenedHowItWorks = true;
       $uibModal.open({
         templateUrl: '/components/vodafone/howItWorksModal.html',
         backdrop: 'static',
