@@ -25,14 +25,8 @@
 
     <!-- Alice -->
     <div ng-if="dashCtrl.auth.isSuperadmin()" class="col-lg-12 col-md-12 dashboard-nav-top">
-      <div class="dashboard-image col-lg-1 col-md-1 col-xs-1">
-        <img class="dashboard-image-in"
-             src="https://s3.eu-west-2.amazonaws.com/alice-res/AliceLogoOnly.png"
-             style="height: 40px; width: auto;"
-             alt="">
-      </div>
       <h3 class="dashboard-title col-lg-5 col-md-5">
-        Hello, {{ dashCtrl.auth.getLoggedFullName() }}
+        Hello {{ dashCtrl.auth.getLoggedUser().firstName }}
       </h3>
     </div>
   </div>
@@ -42,7 +36,15 @@
     <div class="row" style="padding-top: 100px;">
       <div class="col-sm-12">
         <h1>My Impact</h1>
-        <h5>Click on one of your projects below to check the impact of your donation</h5>
+
+        <h5 ng-if="dashCtrl.projectsForMain && dashCtrl.projectsForMain.length > 0">
+          Click on one of your projects below to check the impact of your donation
+        </h5>
+
+        <h5 ng-if="!dashCtrl.projectsForMain || dashCtrl.projectsForMain.length == 0">
+          Please go to our <a href="/?#home-projects" ><u>projects</u></a> page and choose a project to donate.
+          Once you donate, you’ll be able to track your impact on this page.
+        </h5>
       </div>
     </div>
 
@@ -55,11 +57,6 @@
                                 project="project">
         </dashboard-project-card>
       </div>
-    </div>
-    <div class="row"
-         style="margin-top: 20px"
-         ng-if="!dashCtrl.projectsForMain || dashCtrl.projectsForMain.length == 0">
-         <h5> You must donate to a project to track your impact </h5>
     </div>
   </div>
 </section>

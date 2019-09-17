@@ -19,7 +19,13 @@ function loadModel(name) {
   return require('@alice-si/models/' + name)(Mongoose);
 }
 
+function loadStageModel(name) {
+  let StageMongoose = Mongoose.createConnection(Config.stageDB);
+  return require('@alice-si/models/' + name)(StageMongoose);
+}
+
 Utils.loadModel = loadModel;
+Utils.loadStageModel = loadStageModel;
 
 Utils.getUserDetailsById = async (userId) => {
   let users = await User.aggregate([

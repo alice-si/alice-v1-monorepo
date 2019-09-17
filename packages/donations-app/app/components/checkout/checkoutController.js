@@ -1,5 +1,5 @@
 angular.module('aliceApp')
-  .controller('CheckoutController', ['$rootScope', '$uibModal', '$http', '$stateParams', '$state', '$sce', '$timeout', 'AuthService', 'ProjectService', 'NotificationService', 'API', '$scope', 'MANGO', 'CheckoutService', function ($rootScope, $uibModal, $http, $stateParams, $state, $sce, $timeout, AuthService, ProjectService, NotificationService, API, $scope, MANGO, CheckoutService) {
+  .controller('CheckoutController', ['$rootScope', '$uibModal', '$http', '$stateParams', '$state', '$sce', '$timeout', 'AuthService', 'ProjectService', 'NotificationService', 'API', '$scope', 'MANGO', 'CheckoutService', 'MODE', function ($rootScope, $uibModal, $http, $stateParams, $state, $sce, $timeout, AuthService, ProjectService, NotificationService, API, $scope, MANGO, CheckoutService, MODE) {
     var vm = this;
 
     const ADD_AMOUNT_VALUE = 1000;
@@ -44,7 +44,12 @@ angular.module('aliceApp')
 
       //TODO: Consider moving that to the checkout service as well
       if (!AuthService.getLoggedUser()) {
-        AuthService.showLogInModal(CheckoutService.showQuestion);
+        // FIXME added for vodafone testing
+        if (MODE == 'stage') {
+          AuthService.showSignUpModal(CheckoutService.showQuestion);
+        } else {
+          AuthService.showLogInModal(CheckoutService.showQuestion);
+        }
       } else {
         if (vm.mode == 'BANK_TRANSFER') {
           sendDonationByBankTransfer(); // get bank details to show
