@@ -402,7 +402,7 @@ module.exports = function (app) {
       'project', 'serviceProvider', 'beneficiary', 'typeOfBeneficiary', 'validator',
       'initializerImg', 'validatorImg', 'validatorWhiteImg', 'validatorUrl', 'costBreakdown',
       'location', 'upfrontPayment', 'peopleTarget', 'fundingTarget', 'perPerson', 'externalFunding',
-      'outcomesIntro', 'myStory', '_categoryId'
+      'outcomesIntro', 'myStory', '_categoryId', 'noGiftAid'
     ];
 
     Object.assign(project, _.pick(projectFromStage, projectSyncFields));
