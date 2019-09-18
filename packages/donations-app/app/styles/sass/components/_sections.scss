@@ -71,7 +71,6 @@
    }
 
    button {
-     margin-top: 20px;
      width: 120px;
      background: $alice-tonal-medium;
      border-radius: 2px;
@@ -243,9 +242,9 @@
     height: 100vh;
 
     &__container-title {
-      top: 30vh !important;
       @include box-shadow(0, 1px, 3px, rgba(0,0,0,0.4));
       width: 86vw;
+      top: 190px;
     }
 
     &__progress {
@@ -255,14 +254,14 @@
     }
   }
   .appeal-page > .splash-v3 {
-    height: 80vh;
+    height: 75vh;
   }
 }
 
 @media screen and (max-width: 414px) {
   .splash-v2, .splash-v3 {
     .header-image {
-      height: 100vh !important;
+      height: 40vh;
     }
 
     &__container-title {
@@ -307,29 +306,12 @@
       font-size: 20px;
     }
 
-    .header-image {
-      height: 100vh;
-    }
-
     &__container-title {
-      top: 100px;
       left: 30px;
     }
 
     a {
       font-size: 12px !important;
-    }
-  }
-
-  .my-impact-splash > .header-image {
-    height: 40vh !important;
-  }
-
-  .appeal-page {
-    .splash-v3 {
-      .header-image {
-        height: 40vh !important;
-      }
     }
   }
 }
@@ -353,7 +335,7 @@
   }
 
   .appeal-page > .splash-v3 {
-    height: 100vh !important;
+    height: 95vh;
 
     p {
       font-size: 10px !important;
