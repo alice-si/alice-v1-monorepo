@@ -416,6 +416,11 @@ angular.module('aliceApp')
         project: '=',
         page: '='
       },
-      templateUrl: '/components/global/splashCard.html'
+      templateUrl: '/components/global/splashCard.html',
+      controller: ['$scope', 'CheckoutService', function($scope, CheckoutService) {
+        $scope.donate = function() {
+            CheckoutService.startCheckout($scope.project);
+        }
+      }]
     };
   });

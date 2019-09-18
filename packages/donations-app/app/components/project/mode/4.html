@@ -3,7 +3,8 @@
     <div class="header-image appeal-splash"
          ng-style="{ 'background' : 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0)), url(' + projectCtrl.model.img + ') no-repeat center center' }">
       <splash-card project="projectCtrl.model"
-                   page="'APPEAL_PAGE'"></splash-card>
+                   page="'APPEAL_PAGE'"
+                   donateFn="projectCtrl.donate()"></splash-card>
     </div>
   </section>
 

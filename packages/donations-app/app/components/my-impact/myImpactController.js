@@ -95,8 +95,6 @@ angular.module('aliceApp')
 						// For splash consolidation
 						vm.project.raised = vm.project.donatedByAll;
 						vm.project._outcomes = vm.project.outcomes;
-
-						console.log(vm.project);
           }
 				}
       });

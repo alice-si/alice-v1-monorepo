@@ -39,7 +39,7 @@
         <div ng-if="project.status != 'FINISHED'">
           <div ng-if="page === 'APPEAL_PAGE'"
                class="col-md-6 col-xs-10 no-padding">
-            <a ng-click="projectCtrl.donate()">
+            <a ng-click="donate()">
               <button>
                 <i class="glyphicon glyphicon-chevron-right"></i>
                 DONATE
@@ -54,7 +54,7 @@
               </div>
             </div>
             <div class="col-md-6 col-xs-7 col-xs-offset-1 no-padding">
-              <a href="/project/{{project.code}}/4">
+              <a href="/project/{{project.code}}">
                 <button class="inverse-button my-impact__show-appeal-button">
                   VIEW APPEAL PAGE
                 </button>

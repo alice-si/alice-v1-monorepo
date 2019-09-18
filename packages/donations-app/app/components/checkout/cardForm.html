@@ -11,6 +11,14 @@
   <div class="has-error" ng-show="checkCtrl.noAmount">
     <span class="help-block">Please select an amount</span>
   </div>
+  <div style="margin: 20px 0;"
+       class="has-error"
+       ng-show="checkCtrl.nonEU">
+    <p class="has-error help-block">
+      The maximum donation with cards outside the Eurozone is £299 at a time.
+      Please lower your donation amount, and donate the rest in a separate payment.
+    </p>
+  </div>
 
   <div class="row" style="margin-top: 20px">
     <p class="checkout-subtitle col-md-12">Enter your details</p>

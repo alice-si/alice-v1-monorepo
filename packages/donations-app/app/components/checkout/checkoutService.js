@@ -1,5 +1,5 @@
 angular.module('aliceApp')
-  .service('CheckoutService', ['$rootScope', '$uibModal', 'MANGO', 'AuthService', 'NotificationService', '$http', 'API', '$q', function ($rootScope, $uibModal, MANGO, AuthService, NotificationService, $http, API, $q) {
+  .service('CheckoutService', ['$rootScope', '$uibModal', '$uibModalStack', 'MANGO', 'AuthService', 'NotificationService', '$http', 'API', '$q', function ($rootScope, $uibModal, $uibModalStack, MANGO, AuthService, NotificationService, $http, API, $q) {
 
     // Set MANGOPAY API base URL and Client ID
     mangoPay.cardRegistration.baseURL = MANGO.url;
@@ -76,8 +76,14 @@ angular.module('aliceApp')
               }).catch(function (failure) {
                 console.error(failure);
                 if (failure && failure.type == 'securityModeUnsupported') {
-                  NotificationService.error(`Unfortunately your card doesn't support 3DS security verification. Please choose smaller amount or use card issued in the Euro zone`);
-                } else {
+                  // NotificationService.error(`Unfortunately your card doesn't support 3DS security verification. Please choose smaller amount or use card issued in the Euro zone`);
+                  $uibModalStack.dismissAll();
+                  self.showCheckout(true);
+                }
+                else if(failure.data === 'Transaction amount is higher than maximum permitted amount') {
+                  self.showKYCModal(failure.config.data);
+                }
+                else {
                   NotificationService.error("Your bank issuer has declined the transaction, please contact them to be able to donate");
                 }
                 reject(failure);
@@ -120,11 +126,16 @@ angular.module('aliceApp')
         });
       }
 
-      this.showCheckout();
+      this.showCheckout(false);
     };
 
-    this.showCheckout = function () {
+    this.showCheckout = function (nonEU) {
       $uibModal.open({
+        resolve: {
+          NonEU: function() {
+            return nonEU;
+          }
+        },
         templateUrl: '/components/checkout/checkoutModal.html',
         controller: 'CheckoutController as checkCtrl'
       });
@@ -157,6 +168,24 @@ angular.module('aliceApp')
           $timeout(function () {
             FB.XFBML.parse();
           });
+        }]
+      });
+    };
+
+    this.showKYCModal = function (errorData) {
+      $uibModal.open({
+        templateUrl: '/components/checkout/donationRestrictionsModal.html',
+        controller: ['$scope', '$state', 'CheckoutService', '$uibModalStack', function ($scope, $state, CheckoutService, $uibModalStack) {
+          // TODO: Dhen - Keep this here until we're sure we log failed donations well enough
+          // $scope.donationAmount = errorData.amount;
+          // $scope.userData = errorData.user;
+          // $scope.donationType = errorData.type;
+          // $scope.projectCode = CheckoutService.project.code;
+
+          $scope.backToEdit = function() {
+            $uibModalStack.dismissAll();
+            self.showCheckout(false);
+          };
         }]
       });
     };
