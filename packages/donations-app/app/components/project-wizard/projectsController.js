@@ -1,10 +1,11 @@
 angular.module('aliceApp')
 
-  .controller('ProjectsController', ['AuthService', 'NotificationService', 'ProjectService', '$http', '$state', 'API', 'ETHERSCAN', function (AuthService, NotificationService, ProjectService, $http, $state, API, ETHERSCAN) {
+  .controller('ProjectsController', ['AuthService', 'NotificationService', 'ProjectService', '$http', '$state', 'API', 'ETHERSCAN', 'MODE', function (AuthService, NotificationService, ProjectService, $http, $state, API, ETHERSCAN, MODE) {
     var vm = this;
     vm.auth = AuthService;
 
     vm.ETHERSCAN = ETHERSCAN;
+    vm.MODE = MODE;
 
     vm.startDeployment = function ({ code }) {
       const question =
@@ -22,6 +23,23 @@ angular.module('aliceApp')
       const successMsg = `Project is active now: ${code}`;
       setProjectStatus(code, 'ACTIVE', question, successMsg);
     };
+
+    vm.syncWithStage = function ({ code }) {
+      const question =
+        `Are you sure you want to sync the project "${code}" with stage?`
+        + ` Project fields (except for "validator", "charity", "status" and "ethAddresses")`
+        + ` and outcomes will be updated. Please note that it is unsafe to sync active projects`;
+      const successMsg = `Project is synced: ${code}`;
+
+      if (confirm(question)) {
+        $http.post(API + 'syncProjectWithStage', {
+          code,
+        }).then(function () {
+          NotificationService.success(successMsg);
+          $state.reload();
+        });
+      }
+    }
 
     vm.noAddresseForProject = function ({ code }) {
       NotificationService.error(`Project "${code}" does not have an ethAddress`);

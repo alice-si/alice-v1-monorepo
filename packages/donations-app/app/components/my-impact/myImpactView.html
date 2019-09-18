@@ -1,34 +1,33 @@
-<div ng-controller="MyImpactController as impactCtrl" class="appeal-page">
-  <section class="splash-v3 grad-both">
+<div ng-controller="MyImpactController as impactCtrl" class="appeal-page my-impact">
+  <section class="splash-v3 my-impact-splash grad-both">
     <div class="header-image"
-         ng-style="{ 'background' : 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0)), url(' + impactCtrl.project.img + ') no-repeat center' }">
+         ng-style="{ 'background' : 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0)), url(' + impactCtrl.project.img + ') no-repeat center center' }">
       <div class="container my-impact__splash_container splash-v3__container-title">
         <div class="row">
           <h3 id="my-impact-project-title">{{ impactCtrl.project.title }}</h3>
         </div>
         <div class="row ">
-          <div ng-if="impactCtrl.project.status !== 'FINISHED'" class="col-md-4 splash-v3__progress-section">
-             <p class="my-impact__progress-title">We need to raise</p>
-             <span class="my-impact__progress-value">{{ impactCtrl.project.fundingTarget | money}}</span>
-           </div>
-           <div class="col-md-4 splash-v3__progress-section">
-             <p class="my-impact__progress-title">{{impactCtrl.project.status == "FINISHED" ? 'Raised' : 'Raised so far'}}</p>
-             <span class="my-impact__progress-value">{{ impactCtrl.project.donatedByAll | money}}</span>
-           </div>
-           <div class="col-md-4 splash-v3__progress-section">
-            <p ng-if="impactCtrl.project.unitsHelped > 0" class="my-impact__progress-title">Helped</p>
-            <p ng-if="impactCtrl.project.unitsHelped == 0" class="my-impact__progress-title">To help</p>
-            <span class="my-impact__progress-value">
+          <p ng-if="impactCtrl.project.status !== 'FINISHED'" class="col-md-4 col-sm-4 col-xs-4 no-padding splash-v3__progress-section">
+            We need to raise<br>
+             <span class="splash-v3__progress-amount">{{ impactCtrl.project.fundingTarget | money}}</span>
+           </p>
+           <p class="col-md-4 col-sm-4 col-xs-4 splash-v3__progress-section">
+             {{impactCtrl.project.status == "FINISHED" ? 'Raised' : 'Raised so far'}}<br>
+             <span class="splash-v3__progress-amount">{{ impactCtrl.project.donatedByAll | money}}</span>
+           </p>
+           <p class="col-md-4 col-sm-4 col-xs-4  splash-v3__progress-section">
+             {{ 'help' | pastTense:impactCtrl.project.unitsHelped:impactCtrl.project.totalUnitsToHelp | capitalize }}<br>
+            <span class="splash-v3__progress-amount">
               <span ng-if="impactCtrl.project.unitsHelped > 0">{{ impactCtrl.project.unitsHelped }}/</span>
               <span>{{ impactCtrl.project.totalUnitsToHelp }}</span>
               <span class="my-impact__units">
                 {{ impactCtrl.project.typeOfBeneficiary }}
               </span>
             </span>
-          </div>
+          </p>
         </div>
         <div class="row">
-          <div ng-show="impactCtrl.project.status == 'FINISHED'" class="col-md-10 col-xs-10 no-padding"
+          <div ng-if="impactCtrl.project.status == 'FINISHED'" class="col-md-10 col-xs-10 no-padding"
                style="margin-top: 30px;" >
             <div class="row">
               <div class="col-md-6">
@@ -37,13 +36,13 @@
                      style="margin-bottom: -100px; background-image: url('{{impactCtrl.project.charity.picture}}')">
                 </div>
               </div>
-              <div ng-show="false" class="col-md-6" style="padding-top: 10px;">
-              <a href="/project/{{impactCtrl.project.code}}/4">
-                <button class="inverse-button my-impact__show-appeal-button">
-                  <i class="glyphicon glyphicon-chevron-right"></i>
-                  VIEW REPORT
-                </button>
-              </a>
+              <div class="col-md-6" style="padding-top: 10px;">
+                <a href="/project/{{impactCtrl.project.code}}/4">
+                  <button class="inverse-button my-impact__show-appeal-button">
+                    <i class="glyphicon glyphicon-chevron-right"></i>
+                    VIEW REPORT
+                  </button>
+                </a>
               </div>
             </div>
           </div>
@@ -77,28 +76,34 @@
         <div ng-if="impactCtrl.project.totalPaidOut > 0" class="my-impact__overview-section col-md-4 col-sm-6 col-xs-12">
           <p>{{ impactCtrl.charity.name }} used</p>
           <h3 class="alice-blue">{{ impactCtrl.project.totalPaidOut | money }}</h3>
-          <p>so far</p>
+          <p class="my-impact__overview-section-value-postfix">so far</p>
         </div>
         <div ng-if="impactCtrl.project.unitsHelpedWithUserDonations > 0" class="my-impact__overview-section col-md-4 col-sm-6 col-xs-12">
           <p>To help</p>
           <h3 class="alice-blue">
             {{impactCtrl.project.unitsHelpedWithUserDonations}}
           </h3>
-          <p>{{ impactCtrl.project.typeOfBeneficiary }}</p>
+          <p class="my-impact__overview-section-value-postfix">{{ impactCtrl.project.typeOfBeneficiary }}</p>
+        </div>
+        <div ng-if="impactCtrl.project.unitsHelpedWithUserDonations == 0" class="col-md-4 col-sm-6 col-xs-12">
+          <p class="my-impact__empty-impact-text">{{ impactCtrl.charity.name }} is working hard to deliver on the goals below.
+            Once your donation is used we will email you, with a link to this page,
+            to see the goals your donations completed and how many {{ impactCtrl.project.typeOfBeneficiary | lowercase }} it helped.
+          </p>
         </div>
       </div>
     </div>
 
     <div class="row my-impact__container-boost-donation">
-      <div class="col-md-4 col-xs-10">
+      <div class="col-md-4 col-xs-11">
         <button ng-click="impactCtrl.boostDonation()" class="my-impact__boost-donation-button">
           <i class="glyphicon glyphicon-chevron-right"></i>
           BOOST YOUR DONATION
         </button>
       </div>
-      <div class="col-md-4 col-xs-10">
+      <div class="col-md-4 col-xs-11">
         <a target="_blank" href="{{ impactCtrl.getEtherscanLinkForProject() }}">
-          <button  class="inverse-button my-impact__see-on-blockchain-button">
+          <button class="inverse-button my-impact__see-on-blockchain-button">
             <i class="glyphicon glyphicon-chevron-right"></i>
             SEE IT ON BLOCKCHAIN
           </button>
@@ -109,23 +114,17 @@
     <!-- Goals -->
     <div class="my-impact__container-goals">
       <h5 class="alice-dark-grey">TRACK IMPACT THROUGH {{ impactCtrl.project.outcomes.length }} GOALS </h5>
-      <!-- <a href="">
-          <i class="fa fa-chevron-circle-left"
-             style="position: absolute; color: #1CB8C4; margin-top: 230px; z-index: 100; font-size: 20px"
-             ng-click="impactCtrl.scrollGoal('left')">
-          </i>
-        </a>
-        <a href="">
-          <i class="fa fa-chevron-circle-right"
-             style="position: absolute; color: #1CB8C4; right: -10px; margin-top: 230px; z-index: 100; font-size: 20px"
-             ng-click="impactCtrl.scrollGoal('right')">
-          </i>
-        </a> -->
-        <div class="row">
+        <outcome-cards
+          project="impactCtrl.project.code"
+          show-impact="true">
+        </outcome-cards>
+
+        <!-- TODO alex - remove the commented code -->
+        <!-- <div class="row">
           <div ng-repeat="outcome in impactCtrl.project.outcomes" index="$index">
             <my-impact-goal goal="outcome" index="$index" finished="impactCtrl.project.status == 'FINISHED'" goals-count="impactCtrl.project.totalUnitsToHelp"></my-impact-goal>
           </div>
-        </div>
+        </div> -->
 
 
     </div>

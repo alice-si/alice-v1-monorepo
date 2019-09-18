@@ -16,7 +16,7 @@ Mango.securityTresholdForCardsWith3DSSupport = 10100;
 
 const supportedCountryCodesFor3DS = [
   'AUT', 'BEL', 'CYP', 'EST', 'FIN', 'FRA', 'DEU', 'GRC', 'IRL', 'ITA', 'LVA',
-  'LTU', 'LUX', 'MLT', 'NLD', 'PRT', 'SVK', 'SVN', 'ESP'
+  'LTU', 'LUX', 'MLT', 'NLD', 'PRT', 'SVK', 'SVN', 'ESP', 'GBR'
 ];
 
 const TEST_ALIAS = "356999XXXXXX0157";

@@ -1,0 +1,31 @@
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 story-card__container">
+  <div class="story-card">
+    <!-- story card image -->
+    <img class="story-card__image" src="{{ story.img }}">
+
+    <!-- story card content  -->
+    <div class="story-card__content">
+      <p class="story-card__story-header">
+        {{ story.header.toUpperCase() }}
+      </p>
+      <p class="story-card__story-quote">
+        {{ story.quote }}
+      </p>
+
+      <div uib-collapse="!expandStory">
+        <div>
+          <p ng-bind-html="story.details"></p>
+        </div>
+      </div>
+
+      <a class="story-card__read-more" ng-click="expandStory = !expandStory">
+        Read
+        <span ng-if="expandStory">Less</span>
+        <span ng-if="!expandStory">{{ story.header }}'s story</span>
+        <i class="pull-up glyphicon story-card__arrow"
+          ng-class="expandStory ? 'glyphicon-chevron-up' : 'glyphicon-chevron-down'">
+        </i>
+      </a>
+    </div>
+  </div>
+</div>

@@ -23,6 +23,8 @@
 @import "components/forms";
 @import "components/footer";
 @import "components/toastr";
+@import "components/outcomeCards";
+@import "components/storyCards";
 
 // Pages
 @import "pages/home";
@@ -46,6 +48,12 @@ html,body
     margin: 0px;
     padding: 0px;
     overflow-x: hidden;
+}
+
+// To prevent page scrolling when modal is opened
+body.modal-open {
+    height: 100vh;
+    overflow-y: hidden;
 }
 
 html {

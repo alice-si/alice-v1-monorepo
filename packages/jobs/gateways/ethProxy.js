@@ -5,7 +5,6 @@ const ethers = require('ethers');
 const ContractUtils = require('../utils/contract-utils');
 const ModelUtils = require('../utils/model-utils');
 const ContractProxy = require('./contractProxy');
-const Deploy = require('../utils/deploy');
 const logger = require('../utils/logger')('gateways/ethProxy');
 const config = require('../config');
 
@@ -147,19 +146,6 @@ EthProxy.checkTransaction = async function (tx) {
 
 EthProxy.checkTransactionReceipt = function (receipt) {
   return receipt.status == 1;
-};
-
-EthProxy.deployProject = async (project, validatorAccount, charityAccount) => {
-  try {
-    return await Deploy.deployProject(
-      validatorAccount,
-      charityAccount,
-      config.claimsRegistryAddress,
-      project);
-  } catch (err) {
-    logger.error(err);
-    throw err;
-  }
 };
 
 EthProxy.checkTransactionWithEtherscan = function (tx) {

@@ -16,7 +16,10 @@
   "dependencies": {
     "@alice-si/cli": "^0.0.0",
     "@alice-si/models": "^0.0.0",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
     "aws-sdk": "^2.259.1",
+    "babel-polyfill": "^6.26.0",
     "bcrypt": "^2.0.0",
     "bluebird": "^3.4.7",
     "body-parser": "^1.5.2",
@@ -31,6 +34,7 @@
     "gulp": "^3.9.1",
     "gulp-angular-filesort": "^1.0.4",
     "gulp-awspublish": "^3.3.0",
+    "gulp-babel": "^8.0.0",
     "gulp-clean-css": "3.9.4",
     "gulp-cloudfront-invalidate-aws-publish": "^1.0.0",
     "gulp-concat": "^2.4.3",

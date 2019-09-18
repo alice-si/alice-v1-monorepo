@@ -34,6 +34,10 @@
     </div>
   </div>
 
+  <h5 ng-show="dpCtrl.passwordHintFor3DS && dpCtrl.mode == '3DS'" style="position: relative; top: 40px;">
+    {{ dpCtrl.passwordHintFor3DS }}
+  </h5>
+
   <iframe width="500px" height="500px"
           ng-show="dpCtrl.mode == '3DS'"
           style="margin-left: -50px; -webkit-transform:scale({{dpCtrl.iframeScale}});-moz-transform-scale({{dpCtrl.iframeScale}});-webkit-transform-origin:top left;-moz-transform-origin:top left;"

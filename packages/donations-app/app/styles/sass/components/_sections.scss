@@ -47,7 +47,7 @@
      position: absolute;
      top: 100px;
      left: 7vw;
-     width: 480px;
+     width: 490px;
    }
 
    &__container-progress {
@@ -145,11 +145,18 @@
 
     .header-image {
       height: 550px;
+      // height: 100vh;
     }
 
-    &__progress-section {
-      border-right: 1px solid $alice-dark-grey;
-      font-size: 16px;
+    &__progress {
+      &-section {
+        border-right: 1px solid $alice-dark-grey;
+        font-size: 16px;
+      }
+
+      &-amount {
+        font-size: 22px;
+      }
     }
 
     &__container-title {
@@ -204,8 +211,14 @@
 
 @media screen and (max-width: 990px) {
   .splash-v3 {
-    &__progress-section {
-      border-right: none;
+    &__progress {
+      &-section {
+        border-right: 1px solid $alice-dark-grey;
+      }
+
+      &-amount {
+        font-size: 18px;
+      }
     }
   }
 }
@@ -227,16 +240,29 @@
 
 @media screen and (max-width: 565px) {
   .splash-v3 {
+    height: 100vh;
+
     &__container-title {
+      top: 30vh !important;
+      @include box-shadow(0, 1px, 3px, rgba(0,0,0,0.4));
       width: 86vw;
     }
+
+    &__progress {
+      &-section {
+        border-right: 1px solid $alice-dark-grey;
+      }
+    }
+  }
+  .appeal-page > .splash-v3 {
+    height: 80vh;
   }
 }
 
 @media screen and (max-width: 414px) {
   .splash-v2, .splash-v3 {
     .header-image {
-      height: 100vh;
+      height: 100vh !important;
     }
 
     &__container-title {
@@ -244,11 +270,11 @@
     }
 
     p {
-      font-size: 16px !important;
+      font-size: 12px !important;
     }
 
     &__progress-section {
-      border-right: none;
+      // border-right: none;
 
       span {
         font-weight: 600;
@@ -294,6 +320,18 @@
       font-size: 12px !important;
     }
   }
+
+  .my-impact-splash > .header-image {
+    height: 40vh !important;
+  }
+
+  .appeal-page {
+    .splash-v3 {
+      .header-image {
+        height: 40vh !important;
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 330px) {
@@ -311,6 +349,20 @@
 
     &__progress-section:first-child {
       margin-top: 10px;
+    }
+  }
+
+  .appeal-page > .splash-v3 {
+    height: 100vh !important;
+
+    p {
+      font-size: 10px !important;
+    }
+  }
+
+  .splash-v3__progress {
+    &-amount {
+      font-size: 14px !important;
     }
   }
 }

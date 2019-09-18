@@ -1,4 +1,5 @@
 angular.module('aliceApp').constant('HOST', 'https://donationsapp.alice.si/');
+angular.module('aliceApp').constant('MODE', 'prod');
 angular.module('aliceApp').constant('REDIRECTION', 'https://s3.eu-west-2.amazonaws.com/prod.alice.si/');
 angular.module('aliceApp').constant('API', 'https://api.alice.si/api/');
 angular.module('aliceApp').constant('MANGO', {clientId: 'alice1703si', url: 'https://api.mangopay.com'});

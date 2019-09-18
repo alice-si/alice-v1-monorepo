@@ -24,6 +24,25 @@
         content="A new transparent way to donate. Track your impact.">
   <meta name="twitter:image" content="https://s3.eu-west-2.amazonaws.com/alice-res/butterfly3.jpg">
 
+  <!-- Hotjar Tracking Code for https://stage.alice.si/ -->
+  <script>
+    (function(h,o,t,j,a,r){
+        // Added by alex@alice.si to disable hotjar on production
+        if (location.href.indexOf('stage.alice.si') == -1) {
+          console.log('Hotjar loading skipped');
+          return;
+        } else {
+          console.log('Hotjar loading started on stage');
+        }
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:1451891,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+  </script>
+
 
   <!-- Google -->
   <meta name="google-site-verification" content="UNe-V9nEiviQayivru5RtB69wFuRStfA80I_7tAPs-o"/>
@@ -45,13 +64,14 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
 
 
+
   <!-- app:css -->
   <!-- endinject -->
   <!-- Start of Async Drift Code -->
   <script>
     // Loading drift only on production
     // Don't load drift when we just open authentication modal (oauth2)
-    if (location.href.includes('donationsapp.alice.si') && !location.href.includes('/oauth2')) {
+    if (location.href.indexOf('donationsapp.alice.si') != -1 && location.href.indexOf('/oauth2') == -1) {
       !function () {
         var t;
         if (t = window.driftt = window.drift = window.driftt || [], !t.init) return t.invoked ? void (window.console && console.error && console.error("Drift snippet included twice.")) : (t.invoked = !0,
