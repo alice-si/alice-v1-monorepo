@@ -1,5 +1,5 @@
 angular.module('aliceApp')
-  .controller('CheckoutController', ['$rootScope', '$uibModal', '$http', '$stateParams', '$state', '$sce', '$timeout', 'AuthService', 'ProjectService', 'NotificationService', 'API', '$scope', 'MANGO', 'CheckoutService', 'MODE', function ($rootScope, $uibModal, $http, $stateParams, $state, $sce, $timeout, AuthService, ProjectService, NotificationService, API, $scope, MANGO, CheckoutService, MODE) {
+  .controller('CheckoutController', ['$rootScope', '$uibModal', '$http', '$stateParams', '$state', '$sce', '$timeout', 'AuthService', 'ProjectService', 'NotificationService', 'API', '$scope', 'MANGO', 'CheckoutService', 'MODE', 'NonEU', function ($rootScope, $uibModal, $http, $stateParams, $state, $sce, $timeout, AuthService, ProjectService, NotificationService, API, $scope, MANGO, CheckoutService, MODE, NonEU) {
     var vm = this;
 
     const ADD_AMOUNT_VALUE = 1000;
@@ -18,6 +18,7 @@ angular.module('aliceApp')
     vm.card = CheckoutService.card;
     vm.project = CheckoutService.project;
     vm.donation = CheckoutService.donation;
+    vm.nonEU = NonEU;
 
     vm.validateGuest = function () {
       vm.guestForm.$submitted = true;
@@ -31,6 +32,10 @@ angular.module('aliceApp')
       if (vm.donation.amount === 0) {
         vm.noAmount = true;
         return;
+      }
+
+      if(vm.donation.amount > 100000) {
+        return
       }
 
       if ((vm.mode == 'CARD' && !vm.cardForm.$valid) || (vm.mode == 'BANK_TRANSFER' && !vm.bankForm.$valid)) {

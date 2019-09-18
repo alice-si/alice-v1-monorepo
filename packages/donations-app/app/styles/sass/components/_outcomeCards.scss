@@ -93,8 +93,17 @@
 
     &__details-table {
       th:first-of-type, td:first-of-type {
-        width: 60%;
+        width: 50%;
       }
+    }
+  }
+}
+
+
+@media screen and (max-width: 767px) {
+  .outcome-card {
+    &__cost-per-unit-header {
+      font-size: 14px;
     }
   }
 }

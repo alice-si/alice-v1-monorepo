@@ -7,13 +7,20 @@ angular.module('aliceApp')
       loadProjectsWithCharities();
     };
 
-    if (MODE != 'prod' && !localStorage.vodafoneWindowOpenedHome) {
-      localStorage.vodafoneWindowOpenedHome = true;
-      $uibModal.open({
-        templateUrl: '/components/vodafone/homePageModal.html',
-        backdrop: 'static',
-        resolve: {}
-      });
+    if (MODE != 'prod') {
+      if(!localStorage.vodafoneWindowOpenedHome) {
+        vm.vodafoneTooltip = "Patience is a virtue :) We'll get to 'How it works' at the end of the survey. Please follow the steps of the survey at the bottom of the page";
+        vm.showVodafoneTooltip = true;
+        localStorage.vodafoneWindowOpenedHome = true;
+        $uibModal.open({
+          templateUrl: '/components/vodafone/homePageModal.html',
+          backdrop: 'static',
+          resolve: {}
+        });
+      }
+      else {
+        vm.showVodafoneTooltip = false;
+      }
     }
 
     // FIXME
