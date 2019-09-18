@@ -81,7 +81,8 @@ angular.module('aliceApp')
                   self.showCheckout(true);
                 }
                 else if(failure.data === 'Transaction amount is higher than maximum permitted amount') {
-                  self.showKYCModal(failure.config.data);
+                  $uibModalStack.dismissAll();
+                  self.showCheckout(true);
                 }
                 else {
                   NotificationService.error("Your bank issuer has declined the transaction, please contact them to be able to donate");
@@ -168,24 +169,6 @@ angular.module('aliceApp')
           $timeout(function () {
             FB.XFBML.parse();
           });
-        }]
-      });
-    };
-
-    this.showKYCModal = function (errorData) {
-      $uibModal.open({
-        templateUrl: '/components/checkout/donationRestrictionsModal.html',
-        controller: ['$scope', '$state', 'CheckoutService', '$uibModalStack', function ($scope, $state, CheckoutService, $uibModalStack) {
-          // TODO: Dhen - Keep this here until we're sure we log failed donations well enough
-          // $scope.donationAmount = errorData.amount;
-          // $scope.userData = errorData.user;
-          // $scope.donationType = errorData.type;
-          // $scope.projectCode = CheckoutService.project.code;
-
-          $scope.backToEdit = function() {
-            $uibModalStack.dismissAll();
-            self.showCheckout(false);
-          };
         }]
       });
     };

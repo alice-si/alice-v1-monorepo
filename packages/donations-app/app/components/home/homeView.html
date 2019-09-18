@@ -26,9 +26,22 @@
              </div>
              <div class="form-group col-md-3">
                <button class="inverse-button"
-                       ui-sref="how-it-works">
+                       ui-sref="how-it-works"
+                       ng-if="homeCtrl.mode === 'prod'">
                  SEE HOW IT WORKS
                </button>
+               <!-- FOR VODAFONE ONLY -->
+               <div tooltip-placement="top"
+                    tooltip-class="vodafone-tooltip"
+                    tooltip-enable="homeCtrl.showVodafoneTooltip"
+                    uib-tooltip="{{homeCtrl.vodafoneTooltip}}"
+                    ng-if="homeCtrl.mode !== 'prod'">
+                    <button class="inverse-button"
+                            ui-sref="how-it-works"
+                            ng-disabled="homeCtrl.showVodafoneTooltip">
+                      SEE HOW IT WORKS
+                    </button>
+               </div>
              </div>
            </div>
          </div>
@@ -48,8 +61,14 @@
             </p>
            <div class="col-xs-12">
              <div class="form-group col-md-3 no-padding">
+               <!-- Revert back to this after vodafone test
                <button ui-sref="how-it-works">
                  SEE HOW IT WORKS
+               </button>
+               -->
+               <button ng-click="homeCtrl.explore()">
+                 <i class="glyphicon glyphicon-chevron-right"></i>
+                 EXPLORE PROJECTS
                </button>
              </div>
            </div>

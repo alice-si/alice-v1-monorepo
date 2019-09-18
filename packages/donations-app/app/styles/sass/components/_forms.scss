@@ -102,3 +102,13 @@ button {
     }
   }
 }
+
+.disabled-button {
+  background-color: #CCC;
+  border: none;
+
+  &:hover {
+    background-color: #CCC !important;
+    color: #fff !important;
+  }
+}

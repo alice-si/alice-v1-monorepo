@@ -13,6 +13,14 @@
   </div>
   <div style="margin: 20px 0;"
        class="has-error"
+       ng-show="checkCtrl.donation.amount > 100000">
+    <p class="has-error help-block">
+      Thank you for your generosity! <br>
+      Donations are limited to £1,000 at a time. Please lower your donation amount, and donate the rest in a separate payment.
+    </p>
+  </div>
+  <div style="margin: 20px 0;"
+       class="has-error"
        ng-show="checkCtrl.nonEU">
     <p class="has-error help-block">
       The maximum donation with cards outside the Eurozone is £299 at a time.

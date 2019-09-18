@@ -1,3 +1,28 @@
+/** TODO - Dhen
+ **
+  * Remove this once vodafone testing is finished
+ **
+ **/
+
+.vodafone-tooltip {
+  .tooltip-inner {
+    padding: 10px 15px;
+    font-size: 14px;
+    font-family: $source;
+    letter-spacing: 1px;
+    width: 250px;
+    background: rgba(255, 255, 255, 1);
+    border: 1px solid $alice-tonal-medium;
+    color: $alice-tonal-medium;
+    @include box-shadow(0, 6px, 12px, rgba(0,0,0,.175));
+  }
+
+  .tooltip-arrow {
+    display: none;
+  }
+}
+
+
 /* For the new Donations Homepage
  *
  * Current homepage at: styles/homepage.css

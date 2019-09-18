@@ -18,7 +18,6 @@ angular.module('aliceApp')
     vm.card = CheckoutService.card;
     vm.project = CheckoutService.project;
     vm.donation = CheckoutService.donation;
-
     vm.nonEU = NonEU;
 
     vm.validateGuest = function () {
@@ -33,6 +32,10 @@ angular.module('aliceApp')
       if (vm.donation.amount === 0) {
         vm.noAmount = true;
         return;
+      }
+
+      if(vm.donation.amount > 100000) {
+        return
       }
 
       if ((vm.mode == 'CARD' && !vm.cardForm.$valid) || (vm.mode == 'BANK_TRANSFER' && !vm.bankForm.$valid)) {
