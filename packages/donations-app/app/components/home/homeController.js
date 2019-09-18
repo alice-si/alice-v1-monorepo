@@ -7,7 +7,8 @@ angular.module('aliceApp')
       loadProjectsWithCharities();
     };
 
-    if (MODE != 'prod') {
+    if (MODE != 'prod' && !localStorage.vodafoneWindowOpenedHome) {
+      localStorage.vodafoneWindowOpenedHome = true;
       $uibModal.open({
         templateUrl: '/components/vodafone/homePageModal.html',
         backdrop: 'static',
