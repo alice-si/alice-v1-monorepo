@@ -13,7 +13,14 @@
             <span class="outcome-card__we-used-amount">
               {{ outcome.helpedWithUserDonations }}
             </span>
-            {{ projectUnit }}
+
+            <span ng-if="outcome.helpedWithUserDonations == 1">
+              {{ projectUnit | lowercase | singular }}
+            </span>
+            <span ng-if="outcome.helpedWithUserDonations != 1">
+              {{ projectUnit | lowercase }}
+            </span>
+
             complete this goal
           </div>
     </div>
