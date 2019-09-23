@@ -1,6 +1,7 @@
 const ModelUtils = require('../utils/model-utils');
 const Moment = require('moment');
 const { BasicJob } = require('./job');
+const config = require('../config');
 
 const Donation = ModelUtils.loadModel('donation');
 
@@ -32,7 +33,7 @@ function getFilter() {
       $nin: ['DONATED', 'BANK_TRANSFER_REQUESTED']
     },
     createdAt: {
-      $lt: (new Moment()).subtract(Config.stalledDonationTimeout, 's').toDate()
+      $lt: (new Moment()).subtract(config.stalledDonationTimeout, 's').toDate()
     },
     errorChecked: {
       $ne: true
