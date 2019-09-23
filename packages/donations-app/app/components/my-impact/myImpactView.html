@@ -2,62 +2,8 @@
   <section class="splash-v3 my-impact-splash grad-both">
     <div class="header-image"
          ng-style="{ 'background' : 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0)), url(' + impactCtrl.project.img + ') no-repeat center center' }">
-      <div class="container my-impact__splash_container splash-v3__container-title">
-        <div class="row">
-          <h3 id="my-impact-project-title">{{ impactCtrl.project.title }}</h3>
-        </div>
-        <div class="row ">
-          <p ng-if="impactCtrl.project.status !== 'FINISHED'" class="col-md-4 col-sm-4 col-xs-4 no-padding splash-v3__progress-section">
-            We need to raise<br>
-             <span class="splash-v3__progress-amount">{{ impactCtrl.project.fundingTarget | money}}</span>
-           </p>
-           <p class="col-md-4 col-sm-4 col-xs-4 splash-v3__progress-section">
-             {{impactCtrl.project.status == "FINISHED" ? 'Raised' : 'Raised so far'}}<br>
-             <span class="splash-v3__progress-amount">{{ impactCtrl.project.donatedByAll | money}}</span>
-           </p>
-           <p class="col-md-4 col-sm-4 col-xs-4  splash-v3__progress-section">
-             {{ 'help' | pastTense:impactCtrl.project.unitsHelped:impactCtrl.project.totalUnitsToHelp | capitalize }}<br>
-            <span class="splash-v3__progress-amount">
-              <span ng-if="impactCtrl.project.unitsHelped > 0">{{ impactCtrl.project.unitsHelped }}/</span>
-              <span>{{ impactCtrl.project.totalUnitsToHelp }}</span>
-              <span class="my-impact__units">
-                {{ impactCtrl.project.typeOfBeneficiary }}
-              </span>
-            </span>
-          </p>
-        </div>
-        <div class="row">
-          <div ng-if="impactCtrl.project.status == 'FINISHED'" class="col-md-10 col-xs-10 no-padding"
-               style="margin-top: 30px;" >
-            <div class="row">
-              <div class="col-md-6">
-                <p>Run by</p>
-                <div class="appeal-v3__info-image"
-                     style="margin-bottom: -100px; background-image: url('{{impactCtrl.project.charity.picture}}')">
-                </div>
-              </div>
-              <div class="col-md-6" style="padding-top: 10px;">
-                <a href="/project/{{impactCtrl.project.code}}/4">
-                  <button class="inverse-button my-impact__show-appeal-button">
-                    <i class="glyphicon glyphicon-chevron-right"></i>
-                    VIEW REPORT
-                  </button>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div ng-hide="impactCtrl.project.status == 'FINISHED'" class="col-md-6 col-xs-10 no-padding">
-            <a href="/project/{{impactCtrl.project.code}}/4">
-              <button class="inverse-button my-impact__show-appeal-button">
-                <i class="glyphicon glyphicon-chevron-right"></i>
-                VIEW APPEAL PAGE
-              </button>
-            </a>
-          </div>
-
-        </div>
-      </div>
+         <splash-card project="impactCtrl.project"
+                      page="'MY_IMPACT'"></splash-card>
     </div>
   </section>
 

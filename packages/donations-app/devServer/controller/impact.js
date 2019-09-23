@@ -87,10 +87,11 @@ module.exports = function (app) {
             from: "outcomes",
             let: {projectId: "$_id"},
             pipeline: [
-              {$match: {$expr: 
+              {$match: {$expr:
                 {$eq: ["$_projectId", "$$projectId"]}
               }},
               {
+
                 $lookup: { // User impacts for each outcome
                   from: "impacts",
                   let: {outcomeId: "$_id"},
@@ -147,8 +148,7 @@ module.exports = function (app) {
               {$match: {$expr: {
                 $and: [
                   {$eq: ["$_projectId", "$$projectId"]},
-                  {$ne: ["$status", "3DS"]},
-                  {$ne: ["$status", "FAILED"]}
+                  {$eq: ["$status", "DONATED"]}
                 ]}}},
               {$project: {"amount": 1}}
             ],

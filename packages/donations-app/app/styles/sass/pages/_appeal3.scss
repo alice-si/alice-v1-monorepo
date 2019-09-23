@@ -37,7 +37,7 @@
     }
 
     &-image {
-      height: 150px;
+      height: 70px;
       width: auto;
       max-width: 150px;
       background-size: contain;
@@ -165,6 +165,13 @@
       width: 85vw;
       margin: 15px auto;
       padding-bottom: 20px;
+    }
+
+    &__info {
+      &-image {
+        height: 50px;
+        width: auto;
+      }
     }
 
     &__stories {
