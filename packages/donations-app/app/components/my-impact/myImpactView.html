@@ -29,7 +29,15 @@
           <h3 class="alice-blue">
             {{impactCtrl.project.unitsHelpedWithUserDonations}}
           </h3>
-          <p class="my-impact__overview-section-value-postfix">{{ impactCtrl.project.typeOfBeneficiary }}</p>
+          <p class="my-impact__overview-section-value-postfix">
+            <span ng-if="impactCtrl.project.unitsHelpedWithUserDonations == 1">
+              {{ impactCtrl.project.typeOfBeneficiary | lowercase | singular }}
+            </span>
+
+            <span ng-if="impactCtrl.project.unitsHelpedWithUserDonations != 1">
+              {{ impactCtrl.project.typeOfBeneficiary | lowercase }}
+            </span>
+          </p>
         </div>
         <div ng-if="impactCtrl.project.unitsHelpedWithUserDonations == 0" class="col-md-4 col-sm-6 col-xs-12">
           <p class="my-impact__empty-impact-text">{{ impactCtrl.charity.name }} is working hard to deliver on the goals below.
