@@ -68,16 +68,18 @@
 }
 
 .home-charity {
-  height: 100px;
+  height: 150px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
 
   &-container {
     margin-bottom: 20px;
   }
 
   &-picture {
-      max-height: 125px;
+      width: 125px;
       height: auto;
-      vertical-align: middle;
   }
 }
 

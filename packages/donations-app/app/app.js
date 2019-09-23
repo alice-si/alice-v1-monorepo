@@ -65,7 +65,7 @@ angular.module('aliceApp', ['ui.router', 'angular-jwt', 'ui.bootstrap', 'ui.boot
         url: '/project/:projectCode',
         templateUrl: function(params) {
           const appealVersionsForProject = {
-            'fusion-housing-1': 2,
+            // 'fusion-housing-1': 2,
             // 'gift-of-walking': 2,
             // 'save-from-abuse': 2
           };

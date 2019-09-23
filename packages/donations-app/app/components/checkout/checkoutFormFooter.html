@@ -1,6 +1,6 @@
 <div class="modal-footer">
     <div class="row">
-        <div ng-show="checkCtrl.donation.amount">
+        <div ng-show="checkCtrl.donation.amount && !checkCtrl.project.noGiftAid">
 
             <p class="form-group col-md-12 center alice-blue">
                 <input icheck type="checkbox" ng-model="checkCtrl.giftAid" /> Add Gift Aid to turn your donation into
