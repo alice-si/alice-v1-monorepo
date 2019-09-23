@@ -148,7 +148,8 @@ module.exports = function (app) {
               {$match: {$expr: {
                 $and: [
                   {$eq: ["$_projectId", "$$projectId"]},
-                  {$eq: ["$status", "DONATED"]}
+                  {$ne: ["$status", "FAILED"]},
+                  {$ne: ["$status", "3DS"]},
                 ]}}},
               {$project: {"amount": 1}}
             ],

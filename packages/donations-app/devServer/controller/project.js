@@ -92,7 +92,11 @@ module.exports = function (app) {
     let donations = await Donation.aggregate([
       {
         $match: {
-          $and: [{ _projectId: project._id }, { status: 'DONATED' }]
+          $and: [
+            { _projectId: project._id },
+            { status: { $ne: '3DS' } },
+            { status: { $ne: 'FAILED' } },
+          ]
         }
       },
       {
