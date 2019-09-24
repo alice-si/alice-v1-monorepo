@@ -125,8 +125,7 @@ module.exports = function (app) {
     user.passwordChangeToken = undefined;
     await user.save();
 
-    return res.json("Password change request registered."
-      + " We will notify you by email when the process is complete.");
+    return res.json("Your password has been changed successfully!");
   }));
 
   app.post('/api/oauth2/requestAccessCode', Auth.auth(), asyncHandler(async (req, res) => {
