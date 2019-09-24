@@ -16,7 +16,7 @@ contract('DonationStatusCheckingJob', async function () {
 
   TestUtils.setBeforeAndAfterHooksForJobTest();
 
-  it('should create test donations', async function () {
+  it('Should create test donations', async function () {
     for (let i = 0; i < 10; i++) {
       logger.info('Creating donation');
       donations[i] = await new Donation({
@@ -29,7 +29,7 @@ contract('DonationStatusCheckingJob', async function () {
     
   });
 
-  it('Execute DonationStatusChecking job', async function () {
+  it('Should execute DonationStatusChecking job', async function () {
     await new DonationStatusCheckingJob().execute();
   });
 
@@ -37,6 +37,10 @@ contract('DonationStatusCheckingJob', async function () {
     await sleep();
     mails = await Mail.find();
     mails.length.should.be.gt(0);
+  });
+
+  it('Mails should not include error notifications for devs', async function () {
+    mails.filter(mail => mail.type == 'ErrorNotification').should.be.empty;
   });
 
   it('Checking email sending if needed', async () => {
