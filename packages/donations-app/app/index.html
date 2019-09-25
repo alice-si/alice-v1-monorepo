@@ -27,20 +27,42 @@
   <!-- Hotjar Tracking Code for https://stage.alice.si/ -->
   <script>
     (function(h,o,t,j,a,r){
-        // Added by alex@alice.si to disable hotjar on production
+        var hotjarLoadingStarted = false;
+
         h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
         if (location.href.indexOf('donationsapp.alice.si') != -1) {
+          hotjarLoadingStarted = true;
           console.log('Hotjar loading started on production');
           h._hjSettings={hjid:1481120,hjsv:6};
         } else if (location.href.indexOf('stage.alice.si') != -1) {
+          hotjarLoadingStarted = true;
           console.log('Hotjar loading started on stage');
           h._hjSettings={hjid:1451891,hjsv:6};
         }
-        a=o.getElementsByTagName('head')[0];
-        r=o.createElement('script');r.async=1;
-        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-        a.appendChild(r);
+
+        if (hotjarLoadingStarted) {
+          a=o.getElementsByTagName('head')[0];
+          r=o.createElement('script');r.async=1;
+          r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+          a.appendChild(r);
+        }
     })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+  </script>
+
+  <script>
+    (function () {
+      var timer = setInterval(function () {
+        if (document.querySelectorAll('[data-src]').length > 0) {
+          // clearInterval(timer);
+          $('.lazy').Lazy({
+            effect: 'fadeIn',
+            scrollDirection: 'vertical',
+            effectTime: 1000,
+            visibleOnly: true
+          });
+        }
+      }, 500)
+    })();
   </script>
 
 

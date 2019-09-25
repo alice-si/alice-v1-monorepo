@@ -1,7 +1,7 @@
 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 outcome-card__container">
   <div class="outcome-card">
     <!-- Outcome card image -->
-    <img class="outcome-card__image" src="{{ outcome.image }}">
+    <img class="outcome-card__image lazy" data-src="{{ outcome.image }}">
 
     <div class="outcome-card__we-used-container">
         <div ng-if="outcome.userDonationsUsedAmount"  class="outcome-card__we-used">

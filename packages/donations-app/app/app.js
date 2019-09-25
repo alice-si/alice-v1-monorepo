@@ -222,12 +222,11 @@ angular.module('aliceApp', ['ui.router', 'angular-jwt', 'ui.bootstrap', 'ui.boot
       }
     });
 
-    //Autoscroll to top after route change
     $rootScope.$on('$stateChangeSuccess', function () {
+      //Autoscroll to top after route change
       document.body.scrollTop = document.documentElement.scrollTop = 0;
-    });
 
-    $rootScope.$on('$stateChangeSuccess', function () {
+      // Google analytics event reporting
       ga('send', 'pageview', $location.path());
     });
 
