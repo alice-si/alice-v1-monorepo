@@ -35,14 +35,6 @@ module.exports = function (app) {
       return res.json(projects);
     }));
 
-  // Deprecated - TODO remove later
-	// app.get(
-  //   '/api/getActiveProjects',
-  //   asyncHandler(async (req, res) => {
-  //     const projects = await Project.find({status: 'ACTIVE'});
-  //     return res.json(projects);
-  //   }));
-
   app.get(
     '/api/getProjects',
     asyncHandler(async (req, res) => {

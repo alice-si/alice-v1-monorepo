@@ -1,15 +1,10 @@
 <section ng-controller="CharityDashboardController as dashCtrl"
          class="goals-dash dashboard-background">
 
-  <div class="title-over-image grad-both">
-    <div class="header-image" ng-style="{ 'background' : 'linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.8)), url(' + dashCtrl.project.img + ') no-repeat center' }">
-      <div class="container">
-        <div class="row">
-          <h3 class="white title-over-image__title">{{ dashCtrl.project.title }}</h3>
-        </div>
-      </div>
-    </div>
-  </div>
+  <splash
+    show-appeal-page-link="true"
+    back-to-projects-link="/charity-dashboard/"
+    project="dashCtrl.projectDetails" />
 
     <loading-screen ng-if="!dataLoaded"></loading-screen>
     <div class="container"
@@ -30,6 +25,12 @@
       </div>
 
       <uib-tabset type="pills" class="alice-tabset goals-dash__tabset">
+        <uib-tab heading="Money">
+          <div class="row">
+            <charity-dashboard-money donations="dashCtrl.donations">
+            </charity-dashboard-money>
+          </div>
+        </uib-tab>
         <uib-tab active="true" heading="Goals">
           <div class="row">
             <charity-dashboard-goals outcomes-donated-to="dashCtrl.donated_outcomes"
@@ -40,12 +41,6 @@
                                      project-validator="dashCtrl.projectValidator">
                                      <!-- projectvalidator is not used currently -->
             </charity-dashboard-goals>
-          </div>
-        </uib-tab>
-        <uib-tab heading="Money">
-          <div class="row">
-            <charity-dashboard-money donations="dashCtrl.donations">
-            </charity-dashboard-money>
           </div>
         </uib-tab>
         <!-- No designs for these pages, yet

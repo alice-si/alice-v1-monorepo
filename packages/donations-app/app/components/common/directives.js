@@ -414,7 +414,9 @@ angular.module('aliceApp')
     return {
       scope: {
         project: '=',
-        page: '='
+        showAppealPageLink: '@',
+        showDonateButton: '@',
+        showTrackDonationsImpactLink: '@',
       },
       templateUrl: '/components/global/splashCard.html',
       controller: ['$scope', 'CheckoutService', function($scope, CheckoutService) {
@@ -422,5 +424,17 @@ angular.module('aliceApp')
             CheckoutService.startCheckout($scope.project);
         }
       }]
+    };
+  })
+  .directive('splash', function () {
+    return {
+      scope: {
+        project: '=',
+        backToProjectsLink: '@',
+        showAppealPageLink: '@',
+        showDonateButton: '@',
+        showTrackDonationsImpactLink: '@',
+      },
+      templateUrl: '/components/global/splash.html'
     };
   });
