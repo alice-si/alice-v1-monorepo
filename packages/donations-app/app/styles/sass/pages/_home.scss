@@ -105,7 +105,7 @@
   .home-container {
     section:first-child {
       border-bottom: none;
-      height: 75vh !important;
+      height: 430px !important;
     }
   }
 
@@ -177,7 +177,7 @@
   .home-container {
     section:first-child {
       border-bottom: none;
-      height: 58vh;
+      height: 400px;
     }
 
     .splash-v3__container-title {
@@ -240,8 +240,12 @@
     }
   }
 
-  .home-charity-picture {
-    max-height: 75px;
+  .home-charity {
+
+    &-picture {
+      max-width: 75px;
+      height: auto;
+    }
   }
 }
 

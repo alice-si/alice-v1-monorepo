@@ -1,6 +1,7 @@
 <div class="container splash-v3__container-title">
   <div class="row">
     <h3>{{ project.title }}</h3>
+    <p ng-if="project.status == 'FINISHED'">This project has been completed! View details below</p>
     <a ui-sref="how-it-works"
        ng-if="page === 'APPEAL_PAGE' && project.status != 'FINISHED'">Track your donation's impact <i class="glyphicon glyphicon-chevron-right"></i></a>
   </div>
@@ -46,31 +47,28 @@
               </button>
             </a>
           </div>
-          <div ng-if="page === 'MY_IMPACT'">
-            <div class="col-md-5 col-xs-3 no-padding">
-              <p>Run by</p>
-              <div class="appeal-v3__info-image"
-                   style="background-image: url('{{project.charity.picture}}')">
-              </div>
-            </div>
-            <div class="col-md-6 col-xs-7 col-xs-offset-1 no-padding">
-              <a href="/project/{{project.code}}">
-                <button class="inverse-button my-impact__show-appeal-button">
-                  VIEW APPEAL PAGE
-                </button>
-              </a>
+        </div>
+        <div ng-if="page === 'MY_IMPACT'">
+          <div class="col-md-5 col-xs-3 no-padding">
+            <p>Run by</p>
+            <div class="appeal-v3__info-image"
+                 style="background-image: url('{{project.charity.picture}}')">
             </div>
           </div>
-        </div>
-        <div ng-if="project.status == 'FINISHED'"
-             class="col-md-6"
-             style="padding-top: 10px;">
-          <a href="/project/{{project.code}}">
-            <button class="inverse-button my-impact__show-appeal-button">
-              <i class="glyphicon glyphicon-chevron-right"></i>
-              VIEW REPORT
-            </button>
-          </a>
+          <div class="col-md-6 col-xs-7 col-xs-offset-1 no-padding">
+            <a href="/project/{{project.code}}"
+               ng-if="project.status != 'FINISHED'">
+              <button class="inverse-button my-impact__show-appeal-button">
+                VIEW APPEAL PAGE
+              </button>
+            </a>
+            <a href="/project/{{project.code}}"
+               ng-if="project.status == 'FINISHED'">
+              <button class="my-impact__show-appeal-button">
+                VIEW REPORT
+              </button>
+            </a>
+          </div>
         </div>
     </div>
   </div>

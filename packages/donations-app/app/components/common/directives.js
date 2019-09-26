@@ -33,7 +33,7 @@ angular.module('aliceApp')
       }
     };
   }])
-  .directive('cookieConsent', function($cookies) {
+  .directive('cookieConsent', ['$cookies', function($cookies) {
     return {
       scope: {},
       templateUrl: '/components/global/cookieConsent.html',
@@ -49,7 +49,7 @@ angular.module('aliceApp')
         };
       }
     }
-  })
+  }])
   .directive('aliceFooter', function() {
     return {
       scope: {

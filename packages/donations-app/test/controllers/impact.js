@@ -35,7 +35,7 @@ describe('ImpactController', function () {
     it('Should get my projects', function () {
         return TestUtils.testGet('getMyProjects', '', async function (res) {
             res.length.should.be.equal(1);
-            res[0].donatedByAll.should.be.equal(150);
+            res[0].donatedByAll.should.be.equal(250);
             res[0].totalDonated.should.be.equal(100);
             res[0].impacts.length.should.be.equal(1);
             res[0].impacts[0].should.be.shallowDeepEqual({
