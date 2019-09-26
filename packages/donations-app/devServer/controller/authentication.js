@@ -8,10 +8,12 @@ const Validator = require('validator');
 const Auth = require('../service/auth');
 const Moment = require('moment');
 const Lodash = require('lodash');
+const AccessControl = require('../service/access-control');
 const User = Utils.loadModel('user');
 const AccessRequest = Utils.loadModel('accessRequest');
 const Charity = Utils.loadModel('charity');
 
+const ANOTHER_USER_TOKEN_TTL = 600; // seconds
 const ACCESS_REQUEST_TTL = 120; // seconds
 const JWT_OAUTH_TTL = 300; // seconds
 const DEFAULT_RESIDENCE = "GB";
@@ -76,6 +78,25 @@ module.exports = function (app) {
         return res.status(401).json('Authentication failed. Wrong password.');
       }
       const token = Auth.getJWT(user._id, {scope: 'full_access'});
+      return res.json({token});
+  }));
+
+  app.post(
+    '/api/authenticateAsAnotherUser',
+    Auth.auth(),
+    AccessControl.Middleware.isSuperadmin,
+    asyncHandler(async (req, res) => {
+      const user = await User.findOne({
+        email: new RegExp('^' + req.body.email, 'i')
+      });
+      if (!user) {
+        return res.status(400).json('Authentication failed. User was not found.');
+      }
+      // TODO - maybe we should disable access to endpoints for making claims and validations
+      const token = Auth.getJWT(user._id, {
+        scope: 'full_access',
+        expiresIn: ANOTHER_USER_TOKEN_TTL,
+      });
       return res.json({token});
   }));
 

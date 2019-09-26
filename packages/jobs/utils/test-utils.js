@@ -1,10 +1,11 @@
 const config = require('../config');
+config.enableAutoNonce = false;
 const TestConfig = require('../test-config');
 const ModelUtils = require('./model-utils');
+const ContractUtils = require('./contract-utils');
 const Mongoose = require('mongoose');
 const Mockgoose = require('mockgoose').Mockgoose;
 const mockgoose = new Mockgoose(Mongoose);
-const BigNumber = web3.BigNumber;
 const MangoProxy = require('../gateways/mangoProxy');
 const KeyProxy = require('../gateways/keyProxy');
 const EthProxy = require('../gateways/ethProxy');
@@ -19,6 +20,9 @@ const User = ModelUtils.loadModel('user');
 const Project = ModelUtils.loadModel('project');
 const Charity = ModelUtils.loadModel('charity');
 
+if (global.web3) {
+  var BigNumber = web3.BigNumber;
+}
 require('chai')
   .use(require('chai-as-promised'))
   .use(require('chai-bignumber')(BigNumber))
@@ -99,7 +103,7 @@ TestUtils.createDefaultMockUser = async function (postfix, ethAccount, charity, 
   const crypto = KeyProxy.encrypt(TestConfig.defaultPassword);
 
   let testUserObj = {
-    email: 'test_email@gmail.com' + postfix,
+    email: `test_email_${postfix}@alice.si`,
     crypto: crypto,
     ethAccount: ethAccount,
     firstName: 'Tom' + postfix,
@@ -161,7 +165,7 @@ TestUtils.createDefaultMockValidation = async (
 
 /** Deploys contracts with default values and returns their addresses. */
 TestUtils.deployDefault = async () => {
-  let accounts = await Promise.promisify(web3.eth.getAccounts)();
+  let accounts = await ContractUtils.mainWallet.provider.listAccounts();
 
   let claimsRegistryAddress = await Deploy.deployClaimsRegistry(accounts[0]);
   let project = {
@@ -261,7 +265,7 @@ TestUtils.testStatus = async (model, status, id) => {
 };
 
 TestUtils.prepareMockObjectsForLoadTest = async function (numberOfUsers) {
-  const accounts = await Promise.promisify(web3.eth.getAccounts)();
+  let accounts = await ContractUtils.mainWallet.provider.listAccounts();
   // we need to have eth validator account to be able to deploy project with job
   const validatorEthAccount = accounts[5];
   let mainUser = await TestUtils.createDefaultMockUser('', config.mainAccount);
@@ -310,8 +314,8 @@ TestUtils.createMockValidations = async function () {
 TestUtils.setBeforeAndAfterHooksForJobTest = function () {
   before(async function () {
     await TestUtils.connectToMockDB();
-    await generateTestEthAddresses(10);
     logger.info('Connected to mock DB.');
+    await generateTestEthAddresses(10);
   });
 
   after(async function () {

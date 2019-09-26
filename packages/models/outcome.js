@@ -3,6 +3,7 @@ const ModelUtils = require('./model-utils');
 
 let OutcomeSchema = new Mongoose.Schema({
   title: String,
+  orderNumber: Number,
   description: String,
   reason: String,
   value: String,
@@ -19,7 +20,10 @@ let OutcomeSchema = new Mongoose.Schema({
   _projectId: {
     type: Mongoose.Schema.ObjectId,
     ref: 'Project'
-  }
+  },
+
+  actionVerbForProgress: String,
+  unitForActionVerb: String,
 });
 
 module.exports = ModelUtils.exportModel('Outcome', OutcomeSchema);

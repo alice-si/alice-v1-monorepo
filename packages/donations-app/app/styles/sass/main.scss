@@ -22,6 +22,9 @@
 @import "components/loginModal";
 @import "components/forms";
 @import "components/footer";
+@import "components/toastr";
+@import "components/outcomeCards";
+@import "components/storyCards";
 
 // Pages
 @import "pages/home";
@@ -33,6 +36,9 @@
 @import "pages/dashboard";
 @import "pages/validator";
 @import "pages/myImpact";
+@import "pages/projectWizard";
+@import "pages/faq";
+@import "pages/geekMode";
 
 html,body
 {
@@ -42,6 +48,12 @@ html,body
     margin: 0px;
     padding: 0px;
     overflow-x: hidden;
+}
+
+// To prevent page scrolling when modal is opened
+body.modal-open {
+    height: 100vh;
+    overflow-y: hidden;
 }
 
 html {

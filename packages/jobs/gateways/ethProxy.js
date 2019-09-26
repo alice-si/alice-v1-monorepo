@@ -5,13 +5,18 @@ const ethers = require('ethers');
 const ContractUtils = require('../utils/contract-utils');
 const ModelUtils = require('../utils/model-utils');
 const ContractProxy = require('./contractProxy');
-const Deploy = require('../utils/deploy');
 const logger = require('../utils/logger')('gateways/ethProxy');
 const config = require('../config');
 
 const EthAddress = ModelUtils.loadModel('ethAddress');
 
 let EthProxy = {};
+
+// Fix proposed by ethers author (ricmoo)
+// https://github.com/ethers-io/ethers.js/issues/469
+const overrides = {
+  gasLimit: 750000
+};
 
 EthProxy.createNewAddress = async function () {
   const lastEthAddress = await EthAddress.findOne(
@@ -49,7 +54,7 @@ EthProxy.validateOutcome = async (
 ) => {
   logger.info(
     `Validating outcome, validation id: ${validation._id}, ` +
-    `amount: ${validation.amount}`);
+    `amount: ${validation.amount}, account: ${validatorAccount}`);
 
   let contracts = await ContractProxy.getAllContractsForDocument(
     project,
@@ -57,7 +62,7 @@ EthProxy.validateOutcome = async (
 
   let idBytes = mongoIdToBytes(validation._id);
   let transaction = await contracts.project.validateOutcome(
-    idBytes, validation.amount);
+    idBytes, validation.amount, overrides);
 
   return getTxHash(transaction);
 };
@@ -141,19 +146,6 @@ EthProxy.checkTransaction = async function (tx) {
 
 EthProxy.checkTransactionReceipt = function (receipt) {
   return receipt.status == 1;
-};
-
-EthProxy.deployProject = async (project, validatorAccount, charityAccount) => {
-  try {
-    return await Deploy.deployProject(
-      validatorAccount,
-      charityAccount,
-      config.claimsRegistryAddress,
-      project);
-  } catch (err) {
-    logger.error(err);
-    throw err;
-  }
 };
 
 EthProxy.checkTransactionWithEtherscan = function (tx) {

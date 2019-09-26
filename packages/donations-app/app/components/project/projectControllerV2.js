@@ -1,10 +1,17 @@
 angular.module('aliceApp')
-  .controller('ProjectControllerV2', ['$uibModal', '$stateParams', 'ProjectService',  '$scope', '$state', '$timeout', 'CheckoutService', function($uibModal, $stateParams, ProjectService, $scope, $state, $timeout, CheckoutService) {
-    var vm = this;
+  .controller('ProjectControllerV2', ['$stateParams', '$state', 'ProjectService', 'CheckoutService', function($stateParams, $state, ProjectService, CheckoutService) {
+		var vm = this;
 
 		ProjectService.getProjectDetails($stateParams.projectCode).then(function (result) {
 			vm.model = ProjectService.prepareProjectDetails(result.data);
 			vm.supporters = result.data.supporters;
+
+			// TODO alex - solve it better
+			// Probably we should have global directive for project white card on splash
+			if (vm.model.code == 'mungos-15-lives') {
+				vm.model.unitsHelped = 15;
+				vm.model.totalUnitsToHelp = 15;
+			}
 
 			vm.model._outcomes.forEach((elem) => {
 				let impact = vm.model.goalsV2.find((e) => {
@@ -41,18 +48,6 @@ angular.module('aliceApp')
 			CheckoutService.startCheckout(vm.model);
 		}
 
-		$scope.scrollGoal = function(direction) {
-			let position = (direction === 'left') ? '-=300': '+=300';
-			angular.element('#appeal-goals').animate({ scrollLeft: position }, 400);
-			event.preventDefault();
-		}
-
-		$scope.scrollStory = function(direction) {
-			let width = angular.element('.appeal-v3__stories-container').width() + 20;
-			let position = (direction === 'left') ? '-=' + width : '+=' + width;
-			angular.element('#appeal-stories').animate({ scrollLeft: position }, 400);
-			event.preventDefault();
-		}
 }])
 .directive('appealGoal', function() {
 	return {

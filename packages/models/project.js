@@ -31,9 +31,11 @@ let projectSchemaObject = {
   validator: String,
   initializerImg: String,
   validatorImg: String,
+  validatorWhiteImg: String, // Should be removed later (used in appeal v2)
   validatorUrl: String,
   costBreakdown: String,
   location: String,
+  noGiftAid: Boolean,
 
   upfrontPayment: Number,
   peopleTarget: Number,

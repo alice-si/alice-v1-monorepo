@@ -2,6 +2,7 @@ const contract = require('truffle-contract');
 const ethers = require('ethers');
 const config = require('../config');
 const logger = require('./logger')('utils/contract-utils');
+const keyProxy = require('../gateways/keyProxy');
 const ModelUtils = require('../utils/model-utils');
 
 const EthAddress = ModelUtils.loadModel('ethAddress');
@@ -17,8 +18,16 @@ async function deployContract(truffleContractObj, ...args) {
     abi,
     bytecode,
     mainWallet);
-  const contract = await contractFactory.deploy(...args);
+  const overrides = {
+    gasLimit: 3000000,
+    gasPrice: 15000000000 // 15 gwei
+  };
+  const contract = await contractFactory.deploy(...args, overrides);
+  logger.debug('Contract deployment started: '
+    + JSON.stringify(contract.deployTransaction.hash));
   await contract.deployed(); // waiting until it is mined
+  logger.debug('Contract deployment finished: '
+    + JSON.stringify(contract.deployTransaction.hash));
   return contract;
 };
 
@@ -37,12 +46,18 @@ async function getContractInstance(
   addressForWallet=config.mainAccount
 ) {
   const contract = getTruffleContract(contractName);
-  let wallet = await getWallet(addressForWallet);
+  let wallet = await getWallet({
+    address: addressForWallet,
+    checkBalance: true
+  });
   
   return new ethers.Contract(address, contract.abi, wallet);
 }
 
-async function getWallet(address) {
+async function getWallet({
+  address,
+  checkBalance=false,
+}) {
   if (equalAddresses(address, config.mainAccount)) {
     return mainWallet;
   }
@@ -53,19 +68,48 @@ async function getWallet(address) {
   if (!ethAddress) {
     throw new Error(`Could not get wallet for address: ${address}`);
   }
-  
-  return getWalletForIndex(ethAddress.index);
+
+  let wallet;
+
+  if (ethAddress.index) {
+    wallet = getWalletForIndex(ethAddress.index);
+  } else {
+    const privateKey = keyProxy.decrypt(ethAddress.privateKey);
+    wallet = getWalletFromPrivateKey(privateKey);
+  }
+
+  // Generated address must be equal to the address argument
+  if (!equalAddresses(address, wallet.address)) {
+    throw new Error(`Wallet generating failed. `
+      + `Addresses are different: ${address}, ${wallet.address}`);
+  }
+
+  if (checkBalance) {
+    await checkWalletBalance(wallet);
+  }
+
+  return wallet;
 }
 
 function getMainWallet() {
   return getWalletForIndex(0);
 }
 
+function initWallet(wallet) {
+  let provider = getProvider();
+  wallet = wallet.connect(provider);
+  return wallet.setAutoNonce(config.enableAutoNonce);
+}
+
 function getWalletForIndex(index) {
   let path = `m/44'/60'/0'/0/${index}`;
   let mnemonicWallet = ethers.Wallet.fromMnemonic(config.mnemonic, path);
-  let provider = getProvider();
-  return mnemonicWallet.connect(provider);
+  return initWallet(mnemonicWallet);
+}
+
+function getWalletFromPrivateKey(privateKey) {
+  let walletFromPrivateKey = new ethers.Wallet(privateKey);
+  return initWallet(walletFromPrivateKey);
 }
 
 function equalAddresses(addr1, addr2) {
@@ -95,10 +139,28 @@ async function validateNetworkId(provider) {
   }
 }
 
+async function checkWalletBalance(wallet) {
+  let balance = await wallet.provider.getBalance(wallet.address);
+  minimalBalanceBN = ethers.utils.parseEther(config.minimalBalance);
+  if (balance.lt(minimalBalanceBN)) {
+    let amountToSend = ethers.utils.parseEther(config.defaultLoadAmount);
+    logger.info(`Loading wallet: ${wallet.address}`);
+    await loadWallet(wallet, amountToSend);
+  }
+}
+
+async function loadWallet(wallet, amount) {
+  await mainWallet.sendTransaction({
+    to: wallet.address,
+    value: amount
+  });
+}
+
 module.exports = {
   getProvider,
   getWallet,
   getWalletForIndex,
+  getWalletFromPrivateKey,
   getContractInstance,
   deployContract,
   mainWallet,

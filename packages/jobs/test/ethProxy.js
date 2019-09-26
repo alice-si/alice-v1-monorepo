@@ -1,4 +1,4 @@
-const TestUtils = require('../utils/test-utils');
+const TestUtils = require('../utils/test-utils'); // TestUtils must be included firstly
 const logger = require('../utils/logger')('test/ethProxy');
 const EthProxy = require('../gateways/ethProxy');
 const Project = artifacts.require('Project');

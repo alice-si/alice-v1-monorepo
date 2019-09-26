@@ -4,7 +4,7 @@ input, textarea {
   -webkit-box-shadow: none;
   display: block;
   width: 100%;
-  padding: 20px 11px;
+  padding-left: 10px;
   font-size: 16px;
   line-height: 1.5;
   background-color: #fff;
@@ -26,7 +26,7 @@ input, textarea {
 }
 
 input {
-  height: 34px;
+  height: 44px;
 }
 
 select:focus,
@@ -93,6 +93,22 @@ button {
   @include transition(0.1s, all, ease-out);
 
   &:hover {
-    background-color: rgba(255, 255, 255, 0.2) !important;
+    // background-color: rgba(255, 255, 255, 0.2) !important;
+    background-color: $alice-tonal-medium !important;
+    color: #FFFFFF !important;
+
+    i {
+      color: #FFFFFF;
+    }
+  }
+}
+
+.disabled-button {
+  background-color: #CCC;
+  border: none;
+
+  &:hover {
+    background-color: #CCC !important;
+    color: #fff !important;
   }
 }

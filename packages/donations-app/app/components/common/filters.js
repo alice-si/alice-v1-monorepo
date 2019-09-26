@@ -77,10 +77,42 @@ angular.module('aliceApp')
   })
 	.filter('vowelize', function() {
 		return function(word) {
-			const vowelRegex = '^[aieouAIEOU].*';
+      const vowelRegex = '^[aieouAIEOU].*';
+      if (!word) {
+        return '';
+      }
 			if(word.match(vowelRegex)) {
 				return 'An ' + word;
 			}
 			return 'A ' + word;
 		}
-	});
+	})
+	.filter('pastTense', ['Tensify', function(Tensify) {
+		return function(verb, current, target) {
+			if (current > 0) {
+				return Tensify.tensify(verb).past;
+			}
+			else {
+				return 'to ' + verb;
+			}
+		}
+	}])
+	.filter('capitalize', function () {
+		return function(input) {
+			if (input && (typeof input) == 'string' && input.length > 0) {
+				return input.charAt(0).toUpperCase() + input.substr(1).toLowerCase();
+			}
+			return input;
+		}
+	})
+	.filter('singular', function() {
+		return function(noun) {
+			if (noun.toLowerCase() == 'people') {
+				return 'person';
+			} else if (noun.endsWith('s')) {
+				return noun.slice(0, -1);
+			} else {
+				return noun;
+			}
+		}
+	})

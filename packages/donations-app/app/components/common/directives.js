@@ -33,13 +33,13 @@ angular.module('aliceApp')
       }
     };
   }])
-  .directive('cookieConsent', function($cookies) {
+  .directive('cookieConsent', ['$cookies', function($cookies) {
     return {
       scope: {},
       templateUrl: '/components/global/cookieConsent.html',
-      controller: function ($scope) {
+      link: function (scope) {
         var _consent = $cookies.get('consent');
-        $scope.consent = function (consent) {
+        scope.consent = function (consent) {
           if (consent === undefined) {
             return _consent;
           } else if (consent) {
@@ -49,11 +49,14 @@ angular.module('aliceApp')
         };
       }
     }
-  })
+  }])
   .directive('aliceFooter', function() {
     return {
       scope: {
         model: '=',
+      },
+      link: function ($scope) {
+        $scope.currentYear =  new Date().getFullYear();
       },
       templateUrl: '/components/global/footer.html'
     };
@@ -329,13 +332,13 @@ angular.module('aliceApp')
       },
       /*jshint multistr: true */
       template: '<div >\
-                  <div class="btn btn-sm btn-primary"\
-                      style="height:34px; padding-top:7px; margin-top: 3px; text-align:center; width:10vw" ngf-select\
+                  <button\
+                      style="width:10vw !important" ngf-select\
                       ngf-pattern="\'image/*\'"\
                       ngf-accept="\'*\'" ngf-max-size="20MB" ngf-min-height="100"\
                       ng-model="imgFileModel">\
                     Browse\
-                  </div>\
+                  </button>\
                    <span ng-if="status != \'undefined\'">\
                     <img style="width:80px; margin-left: 10px;" src="{{statusIconUrl}}">\
                     {{description}}\
@@ -405,5 +408,19 @@ angular.module('aliceApp')
   .directive('loadingScreen', function () {
     return {
       templateUrl: '/components/global/loader.html',
+    };
+  })
+  .directive('splashCard', function() {
+    return {
+      scope: {
+        project: '=',
+        page: '='
+      },
+      templateUrl: '/components/global/splashCard.html',
+      controller: ['$scope', 'CheckoutService', function($scope, CheckoutService) {
+        $scope.donate = function() {
+            CheckoutService.startCheckout($scope.project);
+        }
+      }]
     };
   });

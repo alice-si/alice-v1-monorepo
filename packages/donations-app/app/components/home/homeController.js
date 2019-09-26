@@ -1,27 +1,67 @@
 angular.module('aliceApp')
-  .controller('HomeController', ['ProjectService', 'NotificationService', 'API', '$location', '$http', function (ProjectService, NotificationService, API, $location, $http) {
+  .controller('HomeController', ['ProjectService', 'NotificationService', 'API', '$location', '$http', '$uibModal', 'MODE', function (ProjectService, NotificationService, API, $location, $http, $uibModal, MODE) {
     var vm = this, navHeight = $('#navbar-menu').height();
 
     var loadData = function () {
       vm.contact = {};
-      ProjectService.getActiveProjects().then(function (projects) {
-        vm.projects = _.map(projects.data, (project) => {
-          let keyList = ['title', 'code', 'charity', 'lead', 'img'];
-          return _.pick(project, keyList);
-        });
-      });
-
-      $http.get(API + 'getCharities').then(function (response) {
-          vm.charities = response.data;
-          _.each(vm.projects, (project) => {
-            let charity_info = _.where(vm.charities, { _id: project.charity })[0];
-            let keyList = ['name', 'url'];
-            charity_info = _.pick(charity_info, keyList);
-            project.charity = charity_info;
-          });
-        }
-      );
+      loadProjectsWithCharities();
     };
+
+    if (MODE != 'prod') {
+      if(!localStorage.vodafoneWindowOpenedHome) {
+        vm.vodafoneTooltip = "Patience is a virtue :) We'll get to 'How it works' at the end of the survey. Please follow the steps of the survey at the bottom of the page";
+        vm.showVodafoneTooltip = true;
+        localStorage.vodafoneWindowOpenedHome = true;
+        $uibModal.open({
+          templateUrl: '/components/vodafone/homePageModal.html',
+          backdrop: 'static',
+          resolve: {}
+        });
+      }
+      else {
+        vm.showVodafoneTooltip = false;
+      }
+    }
+
+    // FIXME
+    // Livia asked to move fusion-housing project from the first position of
+    // active projects
+    // The problem is connected with the fact that fusion housing project was
+    // the second project created on stage (after st-mungos)
+    function doHackForFusionHousing(projects) {
+      function getNewIndex({code}) {
+        const newProjectIndexes = {
+          'mungos-15-lives': 0,
+          'save-from-abuse': 1,
+          'gift-of-walking': 2,
+          'fusion-housing-1': 3,
+        }
+        return newProjectIndexes[code] || 4;
+      }
+      projects.sort(
+        (prj1, prj2) => getNewIndex(prj1) - getNewIndex(prj2));
+      return projects;
+    }
+
+    var loadProjectsWithCharities = function () {
+      ProjectService.getProjects().then(function (projects) {
+        vm.projects = doHackForFusionHousing(projects.data);
+        loadCharities();
+      });
+    }
+
+    var loadCharities = function () {
+      $http.get(API + 'getCharities').then(function (response) {
+        vm.charities = response.data;
+        _.each(vm.projects, (project) => {
+          let charityInfo = _.where(vm.charities, { _id: project.charity })[0];
+          let keyList = ['name', 'url'];
+          charityInfo = _.pick(charityInfo, keyList);
+          project.charity = charityInfo;
+        });
+      }
+    );
+    }
 
     loadData();
 

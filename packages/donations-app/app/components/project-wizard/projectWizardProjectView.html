@@ -1,5 +1,5 @@
 <div class="row">
-  <div style="min-height: 100vh" class="col-md-8">
+  <div class="col-md-8">
     <div ng-show="prWizardCtrl.mode == prWizardCtrl.modes.GENERAL">
       <div class="form-group" has-error>
         <label class="col-sm-3 control-label">Project image</label>
@@ -45,16 +45,16 @@
         <label class="col-sm-3 control-label">Lead</label>
 
         <div class="col-sm-9">
-          <div class="form-control" summernote ng-model="prWizardCtrl.project.lead"></div>
+          <div class="form-control" summernote config="prWizardCtrl.summernoteConfig" ng-model="prWizardCtrl.project.lead"></div>
         </div>
       </div>
 
       <!-- Charity should be selectable only when project is being created -->
-      <div class="form-group" ng-if="prWizardCtrl.auth.isSuperadmin() && !prWizardCtrl.project._id">
+      <div class="form-group" ng-if="prWizardCtrl.auth.isSuperadmin()">
         <label class="col-sm-3 control-label">Charity</label>
 
-        <select class="col-sm-9" ng-model="prWizardCtrl.project.charity">
-          <option ng-repeat="charity in prWizardCtrl.charities" value="{{charity._id}}">{{charity.name}}</option>
+        <select ng-disabled="prWizardCtrl.project.charity" class="col-sm-9" ng-model="prWizardCtrl.project.charity">
+          <option ng-repeat="charity in prWizardCtrl.charities" value="{{charity._id}}" ng-selected="prWizardCtrl.project.charity._id == charity._id">{{charity.name}}</option>
         </select>
       </div>
 
@@ -80,6 +80,18 @@
                  name="location">
         </div>
       </div>
+
+      <div class="form-group" has-error>
+        <label class="col-sm-3 control-label">Disable gift aid</label>
+
+        <div class="col-sm-9">
+          <input type="checkbox"
+                 class="form-control"
+                 ng-model="prWizardCtrl.project.noGiftAid"
+                 name="noGiftAid">
+        </div>
+      </div>
+
       <div class="form-group" has-error>
         <label class="col-sm-3 control-label">Type Of Beneficiary</label>
 
@@ -143,14 +155,14 @@
         <label class="col-sm-3 control-label">Summary</label>
 
         <div class="col-sm-9">
-          <div class="form-control" summernote ng-model="prWizardCtrl.project.summary"></div>
+          <div class="form-control" summernote config="prWizardCtrl.summernoteConfig" ng-model="prWizardCtrl.project.summary"></div>
         </div>
       </div>
       <div class="form-group">
         <label class="col-sm-3 control-label">Extended Summary</label>
 
         <div class="col-sm-9">
-          <div class="form-control" summernote ng-model="prWizardCtrl.project.extendedSummary"></div>
+          <div class="form-control" summernote config="prWizardCtrl.summernoteConfig" ng-model="prWizardCtrl.project.extendedSummary"></div>
         </div>
       </div>
 
@@ -158,7 +170,7 @@
         <label class="col-sm-3 control-label">Our project</label>
 
         <div class="col-sm-9">
-          <div class="form-control" summernote ng-model="prWizardCtrl.project.project"></div>
+          <div class="form-control" summernote config="prWizardCtrl.summernoteConfig" ng-model="prWizardCtrl.project.project"></div>
         </div>
       </div>
 
@@ -167,7 +179,7 @@
         <label class="col-sm-3 control-label">Service provider (Who we are)</label>
 
         <div class="col-sm-9">
-          <div class="form-control" summernote ng-model="prWizardCtrl.project.serviceProvider"></div>
+          <div class="form-control" summernote config="prWizardCtrl.summernoteConfig" ng-model="prWizardCtrl.project.serviceProvider"></div>
         </div>
       </div>
 
@@ -175,7 +187,7 @@
         <label class="col-sm-3 control-label">Beneficiary (Who we're helping)</label>
 
         <div class="col-sm-9">
-          <div class="form-control" summernote ng-model="prWizardCtrl.project.beneficiary"></div>
+          <div class="form-control" summernote config="prWizardCtrl.summernoteConfig" ng-model="prWizardCtrl.project.beneficiary"></div>
         </div>
       </div>
 
@@ -183,7 +195,7 @@
         <label class="col-sm-3 control-label">Validator (Who’s validating our goals)</label>
 
         <div class="col-sm-9">
-          <div class="form-control" summernote ng-model="prWizardCtrl.project.validator"></div>
+          <div class="form-control" summernote config="prWizardCtrl.summernoteConfig" ng-model="prWizardCtrl.project.validator"></div>
         </div>
       </div>
 
@@ -191,7 +203,7 @@
         <label class="col-sm-3 control-label">Cost breakdown</label>
 
         <div class="col-sm-9">
-          <div class="form-control" summernote ng-model="prWizardCtrl.project.costBreakdown"></div>
+          <div class="form-control" summernote config="prWizardCtrl.summernoteConfig" ng-model="prWizardCtrl.project.costBreakdown"></div>
         </div>
       </div>
 
@@ -207,6 +219,12 @@
       <div class="form-group" has-error>
         <label class="col-sm-3 control-label">Validator image</label>
         <div s3loader model="prWizardCtrl.project.validatorImg">
+        </div>
+      </div>
+
+      <div class="form-group" has-error>
+        <label class="col-sm-3 control-label">Validator white image (for appeal v2)</label>
+        <div s3loader model="prWizardCtrl.project.validatorWhiteImg">
         </div>
       </div>
 

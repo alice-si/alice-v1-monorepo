@@ -4,7 +4,8 @@
    <section class="splash-v3 grad-both">
      <div class="header-image"
           style="background: url('https://alice-res.s3.eu-west-2.amazonaws.com/home-splash-1.jpg') no-repeat 100% 50%;">
-       <div class="container">
+       <!-- Desktop -->
+       <div class="container hidden-xs">
          <div class="row">
            <h2 class="white">Fund social projects.<br>
              Track your impact.</h2>
@@ -16,7 +17,6 @@
             </p>
          </div>
          <div class="row">
-           <!-- Desktop -->
            <div class="col-md-12 hidden-xs hidden-sm no-padding">
              <div class="form-group col-md-3 no-padding">
                <button ng-click="homeCtrl.explore()">
@@ -26,23 +26,59 @@
              </div>
              <div class="form-group col-md-3">
                <button class="inverse-button"
-                       ui-sref="how-it-works">
+                       ui-sref="how-it-works"
+                       ng-if="homeCtrl.mode === 'prod'">
                  SEE HOW IT WORKS
                </button>
-             </div>
-           </div>
-
-           <!-- Mobile -->
-           <div class="col-xs-12 hidden-md hidden-lg no-padding">
-             <div class="form-group col-xs-12 no-padding">
-               <button ng-click="homeCtrl.explore()">
-                 <i class="white glyphicon glyphicon-chevron-right" style="transform: translateY(1px); margin-left: -10px"></i>
-                 EXPLORE PROJECTS
-               </button>
+               <!-- FOR VODAFONE ONLY -->
+               <div tooltip-placement="top"
+                    tooltip-class="vodafone-tooltip"
+                    tooltip-enable="homeCtrl.showVodafoneTooltip"
+                    uib-tooltip="{{homeCtrl.vodafoneTooltip}}"
+                    ng-if="homeCtrl.mode !== 'prod'">
+                    <button class="inverse-button"
+                            ui-sref="how-it-works"
+                            ng-disabled="homeCtrl.showVodafoneTooltip">
+                      SEE HOW IT WORKS
+                    </button>
+               </div>
              </div>
            </div>
          </div>
        </div>
+
+       <!-- Mobile -->
+       <div class="container splash-v3__container-title
+                   hidden-sm hidden-md hidden-lg
+                   no-padding">
+           <h3 class="col-xs-12">
+             Fund social projects.<br>
+             Track your impact.
+           </h3>
+            <p class="col-xs-12">Donate, grant, invest in social projects
+              &amp; track what is achieved with your money. Alice is the blockchain
+              standard of social funding and impact management.
+            </p>
+           <div class="col-xs-12">
+             <div class="form-group col-md-3 no-padding">
+               <!-- Revert back to this after vodafone test
+               <button ui-sref="how-it-works">
+                 SEE HOW IT WORKS
+               </button>
+               -->
+               <button ng-click="homeCtrl.explore()">
+                 <i class="glyphicon glyphicon-chevron-right"></i>
+                 EXPLORE PROJECTS
+               </button>
+             </div>
+           </div>
+
+       </div>
+
+
+
+
+
      </div>
    </section>
 
@@ -55,6 +91,23 @@
      </div>
      <div class="row">
          <homepage-project-card ng-repeat="project in homeCtrl.projects"
+                                ng-if="project.status == 'ACTIVE' && !project.code.includes('mock')"
+                                project="project"
+                                dashboard="'project'">
+         </homepage-project-card>
+     </div>
+   </section>
+
+  <section class="container"
+            id="home-completed-projects">
+     <div class="row">
+       <h3 class="uppercase">
+         Visit our completed projects
+       </h3>
+     </div>
+     <div class="row">
+         <homepage-project-card ng-repeat="project in homeCtrl.projects"
+                                ng-if="project.status == 'FINISHED' && !project.code.includes('mock')"
                                 project="project"
                                 dashboard="'project'">
          </homepage-project-card>
@@ -68,7 +121,7 @@
        </h3>
      </div>
      <div class="row home-charity-container">
-       <div class="col-md-2"
+       <div class="col-md-2 col-sm-4 col-xs-6"
             ng-repeat="charity in homeCtrl.charities | limitTo: 6">
             <div class="home-charity">
               <img src="{{charity.picture}}" class="home-charity-picture">
@@ -78,7 +131,7 @@
    </section>
 
    <section>
-     <div class="container">
+     <div class="container" id="organisation-signup">
        <div class="row">
          <h3 class="uppercase">
            Are you a social organisation?

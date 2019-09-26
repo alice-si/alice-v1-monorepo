@@ -1,10 +1,9 @@
-const expect = require('chai').expect;
-
+const TestUtils = require('../utils/test-utils'); // TestUtils must be included firstly
 const ClaimingJob = require('../jobs/ClaimingJob');
 const EthProxy = require('../gateways/ethProxy');
 const ModelUtils = require('../utils/model-utils');
-const TestUtils = require('../utils/test-utils');
-const config = require('../config');
+const ContractUtils = require('../utils/contract-utils');
+const ethers = require('ethers');
 
 const Validation = ModelUtils.loadModel('validation');
 
@@ -23,6 +22,17 @@ contract('ClaimingJob', async () => {
     await EthProxy.mint(mocks.project, validation.amount);
     await EthProxy.deposit(
       mocks.project.ethAddresses.owner, mocks.project, validation.amount);
+  });
+
+  step('should unload claimer account', async () => {
+    let beneficiary = mocks.project.ethAddresses.beneficiary;
+    let beneficiaryWallet = await ContractUtils.getWallet({
+      address: beneficiary
+    });
+    await beneficiaryWallet.sendTransaction({
+      to: ContractUtils.mainWallet.address,
+      value: ethers.utils.parseEther('99.999') // We save about 0.001 ethers for gas
+    });
   });
 
   step('job sends transaction', async () => {

@@ -1,5 +1,5 @@
 angular.module('aliceApp')
-  .controller('MyImpactController', ['$http', 'AuthService', '$stateParams', '$scope', '$state', 'API', '$rootScope', 'CheckoutService', function ($http, AuthService, $stateParams, $scope, $state, API, $rootScope, CheckoutService) {
+  .controller('MyImpactController', ['$http', 'AuthService', '$stateParams', '$scope', '$state', 'API', '$rootScope', 'CheckoutService', 'ETHERSCAN', function ($http, AuthService, $stateParams, $scope, $state, API, $rootScope, CheckoutService, ETHERSCAN) {
     var vm = this;
     vm.auth = AuthService;
 		vm.loggedUser = vm.auth.getLoggedUser();
@@ -36,58 +36,105 @@ angular.module('aliceApp')
               vm.charity = vm.project.charity;
             }
 
-            vm.project.allImpactsForProject.forEach((elem) => {
-              let impact = vm.project.impacts.find((e) => {
-                if (e._id === elem._id) {
-                  return e
-                }
-              });
-							if(impact) {
-								elem.userSpent = impact.total;
-								elem.userPercentage = Math.floor(100 * impact.total / elem.target);
-								elem.totalPercentage = Math.floor(100 * elem.totalSpent / elem.target);
-							} else {
-								elem.userSpent = 0;
-								elem.userPercentage = 0;
-								elem.totalPercentage = 0;
-							}
+            // Calculating unitsToHelp and unitHelped
+            vm.project.unitsHelped = vm.project.completedValidations.length;
+            vm.project.totalUnitsToHelp = vm.project.outcomes.reduce((acc, outcome) => {
+              return (Number(outcome.quantityOfUnits) || 0) + acc;
+            }, 0);
+            vm.project.unitsHelpedWithUserDonations =
+              vm.project.impacts.reduce((acc, userImpact) => {
+                return acc + (userImpact.count);
+              }, 0);
 
-							elem.lightColor = convertHex(elem.color, 0.4);
-							// For stacked progress
-							elem.stacked = [
-								{value: (elem.totalPercentage - elem.userPercentage), color: elem.color},
-								{value: elem.userPercentage, color: "#1998a2"}
-							];
+            // Calculating totalCost for each outcome
+            vm.project.outcomes.forEach(elem => {
+              elem.totalCost = (elem.quantityOfUnits || 0) * (elem.costPerUnit || 0);
             });
-            vm.goals = vm.project.allImpactsForProject
+
+            //TODO: Filter out some of the St. Mungos goals (perhaps remove them permanently)
+            let hidden = [
+              'KEEP A PERMANENT HOME (6 months)',
+              'KEEP A TEMPORARY HOME (6 months)',
+              'KEEP A PERMANENT HOME',
+              'KEEP A PERMANENT HOME (6 months)',
+              'Tackle substance misuse: register with a specialist  they trust to get the help they need',
+              'CONNECT TO SERVICES OUTSIDE LONDON'
+            ];
+            vm.project.outcomes = vm.project.outcomes.filter(elem => {
+              return hidden.indexOf(elem.title) == -1;
+            });
+
+            //"FIND A TEMPORARY HOME": 3,
+
+            if (vm.project.code == 'mungos-15-lives') {
+              vm.project.totalUnitsToHelp = 15;
+            }
+
+            //Add off-chain goals that have been achieved by St Mungos
+            if (vm.project.code == 'mungos-15-lives') {
+              vm.project.outcomes.forEach((outcome) => {
+                if (outcome._id === '58d9041ffc008d7f9aabd43f') {
+                  outcome.moneyUsed += 2500;
+                }
+                if (outcome._id === '58d904e7fc008d7f9aabd441') {
+                  outcome.moneyUsed += 300000;
+                }
+                // Duplicated outcome
+                // if (outcome._id === '57d7e78504efabbc43d4f8b9') {
+                //   outcome.moneyUsed += 20000;
+                // }
+                if (outcome._id === '58d905bffc008d7f9aabd442') {
+                  outcome.costPerUnit = 100000;
+                  outcome.moneyUsed += 300000;
+                }
+
+              });
+            }
+
+						// TODO - Dhen: Fix this in backend
+						// For splash consolidation
+						vm.project.raised = vm.project.donatedByAll;
+						vm.project._outcomes = vm.project.outcomes;
           }
 				}
       });
     }
 
+    vm.scrollGoal = function(direction) {
+			let position = (direction === 'left') ? '-=300': '+=300';
+			angular.element('#appeal-goals').animate({ scrollLeft: position }, 400);
+			event.preventDefault();
+		};
+
     vm.boostDonation = function() {
-      $state.go('project', { projectCode: vm.project.code });
+      // $state.go('project', { projectCode: vm.project.code });
       CheckoutService.startCheckout(vm.project);
     };
 
-		function convertHex(hex, opacity) {
-      hex = hex.replace('#','');
-      let r = parseInt(hex.substring(0,2), 16);
-      let g = parseInt(hex.substring(2,4), 16);
-      let b = parseInt(hex.substring(4,6), 16);
-
-      let result = 'rgba(' + r + ',' + g + ',' + b + ',' + opacity + ')';
-      return result;
-    }
+    vm.getEtherscanLinkForProject = function() {
+      // Hack for St' Mungos because it doesn't contain ethAddresses field
+      if (vm.project && vm.project.code == 'mungos-15-lives') {
+        vm.project.ethAddresses = {
+          project: '0xbd897c8885b40d014fb7941b3043b21adcc9ca1c'
+        };
+      }
+      if (vm.project) {
+        return `${ETHERSCAN}/address/${vm.project.ethAddresses.project}`;
+      }
+    };
 
     return vm;
-  }])
-	.directive('myImpactGoal', function() {
-		return {
-			scope: {
-				goal: '=',
-				index: '='
-			},
-			templateUrl: '/components/my-impact/singleGoalComponent.html'
-		};
-	});
+  }]);
+
+  // TODO alex - remove the commented code
+	// .directive('myImpactGoal', function() {
+	// 	return {
+	// 		scope: {
+	// 			goal: '=',
+	// 			index: '=',
+  //       finished: '=',
+  //       goalsCount: '='
+	// 		},
+	// 		templateUrl: '/components/my-impact/myImpactGoal.html'
+	// 	};
+	// });

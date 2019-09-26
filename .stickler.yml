@@ -2,8 +2,6 @@ linters:
   eslint:
     config: '.eslintrc.yml'
     fixer: true
-  shellcheck:
-    shell: bash
 fixers:
   enable: false
 files:

@@ -1,7 +1,7 @@
 angular.module('aliceApp')
-  .controller('HowItWorksController', ['AuthService', '$scope', 'API', 'NotificationService', '$http', function (AuthService, $scope, API, NotificationService, $http) {
+  .controller('HowItWorksController', ['AuthService', '$scope', 'API', 'NotificationService', '$http', '$uibModal', 'MODE', function (AuthService, $scope, API, NotificationService, $http, $uibModal, MODE) {
     var vm = this;
-
+      
     vm.sendMessage = function () {
       vm.contactForm.$submitted = true;
       if (vm.contactForm.$valid) {

@@ -1,9 +1,13 @@
 angular.module('aliceApp')
-  .controller('DonationProcessingController', ['$http', '$sce', '$scope', '$timeout', 'NotificationService', 'API', 'MANGO', 'CheckoutService', function ($http, $sce, $scope, $timeout, NotificationService, API, MANGO, CheckoutService) {
+  .controller('DonationProcessingController', ['$http', '$sce', '$scope', '$timeout', 'NotificationService', 'API', 'MANGO', 'CheckoutService', 'MODE', function ($http, $sce, $scope, $timeout, NotificationService, API, MANGO, CheckoutService, MODE) {
 
     var vm = this;
 
     vm.donation = CheckoutService.donation;
+
+    if (MODE != 'prod') {
+      vm.passwordHintFor3DS = 'Password: secret3';
+    }
 
     vm.edit = function () {
       $scope.$dismiss();

@@ -14,6 +14,7 @@
      width: 100%;
      height: 500px;
      object-fit: cover;
+     object-position: center top;
      background-size: cover;
      background-blend-mode: multiply;
      background-size: cover !important;
@@ -24,21 +25,17 @@
      width: 100%;
      height: 400px;
      object-fit: cover;
+     object-position: center top;
      @include transition(0.2s, all, ease-out);
      filter: brightness(60%);
    }
 
    &__progress-section {
      border-right: 1px solid #fff;
-     margin-right: 20px;
+    //  margin-right: 20px;
 
      span {
        font-weight: 600;
-     }
-
-     &:first-child {
-       padding: none !important;
-       margin-left: -15px;
      }
 
      &:last-child {
@@ -49,9 +46,8 @@
    &__container-title {
      position: absolute;
      top: 100px;
-     left: 85px;
-     // width: 60%;
-     // margin: 0 0 30px 15px;
+     left: 7vw;
+     width: 490px;
    }
 
    &__container-progress {
@@ -75,7 +71,6 @@
    }
 
    button {
-     margin-top: 20px;
      width: 120px;
      background: $alice-tonal-medium;
      border-radius: 2px;
@@ -149,25 +144,33 @@
 
     .header-image {
       height: 550px;
+      // height: 100vh;
     }
 
-    &__progress-section {
-      border-right: 1px solid $alice-dark-grey;
-      font-size: 16px;
+    &__progress {
+      &-section {
+        border-right: 1px solid $alice-dark-grey;
+        font-size: 16px;
+      }
+
+      &-amount {
+        font-size: 22px;
+      }
     }
 
     &__container-title {
       // width: 30%;
       border-radius: 5px;
       background: #fff;
-      padding: 5px 20px 30px 50px;
+      padding: 5px 10px 30px 40px;
       font-family: $source;
       letter-spacing: 0.6;
     }
 
     &__container-progress {
       width: 100%;
-      margin-top: 25px;
+      margin-top: 30px;
+      margin-bottom: 15px;
     }
 
     h3 {
@@ -177,7 +180,7 @@
       font-size: 26px;
       width: 90%;
       line-height: 1.4;
-      margin-bottom: 15px;
+      margin-bottom: 30px;
     }
 
     a {
@@ -205,13 +208,60 @@
   }
 
 
+@media screen and (max-width: 990px) {
+  .splash-v3 {
+    &__progress {
+      &-section {
+        border-right: 1px solid $alice-dark-grey;
+      }
+
+      &-amount {
+        font-size: 18px;
+      }
+    }
+  }
+}
 
 // Mobile for both splash v2 and v3
+
+@media screen and (max-width: 771px) {
+  .splash-v3 {
+    h3 {
+      margin-bottom: 20px;
+      font-size: 22px;
+    }
+
+    &__container-progress,h3 {
+      margin-bottom: 5px;
+    }
+  }
+}
+
+@media screen and (max-width: 565px) {
+  .splash-v3 {
+    height: 100vh;
+
+    &__container-title {
+      @include box-shadow(0, 1px, 3px, rgba(0,0,0,0.4));
+      width: 86vw;
+      top: 190px;
+    }
+
+    &__progress {
+      &-section {
+        border-right: 1px solid $alice-dark-grey;
+      }
+    }
+  }
+  .appeal-page > .splash-v3 {
+    height: 500px;
+  }
+}
 
 @media screen and (max-width: 414px) {
   .splash-v2, .splash-v3 {
     .header-image {
-      height: 100vh;
+      height: 40vh;
     }
 
     &__container-title {
@@ -219,12 +269,11 @@
     }
 
     p {
-      font-size: 16px !important;
+      font-size: 12px !important;
     }
 
     &__progress-section {
-      border-right: none;
-      margin-left: -15px;
+      // border-right: none;
 
       span {
         font-weight: 600;
@@ -248,7 +297,6 @@
 
     &__container-title {
       top: 80px;
-      left: 50px;
     }
   }
 
@@ -257,12 +305,7 @@
       font-size: 20px;
     }
 
-    .header-image {
-      height: 100vh;
-    }
-
     &__container-title {
-      top: 100px;
       left: 30px;
     }
 
@@ -287,6 +330,20 @@
 
     &__progress-section:first-child {
       margin-top: 10px;
+    }
+  }
+
+  .appeal-page > .splash-v3 {
+    height: 520px;
+
+    p {
+      font-size: 10px !important;
+    }
+  }
+
+  .splash-v3__progress {
+    &-amount {
+      font-size: 14px !important;
     }
   }
 }

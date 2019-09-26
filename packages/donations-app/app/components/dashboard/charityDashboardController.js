@@ -1,5 +1,5 @@
 angular.module('aliceApp')
-  .controller('CharityDashboardController', ['AuthService', '$scope', '$timeout', '$http', 'API', '$stateParams', '$uibModal', function (AuthService, $scope, $timeout, $http, API, $stateParams, $uibModal) {
+  .controller('CharityDashboardController', ['AuthService', '$scope', '$timeout', '$http', 'API', '$stateParams', 'ProjectService', function (AuthService, $scope, $timeout, $http, API, $stateParams, ProjectService) {
     var vm = this;
     vm.auth = AuthService;
     vm.code = $stateParams.project;
@@ -11,6 +11,9 @@ angular.module('aliceApp')
       AuthService.showLogInModal();
     }
 
+    ProjectService.getProjectDetails(vm.code).then(function (projectDetails) {
+      vm.projectDetails = projectDetails.data;
+    });
     loadGoalsFromProject(vm.code);
 
     function loadGoalsFromProject(code) {
@@ -118,6 +121,8 @@ angular.module('aliceApp')
         outcomesValidated: '=',
         outcomesOfProject: '=',
         projectValidator: '=',
+        amountAvailable: '=',
+        projectCode: '=',
       },
       templateUrl: '/components/dashboard/tabs/goals/charityDashboardGoals.html'
     };
@@ -167,26 +172,28 @@ angular.module('aliceApp')
       templateUrl: '/components/dashboard/panels/goalProgressGraph.html',
       controller: 'GoalsGraphController as graphCtrl',
     };
-  })
-  .directive('claimOutcomeCard', () => {
-    return {
-      templateUrl: '/components/dashboard/panels/claimOutcomeCard.html',
-      scope: {
-        outcome: '=',
-        validator: '=',
-      },
-      controller: ['$scope', '$uibModal', function($scope, $uibModal) {
-        // Claiming function for a validation
-        $scope.claimFn = function(outcome, quantity) {
-          let modal = $uibModal.open({
-            templateUrl: '/components/global/claimModal.html',
-            controller: 'ImpactClaimController as claimCtrl',
-            resolve: {
-              outcome: () => outcome,
-              quantity: () => quantity,
-            }
-          });
-        };
-      }],
-    };
   });
+
+  // TODO alex - remove the commented code
+  // .directive('claimOutcomeCard', () => {
+  //   return {
+  //     templateUrl: '/components/dashboard/panels/claimOutcomeCard.html',
+  //     scope: {
+  //       outcome: '=',
+  //       validator: '=',
+  //     },
+  //     controller: ['$scope', '$uibModal', function($scope, $uibModal) {
+  //       // Claiming function for a validation
+  //       $scope.claimFn = function(outcome, quantity) {
+  //         let modal = $uibModal.open({
+  //           templateUrl: '/components/global/claimModal.html',
+  //           controller: 'ImpactClaimController as claimCtrl',
+  //           resolve: {
+  //             outcome: () => outcome,
+  //             quantity: () => quantity,
+  //           }
+  //         });
+  //       };
+  //     }],
+  //   };
+  // });

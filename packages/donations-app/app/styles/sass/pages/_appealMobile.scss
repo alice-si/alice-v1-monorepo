@@ -110,6 +110,10 @@
   .graph-container {
 		display: flex;
 		justify-content: center;
+
+		.subtext {
+			font-size: 2px;
+		}
   }
 
   #appealSummary {

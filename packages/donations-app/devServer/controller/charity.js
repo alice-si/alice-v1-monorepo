@@ -24,7 +24,7 @@ module.exports = function (app) {
 
   app.get('/api/charities/:charityId', asyncHandler(async (req, res) => {
     const foundCharity = await Charity.findById(req.params.charityId,
-      '_id code name picture url darkPicture');
+      '_id code name picture url');
     if (!foundCharity) {
       res.status(404)
         .send(`No charity found with the id: ${req.params.charityId}`);
@@ -60,7 +60,7 @@ module.exports = function (app) {
           "projectAdmins",
           "projectManagers",
           "picture",
-          "darkPicture"
+          "whitePicture",
         ])
       ];
 
@@ -133,7 +133,7 @@ module.exports = function (app) {
 
   async function getCharitiesEP(req, res) {
     const charities = await Charity.aggregate([
-      Utils.createProjection(["_id", "code", "name", "url", "picture", "darkPicture"])
+      Utils.createProjection(["_id", "code", "name", "url", "picture"])
     ]);
     return res.json(charities);
   }
