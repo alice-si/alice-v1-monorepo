@@ -73,7 +73,7 @@ describe('AuthenticationController', function () {
             passwordChangeToken: changePwdToken,
             password: 'NEW_PASSWORD'
         }, res => {
-            res.should.be.equal('Password change request registered. We will notify you by email when the process is complete.');
+            res.should.be.equal('Your password has been changed successfully!');
         });
     });
 
