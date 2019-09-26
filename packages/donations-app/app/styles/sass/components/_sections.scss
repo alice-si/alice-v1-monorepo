@@ -239,7 +239,7 @@
 
 @media screen and (max-width: 565px) {
   .splash-v3 {
-    height: 100vh;
+    height: 500px;
 
     &__container-title {
       @include box-shadow(0, 1px, 3px, rgba(0,0,0,0.4));
@@ -252,9 +252,6 @@
         border-right: 1px solid $alice-dark-grey;
       }
     }
-  }
-  .appeal-page > .splash-v3 {
-    height: 500px;
   }
 }
 

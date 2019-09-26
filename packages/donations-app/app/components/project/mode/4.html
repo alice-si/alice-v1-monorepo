@@ -1,14 +1,9 @@
 <div ng-controller="ProjectControllerV2 as projectCtrl" class="appeal-page">
-  <section class="splash-v3 grad-both">
-    <div class="header-image appeal-splash"
-         ng-style="{ 'background' : 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0)), url(' + projectCtrl.model.img + ') no-repeat center center' }">
-      <splash-card project="projectCtrl.model"
-                   page="'APPEAL_PAGE'"
-                   donateFn="projectCtrl.donate()"></splash-card>
-    </div>
-  </section>
 
-
+  <splash
+    show-donate-button="true"
+    show-track-donations-impact-link="true"
+    project="projectCtrl.model" />
 
   <section class="container appeal-v3__container">
 

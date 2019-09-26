@@ -1,11 +1,7 @@
 <div ng-controller="MyImpactController as impactCtrl" class="appeal-page my-impact">
-  <section class="splash-v3 my-impact-splash grad-both">
-    <div class="header-image"
-         ng-style="{ 'background' : 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0)), url(' + impactCtrl.project.img + ') no-repeat center center' }">
-         <splash-card project="impactCtrl.project"
-                      page="'MY_IMPACT'"></splash-card>
-    </div>
-  </section>
+  <splash
+    show-appeal-page-link="true"
+    project="impactCtrl.project" />
 
   <section class="container my-impact__container">
     <div class="row my-impact__container-greeting">

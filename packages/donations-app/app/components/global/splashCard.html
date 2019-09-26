@@ -3,7 +3,7 @@
     <h3>{{ project.title }}</h3>
     <p ng-if="project.status == 'FINISHED'">This project has been completed! View details below</p>
     <a ui-sref="how-it-works"
-       ng-if="page === 'APPEAL_PAGE' && project.status != 'FINISHED'">Track your donation's impact <i class="glyphicon glyphicon-chevron-right"></i></a>
+       ng-if="showTrackDonationsImpactLink && project.status != 'FINISHED'">Track your donation's impact <i class="glyphicon glyphicon-chevron-right"></i></a>
   </div>
   <div class="row splash-v3__container-progress">
       <p ng-if="project.status !== 'FINISHED'" class="col-md-4 col-sm-4 col-xs-4 no-padding splash-v3__progress-section">
@@ -38,7 +38,7 @@
   <div class="row">
     <div class="col-md-10 col-xs-12 no-padding">
         <div ng-if="project.status != 'FINISHED'">
-          <div ng-if="page === 'APPEAL_PAGE'"
+          <div ng-if="showDonateButton"
                class="col-md-6 col-xs-10 no-padding">
             <a ng-click="donate()">
               <button>
@@ -48,7 +48,7 @@
             </a>
           </div>
         </div>
-        <div ng-if="page === 'MY_IMPACT'">
+        <div ng-if="showAppealPageLink">
           <div class="col-md-5 col-xs-3 no-padding">
             <p>Run by</p>
             <div class="appeal-v3__info-image"

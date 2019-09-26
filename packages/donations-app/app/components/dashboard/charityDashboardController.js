@@ -147,15 +147,6 @@ angular.module('aliceApp')
       controller: 'CharityDashboardDonationsController as donCtrl',
     };
   })
-  .directive('goalProgressCarousel', function() {
-    return {
-      scope: {
-        outcomes: '=',
-      },
-      templateUrl: '/components/dashboard/panels/goalProgressCarousel.html',
-      controller: 'goalCarouselController as crslCtrl',
-    };
-  })
   .directive('goalsBreakdownTable', function() {
     return {
       scope: {
@@ -163,37 +154,4 @@ angular.module('aliceApp')
       },
       templateUrl: '/components/dashboard/panels/goalsBreakdownTable.html'
     };
-  })
-  .directive('goalsProgressGraph', function() {
-    return {
-      scope: {
-        outcomes: '=',
-      },
-      templateUrl: '/components/dashboard/panels/goalProgressGraph.html',
-      controller: 'GoalsGraphController as graphCtrl',
-    };
   });
-
-  // TODO alex - remove the commented code
-  // .directive('claimOutcomeCard', () => {
-  //   return {
-  //     templateUrl: '/components/dashboard/panels/claimOutcomeCard.html',
-  //     scope: {
-  //       outcome: '=',
-  //       validator: '=',
-  //     },
-  //     controller: ['$scope', '$uibModal', function($scope, $uibModal) {
-  //       // Claiming function for a validation
-  //       $scope.claimFn = function(outcome, quantity) {
-  //         let modal = $uibModal.open({
-  //           templateUrl: '/components/global/claimModal.html',
-  //           controller: 'ImpactClaimController as claimCtrl',
-  //           resolve: {
-  //             outcome: () => outcome,
-  //             quantity: () => quantity,
-  //           }
-  //         });
-  //       };
-  //     }],
-  //   };
-  // });
