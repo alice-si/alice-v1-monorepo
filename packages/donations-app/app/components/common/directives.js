@@ -430,6 +430,7 @@ angular.module('aliceApp')
     return {
       scope: {
         project: '=',
+        backToProjectsLink: '@',
         showAppealPageLink: '@',
         showDonateButton: '@',
         showTrackDonationsImpactLink: '@',

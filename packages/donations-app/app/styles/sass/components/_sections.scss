@@ -45,7 +45,7 @@
 
    &__container-title {
      position: absolute;
-     top: 100px;
+     top: 110px;
      left: 7vw;
      width: 490px;
    }
@@ -173,6 +173,32 @@
       margin-bottom: 15px;
     }
 
+    &__back-to-projects-link {
+      color: white;
+      position: absolute;
+      top: 80px;
+      left: 7vw;
+      // cursor: pointer;
+    }
+
+    &__back-to-projects-link:hover {
+      color: $alice-tonal-medium;
+    }
+
+    &__track-donation-link {
+      font-size: 18px !important;
+      font-family: $source !important;
+      border-bottom: 1px solid $alice-tonal-medium;
+      padding-bottom: 2px;
+      letter-spacing: 1px;
+      color: $alice-tonal-medium;
+    }
+
+    &__track-donation-link:hover,&__track-donation-link:visited {
+      color: $alice-tonal-medium;
+      opacity: 0.5;
+    }
+
     h3 {
       font-family: $source;
       color: $alice-dark-grey;
@@ -181,15 +207,6 @@
       width: 90%;
       line-height: 1.4;
       margin-bottom: 30px;
-    }
-
-    a {
-      font-size: 18px !important;
-      font-family: $source !important;
-      border-bottom: 1px solid $alice-tonal-medium;
-      padding-bottom: 2px;
-      letter-spacing: 1px;
-      color: $alice-tonal-medium;
     }
 
     p {
