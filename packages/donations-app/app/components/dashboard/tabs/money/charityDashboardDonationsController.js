@@ -11,9 +11,8 @@ angular.module('aliceApp')
     };
 
     vm.exportToExcel = function() {
-      Excel.tableToExcel('donations', 'donations', 'donations.xlsx');
+      Excel.tableToExcel('donations-export', 'donations', 'donations.xlsx');
     };
-
     vm.axisOptions = ['week', 'month', 'year'];
     $scope.axis = 'week';
 
@@ -97,7 +96,14 @@ angular.module('aliceApp')
 
     $scope.$watch('axis', function() {
       vm.lineChartOptions.scales.xAxes[0].time.unit = $scope.axis;
-   });
+    });
+
+    $scope.$watch('dates', function() {
+      if($scope.dates) {
+        vm.lineChartOptions.scales.xAxes[0].time.min = $scope.dates[0];
+        vm.lineChartOptions.scales.xAxes[0].time.max = $scope.dates[($scope.dates.length - 1)];
+      }
+    })
 
     $scope.setXAxis = function(option) {
         $scope.axis = option;
@@ -111,17 +117,22 @@ angular.module('aliceApp')
       $http.get(API + `getDonationsForProject/${code}`).then(function (result) {
         vm.allowPageLoad = true;
         vm.projectWithDonations = result.data;
+
+        vm.latest = findLatestActivity(vm.projectWithDonations[0].donations,
+          vm.projectWithDonations[0].validations);
+        if(vm.latest) {
+          $scope.setXAxis('week');
+        }
+
         if(vm.projectWithDonations) {
-          vm.latest = findLatestActivity(vm.projectWithDonations[0].donations,
-            vm.projectWithDonations[0].validations);
-          if(vm.latest) {
-            $scope.setXAxis('week');
-          }
+          vm.upfrontPayment = vm.projectWithDonations[0].upfrontPayment;
+          // Turn data to { x, y }
           cleanDataForLineChart(vm.projectWithDonations[0].donations, 0);
           cleanDataForLineChart(vm.projectWithDonations[0].validations, 0);
 
           vm.projectWithDonations[0].validations.unshift({ x: vm.projectWithDonations[0].donations[0].x, y: 0 });
           vm.donationsGraphData = [vm.projectWithDonations[0].donations, vm.projectWithDonations[0].validations];
+
           // Turn validation/donation amounts to £ prices
           vm.totalValidated = vm.projectWithDonations[0].validations.reduce((acc, e) => {
             return acc + e.y;
@@ -135,6 +146,7 @@ angular.module('aliceApp')
             return acc;
           }, []);
           vm.users.forEach((user) => {
+            user.receivedUpfront = user.donated * (vm.upfrontPayment / 100);
             user.totalReceived = user.received.reduce((acc, elem) => {
               acc = acc + elem.amount;
               return acc;
@@ -182,7 +194,7 @@ angular.module('aliceApp')
       let visited = {};
       let usersReceived = {};
 
-      users.sort((elem1, elem2) => 
+      users.sort((elem1, elem2) =>
         new Date(elem1.date).getTime() - new Date(elem2.date).getTime());
 
       for (let user of users) {
@@ -194,16 +206,18 @@ angular.module('aliceApp')
         user.receviedForDonation = Math.min(usersReceived[userKey], user.donated);
         usersReceived[userKey] -= user.receviedForDonation;
         result.push(user);
+        let totalReceived = user.totalReceived + user.receivedUpfront;
+        user.totalReceived = Math.min(totalReceived, user.donated);
       }
 
       return result;
     }
 
     // Donation table pagination config
-    $scope.viewby = 5;
+    $scope.viewby = 10;
     $scope.currentPage = 1;
     $scope.itemsPerPage = $scope.viewby;
-    $scope.maxSize = 5;
+    $scope.maxSize = 10;
 
     function getLabelsForAxis(option) {
       switch (option) {
@@ -227,20 +241,18 @@ angular.module('aliceApp')
       if (latestDonation > latestValidation) {
         return latestDonation;
       }
-      else {
-        return latestValidation;
-      }
+      return latestValidation;
     }
 
     function getDaysInWeek(latestDate) {
       var dates = [];
       var startDate = new Date(moment(latestDate).subtract(3, 'days'));
-      var endDate = new Date(moment(latestDate).add(3, 'days'));
+      var endDate = new Date(moment(latestDate).add(4, 'days'));
       while(startDate < endDate){
         dates.push(moment(startDate));
         startDate = new Date(startDate.setDate(startDate.getDate() + 1));
       }
-      vm.dates = dates;
+      $scope.dates = dates;
     }
 
     function getDaysInMonth(latestDate) {
@@ -254,7 +266,7 @@ angular.module('aliceApp')
         dates.push(moment(startDate));
         startDate = new Date(startDate.setDate(startDate.getDate() + 1));
       }
-      vm.dates = dates;
+      $scope.dates = dates;
     }
 
     function getMonthsInYear(latestDate) {
@@ -265,7 +277,7 @@ angular.module('aliceApp')
         dates.push(moment(startDate));
         startDate = new Date(startDate.setMonth(startDate.getMonth() + 1));
       }
-      vm.dates = dates;
+      $scope.dates = dates;
     }
 
     return vm;

@@ -35,7 +35,7 @@ module.exports = function (app) {
       async function findAndPrepareDonations(filter) {
         return await Project.aggregate([
           {$match: filter},
-          Utils.createProjection(["_id"]),
+          Utils.createProjection(["_id", "upfrontPayment"]),
           {
             $lookup: {
               from: "validations",
@@ -64,11 +64,12 @@ module.exports = function (app) {
                   $match: {
                     $and: [
                       {$expr: {$eq: ["$_projectId", "$$projectId"]}},
-                      {$expr: {$eq: ["$status", "DONATED"]}}
+                      {$expr: {$ne: ["$status", "FAILED"]}},
+                      {$expr: {$ne: ["$status", "3DS"]}}
                     ]
                   }
                 },
-                Utils.createProjection(["_userId", "createdAt", "amount"]),
+                Utils.createProjection(["_userId", "createdAt", "amount", "giftAidAddress"]),
                 {$lookup: {from: "users", localField: "_userId", foreignField: "_id", as: "user"}},
                 {$unwind: "$user"},
                 {
@@ -93,12 +94,13 @@ module.exports = function (app) {
                     "user.fullName": {$concat: ["$user.firstName", " ", "$user.lastName"]},
                     "user.donated": "$amount",
                     "user.date": "$createdAt",
-                    "user.received": "$received"
+                    "user.received": "$received",
+                    "user.giftAidAddress": "$giftAidAddress"
                   }
                 },
                 {$replaceRoot: {newRoot: "$user"}},
                 Utils.createProjection([
-                  "donated", "date", "_id", "fullName", "giftAid", "agreeContact", "email", "received"
+                  "donated", "date", "_id", "fullName", "giftAid", "agreeContact", "email", "received", "giftAidAddress"
                 ]),
               ],
               as: "users"
@@ -113,7 +115,8 @@ module.exports = function (app) {
                   $match: {
                     $and: [
                       {$expr: {$eq: ["$_projectId", "$$projectId"]}},
-                      {$expr: {$eq: ["$status", "DONATED"]}}
+                      {$expr: {$ne: ["$status", "FAILED"]}},
+                      {$expr: {$ne: ["$status", "3DS"]}}
                     ]
                   }
                 },
