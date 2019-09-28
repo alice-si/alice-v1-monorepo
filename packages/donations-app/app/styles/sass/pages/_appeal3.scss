@@ -12,7 +12,6 @@
 
 .appeal-v3 {
   &__container {
-    width: 85vw;
     padding: 0;
     margin: 22px auto 42px;
   }
@@ -215,5 +214,11 @@
         margin-bottom: 20px;
       }
     }
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .appeal-v3__container {
+    width: 85vw;
   }
 }
