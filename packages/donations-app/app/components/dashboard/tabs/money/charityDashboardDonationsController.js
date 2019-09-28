@@ -132,6 +132,12 @@ angular.module('aliceApp')
 
           vm.projectWithDonations[0].validations.unshift({ x: vm.projectWithDonations[0].donations[0].x, y: 0 });
           vm.donationsGraphData = [vm.projectWithDonations[0].donations, vm.projectWithDonations[0].validations];
+          if(vm.upfrontPayment > 0) {
+            let factor = vm.upfrontPayment / 100;
+            vm.donationsGraphData[0].forEach((donation) => {
+              vm.donationsGraphData[1].push({ x: donation.x, y: (donation.y * factor) });
+            });
+          }
 
           // Turn validation/donation amounts to £ prices
           vm.totalValidated = vm.projectWithDonations[0].validations.reduce((acc, e) => {
