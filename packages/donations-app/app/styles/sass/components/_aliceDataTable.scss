@@ -1,0 +1,44 @@
+.alice-data-table {
+  &__export-button a {
+    background-color: $alice-tonal-medium;
+    border: 1px solid $alice-tonal-medium;
+  }
+
+  &__export-button :hover {
+    background-color: white;
+    color: $alice-tonal-medium;
+    border: 1px solid $alice-tonal-medium;
+  }
+
+	tr {
+		background: none;
+		border-bottom: 1px solid $alice-tonal-light;
+
+		td {
+			color: inherit;
+			text-align: left;
+			padding-left: 15px !important;
+			font-family: "Avenir";
+			font-weight: 200;
+			letter-spacing: 1px;
+			padding: 15px 0;
+		}
+	}
+
+	td:first-child {
+		width: 15% !important;
+	}
+
+	tr:first-child {
+		border-bottom: 1px solid $alice-tonal-medium;
+
+		p {
+			font-size: 14px;
+			text-transform: uppercase;
+		}
+	}
+}
+
+.sort-buttons {
+	margin-left: 10px;
+}

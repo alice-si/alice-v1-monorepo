@@ -46,12 +46,17 @@ angular.module('aliceApp')
           vm.general_outcomes.forEach((elem) => {
             if(!(_.where(vm.projectWithGoals.validated, {'_id': elem._id }).length)) {
               vm.validated_outcomes.push(initialiseGoalStatus(elem));
-            }
-            else {
+            } else {
               // This will always be the first value ([0]) since _id is unique.
               vm.validated_outcomes.push(_.where(vm.projectWithGoals.validated, {'_id': elem._id })[0]);
             }
-          })
+
+            elem.validated =
+              elem.claimed.filter(claim => claim.status == 'IMPACT_FETCHING_COMPLETED').length;
+            elem.pendingValidations =
+              elem.claimed.filter(claim => !claim.status.includes('FAILED') && claim.status != 'IMPACT_FETCHING_COMPLETED').length;
+            elem.received = elem.validated * elem.costPerUnit;
+          });
 
           vm.validated_outcomes.forEach((elem) => {
             elem.doughnutOptions = { cutoutPercentage: 80 };
