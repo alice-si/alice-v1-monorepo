@@ -62,7 +62,6 @@ angular.module('aliceApp')
           CheckoutService.showQuestion();
         }
       }
-      console.log(vm.donation);
     };
 
     vm.addAmount = function () {
