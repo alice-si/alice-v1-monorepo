@@ -19,7 +19,7 @@
       <span ng-if="fieldDetails.type == 'money'">
         {{ row[field] | money }}
       </span>
-      <span ng-if="fieldDetails.type == 'pastTenseVerb'">
+      <span ng-if="fieldDetails.type == 'pastTenseVerb' && row[field]">
         {{ row[field] | pastTense:1:1 }}
       </span>
 
