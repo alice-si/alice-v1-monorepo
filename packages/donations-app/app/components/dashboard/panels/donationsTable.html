@@ -3,7 +3,10 @@
     <a id="exportDonationsButton"
            class="btn btn-primary btn-export"
            ng-click="donCtrl.exportToExcel()">Export data</a>
-        <input class="table-search" ng-model="donCtrl.donationSearch" placeholder="Search">
+        <input class="table-search"
+               ng-change="donCtrl.sort('fullName')"
+               ng-model="donCtrl.donationSearch"
+               placeholder="Search">
   </div>
   <table id="donations"
          class="impact-table"
@@ -13,15 +16,15 @@
       <td><p>Email<sort action="donCtrl.sort" field="email" style="margin-left: 10px;"></sort></p></td>
       <td><p>Donated<sort action="donCtrl.sort" field="donated" style="margin-left: 10px;"></sort></p></td>
       <td><p>Date<sort action="donCtrl.sort" field="date" style="margin-left: 10px;"></sort></p></td>
-      <td><p>Received <br>Upfront ({{ donCtrl.upfrontPayment }}%)<sort action="donCtrl.sort" field="upfront" style="margin-left: 10px;"></sort></p></td>
-      <td><p>Received On<br> Validation<sort action="donCtrl.sort" field="paidOut" style="margin-left: 10px;"></sort></p></td>
-      <td><p>Total <br>Received<sort action="donCtrl.sort" field="totalPaidOut" style="margin-left: 10px;"></sort></p></td>
-      <td><p>Gift Aid<sort action="donCtrl.sort" field="giftAid" style="margin-left: 10px;"></sort></p></td>
+      <td><p>Received <br>Upfront ({{ donCtrl.upfrontPayment }}%)<sort action="donCtrl.sort" field="receivedUpfront" style="margin-left: 10px;"></sort></p></td>
+      <td><p>Received On<br> Validation<sort action="donCtrl.sort" field="receviedForDonation" style="margin-left: 10px;"></sort></p></td>
+      <td><p>Total <br>Received<sort action="donCtrl.sort" field="totalReceived" style="margin-left: 10px;"></sort></p></td>
+      <td><p>Gift Aid <input type="checkbox" ng-model="donCtrl.filterGiftAid" ng-click="donCtrl.sort('fullName')"></p></td>
     </tr>
     <tr ng-repeat="donation in donCtrl.users.slice(((currentPage - 1) * itemsPerPage),
-                   ((currentPage) * itemsPerPage))
+                    ((currentPage) * itemsPerPage))
                    | filter: donCtrl.donationSearch
-                   | orderBy : donCtrl.sortField"
+                   | filter: donCtrl.giftAidFilter"
         class="donation-row">
         <td>{{donation.fullName}}</td>
         <td>{{donation.email}}</td>
@@ -47,13 +50,13 @@
   <table ng-show="false"
          id="donations-export">
     <tr>
-      <td><p>Name<sort action="donCtrl.sort" field="fullName"></sort></p></td>
-      <td><p>Email<sort action="donCtrl.sort" field="email"></sort></p></td>
-      <td><p>Donated<sort action="donCtrl.sort" field="donated"></sort></p></td>
-      <td><p>Date<sort action="donCtrl.sort" field="date"></sort></p></td>
-      <td><p>Received<sort action="donCtrl.sort" field="paidOut"></sort></p></td>
-      <td><p>Gift Aid<sort action="donCtrl.sort" field="giftAid"></sort></p></td>
-      <td><p>Contact<sort action="donCtrl.sort" field="agreeContact"></sort></p></td>
+      <td><p>Name</p></td>
+      <td><p>Email</p></td>
+      <td><p>Donated</p></td>
+      <td><p>Date</p></td>
+      <td><p>Received</p></td>
+      <td><p>Gift Aid</p></td>
+      <td><p>Contact</p></td>
     </tr>
     <tr ng-repeat="donation in donCtrl.users
                    | filter: donCtrl.donationSearch
