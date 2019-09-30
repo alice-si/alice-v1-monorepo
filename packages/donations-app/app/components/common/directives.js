@@ -437,4 +437,29 @@ angular.module('aliceApp')
       },
       templateUrl: '/components/global/splash.html'
     };
+  })
+  .directive('aliceDataTable', function () {
+    return {
+      scope: {
+        fields: '=',
+        rows: '=',
+        tableName: '=',
+        enablePagination: '=',
+        pageSize: '=',
+        exportable: '=',
+      },
+      controller: ['$scope', 'Excel', function ($scope, Excel) {
+        $scope.export = function () {
+          Excel.tableToExcel(
+            $scope.tableName,
+            $scope.tableName,
+            $scope.tableName + '.xlsx');
+        };
+
+        $scope.sort = function (field) {
+          $scope.sortField = field;
+        }
+      }],
+      templateUrl: '/components/global/aliceDataTable.html'
+    };
   });
