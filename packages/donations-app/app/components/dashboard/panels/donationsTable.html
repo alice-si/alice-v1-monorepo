@@ -19,7 +19,12 @@
       <td><p>Received <br>Upfront ({{ donCtrl.upfrontPayment }}%)<sort action="donCtrl.sort" field="receivedUpfront" style="margin-left: 10px;"></sort></p></td>
       <td><p>Received On<br> Validation<sort action="donCtrl.sort" field="receviedForDonation" style="margin-left: 10px;"></sort></p></td>
       <td><p>Total <br>Received<sort action="donCtrl.sort" field="totalReceived" style="margin-left: 10px;"></sort></p></td>
-      <td><p>Gift Aid <input type="checkbox" ng-model="donCtrl.filterGiftAid" ng-click="donCtrl.sort('fullName')"></p></td>
+      <td><p>Gift Aid <input type="checkbox"
+                             icheck
+                             class="ng-pristine ng-untouched ng-valid ng-empty" style="position: absolute; opacity: 0;"
+                             ng-model="donCtrl.filterGiftAid"
+                             ng-click="donCtrl.sort('fullName')"
+                             style="height: 16px;"></p></td>
     </tr>
     <tr ng-repeat="donation in donCtrl.users.slice(((currentPage - 1) * itemsPerPage),
                     ((currentPage) * itemsPerPage))
