@@ -105,8 +105,18 @@
   .home-container {
     section:first-child {
       border-bottom: none;
-      height: 430px !important;
+      height: 520px !important;
     }
+
+    .splash-v3__container-title {
+      p {
+        font-size: 16px !important;
+      }
+    }
+  }
+
+  .splash-v3__container-title {
+    top: 60px !important;
   }
 
   #hiw {
@@ -177,11 +187,15 @@
   .home-container {
     section:first-child {
       border-bottom: none;
-      height: 400px;
+      height: 480px;
     }
 
     .splash-v3__container-title {
       top: 100px;
+
+      p {
+        font-size: 14px !important;
+      }
     }
 
     .alice-footer .row {

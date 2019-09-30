@@ -39,6 +39,7 @@ angular.module('aliceApp')
               item.outcome[0].lightColor = convertHex(item.outcome[0].color, 0.35);
               item.doughnutColors = [item.outcome[0].color, item.outcome[0].lightColor];
             }
+            item.labels = ['Achieved', 'Waiting'];
           });
 
           // For each outcome in the project, check whether we have a validation in progress
@@ -59,7 +60,17 @@ angular.module('aliceApp')
           });
 
           vm.validated_outcomes.forEach((elem) => {
-            elem.doughnutOptions = { cutoutPercentage: 80 };
+            elem.doughnutOptions = {
+              cutoutPercentage: 70,
+              tooltips: {
+                backgroundColor: '#FFF',
+                titleFontSize: 20,
+                titleFontColor: '#0066ff',
+                bodyFontColor: '#000',
+                bodyFontSize: 14,
+                displayColors: false
+              }
+            };
           })
 
           // Get the total number of goals achieved/validated
@@ -85,6 +96,7 @@ angular.module('aliceApp')
           init.doughnutColors = [init.outcome[0].color, init.outcome[0].lightColor];
         }
         init.doughnutData = [0, 100];
+        init.labels = ['Achieved', 'Yet to achieve'];
         return init;
       }
 

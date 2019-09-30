@@ -10,7 +10,6 @@ contract DemoInvestmentWallet is InvestmentWallet {
         InvestmentWallet(_projectCatalog) {
     }
 
-
     function requestTokens(DemoToken _token, uint _amount) public onlyOwner {
         _token.mint(_amount);
     }

@@ -6,18 +6,181 @@ angular.module('aliceApp')
     vm.code = $stateParams.project;
     vm.allowPageLoad = false;
 
+    /*jshint -W030 */
+    loadDonationsForProject(vm.code);
+
+    // SECTION 1:
+    // Main backend call for data population
+    function loadDonationsForProject(code) {
+      $http.get(API + `getDonationsForProject/${code}`).then(function (result) {
+        vm.allowPageLoad = true;
+        vm.projectWithDonations = result.data;
+
+        vm.latest = findLatestActivity(vm.projectWithDonations[0].donations,
+          vm.projectWithDonations[0].validations);
+        if(vm.latest) {
+          $scope.setXAxis('week');
+        }
+
+        if(vm.projectWithDonations) {
+          vm.upfrontPayment = vm.projectWithDonations[0].upfrontPayment;
+          // Turn data to { x, y }
+          cleanDataForLineChart(vm.projectWithDonations[0].donations, 0);
+          cleanDataForLineChart(vm.projectWithDonations[0].validations, 0);
+
+          vm.projectWithDonations[0].validations.unshift({ x: vm.projectWithDonations[0].donations[0].x, y: 0 });
+          vm.donationsGraphData = [vm.projectWithDonations[0].donations, vm.projectWithDonations[0].validations];
+          if(vm.upfrontPayment > 0) {
+            let factor = vm.upfrontPayment / 100;
+            vm.donationsGraphData[0].forEach((donation) => {
+              vm.donationsGraphData[1].push({ x: donation.x, y: (donation.y * factor) });
+            });
+          }
+
+          // Turn validation/donation amounts to £ prices
+          vm.totalValidated = vm.projectWithDonations[0].validations.reduce((acc, e) => {
+            return acc + e.y;
+          }, 0) * 100;
+          vm.totalDonated = vm.projectWithDonations[0].donations.reduce((acc, e) => {
+            return acc + e.y;
+          }, 0) * 100;
+          // Concat user arrays into one: vm.users.
+          vm.users = vm.projectWithDonations[0].users.reduce((acc, elem) => {
+            acc = acc.concat(elem);
+            return acc;
+          }, []);
+          vm.users.forEach((user) => {
+            user.receivedUpfront = user.donated * (vm.upfrontPayment / 100);
+            user.totalReceived = user.received.reduce((acc, elem) => {
+              acc = acc + elem.amount;
+              return acc;
+            }, 0);
+          });
+          vm.users = calculateReceivedForUsers(vm.users);
+          vm.totalItems = vm.users.length;
+        }
+      });
+    }
+
+    // relabel object keys to: { x, y }
+    function cleanDataForLineChart(array, datesIndex) {
+      array.forEach(elem => {
+        elem.x = elem.createdAt;
+        elem.y = elem.amount / 100;
+        delete elem.amount;
+        delete elem.createdAt;
+        return elem;
+      });
+    }
+
+    // Hacky function to calculate received value for each donation
+    // (here we use word "users" to be consistent with the rest of the code)
+    // users here mean donations - it could be misleading and we should refactor it later
+    function calculateReceivedForUsers(users) {
+      let result = [];
+      let visited = {};
+      let usersReceived = {};
+
+      users.sort((elem1, elem2) =>
+        new Date(elem1.date).getTime() - new Date(elem2.date).getTime());
+
+      for (let user of users) {
+        const userKey = user._id;
+        if (!visited[userKey]) {
+          visited[userKey] = true;
+          usersReceived[userKey] = user.totalReceived;
+        }
+        user.receviedForDonation = Math.min(usersReceived[userKey], user.donated);
+        usersReceived[userKey] -= user.receviedForDonation;
+        result.push(user);
+        let totalReceived = user.totalReceived + user.receivedUpfront;
+        user.totalReceived = Math.min(totalReceived, user.donated);
+      }
+
+      return result;
+    }
+
+
+
+    // SECTION 2:
+    // Logic for donations table
+    // Sorting & filtering with uib-pagination
+    vm.ascending = true;
+    // Hacky custom sort function for multiple page-sorting
+    // uib-pagination component doesn't make this easy.
     vm.sort = function (field) {
       vm.sortField = field;
+      vm.ascending = !vm.ascending;
+      vm.users.sort(function(a, b) {
+        if(field[0] === '-') {
+          field = field.substr(1);
+        }
+        var nameA, nameB, temp;
+
+        // Weird edge case for columns
+        // handling money
+        if(typeof a[field] !== 'number') {
+          nameA = a[field].toString().toLowerCase();
+          nameB = b[field].toString().toLowerCase();
+        }
+        else {
+          nameA = a[field];
+          nameB = b[field];
+        }
+        if(vm.ascending){
+          temp = nameA; nameA = nameB; nameB = temp;
+        }
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        return 0;
+      });
     };
+
+    // Donation table pagination config
+    $scope.currentPage = 1;
+    $scope.itemsPerPage = 10;
+    $scope.maxSize = 10;
+
+    vm.giftAidFilter = function (row) {
+      if(vm.filterGiftAid) {
+        return row.giftAidAddress;
+      }
+      return 1;
+    };
+
+    vm.openGiftAidAddress = function(user) {
+      $uibModal.open({
+        resolve: {
+          giftAidUser: function() {
+            return user;
+          }
+        },
+        templateUrl: '/components/dashboard/giftAidModal.html',
+        controller: ['$scope', 'giftAidUser', function($scope, giftAidUser) {
+          $scope.user = giftAidUser;
+          $scope.dismissModal = function() {
+            $scope.$dismiss();
+          }
+        }]
+      });
+    }
 
     vm.exportToExcel = function() {
-      Excel.tableToExcel('donations', 'donations', 'donations.xlsx');
+      Excel.tableToExcel('donations-export', 'donations', 'donations.xlsx');
     };
 
+
+
+    // SECTION 3 :
+    // Donations graph functions
     vm.axisOptions = ['week', 'month', 'year'];
     $scope.axis = 'week';
 
-    // Override default graph graph properties
+    // Graph config properties
     vm.datasetOverride = [{
       backgroundColor: "#1998A2",
       pointBackgroundColor: "rgba(25, 152, 162, 0.3)",
@@ -95,115 +258,22 @@ angular.module('aliceApp')
       }
     };
 
+    // Graph rendering
     $scope.$watch('axis', function() {
       vm.lineChartOptions.scales.xAxes[0].time.unit = $scope.axis;
-   });
+    });
+
+    $scope.$watch('dates', function() {
+      if($scope.dates) {
+        vm.lineChartOptions.scales.xAxes[0].time.min = $scope.dates[0];
+        vm.lineChartOptions.scales.xAxes[0].time.max = $scope.dates[($scope.dates.length - 1)];
+      }
+    })
 
     $scope.setXAxis = function(option) {
         $scope.axis = option;
         getLabelsForAxis(option);
     };
-
-    /*jshint -W030 */
-    loadDonationsForProject(vm.code);
-
-    function loadDonationsForProject(code) {
-      $http.get(API + `getDonationsForProject/${code}`).then(function (result) {
-        vm.allowPageLoad = true;
-        vm.projectWithDonations = result.data;
-        if(vm.projectWithDonations) {
-          vm.latest = findLatestActivity(vm.projectWithDonations[0].donations,
-            vm.projectWithDonations[0].validations);
-          if(vm.latest) {
-            $scope.setXAxis('week');
-          }
-          cleanDataForLineChart(vm.projectWithDonations[0].donations, 0);
-          cleanDataForLineChart(vm.projectWithDonations[0].validations, 0);
-
-          vm.projectWithDonations[0].validations.unshift({ x: vm.projectWithDonations[0].donations[0].x, y: 0 });
-          vm.donationsGraphData = [vm.projectWithDonations[0].donations, vm.projectWithDonations[0].validations];
-          // Turn validation/donation amounts to £ prices
-          vm.totalValidated = vm.projectWithDonations[0].validations.reduce((acc, e) => {
-            return acc + e.y;
-          }, 0) * 100;
-          vm.totalDonated = vm.projectWithDonations[0].donations.reduce((acc, e) => {
-            return acc + e.y;
-          }, 0) * 100;
-          // Concat user arrays into one: vm.users.
-          vm.users = vm.projectWithDonations[0].users.reduce((acc, elem) => {
-            acc = acc.concat(elem);
-            return acc;
-          }, []);
-          vm.users.forEach((user) => {
-            user.totalReceived = user.received.reduce((acc, elem) => {
-              acc = acc + elem.amount;
-              return acc;
-            }, 0);
-          });
-          vm.users = calculateReceivedForUsers(vm.users);
-          vm.totalItems = vm.users.length;
-        }
-      });
-    }
-
-    vm.openGiftAidAddress = function(user) {
-      $uibModal.open({
-        resolve: {
-          giftAidUser: function() {
-            return user;
-          }
-        },
-        templateUrl: '/components/dashboard/giftAidModal.html',
-        controller: ['$scope', 'giftAidUser', function($scope, giftAidUser) {
-          $scope.user = giftAidUser;
-          $scope.dismissModal = function() {
-            $scope.$dismiss();
-          }
-        }]
-      });
-    }
-
-    // relabel object keys to: { x, y }
-    function cleanDataForLineChart(array, datesIndex) {
-      array.forEach(elem => {
-        elem.x = elem.createdAt;
-        elem.y = elem.amount / 100;
-        delete elem.amount;
-        delete elem.createdAt;
-        return elem;
-      });
-    }
-
-    // Hacky function to calculate received value for each donation
-    // (here we use word "users" to be consistent with the rest of the code)
-    // users here mean donations - it could be misleading and we should refactor it later
-    function calculateReceivedForUsers(users) {
-      let result = [];
-      let visited = {};
-      let usersReceived = {};
-
-      users.sort((elem1, elem2) => 
-        new Date(elem1.date).getTime() - new Date(elem2.date).getTime());
-
-      for (let user of users) {
-        const userKey = user._id;
-        if (!visited[userKey]) {
-          visited[userKey] = true;
-          usersReceived[userKey] = user.totalReceived;
-        }
-        user.receviedForDonation = Math.min(usersReceived[userKey], user.donated);
-        usersReceived[userKey] -= user.receviedForDonation;
-        result.push(user);
-      }
-
-      return result;
-    }
-
-    // Donation table pagination config
-    $scope.viewby = 5;
-    $scope.currentPage = 1;
-    $scope.itemsPerPage = $scope.viewby;
-    $scope.maxSize = 5;
 
     function getLabelsForAxis(option) {
       switch (option) {
@@ -227,20 +297,18 @@ angular.module('aliceApp')
       if (latestDonation > latestValidation) {
         return latestDonation;
       }
-      else {
-        return latestValidation;
-      }
+      return latestValidation;
     }
 
     function getDaysInWeek(latestDate) {
       var dates = [];
       var startDate = new Date(moment(latestDate).subtract(3, 'days'));
-      var endDate = new Date(moment(latestDate).add(3, 'days'));
+      var endDate = new Date(moment(latestDate).add(4, 'days'));
       while(startDate < endDate){
         dates.push(moment(startDate));
         startDate = new Date(startDate.setDate(startDate.getDate() + 1));
       }
-      vm.dates = dates;
+      $scope.dates = dates;
     }
 
     function getDaysInMonth(latestDate) {
@@ -254,7 +322,7 @@ angular.module('aliceApp')
         dates.push(moment(startDate));
         startDate = new Date(startDate.setDate(startDate.getDate() + 1));
       }
-      vm.dates = dates;
+      $scope.dates = dates;
     }
 
     function getMonthsInYear(latestDate) {
@@ -265,7 +333,7 @@ angular.module('aliceApp')
         dates.push(moment(startDate));
         startDate = new Date(startDate.setMonth(startDate.getMonth() + 1));
       }
-      vm.dates = dates;
+      $scope.dates = dates;
     }
 
     return vm;
