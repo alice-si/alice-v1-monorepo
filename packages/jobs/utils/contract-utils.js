@@ -43,7 +43,7 @@ function getTruffleContract(name) {
 async function getContractInstance(
   contractName,
   address,
-  addressForWallet=config.mainAccount
+  addressForWallet=mainWallet.address
 ) {
   const contract = getTruffleContract(contractName);
   let wallet = await getWallet({
@@ -58,7 +58,7 @@ async function getWallet({
   address,
   checkBalance=false,
 }) {
-  if (equalAddresses(address, config.mainAccount)) {
+  if (equalAddresses(address, mainWallet.address)) {
     return mainWallet;
   }
 

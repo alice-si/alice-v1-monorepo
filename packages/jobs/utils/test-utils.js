@@ -268,7 +268,7 @@ TestUtils.prepareMockObjectsForLoadTest = async function (numberOfUsers) {
   let accounts = await ContractUtils.mainWallet.provider.listAccounts();
   // we need to have eth validator account to be able to deploy project with job
   const validatorEthAccount = accounts[5];
-  let mainUser = await TestUtils.createDefaultMockUser('', config.mainAccount);
+  let mainUser = await TestUtils.createDefaultMockUser('', ContractUtils.mainWallet.address);
   let testAmount = 10;
 
   // Deploy and configure claims registry.
