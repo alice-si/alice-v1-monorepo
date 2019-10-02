@@ -52,7 +52,7 @@ angular.module('aliceApp')
                 titleFontColor: '#0066ff',
                 bodyFontColor: '#000',
                 bodyFontFamily: 'Source Sans Pro',
-                bodyFontSize: 18,
+                bodyFontSize: 16,
                 displayColors: false,
               }
             };
