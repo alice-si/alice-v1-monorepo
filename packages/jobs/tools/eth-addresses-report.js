@@ -10,6 +10,8 @@ const Project = ModelUtils.loadModel('project');
 const Charity = ModelUtils.loadModel('charity');
 const EthAddress = ModelUtils.loadModel('ethAddress');
 
+const mainAccount = ContractUtils.mainWallet.address;
+
 async function main() {
   await connectToDB();
 
@@ -45,7 +47,7 @@ async function getReportForProject(project) {
 }
 
 async function getAddressInfo(address) {
-  if (equalAddresses(address, config.mainAccount)) {
+  if (equalAddresses(address, mainAccount)) {
     return 'Main eth account';
   } else {
     let addressRegex = getAddressRegex(address);
