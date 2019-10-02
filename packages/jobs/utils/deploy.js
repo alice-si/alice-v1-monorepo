@@ -120,7 +120,7 @@ async function deploy(
   }));
   let contractsAddresses = {
     claimsRegistry: claimsRegistryAddress,
-    owner: config.mainAccount,
+    owner: ContractUtils.mainWallet.address,
     validator: validatorAccount,
     beneficiary: beneficiaryAccount
   };
