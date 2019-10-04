@@ -28,7 +28,7 @@ angular.module('aliceApp', ['ui.router', 'angular-jwt', 'ui.bootstrap', 'ui.boot
     });
   }])
 
-  .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+  .config(['$stateProvider', '$urlRouterProvider', 'MODE', function ($stateProvider, $urlRouterProvider, MODE) {
 
     $urlRouterProvider.otherwise('/404');
 
@@ -69,6 +69,12 @@ angular.module('aliceApp', ['ui.router', 'angular-jwt', 'ui.bootstrap', 'ui.boot
             // 'gift-of-walking': 2,
             // 'save-from-abuse': 2
           };
+
+          // FIXME remove this after AB vodafone testing
+          if (MODE != 'prod') {
+            appealVersionsForProject['fusion-housing-1'] = 2;
+          }
+
           const defaultAppealVersion = 4;
           const defaultVersionForProject =
             appealVersionsForProject[params.projectCode] || defaultAppealVersion;
