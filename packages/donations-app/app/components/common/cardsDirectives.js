@@ -70,7 +70,7 @@ angular.module('aliceApp')
       function loadImpact(projectCode) {
         $http.get(API + `getImpactForOutcomes/${projectCode}`)
           .then(function (result) {
-            moneyImpact = result.data;
+            let moneyImpact = result.data;
             scope.outcomes.forEach(outcome => {
               if (moneyImpact[outcome._id]) {
                 outcome.helpedWithUserDonations = moneyImpact[outcome._id].helped;

@@ -1,0 +1,19 @@
+<section class="splash-v3 grad-both">
+  <div class="header-image"
+       ng-style="{ 'background' : 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0)), url(' + project.img + ') no-repeat center center' }">
+
+         <a class="splash-v3__back-to-projects-link"
+            ng-if="backToProjectsLink"
+            href="{{ backToProjectsLink }}">
+              <i class="glyphicon glyphicon-chevron-left"></i>
+              BACK TO PROJECTS
+        </a>
+  </div>
+
+  <splash-card
+    project="project"
+    show-donate-button="{{showDonateButton}}"
+    show-track-donations-impact-link="{{showTrackDonationsImpactLink}}"
+    show-appeal-page-link="{{showAppealPageLink}}"
+    />
+</section>

@@ -91,7 +91,10 @@ angular.module('aliceApp')
               });
             }
 
-
+						// TODO - Dhen: Fix this in backend
+						// For splash consolidation
+						vm.project.raised = vm.project.donatedByAll;
+						vm.project._outcomes = vm.project.outcomes;
           }
 				}
       });

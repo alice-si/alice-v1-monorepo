@@ -6,39 +6,10 @@
         No goals have been validated yet. Please check back again later.
       </h3>
     </div>
-    <div ng-hide="outcomesValidated.length === 0">
-         <div uib-accordion-group
-              template-url="/components/dashboard/panels/panel.html"
-              class="c-dashboard__panel"
-              heading="Goals Progress">
-              <div class="col-md-12">
-                <goal-progress-carousel outcomes="outcomesValidated">
-                </goal-progress-carousel>
-              </div>
-         </div>
-         <div uib-accordion-group
-              template-url="/components/dashboard/panels/panel.html"
-              class="c-dashboard__panel"
-              heading="Goals Breakdown">
-              <div class="alice-table-container col-md-12">
-              <goals-breakdown-table outcomes="outcomesValidated">
-              </goals-breakdown-table>
-            </div>
-         </div>
-         <div uib-accordion-group
-              template-url="/components/dashboard/panels/panel.html"
-              class="c-dashboard__panel"
-              heading="Goals Completed over time">
-              <div class="alice-table-container col-md-12">
-              <goals-progress-graph outcomes="outcomesValidated">
-              </goals-progress-graph>
-            </div>
-         </div>
-    </div>
     <div uib-accordion-group
          template-url="/components/dashboard/panels/panel.html"
          class="c-dashboard__panel"
-         heading="Goals Claim"
+         heading="Goals Progress"
          id="claimGoals">
 
          <h2 class="goals-claim-balance">
@@ -48,19 +19,21 @@
           </span>
         </h2>
 
-
-         <!-- TODO alex - remove the commented code -->
-         <!-- <div ng-repeat="outcome in outcomesOfProject"
-              class="col-sm-12 col-md-6 col-md-4">
-              <claim-outcome-card outcome="outcome"
-                                  validator="projectValidator.email"/>
-         </div> -->
-
          <outcome-cards
           project="projectCode"
           show-claiming-form="true">
         </outcome-cards>
-
+    </div>
+    <div ng-hide="outcomesValidated.length === 0">
+         <div uib-accordion-group
+              template-url="/components/dashboard/panels/panel.html"
+              class="c-dashboard__panel"
+              heading="Goals Breakdown">
+              <div class="alice-table-container col-md-12">
+              <goals-breakdown-table outcomes="outcomesOfProject">
+              </goals-breakdown-table>
+            </div>
+         </div>
     </div>
   </uib-accordion>
 

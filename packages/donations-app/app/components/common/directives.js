@@ -33,7 +33,7 @@ angular.module('aliceApp')
       }
     };
   }])
-  .directive('cookieConsent', function($cookies) {
+  .directive('cookieConsent', ['$cookies', function($cookies) {
     return {
       scope: {},
       templateUrl: '/components/global/cookieConsent.html',
@@ -49,7 +49,7 @@ angular.module('aliceApp')
         };
       }
     }
-  })
+  }])
   .directive('aliceFooter', function() {
     return {
       scope: {
@@ -408,5 +408,58 @@ angular.module('aliceApp')
   .directive('loadingScreen', function () {
     return {
       templateUrl: '/components/global/loader.html',
+    };
+  })
+  .directive('splashCard', function() {
+    return {
+      scope: {
+        project: '=',
+        showAppealPageLink: '@',
+        showDonateButton: '@',
+        showTrackDonationsImpactLink: '@',
+      },
+      templateUrl: '/components/global/splashCard.html',
+      controller: ['$scope', 'CheckoutService', function($scope, CheckoutService) {
+        $scope.donate = function() {
+            CheckoutService.startCheckout($scope.project);
+        }
+      }]
+    };
+  })
+  .directive('splash', function () {
+    return {
+      scope: {
+        project: '=',
+        backToProjectsLink: '@',
+        showAppealPageLink: '@',
+        showDonateButton: '@',
+        showTrackDonationsImpactLink: '@',
+      },
+      templateUrl: '/components/global/splash.html'
+    };
+  })
+  .directive('aliceDataTable', function () {
+    return {
+      scope: {
+        fields: '=',
+        rows: '=',
+        tableName: '=',
+        enablePagination: '=',
+        pageSize: '=',
+        exportable: '=',
+      },
+      controller: ['$scope', 'Excel', function ($scope, Excel) {
+        $scope.export = function () {
+          Excel.tableToExcel(
+            $scope.tableName,
+            $scope.tableName,
+            $scope.tableName + '.xlsx');
+        };
+
+        $scope.sort = function (field) {
+          $scope.sortField = field;
+        }
+      }],
+      templateUrl: '/components/global/aliceDataTable.html'
     };
   });

@@ -1,0 +1,38 @@
+<div class="alice-data-table__export-button">
+  <a class="btn btn-primary btn-export" ng-click="export()">Export</a>
+</div>
+
+<table id="{{ tableName }}" class="alice-data-table">
+  <!-- Headers -->
+  <tr>
+    <td ng-repeat="(field, fieldDetails) in fields">
+      <p>
+        {{ fieldDetails.title }}
+        <sort class="sort-buttons" action="sort" field="{{ field }}" />
+      </p>
+    </td>
+  </tr>
+
+  <!-- Data rows -->
+  <tr ng-repeat="row in rows | orderBy : sortField " class="donation-row">
+    <td ng-repeat="(field, fieldDetails) in fields">
+      <span ng-if="fieldDetails.type == 'money'">
+        {{ row[field] | money }}
+      </span>
+      <span ng-if="fieldDetails.type == 'pastTenseVerb' && row[field]">
+        {{ row[field] | pastTense:1:1 }}
+      </span>
+      <canvas class="chart chart-doughnut"
+              ng-if="fieldDetails.includeDoughnut"
+              chart-data="row.doughnutData"
+              chart-labels="row.labels"
+              chart-colors="row.doughnutColors"
+              chart-options="row.doughnutOptions">
+      </canvas>
+
+      <span ng-if="!fieldDetails.type">
+        {{ row[field] }}
+      </span>
+    </td>
+  </tr>
+</table>

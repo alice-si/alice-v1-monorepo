@@ -40,8 +40,6 @@
   }
 
   &__outcome-description {
-    // TODO alex remove these comments later
-    // min-height: 150px;
     min-height: 120px; // Areti asked to decrease this area by 1 line of text
   }
 
@@ -93,8 +91,17 @@
 
     &__details-table {
       th:first-of-type, td:first-of-type {
-        width: 60%;
+        width: 50%;
       }
+    }
+  }
+}
+
+
+@media screen and (max-width: 767px) {
+  .outcome-card {
+    &__cost-per-unit-header {
+      font-size: 14px;
     }
   }
 }

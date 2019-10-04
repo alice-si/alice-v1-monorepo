@@ -1,7 +1,7 @@
 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 outcome-card__container">
   <div class="outcome-card">
     <!-- Outcome card image -->
-    <img class="outcome-card__image" src="{{ outcome.image }}">
+    <img class="outcome-card__image lazy" data-src="{{ outcome.image }}">
 
     <div class="outcome-card__we-used-container">
         <div ng-if="outcome.userDonationsUsedAmount"  class="outcome-card__we-used">
@@ -13,7 +13,14 @@
             <span class="outcome-card__we-used-amount">
               {{ outcome.helpedWithUserDonations }}
             </span>
-            {{ projectUnit }}
+
+            <span ng-if="outcome.helpedWithUserDonations == 1">
+              {{ projectUnit | lowercase | singular }}
+            </span>
+            <span ng-if="outcome.helpedWithUserDonations != 1">
+              {{ projectUnit | lowercase }}
+            </span>
+
             complete this goal
           </div>
     </div>
@@ -36,7 +43,8 @@
             <tr>
               <th>
                 <p class="outcome-card__cost-per-unit-header">
-                  Cost per {{ outcome.unit }}
+                  Cost per <br>
+                  {{ outcome.unit }}
                 </p>
               </th>
               <th>

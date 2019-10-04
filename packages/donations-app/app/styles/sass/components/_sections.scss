@@ -44,13 +44,9 @@
 
    &__container-title {
      position: absolute;
-     top: 125px;
+     top: 110px;
      left: 7vw;
      width: 490px;
-
-     .row > h1 {
-       padding-right: 20px;
-     }
    }
 
    &__container-progress {
@@ -74,7 +70,6 @@
    }
 
    button {
-     margin-top: 20px;
      width: 120px;
      background: $alice-tonal-medium;
      border-radius: 4px;
@@ -153,7 +148,7 @@
     &__progress {
       &-section {
         border-right: 1px solid $alice-dark-grey;
-        font-size: 16px !important;
+        font-size: 16px;
       }
 
       &-amount {
@@ -175,6 +170,32 @@
       margin-bottom: 15px;
     }
 
+    &__back-to-projects-link {
+      color: white;
+      position: absolute;
+      top: 80px;
+      left: 7vw;
+      // cursor: pointer;
+    }
+
+    &__back-to-projects-link:hover {
+      color: $alice-tonal-medium;
+    }
+
+    &__track-donation-link {
+      font-size: 18px !important;
+      font-family: $source !important;
+      border-bottom: 1px solid $alice-tonal-medium;
+      padding-bottom: 2px;
+      letter-spacing: 1px;
+      color: $alice-tonal-medium;
+    }
+
+    &__track-donation-link:hover,&__track-donation-link:visited {
+      color: $alice-tonal-medium;
+      opacity: 0.5;
+    }
+
     h3 {
       font-family: $source;
       color: $alice-dark-grey;
@@ -183,15 +204,6 @@
       width: 90%;
       line-height: 1.4;
       margin-bottom: 30px;
-    }
-
-    a {
-      font-size: 18px !important;
-      font-family: $source !important;
-      border-bottom: 1px solid $alice-tonal-medium;
-      padding-bottom: 2px;
-      letter-spacing: 1px;
-      color: $alice-tonal-medium;
     }
 
     p {
@@ -241,12 +253,18 @@
 
 @media screen and (max-width: 565px) {
   .splash-v3 {
-    height: 100vh;
+    height: 500px;
 
     &__container-title {
-      top: 30vh !important;
       @include box-shadow(0, 1px, 3px, rgba(0,0,0,0.4));
       width: 86vw;
+      top: 190px;
+    }
+
+    &__progress {
+      &-section {
+        border-right: 1px solid $alice-dark-grey;
+      }
     }
 
     &__progress {
@@ -267,7 +285,7 @@
 @media screen and (max-width: 414px) {
   .splash-v2, .splash-v3 {
     .header-image {
-      height: 100vh !important;
+      height: 40vh;
     }
 
     &__container-title {
@@ -275,10 +293,11 @@
     }
 
     p {
-      font-size: 16px !important;
+      font-size: 12px !important;
     }
 
     &__progress-section {
+      // border-right: none;
 
       span {
         font-weight: 600;
@@ -310,12 +329,7 @@
       font-size: 20px;
     }
 
-    .header-image {
-      height: 100vh;
-    }
-
     &__container-title {
-      top: 100px;
       left: 30px;
     }
 
@@ -356,7 +370,7 @@
   }
 
   .appeal-page > .splash-v3 {
-    height: 75vh !important;
+    height: 520px;
 
     p {
       font-size: 10px !important;

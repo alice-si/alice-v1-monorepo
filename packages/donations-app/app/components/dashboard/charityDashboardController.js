@@ -30,16 +30,32 @@ angular.module('aliceApp')
           // Here we iterate through validated goals and calculate
           // overall progress of that goal
           vm.projectWithGoals.validated.forEach((item) => {
-            item.progressInUnits = Math.min(Math.floor(item.totalValidated / (item.outcome[0].costPerUnit)),
+            var match = vm.general_outcomes.find((elem) => {
+              return elem._id === item._id;
+            });
+            match.progressInUnits = Math.min(Math.floor(item.totalValidated / (item.outcome[0].costPerUnit)),
                                             item.outcome[0].quantityOfUnits);
-            item.percentage = Math.min(Math.floor(100 * item.totalValidated / (item.outcome[0].target)),
+            match.percentage = Math.min(Math.floor(100 * item.totalValidated / (item.outcome[0].target)),
                                         100);
-            item.doughnutData = [item.percentage, (100 - item.percentage)];
+            match.doughnutData = [match.percentage, (100 - match.percentage)];
             if(item.outcome[0].color) {
               item.outcome[0].lightColor = convertHex(item.outcome[0].color, 0.35);
-              item.doughnutColors = [item.outcome[0].color, item.outcome[0].lightColor];
+              match.doughnutColors = [item.outcome[0].color, item.outcome[0].lightColor];
             }
-            item.labels = ['Achieved', 'Yet to achieve'];
+            match.labels = ['% Validated', '% Remaining'];
+            match.doughnutOptions = {
+              cutoutPercentage: 70,
+              tooltips: {
+                xPadding: 35,
+                backgroundColor: '#FFF',
+                titleFontSize: 25,
+                titleFontColor: '#0066ff',
+                bodyFontColor: '#000',
+                bodyFontFamily: 'Source Sans Pro',
+                bodyFontSize: 16,
+                displayColors: false,
+              }
+            };
           });
 
           // For each outcome in the project, check whether we have a validation in progress
@@ -47,16 +63,17 @@ angular.module('aliceApp')
           vm.general_outcomes.forEach((elem) => {
             if(!(_.where(vm.projectWithGoals.validated, {'_id': elem._id }).length)) {
               vm.validated_outcomes.push(initialiseGoalStatus(elem));
-            }
-            else {
+            } else {
               // This will always be the first value ([0]) since _id is unique.
               vm.validated_outcomes.push(_.where(vm.projectWithGoals.validated, {'_id': elem._id })[0]);
             }
-          })
 
-          vm.validated_outcomes.forEach((elem) => {
-            elem.doughnutOptions = { cutoutPercentage: 70 };
-          })
+            elem.validated =
+              elem.claimed.filter(claim => claim.status == 'IMPACT_FETCHING_COMPLETED').length;
+            elem.pendingValidations =
+              elem.claimed.filter(claim => !claim.status.includes('FAILED') && claim.status != 'IMPACT_FETCHING_COMPLETED').length;
+            elem.received = elem.validated * elem.costPerUnit;
+          });
 
           // Get the total number of goals achieved/validated
           vm.totalGoalsAchieved = vm.validated_outcomes.reduce((acc, elem) => ({
@@ -149,15 +166,6 @@ angular.module('aliceApp')
       controller: 'CharityDashboardDonationsController as donCtrl',
     };
   })
-  .directive('goalProgressCarousel', function() {
-    return {
-      scope: {
-        outcomes: '=',
-      },
-      templateUrl: '/components/dashboard/panels/goalProgressCarousel.html',
-      controller: 'goalCarouselController as crslCtrl',
-    };
-  })
   .directive('goalsBreakdownTable', function() {
     return {
       scope: {
@@ -165,37 +173,4 @@ angular.module('aliceApp')
       },
       templateUrl: '/components/dashboard/panels/goalsBreakdownTable.html'
     };
-  })
-  .directive('goalsProgressGraph', function() {
-    return {
-      scope: {
-        outcomes: '=',
-      },
-      templateUrl: '/components/dashboard/panels/goalProgressGraph.html',
-      controller: 'GoalsGraphController as graphCtrl',
-    };
   });
-
-  // TODO alex - remove the commented code
-  // .directive('claimOutcomeCard', () => {
-  //   return {
-  //     templateUrl: '/components/dashboard/panels/claimOutcomeCard.html',
-  //     scope: {
-  //       outcome: '=',
-  //       validator: '=',
-  //     },
-  //     controller: ['$scope', '$uibModal', function($scope, $uibModal) {
-  //       // Claiming function for a validation
-  //       $scope.claimFn = function(outcome, quantity) {
-  //         let modal = $uibModal.open({
-  //           templateUrl: '/components/global/claimModal.html',
-  //           controller: 'ImpactClaimController as claimCtrl',
-  //           resolve: {
-  //             outcome: () => outcome,
-  //             quantity: () => quantity,
-  //           }
-  //         });
-  //       };
-  //     }],
-  //   };
-  // });

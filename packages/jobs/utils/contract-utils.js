@@ -18,8 +18,16 @@ async function deployContract(truffleContractObj, ...args) {
     abi,
     bytecode,
     mainWallet);
-  const contract = await contractFactory.deploy(...args);
+  const overrides = {
+    gasLimit: 3000000,
+    gasPrice: 15000000000 // 15 gwei
+  };
+  const contract = await contractFactory.deploy(...args, overrides);
+  logger.debug('Contract deployment started: '
+    + JSON.stringify(contract.deployTransaction.hash));
   await contract.deployed(); // waiting until it is mined
+  logger.debug('Contract deployment finished: '
+    + JSON.stringify(contract.deployTransaction.hash));
   return contract;
 };
 
@@ -35,7 +43,7 @@ function getTruffleContract(name) {
 async function getContractInstance(
   contractName,
   address,
-  addressForWallet=config.mainAccount
+  addressForWallet=mainWallet.address
 ) {
   const contract = getTruffleContract(contractName);
   let wallet = await getWallet({
@@ -50,7 +58,7 @@ async function getWallet({
   address,
   checkBalance=false,
 }) {
-  if (equalAddresses(address, config.mainAccount)) {
+  if (equalAddresses(address, mainWallet.address)) {
     return mainWallet;
   }
 

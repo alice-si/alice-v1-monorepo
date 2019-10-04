@@ -28,7 +28,7 @@ angular.module('aliceApp', ['ui.router', 'angular-jwt', 'ui.bootstrap', 'ui.boot
     });
   }])
 
-  .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+  .config(['$stateProvider', '$urlRouterProvider', 'MODE', function ($stateProvider, $urlRouterProvider, MODE) {
 
     $urlRouterProvider.otherwise('/404');
 
@@ -65,10 +65,16 @@ angular.module('aliceApp', ['ui.router', 'angular-jwt', 'ui.bootstrap', 'ui.boot
         url: '/project/:projectCode',
         templateUrl: function(params) {
           const appealVersionsForProject = {
-            'fusion-housing-1': 2,
+            // 'fusion-housing-1': 2,
             // 'gift-of-walking': 2,
             // 'save-from-abuse': 2
           };
+
+          // FIXME remove this after AB vodafone testing
+          if (MODE != 'prod') {
+            appealVersionsForProject['fusion-housing-1'] = 2;
+          }
+
           const defaultAppealVersion = 4;
           const defaultVersionForProject =
             appealVersionsForProject[params.projectCode] || defaultAppealVersion;
@@ -222,12 +228,11 @@ angular.module('aliceApp', ['ui.router', 'angular-jwt', 'ui.bootstrap', 'ui.boot
       }
     });
 
-    //Autoscroll to top after route change
     $rootScope.$on('$stateChangeSuccess', function () {
+      //Autoscroll to top after route change
       document.body.scrollTop = document.documentElement.scrollTop = 0;
-    });
 
-    $rootScope.$on('$stateChangeSuccess', function () {
+      // Google analytics event reporting
       ga('send', 'pageview', $location.path());
     });
 

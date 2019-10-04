@@ -7,15 +7,10 @@ angular.module('aliceApp')
       return $http.get(API + 'getCategories');
     };
 
-    // Deprectated - TODO remove later
-		// this.getActiveProjects = function () {
-		// 	return $http.get(API + 'getActiveProjects');
-    // };
-
     this.getProjects = function () {
       return $http.get(API + 'getProjects');
     }
-    
+
     this.saveProject = function (project) {
       return $http.post(API + 'saveProject', project);
     };
@@ -74,17 +69,6 @@ angular.module('aliceApp')
 
       return details;
     };
-
-    this.getAppealPageVersion = function (projectCode) {
-      const appealVersionsForProject = {
-        'fusion-housing-1': 2,
-        // 'gift-of-walking': 2,
-        // 'save-from-abuse': 2
-      };
-      const defaultAppealVersion = 4;
-
-      return appealVersionsForProject[projectCode] || defaultAppealVersion;
-    }
 
     this.model = model;
 

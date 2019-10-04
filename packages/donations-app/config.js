@@ -1,6 +1,7 @@
 let config = {
   // The following lazy settings only get looked up when actually needed.
   get db() { return getEnv('DB_URL'); },
+  get stageDB() { return getEnv('STAGE_DB_URL'); },
   get awsAccessKey() { return getEnv('AWS_S3_ACCESS_KEY'); },
   get awsSecretKey() { return getEnv('AWS_S3_SECRET_KEY'); },
 };

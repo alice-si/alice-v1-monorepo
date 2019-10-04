@@ -1,6 +1,6 @@
 <div class="modal-footer">
     <div class="row">
-        <div ng-show="checkCtrl.donation.amount">
+        <div ng-show="checkCtrl.donation.amount && !checkCtrl.project.noGiftAid">
 
             <p class="form-group col-md-12 center alice-blue">
                 <input icheck type="checkbox" ng-model="checkCtrl.giftAid" /> Add Gift Aid to turn your donation into
@@ -33,7 +33,7 @@
                                     name="address1"
                                     rows="3"
                                     ng-required="checkCtrl.giftAid"
-                                    ng-model="checkCtrl.giftAidAddress"
+                                    ng-model="checkCtrl.donation.giftAidAddress"
                             />
                             <error-message name="address1" error="required">This field is required</error-message>
                         </div>
@@ -62,15 +62,16 @@
         </div>
     </div>
     <div class="row">
-        <button 
-                class="col-md-12"
+        <button class="col-md-12"
+                ng-class="{ 'disabled-button' : (checkCtrl.donation.amount > 100000) }"
                 ng-click="checkCtrl.donate()"
                 type="submit">
                 <span ng-show="checkCtrl.mode == 'BANK_TRANSFER'">
                     Show bank details
                 </span>
-                <span ng-show="checkCtrl.mode != 'BANK_TRANSFER'">
-                    Donate {{ checkCtrl.donation.amount | money }}
+                <span ng-show="checkCtrl.mode != 'BANK_TRANSFER'"
+                      ng-disable="checkCtrl.donation.amount > 100000">
+                      Donate {{ checkCtrl.donation.amount | money }}
                 </span>
         </button>
     </div>

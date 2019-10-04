@@ -1,52 +1,9 @@
 <div ng-controller="ProjectControllerV2 as projectCtrl" class="appeal-page">
-  <section class="splash-v3 grad-both">
-    <div class="header-image appeal-splash"
-         ng-style="{ 'background' : 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0)), url(' + projectCtrl.model.img + ') no-repeat center center' }">
-      <div class="container splash-v3__container-title">
-        <div class="row">
-          <h1>{{ projectCtrl.model.title }}</h1>
-          <a ui-sref="how-it-works">Track your donation's impact <i class="glyphicon glyphicon-chevron-right"></i></a>
-        </div>
-        <div class="row splash-v3__container-progress">
-          <div class="row">
-            <p ng-if="projectCtrl.model.status != 'FINISHED'" class="col-md-4 col-sm-4 col-xs-4 splash-v3__progress-section">We need to raise<br>
-              <span class="splash-v3__progress-amount">{{ projectCtrl.model.fundingTarget | money}}</span>
-            </p>
-            <p class=" col-md-4 col-sm-4 col-xs-4 splash-v3__progress-section">
-              {{ projectCtrl.model.status == 'FINISHED' ? 'Raised' : 'Raised so far' }}
-              <br>
-              <span class="splash-v3__progress-amount">{{ projectCtrl.model.raised | money }}</span>
-            </p>
-            <!-- TODO it is not calculated correctly -->
-            <p ng-if="projectCtrl.model.status != 'FINISHED'" class=" col-md-4 col-sm-4 col-xs-4 splash-v3__progress-section">To complete<br>
-              <span class="splash-v3__progress-amount">{{ projectCtrl.model._outcomes.length }}</span> goals
-            </p>
-            <p ng-if="projectCtrl.model.status == 'FINISHED'" class=" col-md-4 col-sm-4 col-xs-4 splash-v3__progress-section">
-              Helped<br>
-              <span class="splash-v3__progress-amount">
-                {{ projectCtrl.model.unitsHelped }}
-                /
-                {{ projectCtrl.model.totalUnitsToHelp }}
-              </span> people
-            </p>
-          </div>
 
-        </div>
-        <div class="row">
-          <div ng-if="projectCtrl.model.status != 'FINISHED'" class="col-md-5 col-xs-10 no-padding">
-            <a ng-click="projectCtrl.donate()">
-              <button>
-                <i class="glyphicon glyphicon-chevron-right"></i>
-                DONATE
-              </button>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
+  <splash
+    show-donate-button="true"
+    show-track-donations-impact-link="true"
+    project="projectCtrl.model" />
 
   <section class="container appeal-v3__container">
 

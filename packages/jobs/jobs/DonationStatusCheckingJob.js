@@ -1,5 +1,9 @@
-const ModelUtils = require('../utils/model-utils');
 const Moment = require('moment');
+
+const ModelUtils = require('../utils/model-utils');
+const config = require('../config');
+const Monitor = require('../utils/monitor');
+const MailUtils = require('../utils/mail-utils');
 const { BasicJob } = require('./job');
 
 const Donation = ModelUtils.loadModel('donation');
@@ -19,7 +23,7 @@ class DonationStatusCheckingJob extends BasicJob {
           .sort({createdAt: 'desc'})
           .populate('_userId', 'email');
 
-      this.logger.info('Sending email to devs with Donation: ' + JSON.stringify(result));
+      this.logger.info('Sending email to devs with: ' + JSON.stringify(aggregatedResult));
       await MailUtils.sendStalledDonationsNotification(
         aggregatedResult, stalledDonations);
     }
@@ -32,7 +36,7 @@ function getFilter() {
       $nin: ['DONATED', 'BANK_TRANSFER_REQUESTED']
     },
     createdAt: {
-      $lt: (new Moment()).subtract(Config.stalledDonationTimeout, 's').toDate()
+      $lt: (new Moment()).subtract(config.stalledDonationTimeout, 's').toDate()
     },
     errorChecked: {
       $ne: true

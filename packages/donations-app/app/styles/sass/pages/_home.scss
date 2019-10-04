@@ -1,3 +1,28 @@
+/** TODO - Dhen
+ **
+  * Remove this once vodafone testing is finished
+ **
+ **/
+
+.vodafone-tooltip {
+  .tooltip-inner {
+    padding: 10px 15px;
+    font-size: 14px;
+    font-family: $source;
+    letter-spacing: 1px;
+    width: 250px;
+    background: rgba(255, 255, 255, 1);
+    border: 1px solid $alice-tonal-medium;
+    color: $alice-tonal-medium;
+    @include box-shadow(0, 6px, 12px, rgba(0,0,0,.175));
+  }
+
+  .tooltip-arrow {
+    display: none;
+  }
+}
+
+
 /* For the new Donations Homepage
  *
  * Current homepage at: styles/homepage.css
@@ -6,7 +31,7 @@
 
  .home-container, .hiw-container {
    .row {
-     margin: 20px 25px;
+     margin: 20px 30px 40px;
    }
 
    .header-image {
@@ -50,6 +75,22 @@
   }
 }
 
+.home-charity {
+  height: 150px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+
+  &-container {
+    margin-bottom: 20px;
+  }
+
+  &-picture {
+      width: 125px;
+      height: auto;
+  }
+}
+
 .home-container {
   section {
     border-bottom: 1px solid $alice-UI-light-grey;
@@ -63,6 +104,24 @@
 }
 
 @media screen and (max-width: 330px) {
+
+  .home-container {
+    section:first-child {
+      border-bottom: none;
+      height: 520px !important;
+    }
+
+    .splash-v3__container-title {
+      p {
+        font-size: 16px !important;
+      }
+    }
+  }
+
+  .splash-v3__container-title {
+    top: 60px !important;
+  }
+
   #hiw {
     &-create {
       .header-image {
@@ -110,23 +169,49 @@
       transform: translate(-30px, 80px);
     }
   }
+
+  h3 {
+    font-size: 18px;
+    line-height: 23px;
+  }
+
+  h4 {
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .home-project-card {
+    min-height: 240px;
+  }
 }
 
 
 @media screen and (max-width: 470px) {
-  .home-container, .hiw-container {
-    .header-image {
-      background-color: rgba(0, 0, 0, 0.5) !important;
+  .home-container {
+    section:first-child {
+      border-bottom: none;
+      height: 480px;
+    }
 
-      .container {
-        transform: translateY(10%);
+    .splash-v3__container-title {
+      top: 100px;
+
+      p {
+        font-size: 14px !important;
       }
     }
+
+    .alice-footer .row {
+      margin: 0 !important;
+    }
   }
+
 
   #hiw {
     &-create {
       .header-image {
+        height: 100vh;
+
         .container {
           transform: translateY(10%);
         }
@@ -139,10 +224,16 @@
     }
 
     &-validate {
-      margin-top: 30px;
+      margin-top: 0;
       margin-bottom: 15px;
       padding-bottom: 105px;
       border-bottom: 1px solid $alice-UI-light-grey;
+
+      .row {
+        div:last-child {
+          margin-top: 50px;
+        }
+      }
     }
   }
 
@@ -166,8 +257,12 @@
     }
   }
 
-  .investors-and-media-list {
-    margin: 0 20px;
+  .home-charity {
+
+    &-picture {
+      max-width: 75px;
+      height: auto;
+    }
   }
 }
 

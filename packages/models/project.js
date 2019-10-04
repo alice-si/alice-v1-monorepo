@@ -35,6 +35,7 @@ let projectSchemaObject = {
   validatorUrl: String,
   costBreakdown: String,
   location: String,
+  noGiftAid: Boolean,
 
   upfrontPayment: Number,
   peopleTarget: Number,

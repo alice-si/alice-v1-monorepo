@@ -1,33 +1,19 @@
-<table id="goalsBreakdown" class="alice-table">
-   <tr>
-      <td><p>Goal</p></td>
-      <td><p>Cost/(unit)</p></td>
-      <td><p>Target No. Units</p></td>
-      <td><p>Total Goal Cost</p></td>
-      <td><p style="opacity: 0.5">Proof Sent For</p></td>
-      <td><p>Validated</p></td>
-      <td><p>Money Received</p></td>
-   </tr>
-   <tr ng-repeat="goal in outcomes | orderBy: validated"
-       style="border-bottom: 1px solid {{goal.outcome[0].color}};
-              color: {{goal.outcome[0].color}};">
-      <td>{{ goal.outcome[0].title }}</td>
-      <td>{{ goal.outcome[0].costPerUnit | money }}/{{goal.outcome[0].unit}}</td>
-      <td>{{ goal.outcome[0].quantityOfUnits }} {{goal.outcome[0].unit}}<ng-pluralize count="goal.outcome[0].quantityOfUnits" when="{'1': '','other': 's'}"></ng-pluralize>
-      </td>
-      <td>{{ goal.outcome[0].target | money }}</td>
-      <!-- <td>{{ goal.outcome[0].amount | money }}</td> -->
-      <td style="opacity: 0.4">Coming Soon!</td>
-      <td>{{ goal.progressInUnits }}</td>
-      <td>
-         {{ goal.totalValidated | money }}
-         <canvas id="doughnut"
-                 class="chart chart-doughnut"
-                 chart-data="goal.doughnutData"
-                 chart-labels="goal.labels"
-                 chart-colors="goal.doughnutColors"
-                 chart-options="goal.doughnutOptions">
-         </canvas>
-      </td>
-   </tr>
-</table>
+<alice-data-table
+   fields="{
+      title: { title: 'Title' },
+      costPerUnit: {
+         title: 'Cost per unit',
+         type: 'money'
+      },
+      quantityOfUnits: { title: 'Total units' },
+      pendingValidations: { title: 'Pending validations' },
+      validated: { title: 'Total validated' },
+      received: {
+         title: 'Money received',
+         type: 'money',
+         includeDoughnut: true
+      }
+   }"
+   table-name="'outcomes'"
+   rows="outcomes"
+/>

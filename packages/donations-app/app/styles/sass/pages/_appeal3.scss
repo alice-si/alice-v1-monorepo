@@ -2,17 +2,16 @@
   h5 {
     font-weight: 400;
   }
+}
 
-  .splash-v3 {
-    button {
-      padding: 8px 0 10px !important;
-    }
+.splash-v3 {
+  button {
+    padding: 8px 0 10px !important;
   }
 }
 
 .appeal-v3 {
   &__container {
-    width: 85vw;
     padding: 0;
     margin: 22px auto 42px;
   }
@@ -37,7 +36,7 @@
     }
 
     &-image {
-      min-height: 80px;
+      height: 70px;
       width: auto;
       max-width: 150px;
       background-size: contain;
@@ -167,6 +166,13 @@
       padding-bottom: 20px;
     }
 
+    &__info {
+      &-image {
+        width: auto;
+        height: 70px;
+      }
+    }
+
     &__stories {
       h5 {
         margin-top: 30px;
@@ -208,5 +214,11 @@
         margin-bottom: 20px;
       }
     }
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .appeal-v3__container {
+    width: 85vw;
   }
 }

@@ -1,11 +1,16 @@
-// TODO alex - remove commented text in this file
-
 .my-impact {
   background: $white;
   min-height: 100vh;
 
+  &-splash {
+    .splash-v3__container-progress {
+        margin-top: 0;
+    }
+  }
+
   &__show-appeal-button {
     padding: 30px;
+    margin-top: 30px;
   }
 
   &__progress-title {
@@ -34,47 +39,6 @@
     color: #676a6c;
   }
 
-  // &__goal-progress-title {
-  //   font-family: "Source Sans Pro", sans-serif !important;
-  //   font-weight: 300;
-  //   font-size: 14px !important;
-  // }
-
-  // &__goal-progress-value {
-  //   font-family: "Source Sans Pro", sans-serif !important;
-  //   font-size: 16px;
-  //   font-weight: 600;
-  //   color: #676a6c;
-  // }
-
-  // &__goal-progress-section {
-  //   margin-bottom: 20px;
-  // }
-
-  // &__goal-progress-section.right-border {
-  //   border-right: 1px solid #4a4a4a;
-  // }
-
-  // &__goal-we-used-amount {
-  //   font-weight: 500;
-  //   font-size: 16px;
-  // }
-
-  // &__goal-we-used-section {
-  //   font-family: "Source Sans Pro", sans-serif;
-  //   font-weight: 300;
-  //   font-size: 14px;
-  //   text-align: center;
-  //   height: 50px;
-  //   line-height: 50px;
-  //   width: 100%;
-  //   position: absolute;
-  //   bottom: 0;
-  //   background: white;
-  //   border-radius: 3px;
-  //   border: 1px solid $alice-blue;
-  // }
-
   &__splash_container {
     width: 490px;
   }
@@ -85,21 +49,8 @@
     font-stretch: normal;
   }
 
-  // &__goal-title {
-  //   min-height: 70px;
-  // }
-
   &__container {
     margin: auto;
-
-    // &-goals {
-    //   margin: 50px 0;
-
-    //   .aliceGoal__goal-right {
-    //     border-top-right-radius: 4px !important;
-    //     border-bottom-right-radius: 4px !important;
-    //   }
-    // }
 
     &-goals {
       margin-top: 40px;
@@ -145,12 +96,6 @@
   #my-impact-project-title {
     margin-bottom: 5px !important;
   }
-
-  // .my-impact {
-  //   &__goal-progress-section.right-border {
-  //     border-right: none;
-  //   }
-  // }
 }
 
 @media screen and (max-width: 835px) {
@@ -194,6 +139,26 @@
   .my-impact {
     &__container {
       width: 100%;
+
+      &-goals {
+        margin: 40px 25px 0;
+      }
+    }
+
+    &-splash {
+      .splash-v3__container-progress {
+          margin-top: 30px;
+      }
+    }
+
+    &__show-appeal-button {
+      font-size: 14px !important;
+    }
+
+    &__boost-donation, &__see-on-blockchain {
+      &-button {
+        font-size: 14px;
+      }
     }
 
     &__boost-donation, &__see-on-blockchain {
@@ -207,5 +172,11 @@
         height: 20px;
       }
     }
+  }
+}
+
+@media screen and (max-width: 340px) {
+  .my-impact__show-appeal-button {
+    font-size: 12px !important;
   }
 }
