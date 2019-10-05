@@ -18,18 +18,19 @@
          </div>
          <div class="row">
            <div class="col-md-12 hidden-xs hidden-sm no-padding">
-             <div class="form-group col-md-3 no-padding">
+             <div class="form-group col-md-4 no-padding">
                <button ng-click="homeCtrl.explore()">
                  <i class="glyphicon glyphicon-chevron-right"></i>
                  EXPLORE PROJECTS
                </button>
              </div>
-             <div class="form-group col-md-3">
+             <div class="form-group col-md-4">
                <button class="inverse-button"
                        ui-sref="how-it-works"
                        ng-if="homeCtrl.mode === 'prod'">
                  SEE HOW IT WORKS
                </button>
+
                <!-- FOR VODAFONE ONLY -->
                <div tooltip-placement="top"
                     tooltip-class="vodafone-tooltip"
@@ -51,10 +52,10 @@
        <div class="container splash-v3__container-title
                    hidden-sm hidden-md hidden-lg
                    no-padding">
-           <h2 class="col-xs-12 alice-dark-grey">
+           <h1 class="col-xs-12 alice-dark-grey">
              Fund social projects.<br>
              Track your impact.
-           </h2>
+           </h1>
             <p class="col-xs-12">Donate, grant, invest in social projects
               &amp; track what is achieved with your money. Alice is the blockchain
               standard of social funding and impact management.
@@ -85,9 +86,9 @@
    <section class="container"
             id="home-projects">
      <div class="row">
-       <h3 class="uppercase">
+       <h2 class="uppercase alice-dark-grey">
          Explore our social projects
-       </h3>
+       </h2>
      </div>
      <div class="row">
          <homepage-project-card ng-repeat="project in homeCtrl.projects"
@@ -101,25 +102,9 @@
   <section class="container"
             id="home-completed-projects">
      <div class="row">
-       <h3 class="uppercase">
+       <h2 class="uppercase alice-dark-grey">
          Visit our completed projects
-       </h3>
-     </div>
-     <div class="row">
-         <homepage-project-card ng-repeat="project in homeCtrl.projects"
-                                ng-if="project.status == 'FINISHED' && !project.code.includes('mock')"
-                                project="project"
-                                dashboard="'project'">
-         </homepage-project-card>
-     </div>
-   </section>
-
-  <section class="container"
-            id="home-completed-projects">
-     <div class="row">
-       <h3 class="uppercase">
-         Visit our completed projects
-       </h3>
+       </h2>
      </div>
      <div class="row">
          <homepage-project-card ng-repeat="project in homeCtrl.projects"
@@ -132,9 +117,9 @@
 
    <section class="container" id="social-organisation-list">
      <div class="row">
-       <h3 class="uppercase">
+       <h2 class="uppercase alice-dark-grey">
          Social organisations we work with
-       </h3>
+       </h2>
      </div>
 
      <ul class="investors-and-media-list justify-content-around align-items-center align-content-lg-start">
@@ -150,9 +135,9 @@
    <section>
      <div class="container" id="organisation-signup">
        <div class="row">
-         <h3 class="uppercase">
+         <h2 class="uppercase alice-dark-grey">
            Are you a social organisation?
-         </h3>
+         </h2>
          <h4 class="alice-dark-text">Get in touch with your project</h4>
        </div>
 
@@ -231,11 +216,11 @@
            </div>
          </div>
          <div class="col-md-12 no-padding">
-           <div class="form-group col-md-3 no-padding">
+           <div class="form-group col-md-2 no-padding">
              <button name="sendMessage"
                      ng-click="homeCtrl.sendMessage()">
                      <i class="glyphicon glyphicon-chevron-right"></i>
-                     SEND MESSAGE
+                     SEND
              </button>
            </div>
          </div>

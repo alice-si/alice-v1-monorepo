@@ -7,12 +7,12 @@
        ng-if="showTrackDonationsImpactLink && project.status != 'FINISHED'">Track your donation's impact <i class="glyphicon glyphicon-chevron-right"></i></a>
   </div>
   <div class="row splash-v3__container-progress">
-      <p ng-if="project.status !== 'FINISHED'" class="col-md-4 col-sm-4 col-xs-4 no-padding splash-v3__progress-section">
+      <p ng-if="project.status !== 'FINISHED'" class="col-md-4 col-sm-4 col-xs-4 no-padding splash-v3__progress-section progress-p">
         We need to raise<br>
         <span class="splash-v3__progress-amount hidden-xs">{{ project.fundingTarget | money}}</span>
         <span class="splash-v3__progress-amount hidden-sm hidden-md hidden-lg">{{ project.fundingTarget | roundedK }}</span>
       </p>
-      <p class="col-md-4 col-sm-4 col-xs-4 splash-v3__progress-section"
+      <p class="col-md-4 col-sm-4 col-xs-4 splash-v3__progress-section progress-p"
          ng-class="{ 'no-padding' : project.status == 'FINISHED' }">
         {{ project.status == 'FINISHED' ? 'Raised' : 'Raised so far' }}
         <br>
@@ -21,10 +21,10 @@
       </p>
 
       <!-- TODO it is not calculated correctly -->
-      <p ng-if="project.status != 'FINISHED'" class=" col-md-4 col-sm-4 col-xs-4 splash-v3__progress-section">To complete<br>
+      <p ng-if="project.status != 'FINISHED'" class=" col-md-4 col-sm-4 col-xs-4 splash-v3__progress-section progress-p">To complete<br>
         <span class="splash-v3__progress-amount">{{ project._outcomes.length }}</span> goals
       </p>
-      <p ng-if="project.status == 'FINISHED'" class="col-md-6 col-sm-4 col-xs-4 splash-v3__progress-section">
+      <p ng-if="project.status == 'FINISHED'" class="col-md-6 col-sm-4 col-xs-4 splash-v3__progress-section progress-p">
         {{ 'help' | pastTense:project.unitsHelped:project.totalUnitsToHelp | capitalize }}<br>
          <span class="splash-v3__progress-amount">
            <span ng-if="project.unitsHelped > 0">{{ project.unitsHelped }}/</span>
@@ -50,13 +50,13 @@
           </div>
         </div>
         <div ng-if="showAppealPageLink">
-          <div class="col-md-5 col-xs-3 no-padding">
+          <div class="col-md-4 col-xs-3 no-padding">
             <p>Run by</p>
             <div class="appeal-v3__info-image"
                  style="background-image: url('{{project.charity.picture}}')">
             </div>
           </div>
-          <div class="col-md-6 col-xs-7 col-xs-offset-1 no-padding">
+          <div class="col-md-7 col-xs-7 col-xs-offset-1 no-padding">
             <a href="/project/{{project.code}}"
                ng-if="project.status != 'FINISHED'">
               <button class="inverse-button my-impact__show-appeal-button">

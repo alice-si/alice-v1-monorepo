@@ -1,4 +1,6 @@
-
+.project-wizard-form {
+  margin-top: $menu-height / 2;
+}
 
 /* Global font styles */
 .header {
@@ -134,7 +136,7 @@ p span.sub-target {
 }
 
 .wrapper-content {
-  margin-top: 80px;
+  margin-top: $menu-height;
   padding-bottom: 0 !important;
 }
 
@@ -720,7 +722,9 @@ input.validation-quantity {
 button.note-btn {
   width: initial !important;
   background-color: white !important;
-  
+  min-width: 0 !important;
+  min-height: 0 !important;
+
 
   i {
     color: $alice-blue !important;

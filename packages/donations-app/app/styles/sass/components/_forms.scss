@@ -58,16 +58,16 @@ button {
   color: #FFFFFF;
   border-radius: 4px;
   letter-spacing: 2px;
-  font-size: 18px;
+  font-size: 22px;
   font-family: $source;
-  font-weight: 300;
-  font-stretch:normal;
-  margin: 10px 0;
+  font-weight: 400;
+  font-stretch: normal;
+  margin: 10px -5px;
   @include transition(0.1s, all, ease-out);
 
   &:hover {
-    background-color: #FFFFFF;
-    color: $alice-tonal-medium;
+    background-color: #FFFFFF !important;
+    color: $alice-tonal-medium !important;
 
     i {color: $alice-tonal-medium}
     border: 1px solid $alice-tonal-medium;
@@ -107,5 +107,22 @@ button {
   &:hover {
     background-color: #CCC !important;
     color: #fff !important;
+  }
+}
+
+.splash-v3 {
+  button {
+    width: 140px;
+    background: $alice-tonal-medium;
+    border-radius: 4px;
+    font-size: 21px;
+    font-family: $source !important;
+    font-weight: 400;
+    font-stretch: normal;
+    color: #fff;
+    border: none;
+    letter-spacing: 1px;
+    @include box-shadow(0, 0, 2px, rgba(0, 0, 0, 0.23));
+    outline: none;
   }
 }

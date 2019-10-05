@@ -19,7 +19,7 @@
 }
 
 .footer-social-icons {
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
 @media screen and (max-width: 760px) {
@@ -158,5 +158,19 @@
 
   .twitter-icon:hover {
     background-image: url('https://s3.eu-west-2.amazonaws.com/alice-res/twitter.png');
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .alice-footer {
+    .container {
+      margin: 0 40px;
+    }
+  }
+
+  .hiw-container {
+    .alice-footer > .container {
+      margin: 0 !important;
+    }
   }
 }

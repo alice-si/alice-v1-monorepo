@@ -36,11 +36,7 @@
 
    .header-image {
      .container {
-       transform: translateY(30%);
-
-       p {
-         font-size: 22px !important;
-       }
+       transform: translateY(120px);
      }
    }
 
@@ -112,14 +108,11 @@
     }
 
     .splash-v3__container-title {
+      top: 60px !important;
       p {
         font-size: 16px !important;
       }
     }
-  }
-
-  .splash-v3__container-title {
-    top: 60px !important;
   }
 
   #hiw {
@@ -190,15 +183,11 @@
   .home-container {
     section:first-child {
       border-bottom: none;
-      height: 480px;
+      height: 540px;
     }
 
     .splash-v3__container-title {
       top: 100px;
-
-      p {
-        font-size: 14px !important;
-      }
     }
 
     .alice-footer .row {
@@ -272,10 +261,15 @@
     button {
       min-width: 80%;
     }
-  }
+    .header-image {
+      .container {
+        transform: translateY(120px);
 
-  .home-title {
-      margin-bottom: 20px;
+        p {
+          font-size: 22px !important;
+        }
+      }
+    }
   }
 
   // How it works:

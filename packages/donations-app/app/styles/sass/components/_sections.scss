@@ -44,7 +44,7 @@
 
    &__container-title {
      position: absolute;
-     top: 110px;
+     top: 140px;
      left: 7vw;
      width: 490px;
    }
@@ -69,19 +69,6 @@
      margin: 20px 0 5px;
    }
 
-   button {
-     width: 120px;
-     background: $alice-tonal-medium;
-     border-radius: 4px;
-     font-size: 18px;
-     color: #fff;
-     border: none;
-     font-family: "Avenir" !important;
-     font-weight: 300;
-     letter-spacing: 1px;
-     @include box-shadow(0, 0, 2px, rgba(0, 0, 0, 0.23));
-     outline: none;
-   }
 
    .grad-bottom:before {
      display: inline-block;
@@ -110,25 +97,6 @@
    }
  }
 
-@media screen and (max-width: 330px) {
-  .splash-v2 {
-    h3 {
-      font-size: 24px;
-      line-height: 1.2;
-      margin-top: -10px;
-    }
-
-    p {
-      font-size: 12px !important;
-      margin-top: -10px;
-    }
-
-    &__progress-section:first-child {
-      margin-top: 10px;
-    }
-  }
-}
-
 
 
 /**
@@ -140,7 +108,6 @@
  **/
 
  .splash-v3 {
-
     .header-image {
       height: 615px;
     }
@@ -173,7 +140,8 @@
     &__back-to-projects-link {
       color: white;
       position: absolute;
-      top: 80px;
+      top: 110px;
+      z-index: 1000;
       left: 7vw;
       // cursor: pointer;
     }
@@ -292,12 +260,7 @@
       width: 80%;
     }
 
-    p {
-      font-size: 12px !important;
-    }
-
     &__progress-section {
-      // border-right: none;
 
       span {
         font-weight: 600;
@@ -305,10 +268,6 @@
 
       &:first-child {
         padding: none !important;
-      }
-
-      &:last-child {
-        border: none;
       }
     }
   }

@@ -26,6 +26,10 @@
   background: $alice-blue !important;
 }
 
+#menu-sign-up {
+  margin: 0px;
+}
+
 #menu-top:hover, #menu-login:hover, #menu-sign-up:hover {
   cursor: pointer;
 }
@@ -387,6 +391,8 @@ span.menu-arrow {
   #navbar-menu {
     width: 100%;
     left: 0;
+    padding: 0 !important;
+    height: 65px;
   }
 
   .alice-logo img {

@@ -8,6 +8,7 @@
   position: absolute;
   background: $dashboard-background;
   width: 100%;
+	margin-top: $menu-height;
   min-height: 100vh;
 }
 
@@ -531,7 +532,6 @@
 }
 
 .dashboard-content {
-  margin: 120px 0;
   background: $dashboard-background;
 }
 
@@ -778,5 +778,12 @@
 				cursor: auto;
 			}
 		}
+	}
+}
+
+
+@media screen and (max-width: 330px) {
+	.dashboard-nav-top {
+	  height: 80px;
 	}
 }

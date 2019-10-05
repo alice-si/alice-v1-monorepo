@@ -18,12 +18,7 @@
     width: 150px;
   }
 
-  &__boost-donation-button {
-    border-radius: 2px;
-  }
-
   &__see-on-blockchain-button {
-    border-radius: 2px;
     i {
       color: $alice-tonal-medium;
     }
@@ -145,9 +140,12 @@
       }
     }
 
-    &-splash {
-      .splash-v3__container-progress {
-          margin-top: 30px;
+    .splash-v3__container {
+      &-progress {
+        margin-top: 10px;
+      }
+      &-title {
+        top: 140px !important;
       }
     }
 
