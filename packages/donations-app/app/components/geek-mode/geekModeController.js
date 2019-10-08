@@ -15,7 +15,9 @@ angular.module('aliceApp')
     };
 
     checkNetworkId();
-    loadData();
+    if (AuthService.getLoggedUser()) {
+      loadData();
+    }
 
     function loadData () {
       $http.get(API + 'getMyProjects').then(function (result) {
