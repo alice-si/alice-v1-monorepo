@@ -337,4 +337,9 @@ angular.module('aliceApp')
     }
 
     return vm;
-  }]);
+  }])
+  .filter('offset', function() {
+    return function(input, start) {
+      return input.slice(start);
+    };
+  });

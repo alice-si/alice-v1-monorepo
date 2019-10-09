@@ -24,10 +24,8 @@
                              ng-click="donCtrl.sort('fullName')"
                              class="gift-aid-check"></p></td>
     </tr>
-    <tr ng-repeat="donation in donCtrl.users.slice(((currentPage - 1) * itemsPerPage),
-                    ((currentPage) * itemsPerPage))
-                   | filter: donCtrl.donationSearch
-                   | filter: donCtrl.giftAidFilter"
+    <tr ng-repeat="donation in filteredData = (donCtrl.users | filter: donCtrl.donationSearch | filter: donCtrl.giftAidFilter )
+                   | offset: (currentPage - 1) * itemsPerPage | limitTo:itemsPerPage"
         class="donation-row">
         <td>{{donation.fullName}}</td>
         <td>{{donation.email}}</td>
@@ -40,7 +38,7 @@
     </tr>
   </table>
   <div uib-pagination
-       total-items="donCtrl.totalItems"
+       total-items="filteredData.length"
        ng-model="currentPage"
        max-size="maxSize"
        class="pagination-sm"
