@@ -1,15 +1,17 @@
 .graph-option {
-  border: none;
-  background: $alice-tonal-medium;
-  color: #fff;
+  text-align: center;
   padding: 5px 0;
   width: 100%;
-  border-radius: 4px;
   letter-spacing: 2px;
 
-  &:focus {
-    outline: none;
-    background: $alice-tonal-dark;
+  &:hover {
+    cursor: pointer;
+    border-bottom: 2px solid $alice-tonal-medium;
+  }
+
+  &-focus {
+    font-weight: 500 !important;
+    border-bottom: 2px solid $alice-tonal-medium;;
   }
 }
 
