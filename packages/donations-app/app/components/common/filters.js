@@ -105,17 +105,6 @@ angular.module('aliceApp')
 			return input;
 		}
 	})
-	.filter('singular', function() {
-		return function(noun) {
-			if (noun.toLowerCase() == 'people') {
-				return 'person';
-			} else if (noun.endsWith('s')) {
-				return noun.slice(0, -1);
-			} else {
-				return noun;
-			}
-		}
-	})
 	.filter('pluralize', function() {
 		return function(noun, number) {
 			return pluralize(noun, number);
