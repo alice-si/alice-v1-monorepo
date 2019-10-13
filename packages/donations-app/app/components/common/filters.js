@@ -116,3 +116,8 @@ angular.module('aliceApp')
 			}
 		}
 	})
+	.filter('pluralize', function() {
+		return function(noun, number) {
+			return pluralize(noun, number);
+		}
+	})
