@@ -37,6 +37,9 @@ angular.module('aliceApp')
             });
           }
 
+          vm.donationsGraphDataFull = vm.donationsGraphData;
+          getLabelsForAxis('year');
+
           // Turn validation/donation amounts to £ prices
           vm.totalValidated = vm.projectWithDonations[0].validations.reduce((acc, e) => {
             return acc + e.y;
@@ -304,6 +307,7 @@ angular.module('aliceApp')
       var dates = [];
       var startDate = new Date(moment(latestDate).subtract(3, 'days'));
       var endDate = new Date(moment(latestDate).add(4, 'days'));
+      updateGraphData(startDate, endDate);
       while(startDate < endDate){
         dates.push(moment(startDate));
         startDate = new Date(startDate.setDate(startDate.getDate() + 1));
@@ -317,6 +321,7 @@ angular.module('aliceApp')
       var startDate = new Date(moment(latestDate).subtract(15, 'days'));
       //Date after 15 days from today (This is the end date)
       var endDate = new Date(moment(latestDate).add(15, 'days'));
+      updateGraphData(startDate, endDate);
       //Logic for getting rest of the dates between two dates("startDate" to "endDate")
       while(startDate < endDate){
         dates.push(moment(startDate));
@@ -329,11 +334,41 @@ angular.module('aliceApp')
       var dates = [];
       let startDate = new Date(moment(latestDate).subtract(6, 'months'));
       let endDate = new Date(moment(latestDate).add(6, 'months'));
+      updateGraphData(startDate, endDate);
       while(startDate < endDate){
         dates.push(moment(startDate));
         startDate = new Date(startDate.setMonth(startDate.getMonth() + 1));
       }
       $scope.dates = dates;
+    }
+
+    function updateGraphData(startDate, endDate) {
+      if (!$scope.donCtrl.donationsGraphDataFull) {
+        return;
+      }
+
+      let startTime = startDate.getTime();
+      let endTime = endDate.getTime();
+
+      let newGraphData = [];
+      for (let line of $scope.donCtrl.donationsGraphDataFull) {
+        let newLine = [];
+        for (let point of line) {
+          pointTime = new Date(point.x).getTime();
+          if (pointTime >= startTime) {
+            // Hack to start from begin at 0
+            if (newLine.length == 0) {
+              newLine.push({
+                x: moment(startDate),
+                y: 0,
+              });
+            }
+            newLine.push(point);
+          }
+        }
+        newGraphData.push(newLine);
+      }
+      $scope.donCtrl.donationsGraphData = newGraphData;
     }
 
     return vm;
