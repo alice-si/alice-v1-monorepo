@@ -356,7 +356,7 @@ angular.module('aliceApp')
         for (let point of line) {
           pointTime = new Date(point.x).getTime();
           if (pointTime >= startTime) {
-            // Hack to start from begin at 0
+            // Hack to begin at 0
             if (newLine.length == 0) {
               newLine.push({
                 x: moment(startDate),
