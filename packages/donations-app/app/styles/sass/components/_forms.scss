@@ -12,6 +12,7 @@ input, textarea {
   border: 1px solid #ccc;
   border-radius: 3px;
   font-family: $source;
+  resize: none;
 
   caret-color: $alice-tonal-medium;
 
@@ -49,7 +50,7 @@ button:focus {
   }
 }
 
-
+// form button
 button {
   width: 100% !important;
   padding: 13px 0;
@@ -78,6 +79,11 @@ button {
     transform: translateY(1px);
     margin-left: -10px;
   }
+}
+
+.form-button__sendMessage {
+  width: 124px !important;
+  height: 50px;
 }
 
 .no-border {

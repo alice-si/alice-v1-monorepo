@@ -1,5 +1,9 @@
 // Base
 
+*, *::before, *::after {
+    outline: 1px solid rgba(255, 0, 0, 0.2);
+}
+
 @import "base/variables";
 @import "base/mixins";
 @import "base/reset";
@@ -44,10 +48,11 @@
 html,body
 {
     width: 100%;
+    min-width: 320px;
     height: auto;
     min-height: 100%;
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     overflow-x: hidden;
 }
 
@@ -83,5 +88,27 @@ html {
 @media (max-width: 350px) {
     html {
         font-size: 5px;
+    }
+}
+
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+@media (min-width: 768px) {
+    .container {
+        width: 750px;
+    }
+}
+@media (min-width: 992px) {
+    .container {
+        width: 970px;
+    }
+}
+@media (min-width: 1200px) {
+    .container {
+        width: 1200px !important;
     }
 }

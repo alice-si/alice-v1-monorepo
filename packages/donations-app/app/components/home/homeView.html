@@ -147,7 +147,7 @@
              novalidate=""
              class="row">
          <div class="col-md-12 no-padding">
-           <div class="form-group col-md-5 no-padding"
+           <div class="form-group col-md-6 no-padding"
                 has-error>
              <label for="contactName">Full name</label>
                <input type="text"
@@ -162,7 +162,7 @@
                       </error-message>
            </div>
            <!-- Desktop: Padded -->
-           <div class="form-group hidden-xs hidden-sm col-md-5"
+           <div class="form-group hidden-xs hidden-sm col-md-6"
                 style="padding-right: 0;"
                 has-error>
              <label for="contactEmail">Email</label>
@@ -204,7 +204,7 @@
 
          </div>
          <div class="col-md-12  no-padding">
-           <div class="form-group col-md-10 no-padding">
+           <div class="form-group col-md-12 no-padding">
              <label for="contactMessage">Project Description</label>
              <textarea rows="3"
                        name="contactMessage"
@@ -215,10 +215,10 @@
          </div>
          <div class="col-md-12 no-padding">
            <div class="form-group col-md-3 no-padding">
-             <button name="sendMessage"
+             <button class="form-button__sendMessage" name="sendMessage"
                      ng-click="homeCtrl.sendMessage()">
                      <i class="glyphicon glyphicon-chevron-right"></i>
-                     SEND MESSAGE
+                     SEND
              </button>
            </div>
          </div>
