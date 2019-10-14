@@ -327,8 +327,8 @@ angular.module('aliceApp')
 
     function getMonthsInYear(latestDate) {
       var dates = [];
-      let startDate = new Date(moment(latestDate).subtract(6, 'months'));
-      let endDate = new Date(moment(latestDate).add(6, 'months'));
+      let startDate = new Date(moment(latestDate).subtract(9, 'months'));
+      let endDate = new Date(moment(latestDate).add(3, 'months'));
       while(startDate < endDate){
         dates.push(moment(startDate));
         startDate = new Date(startDate.setMonth(startDate.getMonth() + 1));
@@ -337,4 +337,11 @@ angular.module('aliceApp')
     }
 
     return vm;
-  }]);
+  }])
+  .filter('offset', function() {
+    return function(input, start) {
+      if(input) {
+        return input.slice(start);
+      }
+    };
+  });

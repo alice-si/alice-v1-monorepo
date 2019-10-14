@@ -5,10 +5,9 @@
         <div class="col-md-3"
              ng-repeat="option in donCtrl.axisOptions"
              style="margin-right: 3px;">
-          <button type="button"
-                  name="button"
-                  ng-click="setXAxis(option)"
-                  class="graph-option">{{option}}</button>
+          <p ng-click="setXAxis(option)"
+             class="graph-option uppercase"
+             ng-class="{'graph-option-focus' : option === axis }">{{option}}</p>
         </div>
       </div>
       <div class="col-md-6 col-sm-6 col-xs-6">
