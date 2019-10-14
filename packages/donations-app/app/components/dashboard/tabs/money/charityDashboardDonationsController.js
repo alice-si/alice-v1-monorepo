@@ -327,8 +327,8 @@ angular.module('aliceApp')
 
     function getMonthsInYear(latestDate) {
       var dates = [];
-      let startDate = new Date(moment(latestDate).subtract(9, 'months'));
-      let endDate = new Date(moment(latestDate).add(3, 'months'));
+      let startDate = new Date(moment(latestDate).subtract(12, 'months'));
+      let endDate = new Date(moment(latestDate).add(0, 'months'));
       while(startDate < endDate){
         dates.push(moment(startDate));
         startDate = new Date(startDate.setMonth(startDate.getMonth() + 1));

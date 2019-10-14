@@ -331,21 +331,23 @@ angular.module('aliceApp')
 
       },
       /*jshint multistr: true */
-      template: '<div >\
-                  <button\
-                      style="width:10vw !important" ngf-select\
-                      ngf-pattern="\'image/*\'"\
-                      ngf-accept="\'*\'" ngf-max-size="20MB" ngf-min-height="100"\
-                      ng-model="imgFileModel">\
-                    Browse\
-                  </button>\
-                   <span ng-if="status != \'undefined\'">\
-                    <img style="width:80px; margin-left: 10px;" src="{{statusIconUrl}}">\
-                    {{description}}\
-                   </span>\
-                </div>\
-                <div style="text-align: center; margin-top:10px" class="col-md-12">\
-                <img src="{{model}}" style="max-width:300px; box-shadow: 1px 1px 1px #888888">\
+      template: '<div class="form-group">\
+                   <div class="col-sm-offset-3 col-sm-9">\
+                      <button\
+                          ngf-select\
+                          ngf-pattern="\'image/*\'"\
+                          ngf-accept="\'*\'" ngf-max-size="20MB" ngf-min-height="100"\
+                          ng-model="imgFileModel">\
+                        Browse\
+                      </button>\
+                       <span ng-if="status != \'undefined\'">\
+                        <img style="width:80px; margin-left: 10px;" src="{{statusIconUrl}}">\
+                        {{description}}\
+                       </span>\
+                    </div>\
+                    <div style="text-align: center; margin-top:10px" class="col-md-12">\
+                    <img src="{{model}}" style="max-width:300px; box-shadow: 1px 1px 1px #888888">\
+                  </div>\
                 </div>'
     };
   }])
@@ -414,6 +416,7 @@ angular.module('aliceApp')
     return {
       scope: {
         project: '=',
+        backToProjectsLink: '@',
         showAppealPageLink: '@',
         showDonateButton: '@',
         showTrackDonationsImpactLink: '@',

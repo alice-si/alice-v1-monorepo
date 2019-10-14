@@ -8,14 +8,15 @@
   position: absolute;
   background: $dashboard-background;
   width: 100%;
-	margin-top: $menu-height;
   min-height: 100vh;
+	top: $menu-height;
 }
 
 .dashboard-nav-top {
   height: 100px;
   width: 100%;
   border-bottom: 2px solid #E3ECF0;
+	padding-left: 25px;
   z-index: 500;
   background: $dashboard-background;
   position: fixed;

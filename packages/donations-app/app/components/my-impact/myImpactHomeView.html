@@ -1,5 +1,5 @@
+<div class="navbar-background"></div>
 <section class="dashboard-page page" ng-controller="MyImpactController as dashCtrl">
-
   <div ng-hide="dashCtrl.auth.getLoggedUser()">
     Please log in to view the content.
   </div>
@@ -12,28 +12,36 @@
   <div ng-if="dashCtrl.auth.isManager()" class="dashboard-content">
 
     <!-- Charity -->
-    <div ng-if="dashCtrl.auth.isManager() && !dashCtrl.auth.isSuperadmin()" class="col-lg-12 col-md-12 dashboard-nav-top">
-      <div class="dashboard-image col-lg-1 col-md-1 col-xs-1">
-        <img class="dashboard-image-in"
-             src="{{dashCtrl.loggedUser.charityForCharityAdmin.picture}}"
-             alt="Charity image">
+    <div ng-if="dashCtrl.auth.isManager() && !dashCtrl.auth.isSuperadmin()" class="dashboard-nav-top">
+      <div class="container">
+        <div class="row no-padding">
+          <div class="dashboard-image col-lg-1 col-md-1 col-xs-1">
+            <img class="dashboard-image-in"
+                 src="{{dashCtrl.loggedUser.charityForCharityAdmin.picture}}"
+                 alt="Charity image">
+          </div>
+          <h3 class="dashboard-title col-lg-5 col-md-5">
+            {{ dashCtrl.loggedUser.charityForCharityAdmin.name }}
+          </h3>
+        </div>
       </div>
-      <h3 class="dashboard-title col-lg-5 col-md-5">
-        {{ dashCtrl.loggedUser.charityForCharityAdmin.name }}
-      </h3>
     </div>
 
     <!-- Alice -->
-    <div ng-if="dashCtrl.auth.isSuperadmin()" class="col-lg-12 col-md-12 dashboard-nav-top">
-      <h3 class="dashboard-title col-lg-5 col-md-5">
-        Hello {{ dashCtrl.auth.getLoggedUser().firstName }}
-      </h3>
+    <div ng-if="dashCtrl.auth.isSuperadmin()" class="dashboard-nav-top">
+      <div class="container">
+        <div class="row no-padding">
+          <h3 class="dashboard-title col-lg-5 col-md-5" style="padding-left: 25px;">
+            Hello {{ dashCtrl.auth.getLoggedUser().firstName }}
+          </h3>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- Individual dashboard -->
   <div class="container">
-    <div class="row" style="padding-top: 100px;">
+    <div class="row" style="padding: 100px 25px 0 25px;">
       <div class="col-sm-12">
         <h1>My Impact</h1>
 

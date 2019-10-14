@@ -4,11 +4,19 @@
     height: $menu-height;
     position: fixed;
     z-index: 1000;
-    width: 100%;
-    padding: 12px 50px 10px 100px !important;
+    width: 1220px;
+    padding: 10px 80px 10px 45px !important;
     background: rgba(0,0,0,0);
     color: #000;
     @include transition(0.5s, all, ease-out);
+}
+
+.navbar-background {
+	height: $menu-height;
+	width: 100vw;
+	position: fixed;
+	z-index: 500;
+	background: $alice-blue !important;
 }
 
 .navbar-hide {
@@ -20,10 +28,6 @@
   z-index: 900;
   color: #000;
   width: 100%;
-}
-
-.navbar-coloured {
-  background: $alice-blue !important;
 }
 
 #menu-sign-up {
@@ -40,7 +44,7 @@
 
 .alice-logo img{
     margin: 25px 20px 0 -20px;
-    height: 45px;
+    height: 44px;
     width: auto;
 }
 
@@ -144,7 +148,8 @@ ul.menu-right li {
 .landing-page {
   .menu-item a {
     font-size: 20px;
-    font-weight: 200;
+    font-weight: 300;
+		line-height: 30px;
     color: #fff;
     margin: 0 21.5px;
   }
@@ -249,8 +254,8 @@ span.divider {
   }
 
   .menu-top {
-      height: 40px;
-      width: 100%;
+    height: 40px;
+    width: 100%;
   }
 }
 

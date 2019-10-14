@@ -42,10 +42,13 @@
      }
    }
 
-   &__container-title {
+   &__card-container {
      position: absolute;
-     top: 140px;
-     left: 7vw;
+     width: 100%;
+   }
+
+   &__container-title {
+     position: relative;
      width: 490px;
    }
 
@@ -140,10 +143,10 @@
     &__back-to-projects-link {
       color: white;
       position: absolute;
-      top: 110px;
+      top: -30px;
       z-index: 1000;
-      left: 7vw;
-      // cursor: pointer;
+      left: 0;
+      cursor: pointer;
     }
 
     &__back-to-projects-link:hover {
@@ -226,7 +229,7 @@
     &__container-title {
       @include box-shadow(0, 1px, 3px, rgba(0,0,0,0.4));
       width: 86vw;
-      top: 190px;
+      top: -80px;
     }
 
     &__progress {
@@ -257,7 +260,8 @@
     }
 
     &__container-title {
-      width: 80%;
+      width: 85%;
+      left: 22px;
     }
 
     &__progress-section {
@@ -286,10 +290,6 @@
   .splash-v3 {
     h3 {
       font-size: 20px;
-    }
-
-    &__container-title {
-      left: 30px;
     }
 
     a {
@@ -340,6 +340,13 @@
     &-amount {
       font-size: 14px !important;
     }
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .splash-v3__card-container {
+    top: 140px;
+    left: 25px;
   }
 }
 
