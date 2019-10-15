@@ -27,12 +27,8 @@
             {{impactCtrl.project.unitsHelpedWithUserDonations}}
           </h3>
           <p class="my-impact__overview-section-value-postfix">
-            <span ng-if="impactCtrl.project.unitsHelpedWithUserDonations == 1">
-              {{ impactCtrl.project.typeOfBeneficiary | lowercase | singular }}
-            </span>
-
-            <span ng-if="impactCtrl.project.unitsHelpedWithUserDonations != 1">
-              {{ impactCtrl.project.typeOfBeneficiary | lowercase }}
+            <span>
+              {{ impactCtrl.project.typeOfBeneficiary | lowercase | pluralize:impactCtrl.project.unitsHelpedWithUserDonations }}
             </span>
           </p>
         </div>

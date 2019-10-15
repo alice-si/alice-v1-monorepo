@@ -18,9 +18,9 @@ angular.module('aliceApp')
 
         vm.latest = findLatestActivity(vm.projectWithDonations[0].donations,
           vm.projectWithDonations[0].validations);
-        if(vm.latest) {
-          $scope.setXAxis('week');
-        }
+        // if(vm.latest) {
+        //   $scope.setXAxis('week');
+        // }
 
         if(vm.projectWithDonations) {
           vm.upfrontPayment = vm.projectWithDonations[0].upfrontPayment;
@@ -36,6 +36,8 @@ angular.module('aliceApp')
               vm.donationsGraphData[1].push({ x: donation.x, y: (donation.y * factor) });
             });
           }
+
+          vm.donationsGraphDataFull = vm.donationsGraphData;
 
           // Turn validation/donation amounts to £ prices
           vm.totalValidated = vm.projectWithDonations[0].validations.reduce((acc, e) => {
@@ -58,6 +60,8 @@ angular.module('aliceApp')
           });
           vm.users = calculateReceivedForUsers(vm.users);
           vm.totalItems = vm.users.length;
+
+          updateGraphDateRange('year');
         }
       });
     }
@@ -270,12 +274,8 @@ angular.module('aliceApp')
       }
     })
 
-    $scope.setXAxis = function(option) {
-        $scope.axis = option;
-        getLabelsForAxis(option);
-    };
-
-    function getLabelsForAxis(option) {
+    function updateGraphDateRange(option) {
+      $scope.axis = option;
       switch (option) {
         case 'week':
           getDaysInWeek(vm.latest);
@@ -291,6 +291,8 @@ angular.module('aliceApp')
       }
     }
 
+    $scope.updateGraphDateRange = updateGraphDateRange;
+
     function findLatestActivity(donations, validations) {
       let latestDonation = donations.length > 0 ? Date.parse(_.last(donations).createdAt) : 0;
       let latestValidation = validations.length > 0 ? Date.parse(_.last(validations).createdAt) : 0;
@@ -304,6 +306,7 @@ angular.module('aliceApp')
       var dates = [];
       var startDate = new Date(moment(latestDate).subtract(3, 'days'));
       var endDate = new Date(moment(latestDate).add(4, 'days'));
+      updateGraphData(startDate, endDate);
       while(startDate < endDate){
         dates.push(moment(startDate));
         startDate = new Date(startDate.setDate(startDate.getDate() + 1));
@@ -317,6 +320,7 @@ angular.module('aliceApp')
       var startDate = new Date(moment(latestDate).subtract(15, 'days'));
       //Date after 15 days from today (This is the end date)
       var endDate = new Date(moment(latestDate).add(15, 'days'));
+      updateGraphData(startDate, endDate);
       //Logic for getting rest of the dates between two dates("startDate" to "endDate")
       while(startDate < endDate){
         dates.push(moment(startDate));
@@ -329,11 +333,41 @@ angular.module('aliceApp')
       var dates = [];
       let startDate = new Date(moment(latestDate).subtract(9, 'months'));
       let endDate = new Date(moment(latestDate).add(3, 'months'));
+      updateGraphData(startDate, endDate);
       while(startDate < endDate){
         dates.push(moment(startDate));
         startDate = new Date(startDate.setMonth(startDate.getMonth() + 1));
       }
       $scope.dates = dates;
+    }
+
+    function updateGraphData(startDate, endDate) {
+      if (!$scope.donCtrl.donationsGraphDataFull) {
+        return;
+      }
+
+      let startTime = startDate.getTime();
+      let endTime = endDate.getTime();
+
+      let newGraphData = [];
+      for (let line of $scope.donCtrl.donationsGraphDataFull) {
+        let newLine = [];
+        for (let point of line) {
+          pointTime = new Date(point.x).getTime();
+          if (pointTime >= startTime && pointTime <= endTime) {
+            // Hack to begin at 0
+            if (newLine.length == 0) {
+              newLine.push({
+                x: moment(startDate),
+                y: 0,
+              });
+            }
+            newLine.push(point);
+          }
+        }
+        newGraphData.push(newLine);
+      }
+      $scope.donCtrl.donationsGraphData = newGraphData;
     }
 
     return vm;
