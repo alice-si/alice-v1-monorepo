@@ -274,11 +274,6 @@ angular.module('aliceApp')
       }
     })
 
-    // $scope.setXAxis = function(option) {
-    //     $scope.axis = option;
-    //     updateGraphDateRange(option);
-    // };
-
     function updateGraphDateRange(option) {
       $scope.axis = option;
       switch (option) {
