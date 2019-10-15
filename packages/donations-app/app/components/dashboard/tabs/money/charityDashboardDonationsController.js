@@ -18,9 +18,9 @@ angular.module('aliceApp')
 
         vm.latest = findLatestActivity(vm.projectWithDonations[0].donations,
           vm.projectWithDonations[0].validations);
-        if(vm.latest) {
-          $scope.setXAxis('week');
-        }
+        // if(vm.latest) {
+        //   $scope.setXAxis('week');
+        // }
 
         if(vm.projectWithDonations) {
           vm.upfrontPayment = vm.projectWithDonations[0].upfrontPayment;
@@ -38,7 +38,6 @@ angular.module('aliceApp')
           }
 
           vm.donationsGraphDataFull = vm.donationsGraphData;
-          getLabelsForAxis('year');
 
           // Turn validation/donation amounts to £ prices
           vm.totalValidated = vm.projectWithDonations[0].validations.reduce((acc, e) => {
@@ -61,6 +60,8 @@ angular.module('aliceApp')
           });
           vm.users = calculateReceivedForUsers(vm.users);
           vm.totalItems = vm.users.length;
+
+          updateGraphDateRange('year');
         }
       });
     }
@@ -273,12 +274,13 @@ angular.module('aliceApp')
       }
     })
 
-    $scope.setXAxis = function(option) {
-        $scope.axis = option;
-        getLabelsForAxis(option);
-    };
+    // $scope.setXAxis = function(option) {
+    //     $scope.axis = option;
+    //     updateGraphDateRange(option);
+    // };
 
-    function getLabelsForAxis(option) {
+    function updateGraphDateRange(option) {
+      $scope.axis = option;
       switch (option) {
         case 'week':
           getDaysInWeek(vm.latest);
@@ -293,6 +295,8 @@ angular.module('aliceApp')
           getDaysInWeek(vm.latest);
       }
     }
+
+    $scope.updateGraphDateRange = updateGraphDateRange;
 
     function findLatestActivity(donations, validations) {
       let latestDonation = donations.length > 0 ? Date.parse(_.last(donations).createdAt) : 0;
@@ -355,7 +359,7 @@ angular.module('aliceApp')
         let newLine = [];
         for (let point of line) {
           pointTime = new Date(point.x).getTime();
-          if (pointTime >= startTime) {
+          if (pointTime >= startTime && pointTime <= endTime) {
             // Hack to begin at 0
             if (newLine.length == 0) {
               newLine.push({
