@@ -129,4 +129,13 @@ angular.module('aliceApp')
                 </story-card>
               </div>`
   }
+})
+.directive('projectCard', function () {
+  return {
+    scope: {
+      link: '=',
+      project: '=',
+    },
+    templateUrl: '/components/global/projectCard.html',
+  };
 });

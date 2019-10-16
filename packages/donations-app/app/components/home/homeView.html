@@ -90,11 +90,17 @@
        </h3>
      </div>
      <div class="row">
-         <homepage-project-card ng-repeat="project in homeCtrl.projects"
+       <!-- TODO alex remove after tests -->
+         <!-- <homepage-project-card ng-repeat="project in homeCtrl.projects"
                                 ng-if="project.status == 'ACTIVE' && !project.code.includes('mock')"
                                 project="project"
                                 dashboard="'project'">
-         </homepage-project-card>
+         </homepage-project-card> -->
+         <div class="col-sm-12 col-md-6 col-lg-4 home-project-card"
+             ng-repeat="project in homeCtrl.projects"
+             ng-if="project.status == 'ACTIVE' && !project.code.includes('mock')">
+            <project-card project="project" link="'project'" />
+        </div>
      </div>
    </section>
 
@@ -106,11 +112,18 @@
        </h3>
      </div>
      <div class="row">
-         <homepage-project-card ng-repeat="project in homeCtrl.projects"
+       <!-- TODO alex remove after tests -->
+         <!-- <homepage-project-card ng-repeat="project in homeCtrl.projects"
                                 ng-if="project.status == 'FINISHED' && !project.code.includes('mock')"
                                 project="project"
                                 dashboard="'project'">
-         </homepage-project-card>
+         </homepage-project-card> -->
+        <div class="col-sm-12 col-md-6 col-lg-4 home-project-card"
+             ng-repeat="project in homeCtrl.projects"
+             ng-if="project.status == 'FINISHED' && !project.code.includes('mock')">
+            <project-card project="project" link="'project'" />
+        </div>
+         
      </div>
    </section>
 

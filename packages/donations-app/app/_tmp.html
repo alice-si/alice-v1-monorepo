@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Donate, grant, invest in social projects & track what is achieved with your money. Alice is the blockchain standard of social funding and impact management.">
+    <meta name="author" content="">
+    <meta property="lastCommitId" content="43e29f04c60b08f2abdbfa6340b483af0f8e9243">
+    <meta property="og:url" content="https://donationsapp.alice.si/">
+    <meta property="og:title" content="Transparent Social Impact">
+    <meta property="og:description" content="A new transparent way to donate. Track your impact.">
+    <meta property="og:image" content="https://s3.eu-west-2.amazonaws.com/alice-res/butterfly3.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@raph_alice">
+    <meta name="twitter:title" content="Transparent Social Impact">
+    <meta name="twitter:description" content="A new transparent way to donate. Track your impact.">
+    <meta name="twitter:image" content="https://s3.eu-west-2.amazonaws.com/alice-res/butterfly3.jpg">
+    <meta name="google-site-verification" content="UNe-V9nEiviQayivru5RtB69wFuRStfA80I_7tAPs-o">
+    <title>Alice</title>
+    <link rel="shortcut icon" type="image/png" href="https://s3.eu-west-2.amazonaws.com/alice-res/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/3.2.0/ng-tags-input.min.css">
+    <link rel="stylesheet" href="https://s3.eu-west-2.amazonaws.com/alice-res/iCheck/minimal/blue.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600&display=swap" rel="stylesheet">
+    <script>
+        (function(h, o, t, j, a, r) {
+            var hotjarLoadingStarted = false;
+
+            h.hj = h.hj || function() {
+                (h.hj.q = h.hj.q || []).push(arguments)
+            };
+            if (location.href.indexOf('donationsapp.alice.si') != -1) {
+                hotjarLoadingStarted = true;
+                console.log('Hotjar loading started on production');
+                h._hjSettings = {
+                    hjid: 1481120,
+                    hjsv: 6
+                };
+            } else if (location.href.indexOf('stage.alice.si') != -1) {
+                hotjarLoadingStarted = true;
+                console.log('Hotjar loading started on stage');
+                h._hjSettings = {
+                    hjid: 1451891,
+                    hjsv: 6
+                };
+            }
+
+            if (hotjarLoadingStarted) {
+                a = o.getElementsByTagName('head')[0];
+                r = o.createElement('script');
+                r.async = 1;
+                r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+                a.appendChild(r);
+            }
+        })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
+    </script>
+    <script>
+        (function() {
+            var timer = setInterval(function() {
+                if (document.querySelectorAll('[data-src]').length > 0) {
+                    // clearInterval(timer);
+                    $('.lazy').Lazy({
+                        effect: 'fadeIn',
+                        scrollDirection: 'vertical',
+                        effectTime: 1000,
+                        visibleOnly: true
+                    });
+                }
+            }, 500)
+        })();
+    </script>
+    <link rel="stylesheet" href="/angular-toastr.css">
+    <link rel="stylesheet" href="/animate.css">
+    <link rel="stylesheet" href="/carousel.css">
+    <link rel="stylesheet" href="/dai.css">
+    <link rel="stylesheet" href="/loading.css">
+    <link rel="stylesheet" href="/owl.carousel.css">
+    <link rel="stylesheet" href="/owl.theme.default.css">
+    <link rel="stylesheet" href="/skin-blue.min.css">
+    <link rel="stylesheet" href="/spinner.css">
+    <link rel="stylesheet" href="/table.css">
+    <link rel="stylesheet" href="/tabs.css">
+    <link rel="stylesheet" href="/users.css">
+    <link rel="stylesheet" href="/validator-dash.css">
+    <link rel="stylesheet" href="/sass/main.css">
+    <script>
+        // Loading drift only on production
+        // Don't load drift when we just open authentication modal (oauth2)
+
+        // Drift temporary disabled
+        // if (location.href.indexOf('donationsapp.alice.si') != -1 && location.href.indexOf('/oauth2') == -1) {
+        //   !function () {
+        //     var t;
+        //     if (t = window.driftt = window.drift = window.driftt || [], !t.init) return t.invoked ? void (window.console && console.error && console.error("Drift snippet included twice.")) : (t.invoked = !0,
+        //       t.methods = ["identify", "config", "track", "reset", "debug", "show", "ping", "page", "hide", "off", "on"],
+        //       t.factory = function (e) {
+        //         return function () {
+        //           var n;
+        //           return n = Array.prototype.slice.call(arguments), n.unshift(e), t.push(n), t;
+        //         };
+        //       }, t.methods.forEach(function (e) {
+        //       t[e] = t.factory(e);
+        //     }), t.load = function (t) {
+        //       var e, n, o, i;
+        //       e = 3e5, i = Math.ceil(new Date() / e) * e, o = document.createElement("script"),
+        //         o.type = "text/javascript", o.async = !0, o.crossorigin = "anonymous", o.src = "https://js.driftt.com/include/" + i + "/" + t + ".js",
+        //         n = document.getElementsByTagName("script")[0], n.parentNode.insertBefore(o, n);
+        //     });
+        //   }();
+        //   drift.SNIPPET_VERSION = '0.3.1';
+        //   drift.load('t7u5cine4z89');
+        // }
+    </script>
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-101492075-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+</head>
+
+<body id="page-top" class="landing-page" ng-app="aliceApp">
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MB3MZ2Z" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <menu-header></menu-header>
+    <div ui-view></div>
+    <div cookie-consent></div>
+    <script src="/scripts/vendor-min.js"></script>
+    <script src="/scripts/app-min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/1.1.1/angular-chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
+    <script>
+        function getVersion() {
+            let metas = document.getElementsByTagName('meta');
+            for (var i = 0; i < metas.length; i++) {
+                if (metas[i].getAttribute("property") == "lastCommitId") {
+                    return metas[i].getAttribute("content");
+                }
+            }
+            console.log("Was not able to get version :(");
+        }
+    </script>
+</body>
+
+</html>

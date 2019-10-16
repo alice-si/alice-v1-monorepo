@@ -63,15 +63,16 @@ angular.module('aliceApp')
 
     return vm;
   }])
-  .directive('dashboardProjectCard', () => {
-    return {
-      scope: {
-        dashboard: '=',
-        project: '=',
-      },
-      templateUrl: '/components/global/projectCard.html',
-    };
-  })
+  // TODO alex remove after tests
+  // .directive('dashboardProjectCard', () => {
+  //   return {
+  //     scope: {
+  //       dashboard: '=',
+  //       project: '=',
+  //     },
+  //     templateUrl: '/components/global/projectCard.html',
+  //   };
+  // })
   .directive('dashboardDonations', function() {
     return {
       scope: {
