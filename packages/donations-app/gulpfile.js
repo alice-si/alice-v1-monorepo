@@ -18,6 +18,10 @@ const defaultHtmlhintOptions = {
   "doctype-first": false
 };
 
+// set to true if you want to test minified js and css
+// then just use gulp watch-local as usually
+const alwaysMinifiedAndUglified = false;
+
 let paths = {
   scripts: ["app/components/**/*.js", "app/app.js"],
   styles: ["./app/styles/**/*.css", "./app/styles/**/*.scss"],
@@ -33,7 +37,7 @@ let paths = {
   },
   getEnvConfPath: function () {
     return "app/env/" + this.env + "-config.js";
-  }
+  },
 };
 let lastCommitId, projects;
 
@@ -82,12 +86,20 @@ gulp.task("watch-local", ["set-local-env", "clean-build-frontend-app", "validate
 
   // watch index
   gulp.watch(paths.index, function() {
+    if (alwaysMinifiedAndUglified) {
+      return pipes.builtIndexForProduction()
+        .pipe(plugins.livereload());
+    }
     return pipes.builtIndexForDevelopment()
       .pipe(plugins.livereload());
   });
 
   // watch app scripts
   gulp.watch(paths.scripts, function() {
+    if (alwaysMinifiedAndUglified) {
+      return pipes.builtAppScriptsForDevelopment()
+        .pipe(plugins.livereload());
+    }
     return pipes.builtAppScriptsForDevelopment()
       .pipe(plugins.livereload());
   });
@@ -118,10 +130,10 @@ gulp.task("validate-devserver-scripts", pipes.validatedDevServerScripts);
 
 // build all statics to dist.<env> folder
 gulp.task("clean-build-frontend-app", ["get-last-commit", "get-projects", "clean-dist"], function () {
-  if (paths.env == "local" || paths.env == "dev") {
-    return pipes.builtFrontendForDevelopment();
-  } else {
+  if (paths.env == "prod" || paths.env == "stage" || alwaysMinifiedAndUglified) {
     return pipes.builtFrontendForProduction();
+  } else {
+    return pipes.builtFrontendForDevelopment();
   }
 });
 
@@ -142,7 +154,7 @@ gulp.task("get-last-commit", function(cb) {
 gulp.task("get-projects", function(cb) {
   if (paths.env == "local" || paths.env == "dev") {
     const db = config.db;
-    console.log("Using db with url to generate prject static pages: " + db);
+    console.log("Using db with url to generate project static pages: " + db);
     mongoose.connect(db, {useNewUrlParser: true});
     project.find({}).then(function(res) {
         projects = res;
@@ -153,7 +165,7 @@ gulp.task("get-projects", function(cb) {
     });
   } else { // for stage and prod fron-end publishing
     const epUrl = config.apiHostnames[paths.env] + "/api/getAllProjects";
-    console.log("Using ep to generate prject static pages: " + epUrl);
+    console.log("Using ep to generate project static pages: " + epUrl);
     request.get(epUrl).then(function (res) {
       projects = JSON.parse(res);
       console.log("Fetched projects with codes: " + projects.map(prj => prj.code));
@@ -297,14 +309,14 @@ function initPipesFunctions() {
   };
 
   pipes.orderedVendorScripts = function() {
-    return plugins.order(["jquery.js", "angular.js"]);
+    return plugins.order(["jquery.js", "bootstrap.js", "angular.js"]);
   };
 
   pipes.validatedAppScripts = function() {
     let conf = gulp.src(paths.getEnvConfPath())
       .pipe(plugins.rename("envConfig.js"));
 
-    // TODO we should remove jshint and use eslint instead
+    // return es.merge([gulp.src(paths.scripts), conf])
     return es.merge([gulp.src(paths.babelPolyfill), gulp.src(paths.scripts), conf])
       .pipe(plugins.jshint.reporter("jshint-stylish"));
   };
@@ -328,23 +340,23 @@ function initPipesFunctions() {
   pipes.builtVendorScriptsForProduction = function() {
     return gulp.src(bowerFiles("**/*.js"))
       .pipe(pipes.orderedVendorScripts())
-      .pipe(plugins.concat("vendor.min.js"))
-      .pipe(plugins.uglifyEs.default())
+      .pipe(plugins.concat("vendor.js"))
+      .pipe(plugins.minify({ noSource: true }))
       .pipe(gulp.dest(paths.getDistPath() + "/scripts"));
   };
 
-  pipes.minifiedFileName = function() {
-    return plugins.rename(function (path) {
-      path.extname = '.min' + path.extname;
-    });
-  };
+  // TODO alex remove after tests
+  // pipes.minifiedFileName = function() {
+  //   return plugins.rename(function (path) {
+  //     path.extname = '.min' + path.extname;
+  //   });
+  // };
 
   pipes.builtVendorStylesForProduction = function() {
     return gulp.src(bowerFiles("**/*.css"))
       .pipe(plugins.sourcemaps.init())
       .pipe(plugins.cleanCss())
       .pipe(plugins.sourcemaps.write())
-      .pipe(pipes.minifiedFileName())
       .pipe(gulp.dest(paths.getDistPath()));
   };
 
@@ -371,8 +383,8 @@ function initPipesFunctions() {
       .pipe(pipes.orderedAppScripts())
       .pipe(plugins.sourcemaps.init())
       .pipe(plugins.babel({presets: ['@babel/env']}))
-      .pipe(plugins.concat('app.min.js'))
-      .pipe(plugins.uglifyEs.default())
+      .pipe(plugins.concat('app.js'))
+      .pipe(plugins.minify({ noSource: true }))
       .pipe(plugins.sourcemaps.write())
       .pipe(gulp.dest(paths.getDistPath() + "/scripts"));
   };
@@ -383,7 +395,6 @@ function initPipesFunctions() {
       .pipe(plugins.sass())
       .pipe(plugins.cleanCss())
       .pipe(plugins.sourcemaps.write())
-      .pipe(pipes.minifiedFileName())
       .pipe(gulp.dest(paths.getDistPath()));
   };
 
