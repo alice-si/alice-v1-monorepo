@@ -1,6 +1,12 @@
-<div class="home-project-card no-padding">
+<div class="project-small-card no-padding">
   <a href="/{{link}}/{{project.code}}">
-    <img class="project-card-image lazy" data-src="{{project.img}}" />
+    <img
+      class="
+        project-card-image
+        lazy
+        with-object-fit-cover"
+      data-src="{{project.img}}"
+      alt="{{project.code}}-project-image" />
     <h6 class="uppercase alice-grey">Run by: {{ project.charity.name }}</h6>
     <h4 class="alice-dark-text">{{ project.title }}</h4>
   </a>

@@ -135,9 +135,13 @@
      </div>
      <div class="row home-charity-container">
        <div class="col-md-2 col-sm-4 col-xs-6"
-            ng-repeat="charity in homeCtrl.charities | limitTo: 6">
+            ng-repeat="charity in homeCtrl.charities | limitTo: 6"
+            ng-if="!charity.code.includes('mock')">
             <div class="home-charity">
-              <img src="{{charity.picture}}" class="home-charity-picture">
+              <img
+                data-src="{{charity.picture}}"
+                alt="{{ charity.code }}-charity-logo"
+                class="home-charity-picture lazy">
             </div>
        </div>
      </div>

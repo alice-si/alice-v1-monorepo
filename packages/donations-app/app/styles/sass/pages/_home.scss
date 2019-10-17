@@ -41,32 +41,6 @@
    }
  }
 
-
-
-.home-project-card {
-  min-height: 400px;
-  height: auto;
-  padding: 0 25px 10px 0;
-  @include transition(0.2s, all, ease-out);
-
-  &:hover {
-    padding: 0 28px 10px 3px;
-  }
-
-  .project-card-image {
-    width: 100%;
-    height: 200px;
-    background-position: center !important;
-    background-size: cover !important;
-    @include transition(0.2s, all, ease-out);
-    border-radius: 4px;
-
-    &.zoom-in {
-      transform: scale(1.3);
-    }
-  }
-}
-
 .home-charity {
   height: 150px;
   margin-bottom: 15px;
@@ -175,10 +149,6 @@
   h4 {
     font-size: 16px;
     line-height: 20px;
-  }
-
-  .home-project-card {
-    min-height: 240px;
   }
 }
 
