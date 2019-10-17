@@ -136,6 +136,14 @@ angular.module('aliceApp')
       link: '=',
       project: '=',
     },
+    link: function (scope) {
+      scope.isInternetExplorer = function () {
+        let ua = window.navigator.userAgent;
+        let oldIE = ua.indexOf('MSIE ');
+        let newIE = ua.indexOf('Trident/');
+        return (oldIE > -1) || (newIE > -1);
+      };
+    },
     templateUrl: '/components/global/projectCard.html',
   };
 });
