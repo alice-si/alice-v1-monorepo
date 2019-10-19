@@ -14,11 +14,8 @@
               {{ outcome.helpedWithUserDonations }}
             </span>
 
-            <span ng-if="outcome.helpedWithUserDonations == 1">
-              {{ projectUnit | lowercase | singular }}
-            </span>
-            <span ng-if="outcome.helpedWithUserDonations != 1">
-              {{ projectUnit | lowercase }}
+            <span>
+              {{ projectUnit | lowercase | pluralize:outcome.helpedWithUserDonations }}
             </span>
 
             complete this goal
