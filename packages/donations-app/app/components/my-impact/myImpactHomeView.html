@@ -10,33 +10,7 @@
 
   <!-- Project Managers -->
   <div ng-if="dashCtrl.auth.isManager()" class="dashboard-content">
-
-    <!-- Charity -->
-    <div ng-if="dashCtrl.auth.isManager() && !dashCtrl.auth.isSuperadmin()" class="dashboard-nav-top">
-      <div class="container">
-        <div class="row no-padding">
-          <div class="dashboard-image col-lg-1 col-md-1 col-xs-1">
-            <img class="dashboard-image-in"
-                 src="{{dashCtrl.loggedUser.charityForCharityAdmin.picture}}"
-                 alt="Charity image">
-          </div>
-          <h3 class="dashboard-title col-lg-5 col-md-5">
-            {{ dashCtrl.loggedUser.charityForCharityAdmin.name }}
-          </h3>
-        </div>
-      </div>
-    </div>
-
-    <!-- Alice -->
-    <div ng-if="dashCtrl.auth.isSuperadmin()" class="dashboard-nav-top">
-      <div class="container">
-        <div class="row no-padding">
-          <h3 class="dashboard-title col-lg-5 col-md-5" style="padding-left: 25px;">
-            Hello {{ dashCtrl.auth.getLoggedUser().firstName }}
-          </h3>
-        </div>
-      </div>
-    </div>
+    <dashboard-header details=""></dashboard-header>
   </div>
 
   <!-- Individual dashboard -->
@@ -57,7 +31,7 @@
     </div>
 
     <div class="row"
-         style="margin-top: 20px;"
+         style="margin: 20px 10px;"
          ng-if="dashCtrl.projectsForMain.length > 0">
       <div ng-repeat="project in dashCtrl.projectsForMain"
            class="col-sm-12 col-md-6 col-lg-4">

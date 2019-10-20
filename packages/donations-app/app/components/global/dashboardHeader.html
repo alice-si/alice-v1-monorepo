@@ -1,0 +1,32 @@
+<!-- Charity -->
+<div ng-if="details" class="dashboard-nav-top">
+  <div class="container">
+    <div class="row no-padding">
+      <div class="dashboard-image col-lg-1 col-md-1 col-xs-1">
+        <img class="dashboard-image-in"
+             src="{{details.charity.picture}}"
+             alt="Charity image">
+      </div>
+      <h3 class="dashboard-title col-lg-5 col-md-5">
+        {{ details.charity.name }}
+      </h3>
+    </div>
+  </div>
+</div>
+
+<!-- Alice -->
+<div ng-if="!details" class="dashboard-nav-top">
+  <div class="container">
+    <div class="row no-padding">
+      <div class="dashboard-image col-lg-1 col-md-1 col-xs-12">
+        <img class="dashboard-image-in"
+             src="https://s3.eu-west-2.amazonaws.com/alice-res/AliceLogoOnly.png"
+             style="height: 40px; width: auto;"
+             alt="">
+      </div>
+      <h3 class="dashboard-title col-lg-5 col-md-5">
+        Hello, {{ barCtrl.auth.getLoggedFullName() }}
+      </h3>
+    </div>
+  </div>
+</div>

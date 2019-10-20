@@ -122,7 +122,6 @@ angular.module('aliceApp')
         return `${ETHERSCAN}/address/${vm.project.ethAddresses.project}`;
       }
     };
-
     return vm;
   }]);
 

@@ -1,11 +1,7 @@
+<div class="navbar-background"></div>
 <section ng-controller="CharityDashboardController as dashCtrl"
-         class="goals-dash dashboard-background">
-
-  <splash
-    show-appeal-page-link="true"
-    back-to-projects-link="/charity-dashboard/"
-    project="dashCtrl.projectDetails" />
-
+         class="dashboard-page page">
+    <dashboard-header details="dashCtrl.projectDetails"/>
     <loading-screen ng-if="!dataLoaded"></loading-screen>
     <div class="container"
          ng-if="dataLoaded">
@@ -13,11 +9,12 @@
         <div class="col-xs-12">
           <h3 class="goals-dash__greeting">
             Hi {{ dashCtrl.loggedUser.firstName }}
-            <span><p style="margin: 2px 0 0 5px;">
-              <ng-pluralize count="dashCtrl.totalGoalsAchieved"
+            <span><p style="margin: 2px 0 0 5px;" class="alice-tonal-medium">
+              {{ dashCtrl.projectWithDonations[0].validations.length }}
+              <ng-pluralize count="dashCtrl.projectWithDonations[0].validations.length"
                             when="{'0': '- No goals have been validated yet',
-                                   '1': '- We have achieved 1 goal',
-                                   'other': '- We have achieved {} goals'}">
+                                   '1': '- You have validated 1 goal',
+                                   'other': '- You have validated {} goals'}">
               </ng-pluralize>
             </p></span>
           </h3>

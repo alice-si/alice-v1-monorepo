@@ -465,4 +465,18 @@ angular.module('aliceApp')
       }],
       templateUrl: '/components/global/aliceDataTable.html'
     };
+  })
+  .directive('dashboardHeader', function () {
+    return {
+      scope: {
+        details: '=',
+      },
+      controller: ['$scope', 'AuthService', function ($scope, AuthService) {
+        var vm = this;
+        vm.auth = AuthService;
+        return vm
+      }],
+      controllerAs: 'barCtrl',
+      templateUrl: '/components/global/dashboardHeader.html',
+    }
   });
