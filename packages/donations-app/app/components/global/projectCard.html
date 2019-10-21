@@ -1,8 +1,19 @@
-<div class="home-project-card no-padding">
-  <a href="/{{dashboard}}/{{project.code}}">
-    <div class="project-card-image"
-         style="background: url('{{project.img}}');">
-    </div>
+<div class="project-small-card no-padding">
+  <a href="/{{link}}/{{project.code}}">
+    <img
+      ng-if="!isInternetExplorer()"
+      class="
+        project-card-image
+        lazy
+        with-object-fit-cover"
+      data-src="{{project.img}}"
+      alt="{{project.code}}-project-image" />
+
+      <div
+        ng-if="isInternetExplorer()"
+        class="project-card-image"
+        style="background: url('{{project.img}}');" >
+      </div>
     <h6 class="uppercase alice-grey">Run by: {{ project.charity.name }}</h6>
     <h4 class="alice-dark-text">{{ project.title }}</h4>
   </a>

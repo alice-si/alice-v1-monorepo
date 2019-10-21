@@ -44,6 +44,7 @@
     "gulp-jshint": "^2.1.0",
     "gulp-livereload": "^3.8.1",
     "gulp-load-plugins": "^0.8.0",
+    "gulp-minify": "^3.1.0",
     "gulp-mustache": "^4.0.0",
     "gulp-ng-html2js": "^0.2.2",
     "gulp-nodemon": "^1.0.5",

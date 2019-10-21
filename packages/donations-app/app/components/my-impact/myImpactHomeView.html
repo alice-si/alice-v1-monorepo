@@ -53,9 +53,7 @@
          ng-if="dashCtrl.projectsForMain.length > 0">
       <div ng-repeat="project in dashCtrl.projectsForMain"
            class="col-sm-12 col-md-6 col-lg-4">
-        <dashboard-project-card dashboard="dashCtrl.dashboardType"
-                                project="project">
-        </dashboard-project-card>
+        <project-card link="dashCtrl.dashboardType" project="project" />
       </div>
     </div>
   </div>
