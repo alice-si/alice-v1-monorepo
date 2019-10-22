@@ -112,7 +112,7 @@
 
  .splash-v3 {
     .header-image {
-      height: 615px;
+      height: 635px;
     }
 
     &__progress {
@@ -343,12 +343,19 @@
   }
 }
 
-@media screen and (min-width: 990px) {
+@media screen and (min-width: 720px) {
   .splash-v3__card-container {
     top: 140px;
     left: 25px;
   }
 }
+
+// @media screen and (min-width: 990px) {
+//   .splash-v3__card-container {
+//     top: 140px;
+//     left: 25px;
+//   }
+// }
 
 .purple-grad {
   background: #894dd8;

@@ -7,7 +7,7 @@
        <!-- Desktop -->
        <div class="container hidden-xs">
          <div class="row">
-           <h1 class="white home-title">Fund social projects.<br>
+           <h1 class="white">Fund social projects.<br>
              Track your impact.</h1>
          </div>
          <div class="row">
@@ -17,14 +17,14 @@
             </p>
          </div>
          <div class="row">
-           <div class="col-md-12 hidden-xs hidden-sm no-padding">
-             <div class="form-group col-md-4 no-padding">
+           <div class="col-md-12 hidden-xs no-padding">
+             <div class="form-group col-md-4 col-sm-6 no-padding">
                <button ng-click="homeCtrl.explore()">
                  <i class="glyphicon glyphicon-chevron-right"></i>
                  EXPLORE PROJECTS
                </button>
              </div>
-             <div class="form-group col-md-4">
+             <div class="form-group col-md-4 col-sm-6">
                <button class="inverse-button"
                        ui-sref="how-it-works"
                        ng-if="homeCtrl.mode === 'prod'">
@@ -125,7 +125,7 @@
      <ul class="investors-and-media-list justify-content-around align-items-center align-content-lg-start">
         <li class="investor-and-media-item m-2"
             ng-repeat="charity in homeCtrl.charities | limitTo: 6">
-          <div class="investors-and-media-link col-md-2 col-xs-6">
+          <div class="investors-and-media-link col-md-2 col-xs-4">
             <img src="{{charity.picture}}" class="home-charity-picture" height="97" width="auto">
           </div>
         </li>

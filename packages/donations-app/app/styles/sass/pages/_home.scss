@@ -249,10 +249,10 @@
   }
 
   .home-charity {
-
     &-picture {
       max-width: 75px;
       height: auto;
+      padding: 20px 0;
     }
   }
 }
@@ -307,14 +307,32 @@
     }
   }
 
-  .investors-and-media-list {
-    margin: 0;
+  .investors-and-media {
+    &-list {
+      padding: 0;
+    }
+    &-link {
+      padding: 20px;
+    }
   }
 
   #social-organisation-list {
     padding-bottom: 50px;
   }
 
+  .home-project-card {
+    min-height: 300px;
+  }
+
+}
+
+
+@media screen and (min-width: 1200px) {
+  .header-image {
+    .container {
+      transform: translateY(145px) !important;
+    }
+  }
 }
 
 .justify-content-around {
