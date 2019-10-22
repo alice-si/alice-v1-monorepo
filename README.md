@@ -23,6 +23,8 @@ We offer public access to projects, outcomes and donations data.
 GraphQL endpoint is opened on 
   - https://api.alice.si/graphql
   - https://stage.api.alice.si/graphql
+
+
 You can check our [graphql schema](packages/donations-app/devServer/graphql/schema.graphql)
 
 #### GraphQL example queries
