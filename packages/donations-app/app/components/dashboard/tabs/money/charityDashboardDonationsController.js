@@ -18,10 +18,7 @@ angular.module('aliceApp')
 
         vm.latest = findLatestActivity(vm.projectWithDonations[0].donations,
           vm.projectWithDonations[0].validations);
-        // if(vm.latest) {
-        //   $scope.setXAxis('week');
-        // }
-
+      
         if(vm.projectWithDonations) {
           vm.upfrontPayment = vm.projectWithDonations[0].upfrontPayment;
           // Turn data to { x, y }

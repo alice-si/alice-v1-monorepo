@@ -17,7 +17,6 @@ angular.module('aliceApp')
     $http.get(API + 'getProjectsForMain').then(function (result) {
       vm.projectsForMain = result.data;
       vm.projectsForMain.forEach(project => {
-        console.log(vm.projectsForMain);
         if (project.upfrontPayment) {
           project.received += (project.donated * project.upfrontPayment / 100);
         }

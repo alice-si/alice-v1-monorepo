@@ -19,9 +19,9 @@
               <div ng-repeat="project in dashCtrl.projectsForMain
                               | filter: { status: 'ACTIVE'} "
                    class="col-sm-12 col-md-6 col-lg-4">
-                   <dashboard-project-card dashboard="dashCtrl.dashboardType"
-                                           project="project">
-                   </dashboard-project-card>
+                   <project-card link="dashCtrl.dashboardType"
+                                 project="project">
+                   </project-card>
               </div>
             </div>
           </uib-tab>
@@ -30,9 +30,9 @@
               <div ng-repeat="project in dashCtrl.projectsForMain
                               | filter: { status : 'FINISHED' } "
                    class="col-sm-12 col-md-6 col-lg-4">
-                   <dashboard-project-card dashboard="dashCtrl.dashboardType"
-                                           project="project">
-                   </dashboard-project-card>
+                   <project-card link="dashCtrl.dashboardType"
+                                 project="project">
+                   </project-card>
               </div>
             </div>
           </uib-tab>
