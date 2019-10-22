@@ -11,5 +11,5 @@ module.exports = function (app) {
   require('./controller/charity')(app);
   require('./controller/environment')(app);
   require('./controller/outcome')(app);
-
+  require('./controller/graphql')(app);
 };
