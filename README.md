@@ -50,6 +50,6 @@ You can check our [graphql schema](packages/donations-app/devServer/graphql/sche
     _id
     amount
     createdAt
-	}
+  }
 }
 ```
