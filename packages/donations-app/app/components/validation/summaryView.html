@@ -34,9 +34,8 @@
            style="margin-top: 20px">
         <div ng-repeat="project in summaryCtrl.projects"
              class="col-sm-12 col-md-6 col-lg-4">
-             <dashboard-project-card dashboard="summaryCtrl.dashboardType"
-                                     project="project">
-             </dashboard-project-card>
+             <project-card link="summaryCtrl.dashboardType"
+                           project="project" />
         </div>
       </div>
     </div>

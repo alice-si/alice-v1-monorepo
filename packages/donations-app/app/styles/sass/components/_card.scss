@@ -90,3 +90,34 @@
 .alice-card__buttons .btn {
   min-width: 130px;
 }
+
+// Project small cards styling
+.project-small-card {
+  height: auto;
+  padding: 0 25px 10px 0;
+  @include transition(0.2s, all, ease-out);
+
+  &:hover {
+    padding: 0 28px 10px 3px;
+  }
+
+  .project-card-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    @include transition(0.2s, all, ease-out);
+    border-radius: 4px;
+
+    &.zoom-in {
+      transform: scale(1.3);
+    }
+  }
+
+  // For IE
+  div.project-card-image {
+    width: 100%;
+    height: 200px;
+    background-position: center !important;
+    background-size: cover !important;
+  }
+}

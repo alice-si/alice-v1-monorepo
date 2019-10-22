@@ -353,7 +353,7 @@ angular.module('aliceApp')
       for (let line of $scope.donCtrl.donationsGraphDataFull) {
         let newLine = [];
         for (let point of line) {
-          pointTime = new Date(point.x).getTime();
+          let pointTime = new Date(point.x).getTime();
           if (pointTime >= startTime && pointTime <= endTime) {
             // Hack to begin at 0
             if (newLine.length == 0) {

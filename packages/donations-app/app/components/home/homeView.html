@@ -91,11 +91,17 @@
        </h2>
      </div>
      <div class="row">
-         <homepage-project-card ng-repeat="project in homeCtrl.projects"
+       <!-- TODO alex remove after tests -->
+         <!-- <homepage-project-card ng-repeat="project in homeCtrl.projects"
                                 ng-if="project.status == 'ACTIVE' && !project.code.includes('mock')"
                                 project="project"
                                 dashboard="'project'">
-         </homepage-project-card>
+         </homepage-project-card> -->
+         <div class="col-sm-12 col-md-6 col-lg-4 home-project-card"
+             ng-repeat="project in homeCtrl.projects"
+             ng-if="project.status == 'ACTIVE' && !project.code.includes('mock')">
+            <project-card project="project" link="'project'" />
+        </div>
      </div>
    </section>
 
@@ -107,11 +113,18 @@
        </h2>
      </div>
      <div class="row">
-         <homepage-project-card ng-repeat="project in homeCtrl.projects"
+       <!-- TODO alex remove after tests -->
+         <!-- <homepage-project-card ng-repeat="project in homeCtrl.projects"
                                 ng-if="project.status == 'FINISHED' && !project.code.includes('mock')"
                                 project="project"
                                 dashboard="'project'">
-         </homepage-project-card>
+         </homepage-project-card> -->
+        <div class="col-sm-12 col-md-6 col-lg-4 home-project-card"
+             ng-repeat="project in homeCtrl.projects"
+             ng-if="project.status == 'FINISHED' && !project.code.includes('mock')">
+            <project-card project="project" link="'project'" />
+        </div>
+
      </div>
    </section>
 
@@ -121,12 +134,11 @@
          Social organisations we work with
        </h2>
      </div>
-
      <ul class="investors-and-media-list justify-content-around align-items-center align-content-lg-start">
         <li class="investor-and-media-item m-2"
             ng-repeat="charity in homeCtrl.charities | limitTo: 6">
           <div class="investors-and-media-link col-md-2 col-xs-4">
-            <img src="{{charity.picture}}" class="home-charity-picture" height="97" width="auto">
+            <img src="{{charity.picture}}" class="home-charity-picture lazy" height="97" width="auto">
           </div>
         </li>
       </ul>
