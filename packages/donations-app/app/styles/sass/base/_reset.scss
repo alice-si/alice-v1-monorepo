@@ -173,3 +173,13 @@
     padding-left: 0 !important;
   }
 }
+
+.float {
+  &-right {
+    float: right !important;
+  }
+
+  &-left {
+    float: left !important;
+  }
+}

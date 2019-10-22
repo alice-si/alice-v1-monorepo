@@ -17,6 +17,7 @@ angular.module('aliceApp')
     $http.get(API + 'getProjectsForMain').then(function (result) {
       vm.projectsForMain = result.data;
       vm.projectsForMain.forEach(project => {
+        console.log(vm.projectsForMain);
         if (project.upfrontPayment) {
           project.received += (project.donated * project.upfrontPayment / 100);
         }
@@ -34,33 +35,6 @@ angular.module('aliceApp')
         }
       });
     });
-
-    vm.setProject = function(project, mode) {
-      if(project) {
-        vm.activeProject = project;
-        vm.setMode(mode);
-      }
-    };
-
-    vm.setMode = function(mode) {
-      if(mode !== undefined) {
-        vm.mode = modes[mode];
-      }
-    };
-
-    vm.selectProject = function(code) {
-      if(code) {
-        if(vm.projectSelected !== undefined) {
-          if(vm.projectSelected.includes(code)) {
-            vm.projectSelected.splice(vm.projectSelected.indexOf(code), 1);
-          }
-          else {
-            vm.projectSelected.push(code);
-          }
-        }
-      }
-    };
-
     return vm;
   }])
   .directive('dashboardProjectCard', () => {

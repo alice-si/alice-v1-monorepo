@@ -471,10 +471,17 @@ angular.module('aliceApp')
       scope: {
         details: '=',
       },
-      controller: ['$scope', 'AuthService', function ($scope, AuthService) {
-        var vm = this;
-        vm.auth = AuthService;
-        return vm
+      controller: ['$scope', '$state', function ($scope, $state) {
+        $scope.dashboardHome = function() {
+          var to = $state.current.url.includes('charity-dashboard');
+          if(to) {
+            $state.go('charity-dashboard');
+          }
+        }
+
+        $scope.appeal = function() {
+          $state.go("project", { projectCode: $scope.details.code });
+        }
       }],
       controllerAs: 'barCtrl',
       templateUrl: '/components/global/dashboardHeader.html',

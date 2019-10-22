@@ -10,21 +10,33 @@
 
   <!-- Project Managers -->
   <div ng-if="dashCtrl.auth.isManager()" class="dashboard-content">
-    <dashboard-header details="dashCtrl.projectsForMain[0]"/>
-
+    <dashboard-header/>
     <div class="container">
-      <div class="row" style="padding: 120px 25px 0">
-        <div class="col-sm-12">
-          <h3>Your projects</h3>
-        </div>
-      </div>
-
-      <div class="row" style="padding: 20px 25px 0">
-        <div ng-repeat="project in dashCtrl.projectsForMain"
-             class="col-sm-12 col-md-6 col-lg-4">
-             <dashboard-project-card dashboard="dashCtrl.dashboardType" project="project">
-             </dashboard-project-card>
-        </div>
+      <div class="row" style="padding: 0 25px 0">
+        <uib-tabset type="pills" class="alice-tabset goals-dash__tabset">
+          <uib-tab heading="Live Projects">
+            <div class="row">
+              <div ng-repeat="project in dashCtrl.projectsForMain
+                              | filter: { status: 'ACTIVE'} "
+                   class="col-sm-12 col-md-6 col-lg-4">
+                   <dashboard-project-card dashboard="dashCtrl.dashboardType"
+                                           project="project">
+                   </dashboard-project-card>
+              </div>
+            </div>
+          </uib-tab>
+          <uib-tab heading="Past Projects">
+            <div class="row">
+              <div ng-repeat="project in dashCtrl.projectsForMain
+                              | filter: { status : 'FINISHED' } "
+                   class="col-sm-12 col-md-6 col-lg-4">
+                   <dashboard-project-card dashboard="dashCtrl.dashboardType"
+                                           project="project">
+                   </dashboard-project-card>
+              </div>
+            </div>
+          </uib-tab>
+        </uib-tabset>
       </div>
     </div>
   </div>

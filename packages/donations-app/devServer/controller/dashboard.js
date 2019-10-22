@@ -294,7 +294,7 @@ module.exports = function (app) {
       {$addFields: {"goalsAchieved": {$size: "$validations"}}},
       addLookupToProject("impacts", "_projectId", "impacts", ["amount"]),
       {$addFields: {"received": {$sum: "$impacts.amount"}}},
-      Utils.createProjection(["donated", "title", "img", "fundingTarget", "goalsAchieved", "received", "upfrontPayment", "code", "charity"])
+      Utils.createProjection(["donated", "title", "img", "fundingTarget", "goalsAchieved", "received", "upfrontPayment", "code", "charity", "status"])
     ]);
   };
 

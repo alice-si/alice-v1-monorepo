@@ -5,22 +5,6 @@
     <loading-screen ng-if="!dataLoaded"></loading-screen>
     <div class="container"
          ng-if="dataLoaded">
-      <div class="row">
-        <div class="col-xs-12">
-          <h3 class="goals-dash__greeting">
-            Hi {{ dashCtrl.loggedUser.firstName }}
-            <span><p style="margin: 2px 0 0 5px;" class="alice-tonal-medium">
-              {{ dashCtrl.projectWithDonations[0].validations.length }}
-              <ng-pluralize count="dashCtrl.projectWithDonations[0].validations.length"
-                            when="{'0': '- No goals have been validated yet',
-                                   '1': '- You have validated 1 goal',
-                                   'other': '- You have validated {} goals'}">
-              </ng-pluralize>
-            </p></span>
-          </h3>
-        </div>
-      </div>
-
       <uib-tabset type="pills" class="alice-tabset goals-dash__tabset">
         <uib-tab heading="Money">
           <div class="row">
@@ -40,17 +24,6 @@
             </charity-dashboard-goals>
           </div>
         </uib-tab>
-        <!-- No designs for these pages, yet
-        <uib-tab disable="true" heading="People Helped">
-          <div class="row">
-            <charity-dashboard-people people="">
-            </charity-dashboard-people>
-          </div>
-        </uib-tab>-->
-        <!-- <uib-tab disable="true" heading="Performance">
-          <div class="row">
-          </div>
-        </uib-tab>  -->
       </uib-tabset>
     </div>
 
