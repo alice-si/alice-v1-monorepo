@@ -95,6 +95,7 @@
 .project-small-card {
   height: auto;
   padding: 0 25px 10px 0;
+  margin-bottom: 50px;
   @include transition(0.2s, all, ease-out);
 
   &:hover {
