@@ -1,15 +1,15 @@
 <div class="dashboard-nav-top">
   <div class="container">
     <div class="row ">
-      <h4 class="dashboard-title col-md-2 col-sm-5"
+      <h3 class="dashboard-title col-md-2 col-sm-3"
           ng-click="dashboardHome()">
         My Projects
-      </h4>
-      <h4 class="dashboard-title col-md-6"
+      </h3>
+      <h3 class="dashboard-title col-md-6 col-sm-5"
           ng-if="details">
-        <span class="dashboard-title-chevron">&#x203A;</span>{{ details.title }}
-      </h4>
-      <div class="form-group col-md-3 col-sm-5 float-right"
+        <span class="dashboard-title-chevron">&#x203A;</span>{{ details.title | smallTitle }}
+      </h3>
+      <div class="form-group col-md-3 col-sm-4 float-right"
            style="transform: translateY(10px)">
         <button class="inverse-button uppercase"
                 type="button"

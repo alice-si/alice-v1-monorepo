@@ -56,8 +56,8 @@ button {
   background-color: $alice-tonal-medium;
   color: #FFFFFF;
   border-radius: 4px;
-  letter-spacing: 2px;
-  font-size: 22px;
+  letter-spacing: 0.52px;
+  font-size: 21px;
   font-family: $source;
   font-weight: 400;
   font-stretch: normal;
@@ -91,6 +91,15 @@ button {
   }
 }
 
+.bordered {
+  border: 1px solid $alice-tonal-medium !important;
+
+  &:hover {
+     background: $alice-tonal-medium !important;
+     color: #fff !important;
+  }
+}
+
 .disabled-button {
   background-color: #CCC;
   border: none;
@@ -112,7 +121,7 @@ button {
     font-stretch: normal;
     color: #fff;
     border: none;
-    letter-spacing: 1px;
+    letter-spacing: 0.52px;
     @include box-shadow(0, 0, 2px, rgba(0, 0, 0, 0.23));
     outline: none;
   }

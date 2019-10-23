@@ -13,7 +13,7 @@
          style="margin-top: 20px;">
     <tr>
       <td><p>Name<sort action="donCtrl.sort" field="fullName" style="margin-left: 10px;"></sort></p></td>
-      <td><p>Email<sort action="donCtrl.sort" field="email" style="margin-left: 10px;"></sort></p></td>
+      <td class="hidden-sm"><p>Email<sort action="donCtrl.sort" field="email" style="margin-left: 10px;"></sort></p></td>
       <td><p>Donated<sort action="donCtrl.sort" field="donated" style="margin-left: 10px;"></sort></p></td>
       <td><p>Date<sort action="donCtrl.sort" field="date" style="margin-left: 10px;"></sort></p></td>
       <td><p>Received <br>Upfront ({{ donCtrl.upfrontPayment }}%)<sort action="donCtrl.sort" field="receivedUpfront" style="margin-left: 10px;"></sort></p></td>
@@ -28,7 +28,7 @@
                    | offset: (currentPage - 1) * itemsPerPage | limitTo:itemsPerPage"
         class="donation-row">
         <td>{{donation.fullName}}</td>
-        <td>{{donation.email}}</td>
+        <td class="hidden-sm">{{donation.email}}</td>
         <td>{{donation.donated | money}}</td>
         <td>{{donation.date | date}}</td>
         <td>{{donation.receivedUpfront | money : '0'}}</td>

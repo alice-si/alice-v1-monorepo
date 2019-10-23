@@ -15,7 +15,6 @@
       <div class="row" style="padding: 0 25px 0">
         <uib-tabset type="pills" class="alice-tabset goals-dash__tabset">
           <uib-tab heading="Live Projects">
-            <div class="row">
               <div ng-repeat="project in dashCtrl.projectsForMain
                               | filter: { status: 'ACTIVE'} "
                    class="col-sm-12 col-md-6 col-lg-4">
@@ -23,7 +22,6 @@
                                  project="project">
                    </project-card>
               </div>
-            </div>
           </uib-tab>
           <uib-tab heading="Past Projects">
             <div class="row">
