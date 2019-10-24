@@ -32,6 +32,8 @@ async function getProjects(filters) {
     { $unwind: "$charity" },
     { $project: {
         "charity": "$charity.name",
+        "description": "$project",
+        "contractEthAddress": "$ethAddresses.project",
         "code": 1,
         "title": 1,
         "_outcomes": 1,

@@ -6,11 +6,13 @@ type Query {
 
 type Project {
   code: ID!
+  description: String
   title: String
   _outcomes: [Outcome!]
   charity: String
   validator: String
   status: String
+  contractEthAddress: String
 }
 
 type Outcome {
