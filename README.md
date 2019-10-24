@@ -18,3 +18,42 @@ After you have cloned the repo, you should install dependencies with
 
 Then, navigate to the project of interest and follow the instructions in
 its README file.
+
+
+## GraphQL API
+We offer public access to projects, outcomes and donations data.
+GraphQL endpoint is opened on 
+  - https://api.alice.si/graphql
+  - https://stage.api.alice.si/graphql
+
+
+You can check our [graphql schema](packages/donations-app/devServer/graphql/schema.graphql)
+
+#### GraphQL example queries
+```graphql
+# It queries all available data about projects
+{
+  allProjects {
+    code
+    title
+    charity
+    validator
+    status
+    _outcomes {
+      _id
+      title
+      description
+      costPerUnit
+    }
+  }
+}
+
+# It queries donations for the selected project
+{
+  getDonations(projectCode: "save-from-abuse") {
+    _id
+    amount
+    createdAt
+  }
+}
+```

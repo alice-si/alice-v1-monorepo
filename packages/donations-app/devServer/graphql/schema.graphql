@@ -1,0 +1,30 @@
+type Query {
+  allProjects: [Project!]
+  getProject(code: String): Project
+  getDonations(projectCode: String): [Donation!]
+}
+
+type Project {
+  code: ID!
+  description: String
+  title: String
+  _outcomes: [Outcome!]
+  charity: String
+  validator: String
+  status: String
+  contractEthAddress: String
+}
+
+type Outcome {
+  _id: ID!
+  title: String
+  description: String
+  costPerUnit: Int
+  # completion: Int
+}
+
+type Donation {
+  _id: ID!
+  amount: Int
+  createdAt: String
+}
