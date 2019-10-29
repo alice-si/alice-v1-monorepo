@@ -12,6 +12,7 @@ const moment = require('moment');
 const helmet = require('helmet');
 const expressSanitized = require('express-sanitize-escape');
 const configValidator = require('./tools/config-validator');
+const cors = require('cors');
 
 var port = process.env.PORT || 8080; // set our port
 var config = require('./config');
@@ -60,12 +61,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // parse application/x-www-f
 // app.use(expressSanitized.middleware({encoder: false})); // sanitize all requests to avoid xss attack <- it sanitizes req.body and req.query
 app.use(methodOverride('X-HTTP-Method-Override')); // override with the X-HTTP-Method-Override header in the request. simulate DELETE/PUT
 
-//CORS
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-  next();
-});
+app.use(cors());
 
 //log to console
 morgan.token('date', function() {
