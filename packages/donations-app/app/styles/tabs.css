@@ -9,6 +9,7 @@
   border-bottom: var(--nav-border-width) solid rgba(25, 152, 162, 0.6);
   padding-left: 10px;
   padding-right: 10px;
+  margin-bottom: 40px;
 }
 
 .alice-tabset .nav > li {

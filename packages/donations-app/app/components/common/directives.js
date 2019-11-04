@@ -472,9 +472,15 @@ angular.module('aliceApp')
         details: '=',
       },
       controller: ['$scope', '$state', function ($scope, $state) {
+        var current = $state.current.url.includes('charity-dashboard');
+        if(current) {
+          $scope.heading = 'My Projects'
+        }
+        else {
+          $scope.heading = 'My Impact'
+        }
         $scope.dashboardHome = function() {
-          var to = $state.current.url.includes('charity-dashboard');
-          if(to) {
+          if(current) {
             $state.go('charity-dashboard');
           }
         }

@@ -10,32 +10,12 @@
 
   <!-- Project Managers -->
   <div ng-if="dashCtrl.auth.isManager()" class="dashboard-content">
-    <dashboard-header/>
+    <dashboard-header heading="My Projects"/>
     <div class="container">
-      <div class="row" style="padding: 0 25px 0">
-        <uib-tabset type="pills" class="alice-tabset goals-dash__tabset">
-          <uib-tab heading="Live Projects">
-              <div ng-repeat="project in dashCtrl.projectsForMain
-                              | filter: { status: 'ACTIVE'} "
-                   class="col-sm-12 col-md-6 col-lg-4">
-                   <project-card link="dashCtrl.dashboardType"
-                                 project="project">
-                   </project-card>
-              </div>
-          </uib-tab>
-          <uib-tab heading="Past Projects">
-            <div class="row">
-              <div ng-repeat="project in dashCtrl.projectsForMain
-                              | filter: { status : 'FINISHED' } "
-                   class="col-sm-12 col-md-6 col-lg-4">
-                   <project-card link="dashCtrl.dashboardType"
-                                 project="project">
-                   </project-card>
-              </div>
-            </div>
-          </uib-tab>
-        </uib-tabset>
+      <div class="row" style="margin-top: 110px;">
+
       </div>
+      <ng-include src="'/components/global/aliceTabset.html'"/>
     </div>
   </div>
 </section>

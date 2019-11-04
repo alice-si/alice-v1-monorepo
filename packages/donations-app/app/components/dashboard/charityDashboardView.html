@@ -1,7 +1,7 @@
 <div class="navbar-background"></div>
 <section ng-controller="CharityDashboardController as dashCtrl"
          class="dashboard-page page">
-    <dashboard-header details="dashCtrl.projectDetails"/>
+    <dashboard-header heading="My Projects" details="dashCtrl.projectDetails"/>
     <loading-screen ng-if="!dataLoaded"></loading-screen>
     <div class="container"
          ng-if="dataLoaded">

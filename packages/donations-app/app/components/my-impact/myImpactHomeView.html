@@ -17,7 +17,7 @@
   <div class="container">
     <div class="row" style="padding: 100px 25px 0 25px;">
       <div class="col-sm-12">
-        <h1>My Impact</h1>
+        <h1>My Projects</h1>
 
         <h5 ng-if="dashCtrl.projectsForMain && dashCtrl.projectsForMain.length > 0">
           Click on one of your projects below to check the impact of your donation
@@ -30,13 +30,9 @@
       </div>
     </div>
 
-    <div class="row"
-         style="margin: 20px 10px;"
-         ng-if="dashCtrl.projectsForMain.length > 0">
-      <div ng-repeat="project in dashCtrl.projectsForMain"
-           class="col-sm-12 col-md-6 col-lg-4">
-        <project-card link="dashCtrl.dashboardType" project="project" />
-      </div>
-    </div>
+    <ng-include src="'/components/global/aliceTabset.html'"/>
   </div>
+
+
+
 </section>
