@@ -14,7 +14,12 @@
         class="project-card-image"
         style="background: url('{{project.img}}');" >
       </div>
-    <h6 class="uppercase alice-grey">Run by: {{ project.charity.name }}</h6>
-    <h4 class="alice-dark-text">{{ project.title }}</h4>
+      <div class="project-card-text">
+        <h6 class="uppercase alice-grey">Run by: {{ project.charity.name }}</h6>
+        <h4 class="alice-dark-text">{{ project.title }}</h4>
+        <p ng-if="project._outcomes"
+           class="alice-dark-text"
+           style="font-weight: 400;">{{ project._outcomes.length }} goals to achieve</p>
+      </div>
   </a>
 </div>

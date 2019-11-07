@@ -8,32 +8,30 @@
     <div class="row my-impact__container-greeting">
       <div class="col-xs-12 col-md-12 col-lg-12">
         <h3 class="alice-dark-grey goals-dash__greeting">
-          Hi {{ impactCtrl.loggedUser.firstName }}
+          Hi {{ impactCtrl.loggedUser.firstName }} - see below how your donation helped the project
         </h3>
       </div>
       <div class="col-xs-12 col-md-12 col-lg-12 my-impact__overview">
         <div class="my-impact__overview-section col-md-2 col-sm-6 col-xs-12">
-          <p>You donated</p>
+          <h3 class="alice-dark-grey">You donated</h3>
           <h3 class="alice-blue">{{ impactCtrl.project.totalDonated | money }}</h3>
         </div>
-        <div ng-if="impactCtrl.project.totalPaidOut > 0" class="my-impact__overview-section col-md-4 col-sm-6 col-xs-12">
-          <p>{{ impactCtrl.charity.name }} used</p>
-          <h3 class="alice-blue">{{ impactCtrl.project.totalPaidOut | money }}</h3>
-          <p class="my-impact__overview-section-value-postfix">so far</p>
-        </div>
-        <div ng-if="impactCtrl.project.unitsHelpedWithUserDonations > 0" class="my-impact__overview-section col-md-4 col-sm-6 col-xs-12">
-          <p>To help</p>
-          <h3 class="alice-blue">
-            {{impactCtrl.project.unitsHelpedWithUserDonations}}
+        <div ng-if="impactCtrl.project.totalPaidOut > 0" class="my-impact__overview-section col-md-3 col-sm-6 col-xs-12">
+          <h3 class="alice-dark-grey">{{ impactCtrl.charity.name }} used<br>
+            <span class="alice-blue">{{ impactCtrl.project.totalPaidOut | money }}</span>
           </h3>
-          <p class="my-impact__overview-section-value-postfix">
-            <span>
-              {{ impactCtrl.project.typeOfBeneficiary | lowercase | pluralize:impactCtrl.project.unitsHelpedWithUserDonations }}
-            </span>
-          </p>
         </div>
-        <div ng-if="impactCtrl.project.unitsHelpedWithUserDonations == 0" class="col-md-4 col-sm-6 col-xs-12">
-          <p class="my-impact__empty-impact-text">{{ impactCtrl.charity.name }} is working hard to deliver on the goals below.
+        <div ng-if="impactCtrl.project.unitsHelpedWithUserDonations > 0" class="my-impact__overview-section col-md-2 col-sm-6 col-xs-12">
+          <h3 class="alice-dark-grey">
+            To help<br>
+            <span class="alice-blue">
+              {{impactCtrl.project.unitsHelpedWithUserDonations}}
+            </span>
+            {{ impactCtrl.project.typeOfBeneficiary | lowercase | pluralize:impactCtrl.project.unitsHelpedWithUserDonations }}
+          </h3>
+        </div>
+        <div ng-if="impactCtrl.project.unitsHelpedWithUserDonations == 0" class="col-md-9 col-sm-12 col-xs-12">
+          <p class="alice-dark-grey" style="margin-top: 15px;">{{ impactCtrl.charity.name }} is working hard to deliver on the goals below.
             Once your donation is used we will email you, with a link to this page,
             to see the goals your donations completed and how many {{ impactCtrl.project.typeOfBeneficiary | lowercase }} it helped.
           </p>

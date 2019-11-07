@@ -8,11 +8,18 @@
            BACK TO PROJECTS
       </a>
       <div class="row">
-        <h3>{{ project.title }}</h3>
+        <h3>{{ project.title }}
+        </h3>
         <p ng-if="project.status == 'FINISHED'">This project has been completed! View details below</p>
         <a ui-sref="how-it-works"
            class="splash-v3__track-donation-link"
            ng-if="showTrackDonationsImpactLink && project.status != 'FINISHED'">Track your donation's impact <i class="glyphicon glyphicon-chevron-right"></i></a>
+           <a class="fb-xfbml-parse-ignore" target="_blank" href="http://www.facebook.com/share.php?u={{model.projectShareLink}}&title={{model.title}}">
+             <a class="hidden-xs social-icon">
+               <!-- EMAIL -->
+               <i class="fa fa-share-alt splash-v3__share-icon"></i>
+             </a>
+           </a>
       </div>
       <div class="row splash-v3__container-progress">
           <p ng-if="project.status !== 'FINISHED'" class="col-md-4 col-sm-4 col-xs-4 no-padding splash-v3__progress-section progress-p">

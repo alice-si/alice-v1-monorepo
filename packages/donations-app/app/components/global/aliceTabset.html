@@ -1,12 +1,12 @@
 <div class="row"
-     style="margin: 0 10px"
+     style="margin: 0 20px"
      ng-if="dashCtrl.projectsForMain.length > 0">
   <uib-tabset type="pills"
               class="alice-tabset goals-dash__tabset">
     <uib-tab heading="Live Projects">
         <div ng-repeat="project in dashCtrl.projectsForMain
                         | filter: { status: 'ACTIVE'} "
-             class="col-sm-12 col-md-6 col-lg-4">
+             class="col-sm-12 col-md-6 col-lg-4 no-padding-left">
              <project-card link="dashCtrl.dashboardType"
                            project="project">
              </project-card>
@@ -16,7 +16,7 @@
       <div class="row">
         <div ng-repeat="project in dashCtrl.projectsForMain
                         | filter: { status : 'FINISHED' } "
-             class="col-sm-12 col-md-6 col-lg-4">
+             class="col-sm-12 col-md-6 col-lg-4 no-padding-left">
              <project-card link="dashCtrl.dashboardType"
                            project="project">
              </project-card>

@@ -6,11 +6,16 @@
   }
 
   p {
-    font-weight: 100;
+    line-height: 33px;
+    color: #6b7c93;
+    font-size: 22px;
   }
 
   &-link {
-    color: #6b7c93;
+    color: #9b9b9b;
+    font-size: 18px;
+    line-height: 35px;
+    letter-spacing: 0.9px;
 
     &:hover {
       color: $alice-tonal-medium;

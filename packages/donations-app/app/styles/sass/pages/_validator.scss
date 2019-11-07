@@ -76,10 +76,9 @@
 
   &__tabset {
     margin-top: 20px;
-    
-    a {
-      font-family: 'Avenir';
-      font-weight: 300;
+
+    &-project {
+      margin-top: 110px;
     }
   }
 }
