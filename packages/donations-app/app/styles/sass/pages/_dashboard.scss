@@ -13,7 +13,7 @@
 }
 
 .dashboard-nav-top {
-  height: 100px;
+  height: 65px;
   width: 100%;
   border-bottom: 2px solid #E3ECF0;
 	padding-left: 25px;
@@ -36,7 +36,8 @@
 }
 
 .dashboard-title {
-  padding: 15px 0 0 30px;
+  padding-left: 27px;
+	transform: translateY(-20px);
   color: $white;
 	font-weight: 400;
 	@include transition(0.1s, color, ease-out);

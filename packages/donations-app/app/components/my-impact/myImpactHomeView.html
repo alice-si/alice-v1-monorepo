@@ -15,12 +15,11 @@
 
   <!-- Individual dashboard -->
   <div class="container" style="margin-bottom: 150px;">
-    <div class="row" style="padding: 100px 25px 0 25px;">
+    <div class="row" style="padding: 90px 25px 0 25px;">
       <div class="col-sm-12">
-        <h3 class="alice-dark-grey">
-          Hi {{ dashCtrl.loggedUser.firstName }} - click on a project below to see how your donation helped
-        </h3>
-
+        <h2 class="alice-dark-grey">
+          <span style="font-weight: 300;">Hi {{ dashCtrl.loggedUser.firstName }} - click on a project below to see how your donation helped</span>
+        </h2>
         <h5 ng-if="!dashCtrl.projectsForMain || dashCtrl.projectsForMain.length == 0">
           Please go to our <a href="/?#home-projects" ><u>projects</u></a> page and choose a project to donate.
           Once you donate, you’ll be able to track your impact on this page.

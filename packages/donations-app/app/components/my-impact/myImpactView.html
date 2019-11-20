@@ -7,9 +7,11 @@
   <section class="container my-impact__container">
     <div class="row my-impact__container-greeting">
       <div class="col-xs-12 col-md-12 col-lg-12">
-        <h3 class="alice-dark-grey goals-dash__greeting">
-          Hi {{ impactCtrl.loggedUser.firstName }} - see below how your donation helped the project
-        </h3>
+        <div class="">
+          <h3 class="alice-dark-grey goals-dash__greeting">
+            Hi {{ impactCtrl.loggedUser.firstName }} - <span style="font-weight: 300;"> see below how your donation helped the project</span>
+          </h3>
+        </div>
       </div>
       <div class="col-xs-12 col-md-12 col-lg-12 my-impact__overview">
         <div class="my-impact__overview-section col-md-2 col-sm-6 col-xs-12">
@@ -23,7 +25,7 @@
         </div>
         <div ng-if="impactCtrl.project.unitsHelpedWithUserDonations > 0" class="my-impact__overview-section col-md-2 col-sm-6 col-xs-12">
           <h3 class="alice-dark-grey">
-            To help<br>
+            To help
             <span class="alice-blue">
               {{impactCtrl.project.unitsHelpedWithUserDonations}}
             </span>
