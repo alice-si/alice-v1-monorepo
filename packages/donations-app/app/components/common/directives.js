@@ -52,9 +52,6 @@ angular.module('aliceApp')
   }])
   .directive('aliceFooter', function() {
     return {
-      scope: {
-        model: '=',
-      },
       link: function ($scope) {
         $scope.currentYear =  new Date().getFullYear();
       },
@@ -422,10 +419,33 @@ angular.module('aliceApp')
         showTrackDonationsImpactLink: '@',
       },
       templateUrl: '/components/global/splashCard.html',
-      controller: ['$scope', 'CheckoutService', function($scope, CheckoutService) {
+      controller: ['$scope', 'CheckoutService', '$uibModal', function($scope, CheckoutService, $uibModal) {
         $scope.donate = function() {
             CheckoutService.startCheckout($scope.project);
         }
+
+        $scope.share = function () {
+          console.log("OPEN");
+          $uibModal.open({
+    				scope: {
+    					project: '=',
+    				},
+            templateUrl: '/components/project/components/shareModal.html',
+            controller: ['$scope', '$state', '$timeout', 'HOST', function ($scope, $state, $timeout, HOST) {
+              $scope.host = HOST;
+              $scope.projectTitle = $scope.project.title;
+              $scope.projectShareLink = HOST + 'redirection/project-' + $scope.project.code + '.html';
+              $scope.projectCode = $scope.project.code;
+              $scope.messageToShare = 'Check out this project: ' + $scope.projectTitle + ' on Alice. You only pay if the project works!';
+
+              $timeout(function () {
+                FB.XFBML.parse();
+              });
+            }]
+          });
+        };
+
+
       }]
     };
   })

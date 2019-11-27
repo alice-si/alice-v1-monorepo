@@ -11,10 +11,10 @@
         <div class="">
           <h3>{{ project.title }}
             <a class="fb-xfbml-parse-ignore"
-               target="_blank"
-               href="http://www.facebook.com/share.php?u={{model.projectShareLink}}&title={{model.title}}">
+               target="_blank">
               <a class="hidden-xs social-icon"
-                 style="font-weight: 100;">
+                 style="font-weight: 100;"
+                 ng-click="share(project)">
                 <!-- EMAIL -->
                 <i class="fa fa-share-alt splash-v3__share-icon"></i>
               </a>
@@ -57,10 +57,10 @@
       </div>
 
       <div class="row">
-        <div class="col-md-10 col-xs-12 no-padding">
+        <div class="col-xs-12 no-padding">
             <div ng-if="project.status != 'FINISHED'">
               <div ng-if="showDonateButton"
-                   class="col-md-6 col-xs-10 no-padding">
+                   class=" col-xs-10 no-padding">
                 <a ng-click="donate()">
                   <button>
                     <i class="glyphicon glyphicon-chevron-right"></i>

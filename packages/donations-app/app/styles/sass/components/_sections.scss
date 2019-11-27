@@ -61,15 +61,14 @@
      color: #9b9b9b;
      border-radius: 35px;
      border: 1px solid #9b9b9b;
-     padding: 10px 10px;
-     transform: translate(20px, 10px);
+     padding: 9px 10px;
+     transform: translateX(10px);
      @include transition(0.2s, all, ease-in-out);
 
      &:hover {
        color: $alice-blue;
        border-radius: 35px;
        border: 1px solid $alice-blue;
-       padding: 8px 10px;
      }
    }
 

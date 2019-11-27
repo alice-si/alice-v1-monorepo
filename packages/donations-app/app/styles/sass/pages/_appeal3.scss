@@ -12,7 +12,7 @@
 
 .appeal-v3 {
   &__container {
-    padding: 22px 0 42px 30px;
+    padding: 22px 0 42px 0px;
   }
 
   &__story-quote {
@@ -35,9 +35,9 @@
     }
 
     &-image {
-      height: 70px;
+      height: 130px;
       width: auto;
-      max-width: 150px;
+      max-width: 170px;
       background-size: contain;
       background-repeat: no-repeat;
     }
@@ -220,5 +220,11 @@
 @media screen and (max-width: 1300px) {
   .appeal-v3__container {
     width: 85vw;
+  }
+}
+
+@media screen and (min-width: 1300px) {
+  .appeal-v3__container{
+    padding: 22px 0 42px 30px;
   }
 }
