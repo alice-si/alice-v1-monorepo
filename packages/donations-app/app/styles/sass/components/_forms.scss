@@ -51,7 +51,7 @@ button:focus {
 
 
 button {
-  min-width: 100%;
+  min-width: auto;
   min-height: 50px;
   // padding-left: 10px;
   // padding-right: 10px;
@@ -60,6 +60,7 @@ button {
   border-radius: 4px;
   letter-spacing: 0.52px;
   font-size: 21px;
+  padding: 8px 20px 10px;
   font-family: $source;
   font-weight: 400;
   font-stretch: normal;
