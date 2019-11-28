@@ -6,7 +6,9 @@
 
 .splash-v3 {
   button {
-    padding: 8px 0 10px !important;
+    padding: 8px 20px 10px !important;
+    min-width: 0px !important;
+    width: auto !important;
   }
 }
 
@@ -221,10 +223,21 @@
   .appeal-v3__container {
     width: 85vw;
   }
+  .alice-footer {
+    .footer-bottom {
+      padding-left: 60px;
+    }
+  }
 }
 
 @media screen and (min-width: 1300px) {
   .appeal-v3__container{
     padding: 22px 0 42px 30px;
+  }
+
+  .alice-footer {
+    .footer-bottom {
+      padding-left: 60px;
+    }
   }
 }

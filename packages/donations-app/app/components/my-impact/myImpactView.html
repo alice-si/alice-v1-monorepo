@@ -42,13 +42,14 @@
     </div>
 
     <div class="row my-impact__container-boost-donation">
-      <div class="col-md-4 col-xs-11">
-        <button ng-click="impactCtrl.boostDonation()" class="my-impact__boost-donation-button">
+      <div class="col-xs-11 my-impact__button">
+        <button ng-click="impactCtrl.boostDonation()"
+                class="my-impact__boost-donation-button">
           <i class="glyphicon glyphicon-chevron-right"></i>
           BOOST YOUR DONATION
         </button>
       </div>
-      <div class="col-md-4 col-xs-11">
+      <div class="col-xs-11 my-impact__button">
         <a target="_blank" href="{{ impactCtrl.getEtherscanLinkForProject() }}">
           <button class="inverse-button bordered">
             SEE IT ON BLOCKCHAIN

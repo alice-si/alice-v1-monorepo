@@ -427,25 +427,26 @@ angular.module('aliceApp')
         $scope.share = function () {
           console.log("OPEN");
           $uibModal.open({
-    				scope: {
-    					project: '=',
-    				},
             templateUrl: '/components/project/components/shareModal.html',
-            controller: ['$scope', '$state', '$timeout', 'HOST', function ($scope, $state, $timeout, HOST) {
+            controller: ['$timeout', 'HOST', 'scopeProject', function ($timeout, HOST, scopeProject) {
               $scope.host = HOST;
               $scope.projectTitle = $scope.project.title;
               $scope.projectShareLink = HOST + 'redirection/project-' + $scope.project.code + '.html';
               $scope.projectCode = $scope.project.code;
-              $scope.messageToShare = 'Check out this project: ' + $scope.projectTitle + ' on Alice. You only pay if the project works!';
+              $scope.messageToShare = 'Check out this project on Alice. You only pay if the project works!';
 
               $timeout(function () {
                 FB.XFBML.parse();
               });
-            }]
+            }],
+            resolve: {
+                    // Provide namesInModal as service to modal controller
+                    scopeProject: function () {
+                        return $scope.project;
+                    }
+                }
           });
         };
-
-
       }]
     };
   })
