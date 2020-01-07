@@ -1,30 +1,11 @@
+<div class="navbar-background"></div>
 <section ng-controller="CharityDashboardController as dashCtrl"
-         class="goals-dash dashboard-background">
-
-  <splash
-    show-appeal-page-link="true"
-    back-to-projects-link="/charity-dashboard/"
-    project="dashCtrl.projectDetails" />
-
+         class="dashboard-page page">
+    <dashboard-header heading="My Projects" details="dashCtrl.projectDetails"/>
     <loading-screen ng-if="!dataLoaded"></loading-screen>
     <div class="container"
          ng-if="dataLoaded">
-      <div class="row">
-        <div class="col-xs-12">
-          <h3 class="goals-dash__greeting">
-            Hi {{ dashCtrl.loggedUser.firstName }}
-            <span><p style="margin: 2px 0 0 5px;">
-              <ng-pluralize count="dashCtrl.totalGoalsAchieved"
-                            when="{'0': '- No goals have been validated yet',
-                                   '1': '- We have achieved 1 goal',
-                                   'other': '- We have achieved {} goals'}">
-              </ng-pluralize>
-            </p></span>
-          </h3>
-        </div>
-      </div>
-
-      <uib-tabset type="pills" class="alice-tabset goals-dash__tabset">
+      <uib-tabset type="pills" class="alice-tabset goals-dash__tabset-project">
         <uib-tab heading="Money">
           <div class="row">
             <charity-dashboard-money donations="dashCtrl.donations">
@@ -43,17 +24,6 @@
             </charity-dashboard-goals>
           </div>
         </uib-tab>
-        <!-- No designs for these pages, yet
-        <uib-tab disable="true" heading="People Helped">
-          <div class="row">
-            <charity-dashboard-people people="">
-            </charity-dashboard-people>
-          </div>
-        </uib-tab>-->
-        <!-- <uib-tab disable="true" heading="Performance">
-          <div class="row">
-          </div>
-        </uib-tab>  -->
       </uib-tabset>
     </div>
 

@@ -1,5 +1,5 @@
+<div class="navbar-background"></div>
 <section class="dashboard-page page" ng-controller="MyImpactController as dashCtrl">
-
   <div ng-hide="dashCtrl.auth.getLoggedUser()">
     Please log in to view the content.
   </div>
@@ -10,37 +10,16 @@
 
   <!-- Project Managers -->
   <div ng-if="dashCtrl.auth.isManager()" class="dashboard-content">
-
-    <!-- Charity -->
-    <div ng-if="dashCtrl.auth.isManager() && !dashCtrl.auth.isSuperadmin()" class="col-lg-12 col-md-12 dashboard-nav-top">
-      <div class="dashboard-image col-lg-1 col-md-1 col-xs-1">
-        <img class="dashboard-image-in"
-             src="{{dashCtrl.loggedUser.charityForCharityAdmin.picture}}"
-             alt="Charity image">
-      </div>
-      <h3 class="dashboard-title col-lg-5 col-md-5">
-        {{ dashCtrl.loggedUser.charityForCharityAdmin.name }}
-      </h3>
-    </div>
-
-    <!-- Alice -->
-    <div ng-if="dashCtrl.auth.isSuperadmin()" class="col-lg-12 col-md-12 dashboard-nav-top">
-      <h3 class="dashboard-title col-lg-5 col-md-5">
-        Hello {{ dashCtrl.auth.getLoggedUser().firstName }}
-      </h3>
-    </div>
+    <dashboard-header/>
   </div>
 
   <!-- Individual dashboard -->
-  <div class="container">
-    <div class="row" style="padding-top: 100px;">
+  <div class="container" style="margin-bottom: 150px;">
+    <div class="row" style="padding: 90px 25px 0 25px;">
       <div class="col-sm-12">
-        <h1>My Impact</h1>
-
-        <h5 ng-if="dashCtrl.projectsForMain && dashCtrl.projectsForMain.length > 0">
-          Click on one of your projects below to check the impact of your donation
-        </h5>
-
+        <h2 class="alice-dark-grey">
+          <span style="font-weight: 300;">Hi {{ dashCtrl.loggedUser.firstName }} - click on a project below to see how your donation helped</span>
+        </h2>
         <h5 ng-if="!dashCtrl.projectsForMain || dashCtrl.projectsForMain.length == 0">
           Please go to our <a href="/?#home-projects" ><u>projects</u></a> page and choose a project to donate.
           Once you donate, you’ll be able to track your impact on this page.
@@ -48,13 +27,9 @@
       </div>
     </div>
 
-    <div class="row"
-         style="margin-top: 20px;"
-         ng-if="dashCtrl.projectsForMain.length > 0">
-      <div ng-repeat="project in dashCtrl.projectsForMain"
-           class="col-sm-12 col-md-6 col-lg-4">
-        <project-card link="dashCtrl.dashboardType" project="project" />
-      </div>
-    </div>
+    <ng-include src="'/components/global/aliceTabset.html'"/>
   </div>
+
+
+<alice-footer></alice-footer>
 </section>

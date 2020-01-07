@@ -1,17 +1,32 @@
 .alice-footer {
   margin-bottom: 60px;
 
+  .uppercase {
+    font-weight: 600;
+  }
+
+  p {
+    line-height: 33px;
+    color: #6b7c93;
+    font-size: 22px;
+  }
+
   &-link {
-    color: $alice-grey;
+    color: #9b9b9b;
+    font-size: 18px;
+    line-height: 35px;
+    font-weight: 300;
+    letter-spacing: 0.9px;
 
     &:hover {
       color: $alice-tonal-medium;
+      cursor: pointer;
     }
   }
 }
 
 .footer-social-icons {
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
 @media screen and (max-width: 760px) {
@@ -150,5 +165,19 @@
 
   .twitter-icon:hover {
     background-image: url('https://s3.eu-west-2.amazonaws.com/alice-res/twitter.png');
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .alice-footer {
+    .container {
+      margin: 0 40px;
+    }
+  }
+
+  .hiw-container {
+    .alice-footer > .container {
+      margin: 0 !important;
+    }
   }
 }

@@ -1,4 +1,4 @@
-<div ng-controller="MyImpactController as impactCtrl" class="appeal-page my-impact">
+<div ng-controller="MyImpactController as impactCtrl" class="my-impact">
   <splash
     back-to-projects-link="/my-impact/"
     show-appeal-page-link="true"
@@ -7,33 +7,33 @@
   <section class="container my-impact__container">
     <div class="row my-impact__container-greeting">
       <div class="col-xs-12 col-md-12 col-lg-12">
-        <h3 class="alice-dark-grey goals-dash__greeting">
-          Hi {{ impactCtrl.loggedUser.firstName }}
-        </h3>
+        <div class="">
+          <h3 class="alice-dark-grey goals-dash__greeting">
+            Hi {{ impactCtrl.loggedUser.firstName }} - <span style="font-weight: 300;"> see below how your donation helped the project</span>
+          </h3>
+        </div>
       </div>
       <div class="col-xs-12 col-md-12 col-lg-12 my-impact__overview">
-        <div class="my-impact__overview-section col-md-4 col-sm-6 col-xs-12">
-          <p>You donated</p>
+        <div class="my-impact__overview-section col-md-2 col-sm-6 col-xs-12">
+          <h3 class="alice-dark-grey">You donated</h3>
           <h3 class="alice-blue">{{ impactCtrl.project.totalDonated | money }}</h3>
         </div>
-        <div ng-if="impactCtrl.project.totalPaidOut > 0" class="my-impact__overview-section col-md-4 col-sm-6 col-xs-12">
-          <p>{{ impactCtrl.charity.name }} used</p>
-          <h3 class="alice-blue">{{ impactCtrl.project.totalPaidOut | money }}</h3>
-          <p class="my-impact__overview-section-value-postfix">so far</p>
-        </div>
-        <div ng-if="impactCtrl.project.unitsHelpedWithUserDonations > 0" class="my-impact__overview-section col-md-4 col-sm-6 col-xs-12">
-          <p>To help</p>
-          <h3 class="alice-blue">
-            {{impactCtrl.project.unitsHelpedWithUserDonations}}
+        <div ng-if="impactCtrl.project.totalPaidOut > 0" class="my-impact__overview-section col-md-3 col-sm-6 col-xs-12">
+          <h3 class="alice-dark-grey">{{ impactCtrl.charity.name }} used<br>
+            <span class="alice-blue">{{ impactCtrl.project.totalPaidOut | money }}</span>
           </h3>
-          <p class="my-impact__overview-section-value-postfix">
-            <span>
-              {{ impactCtrl.project.typeOfBeneficiary | lowercase | pluralize:impactCtrl.project.unitsHelpedWithUserDonations }}
-            </span>
-          </p>
         </div>
-        <div ng-if="impactCtrl.project.unitsHelpedWithUserDonations == 0" class="col-md-4 col-sm-6 col-xs-12">
-          <p class="my-impact__empty-impact-text">{{ impactCtrl.charity.name }} is working hard to deliver on the goals below.
+        <div ng-if="impactCtrl.project.unitsHelpedWithUserDonations > 0" class="my-impact__overview-section col-md-2 col-sm-6 col-xs-12">
+          <h3 class="alice-dark-grey">
+            To help
+            <span class="alice-blue">
+              {{impactCtrl.project.unitsHelpedWithUserDonations}}
+            </span>
+            {{ impactCtrl.project.typeOfBeneficiary | lowercase | pluralize:impactCtrl.project.unitsHelpedWithUserDonations }}
+          </h3>
+        </div>
+        <div ng-if="impactCtrl.project.unitsHelpedWithUserDonations == 0" class="col-md-9 col-sm-12 col-xs-12">
+          <p class="alice-dark-grey" style="margin-top: 15px;">{{ impactCtrl.charity.name }} is working hard to deliver on the goals below.
             Once your donation is used we will email you, with a link to this page,
             to see the goals your donations completed and how many {{ impactCtrl.project.typeOfBeneficiary | lowercase }} it helped.
           </p>
@@ -42,16 +42,16 @@
     </div>
 
     <div class="row my-impact__container-boost-donation">
-      <div class="col-md-4 col-xs-11">
-        <button ng-click="impactCtrl.boostDonation()" class="my-impact__boost-donation-button">
+      <div class="col-xs-11 my-impact__button">
+        <button ng-click="impactCtrl.boostDonation()"
+                class="my-impact__boost-donation-button">
           <i class="glyphicon glyphicon-chevron-right"></i>
           BOOST YOUR DONATION
         </button>
       </div>
-      <div class="col-md-4 col-xs-11">
+      <div class="col-xs-11 my-impact__button">
         <a target="_blank" href="{{ impactCtrl.getEtherscanLinkForProject() }}">
-          <button class="inverse-button my-impact__see-on-blockchain-button">
-            <i class="glyphicon glyphicon-chevron-right"></i>
+          <button class="inverse-button bordered">
             SEE IT ON BLOCKCHAIN
           </button>
         </a>

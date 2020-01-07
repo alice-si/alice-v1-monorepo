@@ -1,0 +1,27 @@
+<div class="dashboard-nav-top">
+  <div class="container">
+    <div class="row ">
+      <h3 class="dashboard-title col-md-2 col-sm-3"
+          ng-click="dashboardHome()"
+          >
+          {{ heading }}
+      </h3>
+      <h3 class="dashboard-title col-md-6 col-sm-5"
+          ng-if="details">
+        <span class="dashboard-title-chevron">&#x203A;</span>{{ details.title | smallTitle }}
+      </h3>
+      <div class="form-group col-md-3 col-sm-5 float-right"
+           style="transform: translateY(-10px)">
+        <button class="inverse-button uppercase"
+                type="button"
+                name="button"
+                ng-if="details"
+                ng-click="appeal()">
+                <i class="glyphicon glyphicon-chevron-right"
+                   style="color: #1CB8C4"></i>
+                View appeal page
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

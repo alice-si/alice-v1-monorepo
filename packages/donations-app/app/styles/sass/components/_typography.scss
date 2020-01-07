@@ -1,17 +1,16 @@
 h1 {
 	font-family: $source;
 	font-weight: 400;
-	font-size: 40px;
+	font-size: 42px;
 	color: $alice-dark-text;
-	line-height: 68px;
+	line-height: 1.2;
 }
 
 h2 {
 	font-family: $source;
-	font-weight: 400;
-	font-size: 28px;
-	line-height: 1.4;
-	color: $alice-blue;
+	font-weight: 600;
+	font-size: 24px;
+	letter-spacing: 1px;
 }
 
 h3 {
@@ -26,7 +25,7 @@ h3 {
 h4 {
 	font-family: $source;
 	font-weight: 400 !important;
-	font-size: 26px;
+	font-size: 22px;
 	letter-spacing: 0.25px;
 	color: $alice-blue;
 	line-height: 36px;
@@ -51,6 +50,7 @@ h6 {
 
 p {
 	font-family: $source !important;
+	font-size: 18px;
 	letter-spacing: 0.75px;
 }
 
@@ -252,7 +252,27 @@ a:-webkit-any-link {
 
 
 @media screen and (max-width: 460px) {
+	h1 {
+		font-size: 28px !important;
+	}
 	p {
-		font-size: 16px !important;
+		font-size: 18px !important;
+	}
+	// Used for splash progress labels
+	.progress-p {
+		font-size: 12px !important;
+	}
+}
+
+@media screen and (max-width: 330px) {
+	h1 {
+		font-size: 24px !important;
+	}
+	p {
+		font-size: 14px !important;
+	}
+	// Used for splash progress labels
+	.progress-p {
+		font-size: 12px !important;
 	}
 }

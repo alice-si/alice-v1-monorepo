@@ -31,13 +31,17 @@
 
  .home-container, .hiw-container {
    .row {
-     margin: 20px 30px 40px;
+     margin: 20px 25px 40px;
    }
 
    .header-image {
      .container {
-       transform: translateY(30%);
+       transform: translateY(120px);
      }
+   }
+
+   .inverse-button {
+     margin-left: -35px;
    }
  }
 
@@ -52,14 +56,12 @@
   }
 
   &-picture {
-      width: 125px;
+      width: 115px;
       height: auto;
-  }
-}
 
-.home-container {
-  section {
-    border-bottom: 1px solid $alice-UI-light-grey;
+      &-centre {
+        margin-top: 30px;
+      }
   }
 }
 
@@ -68,11 +70,6 @@
     transform: translateY(30%);
   }
 }
-
-
-
-
-
 
 @media screen and (max-width: 330px) {
 
@@ -83,14 +80,12 @@
     }
 
     .splash-v3__container-title {
+      top: 60px !important;
+      left: 0;
       p {
         font-size: 16px !important;
       }
     }
-  }
-
-  .splash-v3__container-title {
-    top: 60px !important;
   }
 
   #hiw {
@@ -157,15 +152,12 @@
   .home-container {
     section:first-child {
       border-bottom: none;
-      height: 480px;
+      height: 540px;
     }
 
     .splash-v3__container-title {
       top: 100px;
-
-      p {
-        font-size: 14px !important;
-      }
+      left: 0;
     }
 
     .alice-footer .row {
@@ -225,15 +217,33 @@
   }
 
   .home-charity {
-
     &-picture {
       max-width: 75px;
       height: auto;
+      padding: 20px 0;
+
+      &-centre {
+        margin-top: -10px;
+      }
     }
   }
 }
 
 @media screen and (min-width: 760px) {
+
+  .home-container {
+
+    .header-image {
+      .container {
+        transform: translateY(120px);
+
+        p {
+          font-size: 22px !important;
+        }
+      }
+    }
+  }
+
   // How it works:
 
   #hiw {
@@ -266,4 +276,60 @@
       height: 294px;
     }
   }
+
+  .investors-and-media {
+    &-list {
+      padding: 0;
+    }
+    &-link {
+      padding: 20px;
+    }
+  }
+
+  #social-organisation-list {
+    padding-bottom: 50px;
+  }
+}
+
+
+@media screen and (min-width: 1200px) {
+  .header-image {
+    .container {
+      transform: translateY(145px) !important;
+    }
+  }
+}
+
+.justify-content-around {
+  -ms-flex-pack: distribute !important;
+  justify-content: space-around !important;
+}
+
+.align-items-center {
+  -ms-flex-align: center !important;
+  align-items: center !important;
+}
+.align-content-lg-start {
+    -ms-flex-line-pack: start !important;
+    align-content: flex-start !important;
+}
+.m-2 {
+  margin: 0.5rem !important;
+}
+
+
+.investors-and-media-link {
+    display: block;
+    transition: all 0.2s;
+
+    &:hover {
+      transform: translateY(-5px);
+      cursor: pointer;
+  }
+}
+
+.investors-and-media-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }

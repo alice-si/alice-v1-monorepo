@@ -96,6 +96,10 @@ angular.module('aliceApp')
 						vm.project.raised = vm.project.donatedByAll;
 						vm.project._outcomes = vm.project.outcomes;
           }
+
+					vm.projectsForMain.forEach((p) => {
+						p._outcomes = p.outcomes;
+					})
 				}
       });
     }
@@ -122,7 +126,6 @@ angular.module('aliceApp')
         return `${ETHERSCAN}/address/${vm.project.ethAddresses.project}`;
       }
     };
-
     return vm;
   }]);
 

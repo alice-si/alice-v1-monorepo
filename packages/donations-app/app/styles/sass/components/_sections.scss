@@ -32,7 +32,6 @@
 
    &__progress-section {
      border-right: 1px solid #fff;
-    //  margin-right: 20px;
 
      span {
        font-weight: 600;
@@ -43,15 +42,38 @@
      }
    }
 
-   &__container-title {
+   &__card-container {
      position: absolute;
-     top: 110px;
-     left: 7vw;
-     width: 490px;
+     width: 100%;
+   }
+
+   &__container-title {
+     position: relative;
+     max-width: 449px;
+     max-height: 552px;
    }
 
    &__container-progress {
      width: 90%;
+   }
+
+   &__share-icon {
+     color: #9b9b9b;
+     border-radius: 35px;
+     border: 1px solid #9b9b9b;
+     padding: 9px 10px;
+     transform: translateX(10px);
+     @include transition(0.2s, all, ease-in-out);
+
+     &:hover {
+       color: $alice-blue;
+       border-radius: 35px;
+       border: 1px solid $alice-blue;
+     }
+   }
+
+   .fa {
+     font-size: 16px;
    }
 
    h3 {
@@ -61,7 +83,7 @@
    }
 
    p {
-     font-size: 20px !important;
+     // font-size: 22px !important;
      font-family: 'Source Sans Pro';
      letter-spacing: 1px;
    }
@@ -70,19 +92,6 @@
      margin: 20px 0 5px;
    }
 
-   button {
-     width: 120px;
-     background: $alice-tonal-medium;
-     border-radius: 2px;
-     font-size: 18px;
-     color: #fff;
-     border: none;
-     font-family: "Avenir" !important;
-     font-weight: 300;
-     letter-spacing: 1px;
-     @include box-shadow(0, 0, 2px, rgba(0, 0, 0, 0.23));
-     outline: none;
-   }
 
    .grad-bottom:before {
      display: inline-block;
@@ -111,25 +120,6 @@
    }
  }
 
-@media screen and (max-width: 330px) {
-  .splash-v2 {
-    h3 {
-      font-size: 24px;
-      line-height: 1.2;
-      margin-top: -10px;
-    }
-
-    p {
-      font-size: 12px !important;
-      margin-top: -10px;
-    }
-
-    &__progress-section:first-child {
-      margin-top: 10px;
-    }
-  }
-}
-
 
 
 /**
@@ -141,10 +131,8 @@
  **/
 
  .splash-v3 {
-
     .header-image {
-      height: 550px;
-      // height: 100vh;
+      height: 635px;
     }
 
     &__progress {
@@ -159,8 +147,7 @@
     }
 
     &__container-title {
-      // width: 30%;
-      border-radius: 5px;
+      border-radius: 6px;
       background: #fff;
       padding: 5px 10px 30px 40px;
       font-family: $source;
@@ -176,9 +163,10 @@
     &__back-to-projects-link {
       color: white;
       position: absolute;
-      top: 80px;
-      left: 7vw;
-      // cursor: pointer;
+      top: -30px;
+      z-index: 1000;
+      left: 0;
+      cursor: pointer;
     }
 
     &__back-to-projects-link:hover {
@@ -210,7 +198,7 @@
     }
 
     p {
-      font-size: 16px !important;
+      // font-size: 16px !important;
       font-weight: 400;
       font-family: $source !important;
       letter-spacing: 1px;
@@ -261,7 +249,7 @@
     &__container-title {
       @include box-shadow(0, 1px, 3px, rgba(0,0,0,0.4));
       width: 86vw;
-      top: 190px;
+      top: -80px;
     }
 
     &__progress {
@@ -269,6 +257,19 @@
         border-right: 1px solid $alice-dark-grey;
       }
     }
+
+    &__progress {
+      &-section {
+        border-right: 1px solid $alice-dark-grey;
+      }
+    }
+
+    &__container-progress,h3 {
+      margin-bottom: 10px;
+    }
+  }
+  .appeal-page > .splash-v3 {
+    height: 80vh;
   }
 }
 
@@ -279,15 +280,11 @@
     }
 
     &__container-title {
-      width: 80%;
-    }
-
-    p {
-      font-size: 12px !important;
+      width: 85%;
+      left: 22px;
     }
 
     &__progress-section {
-      // border-right: none;
 
       span {
         font-weight: 600;
@@ -295,10 +292,6 @@
 
       &:first-child {
         padding: none !important;
-      }
-
-      &:last-child {
-        border: none;
       }
     }
   }
@@ -319,12 +312,20 @@
       font-size: 20px;
     }
 
-    &__container-title {
-      left: 30px;
-    }
-
     a {
       font-size: 12px !important;
+    }
+  }
+
+  .my-impact-splash > .header-image {
+    height: 40vh !important;
+  }
+
+  .appeal-page {
+    .splash-v3 {
+      .header-image {
+        height: 40vh !important;
+      }
     }
   }
 }
@@ -361,6 +362,20 @@
     }
   }
 }
+
+@media screen and (min-width: 720px) {
+  .splash-v3__card-container {
+    top: 140px;
+    left: 25px;
+  }
+}
+
+// @media screen and (min-width: 990px) {
+//   .splash-v3__card-container {
+//     top: 140px;
+//     left: 25px;
+//   }
+// }
 
 .purple-grad {
   background: #894dd8;

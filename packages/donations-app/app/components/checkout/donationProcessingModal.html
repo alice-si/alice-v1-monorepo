@@ -5,9 +5,9 @@
       <treasure-overlay-spinner active="dpCtrl.donating">
 
         <div class="row">
-          <h6 class="center alice-dark-grey col-md-12" style="margin: 5% 0 2%">
+          <h5 class="center alice-dark-grey col-md-12" style="margin: 5% 0 2%">
             You are about to donate
-          </h6>
+          </h5>
 
           <h1 class="col-md-12 alice-blue center">
             {{dpCtrl.donation.amount | money}}
@@ -22,12 +22,13 @@
           </a>
         </div>
         <div class="row center">
-          <button id="confirm-button"
-                  class="col-md-12"
-                  ng-click="dpCtrl.donate()"
-                  type="submit" style="margin: 5% 0 8% 0">
-            Confirm
-          </button>
+          <div class="form-group col-md-12 no-padding">
+            <button id="confirm-button"
+                    ng-click="dpCtrl.donate()"
+                    type="submit" style="margin: 5% 0 8% 0">
+              Confirm
+            </button>
+          </div>
         </div>
 
       </treasure-overlay-spinner>

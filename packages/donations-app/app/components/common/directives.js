@@ -52,9 +52,6 @@ angular.module('aliceApp')
   }])
   .directive('aliceFooter', function() {
     return {
-      scope: {
-        model: '=',
-      },
       link: function ($scope) {
         $scope.currentYear =  new Date().getFullYear();
       },
@@ -331,21 +328,23 @@ angular.module('aliceApp')
 
       },
       /*jshint multistr: true */
-      template: '<div >\
-                  <button\
-                      style="width:10vw !important" ngf-select\
-                      ngf-pattern="\'image/*\'"\
-                      ngf-accept="\'*\'" ngf-max-size="20MB" ngf-min-height="100"\
-                      ng-model="imgFileModel">\
-                    Browse\
-                  </button>\
-                   <span ng-if="status != \'undefined\'">\
-                    <img style="width:80px; margin-left: 10px;" src="{{statusIconUrl}}">\
-                    {{description}}\
-                   </span>\
-                </div>\
-                <div style="text-align: center; margin-top:10px" class="col-md-12">\
-                <img src="{{model}}" style="max-width:300px; box-shadow: 1px 1px 1px #888888">\
+      template: '<div class="form-group">\
+                   <div class="col-sm-offset-3 col-sm-9">\
+                      <button\
+                          ngf-select\
+                          ngf-pattern="\'image/*\'"\
+                          ngf-accept="\'*\'" ngf-max-size="20MB" ngf-min-height="100"\
+                          ng-model="imgFileModel">\
+                        Browse\
+                      </button>\
+                       <span ng-if="status != \'undefined\'">\
+                        <img style="width:80px; margin-left: 10px;" src="{{statusIconUrl}}">\
+                        {{description}}\
+                       </span>\
+                    </div>\
+                    <div style="text-align: center; margin-top:10px" class="col-md-12">\
+                    <img src="{{model}}" style="max-width:300px; box-shadow: 1px 1px 1px #888888">\
+                  </div>\
                 </div>'
     };
   }])
@@ -414,15 +413,40 @@ angular.module('aliceApp')
     return {
       scope: {
         project: '=',
+        backToProjectsLink: '@',
         showAppealPageLink: '@',
         showDonateButton: '@',
         showTrackDonationsImpactLink: '@',
       },
       templateUrl: '/components/global/splashCard.html',
-      controller: ['$scope', 'CheckoutService', function($scope, CheckoutService) {
+      controller: ['$scope', 'CheckoutService', '$uibModal', function($scope, CheckoutService, $uibModal) {
         $scope.donate = function() {
             CheckoutService.startCheckout($scope.project);
         }
+
+        $scope.share = function () {
+          console.log("OPEN");
+          $uibModal.open({
+            templateUrl: '/components/project/components/shareModal.html',
+            controller: ['$timeout', 'HOST', 'scopeProject', function ($timeout, HOST, scopeProject) {
+              $scope.host = HOST;
+              $scope.projectTitle = $scope.project.title;
+              $scope.projectShareLink = HOST + 'redirection/project-' + $scope.project.code + '.html';
+              $scope.projectCode = $scope.project.code;
+              $scope.messageToShare = 'Check out this project on Alice. You only pay if the project works!';
+
+              $timeout(function () {
+                FB.XFBML.parse();
+              });
+            }],
+            resolve: {
+                    // Provide namesInModal as service to modal controller
+                    scopeProject: function () {
+                        return $scope.project;
+                    }
+                }
+          });
+        };
       }]
     };
   })
@@ -462,4 +486,31 @@ angular.module('aliceApp')
       }],
       templateUrl: '/components/global/aliceDataTable.html'
     };
+  })
+  .directive('dashboardHeader', function () {
+    return {
+      scope: {
+        details: '=',
+      },
+      controller: ['$scope', '$state', function ($scope, $state) {
+        var current = $state.current.url.includes('charity-dashboard');
+        if(current) {
+          $scope.heading = 'My Projects'
+        }
+        else {
+          $scope.heading = 'My Impact'
+        }
+        $scope.dashboardHome = function() {
+          if(current) {
+            $state.go('charity-dashboard');
+          }
+        }
+
+        $scope.appeal = function() {
+          $state.go("project", { projectCode: $scope.details.code });
+        }
+      }],
+      controllerAs: 'barCtrl',
+      templateUrl: '/components/global/dashboardHeader.html',
+    }
   });

@@ -94,8 +94,13 @@
 // Project small cards styling
 .project-small-card {
   height: auto;
+  min-height: 425px;
   padding: 0 25px 10px 0;
+  margin-bottom: 50px;
+  border-radius: 4px;
   @include transition(0.2s, all, ease-out);
+  @include box-shadow(0, 0, 3px, rgba(0,0,0,0.2));
+  background: #fff;
 
   &:hover {
     padding: 0 28px 10px 3px;
@@ -107,6 +112,16 @@
     object-fit: cover;
     @include transition(0.2s, all, ease-out);
     border-radius: 4px;
+
+    &.zoom-in {
+      transform: scale(1.3);
+    }
+  }
+
+  .project-card-text {
+    width: 100%;
+    min-height: 200px;
+    padding: 20px 25px;
 
     &.zoom-in {
       transform: scale(1.3);

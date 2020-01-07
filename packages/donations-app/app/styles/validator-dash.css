@@ -1,9 +1,6 @@
 /* Styles for validator dashboard. */
 
 /* TODO move this to some common location. */
-.goals-dash__tabset {
-  margin-top: 20px;
-}
 
 .goals-dash__grid {
   display: grid;

@@ -9,7 +9,6 @@
   }
 
   &__show-appeal-button {
-    padding: 30px;
     margin-top: 30px;
   }
 
@@ -18,12 +17,7 @@
     width: 150px;
   }
 
-  &__boost-donation-button {
-    border-radius: 2px;
-  }
-
   &__see-on-blockchain-button {
-    border-radius: 2px;
     i {
       color: $alice-tonal-medium;
     }
@@ -51,6 +45,7 @@
 
   &__container {
     margin: auto;
+    margin-bottom: 150px;
 
     &-goals {
       margin-top: 40px;
@@ -145,14 +140,20 @@
       }
     }
 
-    &-splash {
-      .splash-v3__container-progress {
-          margin-top: 30px;
+    .splash-v3__container {
+      &-progress {
+        margin-top: 10px;
       }
     }
 
     &__show-appeal-button {
       font-size: 14px !important;
+    }
+
+    &__boost-donation, &__see-on-blockchain {
+      &-button {
+        font-size: 14px;
+      }
     }
 
     &__boost-donation, &__see-on-blockchain {
@@ -172,5 +173,22 @@
 @media screen and (max-width: 340px) {
   .my-impact__show-appeal-button {
     font-size: 12px !important;
+  }
+}
+
+@media screen and (min-width: 1100px) {
+  .my-impact {
+    &__container {
+      padding: 0 40px;
+
+      &-boost-donation {
+        display: inline-block;
+      }
+    }
+
+    &__button {
+      width: auto;
+      min-width: 0px !important;
+    }
   }
 }

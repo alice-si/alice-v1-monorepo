@@ -18,10 +18,7 @@ angular.module('aliceApp')
 
         vm.latest = findLatestActivity(vm.projectWithDonations[0].donations,
           vm.projectWithDonations[0].validations);
-        // if(vm.latest) {
-        //   $scope.setXAxis('week');
-        // }
-
+      
         if(vm.projectWithDonations) {
           vm.upfrontPayment = vm.projectWithDonations[0].upfrontPayment;
           // Turn data to { x, y }
@@ -331,8 +328,8 @@ angular.module('aliceApp')
 
     function getMonthsInYear(latestDate) {
       var dates = [];
-      let startDate = new Date(moment(latestDate).subtract(6, 'months'));
-      let endDate = new Date(moment(latestDate).add(6, 'months'));
+      let startDate = new Date(moment(latestDate).subtract(12, 'months'));
+      let endDate = new Date(moment(latestDate).add(0, 'months'));
       updateGraphData(startDate, endDate);
       while(startDate < endDate){
         dates.push(moment(startDate));
@@ -371,4 +368,11 @@ angular.module('aliceApp')
     }
 
     return vm;
-  }]);
+  }])
+  .filter('offset', function() {
+    return function(input, start) {
+      if(input) {
+        return input.slice(start);
+      }
+    };
+  });

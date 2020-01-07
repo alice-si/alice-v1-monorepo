@@ -75,11 +75,10 @@
   }
 
   &__tabset {
-    margin-top: 32px;
+    margin-top: 20px;
 
-    a {
-      font-family: 'Avenir';
-      font-weight: 300;
+    &-project {
+      margin-top: 80px;
     }
   }
 }

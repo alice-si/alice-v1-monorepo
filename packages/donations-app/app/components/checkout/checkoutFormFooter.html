@@ -62,18 +62,19 @@
         </div>
     </div>
     <div class="row">
-        <button class="col-md-12"
-                ng-class="{ 'disabled-button' : (checkCtrl.donation.amount > 100000) }"
-                ng-click="checkCtrl.donate()"
-                type="submit">
-                <span ng-show="checkCtrl.mode == 'BANK_TRANSFER'">
-                    Show bank details
-                </span>
-                <span ng-show="checkCtrl.mode != 'BANK_TRANSFER'"
-                      ng-disable="checkCtrl.donation.amount > 100000">
-                      Donate {{ checkCtrl.donation.amount | money }}
-                </span>
-        </button>
+        <div class="form-group no-padding col-md-12">
+            <button ng-class="{ 'disabled-button' : (checkCtrl.donation.amount > 100000) }"
+                    ng-click="checkCtrl.donate()"
+                    type="submit">
+                    <span ng-show="checkCtrl.mode == 'BANK_TRANSFER'">
+                        Show bank details
+                    </span>
+                    <span ng-show="checkCtrl.mode != 'BANK_TRANSFER'"
+                          ng-disable="checkCtrl.donation.amount > 100000">
+                          Donate {{ checkCtrl.donation.amount | money }}
+                    </span>
+            </button>
+        </div>
     </div>
 </div>
 

@@ -6,14 +6,14 @@
 
 .splash-v3 {
   button {
-    padding: 8px 0 10px !important;
+    min-width: 0px !important;
+    width: auto !important;
   }
 }
 
 .appeal-v3 {
   &__container {
-    padding: 0;
-    margin: 22px auto 42px;
+    padding: 22px 0 42px 0px;
   }
 
   &__story-quote {
@@ -36,9 +36,9 @@
     }
 
     &-image {
-      height: 70px;
+      height: 130px;
       width: auto;
-      max-width: 150px;
+      max-width: 170px;
       background-size: contain;
       background-repeat: no-repeat;
     }
@@ -163,6 +163,7 @@
     &__container {
       width: 85vw;
       margin: 15px auto;
+      padding: 0;
       padding-bottom: 20px;
     }
 
@@ -220,5 +221,22 @@
 @media screen and (max-width: 1300px) {
   .appeal-v3__container {
     width: 85vw;
+  }
+  .alice-footer {
+    .footer-bottom {
+      padding-left: 60px;
+    }
+  }
+}
+
+@media screen and (min-width: 1300px) {
+  .appeal-v3__container{
+    padding: 22px 0 42px 30px;
+  }
+
+  .alice-footer {
+    .footer-bottom {
+      padding-left: 60px;
+    }
   }
 }

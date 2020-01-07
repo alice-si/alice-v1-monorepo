@@ -9,14 +9,16 @@
   background: $dashboard-background;
   width: 100%;
   min-height: 100vh;
+	top: $menu-height;
 }
 
 .dashboard-nav-top {
-  height: 100px;
+  height: 65px;
   width: 100%;
   border-bottom: 2px solid #E3ECF0;
+	padding-left: 25px;
   z-index: 500;
-  background: $dashboard-background;
+  background: $alice-blue;
   position: fixed;
 }
 
@@ -34,8 +36,22 @@
 }
 
 .dashboard-title {
-  padding-top: 10px;
-  color: $alice-dark-text;
+  padding-left: 27px;
+	transform: translateY(-20px);
+  color: $white;
+	font-weight: 400;
+	@include transition(0.1s, color, ease-out);
+
+
+	&:first-child:hover {
+		color: rgba(255, 255, 255, 0.7) !important;
+		cursor: pointer;
+	}
+
+	&-chevron {
+		color: $white;
+		margin: 0 20px 0 -30px;
+	}
 }
 
 .dashboard-nav-side {
@@ -73,7 +89,7 @@
 
 .dashboard-main-view {
   position: relative;
-  margin-top: 100px;
+  margin-top: 120px;
   padding: 20px 50px 40px 20px;
   background: $dashboard-background;
 }
@@ -91,6 +107,10 @@
 .dashboard-tabs-container {
   height: auto;
   max-height: 550px;
+}
+
+.tab-content {
+	margin-top: 30px;
 }
 
 #dashboard-overview {
@@ -531,7 +551,6 @@
 }
 
 .dashboard-content {
-  margin: 80px 0;
   background: $dashboard-background;
 }
 
@@ -543,10 +562,6 @@
 	.dashboard {
 		&-image {
 		  margin-left: 10px !important;
-		}
-
-		&-content {
-		  margin: 60px 0 !important;
 		}
 	}
 }
@@ -778,5 +793,21 @@
 				cursor: auto;
 			}
 		}
+	}
+}
+
+@media screen and (max-width: 460px) {
+
+	.dashboard-page {
+		top: 64px;
+	}
+
+	.navbar-background {
+		height: 65px;
+	}
+
+	.dashboard-nav-top {
+	  height: 80px;
+		padding-left: 0;
 	}
 }

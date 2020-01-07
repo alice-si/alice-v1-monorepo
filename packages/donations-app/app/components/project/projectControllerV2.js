@@ -1,9 +1,10 @@
 angular.module('aliceApp')
-  .controller('ProjectControllerV2', ['$stateParams', '$state', 'ProjectService', 'CheckoutService', function($stateParams, $state, ProjectService, CheckoutService) {
+  .controller('ProjectControllerV2', ['$stateParams', '$state', 'ProjectService', 'CheckoutService', 'REDIRECTION', function($stateParams, $state, ProjectService, CheckoutService, REDIRECTION) {
 		var vm = this;
 
 		ProjectService.getProjectDetails($stateParams.projectCode).then(function (result) {
 			vm.model = ProjectService.prepareProjectDetails(result.data);
+			vm.model.projectShareLink = REDIRECTION + 'redirection/project-' + vm.model.code + '.html';
 			vm.supporters = result.data.supporters;
 
 			// TODO alex - solve it better
@@ -72,5 +73,29 @@ angular.module('aliceApp')
 			story: '='
 		},
 		templateUrl: 'components/project/components/singleStoryComponent.html',
+	};
+})
+.directive('stickyDonate', function() {
+	return {
+		scope: {
+			project: '='
+		},
+		templateUrl: 'components/project/components/stickyDonate.html',
+		controller: ['$scope', 'CheckoutService', function ($scope, CheckoutService) {
+			$scope.donate = function() {
+					CheckoutService.startCheckout($scope.project);
+			}
+
+			// Hide on Scroll.
+	    $(window).scroll(function () {
+	      var scrollPos = $(window).scrollTop();
+        if (scrollPos < 140) {
+          $('.sticky-donate').css({ top: '-120px', opacity: '0'});
+        }
+        else {
+          $('.sticky-donate').css({ top: '0', opacity: '100'});
+        }
+	    });
+		}]
 	};
 });

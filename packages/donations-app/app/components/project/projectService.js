@@ -10,7 +10,7 @@ angular.module('aliceApp')
     this.getProjects = function () {
       return $http.get(API + 'getProjects');
     }
-    
+
     this.saveProject = function (project) {
       return $http.post(API + 'saveProject', project);
     };
