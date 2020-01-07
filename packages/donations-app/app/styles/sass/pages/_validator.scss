@@ -68,10 +68,10 @@
 
 .goals-dash {
   &__greeting {
-    margin: 32px 0 -20px;
+    margin: 32px 0;
     font-size: 2em;
     color: #333;
-    display: inline-flex;
+    // display: inline-flex;
   }
 
   &__tabset {

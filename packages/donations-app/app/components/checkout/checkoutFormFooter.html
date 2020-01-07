@@ -65,6 +65,7 @@
         <div class="form-group no-padding col-md-12">
             <button ng-class="{ 'disabled-button' : (checkCtrl.donation.amount > 100000) }"
                     ng-click="checkCtrl.donate()"
+                    id="donate-button-modal"
                     type="submit">
                     <span ng-show="checkCtrl.mode == 'BANK_TRANSFER'">
                         Show bank details
