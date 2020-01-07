@@ -229,6 +229,13 @@
   }
 }
 
+// Added to fix problems on iPhone X and Pixel 2 XL
+@media screen and (max-width: 1300px) and (min-width: 374px) {
+  .appeal-v3__container {
+    margin-top: 50px;
+  }
+}
+
 @media screen and (min-width: 1300px) {
   .appeal-v3__container{
     padding: 22px 0 42px 30px;

@@ -4,9 +4,10 @@
     Please log in to view the content.
   </div>
 
-  <div ng-hide="dashCtrl.auth.isManager()">
+  <!-- Commented, users should not see this message -->
+  <!-- <div ng-hide="dashCtrl.auth.isManager()">
     Unfortunately, you don't have enough privileges to see the page.
-  </div>
+  </div> -->
 
   <!-- Project Managers -->
   <div ng-if="dashCtrl.auth.isManager()" class="dashboard-content">
