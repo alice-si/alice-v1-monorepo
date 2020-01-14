@@ -4,8 +4,8 @@ angular.module('aliceApp')
     var vm = this;
     vm.credentials = {};
     vm.registration = {
-      agreeAlice: true,
-      agreeContact: true,
+      agreeAlice: false,
+      agreeContact: false,
     };
     vm.mode = 'REGISTRATION'; // enum: ['REGISTRATION', 'REGISTRATION_FININSHING']
     if (AuthService.getEmailForSignupFinishing()) {
@@ -56,9 +56,7 @@ angular.module('aliceApp')
     };
 
     let extendContactAgreement = function() {
-      let flag = vm.registration.disagreeContact;
-      vm.registration.agreeContact = !flag;
-      vm.registration.agreeAlice = !flag;
+      vm.registration.agreeAlice = vm.registration.agreeContact;
     }
 
     return vm;

@@ -7,26 +7,6 @@ angular.module('aliceApp')
       loadProjectsWithCharities();
     };
 
-    // FIXME: remove it after vodafone tests
-    if (MODE != 'prod') {
-      // It shows every time users goes to homepage
-      // Livia asked to implement it
-      $uibModal.open({
-        templateUrl: '/components/vodafone/homePageModal.html',
-        backdrop: 'static',
-        resolve: {}
-      });
-
-      if(!localStorage.vodafoneWindowOpenedHome) {
-        vm.vodafoneTooltip = "Patience is a virtue :) We'll get to 'How it works' at the end of the survey. Please follow the steps of the survey at the bottom of the page";
-        vm.showVodafoneTooltip = true;
-        localStorage.vodafoneWindowOpenedHome = true;
-      }
-      else {
-        vm.showVodafoneTooltip = false;
-      }
-    }
-
     // FIXME
     // Livia asked to move fusion-housing project from the first position of
     // active projects

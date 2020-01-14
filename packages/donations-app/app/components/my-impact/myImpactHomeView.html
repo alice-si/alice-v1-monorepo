@@ -10,7 +10,12 @@
   </div> -->
 
   <!-- Project Managers -->
-  <div ng-if="dashCtrl.auth.isManager()" class="dashboard-content">
+  <!-- This code is commented to show "MY IMPACT" title for everyone (not only managers) -->
+  <!-- <div ng-if="dashCtrl.auth.isManager()" class="dashboard-content">
+    <dashboard-header/>
+  </div> -->
+
+  <div class="dashboard-content">
     <dashboard-header/>
   </div>
 
