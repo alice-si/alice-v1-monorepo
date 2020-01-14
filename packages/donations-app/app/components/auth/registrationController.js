@@ -4,7 +4,7 @@ angular.module('aliceApp')
     var vm = this;
     vm.credentials = {};
     vm.registration = {
-      agreeAlice: true,
+      agreeAlice: false,
       agreeContact: false,
     };
     vm.mode = 'REGISTRATION'; // enum: ['REGISTRATION', 'REGISTRATION_FININSHING']
