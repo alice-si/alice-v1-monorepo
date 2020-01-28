@@ -11,7 +11,7 @@
                 <div class="row">
                     <p class="alice-grey center col-md-12"
                         ng-show="checkCtrl.donation.amount">
-                        By tapping Donate you agree to our
+                        By tapping Fund you agree to our
                         <a href="https://s3.eu-west-2.amazonaws.com/alice-res/terms_of_use.pdf"
                             target="_blank">
                             Terms & Conditions
@@ -72,7 +72,7 @@
                     </span>
                     <span ng-show="checkCtrl.mode != 'BANK_TRANSFER'"
                           ng-disable="checkCtrl.donation.amount > 100000">
-                          Donate {{ checkCtrl.donation.amount | money }}
+                          Fund {{ checkCtrl.donation.amount | money }}
                     </span>
             </button>
         </div>

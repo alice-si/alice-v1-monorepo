@@ -36,7 +36,13 @@
                         </a>
                         <h6 style="background-color: red; color: white; padding: 3px;" ng-if="menuCtrl.auth.loggedInAsAnotherUser()">Logged in as another user</h6>
                         <ul class="dropdown-menu user-menu">
+
                             <li style="width: 100%;">
+                                <div style="border-bottom: 2px solid #fff" ng-if="menuCtrl.auth.isSuperadmin()">
+                                    <a href="/project-wizard/">
+                                        Create a project
+                                    </a>
+                                </div>
                                 <div style="border-bottom: 2px solid #fff">
                                     <a href="/my-impact/">
                                         My Impact

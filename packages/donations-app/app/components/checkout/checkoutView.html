@@ -4,7 +4,7 @@
     <div class="row">
 
       <div class="col-lg-6 col-md-8 col-sm-12">
-        <h2 class="section">Donate to {{checkCtrl.project.title}}</h2>
+        <h2 class="section">Fund {{checkCtrl.project.title}}</h2>
 
         <div ng-show="checkCtrl.project.status == 'FINISHED'">
           With this project coming to an end, donations are not possible at this time.
@@ -41,9 +41,9 @@
                 Bank transfer details
               </a>
             </li>
-          </ul>  
-          
-          
+          </ul>
+
+
           <!-- CONTENT -->
           <ng-include src="'/components/checkout/3DS.html'"></ng-include>
           <ng-include src="'/components/checkout/cardForm.html'"></ng-include>
