@@ -1,13 +1,11 @@
 # Alice monorepo
 
-<!-- Disabled for now, as we have no credits on circle ci -->
-<!-- You have used 0/2,500 credits. Free credits will refresh on Sunday, October 27 12:00 AM UTC. -->
-<!-- [![CircleCI](https://circleci.com/gh/alice-si/monorepo.svg?style=svg)](https://circleci.com/gh/alice-si/monorepo) -->
-
 ## Overview
 
 This is the top-level monorepo for Alice donations platform and other projects.
 Please refer to individual projects' README files for detailed description.
+
+We are currently in the process of upgrading to Alice v2. Please see here for more details: https://github.com/alice-si/alice-v2-monorepo
 
 ## Building
 
